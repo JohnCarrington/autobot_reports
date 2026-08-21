@@ -1,0 +1,62 @@
+{
+  "window": [
+    "2026-03-30",
+    "2026-08-21"
+  ],
+  "months": {
+    "2026-03": {
+      "days": 2,
+      "runs": 5,
+      "offered_pips": 318.2,
+      "bound_60pct": 190.9,
+      "banked_pips": 0.0,
+      "gap": 190.9
+    },
+    "2026-04": {
+      "days": 29,
+      "runs": 38,
+      "offered_pips": 2315.1,
+      "bound_60pct": 1389.1,
+      "banked_pips": -168.2,
+      "gap": 1557.2
+    },
+    "2026-05": {
+      "days": 23,
+      "runs": 27,
+      "offered_pips": 1527.8,
+      "bound_60pct": 916.7,
+      "banked_pips": 2.3,
+      "gap": 914.4
+    },
+    "2026-06": {
+      "days": 25,
+      "runs": 28,
+      "offered_pips": 1733.1,
+      "bound_60pct": 1039.9,
+      "banked_pips": -111.6,
+      "gap": 1151.4
+    },
+    "2026-07": {
+      "days": 25,
+      "runs": 26,
+      "offered_pips": 1721.6,
+      "bound_60pct": 1033.0,
+      "banked_pips": -67.3,
+      "gap": 1100.3
+    },
+    "2026-08": {
+      "days": 18,
+      "runs": 7,
+      "offered_pips": 446.2,
+      "bound_60pct": 267.7,
+      "banked_pips": -92.5,
+      "gap": 360.2
+    }
+  },
+  "totals": {
+    "offered_pips": 8062.0,
+    "bound_60pct": 4837.2,
+    "banked_pips": -437.2,
+    "gap": 5274.4
+  }
+}
