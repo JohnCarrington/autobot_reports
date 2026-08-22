@@ -1,0 +1,821 @@
+{
+ "per_day_subject": [
+  {
+   "date": "2026-07-02",
+   "cls": "MULTI_DAY",
+   "n_fires": 5,
+   "managed": 12.9,
+   "um": -60.0,
+   "delta": -72.9,
+   "labels": [
+    "NFP"
+   ],
+   "walks": [
+    {
+     "ts": "2026-07-02T02:20:02Z",
+     "dir": "BUY",
+     "entry": 13295.2,
+     "managed_pnl": -7.9,
+     "managed_reason": "TREND_V3_FLATTEN_EXHAUSTION",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-07-02T03:05:00+00:00"
+    },
+    {
+     "ts": "2026-07-02T06:50:01Z",
+     "dir": "BUY",
+     "entry": 13315.5,
+     "managed_pnl": -4.3,
+     "managed_reason": "TREND_V3_FLATTEN_EXHAUSTION",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-07-02T07:00:00+00:00"
+    },
+    {
+     "ts": "2026-07-02T07:30:02Z",
+     "dir": "BUY",
+     "entry": 13323.7,
+     "managed_pnl": 12.45,
+     "managed_reason": "TP hit",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-07-02T11:55:00+00:00"
+    },
+    {
+     "ts": "2026-07-02T07:45:02Z",
+     "dir": "BUY",
+     "entry": 13334.2,
+     "managed_pnl": 16.45,
+     "managed_reason": "TP hit",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-07-02T11:40:00+00:00"
+    },
+    {
+     "ts": "2026-07-02T08:10:02Z",
+     "dir": "BUY",
+     "entry": 13350.2,
+     "managed_pnl": -3.8,
+     "managed_reason": "TREND_V3_FLATTEN_EXHAUSTION",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-07-02T10:15:00+00:00"
+    }
+   ]
+  },
+  {
+   "date": "2026-07-06",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 4,
+   "managed": 13.4,
+   "um": 23.3,
+   "delta": 9.9,
+   "labels": [
+    "ISM_SVC"
+   ],
+   "walks": [
+    {
+     "ts": "2026-07-06T16:25:02Z",
+     "dir": "BUY",
+     "entry": 13373.2,
+     "managed_pnl": 10.45,
+     "managed_reason": "TP hit",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 16.55,
+     "um_exit_ts": "2026-07-06T20:40:00+00:00"
+    },
+    {
+     "ts": "2026-07-06T17:45:01Z",
+     "dir": "BUY",
+     "entry": 13383.5,
+     "managed_pnl": -1.9,
+     "managed_reason": "TREND_V3_FLATTEN_EXHAUSTION",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 6.25,
+     "um_exit_ts": "2026-07-06T20:40:00+00:00"
+    },
+    {
+     "ts": "2026-07-06T18:15:02Z",
+     "dir": "BUY",
+     "entry": 13382.5,
+     "managed_pnl": 10.45,
+     "managed_reason": "TP hit",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 7.25,
+     "um_exit_ts": "2026-07-06T20:40:00+00:00"
+    },
+    {
+     "ts": "2026-07-06T18:50:02Z",
+     "dir": "BUY",
+     "entry": 13396.5,
+     "managed_pnl": -5.6,
+     "managed_reason": "IG_RECONCILE",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": -6.75,
+     "um_exit_ts": "2026-07-06T20:40:00+00:00"
+    }
+   ]
+  },
+  {
+   "date": "2026-07-14",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 0,
+   "managed": 0,
+   "um": 0,
+   "delta": 0,
+   "labels": [
+    "US_CPI"
+   ],
+   "walks": []
+  },
+  {
+   "date": "2026-07-15",
+   "cls": "GRIND_DAY",
+   "n_fires": 13,
+   "managed": 37.4,
+   "um": 787.9,
+   "delta": 750.5,
+   "labels": [
+    "US_PPI"
+   ],
+   "walks": [
+    {
+     "ts": "2026-07-15T11:55:01Z",
+     "dir": "BUY",
+     "entry": 13409.4,
+     "managed_pnl": 1.6,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "TP",
+     "um_pnl": 100.0,
+     "um_exit_ts": "2026-07-15T16:25:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T12:00:09Z",
+     "dir": "BUY",
+     "entry": 13411.7,
+     "managed_pnl": -4.0,
+     "managed_reason": "IG_RECONCILE",
+     "um_outcome": "TP",
+     "um_pnl": 100.0,
+     "um_exit_ts": "2026-07-15T16:25:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T12:05:04Z",
+     "dir": "BUY",
+     "entry": 13408.8,
+     "managed_pnl": -4.3,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "TP",
+     "um_pnl": 100.0,
+     "um_exit_ts": "2026-07-15T16:25:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T12:10:05Z",
+     "dir": "BUY",
+     "entry": 13405.3,
+     "managed_pnl": 3.5,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "TP",
+     "um_pnl": 100.0,
+     "um_exit_ts": "2026-07-15T16:20:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T12:15:03Z",
+     "dir": "BUY",
+     "entry": 13409.3,
+     "managed_pnl": -2.5,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "TP",
+     "um_pnl": 100.0,
+     "um_exit_ts": "2026-07-15T16:25:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T12:55:01Z",
+     "dir": "BUY",
+     "entry": 13425.5,
+     "managed_pnl": 2.4,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "TP",
+     "um_pnl": 100.0,
+     "um_exit_ts": "2026-07-15T16:50:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T13:00:05Z",
+     "dir": "BUY",
+     "entry": 13428.7,
+     "managed_pnl": 1.3,
+     "managed_reason": "TREND_V3_FLATTEN_EXHAUSTION",
+     "um_outcome": "TP",
+     "um_pnl": 100.0,
+     "um_exit_ts": "2026-07-15T17:00:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T14:50:01Z",
+     "dir": "BUY",
+     "entry": 13474.4,
+     "managed_pnl": 17.45,
+     "managed_reason": "TP hit",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 61.15,
+     "um_exit_ts": "2026-07-15T20:40:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T15:55:02Z",
+     "dir": "BUY",
+     "entry": 13498.5,
+     "managed_pnl": 16.15,
+     "managed_reason": "TP hit",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 37.05,
+     "um_exit_ts": "2026-07-15T20:40:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T16:50:02Z",
+     "dir": "BUY",
+     "entry": 13521.0,
+     "managed_pnl": 15.85,
+     "managed_reason": "TP hit",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 14.55,
+     "um_exit_ts": "2026-07-15T20:40:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T17:05:02Z",
+     "dir": "BUY",
+     "entry": 13536.4,
+     "managed_pnl": 3.6,
+     "managed_reason": "TREND_V3_FLATTEN_EXHAUSTION",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": -0.85,
+     "um_exit_ts": "2026-07-15T20:40:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T17:40:04Z",
+     "dir": "BUY",
+     "entry": 13540.0,
+     "managed_pnl": 10.45,
+     "managed_reason": "TP hit",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-07-15T19:35:00+00:00"
+    },
+    {
+     "ts": "2026-07-15T18:05:01Z",
+     "dir": "BUY",
+     "entry": 13552.3,
+     "managed_pnl": -24.15,
+     "managed_reason": "SL hit",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-07-15T18:50:00+00:00"
+    }
+   ]
+  },
+  {
+   "date": "2026-07-16",
+   "cls": "GRIND_DAY",
+   "n_fires": 0,
+   "managed": 0,
+   "um": 0,
+   "delta": 0,
+   "labels": [
+    "UK_GDP",
+    "US_RETAIL"
+   ],
+   "walks": []
+  },
+  {
+   "date": "2026-07-21",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 2,
+   "managed": 33.9,
+   "um": 12.9,
+   "delta": -21.0,
+   "labels": [
+    "UK_UNEM"
+   ],
+   "walks": [
+    {
+     "ts": "2026-07-21T11:55:01Z",
+     "dir": "SELL",
+     "entry": 13403.4,
+     "managed_pnl": 12.05,
+     "managed_reason": "BE_STOP_POST_SCALEOUT",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 24.95,
+     "um_exit_ts": "2026-07-21T20:40:00+00:00"
+    },
+    {
+     "ts": "2026-07-21T12:45:02Z",
+     "dir": "SELL",
+     "entry": 13387.5,
+     "managed_pnl": 21.85,
+     "managed_reason": "BE_STOP_POST_SCALEOUT",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-07-21T14:10:00+00:00"
+    }
+   ]
+  },
+  {
+   "date": "2026-07-22",
+   "cls": "QUIET_DAY",
+   "n_fires": 0,
+   "managed": 0,
+   "um": 0,
+   "delta": 0,
+   "labels": [
+    "UK_CPI"
+   ],
+   "walks": []
+  },
+  {
+   "date": "2026-07-24",
+   "cls": "QUIET_DAY",
+   "n_fires": 1,
+   "managed": -10.5,
+   "um": -12.0,
+   "delta": -1.5,
+   "labels": [
+    "UK_RETAIL"
+   ],
+   "walks": [
+    {
+     "ts": "2026-07-24T07:15:03Z",
+     "dir": "BUY",
+     "entry": 13337.9,
+     "managed_pnl": -10.5,
+     "managed_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13329.25000 < prior_5_low=13330.35000, pnl=-10.1p",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-07-24T08:45:00+00:00"
+    }
+   ]
+  },
+  {
+   "date": "2026-07-29",
+   "cls": "GRIND_DAY",
+   "n_fires": 0,
+   "managed": 0,
+   "um": 0,
+   "delta": 0,
+   "labels": [
+    "FOMC"
+   ],
+   "walks": []
+  },
+  {
+   "date": "2026-07-30",
+   "cls": "MULTI_DAY",
+   "n_fires": 2,
+   "managed": 14.0,
+   "um": 88.0,
+   "delta": 74.0,
+   "labels": [
+    "BOE",
+    "US_GDP"
+   ],
+   "walks": [
+    {
+     "ts": "2026-07-30T09:35:01Z",
+     "dir": "BUY",
+     "entry": 13373.8,
+     "managed_pnl": 14.25,
+     "managed_reason": "TP hit",
+     "um_outcome": "TP",
+     "um_pnl": 100.0,
+     "um_exit_ts": "2026-07-30T18:00:00+00:00"
+    },
+    {
+     "ts": "2026-07-30T10:45:01Z",
+     "dir": "BUY",
+     "entry": 13398.6,
+     "managed_pnl": -0.25,
+     "managed_reason": "BE_STOP_POST_SCALEOUT",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-07-30T11:05:00+00:00"
+    }
+   ]
+  },
+  {
+   "date": "2026-08-03",
+   "cls": "GRIND_DAY",
+   "n_fires": 0,
+   "managed": 0,
+   "um": 0,
+   "delta": 0,
+   "labels": [
+    "ISM_MFG"
+   ],
+   "walks": []
+  },
+  {
+   "date": "2026-08-05",
+   "cls": "QUIET_DAY",
+   "n_fires": 1,
+   "managed": -10.5,
+   "um": -12.0,
+   "delta": -1.5,
+   "labels": [
+    "ISM_SVC"
+   ],
+   "walks": [
+    {
+     "ts": "2026-08-05T12:05:01Z",
+     "dir": "BUY",
+     "entry": 13480.8,
+     "managed_pnl": -10.5,
+     "managed_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13474.75000 < prior_5_low=13475.05000, pnl=-10.0p",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-08-05T12:55:00+00:00"
+    }
+   ]
+  },
+  {
+   "date": "2026-08-07",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 3,
+   "managed": -6.2,
+   "um": -15.4,
+   "delta": -9.2,
+   "labels": [
+    "NFP"
+   ],
+   "walks": [
+    {
+     "ts": "2026-08-07T12:35:01Z",
+     "dir": "SELL",
+     "entry": 13494.7,
+     "managed_pnl": 3.05,
+     "managed_reason": "Breakeven stop hit (IG server-side)",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-08-07T12:45:00+00:00"
+    },
+    {
+     "ts": "2026-08-07T12:40:01Z",
+     "dir": "SELL",
+     "entry": 13494.3,
+     "managed_pnl": -11.15,
+     "managed_reason": "SL hit",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-08-07T12:45:00+00:00"
+    },
+    {
+     "ts": "2026-08-07T13:00:01Z",
+     "dir": "SELL",
+     "entry": 13499.8,
+     "managed_pnl": 1.9,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 8.65,
+     "um_exit_ts": "2026-08-07T20:40:00+00:00"
+    }
+   ]
+  },
+  {
+   "date": "2026-08-12",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 1,
+   "managed": -11.8,
+   "um": -12.0,
+   "delta": -0.2,
+   "labels": [
+    "US_CPI"
+   ],
+   "walks": [
+    {
+     "ts": "2026-08-12T09:25:01Z",
+     "dir": "BUY",
+     "entry": 13526.2,
+     "managed_pnl": -11.75,
+     "managed_reason": "SL hit",
+     "um_outcome": "SL",
+     "um_pnl": -12.0,
+     "um_exit_ts": "2026-08-12T09:45:00+00:00"
+    }
+   ]
+  },
+  {
+   "date": "2026-08-13",
+   "cls": "QUIET_DAY",
+   "n_fires": 0,
+   "managed": 0,
+   "um": 0,
+   "delta": 0,
+   "labels": [
+    "UK_GDP",
+    "US_PPI"
+   ],
+   "walks": []
+  },
+  {
+   "date": "2026-08-14",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 1,
+   "managed": 32.8,
+   "um": 18.2,
+   "delta": -14.5,
+   "labels": [
+    "US_RETAIL"
+   ],
+   "walks": [
+    {
+     "ts": "2026-08-14T08:05:02Z",
+     "dir": "BUY",
+     "entry": 13516.3,
+     "managed_pnl": 32.75,
+     "managed_reason": "External close (not initiated by this host)",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 18.25,
+     "um_exit_ts": "2026-08-14T20:40:00+00:00"
+    }
+   ]
+  },
+  {
+   "date": "2026-08-18",
+   "cls": "QUIET_DAY",
+   "n_fires": 0,
+   "managed": 0,
+   "um": 0,
+   "delta": 0,
+   "labels": [
+    "UK_UNEM"
+   ],
+   "walks": []
+  },
+  {
+   "date": "2026-08-19",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 0,
+   "managed": 0,
+   "um": 0,
+   "delta": 0,
+   "labels": [
+    "UK_CPI"
+   ],
+   "walks": []
+  }
+ ],
+ "per_day_non_subject": [
+  {
+   "date": "2026-07-08",
+   "cls": "MULTI_DAY",
+   "n_fires": 1,
+   "managed": -16.8,
+   "um": -12.0,
+   "delta": 4.8,
+   "walks": [
+    {
+     "ts": "2026-07-08T09:10:01Z",
+     "dir": "SELL",
+     "entry": 13328.5,
+     "managed_pnl": -16.8,
+     "managed_reason": "TREND_V3_FLATTEN_EXHAUSTION",
+     "um_outcome": "SL",
+     "um_pnl": -12.0
+    }
+   ]
+  },
+  {
+   "date": "2026-07-09",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 4,
+   "managed": 4.7,
+   "um": 80.7,
+   "delta": 76.0,
+   "walks": [
+    {
+     "ts": "2026-07-09T11:05:01Z",
+     "dir": "BUY",
+     "entry": 13391.3,
+     "managed_pnl": 0.3,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 18.65
+    },
+    {
+     "ts": "2026-07-09T11:10:02Z",
+     "dir": "BUY",
+     "entry": 13392.5,
+     "managed_pnl": 0.1,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 17.45
+    },
+    {
+     "ts": "2026-07-09T11:30:02Z",
+     "dir": "BUY",
+     "entry": 13385.7,
+     "managed_pnl": 2.3,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 24.25
+    },
+    {
+     "ts": "2026-07-09T11:35:02Z",
+     "dir": "BUY",
+     "entry": 13389.6,
+     "managed_pnl": 2.0,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 20.35
+    }
+   ]
+  },
+  {
+   "date": "2026-07-17",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 2,
+   "managed": -4.5,
+   "um": -24.0,
+   "delta": -19.5,
+   "walks": [
+    {
+     "ts": "2026-07-17T03:00:03Z",
+     "dir": "SELL",
+     "entry": 13463.6,
+     "managed_pnl": -4.8,
+     "managed_reason": "TREND_V3_FLATTEN_EXHAUSTION",
+     "um_outcome": "SL",
+     "um_pnl": -12.0
+    },
+    {
+     "ts": "2026-07-17T09:10:01Z",
+     "dir": "SELL",
+     "entry": 13442.6,
+     "managed_pnl": 0.3,
+     "managed_reason": "TREND_V3_FLATTEN_EXHAUSTION",
+     "um_outcome": "SL",
+     "um_pnl": -12.0
+    }
+   ]
+  },
+  {
+   "date": "2026-07-20",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 4,
+   "managed": -11.2,
+   "um": -48.0,
+   "delta": -36.8,
+   "walks": [
+    {
+     "ts": "2026-07-20T02:55:01Z",
+     "dir": "SELL",
+     "entry": 13461.0,
+     "managed_pnl": 2.2,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "SL",
+     "um_pnl": -12.0
+    },
+    {
+     "ts": "2026-07-20T03:25:01Z",
+     "dir": "SELL",
+     "entry": 13459.1,
+     "managed_pnl": -0.9,
+     "managed_reason": "TREND_V3_REGIME_LEFT",
+     "um_outcome": "SL",
+     "um_pnl": -12.0
+    },
+    {
+     "ts": "2026-07-20T04:45:01Z",
+     "dir": "BUY",
+     "entry": 13467.4,
+     "managed_pnl": -0.6,
+     "managed_reason": "TREND_V3_FLATTEN_EXHAUSTION",
+     "um_outcome": "SL",
+     "um_pnl": -12.0
+    },
+    {
+     "ts": "2026-07-20T15:15:01Z",
+     "dir": "SELL",
+     "entry": 13419.5,
+     "managed_pnl": -11.95,
+     "managed_reason": "SL hit",
+     "um_outcome": "SL",
+     "um_pnl": -12.0
+    }
+   ]
+  },
+  {
+   "date": "2026-07-28",
+   "cls": "QUIET_DAY",
+   "n_fires": 1,
+   "managed": -12.1,
+   "um": -12.0,
+   "delta": 0.1,
+   "walks": [
+    {
+     "ts": "2026-07-28T13:10:02Z",
+     "dir": "BUY",
+     "entry": 13300.8,
+     "managed_pnl": -12.05,
+     "managed_reason": "SL hit",
+     "um_outcome": "SL",
+     "um_pnl": -12.0
+    }
+   ]
+  },
+  {
+   "date": "2026-07-31",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 1,
+   "managed": 1.4,
+   "um": -12.0,
+   "delta": -13.3,
+   "walks": [
+    {
+     "ts": "2026-07-31T11:55:01Z",
+     "dir": "SELL",
+     "entry": 13419.0,
+     "managed_pnl": 1.35,
+     "managed_reason": "BE_STOP_POST_SCALEOUT",
+     "um_outcome": "SL",
+     "um_pnl": -12.0
+    }
+   ]
+  },
+  {
+   "date": "2026-08-20",
+   "cls": "BOUNCE_DAY",
+   "n_fires": 2,
+   "managed": 11.3,
+   "um": -9.2,
+   "delta": -20.5,
+   "walks": [
+    {
+     "ts": "2026-08-20T08:45:02Z",
+     "dir": "BUY",
+     "entry": 13633.2,
+     "managed_pnl": 10.45,
+     "managed_reason": "TP hit",
+     "um_outcome": "SL",
+     "um_pnl": -12.0
+    },
+    {
+     "ts": "2026-08-20T12:10:02Z",
+     "dir": "BUY",
+     "entry": 13627.2,
+     "managed_pnl": 0.85,
+     "managed_reason": "BE_STOP_POST_SCALEOUT",
+     "um_outcome": "FLAT_2040",
+     "um_pnl": 2.75
+    }
+   ]
+  }
+ ],
+ "totals_subject": {
+  "managed": 105.35000000000001,
+  "um": 819.0499999999956
+ },
+ "totals_non_subject": {
+  "managed": -27.250000000000007,
+  "um": -36.54999999999745
+ },
+ "grind100_in_tv3": [
+  "2026-07-15"
+ ],
+ "tier1_in_tv3": [
+  "2026-07-02",
+  "2026-07-06",
+  "2026-07-14",
+  "2026-07-15",
+  "2026-07-16",
+  "2026-07-21",
+  "2026-07-22",
+  "2026-07-24",
+  "2026-07-29",
+  "2026-07-30",
+  "2026-08-03",
+  "2026-08-05",
+  "2026-08-07",
+  "2026-08-12",
+  "2026-08-13",
+  "2026-08-14",
+  "2026-08-18",
+  "2026-08-19"
+ ],
+ "subject_dates": [
+  "2026-07-02",
+  "2026-07-06",
+  "2026-07-14",
+  "2026-07-15",
+  "2026-07-16",
+  "2026-07-21",
+  "2026-07-22",
+  "2026-07-24",
+  "2026-07-29",
+  "2026-07-30",
+  "2026-08-03",
+  "2026-08-05",
+  "2026-08-07",
+  "2026-08-12",
+  "2026-08-13",
+  "2026-08-14",
+  "2026-08-18",
+  "2026-08-19"
+ ]
+}

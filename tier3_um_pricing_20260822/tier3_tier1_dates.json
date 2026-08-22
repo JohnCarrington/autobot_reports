@@ -1,0 +1,2082 @@
+{
+ "hits": [
+  {
+   "date": "2026-06-05",
+   "label": "NFP",
+   "event": "Non Farm Payrolls",
+   "ts": "2026-06-05T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-06.json"
+  },
+  {
+   "date": "2026-06-10",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate MoM",
+   "ts": "2026-06-10T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-06.json"
+  },
+  {
+   "date": "2026-06-10",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate YoY",
+   "ts": "2026-06-10T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-06.json"
+  },
+  {
+   "date": "2026-06-10",
+   "label": "US_CPI",
+   "event": "Inflation Rate MoM",
+   "ts": "2026-06-10T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-06.json"
+  },
+  {
+   "date": "2026-06-10",
+   "label": "US_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-06-10T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-06.json"
+  },
+  {
+   "date": "2026-06-11",
+   "label": "US_PPI",
+   "event": "PPI MoM",
+   "ts": "2026-06-11T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-06.json"
+  },
+  {
+   "date": "2026-06-12",
+   "label": "UK_GDP",
+   "event": "GDP MoM",
+   "ts": "2026-06-12T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-06.json"
+  },
+  {
+   "date": "2026-06-17",
+   "label": "UK_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-06-17T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-10.json"
+  },
+  {
+   "date": "2026-06-17",
+   "label": "US_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-06-17T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-10.json"
+  },
+  {
+   "date": "2026-06-17",
+   "label": "FOMC",
+   "event": "Fed Interest Rate Decision",
+   "ts": "2026-06-17T18:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-10.json"
+  },
+  {
+   "date": "2026-06-17",
+   "label": "FOMC",
+   "event": "FOMC Economic Projections",
+   "ts": "2026-06-17T18:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-10.json"
+  },
+  {
+   "date": "2026-06-17",
+   "label": "FOMC",
+   "event": "Fed Press Conference",
+   "ts": "2026-06-17T18:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-10.json"
+  },
+  {
+   "date": "2026-06-18",
+   "label": "UK_UNEM",
+   "event": "Unemployment Rate",
+   "ts": "2026-06-18T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-11.json"
+  },
+  {
+   "date": "2026-06-18",
+   "label": "BOE",
+   "event": "BoE Interest Rate Decision",
+   "ts": "2026-06-18T11:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-11.json"
+  },
+  {
+   "date": "2026-06-19",
+   "label": "UK_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-06-19T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-12.json"
+  },
+  {
+   "date": "2026-06-25",
+   "label": "US_GDP",
+   "event": "GDP Growth Rate QoQ Final",
+   "ts": "2026-06-25T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-18.json"
+  },
+  {
+   "date": "2026-07-01",
+   "label": "ISM_MFG",
+   "event": "ISM Manufacturing PMI",
+   "ts": "2026-07-01T14:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-24.json"
+  },
+  {
+   "date": "2026-07-02",
+   "label": "NFP",
+   "event": "Non Farm Payrolls",
+   "ts": "2026-07-02T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-25.json"
+  },
+  {
+   "date": "2026-07-06",
+   "label": "ISM_SVC",
+   "event": "ISM Services PMI",
+   "ts": "2026-07-06T14:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-06-29.json"
+  },
+  {
+   "date": "2026-07-14",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate MoM",
+   "ts": "2026-07-14T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-07.json"
+  },
+  {
+   "date": "2026-07-14",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate YoY",
+   "ts": "2026-07-14T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-07.json"
+  },
+  {
+   "date": "2026-07-14",
+   "label": "US_CPI",
+   "event": "Inflation Rate MoM",
+   "ts": "2026-07-14T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-07.json"
+  },
+  {
+   "date": "2026-07-14",
+   "label": "US_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-07-14T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-07.json"
+  },
+  {
+   "date": "2026-07-15",
+   "label": "US_PPI",
+   "event": "PPI MoM",
+   "ts": "2026-07-15T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-08.json"
+  },
+  {
+   "date": "2026-07-16",
+   "label": "UK_GDP",
+   "event": "GDP MoM",
+   "ts": "2026-07-16T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-09.json"
+  },
+  {
+   "date": "2026-07-16",
+   "label": "US_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-07-16T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-09.json"
+  },
+  {
+   "date": "2026-07-21",
+   "label": "UK_UNEM",
+   "event": "Unemployment Rate",
+   "ts": "2026-07-21T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-14.json"
+  },
+  {
+   "date": "2026-07-22",
+   "label": "UK_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-07-22T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-15.json"
+  },
+  {
+   "date": "2026-07-24",
+   "label": "UK_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-07-24T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-17.json"
+  },
+  {
+   "date": "2026-07-29",
+   "label": "FOMC",
+   "event": "Fed Interest Rate Decision",
+   "ts": "2026-07-29T18:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-22.json"
+  },
+  {
+   "date": "2026-07-29",
+   "label": "FOMC",
+   "event": "Fed Press Conference",
+   "ts": "2026-07-29T18:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-22.json"
+  },
+  {
+   "date": "2026-07-30",
+   "label": "BOE",
+   "event": "BoE Interest Rate Decision",
+   "ts": "2026-07-30T11:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-24.json"
+  },
+  {
+   "date": "2026-07-30",
+   "label": "US_GDP",
+   "event": "GDP Growth Rate QoQ Adv",
+   "ts": "2026-07-30T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-24.json"
+  },
+  {
+   "date": "2026-08-03",
+   "label": "ISM_MFG",
+   "event": "ISM Manufacturing PMI",
+   "ts": "2026-08-03T14:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-27.json"
+  },
+  {
+   "date": "2026-08-05",
+   "label": "ISM_SVC",
+   "event": "ISM Services PMI",
+   "ts": "2026-08-05T14:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-07-29.json"
+  },
+  {
+   "date": "2026-08-07",
+   "label": "NFP",
+   "event": "Non Farm Payrolls",
+   "ts": "2026-08-07T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-03.json"
+  },
+  {
+   "date": "2026-08-12",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate MoM",
+   "ts": "2026-08-12T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-05.json"
+  },
+  {
+   "date": "2026-08-12",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate YoY",
+   "ts": "2026-08-12T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-05.json"
+  },
+  {
+   "date": "2026-08-12",
+   "label": "US_CPI",
+   "event": "Inflation Rate MoM",
+   "ts": "2026-08-12T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-05.json"
+  },
+  {
+   "date": "2026-08-12",
+   "label": "US_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-08-12T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-05.json"
+  },
+  {
+   "date": "2026-08-13",
+   "label": "UK_GDP",
+   "event": "GDP Growth Rate QoQ Prel",
+   "ts": "2026-08-13T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-06.json"
+  },
+  {
+   "date": "2026-08-13",
+   "label": "UK_GDP",
+   "event": "GDP MoM",
+   "ts": "2026-08-13T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-06.json"
+  },
+  {
+   "date": "2026-08-13",
+   "label": "US_PPI",
+   "event": "PPI MoM",
+   "ts": "2026-08-13T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-06.json"
+  },
+  {
+   "date": "2026-08-14",
+   "label": "US_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-08-14T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-07.json"
+  },
+  {
+   "date": "2026-08-18",
+   "label": "UK_UNEM",
+   "event": "Unemployment Rate",
+   "ts": "2026-08-18T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-11.json"
+  },
+  {
+   "date": "2026-08-19",
+   "label": "UK_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-08-19T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-12.json"
+  },
+  {
+   "date": "2026-08-21",
+   "label": "UK_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-08-21T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-14.json"
+  },
+  {
+   "date": "2026-08-26",
+   "label": "US_GDP",
+   "event": "GDP Growth Rate QoQ 2nd Est",
+   "ts": "2026-08-26T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_2026-08-19.json"
+  },
+  {
+   "date": "2026-01-05",
+   "label": "ISM_MFG",
+   "event": "ISM Manufacturing PMI",
+   "ts": "2026-01-05T15:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-05.json"
+  },
+  {
+   "date": "2026-01-07",
+   "label": "ISM_SVC",
+   "event": "ISM Services PMI",
+   "ts": "2026-01-07T15:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-07.json"
+  },
+  {
+   "date": "2026-01-09",
+   "label": "NFP",
+   "event": "Non Farm Payrolls",
+   "ts": "2026-01-09T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-09.json"
+  },
+  {
+   "date": "2026-01-13",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate MoM",
+   "ts": "2026-01-13T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-13.json"
+  },
+  {
+   "date": "2026-01-13",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate YoY",
+   "ts": "2026-01-13T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-13.json"
+  },
+  {
+   "date": "2026-01-13",
+   "label": "US_CPI",
+   "event": "Inflation Rate MoM",
+   "ts": "2026-01-13T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-13.json"
+  },
+  {
+   "date": "2026-01-13",
+   "label": "US_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-01-13T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-13.json"
+  },
+  {
+   "date": "2026-01-14",
+   "label": "US_PPI",
+   "event": "PPI MoM",
+   "ts": "2026-01-14T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-14.json"
+  },
+  {
+   "date": "2026-01-14",
+   "label": "US_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-01-14T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-14.json"
+  },
+  {
+   "date": "2026-01-15",
+   "label": "UK_GDP",
+   "event": "GDP MoM",
+   "ts": "2026-01-15T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-15.json"
+  },
+  {
+   "date": "2026-01-20",
+   "label": "UK_UNEM",
+   "event": "Unemployment Rate",
+   "ts": "2026-01-20T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-20.json"
+  },
+  {
+   "date": "2026-01-21",
+   "label": "UK_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-01-21T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-21.json"
+  },
+  {
+   "date": "2026-01-22",
+   "label": "US_GDP",
+   "event": "GDP Growth Rate QoQ Final",
+   "ts": "2026-01-22T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-22.json"
+  },
+  {
+   "date": "2026-01-23",
+   "label": "UK_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-01-23T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-23.json"
+  },
+  {
+   "date": "2026-01-28",
+   "label": "FOMC",
+   "event": "Fed Interest Rate Decision",
+   "ts": "2026-01-28T19:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-28.json"
+  },
+  {
+   "date": "2026-01-28",
+   "label": "FOMC",
+   "event": "Fed Press Conference",
+   "ts": "2026-01-28T19:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-28.json"
+  },
+  {
+   "date": "2026-01-30",
+   "label": "US_PPI",
+   "event": "PPI MoM",
+   "ts": "2026-01-30T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-01-30.json"
+  },
+  {
+   "date": "2026-02-02",
+   "label": "ISM_MFG",
+   "event": "ISM Manufacturing PMI",
+   "ts": "2026-02-02T15:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-02.json"
+  },
+  {
+   "date": "2026-02-04",
+   "label": "ISM_SVC",
+   "event": "ISM Services PMI",
+   "ts": "2026-02-04T15:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-04.json"
+  },
+  {
+   "date": "2026-02-05",
+   "label": "BOE",
+   "event": "BoE Interest Rate Decision",
+   "ts": "2026-02-05T12:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-05.json"
+  },
+  {
+   "date": "2026-02-10",
+   "label": "US_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-02-10T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-10.json"
+  },
+  {
+   "date": "2026-02-11",
+   "label": "NFP",
+   "event": "Non Farm Payrolls",
+   "ts": "2026-02-11T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-11.json"
+  },
+  {
+   "date": "2026-02-12",
+   "label": "UK_GDP",
+   "event": "GDP Growth Rate QoQ Prel",
+   "ts": "2026-02-12T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-12.json"
+  },
+  {
+   "date": "2026-02-12",
+   "label": "UK_GDP",
+   "event": "GDP MoM",
+   "ts": "2026-02-12T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-12.json"
+  },
+  {
+   "date": "2026-02-13",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate MoM",
+   "ts": "2026-02-13T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-13.json"
+  },
+  {
+   "date": "2026-02-13",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate YoY",
+   "ts": "2026-02-13T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-13.json"
+  },
+  {
+   "date": "2026-02-13",
+   "label": "US_CPI",
+   "event": "Inflation Rate MoM",
+   "ts": "2026-02-13T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-13.json"
+  },
+  {
+   "date": "2026-02-13",
+   "label": "US_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-02-13T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-13.json"
+  },
+  {
+   "date": "2026-02-17",
+   "label": "UK_UNEM",
+   "event": "Unemployment Rate",
+   "ts": "2026-02-17T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-17.json"
+  },
+  {
+   "date": "2026-02-18",
+   "label": "UK_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-02-18T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-18.json"
+  },
+  {
+   "date": "2026-02-20",
+   "label": "UK_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-02-20T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-20.json"
+  },
+  {
+   "date": "2026-02-20",
+   "label": "US_GDP",
+   "event": "GDP Growth Rate QoQ Adv",
+   "ts": "2026-02-20T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-20.json"
+  },
+  {
+   "date": "2026-02-27",
+   "label": "US_PPI",
+   "event": "PPI MoM",
+   "ts": "2026-02-27T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-02-27.json"
+  },
+  {
+   "date": "2026-03-02",
+   "label": "ISM_MFG",
+   "event": "ISM Manufacturing PMI",
+   "ts": "2026-03-02T15:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-02.json"
+  },
+  {
+   "date": "2026-03-04",
+   "label": "ISM_SVC",
+   "event": "ISM Services PMI",
+   "ts": "2026-03-04T15:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-04.json"
+  },
+  {
+   "date": "2026-03-06",
+   "label": "NFP",
+   "event": "Non Farm Payrolls",
+   "ts": "2026-03-06T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-06.json"
+  },
+  {
+   "date": "2026-03-06",
+   "label": "US_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-03-06T13:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-06.json"
+  },
+  {
+   "date": "2026-03-11",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate MoM",
+   "ts": "2026-03-11T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-11.json"
+  },
+  {
+   "date": "2026-03-11",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate YoY",
+   "ts": "2026-03-11T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-11.json"
+  },
+  {
+   "date": "2026-03-11",
+   "label": "US_CPI",
+   "event": "Inflation Rate MoM",
+   "ts": "2026-03-11T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-11.json"
+  },
+  {
+   "date": "2026-03-11",
+   "label": "US_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-03-11T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-11.json"
+  },
+  {
+   "date": "2026-03-13",
+   "label": "UK_GDP",
+   "event": "GDP MoM",
+   "ts": "2026-03-13T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-13.json"
+  },
+  {
+   "date": "2026-03-13",
+   "label": "US_GDP",
+   "event": "GDP Growth Rate QoQ 2nd Est",
+   "ts": "2026-03-13T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-13.json"
+  },
+  {
+   "date": "2026-03-18",
+   "label": "US_PPI",
+   "event": "PPI MoM",
+   "ts": "2026-03-18T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-18.json"
+  },
+  {
+   "date": "2026-03-18",
+   "label": "FOMC",
+   "event": "Fed Interest Rate Decision",
+   "ts": "2026-03-18T18:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-18.json"
+  },
+  {
+   "date": "2026-03-18",
+   "label": "FOMC",
+   "event": "FOMC Economic Projections",
+   "ts": "2026-03-18T18:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-18.json"
+  },
+  {
+   "date": "2026-03-18",
+   "label": "FOMC",
+   "event": "Fed Press Conference",
+   "ts": "2026-03-18T18:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-18.json"
+  },
+  {
+   "date": "2026-03-19",
+   "label": "UK_UNEM",
+   "event": "Unemployment Rate",
+   "ts": "2026-03-19T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-19.json"
+  },
+  {
+   "date": "2026-03-19",
+   "label": "BOE",
+   "event": "BoE Interest Rate Decision",
+   "ts": "2026-03-19T12:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-19.json"
+  },
+  {
+   "date": "2026-03-25",
+   "label": "UK_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-03-25T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-25.json"
+  },
+  {
+   "date": "2026-03-27",
+   "label": "UK_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-03-27T07:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-03-27.json"
+  },
+  {
+   "date": "2026-03-31",
+   "label": "UK_GDP",
+   "event": "GDP Growth Rate QoQ Final",
+   "ts": "2026-03-31T06:00:00+00:00",
+   "impact": "LOW",
+   "source": "news_state_finnhub_backfill_2026-03-31.json"
+  },
+  {
+   "date": "2026-04-01",
+   "label": "US_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-04-01T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-01.json"
+  },
+  {
+   "date": "2026-04-01",
+   "label": "ISM_MFG",
+   "event": "ISM Manufacturing PMI",
+   "ts": "2026-04-01T14:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-01.json"
+  },
+  {
+   "date": "2026-04-03",
+   "label": "NFP",
+   "event": "Non Farm Payrolls",
+   "ts": "2026-04-03T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-03.json"
+  },
+  {
+   "date": "2026-04-06",
+   "label": "ISM_SVC",
+   "event": "ISM Services PMI",
+   "ts": "2026-04-06T14:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-06.json"
+  },
+  {
+   "date": "2026-04-09",
+   "label": "US_GDP",
+   "event": "GDP Growth Rate QoQ Final",
+   "ts": "2026-04-09T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-09.json"
+  },
+  {
+   "date": "2026-04-10",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate MoM",
+   "ts": "2026-04-10T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-10.json"
+  },
+  {
+   "date": "2026-04-10",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate YoY",
+   "ts": "2026-04-10T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-10.json"
+  },
+  {
+   "date": "2026-04-10",
+   "label": "US_CPI",
+   "event": "Inflation Rate MoM",
+   "ts": "2026-04-10T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-10.json"
+  },
+  {
+   "date": "2026-04-10",
+   "label": "US_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-04-10T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-10.json"
+  },
+  {
+   "date": "2026-04-14",
+   "label": "US_PPI",
+   "event": "PPI MoM",
+   "ts": "2026-04-14T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-14.json"
+  },
+  {
+   "date": "2026-04-16",
+   "label": "UK_GDP",
+   "event": "GDP MoM",
+   "ts": "2026-04-16T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-16.json"
+  },
+  {
+   "date": "2026-04-21",
+   "label": "UK_UNEM",
+   "event": "Unemployment Rate",
+   "ts": "2026-04-21T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-21.json"
+  },
+  {
+   "date": "2026-04-21",
+   "label": "US_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-04-21T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-21.json"
+  },
+  {
+   "date": "2026-04-22",
+   "label": "UK_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-04-22T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-22.json"
+  },
+  {
+   "date": "2026-04-24",
+   "label": "UK_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-04-24T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-24.json"
+  },
+  {
+   "date": "2026-04-29",
+   "label": "FOMC",
+   "event": "Fed Interest Rate Decision",
+   "ts": "2026-04-29T18:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-29.json"
+  },
+  {
+   "date": "2026-04-29",
+   "label": "FOMC",
+   "event": "Fed Press Conference",
+   "ts": "2026-04-29T18:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-29.json"
+  },
+  {
+   "date": "2026-04-30",
+   "label": "BOE",
+   "event": "BoE Interest Rate Decision",
+   "ts": "2026-04-30T11:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-30.json"
+  },
+  {
+   "date": "2026-04-30",
+   "label": "US_GDP",
+   "event": "GDP Growth Rate QoQ Adv",
+   "ts": "2026-04-30T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-04-30.json"
+  },
+  {
+   "date": "2026-05-01",
+   "label": "ISM_MFG",
+   "event": "ISM Manufacturing PMI",
+   "ts": "2026-05-01T14:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-01.json"
+  },
+  {
+   "date": "2026-05-05",
+   "label": "ISM_SVC",
+   "event": "ISM Services PMI",
+   "ts": "2026-05-05T14:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-05.json"
+  },
+  {
+   "date": "2026-05-08",
+   "label": "NFP",
+   "event": "Non Farm Payrolls",
+   "ts": "2026-05-08T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-08.json"
+  },
+  {
+   "date": "2026-05-12",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate MoM",
+   "ts": "2026-05-12T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-12.json"
+  },
+  {
+   "date": "2026-05-12",
+   "label": "US_CPI",
+   "event": "Core Inflation Rate YoY",
+   "ts": "2026-05-12T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-12.json"
+  },
+  {
+   "date": "2026-05-12",
+   "label": "US_CPI",
+   "event": "Inflation Rate MoM",
+   "ts": "2026-05-12T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-12.json"
+  },
+  {
+   "date": "2026-05-12",
+   "label": "US_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-05-12T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-12.json"
+  },
+  {
+   "date": "2026-05-13",
+   "label": "US_PPI",
+   "event": "PPI MoM",
+   "ts": "2026-05-13T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-13.json"
+  },
+  {
+   "date": "2026-05-14",
+   "label": "UK_GDP",
+   "event": "GDP Growth Rate QoQ Prel",
+   "ts": "2026-05-14T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-14.json"
+  },
+  {
+   "date": "2026-05-14",
+   "label": "UK_GDP",
+   "event": "GDP MoM",
+   "ts": "2026-05-14T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-14.json"
+  },
+  {
+   "date": "2026-05-14",
+   "label": "US_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-05-14T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-14.json"
+  },
+  {
+   "date": "2026-05-19",
+   "label": "UK_UNEM",
+   "event": "Unemployment Rate",
+   "ts": "2026-05-19T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-19.json"
+  },
+  {
+   "date": "2026-05-20",
+   "label": "UK_CPI",
+   "event": "Inflation Rate YoY",
+   "ts": "2026-05-20T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-20.json"
+  },
+  {
+   "date": "2026-05-22",
+   "label": "UK_RETAIL",
+   "event": "Retail Sales MoM",
+   "ts": "2026-05-22T06:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-22.json"
+  },
+  {
+   "date": "2026-05-28",
+   "label": "US_GDP",
+   "event": "GDP Growth Rate QoQ 2nd Est",
+   "ts": "2026-05-28T12:30:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-05-28.json"
+  },
+  {
+   "date": "2026-06-01",
+   "label": "ISM_MFG",
+   "event": "ISM Manufacturing PMI",
+   "ts": "2026-06-01T14:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-06-01.json"
+  },
+  {
+   "date": "2026-06-03",
+   "label": "ISM_SVC",
+   "event": "ISM Services PMI",
+   "ts": "2026-06-03T14:00:00+00:00",
+   "impact": "HIGH",
+   "source": "news_state_finnhub_backfill_2026-06-03.json"
+  }
+ ],
+ "per_date_labels": {
+  "2026-01-05": [
+   [
+    "ISM_MFG",
+    "ISM Manufacturing PMI",
+    "2026-01-05T15:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-01-07": [
+   [
+    "ISM_SVC",
+    "ISM Services PMI",
+    "2026-01-07T15:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-01-09": [
+   [
+    "NFP",
+    "Non Farm Payrolls",
+    "2026-01-09T13:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-01-13": [
+   [
+    "US_CPI",
+    "Core Inflation Rate MoM",
+    "2026-01-13T13:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Core Inflation Rate YoY",
+    "2026-01-13T13:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate MoM",
+    "2026-01-13T13:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate YoY",
+    "2026-01-13T13:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-01-14": [
+   [
+    "US_PPI",
+    "PPI MoM",
+    "2026-01-14T13:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_RETAIL",
+    "Retail Sales MoM",
+    "2026-01-14T13:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-01-15": [
+   [
+    "UK_GDP",
+    "GDP MoM",
+    "2026-01-15T07:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-01-20": [
+   [
+    "UK_UNEM",
+    "Unemployment Rate",
+    "2026-01-20T07:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-01-21": [
+   [
+    "UK_CPI",
+    "Inflation Rate YoY",
+    "2026-01-21T07:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-01-22": [
+   [
+    "US_GDP",
+    "GDP Growth Rate QoQ Final",
+    "2026-01-22T13:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-01-23": [
+   [
+    "UK_RETAIL",
+    "Retail Sales MoM",
+    "2026-01-23T07:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-01-28": [
+   [
+    "FOMC",
+    "Fed Interest Rate Decision",
+    "2026-01-28T19:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "FOMC",
+    "Fed Press Conference",
+    "2026-01-28T19:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-01-30": [
+   [
+    "US_PPI",
+    "PPI MoM",
+    "2026-01-30T13:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-02-02": [
+   [
+    "ISM_MFG",
+    "ISM Manufacturing PMI",
+    "2026-02-02T15:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-02-04": [
+   [
+    "ISM_SVC",
+    "ISM Services PMI",
+    "2026-02-04T15:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-02-05": [
+   [
+    "BOE",
+    "BoE Interest Rate Decision",
+    "2026-02-05T12:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-02-10": [
+   [
+    "US_RETAIL",
+    "Retail Sales MoM",
+    "2026-02-10T13:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-02-11": [
+   [
+    "NFP",
+    "Non Farm Payrolls",
+    "2026-02-11T13:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-02-12": [
+   [
+    "UK_GDP",
+    "GDP Growth Rate QoQ Prel",
+    "2026-02-12T07:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "UK_GDP",
+    "GDP MoM",
+    "2026-02-12T07:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-02-13": [
+   [
+    "US_CPI",
+    "Core Inflation Rate MoM",
+    "2026-02-13T13:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Core Inflation Rate YoY",
+    "2026-02-13T13:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate MoM",
+    "2026-02-13T13:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate YoY",
+    "2026-02-13T13:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-02-17": [
+   [
+    "UK_UNEM",
+    "Unemployment Rate",
+    "2026-02-17T07:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-02-18": [
+   [
+    "UK_CPI",
+    "Inflation Rate YoY",
+    "2026-02-18T07:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-02-20": [
+   [
+    "UK_RETAIL",
+    "Retail Sales MoM",
+    "2026-02-20T07:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_GDP",
+    "GDP Growth Rate QoQ Adv",
+    "2026-02-20T13:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-02-27": [
+   [
+    "US_PPI",
+    "PPI MoM",
+    "2026-02-27T13:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-03-02": [
+   [
+    "ISM_MFG",
+    "ISM Manufacturing PMI",
+    "2026-03-02T15:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-03-04": [
+   [
+    "ISM_SVC",
+    "ISM Services PMI",
+    "2026-03-04T15:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-03-06": [
+   [
+    "NFP",
+    "Non Farm Payrolls",
+    "2026-03-06T13:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_RETAIL",
+    "Retail Sales MoM",
+    "2026-03-06T13:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-03-11": [
+   [
+    "US_CPI",
+    "Core Inflation Rate MoM",
+    "2026-03-11T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Core Inflation Rate YoY",
+    "2026-03-11T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate MoM",
+    "2026-03-11T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate YoY",
+    "2026-03-11T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-03-13": [
+   [
+    "UK_GDP",
+    "GDP MoM",
+    "2026-03-13T07:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_GDP",
+    "GDP Growth Rate QoQ 2nd Est",
+    "2026-03-13T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-03-18": [
+   [
+    "US_PPI",
+    "PPI MoM",
+    "2026-03-18T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "FOMC",
+    "Fed Interest Rate Decision",
+    "2026-03-18T18:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "FOMC",
+    "FOMC Economic Projections",
+    "2026-03-18T18:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "FOMC",
+    "Fed Press Conference",
+    "2026-03-18T18:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-03-19": [
+   [
+    "UK_UNEM",
+    "Unemployment Rate",
+    "2026-03-19T07:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "BOE",
+    "BoE Interest Rate Decision",
+    "2026-03-19T12:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-03-25": [
+   [
+    "UK_CPI",
+    "Inflation Rate YoY",
+    "2026-03-25T07:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-03-27": [
+   [
+    "UK_RETAIL",
+    "Retail Sales MoM",
+    "2026-03-27T07:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-03-31": [
+   [
+    "UK_GDP",
+    "GDP Growth Rate QoQ Final",
+    "2026-03-31T06:00:00+00:00",
+    "LOW"
+   ]
+  ],
+  "2026-04-01": [
+   [
+    "US_RETAIL",
+    "Retail Sales MoM",
+    "2026-04-01T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "ISM_MFG",
+    "ISM Manufacturing PMI",
+    "2026-04-01T14:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-04-03": [
+   [
+    "NFP",
+    "Non Farm Payrolls",
+    "2026-04-03T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-04-06": [
+   [
+    "ISM_SVC",
+    "ISM Services PMI",
+    "2026-04-06T14:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-04-09": [
+   [
+    "US_GDP",
+    "GDP Growth Rate QoQ Final",
+    "2026-04-09T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-04-10": [
+   [
+    "US_CPI",
+    "Core Inflation Rate MoM",
+    "2026-04-10T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Core Inflation Rate YoY",
+    "2026-04-10T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate MoM",
+    "2026-04-10T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate YoY",
+    "2026-04-10T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-04-14": [
+   [
+    "US_PPI",
+    "PPI MoM",
+    "2026-04-14T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-04-16": [
+   [
+    "UK_GDP",
+    "GDP MoM",
+    "2026-04-16T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-04-21": [
+   [
+    "UK_UNEM",
+    "Unemployment Rate",
+    "2026-04-21T06:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_RETAIL",
+    "Retail Sales MoM",
+    "2026-04-21T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-04-22": [
+   [
+    "UK_CPI",
+    "Inflation Rate YoY",
+    "2026-04-22T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-04-24": [
+   [
+    "UK_RETAIL",
+    "Retail Sales MoM",
+    "2026-04-24T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-04-29": [
+   [
+    "FOMC",
+    "Fed Interest Rate Decision",
+    "2026-04-29T18:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "FOMC",
+    "Fed Press Conference",
+    "2026-04-29T18:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-04-30": [
+   [
+    "BOE",
+    "BoE Interest Rate Decision",
+    "2026-04-30T11:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_GDP",
+    "GDP Growth Rate QoQ Adv",
+    "2026-04-30T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-05-01": [
+   [
+    "ISM_MFG",
+    "ISM Manufacturing PMI",
+    "2026-05-01T14:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-05-05": [
+   [
+    "ISM_SVC",
+    "ISM Services PMI",
+    "2026-05-05T14:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-05-08": [
+   [
+    "NFP",
+    "Non Farm Payrolls",
+    "2026-05-08T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-05-12": [
+   [
+    "US_CPI",
+    "Core Inflation Rate MoM",
+    "2026-05-12T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Core Inflation Rate YoY",
+    "2026-05-12T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate MoM",
+    "2026-05-12T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate YoY",
+    "2026-05-12T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-05-13": [
+   [
+    "US_PPI",
+    "PPI MoM",
+    "2026-05-13T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-05-14": [
+   [
+    "UK_GDP",
+    "GDP Growth Rate QoQ Prel",
+    "2026-05-14T06:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "UK_GDP",
+    "GDP MoM",
+    "2026-05-14T06:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_RETAIL",
+    "Retail Sales MoM",
+    "2026-05-14T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-05-19": [
+   [
+    "UK_UNEM",
+    "Unemployment Rate",
+    "2026-05-19T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-05-20": [
+   [
+    "UK_CPI",
+    "Inflation Rate YoY",
+    "2026-05-20T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-05-22": [
+   [
+    "UK_RETAIL",
+    "Retail Sales MoM",
+    "2026-05-22T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-05-28": [
+   [
+    "US_GDP",
+    "GDP Growth Rate QoQ 2nd Est",
+    "2026-05-28T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-06-01": [
+   [
+    "ISM_MFG",
+    "ISM Manufacturing PMI",
+    "2026-06-01T14:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-06-03": [
+   [
+    "ISM_SVC",
+    "ISM Services PMI",
+    "2026-06-03T14:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-06-05": [
+   [
+    "NFP",
+    "Non Farm Payrolls",
+    "2026-06-05T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-06-10": [
+   [
+    "US_CPI",
+    "Core Inflation Rate MoM",
+    "2026-06-10T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Core Inflation Rate YoY",
+    "2026-06-10T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate MoM",
+    "2026-06-10T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate YoY",
+    "2026-06-10T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-06-11": [
+   [
+    "US_PPI",
+    "PPI MoM",
+    "2026-06-11T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-06-12": [
+   [
+    "UK_GDP",
+    "GDP MoM",
+    "2026-06-12T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-06-17": [
+   [
+    "UK_CPI",
+    "Inflation Rate YoY",
+    "2026-06-17T06:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_RETAIL",
+    "Retail Sales MoM",
+    "2026-06-17T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "FOMC",
+    "Fed Interest Rate Decision",
+    "2026-06-17T18:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "FOMC",
+    "FOMC Economic Projections",
+    "2026-06-17T18:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "FOMC",
+    "Fed Press Conference",
+    "2026-06-17T18:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-06-18": [
+   [
+    "UK_UNEM",
+    "Unemployment Rate",
+    "2026-06-18T06:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "BOE",
+    "BoE Interest Rate Decision",
+    "2026-06-18T11:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-06-19": [
+   [
+    "UK_RETAIL",
+    "Retail Sales MoM",
+    "2026-06-19T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-06-25": [
+   [
+    "US_GDP",
+    "GDP Growth Rate QoQ Final",
+    "2026-06-25T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-07-01": [
+   [
+    "ISM_MFG",
+    "ISM Manufacturing PMI",
+    "2026-07-01T14:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-07-02": [
+   [
+    "NFP",
+    "Non Farm Payrolls",
+    "2026-07-02T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-07-06": [
+   [
+    "ISM_SVC",
+    "ISM Services PMI",
+    "2026-07-06T14:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-07-14": [
+   [
+    "US_CPI",
+    "Core Inflation Rate MoM",
+    "2026-07-14T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Core Inflation Rate YoY",
+    "2026-07-14T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate MoM",
+    "2026-07-14T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate YoY",
+    "2026-07-14T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-07-15": [
+   [
+    "US_PPI",
+    "PPI MoM",
+    "2026-07-15T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-07-16": [
+   [
+    "UK_GDP",
+    "GDP MoM",
+    "2026-07-16T06:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_RETAIL",
+    "Retail Sales MoM",
+    "2026-07-16T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-07-21": [
+   [
+    "UK_UNEM",
+    "Unemployment Rate",
+    "2026-07-21T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-07-22": [
+   [
+    "UK_CPI",
+    "Inflation Rate YoY",
+    "2026-07-22T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-07-24": [
+   [
+    "UK_RETAIL",
+    "Retail Sales MoM",
+    "2026-07-24T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-07-29": [
+   [
+    "FOMC",
+    "Fed Interest Rate Decision",
+    "2026-07-29T18:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "FOMC",
+    "Fed Press Conference",
+    "2026-07-29T18:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-07-30": [
+   [
+    "BOE",
+    "BoE Interest Rate Decision",
+    "2026-07-30T11:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_GDP",
+    "GDP Growth Rate QoQ Adv",
+    "2026-07-30T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-08-03": [
+   [
+    "ISM_MFG",
+    "ISM Manufacturing PMI",
+    "2026-08-03T14:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-08-05": [
+   [
+    "ISM_SVC",
+    "ISM Services PMI",
+    "2026-08-05T14:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-08-07": [
+   [
+    "NFP",
+    "Non Farm Payrolls",
+    "2026-08-07T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-08-12": [
+   [
+    "US_CPI",
+    "Core Inflation Rate MoM",
+    "2026-08-12T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Core Inflation Rate YoY",
+    "2026-08-12T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate MoM",
+    "2026-08-12T12:30:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_CPI",
+    "Inflation Rate YoY",
+    "2026-08-12T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-08-13": [
+   [
+    "UK_GDP",
+    "GDP Growth Rate QoQ Prel",
+    "2026-08-13T06:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "UK_GDP",
+    "GDP MoM",
+    "2026-08-13T06:00:00+00:00",
+    "HIGH"
+   ],
+   [
+    "US_PPI",
+    "PPI MoM",
+    "2026-08-13T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-08-14": [
+   [
+    "US_RETAIL",
+    "Retail Sales MoM",
+    "2026-08-14T12:30:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-08-18": [
+   [
+    "UK_UNEM",
+    "Unemployment Rate",
+    "2026-08-18T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-08-19": [
+   [
+    "UK_CPI",
+    "Inflation Rate YoY",
+    "2026-08-19T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-08-21": [
+   [
+    "UK_RETAIL",
+    "Retail Sales MoM",
+    "2026-08-21T06:00:00+00:00",
+    "HIGH"
+   ]
+  ],
+  "2026-08-26": [
+   [
+    "US_GDP",
+    "GDP Growth Rate QoQ 2nd Est",
+    "2026-08-26T12:30:00+00:00",
+    "HIGH"
+   ]
+  ]
+ }
+}
