@@ -412,5 +412,132 @@ But window_60 also loses 3 of 4 baseline grind days (06-18, 07-29,
 Checkpoint files:
 `q4_tv3_sweep.py`, `q4_tv3_sweep_result.json`.
 
+---
+
+## Q5 — Verdict summary (side-by-side, no recommendation)
+
+Three routes to grind capture, priced on the same 73-day regime-log
+window (2026-05-22 → 2026-08-21). All figures pips of GBPUSD move,
+signed (positive = win to the operator).
+
+### 5.1  Status quo (Q1's existing capture)
+
+| | value |
+|:---|:---|
+| Mechanism | EMA_PULLBACK legacy `_detect` path + level_ladder exits |
+| Grind days (6 target) — dominant close-move offered | +688 p |
+| Grind days — actual EMA_PB banked (from signal_log) | **+27.4 p** |
+| Capture rate on grind tape | **~ 4 %** |
+| Arm side | 231 arms across 6 days (adequate) |
+| Downstream kill rate | 96 % (34-58 arms per day → 0-3 fires per day) |
+| No-arm holes | mostly legitimate (flat periods + counter-pullback stretches); one operator-visible hole on 08-10 10:00-13:00 (3 h, +0.6 p) |
+| Bottleneck | **downstream gates** — not arm side |
+
+### 5.2  TREND_BANDWALK — best variant
+
+Best operator-spec: **bandwalk_8_10** (K=8-of-M=10 closes past outer BB).
+Best sensitivity variant: **bandwalk_5_8**.
+
+| metric | bandwalk_8_10 (spec) | bandwalk_5_8 (sens) | persist_2h |
+|:---|:---|:---|:---|
+| Trigger days (of 73) | **4** | 44 | 44 |
+| Total counterfactual PnL | +17.2 | +90.2 | −11.5 |
+| Total net-of-overlap (Q3) | **+1.3** | −231.2 | −278.8 |
+| Winning-trigger-day count | 2 | 14 | 13 |
+| Avg net-of-overlap per winning day | **+22.3** | +11.0 | +4.2 |
+| Trigger on 08-10 | **no** | yes (17:05 SELL, +3.3) | no |
+| Trigger on 08-14 | no | yes (07:10 BUY, +23.0 excl. reversal) | yes (08:35 BUY, +25 EXHAUSTION) |
+| Trigger on 06-17 | no | 0.0 (immediate SL) | **+40.0** |
+| Trigger on 07-15 | no | +95.8 | +63.2 |
+
+**Best case:** bandwalk_8_10 has a positive net-of-overlap
+(+1.3 p total, +22/win-day) but only fires on 4 days out of 73 in the
+window. It is not a mechanism for the operator's stated grind
+concern — it doesn't fire on 08-10 or 08-14. Loosening K/M catches
+more days but adds false-positive cost that erases the gain.
+
+**Persist_2h** delivers +32.1 net-of-overlap on 06-17 (best single-day
+margin any variant produced) but bleeds heavily across non-target days.
+
+### 5.3  TREND_V3 retuned — best variant
+
+| metric | baseline (live) | floor_30 | floor_40 | window_60 |
+|:---|:---:|:---:|:---:|:---:|
+| ER floor | 0.50 | 0.30 | 0.40 | 0.50 |
+| ER window | 20 | 20 | 20 | 60 |
+| Grind days armed (of 6 target) | 4 | 5 | 5 | 1 |
+| Grind arms | 69 | 134 | 102 | 45 |
+| Non-grind arms | 187 | 611 | 371 | 16 |
+| Grind:non-grind ratio | **0.37** | 0.22 | 0.28 | **2.81** |
+| 08-10 first arm | 17:35 post-peak | **09:05 pre-peak** | 17:15 post-peak | none |
+| 07-15 first arm | 13:05 in-move | **08:55 early** | 13:05 | 16:25 late |
+
+**Trade-off.**
+* **floor_30**: catches 08-10 pre-peak but almost doubles non-grind
+  false-arm count (611 vs 187). Ratio degrades from 0.37 → 0.22.
+* **window_60**: excellent selectivity (2.81 ratio) but covers only
+  1 of 6 target grind days (07-15). Loses everything else.
+* Neither route dominates — floor and window represent orthogonal
+  trade-offs (coverage vs precision).
+
+**Baseline (live) is Pareto-reasonable given the trade-off surface:**
+0.37 grind-to-noise ratio, 4 of 6 target days armed. No sweep variant
+strictly dominates it on both axes.
+
+### 5.4  Consolidated Q1-Q5 side-by-side
+
+Pips on target 6 grind days (dominant move: 688 p total offered):
+
+| route | mechanism | grind days armed / 6 | grind arms / 231 | grind pnl banked | non-grind cost (p) | net-of-overlap on target |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|
+| **Status quo** | EMA_PB legacy + ladder | 6 arm; 4 fire | 231 arms → 9 fires | **+27.4 p** | (already deducted) | baseline |
+| BANDWALK 8/10 (spec) | new module, priority TBD | 0 of 6 target | 0 grind arm total on target | 0 | +17 p total window | **0 (never fires on target)** |
+| BANDWALK 5/8 (sens) | new module | 5 of 6 (all but 06-17) | 8 target arms | +125.1 | −34.9 p non-target | +2.9 p net-of-overlap on 08-10; −80 p on target overall (crowds existing book) |
+| persist_2h | new module | 4 of 6 target | 10 target arms | +107.2 | −118.7 p non-target | +32.1 on 06-17; −60 on target overall |
+| TV3 floor_30 (retune) | existing strategy | 5 of 6 target | 134 grind arms | ~ +100 to +150 p if all-fires-priced (uninstrumented — my sweep does arms not fills) | 611 non-grind arms | — (not priced end-to-end; requires re-run of ladder exit stack) |
+| TV3 window_60 (retune) | existing strategy | 1 of 6 target (07-15) | 45 grind arms | +45 arm approx | 16 non-grind arms | narrow but clean |
+
+### 5.5  Load-bearing caveats
+
+* **Q2/Q3 PnL uses a ladder-surrogate**, not the live `level_ladder`
+  state machine (which reads pivots + PDH/PDL rungs). Absolute pnl
+  numbers should be treated as directional, not point estimates. A
+  ~ ±20 % swing in per-trade pnl is plausible depending on the actual
+  ladder-rung sequence on each day.
+* **06-17 (Fed decision, GRIND_100 DOWN) is impossible for TV3 or
+  bandwalk to catch** without intraday flip or spine-override —
+  prior daily UP + tape DOWN. No ER retune fixes this.
+* **All Q4 sweep numbers count ARMS, not fills.** The end-to-end pnl of a
+  retuned TV3 would require running the ladder exit stack over each
+  arm — not done here.
+* **Q1's downstream-kill attribution is aggregate**, not per-gate.
+  The 96 % downstream kill rate is real but which specific gates
+  (news blackout, H1 direction, pullback-shape, ribbon deferral,
+  cooldown) are responsible is unknowable from the current
+  observability.
+* **Regime engine data is 78 days** (starts 2026-05-22). The pre-May
+  audit GRIND_100 days (01-05, 01-23, 04-07, 04-13, 04-30) are
+  excluded from every Q here.
+* **Thin cells everywhere** — only 6 target grind days, only 4 days
+  where bandwalk_8_10 triggers, 1 winning trigger day for
+  bandwalk_10_12 (zero). No single number in this report survives
+  n<10 caution.
+
+The operator has the numbers. The build decision follows the numbers,
+not this report.
+
+---
+
+## Artefacts
+
+Under `/opt/tradingbot/reports-public/grind_capture_20260822/`:
+
+* `q1_ema_pb_grind.py` + `q1_ema_pb_result.json`
+* `q2_bandwalk.py`, `q2_bandwalk_v2.py`, `q2_bandwalk_result.json`
+* `q3_overlap.py` + `q3_overlap_result.json`
+* `q4_tv3_sweep.py` + `q4_tv3_sweep_result.json`
+* This report: `REPORT.md`
+
+
 
 
