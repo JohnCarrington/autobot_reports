@@ -306,4 +306,111 @@ wins. On the days where the book already banked well (07-15 +105 p,
 Checkpoint files:
 `q3_overlap.py`, `q3_overlap_result.json`.
 
+---
+
+## Q4 — TREND_V3 ER sweep
+
+Reproducer: `q4_tv3_sweep.py` → `q4_tv3_sweep_result.json`.
+
+**Current live config (baseline).** `TREND_V3_ER_MIN=0.5`,
+`TREND_V3_ER_BARS=20`.
+
+**Provenance.** ER_MIN=0.5 was set in the initial TREND_V3 commit
+`1aa6704 feat(trend_v3): new live daily-spine GBPUSD trend strategy`
+(2026-06-30, autobot@localhost). The commit message does not explain
+the choice; no `.env` override exists then or now, and no subsequent
+commit has touched `TREND_V3_ER_MIN` or `TREND_V3_ER_BARS`. This is a
+**default-that-was-never-revisited**, not a value tuned against data.
+
+### 4.1  Sweep summary (all criteria live-config except ER; regime-log window 73 days)
+
+| variant | floor | window | grind days armed | grind arms | non-grind days | non-grind arms |
+|:---|--:|--:|--:|--:|--:|--:|
+| **baseline** | 0.50 | 20 | **4** (of 6 target) |  **69** |  **23** |  **187** |
+| floor_30     | 0.30 | 20 | 5 | 134 | 35 | 611 |
+| floor_35     | 0.35 | 20 | 5 | 120 | 34 | 488 |
+| floor_40     | 0.40 | 20 | 5 | 102 | 31 | 371 |
+| window_40    | 0.50 | 40 | 2 |  46 |  7 |  43 |
+| window_60    | 0.50 | 60 | 1 |  45 |  2 |  16 |
+| window_80    | 0.50 | 80 | 1 |  24 |  0 |   0 |
+
+**Grind-arm-to-non-grind-arm ratio (higher = more selective):**
+
+| variant | ratio | interpretation |
+|:---|--:|:---|
+| baseline    | 69/187 = **0.37** | 3 false-positive arms per grind arm |
+| floor_30    | 134/611 = 0.22 | 4.5 FP per grind arm — worse |
+| floor_35    | 120/488 = 0.25 | 4.1 FP per grind arm — worse |
+| floor_40    | 102/371 = 0.28 | 3.6 FP per grind arm — slightly worse |
+| **window_40** | 46/43 = **1.07** | **≈ 1:1 — 3× cleaner** |
+| **window_60** | 45/16 = **2.81** | **2.8:1 — best selectivity** |
+| window_80   | 24/0 = ∞ | 0 false-arms but only 1 grind day + 24 arms |
+
+Lowering the floor adds grind arms but adds MORE non-grind arms per
+unit; the ratio degrades. **Widening the window is the selective
+lever** — window_60 catches only 07-15 among the grinds but has an
+FP ratio 8× better than the baseline.
+
+### 4.2  First-arm timing per target grind day
+
+| day | dom_end | dom_move | baseline | floor_30 | floor_35 | floor_40 | window_40 | window_60 | window_80 |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 2026-06-17 | 19:35 | −168 p | — | — | — | — | — | — | — |
+| 2026-06-18 | 19:20 | −129 p | 08:10 | **08:00** | 08:00 | 08:05 | 09:30 | — | — |
+| 2026-07-15 | 18:15 | +176 p | 13:05 | **08:55** | 13:05 | 13:05 | 14:30 | 14:55 | 16:25 |
+| 2026-07-29 | 19:15 | +102 p | 13:05 | **11:05** | 12:50 | 13:05 | — | — | — |
+| 2026-08-10 | 14:45 | +44 p  | 17:35 (post-peak) | **09:05** (pre-peak +36 p to go) | 09:05 | 17:15 (post-peak) | — | — | — |
+| 2026-08-14 | 14:25 | +69 p  | — | 18:05 (post-peak) | 18:05 | 18:05 | — | — | — |
+
+**Key observations.**
+
+1. **06-17 stays dead** at every variant — the spine (prior UP) vs
+   actual GRIND-DOWN mismatch blocks all arms across all ER
+   configurations. Only the intraday-flip machinery can rescue this
+   day; no ER tune changes it.
+2. **Floor_30 is the only variant that catches 08-10 pre-peak**
+   (09:05, +36 p of the +44 p climb still to go). Baseline and
+   floor_40 only fire at 17:15–17:35, deep in the post-peak retrace.
+3. **08-14 baseline stayed silent** on this walk (spine=DOWN mismatch);
+   the actual live 08:05 fire came via the intraday-flip that this
+   walk does not model. Under floor_30/35/40 the arm still fires only
+   at 18:05 — late.
+4. **07-15 with floor_30 arms at 08:55** — hours before the baseline's
+   13:05 first-arm; window_60/80 arm even later than baseline.
+
+### 4.3  Top-5 non-grind days by false-arm count
+
+**baseline** (top 5): 07-02 (31 arms, NFP-day), 07-06 (28, ISM_SVC),
+06-05 (25, NFP), 07-30 (18, BoE+US_GDP), 06-22 (11).
+
+**floor_30** (top 5): 07-02 (54), 07-30 (49), 06-05 (47), 07-06 (42),
+06-22 (31). Same days but +80 % arms each on average.
+
+**window_60** (top): 07-02 (16-ish), 07-30 (0 — silenced), 06-05
+(silenced). Wider windows are event-day-selective — they arm on 07-02
+(NFP) which had the sharpest impulse but silence the choppier
+event-days.
+
+### 4.4  Structural vs parametric conclusion
+
+The prompt asked: "is the ER floor's ~90 % failure rate on grind bars
+parametric or structural?" The sweep says **it is structural at
+short windows and parametric at long windows.**
+
+* At `window=20` (current), lowering floor from 0.5 → 0.3 adds arms
+  but doesn't dramatically change WHERE they arm — the operator-grind
+  08-10 borderline case gets a *timing* rescue (09:05 vs 17:35) but
+  the ratio worsens.
+* At `window=40+`, the ER numerator (net over window) and denominator
+  (sum of abs-diff) both grow with a sustained trend, so ER rides
+  higher even at slow pace. window_60 armed at 07-15 without shape
+  tuning — this is the **structural fix** the analysis suggests.
+
+But window_60 also loses 3 of 4 baseline grind days (06-18, 07-29,
+08-10 lost). The selective gain comes at cost of narrow coverage.
+
+Checkpoint files:
+`q4_tv3_sweep.py`, `q4_tv3_sweep_result.json`.
+
+
 
