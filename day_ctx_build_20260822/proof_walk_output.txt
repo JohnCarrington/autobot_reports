@@ -1,0 +1,83 @@
+========================================================================
+  DAY_CTX + EXIT_DRESS end-to-end proof walk
+========================================================================
+
+[1] ENVIRONMENT VARS IN PLAY
+    DAY_CTX_ENABLED=1
+    DAY_CTX_STATE_PATH=/tmp/proof_d3fbdmf4/day_ctx.json
+    DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+    LADDER_ENABLED=1
+    LADDER_MANAGED_MODES=GBPUSD_TREND_V3_L,GBPUSD_TREND_V3_S
+    LADDER_STATE_PATH=/tmp/proof_d3fbdmf4/ladder_state.json
+    LADDER_TELEMETRY_PATH=/tmp/proof_d3fbdmf4/ladder.jsonl
+
+[2] BOOT BANNERS (module load)
+day_context: [DAY_CTX] boot enabled=True state_path=/tmp/proof_d3fbdmf4/day_ctx.json
+day_context: [DAY_CTX] boot enabled=True state_path=/tmp/proof_d3fbdmf4/day_ctx.json
+exit_dress: [EXIT_DRESS] boot maps={'BIG_NEWS': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'PRE_BIG': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'POST_BIG': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'CLEAR': {}}
+exit_dress: [EXIT_DRESS] boot maps={'BIG_NEWS': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'PRE_BIG': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'POST_BIG': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'CLEAR': {}}
+AutoBot: [LADDER] boot enabled=True managed_modes=['GBPUSD_TREND_V3_L', 'GBPUSD_TREND_V3_S'] at_level=5.00p assess_bars=3 stop_buffer=3.00p broker_tp=100.00p
+AutoBot: [LADDER] boot enabled=True managed_modes=['GBPUSD_TREND_V3_L', 'GBPUSD_TREND_V3_S'] at_level=5.00p assess_bars=3 stop_buffer=3.00p broker_tp=100.00p
+
+[3] classify_today() — synthetic BIG_NEWS day 2026-08-14
+day_context: [DAY_CTX] classify_today date=2026-08-14 label=BIG_NEWS big_today=2 big_prev=0 big_next=0
+    snap.label       = BIG_NEWS
+    snap.date        = 2026-08-14
+    snap.big_today.n = 2
+      * Non Farm Payrolls @ 2026-08-14T13:30:00+00:00
+      * Fed Press Conference @ 2026-08-14T14:00:00+00:00
+    snap.big_prev.n  = 0
+    snap.big_next.n  = 0
+    snap.enabled     = True
+
+[4] exit_dress.resolve() — GBPUSD_TREND_V3_L on BIG_NEWS
+    resolved bracket = LADDER_PATIENT
+
+[5] exit_dress.patient_overlay_params() — base (assess=3, buffer=3p)
+    overlay = {'assess_bars': 4, 'stop_buffer_pips': 4.0, 'exhaustion': 'session_end'}
+
+[6] level_ladder.arm() — synthetic pivots for the stubbed day
+AutoBot: [LADDER] armed pos_key=EPIC.CS.D.CFDGBPUSD.CFD.IP|GBPUSD_TREND_V3_L mode=GBPUSD_TREND_V3_L dir=BUY entry=1.30001 rungs=['R1', 'R2', 'R3', 'PDH'] at_level=5.00p assess_bars=4 stop_buffer=4.00p dress=LADDER_PATIENT day_ctx=BIG_NEWS
+    arm() returned   = True
+
+[7] snapshot_state() — verify PATIENT overlay applied on-disk
+    state.mode                 = 'GBPUSD_TREND_V3_L'
+    state.direction            = 'BUY'
+    state.dress                = 'LADDER_PATIENT'
+    state.day_ctx              = 'BIG_NEWS'
+    state.exhaustion           = 'session_end'
+    state.at_level_pips        = 5.0
+    state.assess_bars          = 4
+    state.stop_buffer_pips     = 4.0
+    state.broker_min_pips      = 12.0
+    state.rungs             = ['R1@1.3002', 'R2@1.3004', 'R3@1.3006', 'PDH@1.3006']
+
+[8] on-disk state file
+    /tmp/proof_d3fbdmf4/ladder_state.json:
+      {"saved_at": "2026-08-22T11:30:48.194842+00:00", "positions": {"EPIC.CS.D.CFDGBPUSD.CFD.IP|GBPUSD_TREND_V3_L": {"pos_key": "EPIC.CS.D.CFDGBPUSD.CFD.IP|GBPUSD_TREND_V3_L", "mode": "GBPUSD_TREND_V3_L", "direction": "BUY", "symbol": "GBPUSD", "deal_id": "TEST_DEAL_01", "entry_ts": "2026-08-14T08:05:00+00:00", "entry_price": 1.30001, "pivots_source_ts": "2026-08-13T00:00:00+00:00", "days_gap": 1, "state": "RUNNING", "rung_index": 0, "rungs": [{"name": "R1", "price": 1.3002, "cohort": "OUTER"}, {"name": "R2", "price": 1.3004, "cohort": "OUTER"}, {"name": "R3", "price": 1.3006, "cohort": "OUTER"}, {"name": "PDH", "price": 1.3006, "cohort": "PDH"}], "assess_bars_seen": 0, "intended_stop_price": null, "broker_stop_price": null, "created_at": "2026-08-22T11:30:47.431495+00:00", "updated_at": "2026-08-22T11:30:47.431501+00:00", "at_level_pips": 5.0, "assess_bars": 4, "stop_buffer_pips": 4.0, "broker_min_pips": 12.0, "dress": "LADDER_PATIENT", "day_ctx": "BIG_NEWS", "exhaustion": "session_end"}}}
+
+[9] telemetry: last arm event from ladder JSONL
+    event  = arm
+    dress  = LADDER_PATIENT
+    day_ctx= BIG_NEWS
+    assess_bars      = 4
+    stop_buffer_pips = 4.0
+    exhaustion       = session_end
+
+[10] No-admission-import guard test
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.0.2, pluggy-1.6.0 -- /opt/tradingbot/venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /opt/tradingbot
+plugins: anyio-4.12.1
+collecting ... collected 1 item
+
+tests/unit/test_day_context.py::test_no_admission_import_guard PASSED    [100%]
+
+============================== 1 passed in 0.18s ===============================
+
+    guard test exit code = 0
+
+========================================================================
+  END proof walk
+========================================================================
