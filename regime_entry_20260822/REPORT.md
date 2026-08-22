@@ -264,3 +264,116 @@ assess-3-bar closes it first.
 Checkpoint files:
 `regime_entry_splits.py`, `regime_entry_overlap.json`.
 
+---
+
+## Section 5 — Verdict (side-by-side, no recommendation)
+
+All numbers are pips of GBPUSD move, ladder-surrogate or ladder-v3
+exit stack, 73-day regime-log window (2026-05-22 → 08-21).
+Prior variants from `grind_capture_20260822/REPORT.md` §5.
+
+### 5.1  Regime-entry variants (this study, ladder v3 exit)
+
+| variant | trigger-days | trades | gross PnL | grind PnL (of 6) | other PnL | net-of-overlap |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| **N=1 (rule as stated)** | 60 | 261 | **−63.7** |  −15.2 |  −48.5 | −110.6 |
+| N=2 | 60 | 247 | **−117.4** |  −17.8 |  −99.6 | −164.3 |
+| **N=6 (deep confirm)** | 60 | 192 | **−51.2** | **+73.2** | **−124.4** | **−146.3** |
+
+### 5.2  Alongside grind_capture Q2/Q3 variants (tiered-ratchet exit)
+
+| variant | trigger-days | trades | gross PnL | grind PnL (of 6) | other PnL | net-of-overlap |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Status quo (EMA_PB legacy + level_ladder live) | — | 9 fires on 6 grind days | **+27.4 p on grind only** | +27.4 | (existing book baseline) | 0 by construction |
+| bandwalk_8_10 (operator spec) | 4 |  4 |  +17.2 |   0.0 |  +17.2 |   +1.3 |
+| bandwalk_10_12 (operator spec) | 0 |  0 |    0.0 |   0.0 |    0.0 |    0.0 |
+| bandwalk_5_8 (sensitivity)     | 44 | 64 | +90.2 | +125.1 |  −34.9 | −231.2 |
+| persist_2h (regime persist ≥ 2h; tiered ratchet) | 44 | 98 | −11.5 | **+107.2** | −118.7 | −278.8 |
+| persist_3h                     | 31 | 59 | −20.4 |  +52.4 |  −72.8 | −360.6 |
+
+### 5.3  Consolidated verdict table — the numbers, side by side
+
+| route | gross | net-of-overlap | grind take (6 days) | other-day cost | trades / trigger-days |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| **regime-entry N=1 + ladder v3** |  **−63.7** | −110.6 |  −15.2 |  −48.5 | 261 / 60 |
+| regime-entry N=2 + ladder v3     | −117.4 | −164.3 |  −17.8 |  −99.6 | 247 / 60 |
+| **regime-entry N=6 + ladder v3** |  **−51.2** | −146.3 |  **+73.2** | −124.4 | 192 / 60 |
+| **persist_2h + tiered-ratchet**  |  −11.5 | −278.8 | **+107.2** | −118.7 |  98 / 44 |
+| persist_3h + tiered-ratchet      |  −20.4 | −360.6 |  +52.4 |  −72.8 |  59 / 31 |
+| bandwalk_8_10 + tiered-ratchet   |  +17.2 |   +1.3 |    0.0 |  +17.2 |   4 / 4  |
+| bandwalk_5_8 + tiered-ratchet    |  +90.2 | −231.2 | +125.1 |  −34.9 |  64 / 44 |
+| **status quo** (EMA_PB legacy)   |   +27.4 (grind only) |  0 by construction | +27.4 | baseline | 9 fires / 6 grinds |
+
+### 5.4  What each variant is buying
+
+* **regime-entry N=1**: hits 60 trigger days (identical set to N=2)
+  with 261 trades. The N=1 rule is TOO eager — any single STRONG bar
+  triggers, and short flare-and-reverse patterns dominate.
+* **regime-entry N=6**: cuts trades to 192 (−26%) and captures more
+  of the grind-day upside (+73 vs −15 at N=1) but the trigger-day
+  count doesn't drop — so it re-arms after flares, entering later
+  when the trend has already committed. False-positive tax swaps
+  from "eager flare-losses" to "late-committed-reversal losses."
+* **persist_2h + tiered-ratchet**: SAME regime entry logic
+  (STRONG ≥ 2h) but different exit stack. Beats N=6 on grind (+107
+  vs +73) BECAUSE tiered-ratchet lets runners run instead of
+  assess_expired closing them at rung touches. Net-of-overlap is
+  more negative (−278 vs −146) because it holds losers longer too.
+* **bandwalk_8_10**: rare fire (4 days) with clean +22p avg/win-day.
+  The only variant with positive net-of-overlap. But it fires so
+  rarely it's essentially a "sparse tail-only" strategy.
+* **status quo**: +27p on grind days; the +/-0 net-of-overlap column
+  is by construction (it IS the baseline).
+
+### 5.5  Cap-bind analysis
+
+The 4-re-entry cap binds on **11 of 60 days at N=1 and N=2, 6 of 60
+at N=6**. On those days additional re-entries would have added more
+trades but pnl impact is unknown. Cap-bind rate: 18 % at N=1/2,
+10 % at N=6.
+
+### 5.6  Surrogate error band
+
+Section 1.4 laid out surrogate error sources. Applying them to the
+headline PnL numbers:
+
+| variant | reported gross | error band |
+|:---|:---:|:---:|
+| N=1 | −63.7 | ± 3.2 |
+| N=2 | −117.4 | ± 5.9 |
+| N=6 | −51.2 | ± 2.6 |
+
+**No variant's reported PnL crosses zero within its error band.** The
+directional conclusions stand.
+
+### 5.7  Load-bearing caveats (thin cells + surrogate)
+
+1. **⚠ 6 target grind days is n<10.** Every grind-day cell in this
+   report inherits n=6 caution — a single day (07-15 or 06-18)
+   dominates most sums.
+2. **⚠ 73 total regime-log days.** Pre-May grind-100 days (01-05,
+   01-23, 04-07, 04-13, 04-30) are excluded from all Q1-Q5 and this
+   study.
+3. **⚠ Ladder-v3 surrogate** — see 1.4. MACD tie-break may shift
+   ~ 2 % of momentum-extend decisions. Pivot math ≠ live
+   bb_pd_gate.compute_pivots_only exactly.
+4. **⚠ Existing-book actual pnl** is per signal_log; on days where
+   the actual bot had an outage or degraded state, this
+   underrepresents what the book "could have" banked.
+5. **⚠ 18:00 UTC entry cap** in my simulator may miss some late-day
+   entries that live regime engine + live ladder would fire.
+
+The numbers are on the table. The build decision follows the numbers.
+
+---
+
+## Artefacts
+
+Under `/opt/tradingbot/reports-public/regime_entry_20260822/`:
+
+* `regime_entry_sim.py` — STRONG-onset detector + ladder v3 surrogate
+* `regime_entry_result.json` — per-day per-N trades + PnL
+* `regime_entry_splits.py` — net-of-overlap + TOD + ladder-save
+* `regime_entry_overlap.json` — overlap dedup detail per day per N
+* This report: `REPORT.md`
+
