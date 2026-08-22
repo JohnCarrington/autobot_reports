@@ -240,3 +240,70 @@ grind slice.
 Checkpoint files:
 `q2_bandwalk.py`, `q2_bandwalk_v2.py`, `q2_bandwalk_result.json`.
 
+---
+
+## Q3 — Net-of-overlap dedup vs signal_log
+
+Reproducer: `q3_overlap.py` → `q3_overlap_result.json`.
+
+**Method.** For each variant × day, compare:
+
+* **ctr** — counterfactual PnL from Q2's simulator on that day
+* **actual** — pnl_pips summed over signal_log GBPUSD fires on that day
+  whose direction matches the counterfactual's direction (double-count
+  guard: only same-direction actual fires are subtracted)
+* **net-of-overlap** = ctr − actual
+
+If a variant's counterfactual banks +100 p LONG on a day where the
+existing book already banked +80 p LONG, the marginal contribution is
++20 p, not +100 p.
+
+### 3.1  Full-window totals
+
+| variant | ctr total | actual same-dir | net-of-overlap | trigger-days |
+|:---|--:|--:|--:|--:|
+| persist_2h                    |  −11.5 | **+267.2** | **−278.8** | 44 |
+| persist_3h                    |  −20.4 | **+340.2** | **−360.6** | 31 |
+| bandwalk_8_10 (operator spec) |  +17.2 |   +15.9  |    **+1.3** |  4 |
+| bandwalk_10_12 (spec)         |   0.0  |    0.0   |     0.0    |  0 |
+| bandwalk_6_10 (sensitivity)   |  −36.4 |  +280.0  |  **−316.4** | 31 |
+| bandwalk_5_8 (sensitivity)    |  +90.2 |  +321.4  |  **−231.2** | 44 |
+
+**All variants except bandwalk_8_10 have negative net-of-overlap.** The
+existing book is already trading many of the days the variants
+counterfactually catch — the new mechanism competes with itself, not
+with dead space.
+
+### 3.2  Target-day net-of-overlap
+
+| day | dom_move | best variant → ctr / actual / net |
+|:---|:---:|:---|
+| 2026-08-10 | +44 p  | bandwalk_6_10 → +4.1 / −25.1 / **+29.2 p** — book bled, new mech would have added value |
+| 2026-08-14 | +69 p  | bandwalk_5_8  → +23.0 / +21.4 / **+1.6 p** — book already captured; near breakeven |
+| 2026-06-17 | −168 p | **persist_2h** → +40.0 / +7.8 / **+32.1 p** — best margin any variant on any target day |
+| 2026-06-18 | −129 p | persist_2h → +3.0 / +52.6 / **−49.6 p** — book already captured heavy; new mech erodes |
+| 2026-07-15 | +176 p | bandwalk_5_8 → +95.8 / +105.0 / **−9.2 p** — book already captured full move; marginal ≈ 0 |
+| 2026-07-29 | +102 p | bandwalk_5_8 → +15.0 / 0.0 / **+15.0 p** — book banked 0; clean margin |
+| **target-day marginal (best per day)** | **+688 p offered** |  **+19.2 p average / day** |
+
+**Winning-trigger-day averages** (marginal per variant, filtered to
+days where the counterfactual itself was profitable):
+
+| variant | win days | avg net-of-overlap |
+|:---|--:|--:|
+| persist_2h                    | 13 |  +4.2 p |
+| persist_3h                    | 11 | −21.0 p |
+| **bandwalk_8_10 (operator spec)** |  2 | **+22.3 p** |
+| bandwalk_6_10                 |  8 |  +1.8 p |
+| bandwalk_5_8                  | 14 | +11.0 p |
+
+**Bottom line for Q3.** The mechanism only adds meaningful marginal
+value when the existing book undercapturs — 06-17 (FOMC-day short,
+book banked only +8 p) and 07-29 (FOMC UP, book 0 p) are the clean
+wins. On the days where the book already banked well (07-15 +105 p,
+06-18 +53 p), the new mechanism largely double-counts or interferes.
+
+Checkpoint files:
+`q3_overlap.py`, `q3_overlap_result.json`.
+
+
