@@ -1,0 +1,8757 @@
+[
+ {
+  "fire": {
+   "ts": "2026-05-27T08:10:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13444.75,
+   "actual_pnl": -5.75,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13434.15
+   ],
+   [
+    "S1",
+    13426.5833
+   ],
+   [
+    "S2",
+    13398.7167
+   ],
+   [
+    "S3",
+    13363.2833
+   ]
+  ],
+  "pd_date": "2026-05-26",
+  "pdh": 13497.45,
+  "pdl": 13434.15,
+  "pivots": {
+   "P": 13462.0167,
+   "R1": 13489.8833,
+   "R2": 13525.3167,
+   "R3": 13553.1833,
+   "S1": 13426.5833,
+   "S2": 13398.7167,
+   "S3": 13363.2833
+  },
+  "LADDER": {
+   "pnl": 7.0,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-05-27T10:25:00+00:00",
+   "exit_price": 13437.75,
+   "events": [
+    {
+     "bar_ts": "2026-05-27T10:15:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13434.150000000001
+    },
+    {
+     "bar_ts": "2026-05-27T10:20:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDL",
+     "rung_price": 13434.150000000001,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13437.150000000001,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-05-27T10:25:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13437.150000000001
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-05-27T12:15:00+00:00",
+   "exit_price": 13444.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-05-27T10:40:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13438.55,
+   "actual_pnl": 15.75,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13434.15
+   ],
+   [
+    "S1",
+    13426.5833
+   ],
+   [
+    "S2",
+    13398.7167
+   ],
+   [
+    "S3",
+    13363.2833
+   ]
+  ],
+  "pd_date": "2026-05-26",
+  "pdh": 13497.45,
+  "pdl": 13434.15,
+  "pivots": {
+   "P": 13462.0167,
+   "R1": 13489.8833,
+   "R2": 13525.3167,
+   "R3": 13553.1833,
+   "S1": 13426.5833,
+   "S2": 13398.7167,
+   "S3": 13363.2833
+  },
+  "LADDER": {
+   "pnl": -2.400000000001455,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-05-27T10:55:00+00:00",
+   "exit_price": 13440.95,
+   "events": [
+    {
+     "bar_ts": "2026-05-27T10:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13434.150000000001
+    },
+    {
+     "bar_ts": "2026-05-27T10:55:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDL",
+     "assess_seen": 3,
+     "close": 13440.95
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-05-27T12:20:00+00:00",
+   "exit_price": 13450.55
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-05-27T14:30:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13448.75,
+   "actual_pnl": -19.25,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "P",
+    13462.0167
+   ],
+   [
+    "R1",
+    13489.8833
+   ],
+   [
+    "PDH",
+    13497.45
+   ],
+   [
+    "R2",
+    13525.3167
+   ],
+   [
+    "R3",
+    13553.1833
+   ]
+  ],
+  "pd_date": "2026-05-26",
+  "pdh": 13497.45,
+  "pdl": 13434.15,
+  "pivots": {
+   "P": 13462.0167,
+   "R1": 13489.8833,
+   "R2": 13525.3167,
+   "R3": 13553.1833,
+   "S1": 13426.5833,
+   "S2": 13398.7167,
+   "S3": 13363.2833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-05-27T14:50:00+00:00",
+   "exit_price": 13436.75,
+   "events": [
+    {
+     "bar_ts": "2026-05-27T14:50:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13436.75
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-05-27T14:50:00+00:00",
+   "exit_price": 13436.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-05-28T10:35:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13395.65,
+   "actual_pnl": -11.65,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "rungs": [
+   [
+    "S2",
+    13385.4167
+   ],
+   [
+    "S3",
+    13356.2833
+   ]
+  ],
+  "pd_date": "2026-05-27",
+  "pdh": 13459.15,
+  "pdl": 13414.55,
+  "pivots": {
+   "P": 13430.0167,
+   "R1": 13445.4833,
+   "R2": 13474.6167,
+   "R3": 13490.0833,
+   "S1": 13400.8833,
+   "S2": 13385.4167,
+   "S3": 13356.2833
+  },
+  "LADDER": {
+   "pnl": 2.600000000000364,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-05-28T10:50:00+00:00",
+   "exit_price": 13393.05,
+   "events": [
+    {
+     "bar_ts": "2026-05-28T10:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S2",
+     "rung_price": 13385.416666666666
+    },
+    {
+     "bar_ts": "2026-05-28T10:50:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S2",
+     "assess_seen": 3,
+     "close": 13393.05
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-05-28T11:50:00+00:00",
+   "exit_price": 13407.65
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-05-29T10:05:03Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13413.75,
+   "actual_pnl": -18.95,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "S1",
+    13390.55
+   ],
+   [
+    "PDL",
+    13367.45
+   ],
+   [
+    "S2",
+    13337.35
+   ],
+   [
+    "S3",
+    13307.25
+   ]
+  ],
+  "pd_date": "2026-05-28",
+  "pdh": 13450.75,
+  "pdl": 13367.45,
+  "pivots": {
+   "P": 13420.65,
+   "R1": 13473.85,
+   "R2": 13503.95,
+   "R3": 13557.15,
+   "S1": 13390.55,
+   "S2": 13337.35,
+   "S3": 13307.25
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-05-29T11:40:00+00:00",
+   "exit_price": 13425.75,
+   "events": [
+    {
+     "bar_ts": "2026-05-29T11:40:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13425.75
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-05-29T11:40:00+00:00",
+   "exit_price": 13425.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-05-29T15:25:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13478.45,
+   "actual_pnl": -8.15,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "rungs": [
+   [
+    "R2",
+    13503.95
+   ],
+   [
+    "R3",
+    13557.15
+   ]
+  ],
+  "pd_date": "2026-05-28",
+  "pdh": 13450.75,
+  "pdl": 13367.45,
+  "pivots": {
+   "P": 13420.65,
+   "R1": 13473.85,
+   "R2": 13503.95,
+   "R3": 13557.15,
+   "S1": 13390.55,
+   "S2": 13337.35,
+   "S3": 13307.25
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-05-29T16:10:00+00:00",
+   "exit_price": 13466.45,
+   "events": [
+    {
+     "bar_ts": "2026-05-29T16:10:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13466.45
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-05-29T16:10:00+00:00",
+   "exit_price": 13466.45
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-01T06:45:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13465.75,
+   "actual_pnl": -10.6,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13458.75000 < prior_5_low=13460.45000, pnl=-10.1p"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13485.05
+   ],
+   [
+    "R1",
+    13490.6167
+   ],
+   [
+    "R2",
+    13525.9833
+   ],
+   [
+    "R3",
+    13566.9167
+   ]
+  ],
+  "pd_date": "2026-05-29",
+  "pdh": 13485.05,
+  "pdl": 13408.75,
+  "pivots": {
+   "P": 13449.6833,
+   "R1": 13490.6167,
+   "R2": 13525.9833,
+   "R3": 13566.9167,
+   "S1": 13414.3167,
+   "S2": 13373.3833,
+   "S3": 13338.0167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-01T13:05:00+00:00",
+   "exit_price": 13453.75,
+   "events": [
+    {
+     "bar_ts": "2026-06-01T13:05:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13453.75
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-01T07:05:00+00:00",
+   "exit_price": 13465.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-01T08:25:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13467.35,
+   "actual_pnl": -11.9,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13457.65000 < prior_5_low=13458.15000, pnl=-11.5p"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13485.05
+   ],
+   [
+    "R1",
+    13490.6167
+   ],
+   [
+    "R2",
+    13525.9833
+   ],
+   [
+    "R3",
+    13566.9167
+   ]
+  ],
+  "pd_date": "2026-05-29",
+  "pdh": 13485.05,
+  "pdl": 13408.75,
+  "pivots": {
+   "P": 13449.6833,
+   "R1": 13490.6167,
+   "R2": 13525.9833,
+   "R3": 13566.9167,
+   "S1": 13414.3167,
+   "S2": 13373.3833,
+   "S3": 13338.0167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-01T13:00:00+00:00",
+   "exit_price": 13455.35,
+   "events": [
+    {
+     "bar_ts": "2026-06-01T13:00:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13455.35
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-01T13:00:00+00:00",
+   "exit_price": 13455.35
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-01T12:30:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13466.45,
+   "actual_pnl": -11.0,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13456.65000 < prior_5_low=13462.05000, pnl=-10.2p"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13485.05
+   ],
+   [
+    "R1",
+    13490.6167
+   ],
+   [
+    "R2",
+    13525.9833
+   ],
+   [
+    "R3",
+    13566.9167
+   ]
+  ],
+  "pd_date": "2026-05-29",
+  "pdh": 13485.05,
+  "pdl": 13408.75,
+  "pivots": {
+   "P": 13449.6833,
+   "R1": 13490.6167,
+   "R2": 13525.9833,
+   "R3": 13566.9167,
+   "S1": 13414.3167,
+   "S2": 13373.3833,
+   "S3": 13338.0167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-01T13:05:00+00:00",
+   "exit_price": 13454.45,
+   "events": [
+    {
+     "bar_ts": "2026-06-01T13:05:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13454.45
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-01T13:05:00+00:00",
+   "exit_price": 13454.45
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-01T16:50:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13453.45,
+   "actual_pnl": 0.35,
+   "actual_reason": "Breakeven stop hit (IG server-side)"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13485.05
+   ],
+   [
+    "R1",
+    13490.6167
+   ],
+   [
+    "R2",
+    13525.9833
+   ],
+   [
+    "R3",
+    13566.9167
+   ]
+  ],
+  "pd_date": "2026-05-29",
+  "pdh": 13485.05,
+  "pdl": 13408.75,
+  "pivots": {
+   "P": 13449.6833,
+   "R1": 13490.6167,
+   "R2": 13525.9833,
+   "R3": 13566.9167,
+   "S1": 13414.3167,
+   "S2": 13373.3833,
+   "S3": 13338.0167
+  },
+  "LADDER": {
+   "pnl": 4.5,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-06-01T20:40:00+00:00",
+   "exit_price": 13457.95,
+   "events": [],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 4.5,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-06-01T20:40:00+00:00",
+   "exit_price": 13457.95
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-02T07:35:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13474.35,
+   "actual_pnl": -10.8,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13464.45000 < prior_5_low=13464.75000, pnl=-10.3p"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13475.85
+   ],
+   [
+    "R1",
+    13488.0833
+   ],
+   [
+    "R2",
+    13516.6167
+   ],
+   [
+    "R3",
+    13557.3833
+   ]
+  ],
+  "pd_date": "2026-06-01",
+  "pdh": 13475.85,
+  "pdl": 13406.55,
+  "pivots": {
+   "P": 13447.3167,
+   "R1": 13488.0833,
+   "R2": 13516.6167,
+   "R3": 13557.3833,
+   "S1": 13418.7833,
+   "S2": 13378.0167,
+   "S3": 13349.4833
+  },
+  "LADDER": {
+   "pnl": -2.1999999999989086,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-06-02T07:50:00+00:00",
+   "exit_price": 13472.150000000001,
+   "events": [
+    {
+     "bar_ts": "2026-06-02T07:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13475.849999999999
+    },
+    {
+     "bar_ts": "2026-06-02T07:40:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDH",
+     "rung_price": 13475.849999999999,
+     "close_beyond": true,
+     "momentum_extend": false,
+     "intended_stop": 13472.849999999999,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-06-02T07:50:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13472.849999999999
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-02T08:50:00+00:00",
+   "exit_price": 13462.35
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-02T15:25:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13479.15,
+   "actual_pnl": -11.4,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13468.45000 < prior_5_low=13470.95000, pnl=-11.1p"
+  },
+  "rungs": [
+   [
+    "R1",
+    13488.0833
+   ],
+   [
+    "R2",
+    13516.6167
+   ],
+   [
+    "R3",
+    13557.3833
+   ]
+  ],
+  "pd_date": "2026-06-01",
+  "pdh": 13475.85,
+  "pdl": 13406.55,
+  "pivots": {
+   "P": 13447.3167,
+   "R1": 13488.0833,
+   "R2": 13516.6167,
+   "R3": 13557.3833,
+   "S1": 13418.7833,
+   "S2": 13378.0167,
+   "S3": 13349.4833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-02T16:40:00+00:00",
+   "exit_price": 13467.15,
+   "events": [
+    {
+     "bar_ts": "2026-06-02T16:40:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13467.15
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-02T16:40:00+00:00",
+   "exit_price": 13467.15
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-03T06:50:04Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13445.25,
+   "actual_pnl": -18.3,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13462.45000 > prior_5_high=13458.55000, pnl=-17.7p"
+  },
+  "rungs": [
+   [
+    "S1",
+    13441.1833
+   ],
+   [
+    "S2",
+    13429.9167
+   ],
+   [
+    "S3",
+    13409.8833
+   ]
+  ],
+  "pd_date": "2026-06-02",
+  "pdh": 13481.25,
+  "pdl": 13449.95,
+  "pivots": {
+   "P": 13461.2167,
+   "R1": 13472.4833,
+   "R2": 13492.5167,
+   "R3": 13503.7833,
+   "S1": 13441.1833,
+   "S2": 13429.9167,
+   "S3": 13409.8833
+  },
+  "LADDER": {
+   "pnl": -6.700000000000728,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-03T07:10:00+00:00",
+   "exit_price": 13451.95,
+   "events": [
+    {
+     "bar_ts": "2026-06-03T07:00:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13441.183333333334
+    },
+    {
+     "bar_ts": "2026-06-03T07:10:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S1",
+     "assess_seen": 3,
+     "close": 13451.95
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-03T07:35:00+00:00",
+   "exit_price": 13457.25
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-03T08:40:03Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13443.75,
+   "actual_pnl": -10.6,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13450.35000 > prior_5_high=13450.05000, pnl=-10.1p"
+  },
+  "rungs": [
+   [
+    "S1",
+    13441.1833
+   ],
+   [
+    "S2",
+    13429.9167
+   ],
+   [
+    "S3",
+    13409.8833
+   ]
+  ],
+  "pd_date": "2026-06-02",
+  "pdh": 13481.25,
+  "pdl": 13449.95,
+  "pivots": {
+   "P": 13461.2167,
+   "R1": 13472.4833,
+   "R2": 13492.5167,
+   "R3": 13503.7833,
+   "S1": 13441.1833,
+   "S2": 13429.9167,
+   "S3": 13409.8833
+  },
+  "LADDER": {
+   "pnl": -2.2000000000007276,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-06-03T09:00:00+00:00",
+   "exit_price": 13445.95,
+   "events": [
+    {
+     "bar_ts": "2026-06-03T08:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13441.183333333334
+    },
+    {
+     "bar_ts": "2026-06-03T08:50:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "S1",
+     "rung_price": 13441.183333333334,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13444.183333333334,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-06-03T09:00:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13444.183333333334
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-03T10:05:00+00:00",
+   "exit_price": 13455.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-03T13:15:03Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13432.75,
+   "actual_pnl": 15.0,
+   "actual_reason": "IG_RECONCILE"
+  },
+  "rungs": [
+   [
+    "S2",
+    13429.9167
+   ],
+   [
+    "S3",
+    13409.8833
+   ]
+  ],
+  "pd_date": "2026-06-02",
+  "pdh": 13481.25,
+  "pdl": 13449.95,
+  "pivots": {
+   "P": 13461.2167,
+   "R1": 13472.4833,
+   "R2": 13492.5167,
+   "R3": 13503.7833,
+   "S1": 13441.1833,
+   "S2": 13429.9167,
+   "S3": 13409.8833
+  },
+  "LADDER": {
+   "pnl": -3.900000000001455,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-06-03T14:55:00+00:00",
+   "exit_price": 13436.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-06-03T13:20:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S2",
+     "rung_price": 13429.916666666668
+    },
+    {
+     "bar_ts": "2026-06-03T13:20:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "S2",
+     "rung_price": 13429.916666666668,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13432.916666666668,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-06-03T14:55:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13432.916666666668
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-03T14:10:00+00:00",
+   "exit_price": 13432.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-03T16:15:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13422.55,
+   "actual_pnl": 0.45,
+   "actual_reason": "Breakeven stop hit (IG server-side)"
+  },
+  "rungs": [
+   [
+    "S3",
+    13409.8833
+   ]
+  ],
+  "pd_date": "2026-06-02",
+  "pdh": 13481.25,
+  "pdl": 13449.95,
+  "pivots": {
+   "P": 13461.2167,
+   "R1": 13472.4833,
+   "R2": 13492.5167,
+   "R3": 13503.7833,
+   "S1": 13441.1833,
+   "S2": 13429.9167,
+   "S3": 13409.8833
+  },
+  "LADDER": {
+   "pnl": 8.799999999999272,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-06-03T18:15:00+00:00",
+   "exit_price": 13413.75,
+   "events": [
+    {
+     "bar_ts": "2026-06-03T18:05:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S3",
+     "rung_price": 13409.883333333335
+    },
+    {
+     "bar_ts": "2026-06-03T18:10:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "S3",
+     "rung_price": 13409.883333333335,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13412.883333333335,
+     "new_state": "EXHAUSTED"
+    },
+    {
+     "bar_ts": "2026-06-03T18:15:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13412.883333333335
+    }
+   ],
+   "final_state": "EXHAUSTED"
+  },
+  "RATCHET": {
+   "pnl": 6.0,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-06-03T20:40:00+00:00",
+   "exit_price": 13416.55
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-05T09:10:06Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13459.65,
+   "actual_pnl": 14.95,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13462.85
+   ],
+   [
+    "R2",
+    13483.4833
+   ],
+   [
+    "R3",
+    13504.1167
+   ]
+  ],
+  "pd_date": "2026-06-04",
+  "pdh": 13462.85,
+  "pdl": 13411.65,
+  "pivots": {
+   "P": 13432.2833,
+   "R1": 13452.9167,
+   "R2": 13483.4833,
+   "R3": 13504.1167,
+   "S1": 13401.7167,
+   "S2": 13381.0833,
+   "S3": 13350.5167
+  },
+  "LADDER": {
+   "pnl": 1.8000000000010914,
+   "reason": "LADDER_REJECTION",
+   "exit_ts": "2026-06-05T09:15:00+00:00",
+   "exit_price": 13461.45,
+   "events": [
+    {
+     "bar_ts": "2026-06-05T09:15:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13462.849999999999
+    },
+    {
+     "bar_ts": "2026-06-05T09:15:00+00:00",
+     "action": "LADDER_REJECTION",
+     "rung": "PDH",
+     "close": 13461.45
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-05T12:30:00+00:00",
+   "exit_price": 13459.65
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-05T13:30:03Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13405.95,
+   "actual_pnl": -0.25,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "rungs": [
+   [
+    "S1",
+    13401.7167
+   ],
+   [
+    "S2",
+    13381.0833
+   ],
+   [
+    "S3",
+    13350.5167
+   ]
+  ],
+  "pd_date": "2026-06-04",
+  "pdh": 13462.85,
+  "pdl": 13411.65,
+  "pivots": {
+   "P": 13432.2833,
+   "R1": 13452.9167,
+   "R2": 13483.4833,
+   "R3": 13504.1167,
+   "S1": 13401.7167,
+   "S2": 13381.0833,
+   "S3": 13350.5167
+  },
+  "LADDER": {
+   "pnl": -2.099999999998545,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-06-05T13:45:00+00:00",
+   "exit_price": 13408.05,
+   "events": [
+    {
+     "bar_ts": "2026-06-05T13:35:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13401.716666666667
+    },
+    {
+     "bar_ts": "2026-06-05T13:35:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "S1",
+     "rung_price": 13401.716666666667,
+     "close_beyond": true,
+     "momentum_extend": false,
+     "intended_stop": 13404.716666666667,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-06-05T13:45:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13404.716666666667
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-05T13:45:00+00:00",
+   "exit_price": 13405.95
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-09T07:45:05Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13368.05,
+   "actual_pnl": 14.95,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "R2",
+    13378.85
+   ],
+   [
+    "R3",
+    13390.45
+   ]
+  ],
+  "pd_date": "2026-06-08",
+  "pdh": 13367.25,
+  "pdl": 13333.05,
+  "pivots": {
+   "P": 13344.65,
+   "R1": 13356.25,
+   "R2": 13378.85,
+   "R3": 13390.45,
+   "S1": 13322.05,
+   "S2": 13310.45,
+   "S3": 13287.85
+  },
+  "LADDER": {
+   "pnl": 0.2999999999992724,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-09T08:00:00+00:00",
+   "exit_price": 13368.349999999999,
+   "events": [
+    {
+     "bar_ts": "2026-06-09T07:50:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13378.85
+    },
+    {
+     "bar_ts": "2026-06-09T08:00:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13368.349999999999
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 35.5,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-06-09T12:30:00+00:00",
+   "exit_price": 13403.55
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-09T09:50:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13387.25,
+   "actual_pnl": 14.65,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "R3",
+    13390.45
+   ]
+  ],
+  "pd_date": "2026-06-08",
+  "pdh": 13367.25,
+  "pdl": 13333.05,
+  "pivots": {
+   "P": 13344.65,
+   "R1": 13356.25,
+   "R2": 13378.85,
+   "R3": 13390.45,
+   "S1": 13322.05,
+   "S2": 13310.45,
+   "S3": 13287.85
+  },
+  "LADDER": {
+   "pnl": -1.5999999999985448,
+   "reason": "LADDER_REJECTION",
+   "exit_ts": "2026-06-09T10:05:00+00:00",
+   "exit_price": 13385.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-06-09T09:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R3",
+     "rung_price": 13390.45
+    },
+    {
+     "bar_ts": "2026-06-09T10:05:00+00:00",
+     "action": "LADDER_REJECTION",
+     "rung": "R3",
+     "close": 13385.650000000001
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-09T15:25:00+00:00",
+   "exit_price": 13387.25
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-09T16:40:25Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13363.45,
+   "actual_pnl": -19.55,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "R1",
+    13356.25
+   ],
+   [
+    "P",
+    13344.65
+   ],
+   [
+    "PDL",
+    13333.05
+   ],
+   [
+    "S1",
+    13322.05
+   ],
+   [
+    "S2",
+    13310.45
+   ],
+   [
+    "S3",
+    13287.85
+   ]
+  ],
+  "pd_date": "2026-06-08",
+  "pdh": 13367.25,
+  "pdl": 13333.05,
+  "pivots": {
+   "P": 13344.65,
+   "R1": 13356.25,
+   "R2": 13378.85,
+   "R3": 13390.45,
+   "S1": 13322.05,
+   "S2": 13310.45,
+   "S3": 13287.85
+  },
+  "LADDER": {
+   "pnl": -8.599999999998545,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-09T16:55:00+00:00",
+   "exit_price": 13372.05,
+   "events": [
+    {
+     "bar_ts": "2026-06-09T16:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13356.25
+    },
+    {
+     "bar_ts": "2026-06-09T16:55:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R1",
+     "assess_seen": 3,
+     "close": 13372.05
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-09T17:00:00+00:00",
+   "exit_price": 13375.45
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-10T06:05:03Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13393.35,
+   "actual_pnl": -10.4,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13389.65000 < prior_5_low=13391.85000, pnl=-10.1p"
+  },
+  "rungs": [
+   [
+    "R1",
+    13411.35
+   ],
+   [
+    "PDH",
+    13411.55
+   ],
+   [
+    "R2",
+    13451.65
+   ],
+   [
+    "R3",
+    13491.75
+   ]
+  ],
+  "pd_date": "2026-06-09",
+  "pdh": 13411.55,
+  "pdl": 13331.15,
+  "pivots": {
+   "P": 13371.25,
+   "R1": 13411.35,
+   "R2": 13451.65,
+   "R3": 13491.75,
+   "S1": 13330.95,
+   "S2": 13290.85,
+   "S3": 13250.55
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-10T07:00:00+00:00",
+   "exit_price": 13381.35,
+   "events": [
+    {
+     "bar_ts": "2026-06-10T07:00:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13381.35
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-10T07:00:00+00:00",
+   "exit_price": 13381.35
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-11T09:30:06Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13363.85,
+   "actual_pnl": 13.25,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13349.45
+   ],
+   [
+    "S1",
+    13332.7167
+   ],
+   [
+    "S2",
+    13303.9833
+   ],
+   [
+    "S3",
+    13258.5167
+   ]
+  ],
+  "pd_date": "2026-06-10",
+  "pdh": 13423.65,
+  "pdl": 13349.45,
+  "pivots": {
+   "P": 13378.1833,
+   "R1": 13406.9167,
+   "R2": 13452.3833,
+   "R3": 13481.1167,
+   "S1": 13332.7167,
+   "S2": 13303.9833,
+   "S3": 13258.5167
+  },
+  "LADDER": {
+   "pnl": 6.000000000001819,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-06-11T10:20:00+00:00",
+   "exit_price": 13357.849999999999,
+   "events": [
+    {
+     "bar_ts": "2026-06-11T10:10:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13349.45
+    },
+    {
+     "bar_ts": "2026-06-11T10:15:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDL",
+     "rung_price": 13349.45,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13352.45,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-06-11T10:20:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13352.45
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-11T11:00:00+00:00",
+   "exit_price": 13363.85
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-11T13:10:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13354.75,
+   "actual_pnl": 0.55,
+   "actual_reason": "Breakeven stop hit (IG server-side)"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13349.45
+   ],
+   [
+    "S1",
+    13332.7167
+   ],
+   [
+    "S2",
+    13303.9833
+   ],
+   [
+    "S3",
+    13258.5167
+   ]
+  ],
+  "pd_date": "2026-06-10",
+  "pdh": 13423.65,
+  "pdl": 13349.45,
+  "pivots": {
+   "P": 13378.1833,
+   "R1": 13406.9167,
+   "R2": 13452.3833,
+   "R3": 13481.1167,
+   "S1": 13332.7167,
+   "S2": 13303.9833,
+   "S3": 13258.5167
+  },
+  "LADDER": {
+   "pnl": 2.099999999998545,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-06-11T13:30:00+00:00",
+   "exit_price": 13352.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-06-11T13:15:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13349.45
+    },
+    {
+     "bar_ts": "2026-06-11T13:15:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDL",
+     "rung_price": 13349.45,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13352.45,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-06-11T13:30:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13352.45
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-11T13:30:00+00:00",
+   "exit_price": 13354.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-11T14:05:03Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13346.45,
+   "actual_pnl": 14.95,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "S1",
+    13332.7167
+   ],
+   [
+    "S2",
+    13303.9833
+   ],
+   [
+    "S3",
+    13258.5167
+   ]
+  ],
+  "pd_date": "2026-06-10",
+  "pdh": 13423.65,
+  "pdl": 13349.45,
+  "pivots": {
+   "P": 13378.1833,
+   "R1": 13406.9167,
+   "R2": 13452.3833,
+   "R3": 13481.1167,
+   "S1": 13332.7167,
+   "S2": 13303.9833,
+   "S3": 13258.5167
+  },
+  "LADDER": {
+   "pnl": 8.799999999999272,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-06-11T15:15:00+00:00",
+   "exit_price": 13337.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-06-11T14:25:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13332.716666666667
+    },
+    {
+     "bar_ts": "2026-06-11T14:30:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "S1",
+     "rung_price": 13332.716666666667,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13335.716666666667,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-06-11T15:15:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13335.716666666667
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-11T17:25:00+00:00",
+   "exit_price": 13346.45
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-11T14:50:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13327.95,
+   "actual_pnl": -10.6,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13337.65000 > prior_5_high=13336.95000, pnl=-10.2p"
+  },
+  "rungs": [
+   [
+    "S2",
+    13303.9833
+   ],
+   [
+    "S3",
+    13258.5167
+   ]
+  ],
+  "pd_date": "2026-06-10",
+  "pdh": 13423.65,
+  "pdl": 13349.45,
+  "pivots": {
+   "P": 13378.1833,
+   "R1": 13406.9167,
+   "R2": 13452.3833,
+   "R3": 13481.1167,
+   "S1": 13332.7167,
+   "S2": 13303.9833,
+   "S3": 13258.5167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-11T15:15:00+00:00",
+   "exit_price": 13339.95,
+   "events": [
+    {
+     "bar_ts": "2026-06-11T15:15:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13339.95
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-11T15:15:00+00:00",
+   "exit_price": 13339.95
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-12T08:45:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13416.45,
+   "actual_pnl": -10.6,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13414.95000 < prior_5_low=13415.65000, pnl=-10.0p"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13433.65
+   ],
+   [
+    "R1",
+    13456.7833
+   ],
+   [
+    "R2",
+    13499.8167
+   ],
+   [
+    "R3",
+    13565.9833
+   ]
+  ],
+  "pd_date": "2026-06-11",
+  "pdh": 13433.65,
+  "pdl": 13324.45,
+  "pivots": {
+   "P": 13390.6167,
+   "R1": 13456.7833,
+   "R2": 13499.8167,
+   "R3": 13565.9833,
+   "S1": 13347.5833,
+   "S2": 13281.4167,
+   "S3": 13238.3833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-12T10:25:00+00:00",
+   "exit_price": 13404.45,
+   "events": [
+    {
+     "bar_ts": "2026-06-12T10:25:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13404.45
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-12T10:25:00+00:00",
+   "exit_price": 13404.45
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-12T12:50:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13392.75,
+   "actual_pnl": -12.5,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13403.65000 > prior_5_high=13398.85000, pnl=-12.0p"
+  },
+  "rungs": [
+   [
+    "P",
+    13390.6167
+   ],
+   [
+    "S1",
+    13347.5833
+   ],
+   [
+    "PDL",
+    13324.45
+   ],
+   [
+    "S2",
+    13281.4167
+   ],
+   [
+    "S3",
+    13238.3833
+   ]
+  ],
+  "pd_date": "2026-06-11",
+  "pdh": 13433.65,
+  "pdl": 13324.45,
+  "pivots": {
+   "P": 13390.6167,
+   "R1": 13456.7833,
+   "R2": 13499.8167,
+   "R3": 13565.9833,
+   "S1": 13347.5833,
+   "S2": 13281.4167,
+   "S3": 13238.3833
+  },
+  "LADDER": {
+   "pnl": -1.0,
+   "reason": "LADDER_REJECTION",
+   "exit_ts": "2026-06-12T12:55:00+00:00",
+   "exit_price": 13393.75,
+   "events": [
+    {
+     "bar_ts": "2026-06-12T12:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "P",
+     "rung_price": 13390.616666666669
+    },
+    {
+     "bar_ts": "2026-06-12T12:55:00+00:00",
+     "action": "LADDER_REJECTION",
+     "rung": "P",
+     "close": 13393.75
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-12T13:20:00+00:00",
+   "exit_price": 13404.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-12T15:15:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13414.55,
+   "actual_pnl": 8.75,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13433.65
+   ],
+   [
+    "R1",
+    13456.7833
+   ],
+   [
+    "R2",
+    13499.8167
+   ],
+   [
+    "R3",
+    13565.9833
+   ]
+  ],
+  "pd_date": "2026-06-11",
+  "pdh": 13433.65,
+  "pdl": 13324.45,
+  "pivots": {
+   "P": 13390.6167,
+   "R1": 13456.7833,
+   "R2": 13499.8167,
+   "R3": 13565.9833,
+   "S1": 13347.5833,
+   "S2": 13281.4167,
+   "S3": 13238.3833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-12T20:30:00+00:00",
+   "exit_price": 13402.55,
+   "events": [
+    {
+     "bar_ts": "2026-06-12T20:30:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13402.55
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-12T20:30:00+00:00",
+   "exit_price": 13402.55
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-17T14:05:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13401.8,
+   "actual_pnl": 10.75,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "rungs": [
+   [
+    "S1",
+    13395.8167
+   ],
+   [
+    "PDL",
+    13390.15
+   ],
+   [
+    "S2",
+    13366.6833
+   ],
+   [
+    "S3",
+    13343.2167
+   ]
+  ],
+  "pd_date": "2026-06-16",
+  "pdh": 13442.75,
+  "pdl": 13390.15,
+  "pivots": {
+   "P": 13419.2833,
+   "R1": 13448.4167,
+   "R2": 13471.8833,
+   "R3": 13501.0167,
+   "S1": 13395.8167,
+   "S2": 13366.6833,
+   "S3": 13343.2167
+  },
+  "LADDER": {
+   "pnl": -1.75,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-17T14:30:00+00:00",
+   "exit_price": 13403.55,
+   "events": [
+    {
+     "bar_ts": "2026-06-17T14:20:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13395.81666666667
+    },
+    {
+     "bar_ts": "2026-06-17T14:30:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S1",
+     "assess_seen": 3,
+     "close": 13403.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-17T17:50:00+00:00",
+   "exit_price": 13401.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-17T15:10:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13388.8,
+   "actual_pnl": -10.9,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13397.95000 > prior_5_high=13397.65000, pnl=-10.5p"
+  },
+  "rungs": [
+   [
+    "S2",
+    13366.6833
+   ],
+   [
+    "S3",
+    13343.2167
+   ]
+  ],
+  "pd_date": "2026-06-16",
+  "pdh": 13442.75,
+  "pdl": 13390.15,
+  "pivots": {
+   "P": 13419.2833,
+   "R1": 13448.4167,
+   "R2": 13471.8833,
+   "R3": 13501.0167,
+   "S1": 13395.8167,
+   "S2": 13366.6833,
+   "S3": 13343.2167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-17T17:50:00+00:00",
+   "exit_price": 13400.8,
+   "events": [
+    {
+     "bar_ts": "2026-06-17T17:50:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13400.8
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-17T17:50:00+00:00",
+   "exit_price": 13400.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-18T07:25:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13295.3,
+   "actual_pnl": 14.95,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13261.85
+   ],
+   [
+    "S1",
+    13228.8333
+   ],
+   [
+    "S2",
+    13157.4167
+   ],
+   [
+    "S3",
+    13052.9833
+   ]
+  ],
+  "pd_date": "2026-06-17",
+  "pdh": 13437.7,
+  "pdl": 13261.85,
+  "pivots": {
+   "P": 13333.2667,
+   "R1": 13404.6833,
+   "R2": 13509.1167,
+   "R3": 13580.5333,
+   "S1": 13228.8333,
+   "S2": 13157.4167,
+   "S3": 13052.9833
+  },
+  "LADDER": {
+   "pnl": 50.45000000000073,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-18T09:40:00+00:00",
+   "exit_price": 13244.849999999999,
+   "events": [
+    {
+     "bar_ts": "2026-06-18T08:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13261.849999999999
+    },
+    {
+     "bar_ts": "2026-06-18T08:45:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDL",
+     "rung_price": 13261.849999999999,
+     "close_beyond": true,
+     "momentum_extend": false,
+     "intended_stop": 13264.849999999999,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-06-18T09:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13228.833333333336
+    },
+    {
+     "bar_ts": "2026-06-18T09:40:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S1",
+     "assess_seen": 3,
+     "close": 13244.849999999999
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 62.849999999998545,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-06-18T10:35:00+00:00",
+   "exit_price": 13232.45
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-18T16:45:03Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13218.4,
+   "actual_pnl": -10.6,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13226.65000 > prior_5_high=13225.85000, pnl=-10.1p"
+  },
+  "rungs": [
+   [
+    "S2",
+    13157.4167
+   ],
+   [
+    "S3",
+    13052.9833
+   ]
+  ],
+  "pd_date": "2026-06-17",
+  "pdh": 13437.7,
+  "pdl": 13261.85,
+  "pivots": {
+   "P": 13333.2667,
+   "R1": 13404.6833,
+   "R2": 13509.1167,
+   "R3": 13580.5333,
+   "S1": 13228.8333,
+   "S2": 13157.4167,
+   "S3": 13052.9833
+  },
+  "LADDER": {
+   "pnl": 12.449999999998909,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-06-18T20:40:00+00:00",
+   "exit_price": 13205.95,
+   "events": [],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 12.449999999998909,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-06-18T20:40:00+00:00",
+   "exit_price": 13205.95
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-22T13:05:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13264.7,
+   "actual_pnl": -14.5,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13250.65000 < prior_5_low=13253.65000, pnl=-14.0p"
+  },
+  "rungs": [
+   [
+    "R2",
+    13289.6167
+   ],
+   [
+    "R3",
+    13338.1833
+   ]
+  ],
+  "pd_date": "2026-06-19",
+  "pdh": 13241.05,
+  "pdl": 13162.95,
+  "pivots": {
+   "P": 13211.5167,
+   "R1": 13260.0833,
+   "R2": 13289.6167,
+   "R3": 13338.1833,
+   "S1": 13181.9833,
+   "S2": 13133.4167,
+   "S3": 13103.8833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-22T13:25:00+00:00",
+   "exit_price": 13252.7,
+   "events": [
+    {
+     "bar_ts": "2026-06-22T13:25:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13252.7
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-22T13:25:00+00:00",
+   "exit_price": 13252.7
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-22T15:15:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13260.5,
+   "actual_pnl": -14.2,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13246.75000 < prior_5_low=13251.45000, pnl=-14.0p"
+  },
+  "rungs": [
+   [
+    "R2",
+    13289.6167
+   ],
+   [
+    "R3",
+    13338.1833
+   ]
+  ],
+  "pd_date": "2026-06-19",
+  "pdh": 13241.05,
+  "pdl": 13162.95,
+  "pivots": {
+   "P": 13211.5167,
+   "R1": 13260.0833,
+   "R2": 13289.6167,
+   "R3": 13338.1833,
+   "S1": 13181.9833,
+   "S2": 13133.4167,
+   "S3": 13103.8833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-22T15:45:00+00:00",
+   "exit_price": 13248.5,
+   "events": [
+    {
+     "bar_ts": "2026-06-22T15:45:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13248.5
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-22T15:45:00+00:00",
+   "exit_price": 13248.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-23T09:05:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13217.8,
+   "actual_pnl": -10.6,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13227.25000 > prior_5_high=13223.75000, pnl=-10.0p"
+  },
+  "rungs": [
+   [
+    "S1",
+    13195.55
+   ],
+   [
+    "PDL",
+    13183.35
+   ],
+   [
+    "S2",
+    13144.35
+   ],
+   [
+    "S3",
+    13105.35
+   ]
+  ],
+  "pd_date": "2026-06-22",
+  "pdh": 13273.55,
+  "pdl": 13183.35,
+  "pivots": {
+   "P": 13234.55,
+   "R1": 13285.75,
+   "R2": 13324.75,
+   "R3": 13375.95,
+   "S1": 13195.55,
+   "S2": 13144.35,
+   "S3": 13105.35
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-23T09:55:00+00:00",
+   "exit_price": 13229.8,
+   "events": [
+    {
+     "bar_ts": "2026-06-23T09:55:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13229.8
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-23T09:55:00+00:00",
+   "exit_price": 13229.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-23T15:00:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13200.9,
+   "actual_pnl": 14.55,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "S1",
+    13195.55
+   ],
+   [
+    "PDL",
+    13183.35
+   ],
+   [
+    "S2",
+    13144.35
+   ],
+   [
+    "S3",
+    13105.35
+   ]
+  ],
+  "pd_date": "2026-06-22",
+  "pdh": 13273.55,
+  "pdl": 13183.35,
+  "pivots": {
+   "P": 13234.55,
+   "R1": 13285.75,
+   "R2": 13324.75,
+   "R3": 13375.95,
+   "S1": 13195.55,
+   "S2": 13144.35,
+   "S3": 13105.35
+  },
+  "LADDER": {
+   "pnl": 12.649999999999636,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-06-23T15:50:00+00:00",
+   "exit_price": 13188.25,
+   "events": [
+    {
+     "bar_ts": "2026-06-23T15:05:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13195.549999999996
+    },
+    {
+     "bar_ts": "2026-06-23T15:05:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "S1",
+     "rung_price": 13195.549999999996,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13198.549999999996,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-06-23T15:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13183.349999999999
+    },
+    {
+     "bar_ts": "2026-06-23T15:45:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDL",
+     "rung_price": 13183.349999999999,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13186.349999999999,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-06-23T15:50:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13186.349999999999
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-23T19:30:00+00:00",
+   "exit_price": 13200.9
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-23T16:10:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13188.0,
+   "actual_pnl": -11.4,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13198.85000 > prior_5_high=13197.95000, pnl=-11.0p"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13183.35
+   ],
+   [
+    "S2",
+    13144.35
+   ],
+   [
+    "S3",
+    13105.35
+   ]
+  ],
+  "pd_date": "2026-06-22",
+  "pdh": 13273.55,
+  "pdl": 13183.35,
+  "pivots": {
+   "P": 13234.55,
+   "R1": 13285.75,
+   "R2": 13324.75,
+   "R3": 13375.95,
+   "S1": 13195.55,
+   "S2": 13144.35,
+   "S3": 13105.35
+  },
+  "LADDER": {
+   "pnl": -5.450000000000728,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-23T16:40:00+00:00",
+   "exit_price": 13193.45,
+   "events": [
+    {
+     "bar_ts": "2026-06-23T16:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13183.349999999999
+    },
+    {
+     "bar_ts": "2026-06-23T16:40:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDL",
+     "assess_seen": 3,
+     "close": 13193.45
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-23T19:30:00+00:00",
+   "exit_price": 13200.0
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-24T07:00:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13186.3,
+   "actual_pnl": 0.45,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13182.75
+   ],
+   [
+    "S1",
+    13171.9167
+   ],
+   [
+    "S2",
+    13143.7833
+   ],
+   [
+    "S3",
+    13104.8167
+   ]
+  ],
+  "pd_date": "2026-06-23",
+  "pdh": 13249.85,
+  "pdl": 13182.75,
+  "pivots": {
+   "P": 13210.8833,
+   "R1": 13239.0167,
+   "R2": 13277.9833,
+   "R3": 13306.1167,
+   "S1": 13171.9167,
+   "S2": 13143.7833,
+   "S3": 13104.8167
+  },
+  "LADDER": {
+   "pnl": -1.25,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-06-24T07:20:00+00:00",
+   "exit_price": 13187.55,
+   "events": [
+    {
+     "bar_ts": "2026-06-24T07:05:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13182.75
+    },
+    {
+     "bar_ts": "2026-06-24T07:10:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDL",
+     "rung_price": 13182.75,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13185.75,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-06-24T07:20:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13185.75
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-24T07:45:00+00:00",
+   "exit_price": 13198.3
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-24T08:40:04Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13186.8,
+   "actual_pnl": -10.9,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13195.75000 > prior_5_high=13194.55000, pnl=-10.2p"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13182.75
+   ],
+   [
+    "S1",
+    13171.9167
+   ],
+   [
+    "S2",
+    13143.7833
+   ],
+   [
+    "S3",
+    13104.8167
+   ]
+  ],
+  "pd_date": "2026-06-23",
+  "pdh": 13249.85,
+  "pdl": 13182.75,
+  "pivots": {
+   "P": 13210.8833,
+   "R1": 13239.0167,
+   "R2": 13277.9833,
+   "R3": 13306.1167,
+   "S1": 13171.9167,
+   "S2": 13143.7833,
+   "S3": 13104.8167
+  },
+  "LADDER": {
+   "pnl": -6.150000000001455,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-24T09:15:00+00:00",
+   "exit_price": 13192.95,
+   "events": [
+    {
+     "bar_ts": "2026-06-24T09:05:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13182.75
+    },
+    {
+     "bar_ts": "2026-06-24T09:15:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDL",
+     "assess_seen": 3,
+     "close": 13192.95
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 30.649999999997817,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-06-24T10:55:00+00:00",
+   "exit_price": 13156.150000000001
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-24T09:35:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13178.3,
+   "actual_pnl": 16.65,
+   "actual_reason": "external/manual close (IG monitor)"
+  },
+  "rungs": [
+   [
+    "S1",
+    13171.9167
+   ],
+   [
+    "S2",
+    13143.7833
+   ],
+   [
+    "S3",
+    13104.8167
+   ]
+  ],
+  "pd_date": "2026-06-23",
+  "pdh": 13249.85,
+  "pdl": 13182.75,
+  "pivots": {
+   "P": 13210.8833,
+   "R1": 13239.0167,
+   "R2": 13277.9833,
+   "R3": 13306.1167,
+   "S1": 13171.9167,
+   "S2": 13143.7833,
+   "S3": 13104.8167
+  },
+  "LADDER": {
+   "pnl": -2.25,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-24T09:50:00+00:00",
+   "exit_price": 13180.55,
+   "events": [
+    {
+     "bar_ts": "2026-06-24T09:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13171.916666666664
+    },
+    {
+     "bar_ts": "2026-06-24T09:50:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S1",
+     "assess_seen": 3,
+     "close": 13180.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 33.95000000000073,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-06-24T13:10:00+00:00",
+   "exit_price": 13144.349999999999
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-24T10:50:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13159.9,
+   "actual_pnl": 1.45,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "S2",
+    13143.7833
+   ],
+   [
+    "S3",
+    13104.8167
+   ]
+  ],
+  "pd_date": "2026-06-23",
+  "pdh": 13249.85,
+  "pdl": 13182.75,
+  "pivots": {
+   "P": 13210.8833,
+   "R1": 13239.0167,
+   "R2": 13277.9833,
+   "R3": 13306.1167,
+   "S1": 13171.9167,
+   "S2": 13143.7833,
+   "S3": 13104.8167
+  },
+  "LADDER": {
+   "pnl": 5.350000000000364,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-24T11:15:00+00:00",
+   "exit_price": 13154.55,
+   "events": [
+    {
+     "bar_ts": "2026-06-24T11:05:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S2",
+     "rung_price": 13143.783333333333
+    },
+    {
+     "bar_ts": "2026-06-24T11:15:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S2",
+     "assess_seen": 3,
+     "close": 13154.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-24T11:25:00+00:00",
+   "exit_price": 13159.9
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-24T13:10:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13145.9,
+   "actual_pnl": -20.25,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "S2",
+    13143.7833
+   ],
+   [
+    "S3",
+    13104.8167
+   ]
+  ],
+  "pd_date": "2026-06-23",
+  "pdh": 13249.85,
+  "pdl": 13182.75,
+  "pivots": {
+   "P": 13210.8833,
+   "R1": 13239.0167,
+   "R2": 13277.9833,
+   "R3": 13306.1167,
+   "S1": 13171.9167,
+   "S2": 13143.7833,
+   "S3": 13104.8167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-24T13:25:00+00:00",
+   "exit_price": 13157.9,
+   "events": [
+    {
+     "bar_ts": "2026-06-24T13:15:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S2",
+     "rung_price": 13143.783333333333
+    },
+    {
+     "bar_ts": "2026-06-24T13:25:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13157.9
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-24T13:25:00+00:00",
+   "exit_price": 13157.9
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-25T09:05:04Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13192.0,
+   "actual_pnl": -12.7,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13179.75000 < prior_5_low=13183.05000, pnl=-12.3p"
+  },
+  "rungs": [
+   [
+    "R1",
+    13202.2167
+   ],
+   [
+    "PDH",
+    13209.05
+   ],
+   [
+    "R2",
+    13239.9833
+   ],
+   [
+    "R3",
+    13270.9167
+   ]
+  ],
+  "pd_date": "2026-06-24",
+  "pdh": 13209.05,
+  "pdl": 13140.35,
+  "pivots": {
+   "P": 13171.2833,
+   "R1": 13202.2167,
+   "R2": 13239.9833,
+   "R3": 13270.9167,
+   "S1": 13133.5167,
+   "S2": 13102.5833,
+   "S3": 13064.8167
+  },
+  "LADDER": {
+   "pnl": -4.650000000001455,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-25T09:40:00+00:00",
+   "exit_price": 13187.349999999999,
+   "events": [
+    {
+     "bar_ts": "2026-06-25T09:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13202.216666666667
+    },
+    {
+     "bar_ts": "2026-06-25T09:40:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R1",
+     "assess_seen": 3,
+     "close": 13187.349999999999
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-25T10:00:00+00:00",
+   "exit_price": 13180.0
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-26T14:00:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13228.9,
+   "actual_pnl": -19.95,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "R2",
+    13253.8833
+   ],
+   [
+    "R3",
+    13288.3167
+   ]
+  ],
+  "pd_date": "2026-06-25",
+  "pdh": 13219.45,
+  "pdl": 13151.55,
+  "pivots": {
+   "P": 13185.9833,
+   "R1": 13220.4167,
+   "R2": 13253.8833,
+   "R3": 13288.3167,
+   "S1": 13152.5167,
+   "S2": 13118.0833,
+   "S3": 13084.6167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-06-26T14:40:00+00:00",
+   "exit_price": 13216.9,
+   "events": [
+    {
+     "bar_ts": "2026-06-26T14:40:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13216.9
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-26T14:40:00+00:00",
+   "exit_price": 13216.9
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-29T12:40:03Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13231.8,
+   "actual_pnl": 5.35,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13231.85
+   ],
+   [
+    "R2",
+    13255.0333
+   ],
+   [
+    "R3",
+    13278.2167
+   ]
+  ],
+  "pd_date": "2026-06-26",
+  "pdh": 13231.85,
+  "pdl": 13180.75,
+  "pivots": {
+   "P": 13203.9333,
+   "R1": 13227.1167,
+   "R2": 13255.0333,
+   "R3": 13278.2167,
+   "S1": 13176.0167,
+   "S2": 13152.8333,
+   "S3": 13124.9167
+  },
+  "LADDER": {
+   "pnl": -2.349999999998545,
+   "reason": "LADDER_REJECTION",
+   "exit_ts": "2026-06-29T12:45:00+00:00",
+   "exit_price": 13229.45,
+   "events": [
+    {
+     "bar_ts": "2026-06-29T12:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13231.849999999999
+    },
+    {
+     "bar_ts": "2026-06-29T12:45:00+00:00",
+     "action": "LADDER_REJECTION",
+     "rung": "PDH",
+     "close": 13229.45
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 30.150000000001455,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-06-29T20:20:00+00:00",
+   "exit_price": 13261.95
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-29T14:55:00Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13243.01795,
+   "actual_pnl": -19.95,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "R2",
+    13255.0333
+   ],
+   [
+    "R3",
+    13278.2167
+   ]
+  ],
+  "pd_date": "2026-06-26",
+  "pdh": 13231.85,
+  "pdl": 13180.75,
+  "pivots": {
+   "P": 13203.9333,
+   "R1": 13227.1167,
+   "R2": 13255.0333,
+   "R3": 13278.2167,
+   "S1": 13176.0167,
+   "S2": 13152.8333,
+   "S3": 13124.9167
+  },
+  "LADDER": {
+   "pnl": 5.732050000000527,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-29T15:40:00+00:00",
+   "exit_price": 13248.75,
+   "events": [
+    {
+     "bar_ts": "2026-06-29T15:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13255.033333333333
+    },
+    {
+     "bar_ts": "2026-06-29T15:40:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13248.75
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 16.83204999999907,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-06-29T20:40:00+00:00",
+   "exit_price": 13259.849999999999
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-30T11:15:04Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13228.8,
+   "actual_pnl": 8.85,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "rungs": [
+   [
+    "S1",
+    13210.7167
+   ],
+   [
+    "PDL",
+    13193.95
+   ],
+   [
+    "S2",
+    13167.8833
+   ],
+   [
+    "S3",
+    13141.8167
+   ]
+  ],
+  "pd_date": "2026-06-29",
+  "pdh": 13262.85,
+  "pdl": 13193.95,
+  "pivots": {
+   "P": 13236.7833,
+   "R1": 13279.6167,
+   "R2": 13305.6833,
+   "R3": 13348.5167,
+   "S1": 13210.7167,
+   "S2": 13167.8833,
+   "S3": 13141.8167
+  },
+  "LADDER": {
+   "pnl": 3.149999999997817,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-30T11:45:00+00:00",
+   "exit_price": 13225.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-06-30T11:35:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13210.716666666667
+    },
+    {
+     "bar_ts": "2026-06-30T11:45:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S1",
+     "assess_seen": 3,
+     "close": 13225.650000000001
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-30T13:15:00+00:00",
+   "exit_price": 13228.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-06-30T12:25:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13219.55767,
+   "actual_pnl": -15.8,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13228.95000 > prior_5_high=13223.75000, pnl=-15.4p"
+  },
+  "rungs": [
+   [
+    "S1",
+    13210.7167
+   ],
+   [
+    "PDL",
+    13193.95
+   ],
+   [
+    "S2",
+    13167.8833
+   ],
+   [
+    "S3",
+    13141.8167
+   ]
+  ],
+  "pd_date": "2026-06-29",
+  "pdh": 13262.85,
+  "pdl": 13193.95,
+  "pivots": {
+   "P": 13236.7833,
+   "R1": 13279.6167,
+   "R2": 13305.6833,
+   "R3": 13348.5167,
+   "S1": 13210.7167,
+   "S2": 13167.8833,
+   "S3": 13141.8167
+  },
+  "LADDER": {
+   "pnl": -3.0923300000013114,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-06-30T12:40:00+00:00",
+   "exit_price": 13222.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-06-30T12:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13210.716666666667
+    },
+    {
+     "bar_ts": "2026-06-30T12:40:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S1",
+     "assess_seen": 3,
+     "close": 13222.650000000001
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-06-30T13:20:00+00:00",
+   "exit_price": 13231.55767
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-01T06:45:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13236.0,
+   "actual_pnl": -10.5,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13244.35000 > prior_5_high=13242.85000, pnl=-10.0p"
+  },
+  "rungs": [
+   [
+    "S1",
+    13216.25
+   ],
+   [
+    "PDL",
+    13212.25
+   ],
+   [
+    "S2",
+    13182.15
+   ],
+   [
+    "S3",
+    13152.05
+   ]
+  ],
+  "pd_date": "2026-06-30",
+  "pdh": 13276.45,
+  "pdl": 13212.25,
+  "pivots": {
+   "P": 13246.35,
+   "R1": 13280.45,
+   "R2": 13310.55,
+   "R3": 13344.65,
+   "S1": 13216.25,
+   "S2": 13182.15,
+   "S3": 13152.05
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-01T08:15:00+00:00",
+   "exit_price": 13248.0,
+   "events": [
+    {
+     "bar_ts": "2026-07-01T08:15:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13248.0
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-01T08:15:00+00:00",
+   "exit_price": 13248.0
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-01T13:10:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13235.5,
+   "actual_pnl": -0.15,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "S1",
+    13216.25
+   ],
+   [
+    "PDL",
+    13212.25
+   ],
+   [
+    "S2",
+    13182.15
+   ],
+   [
+    "S3",
+    13152.05
+   ]
+  ],
+  "pd_date": "2026-06-30",
+  "pdh": 13276.45,
+  "pdl": 13212.25,
+  "pivots": {
+   "P": 13246.35,
+   "R1": 13280.45,
+   "R2": 13310.55,
+   "R3": 13344.65,
+   "S1": 13216.25,
+   "S2": 13182.15,
+   "S3": 13152.05
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-01T13:20:00+00:00",
+   "exit_price": 13247.5,
+   "events": [
+    {
+     "bar_ts": "2026-07-01T13:15:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13216.25
+    },
+    {
+     "bar_ts": "2026-07-01T13:20:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13247.5
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-01T13:20:00+00:00",
+   "exit_price": 13235.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-02T02:20:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13295.2,
+   "actual_pnl": -7.9,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "rungs": [
+   [
+    "R1",
+    13307.7833
+   ],
+   [
+    "R2",
+    13336.7167
+   ],
+   [
+    "R3",
+    13380.9833
+   ]
+  ],
+  "pd_date": "2026-07-01",
+  "pdh": 13292.45,
+  "pdl": 13219.25,
+  "pivots": {
+   "P": 13263.5167,
+   "R1": 13307.7833,
+   "R2": 13336.7167,
+   "R3": 13380.9833,
+   "S1": 13234.5833,
+   "S2": 13190.3167,
+   "S3": 13161.3833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-02T03:05:00+00:00",
+   "exit_price": 13283.2,
+   "events": [
+    {
+     "bar_ts": "2026-07-02T03:05:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13283.2
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-02T03:05:00+00:00",
+   "exit_price": 13283.2
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-02T06:30:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13295.3,
+   "actual_pnl": 40.85,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "R1",
+    13307.7833
+   ],
+   [
+    "R2",
+    13336.7167
+   ],
+   [
+    "R3",
+    13380.9833
+   ]
+  ],
+  "pd_date": "2026-07-01",
+  "pdh": 13292.45,
+  "pdl": 13219.25,
+  "pivots": {
+   "P": 13263.5167,
+   "R1": 13307.7833,
+   "R2": 13336.7167,
+   "R3": 13380.9833,
+   "S1": 13234.5833,
+   "S2": 13190.3167,
+   "S3": 13161.3833
+  },
+  "LADDER": {
+   "pnl": 5.950000000000728,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-07-02T07:00:00+00:00",
+   "exit_price": 13301.25,
+   "events": [
+    {
+     "bar_ts": "2026-07-02T06:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13307.783333333336
+    },
+    {
+     "bar_ts": "2026-07-02T06:45:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R1",
+     "rung_price": 13307.783333333336,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13304.783333333336,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-02T07:00:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13304.783333333336
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 15.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-02T06:55:00+00:00",
+   "exit_price": 13310.3
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-02T06:50:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13315.5,
+   "actual_pnl": -4.3,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "rungs": [
+   [
+    "R2",
+    13336.7167
+   ],
+   [
+    "R3",
+    13380.9833
+   ]
+  ],
+  "pd_date": "2026-07-01",
+  "pdh": 13292.45,
+  "pdl": 13219.25,
+  "pivots": {
+   "P": 13263.5167,
+   "R1": 13307.7833,
+   "R2": 13336.7167,
+   "R3": 13380.9833,
+   "S1": 13234.5833,
+   "S2": 13190.3167,
+   "S3": 13161.3833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-02T07:00:00+00:00",
+   "exit_price": 13303.5,
+   "events": [
+    {
+     "bar_ts": "2026-07-02T07:00:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13303.5
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-02T07:00:00+00:00",
+   "exit_price": 13303.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-02T07:30:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13323.7,
+   "actual_pnl": 12.45,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "R2",
+    13336.7167
+   ],
+   [
+    "R3",
+    13380.9833
+   ]
+  ],
+  "pd_date": "2026-07-01",
+  "pdh": 13292.45,
+  "pdl": 13219.25,
+  "pivots": {
+   "P": 13263.5167,
+   "R1": 13307.7833,
+   "R2": 13336.7167,
+   "R3": 13380.9833,
+   "S1": 13234.5833,
+   "S2": 13190.3167,
+   "S3": 13161.3833
+  },
+  "LADDER": {
+   "pnl": 6.25,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-07-02T10:20:00+00:00",
+   "exit_price": 13329.95,
+   "events": [
+    {
+     "bar_ts": "2026-07-02T07:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13336.716666666669
+    },
+    {
+     "bar_ts": "2026-07-02T07:45:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R2",
+     "rung_price": 13336.716666666669,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13333.716666666669,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-02T10:20:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13333.716666666669
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 15.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-02T09:10:00+00:00",
+   "exit_price": 13338.7
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-02T07:45:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13334.2,
+   "actual_pnl": 16.45,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "R2",
+    13336.7167
+   ],
+   [
+    "R3",
+    13380.9833
+   ]
+  ],
+  "pd_date": "2026-07-01",
+  "pdh": 13292.45,
+  "pdl": 13219.25,
+  "pivots": {
+   "P": 13263.5167,
+   "R1": 13307.7833,
+   "R2": 13336.7167,
+   "R3": 13380.9833,
+   "S1": 13234.5833,
+   "S2": 13190.3167,
+   "S3": 13161.3833
+  },
+  "LADDER": {
+   "pnl": -4.25,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-07-02T10:20:00+00:00",
+   "exit_price": 13329.95,
+   "events": [
+    {
+     "bar_ts": "2026-07-02T07:50:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13336.716666666669
+    },
+    {
+     "bar_ts": "2026-07-02T07:55:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R2",
+     "rung_price": 13336.716666666669,
+     "close_beyond": true,
+     "momentum_extend": false,
+     "intended_stop": 13333.716666666669,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-02T10:20:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13333.716666666669
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-02T10:15:00+00:00",
+   "exit_price": 13334.2
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-02T08:10:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13350.2,
+   "actual_pnl": -3.8,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "rungs": [
+   [
+    "R3",
+    13380.9833
+   ]
+  ],
+  "pd_date": "2026-07-01",
+  "pdh": 13292.45,
+  "pdl": 13219.25,
+  "pivots": {
+   "P": 13263.5167,
+   "R1": 13307.7833,
+   "R2": 13336.7167,
+   "R3": 13380.9833,
+   "S1": 13234.5833,
+   "S2": 13190.3167,
+   "S3": 13161.3833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-02T10:15:00+00:00",
+   "exit_price": 13338.2,
+   "events": [
+    {
+     "bar_ts": "2026-07-02T10:15:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13338.2
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-02T09:05:00+00:00",
+   "exit_price": 13350.2
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-03T06:30:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13370.0,
+   "actual_pnl": 0.45,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13385.15
+   ],
+   [
+    "R1",
+    13391.0167
+   ],
+   [
+    "R2",
+    13443.3833
+   ],
+   [
+    "R3",
+    13501.6167
+   ]
+  ],
+  "pd_date": "2026-07-02",
+  "pdh": 13385.15,
+  "pdl": 13274.55,
+  "pivots": {
+   "P": 13332.7833,
+   "R1": 13391.0167,
+   "R2": 13443.3833,
+   "R3": 13501.6167,
+   "S1": 13280.4167,
+   "S2": 13222.1833,
+   "S3": 13169.8167
+  },
+  "LADDER": {
+   "pnl": 5.849999999998545,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-03T06:45:00+00:00",
+   "exit_price": 13375.849999999999,
+   "events": [
+    {
+     "bar_ts": "2026-07-03T06:35:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13385.150000000001
+    },
+    {
+     "bar_ts": "2026-07-03T06:45:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDH",
+     "assess_seen": 3,
+     "close": 13375.849999999999
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-03T06:50:00+00:00",
+   "exit_price": 13370.0
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T06:05:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13338.6,
+   "actual_pnl": 0.65,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13334.75
+   ],
+   [
+    "S1",
+    13329.25
+   ],
+   [
+    "S2",
+    13309.05
+   ],
+   [
+    "S3",
+    13283.35
+   ]
+  ],
+  "pd_date": "2026-07-03",
+  "pdh": 13380.65,
+  "pdl": 13334.75,
+  "pivots": {
+   "P": 13354.95,
+   "R1": 13375.15,
+   "R2": 13400.85,
+   "R3": 13421.05,
+   "S1": 13329.25,
+   "S2": 13309.05,
+   "S3": 13283.35
+  },
+  "LADDER": {
+   "pnl": 2.149999999999636,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-06T06:30:00+00:00",
+   "exit_price": 13336.45,
+   "events": [
+    {
+     "bar_ts": "2026-07-06T06:10:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13334.75
+    },
+    {
+     "bar_ts": "2026-07-06T06:15:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDL",
+     "rung_price": 13334.75,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13337.75,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-06T06:20:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13329.250000000004
+    },
+    {
+     "bar_ts": "2026-07-06T06:30:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S1",
+     "assess_seen": 3,
+     "close": 13336.45
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-06T07:10:00+00:00",
+   "exit_price": 13338.6
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T07:00:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13333.4,
+   "actual_pnl": -19.65,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "S1",
+    13329.25
+   ],
+   [
+    "S2",
+    13309.05
+   ],
+   [
+    "S3",
+    13283.35
+   ]
+  ],
+  "pd_date": "2026-07-03",
+  "pdh": 13380.65,
+  "pdl": 13334.75,
+  "pivots": {
+   "P": 13354.95,
+   "R1": 13375.15,
+   "R2": 13400.85,
+   "R3": 13421.05,
+   "S1": 13329.25,
+   "S2": 13309.05,
+   "S3": 13283.35
+  },
+  "LADDER": {
+   "pnl": -8.050000000001091,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-06T07:15:00+00:00",
+   "exit_price": 13341.45,
+   "events": [
+    {
+     "bar_ts": "2026-07-06T07:05:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13329.250000000004
+    },
+    {
+     "bar_ts": "2026-07-06T07:15:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S1",
+     "assess_seen": 3,
+     "close": 13341.45
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-06T07:40:00+00:00",
+   "exit_price": 13345.4
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T16:25:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13373.3,
+   "actual_pnl": 16.65,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "rungs": [
+   [
+    "R1",
+    13375.15
+   ],
+   [
+    "PDH",
+    13380.65
+   ],
+   [
+    "R2",
+    13400.85
+   ],
+   [
+    "R3",
+    13421.05
+   ]
+  ],
+  "pd_date": "2026-07-03",
+  "pdh": 13380.65,
+  "pdl": 13334.75,
+  "pivots": {
+   "P": 13354.95,
+   "R1": 13375.15,
+   "R2": 13400.85,
+   "R3": 13421.05,
+   "S1": 13329.25,
+   "S2": 13309.05,
+   "S3": 13283.35
+  },
+  "LADDER": {
+   "pnl": -0.6499999999978172,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-06T16:40:00+00:00",
+   "exit_price": 13372.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-07-06T16:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13375.150000000005
+    },
+    {
+     "bar_ts": "2026-07-06T16:40:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R1",
+     "assess_seen": 3,
+     "close": 13372.650000000001
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 16.450000000000728,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-07-06T20:40:00+00:00",
+   "exit_price": 13389.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T16:25:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13373.2,
+   "actual_pnl": 10.45,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "R1",
+    13375.15
+   ],
+   [
+    "PDH",
+    13380.65
+   ],
+   [
+    "R2",
+    13400.85
+   ],
+   [
+    "R3",
+    13421.05
+   ]
+  ],
+  "pd_date": "2026-07-03",
+  "pdh": 13380.65,
+  "pdl": 13334.75,
+  "pivots": {
+   "P": 13354.95,
+   "R1": 13375.15,
+   "R2": 13400.85,
+   "R3": 13421.05,
+   "S1": 13329.25,
+   "S2": 13309.05,
+   "S3": 13283.35
+  },
+  "LADDER": {
+   "pnl": -0.5499999999992724,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-06T16:40:00+00:00",
+   "exit_price": 13372.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-07-06T16:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13375.150000000005
+    },
+    {
+     "bar_ts": "2026-07-06T16:40:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R1",
+     "assess_seen": 3,
+     "close": 13372.650000000001
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 16.549999999999272,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-07-06T20:40:00+00:00",
+   "exit_price": 13389.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T17:45:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13383.5,
+   "actual_pnl": -1.9,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "rungs": [
+   [
+    "R2",
+    13400.85
+   ],
+   [
+    "R3",
+    13421.05
+   ]
+  ],
+  "pd_date": "2026-07-03",
+  "pdh": 13380.65,
+  "pdl": 13334.75,
+  "pivots": {
+   "P": 13354.95,
+   "R1": 13375.15,
+   "R2": 13400.85,
+   "R3": 13421.05,
+   "S1": 13329.25,
+   "S2": 13309.05,
+   "S3": 13283.35
+  },
+  "LADDER": {
+   "pnl": 11.349999999998545,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-06T18:55:00+00:00",
+   "exit_price": 13394.849999999999,
+   "events": [
+    {
+     "bar_ts": "2026-07-06T18:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13400.850000000004
+    },
+    {
+     "bar_ts": "2026-07-06T18:55:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13394.849999999999
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 6.25,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-07-06T20:40:00+00:00",
+   "exit_price": 13389.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T18:15:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13382.5,
+   "actual_pnl": 10.45,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "R2",
+    13400.85
+   ],
+   [
+    "R3",
+    13421.05
+   ]
+  ],
+  "pd_date": "2026-07-03",
+  "pdh": 13380.65,
+  "pdl": 13334.75,
+  "pivots": {
+   "P": 13354.95,
+   "R1": 13375.15,
+   "R2": 13400.85,
+   "R3": 13421.05,
+   "S1": 13329.25,
+   "S2": 13309.05,
+   "S3": 13283.35
+  },
+  "LADDER": {
+   "pnl": 12.349999999998545,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-06T18:55:00+00:00",
+   "exit_price": 13394.849999999999,
+   "events": [
+    {
+     "bar_ts": "2026-07-06T18:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13400.850000000004
+    },
+    {
+     "bar_ts": "2026-07-06T18:55:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13394.849999999999
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 7.25,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-07-06T20:40:00+00:00",
+   "exit_price": 13389.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T18:50:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13396.5,
+   "actual_pnl": -5.6,
+   "actual_reason": "IG_RECONCILE"
+  },
+  "rungs": [
+   [
+    "R2",
+    13400.85
+   ],
+   [
+    "R3",
+    13421.05
+   ]
+  ],
+  "pd_date": "2026-07-03",
+  "pdh": 13380.65,
+  "pdl": 13334.75,
+  "pivots": {
+   "P": 13354.95,
+   "R1": 13375.15,
+   "R2": 13400.85,
+   "R3": 13421.05,
+   "S1": 13329.25,
+   "S2": 13309.05,
+   "S3": 13283.35
+  },
+  "LADDER": {
+   "pnl": -2.9500000000007276,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-07-06T19:05:00+00:00",
+   "exit_price": 13393.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-06T18:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13400.850000000004
+    },
+    {
+     "bar_ts": "2026-07-06T19:00:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R2",
+     "rung_price": 13400.850000000004,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13397.850000000004,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-06T19:05:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13397.850000000004
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -6.75,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-07-06T20:40:00+00:00",
+   "exit_price": 13389.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-07T08:55:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13390.5,
+   "actual_pnl": -19.6,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13371.75000 < prior_5_low=13380.55000, pnl=-19.0p"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13400.95
+   ],
+   [
+    "R1",
+    13420.8833
+   ],
+   [
+    "R2",
+    13447.2167
+   ],
+   [
+    "R3",
+    13493.4833
+   ]
+  ],
+  "pd_date": "2026-07-06",
+  "pdh": 13400.95,
+  "pdl": 13328.35,
+  "pivots": {
+   "P": 13374.6167,
+   "R1": 13420.8833,
+   "R2": 13447.2167,
+   "R3": 13493.4833,
+   "S1": 13348.2833,
+   "S2": 13302.0167,
+   "S3": 13275.6833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-07T10:00:00+00:00",
+   "exit_price": 13378.5,
+   "events": [
+    {
+     "bar_ts": "2026-07-07T10:00:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13378.5
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-07T10:00:00+00:00",
+   "exit_price": 13378.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-07T11:25:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13389.8,
+   "actual_pnl": -11.7,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13379.05000 < prior_5_low=13381.25000, pnl=-10.3p"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13400.95
+   ],
+   [
+    "R1",
+    13420.8833
+   ],
+   [
+    "R2",
+    13447.2167
+   ],
+   [
+    "R3",
+    13493.4833
+   ]
+  ],
+  "pd_date": "2026-07-06",
+  "pdh": 13400.95,
+  "pdl": 13328.35,
+  "pivots": {
+   "P": 13374.6167,
+   "R1": 13420.8833,
+   "R2": 13447.2167,
+   "R3": 13493.4833,
+   "S1": 13348.2833,
+   "S2": 13302.0167,
+   "S3": 13275.6833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-07T13:10:00+00:00",
+   "exit_price": 13377.8,
+   "events": [
+    {
+     "bar_ts": "2026-07-07T13:10:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13377.8
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-07T13:10:00+00:00",
+   "exit_price": 13377.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-07T16:10:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13372.1,
+   "actual_pnl": 15.05,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "rungs": [
+   [
+    "S1",
+    13348.2833
+   ],
+   [
+    "PDL",
+    13328.35
+   ],
+   [
+    "S2",
+    13302.0167
+   ],
+   [
+    "S3",
+    13275.6833
+   ]
+  ],
+  "pd_date": "2026-07-06",
+  "pdh": 13400.95,
+  "pdl": 13328.35,
+  "pivots": {
+   "P": 13374.6167,
+   "R1": 13420.8833,
+   "R2": 13447.2167,
+   "R3": 13493.4833,
+   "S1": 13348.2833,
+   "S2": 13302.0167,
+   "S3": 13275.6833
+  },
+  "LADDER": {
+   "pnl": 16.05000000000109,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-07T19:20:00+00:00",
+   "exit_price": 13356.05,
+   "events": [
+    {
+     "bar_ts": "2026-07-07T19:10:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13348.283333333333
+    },
+    {
+     "bar_ts": "2026-07-07T19:20:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S1",
+     "assess_seen": 3,
+     "close": 13356.05
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 14.350000000000364,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-07-07T20:40:00+00:00",
+   "exit_price": 13357.75
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-08T09:00:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13345.11869,
+   "actual_pnl": 0.25,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "S1",
+    13327.3833
+   ],
+   [
+    "S2",
+    13308.0167
+   ],
+   [
+    "S3",
+    13270.5833
+   ]
+  ],
+  "pd_date": "2026-07-07",
+  "pdh": 13402.25,
+  "pdl": 13345.45,
+  "pivots": {
+   "P": 13364.8167,
+   "R1": 13384.1833,
+   "R2": 13421.6167,
+   "R3": 13440.9833,
+   "S1": 13327.3833,
+   "S2": 13308.0167,
+   "S3": 13270.5833
+  },
+  "LADDER": {
+   "pnl": 11.668689999998605,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-07-08T09:15:00+00:00",
+   "exit_price": 13333.45,
+   "events": [
+    {
+     "bar_ts": "2026-07-08T09:05:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13327.383333333331
+    },
+    {
+     "bar_ts": "2026-07-08T09:10:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "S1",
+     "rung_price": 13327.383333333331,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13330.383333333331,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-08T09:15:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13330.383333333331
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-08T09:40:00+00:00",
+   "exit_price": 13345.11869
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-08T09:10:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13328.5,
+   "actual_pnl": -16.8,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "rungs": [
+   [
+    "S1",
+    13327.3833
+   ],
+   [
+    "S2",
+    13308.0167
+   ],
+   [
+    "S3",
+    13270.5833
+   ]
+  ],
+  "pd_date": "2026-07-07",
+  "pdh": 13402.25,
+  "pdl": 13345.45,
+  "pivots": {
+   "P": 13364.8167,
+   "R1": 13384.1833,
+   "R2": 13421.6167,
+   "R3": 13440.9833,
+   "S1": 13327.3833,
+   "S2": 13308.0167,
+   "S3": 13270.5833
+  },
+  "LADDER": {
+   "pnl": -4.950000000000728,
+   "reason": "LADDER_REJECTION",
+   "exit_ts": "2026-07-08T09:15:00+00:00",
+   "exit_price": 13333.45,
+   "events": [
+    {
+     "bar_ts": "2026-07-08T09:15:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13327.383333333331
+    },
+    {
+     "bar_ts": "2026-07-08T09:15:00+00:00",
+     "action": "LADDER_REJECTION",
+     "rung": "S1",
+     "close": 13333.45
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-08T09:30:00+00:00",
+   "exit_price": 13340.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-09T11:05:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13391.3,
+   "actual_pnl": 0.3,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13410.45
+   ],
+   [
+    "R1",
+    13428.3833
+   ],
+   [
+    "R2",
+    13463.4167
+   ],
+   [
+    "R3",
+    13516.3833
+   ]
+  ],
+  "pd_date": "2026-07-08",
+  "pdh": 13410.45,
+  "pdl": 13322.45,
+  "pivots": {
+   "P": 13375.4167,
+   "R1": 13428.3833,
+   "R2": 13463.4167,
+   "R3": 13516.3833,
+   "S1": 13340.3833,
+   "S2": 13287.4167,
+   "S3": 13252.3833
+  },
+  "LADDER": {
+   "pnl": 11.25,
+   "reason": "LADDER_REJECTION",
+   "exit_ts": "2026-07-09T14:05:00+00:00",
+   "exit_price": 13402.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-09T14:00:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13410.45
+    },
+    {
+     "bar_ts": "2026-07-09T14:05:00+00:00",
+     "action": "LADDER_REJECTION",
+     "rung": "PDH",
+     "close": 13402.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-09T14:50:00+00:00",
+   "exit_price": 13391.3
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-09T11:10:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13392.5,
+   "actual_pnl": 0.1,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13410.45
+   ],
+   [
+    "R1",
+    13428.3833
+   ],
+   [
+    "R2",
+    13463.4167
+   ],
+   [
+    "R3",
+    13516.3833
+   ]
+  ],
+  "pd_date": "2026-07-08",
+  "pdh": 13410.45,
+  "pdl": 13322.45,
+  "pivots": {
+   "P": 13375.4167,
+   "R1": 13428.3833,
+   "R2": 13463.4167,
+   "R3": 13516.3833,
+   "S1": 13340.3833,
+   "S2": 13287.4167,
+   "S3": 13252.3833
+  },
+  "LADDER": {
+   "pnl": 10.049999999999272,
+   "reason": "LADDER_REJECTION",
+   "exit_ts": "2026-07-09T14:05:00+00:00",
+   "exit_price": 13402.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-09T14:00:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13410.45
+    },
+    {
+     "bar_ts": "2026-07-09T14:05:00+00:00",
+     "action": "LADDER_REJECTION",
+     "rung": "PDH",
+     "close": 13402.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-09T14:45:00+00:00",
+   "exit_price": 13392.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-09T11:30:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13385.7,
+   "actual_pnl": 2.3,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13410.45
+   ],
+   [
+    "R1",
+    13428.3833
+   ],
+   [
+    "R2",
+    13463.4167
+   ],
+   [
+    "R3",
+    13516.3833
+   ]
+  ],
+  "pd_date": "2026-07-08",
+  "pdh": 13410.45,
+  "pdl": 13322.45,
+  "pivots": {
+   "P": 13375.4167,
+   "R1": 13428.3833,
+   "R2": 13463.4167,
+   "R3": 13516.3833,
+   "S1": 13340.3833,
+   "S2": 13287.4167,
+   "S3": 13252.3833
+  },
+  "LADDER": {
+   "pnl": 16.849999999998545,
+   "reason": "LADDER_REJECTION",
+   "exit_ts": "2026-07-09T14:05:00+00:00",
+   "exit_price": 13402.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-09T14:00:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13410.45
+    },
+    {
+     "bar_ts": "2026-07-09T14:05:00+00:00",
+     "action": "LADDER_REJECTION",
+     "rung": "PDH",
+     "close": 13402.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-09T12:50:00+00:00",
+   "exit_price": 13385.7
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-09T11:35:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13389.6,
+   "actual_pnl": 2.0,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13410.45
+   ],
+   [
+    "R1",
+    13428.3833
+   ],
+   [
+    "R2",
+    13463.4167
+   ],
+   [
+    "R3",
+    13516.3833
+   ]
+  ],
+  "pd_date": "2026-07-08",
+  "pdh": 13410.45,
+  "pdl": 13322.45,
+  "pivots": {
+   "P": 13375.4167,
+   "R1": 13428.3833,
+   "R2": 13463.4167,
+   "R3": 13516.3833,
+   "S1": 13340.3833,
+   "S2": 13287.4167,
+   "S3": 13252.3833
+  },
+  "LADDER": {
+   "pnl": 12.949999999998909,
+   "reason": "LADDER_REJECTION",
+   "exit_ts": "2026-07-09T14:05:00+00:00",
+   "exit_price": 13402.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-09T14:00:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13410.45
+    },
+    {
+     "bar_ts": "2026-07-09T14:05:00+00:00",
+     "action": "LADDER_REJECTION",
+     "rung": "PDH",
+     "close": 13402.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-09T14:50:00+00:00",
+   "exit_price": 13389.6
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T06:10:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13414.8,
+   "actual_pnl": -12.7,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13402.55000 < prior_5_low=13402.75000, pnl=-12.3p"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13423.05
+   ],
+   [
+    "R1",
+    13423.4167
+   ],
+   [
+    "R2",
+    13450.5833
+   ],
+   [
+    "R3",
+    13478.1167
+   ]
+  ],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 2.150000000001455,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-15T06:25:00+00:00",
+   "exit_price": 13416.95,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T06:15:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13423.05
+    },
+    {
+     "bar_ts": "2026-07-15T06:25:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDH",
+     "assess_seen": 3,
+     "close": 13416.95
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-15T07:45:00+00:00",
+   "exit_price": 13402.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T11:55:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13409.4,
+   "actual_pnl": 1.6,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13423.05
+   ],
+   [
+    "R1",
+    13423.4167
+   ],
+   [
+    "R2",
+    13450.5833
+   ],
+   [
+    "R3",
+    13478.1167
+   ]
+  ],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 32.149999999999636,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-15T14:05:00+00:00",
+   "exit_price": 13441.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T12:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13423.05
+    },
+    {
+     "bar_ts": "2026-07-15T12:40:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDH",
+     "rung_price": 13423.05,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13420.05,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13423.416666666664
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R1",
+     "rung_price": 13423.416666666664,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13420.416666666664,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T13:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13450.583333333332
+    },
+    {
+     "bar_ts": "2026-07-15T14:05:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13441.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 35.55000000000109,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-07-15T14:25:00+00:00",
+   "exit_price": 13444.95
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:00:09Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13411.7,
+   "actual_pnl": -4.0,
+   "actual_reason": "IG_RECONCILE"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13423.05
+   ],
+   [
+    "R1",
+    13423.4167
+   ],
+   [
+    "R2",
+    13450.5833
+   ],
+   [
+    "R3",
+    13478.1167
+   ]
+  ],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 29.849999999998545,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-15T14:05:00+00:00",
+   "exit_price": 13441.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T12:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13423.05
+    },
+    {
+     "bar_ts": "2026-07-15T12:40:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDH",
+     "rung_price": 13423.05,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13420.05,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13423.416666666664
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R1",
+     "rung_price": 13423.416666666664,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13420.416666666664,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T13:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13450.583333333332
+    },
+    {
+     "bar_ts": "2026-07-15T14:05:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13441.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 33.25,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-07-15T14:25:00+00:00",
+   "exit_price": 13444.95
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:05:04Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13408.8,
+   "actual_pnl": -4.3,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13423.05
+   ],
+   [
+    "R1",
+    13423.4167
+   ],
+   [
+    "R2",
+    13450.5833
+   ],
+   [
+    "R3",
+    13478.1167
+   ]
+  ],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 32.75,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-15T14:05:00+00:00",
+   "exit_price": 13441.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T12:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13423.05
+    },
+    {
+     "bar_ts": "2026-07-15T12:40:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDH",
+     "rung_price": 13423.05,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13420.05,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13423.416666666664
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R1",
+     "rung_price": 13423.416666666664,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13420.416666666664,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T13:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13450.583333333332
+    },
+    {
+     "bar_ts": "2026-07-15T14:05:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13441.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 36.150000000001455,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-07-15T14:25:00+00:00",
+   "exit_price": 13444.95
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:10:00Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13405.1,
+   "actual_pnl": 30.35,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13423.05
+   ],
+   [
+    "R1",
+    13423.4167
+   ],
+   [
+    "R2",
+    13450.5833
+   ],
+   [
+    "R3",
+    13478.1167
+   ]
+  ],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 36.44999999999891,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-15T14:05:00+00:00",
+   "exit_price": 13441.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T12:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13423.05
+    },
+    {
+     "bar_ts": "2026-07-15T12:40:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDH",
+     "rung_price": 13423.05,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13420.05,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13423.416666666664
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R1",
+     "rung_price": 13423.416666666664,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13420.416666666664,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T13:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13450.583333333332
+    },
+    {
+     "bar_ts": "2026-07-15T14:05:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13441.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 26.350000000000364,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-07-15T13:35:00+00:00",
+   "exit_price": 13431.45
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:10:05Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13405.3,
+   "actual_pnl": 3.5,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13423.05
+   ],
+   [
+    "R1",
+    13423.4167
+   ],
+   [
+    "R2",
+    13450.5833
+   ],
+   [
+    "R3",
+    13478.1167
+   ]
+  ],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 36.25,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-15T14:05:00+00:00",
+   "exit_price": 13441.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T12:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13423.05
+    },
+    {
+     "bar_ts": "2026-07-15T12:40:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDH",
+     "rung_price": 13423.05,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13420.05,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13423.416666666664
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R1",
+     "rung_price": 13423.416666666664,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13420.416666666664,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T13:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13450.583333333332
+    },
+    {
+     "bar_ts": "2026-07-15T14:05:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13441.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 26.150000000001455,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-07-15T13:35:00+00:00",
+   "exit_price": 13431.45
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:15:03Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13409.3,
+   "actual_pnl": -2.5,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13423.05
+   ],
+   [
+    "R1",
+    13423.4167
+   ],
+   [
+    "R2",
+    13450.5833
+   ],
+   [
+    "R3",
+    13478.1167
+   ]
+  ],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 32.25,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-15T14:05:00+00:00",
+   "exit_price": 13441.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T12:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13423.05
+    },
+    {
+     "bar_ts": "2026-07-15T12:40:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDH",
+     "rung_price": 13423.05,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13420.05,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13423.416666666664
+    },
+    {
+     "bar_ts": "2026-07-15T12:45:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R1",
+     "rung_price": 13423.416666666664,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13420.416666666664,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T13:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13450.583333333332
+    },
+    {
+     "bar_ts": "2026-07-15T14:05:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13441.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 35.650000000001455,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-07-15T14:25:00+00:00",
+   "exit_price": 13444.95
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:55:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13425.5,
+   "actual_pnl": 2.4,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "R2",
+    13450.5833
+   ],
+   [
+    "R3",
+    13478.1167
+   ]
+  ],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 16.049999999999272,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-15T14:05:00+00:00",
+   "exit_price": 13441.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T13:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13450.583333333332
+    },
+    {
+     "bar_ts": "2026-07-15T14:05:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13441.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-15T13:25:00+00:00",
+   "exit_price": 13425.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T13:00:05Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13428.7,
+   "actual_pnl": 1.3,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "rungs": [
+   [
+    "R2",
+    13450.5833
+   ],
+   [
+    "R3",
+    13478.1167
+   ]
+  ],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 12.849999999998545,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-15T14:05:00+00:00",
+   "exit_price": 13441.55,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T13:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13450.583333333332
+    },
+    {
+     "bar_ts": "2026-07-15T14:05:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13441.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 111.64999999999782,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-07-15T18:50:00+00:00",
+   "exit_price": 13540.349999999999
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T14:35:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13447.19137,
+   "actual_pnl": 16.25,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "R2",
+    13450.5833
+   ],
+   [
+    "R3",
+    13478.1167
+   ]
+  ],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 25.758630000000267,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-07-15T15:10:00+00:00",
+   "exit_price": 13472.95,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T14:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13450.583333333332
+    },
+    {
+     "bar_ts": "2026-07-15T14:40:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R2",
+     "rung_price": 13450.583333333332,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13447.583333333332,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-15T14:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R3",
+     "rung_price": 13478.116666666665
+    },
+    {
+     "bar_ts": "2026-07-15T14:55:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R3",
+     "rung_price": 13478.116666666665,
+     "close_beyond": true,
+     "momentum_extend": false,
+     "intended_stop": 13475.116666666665,
+     "new_state": "EXHAUSTED"
+    },
+    {
+     "bar_ts": "2026-07-15T15:10:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13475.116666666665
+    }
+   ],
+   "final_state": "EXHAUSTED"
+  },
+  "RATCHET": {
+   "pnl": 93.15862999999808,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-07-15T18:50:00+00:00",
+   "exit_price": 13540.349999999999
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T14:50:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13474.4,
+   "actual_pnl": 17.45,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "R3",
+    13478.1167
+   ]
+  ],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": -1.4499999999989086,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-07-15T15:10:00+00:00",
+   "exit_price": 13472.95,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T14:55:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R3",
+     "rung_price": 13478.116666666665
+    },
+    {
+     "bar_ts": "2026-07-15T14:55:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R3",
+     "rung_price": 13478.116666666665,
+     "close_beyond": true,
+     "momentum_extend": false,
+     "intended_stop": 13475.116666666665,
+     "new_state": "EXHAUSTED"
+    },
+    {
+     "bar_ts": "2026-07-15T15:10:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13475.116666666665
+    }
+   ],
+   "final_state": "EXHAUSTED"
+  },
+  "RATCHET": {
+   "pnl": 65.94999999999891,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-07-15T18:50:00+00:00",
+   "exit_price": 13540.349999999999
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T15:55:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13498.5,
+   "actual_pnl": 16.15,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 37.04999999999927,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-07-15T20:40:00+00:00",
+   "exit_price": 13535.55,
+   "events": [],
+   "final_state": "EXHAUSTED"
+  },
+  "RATCHET": {
+   "pnl": 41.849999999998545,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-07-15T18:50:00+00:00",
+   "exit_price": 13540.349999999999
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T16:50:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13521.0,
+   "actual_pnl": 15.85,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": 14.549999999999272,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-07-15T20:40:00+00:00",
+   "exit_price": 13535.55,
+   "events": [],
+   "final_state": "EXHAUSTED"
+  },
+  "RATCHET": {
+   "pnl": 19.349999999998545,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-07-15T18:50:00+00:00",
+   "exit_price": 13540.349999999999
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T17:05:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13536.4,
+   "actual_pnl": 3.6,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "rungs": [],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": -0.8500000000003638,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-07-15T20:40:00+00:00",
+   "exit_price": 13535.55,
+   "events": [],
+   "final_state": "EXHAUSTED"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-15T18:55:00+00:00",
+   "exit_price": 13536.4
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T17:40:04Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13540.0,
+   "actual_pnl": 10.45,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-15T19:35:00+00:00",
+   "exit_price": 13528.0,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T19:35:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13528.0
+    }
+   ],
+   "final_state": "EXHAUSTED"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-15T18:50:00+00:00",
+   "exit_price": 13540.0
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T18:05:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13552.3,
+   "actual_pnl": -24.15,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [],
+  "pd_date": "2026-07-14",
+  "pdh": 13423.05,
+  "pdl": 13368.35,
+  "pivots": {
+   "P": 13395.8833,
+   "R1": 13423.4167,
+   "R2": 13450.5833,
+   "R3": 13478.1167,
+   "S1": 13368.7167,
+   "S2": 13341.1833,
+   "S3": 13314.0167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-15T18:50:00+00:00",
+   "exit_price": 13540.3,
+   "events": [
+    {
+     "bar_ts": "2026-07-15T18:50:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13540.3
+    }
+   ],
+   "final_state": "EXHAUSTED"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-15T18:50:00+00:00",
+   "exit_price": 13540.3
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-16T06:30:03Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13536.1,
+   "actual_pnl": -10.5,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13528.95000 < prior_5_low=13533.45000, pnl=-10.1p"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13558.35
+   ],
+   [
+    "R1",
+    13604.1833
+   ],
+   [
+    "R2",
+    13670.0167
+   ],
+   [
+    "R3",
+    13781.6833
+   ]
+  ],
+  "pd_date": "2026-07-15",
+  "pdh": 13558.35,
+  "pdl": 13380.85,
+  "pivots": {
+   "P": 13492.5167,
+   "R1": 13604.1833,
+   "R2": 13670.0167,
+   "R3": 13781.6833,
+   "S1": 13426.6833,
+   "S2": 13315.0167,
+   "S3": 13249.1833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-16T08:05:00+00:00",
+   "exit_price": 13524.1,
+   "events": [
+    {
+     "bar_ts": "2026-07-16T08:05:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13524.1
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-16T08:05:00+00:00",
+   "exit_price": 13524.1
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-17T03:00:03Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13463.6,
+   "actual_pnl": -4.8,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13459.45
+   ],
+   [
+    "S1",
+    13443.6167
+   ],
+   [
+    "S2",
+    13408.8833
+   ],
+   [
+    "S3",
+    13358.3167
+   ]
+  ],
+  "pd_date": "2026-07-16",
+  "pdh": 13544.75,
+  "pdl": 13459.45,
+  "pivots": {
+   "P": 13494.1833,
+   "R1": 13528.9167,
+   "R2": 13579.4833,
+   "R3": 13614.2167,
+   "S1": 13443.6167,
+   "S2": 13408.8833,
+   "S3": 13358.3167
+  },
+  "LADDER": {
+   "pnl": -3.749999999998181,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-17T03:20:00+00:00",
+   "exit_price": 13467.349999999999,
+   "events": [
+    {
+     "bar_ts": "2026-07-17T03:10:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13459.45
+    },
+    {
+     "bar_ts": "2026-07-17T03:20:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDL",
+     "assess_seen": 3,
+     "close": 13467.349999999999
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-17T07:00:00+00:00",
+   "exit_price": 13475.6
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-17T08:35:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13450.9,
+   "actual_pnl": 7.65,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "S1",
+    13443.6167
+   ],
+   [
+    "S2",
+    13408.8833
+   ],
+   [
+    "S3",
+    13358.3167
+   ]
+  ],
+  "pd_date": "2026-07-16",
+  "pdh": 13544.75,
+  "pdl": 13459.45,
+  "pivots": {
+   "P": 13494.1833,
+   "R1": 13528.9167,
+   "R2": 13579.4833,
+   "R3": 13614.2167,
+   "S1": 13443.6167,
+   "S2": 13408.8833,
+   "S3": 13358.3167
+  },
+  "LADDER": {
+   "pnl": 2.4499999999989086,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-07-17T13:50:00+00:00",
+   "exit_price": 13448.45,
+   "events": [
+    {
+     "bar_ts": "2026-07-17T08:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13443.616666666669
+    },
+    {
+     "bar_ts": "2026-07-17T08:50:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "S1",
+     "rung_price": 13443.616666666669,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13446.616666666669,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-17T13:50:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13446.616666666669
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-17T13:55:00+00:00",
+   "exit_price": 13450.9
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-17T09:10:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13442.6,
+   "actual_pnl": 0.3,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "rungs": [
+   [
+    "S2",
+    13408.8833
+   ],
+   [
+    "S3",
+    13358.3167
+   ]
+  ],
+  "pd_date": "2026-07-16",
+  "pdh": 13544.75,
+  "pdl": 13459.45,
+  "pivots": {
+   "P": 13494.1833,
+   "R1": 13528.9167,
+   "R2": 13579.4833,
+   "R3": 13614.2167,
+   "S1": 13443.6167,
+   "S2": 13408.8833,
+   "S3": 13358.3167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-17T14:45:00+00:00",
+   "exit_price": 13454.6,
+   "events": [
+    {
+     "bar_ts": "2026-07-17T14:45:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13454.6
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-17T11:35:00+00:00",
+   "exit_price": 13442.6
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-17T12:40:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13432.5,
+   "actual_pnl": -12.15,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "S2",
+    13408.8833
+   ],
+   [
+    "S3",
+    13358.3167
+   ]
+  ],
+  "pd_date": "2026-07-16",
+  "pdh": 13544.75,
+  "pdl": 13459.45,
+  "pivots": {
+   "P": 13494.1833,
+   "R1": 13528.9167,
+   "R2": 13579.4833,
+   "R3": 13614.2167,
+   "S1": 13443.6167,
+   "S2": 13408.8833,
+   "S3": 13358.3167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-17T13:35:00+00:00",
+   "exit_price": 13444.5,
+   "events": [
+    {
+     "bar_ts": "2026-07-17T13:35:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13444.5
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-17T13:35:00+00:00",
+   "exit_price": 13444.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-20T02:55:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13461.0,
+   "actual_pnl": 2.2,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "P",
+    13453.9167
+   ],
+   [
+    "S1",
+    13426.8833
+   ],
+   [
+    "PDL",
+    13426.15
+   ],
+   [
+    "S2",
+    13399.1167
+   ],
+   [
+    "S3",
+    13372.0833
+   ]
+  ],
+  "pd_date": "2026-07-17",
+  "pdh": 13480.95,
+  "pdl": 13426.15,
+  "pivots": {
+   "P": 13453.9167,
+   "R1": 13481.6833,
+   "R2": 13508.7167,
+   "R3": 13536.4833,
+   "S1": 13426.8833,
+   "S2": 13399.1167,
+   "S3": 13372.0833
+  },
+  "LADDER": {
+   "pnl": 1.5499999999992724,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-20T03:10:00+00:00",
+   "exit_price": 13459.45,
+   "events": [
+    {
+     "bar_ts": "2026-07-20T03:00:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "P",
+     "rung_price": 13453.916666666666
+    },
+    {
+     "bar_ts": "2026-07-20T03:10:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "P",
+     "assess_seen": 3,
+     "close": 13459.45
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-20T07:30:00+00:00",
+   "exit_price": 13473.0
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-20T03:25:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13459.1,
+   "actual_pnl": -0.9,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "P",
+    13453.9167
+   ],
+   [
+    "S1",
+    13426.8833
+   ],
+   [
+    "PDL",
+    13426.15
+   ],
+   [
+    "S2",
+    13399.1167
+   ],
+   [
+    "S3",
+    13372.0833
+   ]
+  ],
+  "pd_date": "2026-07-17",
+  "pdh": 13480.95,
+  "pdl": 13426.15,
+  "pivots": {
+   "P": 13453.9167,
+   "R1": 13481.6833,
+   "R2": 13508.7167,
+   "R3": 13536.4833,
+   "S1": 13426.8833,
+   "S2": 13399.1167,
+   "S3": 13372.0833
+  },
+  "LADDER": {
+   "pnl": -1.8500000000003638,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-20T03:45:00+00:00",
+   "exit_price": 13460.95,
+   "events": [
+    {
+     "bar_ts": "2026-07-20T03:35:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "P",
+     "rung_price": 13453.916666666666
+    },
+    {
+     "bar_ts": "2026-07-20T03:45:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "P",
+     "assess_seen": 3,
+     "close": 13460.95
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-20T07:30:00+00:00",
+   "exit_price": 13471.1
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-20T04:45:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13467.4,
+   "actual_pnl": -0.6,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13480.95
+   ],
+   [
+    "R1",
+    13481.6833
+   ],
+   [
+    "R2",
+    13508.7167
+   ],
+   [
+    "R3",
+    13536.4833
+   ]
+  ],
+  "pd_date": "2026-07-17",
+  "pdh": 13480.95,
+  "pdl": 13426.15,
+  "pivots": {
+   "P": 13453.9167,
+   "R1": 13481.6833,
+   "R2": 13508.7167,
+   "R3": 13536.4833,
+   "S1": 13426.8833,
+   "S2": 13399.1167,
+   "S3": 13372.0833
+  },
+  "LADDER": {
+   "pnl": 9.649999999999636,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-07-20T07:45:00+00:00",
+   "exit_price": 13477.05,
+   "events": [
+    {
+     "bar_ts": "2026-07-20T07:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13480.95
+    },
+    {
+     "bar_ts": "2026-07-20T07:35:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDH",
+     "rung_price": 13480.95,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13477.95,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-20T07:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13481.68333333333
+    },
+    {
+     "bar_ts": "2026-07-20T07:45:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13477.95
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-20T08:25:00+00:00",
+   "exit_price": 13467.4
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-20T10:40:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13474.0,
+   "actual_pnl": -11.65,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13480.95
+   ],
+   [
+    "R1",
+    13481.6833
+   ],
+   [
+    "R2",
+    13508.7167
+   ],
+   [
+    "R3",
+    13536.4833
+   ]
+  ],
+  "pd_date": "2026-07-17",
+  "pdh": 13480.95,
+  "pdl": 13426.15,
+  "pivots": {
+   "P": 13453.9167,
+   "R1": 13481.6833,
+   "R2": 13508.7167,
+   "R3": 13536.4833,
+   "S1": 13426.8833,
+   "S2": 13399.1167,
+   "S3": 13372.0833
+  },
+  "LADDER": {
+   "pnl": -5.349999999998545,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-20T11:40:00+00:00",
+   "exit_price": 13468.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-07-20T11:30:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13480.95
+    },
+    {
+     "bar_ts": "2026-07-20T11:40:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDH",
+     "assess_seen": 3,
+     "close": 13468.650000000001
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-20T11:55:00+00:00",
+   "exit_price": 13462.0
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-20T15:15:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13419.5,
+   "actual_pnl": -11.95,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "S2",
+    13399.1167
+   ],
+   [
+    "S3",
+    13372.0833
+   ]
+  ],
+  "pd_date": "2026-07-17",
+  "pdh": 13480.95,
+  "pdl": 13426.15,
+  "pivots": {
+   "P": 13453.9167,
+   "R1": 13481.6833,
+   "R2": 13508.7167,
+   "R3": 13536.4833,
+   "S1": 13426.8833,
+   "S2": 13399.1167,
+   "S3": 13372.0833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-20T17:45:00+00:00",
+   "exit_price": 13431.5,
+   "events": [
+    {
+     "bar_ts": "2026-07-20T17:45:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13431.5
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-20T17:45:00+00:00",
+   "exit_price": 13431.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-21T10:30:00Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13427.4,
+   "actual_pnl": 13.05,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13413.25
+   ],
+   [
+    "S1",
+    13402.8167
+   ],
+   [
+    "S2",
+    13373.8833
+   ],
+   [
+    "S3",
+    13334.5167
+   ]
+  ],
+  "pd_date": "2026-07-20",
+  "pdh": 13481.55,
+  "pdl": 13413.25,
+  "pivots": {
+   "P": 13442.1833,
+   "R1": 13471.1167,
+   "R2": 13510.4833,
+   "R3": 13539.4167,
+   "S1": 13402.8167,
+   "S2": 13373.8833,
+   "S3": 13334.5167
+  },
+  "LADDER": {
+   "pnl": 7.350000000000364,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-21T11:00:00+00:00",
+   "exit_price": 13420.05,
+   "events": [
+    {
+     "bar_ts": "2026-07-21T10:50:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13413.25
+    },
+    {
+     "bar_ts": "2026-07-21T11:00:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDL",
+     "assess_seen": 3,
+     "close": 13420.05
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 40.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-21T14:05:00+00:00",
+   "exit_price": 13387.4
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-21T11:55:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13403.4,
+   "actual_pnl": 12.05,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "S1",
+    13402.8167
+   ],
+   [
+    "S2",
+    13373.8833
+   ],
+   [
+    "S3",
+    13334.5167
+   ]
+  ],
+  "pd_date": "2026-07-20",
+  "pdh": 13481.55,
+  "pdl": 13413.25,
+  "pivots": {
+   "P": 13442.1833,
+   "R1": 13471.1167,
+   "R2": 13510.4833,
+   "R3": 13539.4167,
+   "S1": 13402.8167,
+   "S2": 13373.8833,
+   "S3": 13334.5167
+  },
+  "LADDER": {
+   "pnl": 25.74999999999818,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-07-21T13:45:00+00:00",
+   "exit_price": 13377.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-07-21T12:00:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13402.81666666667
+    },
+    {
+     "bar_ts": "2026-07-21T12:00:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "S1",
+     "rung_price": 13402.81666666667,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13405.81666666667,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-21T13:25:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S2",
+     "rung_price": 13373.883333333335
+    },
+    {
+     "bar_ts": "2026-07-21T13:30:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "S2",
+     "rung_price": 13373.883333333335,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13376.883333333335,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-21T13:45:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13376.883333333335
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 15.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-21T14:05:00+00:00",
+   "exit_price": 13388.4
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-21T12:45:02Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13387.5,
+   "actual_pnl": 21.85,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "S2",
+    13373.8833
+   ],
+   [
+    "S3",
+    13334.5167
+   ]
+  ],
+  "pd_date": "2026-07-20",
+  "pdh": 13481.55,
+  "pdl": 13413.25,
+  "pivots": {
+   "P": 13442.1833,
+   "R1": 13471.1167,
+   "R2": 13510.4833,
+   "R3": 13539.4167,
+   "S1": 13402.8167,
+   "S2": 13373.8833,
+   "S3": 13334.5167
+  },
+  "LADDER": {
+   "pnl": 9.849999999998545,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-07-21T13:45:00+00:00",
+   "exit_price": 13377.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-07-21T13:25:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S2",
+     "rung_price": 13373.883333333335
+    },
+    {
+     "bar_ts": "2026-07-21T13:30:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "S2",
+     "rung_price": 13373.883333333335,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13376.883333333335,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-07-21T13:45:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13376.883333333335
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-21T14:05:00+00:00",
+   "exit_price": 13387.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-22T06:55:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13376.9,
+   "actual_pnl": -11.45,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13359.45
+   ],
+   [
+    "S1",
+    13340.0833
+   ],
+   [
+    "S2",
+    13301.9167
+   ],
+   [
+    "S3",
+    13244.3833
+   ]
+  ],
+  "pd_date": "2026-07-21",
+  "pdh": 13455.15,
+  "pdl": 13359.45,
+  "pivots": {
+   "P": 13397.6167,
+   "R1": 13435.7833,
+   "R2": 13493.3167,
+   "R3": 13531.4833,
+   "S1": 13340.0833,
+   "S2": 13301.9167,
+   "S3": 13244.3833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-22T07:20:00+00:00",
+   "exit_price": 13388.9,
+   "events": [
+    {
+     "bar_ts": "2026-07-22T07:20:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13388.9
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-22T07:20:00+00:00",
+   "exit_price": 13388.9
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-22T09:30:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13369.7,
+   "actual_pnl": -11.65,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "rungs": [
+   [
+    "PDL",
+    13359.45
+   ],
+   [
+    "S1",
+    13340.0833
+   ],
+   [
+    "S2",
+    13301.9167
+   ],
+   [
+    "S3",
+    13244.3833
+   ]
+  ],
+  "pd_date": "2026-07-21",
+  "pdh": 13455.15,
+  "pdl": 13359.45,
+  "pivots": {
+   "P": 13397.6167,
+   "R1": 13435.7833,
+   "R2": 13493.3167,
+   "R3": 13531.4833,
+   "S1": 13340.0833,
+   "S2": 13301.9167,
+   "S3": 13244.3833
+  },
+  "LADDER": {
+   "pnl": -0.25,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-22T11:35:00+00:00",
+   "exit_price": 13369.95,
+   "events": [
+    {
+     "bar_ts": "2026-07-22T11:25:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDL",
+     "rung_price": 13359.45
+    },
+    {
+     "bar_ts": "2026-07-22T11:35:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDL",
+     "assess_seen": 3,
+     "close": 13369.95
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-22T13:15:00+00:00",
+   "exit_price": 13369.7
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-24T07:15:03Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13337.9,
+   "actual_pnl": -10.5,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13329.25000 < prior_5_low=13330.35000, pnl=-10.1p"
+  },
+  "rungs": [
+   [
+    "R1",
+    13360.6167
+   ],
+   [
+    "PDH",
+    13377.85
+   ],
+   [
+    "R2",
+    13408.8833
+   ],
+   [
+    "R3",
+    13439.9167
+   ]
+  ],
+  "pd_date": "2026-07-23",
+  "pdh": 13377.85,
+  "pdl": 13298.55,
+  "pivots": {
+   "P": 13329.5833,
+   "R1": 13360.6167,
+   "R2": 13408.8833,
+   "R3": 13439.9167,
+   "S1": 13281.3167,
+   "S2": 13250.2833,
+   "S3": 13202.0167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-24T08:45:00+00:00",
+   "exit_price": 13325.9,
+   "events": [
+    {
+     "bar_ts": "2026-07-24T08:45:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13325.9
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-24T08:45:00+00:00",
+   "exit_price": 13325.9
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-28T13:10:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13300.8,
+   "actual_pnl": -12.05,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "P",
+    13312.8833
+   ],
+   [
+    "R1",
+    13341.5167
+   ],
+   [
+    "PDH",
+    13364.15
+   ],
+   [
+    "R2",
+    13392.7833
+   ],
+   [
+    "R3",
+    13421.4167
+   ]
+  ],
+  "pd_date": "2026-07-27",
+  "pdh": 13364.15,
+  "pdl": 13284.25,
+  "pivots": {
+   "P": 13312.8833,
+   "R1": 13341.5167,
+   "R2": 13392.7833,
+   "R3": 13421.4167,
+   "S1": 13261.6167,
+   "S2": 13232.9833,
+   "S3": 13181.7167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-28T14:50:00+00:00",
+   "exit_price": 13288.8,
+   "events": [
+    {
+     "bar_ts": "2026-07-28T14:50:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13288.8
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-28T14:50:00+00:00",
+   "exit_price": 13288.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-30T09:35:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13373.8,
+   "actual_pnl": 14.25,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13387.25
+   ],
+   [
+    "R1",
+    13409.6167
+   ],
+   [
+    "R2",
+    13452.4833
+   ],
+   [
+    "R3",
+    13517.7167
+   ]
+  ],
+  "pd_date": "2026-07-29",
+  "pdh": 13387.25,
+  "pdl": 13279.15,
+  "pivots": {
+   "P": 13344.3833,
+   "R1": 13409.6167,
+   "R2": 13452.4833,
+   "R3": 13517.7167,
+   "S1": 13301.5167,
+   "S2": 13236.2833,
+   "S3": 13193.4167
+  },
+  "LADDER": {
+   "pnl": 6.650000000001455,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-30T09:55:00+00:00",
+   "exit_price": 13380.45,
+   "events": [
+    {
+     "bar_ts": "2026-07-30T09:45:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13387.25
+    },
+    {
+     "bar_ts": "2026-07-30T09:55:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDH",
+     "assess_seen": 3,
+     "close": 13380.45
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 15.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-30T11:00:00+00:00",
+   "exit_price": 13388.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-30T10:45:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13398.6,
+   "actual_pnl": -0.25,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "R1",
+    13409.6167
+   ],
+   [
+    "R2",
+    13452.4833
+   ],
+   [
+    "R3",
+    13517.7167
+   ]
+  ],
+  "pd_date": "2026-07-29",
+  "pdh": 13387.25,
+  "pdl": 13279.15,
+  "pivots": {
+   "P": 13344.3833,
+   "R1": 13409.6167,
+   "R2": 13452.4833,
+   "R3": 13517.7167,
+   "S1": 13301.5167,
+   "S2": 13236.2833,
+   "S3": 13193.4167
+  },
+  "LADDER": {
+   "pnl": -5.550000000001091,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-07-30T11:00:00+00:00",
+   "exit_price": 13393.05,
+   "events": [
+    {
+     "bar_ts": "2026-07-30T10:50:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13409.616666666665
+    },
+    {
+     "bar_ts": "2026-07-30T11:00:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R1",
+     "assess_seen": 3,
+     "close": 13393.05
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-30T11:05:00+00:00",
+   "exit_price": 13386.6
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-07-31T11:55:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13419.0,
+   "actual_pnl": 1.35,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "S1",
+    13369.35
+   ],
+   [
+    "PDL",
+    13332.55
+   ],
+   [
+    "S2",
+    13278.65
+   ],
+   [
+    "S3",
+    13224.75
+   ]
+  ],
+  "pd_date": "2026-07-30",
+  "pdh": 13477.15,
+  "pdl": 13332.55,
+  "pivots": {
+   "P": 13423.25,
+   "R1": 13513.95,
+   "R2": 13567.85,
+   "R3": 13658.55,
+   "S1": 13369.35,
+   "S2": 13278.65,
+   "S3": 13224.75
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-07-31T13:20:00+00:00",
+   "exit_price": 13431.0,
+   "events": [
+    {
+     "bar_ts": "2026-07-31T13:20:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13431.0
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-07-31T13:20:00+00:00",
+   "exit_price": 13431.0
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-03T07:20:00Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13456.5,
+   "actual_pnl": -11.25,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "S1",
+    13421.9833
+   ],
+   [
+    "PDL",
+    13399.85
+   ],
+   [
+    "S2",
+    13363.1167
+   ],
+   [
+    "S3",
+    13326.3833
+   ]
+  ],
+  "pd_date": "2026-07-31",
+  "pdh": 13495.45,
+  "pdl": 13399.85,
+  "pivots": {
+   "P": 13458.7167,
+   "R1": 13517.5833,
+   "R2": 13554.3167,
+   "R3": 13613.1833,
+   "S1": 13421.9833,
+   "S2": 13363.1167,
+   "S3": 13326.3833
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-08-03T07:30:00+00:00",
+   "exit_price": 13468.5,
+   "events": [
+    {
+     "bar_ts": "2026-08-03T07:30:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13468.5
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-03T07:30:00+00:00",
+   "exit_price": 13468.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-03T14:15:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13445.1,
+   "actual_pnl": 16.05,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "S1",
+    13421.9833
+   ],
+   [
+    "PDL",
+    13399.85
+   ],
+   [
+    "S2",
+    13363.1167
+   ],
+   [
+    "S3",
+    13326.3833
+   ]
+  ],
+  "pd_date": "2026-07-31",
+  "pdh": 13495.45,
+  "pdl": 13399.85,
+  "pivots": {
+   "P": 13458.7167,
+   "R1": 13517.5833,
+   "R2": 13554.3167,
+   "R3": 13613.1833,
+   "S1": 13421.9833,
+   "S2": 13363.1167,
+   "S3": 13326.3833
+  },
+  "LADDER": {
+   "pnl": 17.44999999999891,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-08-03T15:20:00+00:00",
+   "exit_price": 13427.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-08-03T15:10:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13421.98333333333
+    },
+    {
+     "bar_ts": "2026-08-03T15:20:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S1",
+     "assess_seen": 3,
+     "close": 13427.650000000001
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 13.750000000001819,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-08-03T20:40:00+00:00",
+   "exit_price": 13431.349999999999
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-05T08:20:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13467.5,
+   "actual_pnl": -10.4,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13458.35000 < prior_5_low=13460.65000, pnl=-10.0p"
+  },
+  "rungs": [
+   [
+    "R2",
+    13479.75
+   ],
+   [
+    "R3",
+    13502.5
+   ]
+  ],
+  "pd_date": "2026-08-04",
+  "pdh": 13457.0,
+  "pdl": 13419.45,
+  "pivots": {
+   "P": 13442.2,
+   "R1": 13464.95,
+   "R2": 13479.75,
+   "R3": 13502.5,
+   "S1": 13427.4,
+   "S2": 13404.65,
+   "S3": 13389.85
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-08-05T08:45:00+00:00",
+   "exit_price": 13455.5,
+   "events": [
+    {
+     "bar_ts": "2026-08-05T08:45:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13455.5
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-05T08:45:00+00:00",
+   "exit_price": 13455.5
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-05T12:05:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13480.8,
+   "actual_pnl": -10.5,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13474.75000 < prior_5_low=13475.05000, pnl=-10.0p"
+  },
+  "rungs": [
+   [
+    "R3",
+    13502.5
+   ]
+  ],
+  "pd_date": "2026-08-04",
+  "pdh": 13457.0,
+  "pdl": 13419.45,
+  "pivots": {
+   "P": 13442.2,
+   "R1": 13464.95,
+   "R2": 13479.75,
+   "R3": 13502.5,
+   "S1": 13427.4,
+   "S2": 13404.65,
+   "S3": 13389.85
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-08-05T12:55:00+00:00",
+   "exit_price": 13468.8,
+   "events": [
+    {
+     "bar_ts": "2026-08-05T12:55:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13468.8
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-05T12:55:00+00:00",
+   "exit_price": 13468.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-05T14:45:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13477.8,
+   "actual_pnl": -10.5,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13469.35000 < prior_5_low=13470.05000, pnl=-10.0p"
+  },
+  "rungs": [
+   [
+    "R2",
+    13479.75
+   ],
+   [
+    "R3",
+    13502.5
+   ]
+  ],
+  "pd_date": "2026-08-04",
+  "pdh": 13457.0,
+  "pdl": 13419.45,
+  "pivots": {
+   "P": 13442.2,
+   "R1": 13464.95,
+   "R2": 13479.75,
+   "R3": 13502.5,
+   "S1": 13427.4,
+   "S2": 13404.65,
+   "S3": 13389.85
+  },
+  "LADDER": {
+   "pnl": -1.0499999999992724,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-08-05T15:00:00+00:00",
+   "exit_price": 13476.75,
+   "events": [
+    {
+     "bar_ts": "2026-08-05T14:50:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13479.750000000002
+    },
+    {
+     "bar_ts": "2026-08-05T14:55:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R2",
+     "rung_price": 13479.750000000002,
+     "close_beyond": false,
+     "momentum_extend": true,
+     "intended_stop": 13476.750000000002,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-08-05T15:00:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13476.750000000002
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-05T15:15:00+00:00",
+   "exit_price": 13465.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-07T12:35:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13494.7,
+   "actual_pnl": 3.05,
+   "actual_reason": "Breakeven stop hit (IG server-side)"
+  },
+  "rungs": [
+   [
+    "R2",
+    13494.55
+   ],
+   [
+    "PDH",
+    13479.25
+   ],
+   [
+    "R1",
+    13474.8
+   ],
+   [
+    "P",
+    13459.5
+   ],
+   [
+    "PDL",
+    13444.2
+   ],
+   [
+    "S1",
+    13439.75
+   ],
+   [
+    "S2",
+    13424.45
+   ],
+   [
+    "S3",
+    13404.7
+   ]
+  ],
+  "pd_date": "2026-08-06",
+  "pdh": 13479.25,
+  "pdl": 13444.2,
+  "pivots": {
+   "P": 13459.5,
+   "R1": 13474.8,
+   "R2": 13494.55,
+   "R3": 13509.85,
+   "S1": 13439.75,
+   "S2": 13424.45,
+   "S3": 13404.7
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-08-07T12:45:00+00:00",
+   "exit_price": 13506.7,
+   "events": [
+    {
+     "bar_ts": "2026-08-07T12:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13494.55
+    },
+    {
+     "bar_ts": "2026-08-07T12:45:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13506.7
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-07T12:45:00+00:00",
+   "exit_price": 13506.7
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-07T12:40:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13494.3,
+   "actual_pnl": -11.15,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13479.25
+   ],
+   [
+    "R1",
+    13474.8
+   ],
+   [
+    "P",
+    13459.5
+   ],
+   [
+    "PDL",
+    13444.2
+   ],
+   [
+    "S1",
+    13439.75
+   ],
+   [
+    "S2",
+    13424.45
+   ],
+   [
+    "S3",
+    13404.7
+   ]
+  ],
+  "pd_date": "2026-08-06",
+  "pdh": 13479.25,
+  "pdl": 13444.2,
+  "pivots": {
+   "P": 13459.5,
+   "R1": 13474.8,
+   "R2": 13494.55,
+   "R3": 13509.85,
+   "S1": 13439.75,
+   "S2": 13424.45,
+   "S3": 13404.7
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-08-07T12:45:00+00:00",
+   "exit_price": 13506.3,
+   "events": [
+    {
+     "bar_ts": "2026-08-07T12:45:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13506.3
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-07T12:45:00+00:00",
+   "exit_price": 13506.3
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-07T13:00:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13499.8,
+   "actual_pnl": 1.9,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "rungs": [
+   [
+    "R2",
+    13494.55
+   ],
+   [
+    "PDH",
+    13479.25
+   ],
+   [
+    "R1",
+    13474.8
+   ],
+   [
+    "P",
+    13459.5
+   ],
+   [
+    "PDL",
+    13444.2
+   ],
+   [
+    "S1",
+    13439.75
+   ],
+   [
+    "S2",
+    13424.45
+   ],
+   [
+    "S3",
+    13404.7
+   ]
+  ],
+  "pd_date": "2026-08-06",
+  "pdh": 13479.25,
+  "pdl": 13444.2,
+  "pivots": {
+   "P": 13459.5,
+   "R1": 13474.8,
+   "R2": 13494.55,
+   "R3": 13509.85,
+   "S1": 13439.75,
+   "S2": 13424.45,
+   "S3": 13404.7
+  },
+  "LADDER": {
+   "pnl": 2.349999999998545,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-08-07T13:15:00+00:00",
+   "exit_price": 13497.45,
+   "events": [
+    {
+     "bar_ts": "2026-08-07T13:05:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13494.55
+    },
+    {
+     "bar_ts": "2026-08-07T13:15:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13497.45
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-07T14:15:00+00:00",
+   "exit_price": 13499.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-07T13:15:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13503.4,
+   "actual_pnl": -11.85,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "R3",
+    13509.85
+   ]
+  ],
+  "pd_date": "2026-08-06",
+  "pdh": 13479.25,
+  "pdl": 13444.2,
+  "pivots": {
+   "P": 13459.5,
+   "R1": 13474.8,
+   "R2": 13494.55,
+   "R3": 13509.85,
+   "S1": 13439.75,
+   "S2": 13424.45,
+   "S3": 13404.7
+  },
+  "LADDER": {
+   "pnl": -7.749999999998181,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-08-07T13:30:00+00:00",
+   "exit_price": 13495.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-08-07T13:20:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R3",
+     "rung_price": 13509.849999999999
+    },
+    {
+     "bar_ts": "2026-08-07T13:30:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R3",
+     "assess_seen": 3,
+     "close": 13495.650000000001
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-07T13:55:00+00:00",
+   "exit_price": 13491.4
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-10T08:10:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13501.2,
+   "actual_pnl": -10.8,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13492.15000 < prior_5_low=13493.35000, pnl=-10.4p"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13508.65
+   ],
+   [
+    "R1",
+    13521.4167
+   ],
+   [
+    "R2",
+    13552.2833
+   ],
+   [
+    "R3",
+    13595.9167
+   ]
+  ],
+  "pd_date": "2026-08-07",
+  "pdh": 13508.65,
+  "pdl": 13434.15,
+  "pivots": {
+   "P": 13477.7833,
+   "R1": 13521.4167,
+   "R2": 13552.2833,
+   "R3": 13595.9167,
+   "S1": 13446.9167,
+   "S2": 13403.2833,
+   "S3": 13372.4167
+  },
+  "LADDER": {
+   "pnl": 2.149999999997817,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-08-10T08:25:00+00:00",
+   "exit_price": 13503.349999999999,
+   "events": [
+    {
+     "bar_ts": "2026-08-10T08:15:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13508.650000000001
+    },
+    {
+     "bar_ts": "2026-08-10T08:25:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDH",
+     "assess_seen": 3,
+     "close": 13503.349999999999
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 6.349999999998545,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-08-10T20:40:00+00:00",
+   "exit_price": 13507.55
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-10T14:30:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13518.6,
+   "actual_pnl": 0.25,
+   "actual_reason": "Breakeven stop hit (IG server-side)"
+  },
+  "rungs": [
+   [
+    "R1",
+    13521.4167
+   ],
+   [
+    "R2",
+    13552.2833
+   ],
+   [
+    "R3",
+    13595.9167
+   ]
+  ],
+  "pd_date": "2026-08-07",
+  "pdh": 13508.65,
+  "pdl": 13434.15,
+  "pivots": {
+   "P": 13477.7833,
+   "R1": 13521.4167,
+   "R2": 13552.2833,
+   "R3": 13595.9167,
+   "S1": 13446.9167,
+   "S2": 13403.2833,
+   "S3": 13372.4167
+  },
+  "LADDER": {
+   "pnl": -2.0500000000010914,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-08-10T15:00:00+00:00",
+   "exit_price": 13516.55,
+   "events": [
+    {
+     "bar_ts": "2026-08-10T14:35:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13521.416666666668
+    },
+    {
+     "bar_ts": "2026-08-10T14:40:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "R1",
+     "rung_price": 13521.416666666668,
+     "close_beyond": true,
+     "momentum_extend": true,
+     "intended_stop": 13518.416666666668,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-08-10T15:00:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13518.416666666668
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-10T14:50:00+00:00",
+   "exit_price": 13518.6
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-11T07:40:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13496.8,
+   "actual_pnl": -8.7,
+   "actual_reason": "AUTO_K_PREMISE"
+  },
+  "rungs": [
+   [
+    "S1",
+    13486.2167
+   ],
+   [
+    "PDL",
+    13483.65
+   ],
+   [
+    "S2",
+    13461.3833
+   ],
+   [
+    "S3",
+    13439.1167
+   ]
+  ],
+  "pd_date": "2026-08-10",
+  "pdh": 13530.75,
+  "pdl": 13483.65,
+  "pivots": {
+   "P": 13508.4833,
+   "R1": 13533.3167,
+   "R2": 13555.5833,
+   "R3": 13580.4167,
+   "S1": 13486.2167,
+   "S2": 13461.3833,
+   "S3": 13439.1167
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-08-11T08:40:00+00:00",
+   "exit_price": 13508.8,
+   "events": [
+    {
+     "bar_ts": "2026-08-11T08:40:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13508.8
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-11T08:40:00+00:00",
+   "exit_price": 13508.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-12T09:25:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13526.2,
+   "actual_pnl": -11.75,
+   "actual_reason": "SL hit"
+  },
+  "rungs": [
+   [
+    "R2",
+    13529.75
+   ],
+   [
+    "R3",
+    13543.55
+   ]
+  ],
+  "pd_date": "2026-08-11",
+  "pdh": 13515.95,
+  "pdl": 13492.05,
+  "pivots": {
+   "P": 13505.85,
+   "R1": 13519.65,
+   "R2": 13529.75,
+   "R3": 13543.55,
+   "S1": 13495.75,
+   "S2": 13481.95,
+   "S3": 13471.85
+  },
+  "LADDER": {
+   "pnl": -12.0,
+   "reason": "INIT_SL",
+   "exit_ts": "2026-08-12T09:45:00+00:00",
+   "exit_price": 13514.2,
+   "events": [
+    {
+     "bar_ts": "2026-08-12T09:45:00+00:00",
+     "action": "INIT_SL",
+     "sl": 13514.2
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-12T09:45:00+00:00",
+   "exit_price": 13514.2
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-12T15:30:06Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13506.2,
+   "actual_pnl": 5.25,
+   "actual_reason": "FLOOR_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "P",
+    13505.85
+   ],
+   [
+    "S1",
+    13495.75
+   ],
+   [
+    "PDL",
+    13492.05
+   ],
+   [
+    "S2",
+    13481.95
+   ],
+   [
+    "S3",
+    13471.85
+   ]
+  ],
+  "pd_date": "2026-08-11",
+  "pdh": 13515.95,
+  "pdl": 13492.05,
+  "pivots": {
+   "P": 13505.85,
+   "R1": 13519.65,
+   "R2": 13529.75,
+   "R3": 13543.55,
+   "S1": 13495.75,
+   "S2": 13481.95,
+   "S3": 13471.85
+  },
+  "LADDER": {
+   "pnl": -3.4500000000007276,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-08-12T15:55:00+00:00",
+   "exit_price": 13509.650000000001,
+   "events": [
+    {
+     "bar_ts": "2026-08-12T15:35:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "P",
+     "rung_price": 13505.85
+    },
+    {
+     "bar_ts": "2026-08-12T15:40:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "P",
+     "rung_price": 13505.85,
+     "close_beyond": true,
+     "momentum_extend": false,
+     "intended_stop": 13508.85,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-08-12T15:55:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13508.85
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 13.549999999999272,
+   "reason": "FLAT_2040",
+   "exit_ts": "2026-08-12T20:40:00+00:00",
+   "exit_price": 13492.650000000001
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-13T07:10:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13478.8,
+   "actual_pnl": -6.4,
+   "actual_reason": "AUTO_K_PREMISE"
+  },
+  "rungs": [
+   [
+    "S1",
+    13474.4167
+   ],
+   [
+    "S2",
+    13451.9833
+   ],
+   [
+    "S3",
+    13416.4167
+   ]
+  ],
+  "pd_date": "2026-08-12",
+  "pdh": 13545.55,
+  "pdl": 13487.55,
+  "pivots": {
+   "P": 13509.9833,
+   "R1": 13532.4167,
+   "R2": 13567.9833,
+   "R3": 13590.4167,
+   "S1": 13474.4167,
+   "S2": 13451.9833,
+   "S3": 13416.4167
+  },
+  "LADDER": {
+   "pnl": -4.950000000000728,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-08-13T07:25:00+00:00",
+   "exit_price": 13483.75,
+   "events": [
+    {
+     "bar_ts": "2026-08-13T07:15:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "S1",
+     "rung_price": 13474.416666666664
+    },
+    {
+     "bar_ts": "2026-08-13T07:25:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "S1",
+     "assess_seen": 3,
+     "close": 13483.75
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": -12.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-13T09:55:00+00:00",
+   "exit_price": 13490.8
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-14T08:05:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13516.3,
+   "actual_pnl": 32.75,
+   "actual_reason": "External close (not initiated by this host)"
+  },
+  "rungs": [
+   [
+    "R2",
+    13531.5167
+   ],
+   [
+    "R3",
+    13549.2833
+   ]
+  ],
+  "pd_date": "2026-08-13",
+  "pdh": 13513.75,
+  "pdl": 13474.95,
+  "pivots": {
+   "P": 13492.7167,
+   "R1": 13510.4833,
+   "R2": 13531.5167,
+   "R3": 13549.2833,
+   "S1": 13471.6833,
+   "S2": 13453.9167,
+   "S3": 13432.8833
+  },
+  "LADDER": {
+   "pnl": 5.75,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-08-14T08:50:00+00:00",
+   "exit_price": 13522.05,
+   "events": [
+    {
+     "bar_ts": "2026-08-14T08:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R2",
+     "rung_price": 13531.516666666666
+    },
+    {
+     "bar_ts": "2026-08-14T08:50:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R2",
+     "assess_seen": 3,
+     "close": 13522.05
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 19.75,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-08-14T13:00:00+00:00",
+   "exit_price": 13536.05
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-20T07:35:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13621.2,
+   "actual_pnl": 0.75,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13630.55
+   ],
+   [
+    "R1",
+    13645.65
+   ],
+   [
+    "R2",
+    13691.75
+   ],
+   [
+    "R3",
+    13752.95
+   ]
+  ],
+  "pd_date": "2026-08-19",
+  "pdh": 13630.55,
+  "pdl": 13523.25,
+  "pivots": {
+   "P": 13584.45,
+   "R1": 13645.65,
+   "R2": 13691.75,
+   "R3": 13752.95,
+   "S1": 13538.35,
+   "S2": 13477.15,
+   "S3": 13431.05
+  },
+  "LADDER": {
+   "pnl": 2.9500000000007276,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-08-20T07:50:00+00:00",
+   "exit_price": 13624.150000000001,
+   "events": [
+    {
+     "bar_ts": "2026-08-20T07:40:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13630.55
+    },
+    {
+     "bar_ts": "2026-08-20T07:50:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "PDH",
+     "assess_seen": 3,
+     "close": 13624.150000000001
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 26.25,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-08-20T10:40:00+00:00",
+   "exit_price": 13647.45
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-20T08:00:03Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13624.8,
+   "actual_pnl": 4.75,
+   "actual_reason": "FLOOR_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13630.55
+   ],
+   [
+    "R1",
+    13645.65
+   ],
+   [
+    "R2",
+    13691.75
+   ],
+   [
+    "R3",
+    13752.95
+   ]
+  ],
+  "pd_date": "2026-08-19",
+  "pdh": 13630.55,
+  "pdl": 13523.25,
+  "pivots": {
+   "P": 13584.45,
+   "R1": 13645.65,
+   "R2": 13691.75,
+   "R3": 13752.95,
+   "S1": 13538.35,
+   "S2": 13477.15,
+   "S3": 13431.05
+  },
+  "LADDER": {
+   "pnl": 16.75,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-08-20T09:20:00+00:00",
+   "exit_price": 13641.55,
+   "events": [
+    {
+     "bar_ts": "2026-08-20T08:05:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13630.55
+    },
+    {
+     "bar_ts": "2026-08-20T08:15:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDH",
+     "rung_price": 13630.55,
+     "close_beyond": true,
+     "momentum_extend": false,
+     "intended_stop": 13627.55,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-08-20T09:10:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13645.649999999998
+    },
+    {
+     "bar_ts": "2026-08-20T09:20:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R1",
+     "assess_seen": 3,
+     "close": 13641.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 22.650000000001455,
+   "reason": "EXHAUSTION",
+   "exit_ts": "2026-08-20T10:40:00+00:00",
+   "exit_price": 13647.45
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-20T08:45:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13633.2,
+   "actual_pnl": 10.45,
+   "actual_reason": "TP hit"
+  },
+  "rungs": [
+   [
+    "R1",
+    13645.65
+   ],
+   [
+    "R2",
+    13691.75
+   ],
+   [
+    "R3",
+    13752.95
+   ]
+  ],
+  "pd_date": "2026-08-19",
+  "pdh": 13630.55,
+  "pdl": 13523.25,
+  "pivots": {
+   "P": 13584.45,
+   "R1": 13645.65,
+   "R2": 13691.75,
+   "R3": 13752.95,
+   "S1": 13538.35,
+   "S2": 13477.15,
+   "S3": 13431.05
+  },
+  "LADDER": {
+   "pnl": 8.349999999998545,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-08-20T09:20:00+00:00",
+   "exit_price": 13641.55,
+   "events": [
+    {
+     "bar_ts": "2026-08-20T09:10:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "R1",
+     "rung_price": 13645.649999999998
+    },
+    {
+     "bar_ts": "2026-08-20T09:20:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "R1",
+     "assess_seen": 3,
+     "close": 13641.55
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-20T11:10:00+00:00",
+   "exit_price": 13633.2
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-20T12:10:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13627.2,
+   "actual_pnl": 0.85,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "rungs": [
+   [
+    "PDH",
+    13630.55
+   ],
+   [
+    "R1",
+    13645.65
+   ],
+   [
+    "R2",
+    13691.75
+   ],
+   [
+    "R3",
+    13752.95
+   ]
+  ],
+  "pd_date": "2026-08-19",
+  "pdh": 13630.55,
+  "pdl": 13523.25,
+  "pivots": {
+   "P": 13584.45,
+   "R1": 13645.65,
+   "R2": 13691.75,
+   "R3": 13752.95,
+   "S1": 13538.35,
+   "S2": 13477.15,
+   "S3": 13431.05
+  },
+  "LADDER": {
+   "pnl": -0.75,
+   "reason": "LADDER_RATCHET_STOP",
+   "exit_ts": "2026-08-20T12:30:00+00:00",
+   "exit_price": 13626.45,
+   "events": [
+    {
+     "bar_ts": "2026-08-20T12:15:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "PDH",
+     "rung_price": 13630.55
+    },
+    {
+     "bar_ts": "2026-08-20T12:15:00+00:00",
+     "action": "EXTEND",
+     "rung_cleared": "PDH",
+     "rung_price": 13630.55,
+     "close_beyond": true,
+     "momentum_extend": false,
+     "intended_stop": 13627.55,
+     "new_state": "RUNNING"
+    },
+    {
+     "bar_ts": "2026-08-20T12:30:00+00:00",
+     "action": "LADDER_RATCHET_STOP",
+     "intended": 13627.55
+    }
+   ],
+   "final_state": "RUNNING"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-20T12:30:00+00:00",
+   "exit_price": 13627.2
+  },
+  "unpriceable_reason": null
+ },
+ {
+  "fire": {
+   "ts": "2026-08-21T13:10:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13639.1,
+   "actual_pnl": -6.9,
+   "actual_reason": "AUTO_K_PREMISE"
+  },
+  "rungs": [
+   [
+    "P",
+    13632.5833
+   ],
+   [
+    "S1",
+    13605.3167
+   ],
+   [
+    "PDL",
+    13594.95
+   ],
+   [
+    "S2",
+    13567.6833
+   ],
+   [
+    "S3",
+    13540.4167
+   ]
+  ],
+  "pd_date": "2026-08-20",
+  "pdh": 13659.85,
+  "pdl": 13594.95,
+  "pivots": {
+   "P": 13632.5833,
+   "R1": 13670.2167,
+   "R2": 13697.4833,
+   "R3": 13735.1167,
+   "S1": 13605.3167,
+   "S2": 13567.6833,
+   "S3": 13540.4167
+  },
+  "LADDER": {
+   "pnl": 2.750000000001819,
+   "reason": "LADDER_ASSESS_EXPIRED",
+   "exit_ts": "2026-08-21T13:25:00+00:00",
+   "exit_price": 13636.349999999999,
+   "events": [
+    {
+     "bar_ts": "2026-08-21T13:15:00+00:00",
+     "action": "RUNNING\u2192ASSESS",
+     "rung": "P",
+     "rung_price": 13632.583333333334
+    },
+    {
+     "bar_ts": "2026-08-21T13:25:00+00:00",
+     "action": "LADDER_ASSESS_EXPIRED",
+     "rung": "P",
+     "assess_seen": 3,
+     "close": 13636.349999999999
+    }
+   ],
+   "final_state": "ASSESS"
+  },
+  "RATCHET": {
+   "pnl": 0.0,
+   "reason": "SL",
+   "exit_ts": "2026-08-21T15:50:00+00:00",
+   "exit_price": 13639.1
+  },
+  "unpriceable_reason": null
+ }
+]

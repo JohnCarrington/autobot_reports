@@ -1,0 +1,1202 @@
+[
+ {
+  "fire": {
+   "ts": "2026-05-27T10:40:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13438.55,
+   "actual_pnl": 15.75,
+   "actual_reason": "TP hit"
+  },
+  "exit_ts": "2026-05-27T10:55:00+00:00",
+  "rung_name": "PDL",
+  "rung_price": 13434.150000000001,
+  "next6": {
+   "bars": 6,
+   "beyond": -1.8999999999978172
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 0.8000000000029104
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 15.75,
+  "ladder_pnl": -2.400000000001455
+ },
+ {
+  "fire": {
+   "ts": "2026-05-28T10:35:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13395.65,
+   "actual_pnl": -11.65,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "exit_ts": "2026-05-28T10:50:00+00:00",
+  "rung_name": "S2",
+  "rung_price": 13385.416666666666,
+  "next6": {
+   "bars": 6,
+   "beyond": -3.4333333333324845
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -3.4333333333324845
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -11.65,
+  "ladder_pnl": 2.600000000000364
+ },
+ {
+  "fire": {
+   "ts": "2026-06-03T06:50:04Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13445.25,
+   "actual_pnl": -18.3,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13462.45000 > prior_5_high=13458.55000, pnl=-17.7p"
+  },
+  "exit_ts": "2026-06-03T07:10:00+00:00",
+  "rung_name": "S1",
+  "rung_price": 13441.183333333334,
+  "next6": {
+   "bars": 6,
+   "beyond": -4.466666666667152
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -4.466666666667152
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -18.3,
+  "ladder_pnl": -6.700000000000728
+ },
+ {
+  "fire": {
+   "ts": "2026-06-09T07:45:05Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13368.05,
+   "actual_pnl": 14.95,
+   "actual_reason": "TP hit"
+  },
+  "exit_ts": "2026-06-09T08:00:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13378.85,
+  "next6": {
+   "bars": 6,
+   "beyond": -0.8999999999996362
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 3.499999999998181
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 14.95,
+  "ladder_pnl": 0.2999999999992724
+ },
+ {
+  "fire": {
+   "ts": "2026-06-09T16:40:25Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13363.45,
+   "actual_pnl": -19.55,
+   "actual_reason": "SL hit"
+  },
+  "exit_ts": "2026-06-09T16:55:00+00:00",
+  "rung_name": "R1",
+  "rung_price": 13356.25,
+  "next6": {
+   "bars": 6,
+   "beyond": -18.299999999999272
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -18.299999999999272
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -19.55,
+  "ladder_pnl": -8.599999999998545
+ },
+ {
+  "fire": {
+   "ts": "2026-06-17T14:05:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13401.8,
+   "actual_pnl": 10.75,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "exit_ts": "2026-06-17T14:30:00+00:00",
+  "rung_name": "S1",
+  "rung_price": 13395.81666666667,
+  "next6": {
+   "bars": 6,
+   "beyond": 2.4666666666707897
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 6.96666666667079
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 10.75,
+  "ladder_pnl": -1.75
+ },
+ {
+  "fire": {
+   "ts": "2026-06-18T07:25:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13295.3,
+   "actual_pnl": 14.95,
+   "actual_reason": "TP hit"
+  },
+  "exit_ts": "2026-06-18T09:40:00+00:00",
+  "rung_name": "S1",
+  "rung_price": 13228.833333333336,
+  "next6": {
+   "bars": 6,
+   "beyond": 1.2833333333364862
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 1.2833333333364862
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 14.95,
+  "ladder_pnl": 50.45000000000073
+ },
+ {
+  "fire": {
+   "ts": "2026-06-23T16:10:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13188.0,
+   "actual_pnl": -11.4,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13198.85000 > prior_5_high=13197.95000, pnl=-11.0p"
+  },
+  "exit_ts": "2026-06-23T16:40:00+00:00",
+  "rung_name": "PDL",
+  "rung_price": 13183.349999999999,
+  "next6": {
+   "bars": 6,
+   "beyond": -1.3000000000029104
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -1.3000000000029104
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -11.4,
+  "ladder_pnl": -5.450000000000728
+ },
+ {
+  "fire": {
+   "ts": "2026-06-24T08:40:04Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13186.8,
+   "actual_pnl": -10.9,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13195.75000 > prior_5_high=13194.55000, pnl=-10.2p"
+  },
+  "exit_ts": "2026-06-24T09:15:00+00:00",
+  "rung_name": "PDL",
+  "rung_price": 13182.75,
+  "next6": {
+   "bars": 6,
+   "beyond": 6.0
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 19.5
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": -10.9,
+  "ladder_pnl": -6.150000000001455
+ },
+ {
+  "fire": {
+   "ts": "2026-06-24T09:35:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13178.3,
+   "actual_pnl": 16.65,
+   "actual_reason": "external/manual close (IG monitor)"
+  },
+  "exit_ts": "2026-06-24T09:50:00+00:00",
+  "rung_name": "S1",
+  "rung_price": 13171.916666666664,
+  "next6": {
+   "bars": 6,
+   "beyond": 14.166666666664241
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 15.366666666664969
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 16.65,
+  "ladder_pnl": -2.25
+ },
+ {
+  "fire": {
+   "ts": "2026-06-24T10:50:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13159.9,
+   "actual_pnl": 1.45,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "exit_ts": "2026-06-24T11:15:00+00:00",
+  "rung_name": "S2",
+  "rung_price": 13143.783333333333,
+  "next6": {
+   "bars": 6,
+   "beyond": -13.066666666665697
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -13.066666666665697
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 1.45,
+  "ladder_pnl": 5.350000000000364
+ },
+ {
+  "fire": {
+   "ts": "2026-06-25T09:05:04Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13192.0,
+   "actual_pnl": -12.7,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13179.75000 < prior_5_low=13183.05000, pnl=-12.3p"
+  },
+  "exit_ts": "2026-06-25T09:40:00+00:00",
+  "rung_name": "R1",
+  "rung_price": 13202.216666666667,
+  "next6": {
+   "bars": 6,
+   "beyond": -12.66666666666788
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -12.66666666666788
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -12.7,
+  "ladder_pnl": -4.650000000001455
+ },
+ {
+  "fire": {
+   "ts": "2026-06-29T14:55:00Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13243.01795,
+   "actual_pnl": -19.95,
+   "actual_reason": "SL hit"
+  },
+  "exit_ts": "2026-06-29T15:40:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13255.033333333333,
+  "next6": {
+   "bars": 6,
+   "beyond": 0.6166666666686069
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 1.5166666666664241
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -19.95,
+  "ladder_pnl": 5.732050000000527
+ },
+ {
+  "fire": {
+   "ts": "2026-06-30T11:15:04Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13228.8,
+   "actual_pnl": 8.85,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "exit_ts": "2026-06-30T11:45:00+00:00",
+  "rung_name": "S1",
+  "rung_price": 13210.716666666667,
+  "next6": {
+   "bars": 6,
+   "beyond": -11.033333333332848
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -3.5333333333328483
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 8.85,
+  "ladder_pnl": 3.149999999997817
+ },
+ {
+  "fire": {
+   "ts": "2026-06-30T12:25:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13219.55767,
+   "actual_pnl": -15.8,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13228.95000 > prior_5_high=13223.75000, pnl=-15.4p"
+  },
+  "exit_ts": "2026-06-30T12:40:00+00:00",
+  "rung_name": "S1",
+  "rung_price": 13210.716666666667,
+  "next6": {
+   "bars": 6,
+   "beyond": -3.233333333333576
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -3.233333333333576
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -15.8,
+  "ladder_pnl": -3.0923300000013114
+ },
+ {
+  "fire": {
+   "ts": "2026-07-03T06:30:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13370.0,
+   "actual_pnl": 0.45,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "exit_ts": "2026-07-03T06:45:00+00:00",
+  "rung_name": "PDH",
+  "rung_price": 13385.150000000001,
+  "next6": {
+   "bars": 6,
+   "beyond": -14.100000000002183
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -14.100000000002183
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 0.45,
+  "ladder_pnl": 5.849999999998545
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T06:05:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13338.6,
+   "actual_pnl": 0.65,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "exit_ts": "2026-07-06T06:30:00+00:00",
+  "rung_name": "S1",
+  "rung_price": 13329.250000000004,
+  "next6": {
+   "bars": 6,
+   "beyond": -3.6999999999970896
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -3.6999999999970896
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 0.65,
+  "ladder_pnl": 2.149999999999636
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T07:00:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13333.4,
+   "actual_pnl": -19.65,
+   "actual_reason": "SL hit"
+  },
+  "exit_ts": "2026-07-06T07:15:00+00:00",
+  "rung_name": "S1",
+  "rung_price": 13329.250000000004,
+  "next6": {
+   "bars": 6,
+   "beyond": -8.599999999994907
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -8.599999999994907
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -19.65,
+  "ladder_pnl": -8.050000000001091
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T16:25:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13373.3,
+   "actual_pnl": 16.65,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "exit_ts": "2026-07-06T16:40:00+00:00",
+  "rung_name": "R1",
+  "rung_price": 13375.150000000005,
+  "next6": {
+   "bars": 6,
+   "beyond": 3.1999999999934516
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 8.299999999995634
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 16.65,
+  "ladder_pnl": -0.6499999999978172
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T16:25:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13373.2,
+   "actual_pnl": 10.45,
+   "actual_reason": "TP hit"
+  },
+  "exit_ts": "2026-07-06T16:40:00+00:00",
+  "rung_name": "R1",
+  "rung_price": 13375.150000000005,
+  "next6": {
+   "bars": 6,
+   "beyond": 3.1999999999934516
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 8.299999999995634
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 10.45,
+  "ladder_pnl": -0.5499999999992724
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T17:45:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13383.5,
+   "actual_pnl": -1.9,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "exit_ts": "2026-07-06T18:55:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13400.850000000004,
+  "next6": {
+   "bars": 6,
+   "beyond": -3.8000000000047294
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -3.8000000000047294
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -1.9,
+  "ladder_pnl": 11.349999999998545
+ },
+ {
+  "fire": {
+   "ts": "2026-07-06T18:15:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13382.5,
+   "actual_pnl": 10.45,
+   "actual_reason": "TP hit"
+  },
+  "exit_ts": "2026-07-06T18:55:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13400.850000000004,
+  "next6": {
+   "bars": 6,
+   "beyond": -3.8000000000047294
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -3.8000000000047294
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 10.45,
+  "ladder_pnl": 12.349999999998545
+ },
+ {
+  "fire": {
+   "ts": "2026-07-07T16:10:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13372.1,
+   "actual_pnl": 15.05,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "exit_ts": "2026-07-07T19:20:00+00:00",
+  "rung_name": "S1",
+  "rung_price": 13348.283333333333,
+  "next6": {
+   "bars": 6,
+   "beyond": -7.166666666667879
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -7.166666666667879
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 15.05,
+  "ladder_pnl": 16.05000000000109
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T06:10:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13414.8,
+   "actual_pnl": -12.7,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13402.55000 < prior_5_low=13402.75000, pnl=-12.3p"
+  },
+  "exit_ts": "2026-07-15T06:25:00+00:00",
+  "rung_name": "PDH",
+  "rung_price": 13423.05,
+  "next6": {
+   "bars": 6,
+   "beyond": -7.5
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -7.099999999998545
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -12.7,
+  "ladder_pnl": 2.150000000001455
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T11:55:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13409.4,
+   "actual_pnl": 1.6,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "exit_ts": "2026-07-15T14:05:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13450.583333333332,
+  "next6": {
+   "bars": 6,
+   "beyond": 6.866666666668607
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 28.46666666666715
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 1.6,
+  "ladder_pnl": 32.149999999999636
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:00:09Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13411.7,
+   "actual_pnl": -4.0,
+   "actual_reason": "IG_RECONCILE"
+  },
+  "exit_ts": "2026-07-15T14:05:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13450.583333333332,
+  "next6": {
+   "bars": 6,
+   "beyond": 6.866666666668607
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 28.46666666666715
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": -4.0,
+  "ladder_pnl": 29.849999999998545
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:05:04Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13408.8,
+   "actual_pnl": -4.3,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "exit_ts": "2026-07-15T14:05:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13450.583333333332,
+  "next6": {
+   "bars": 6,
+   "beyond": 6.866666666668607
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 28.46666666666715
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": -4.3,
+  "ladder_pnl": 32.75
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:10:00Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13405.1,
+   "actual_pnl": 30.35,
+   "actual_reason": "TP hit"
+  },
+  "exit_ts": "2026-07-15T14:05:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13450.583333333332,
+  "next6": {
+   "bars": 6,
+   "beyond": 6.866666666668607
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 28.46666666666715
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 30.35,
+  "ladder_pnl": 36.44999999999891
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:10:05Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13405.3,
+   "actual_pnl": 3.5,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "exit_ts": "2026-07-15T14:05:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13450.583333333332,
+  "next6": {
+   "bars": 6,
+   "beyond": 6.866666666668607
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 28.46666666666715
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 3.5,
+  "ladder_pnl": 36.25
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:15:03Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13409.3,
+   "actual_pnl": -2.5,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "exit_ts": "2026-07-15T14:05:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13450.583333333332,
+  "next6": {
+   "bars": 6,
+   "beyond": 6.866666666668607
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 28.46666666666715
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": -2.5,
+  "ladder_pnl": 32.25
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T12:55:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13425.5,
+   "actual_pnl": 2.4,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "exit_ts": "2026-07-15T14:05:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13450.583333333332,
+  "next6": {
+   "bars": 6,
+   "beyond": 6.866666666668607
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 28.46666666666715
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 2.4,
+  "ladder_pnl": 16.049999999999272
+ },
+ {
+  "fire": {
+   "ts": "2026-07-15T13:00:05Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13428.7,
+   "actual_pnl": 1.3,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "exit_ts": "2026-07-15T14:05:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13450.583333333332,
+  "next6": {
+   "bars": 6,
+   "beyond": 6.866666666668607
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 28.46666666666715
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 1.3,
+  "ladder_pnl": 12.849999999998545
+ },
+ {
+  "fire": {
+   "ts": "2026-07-17T03:00:03Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13463.6,
+   "actual_pnl": -4.8,
+   "actual_reason": "TREND_V3_FLATTEN_EXHAUSTION"
+  },
+  "exit_ts": "2026-07-17T03:20:00+00:00",
+  "rung_name": "PDL",
+  "rung_price": 13459.45,
+  "next6": {
+   "bars": 6,
+   "beyond": -4.099999999998545
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -3.099999999998545
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -4.8,
+  "ladder_pnl": -3.749999999998181
+ },
+ {
+  "fire": {
+   "ts": "2026-07-20T02:55:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13461.0,
+   "actual_pnl": 2.2,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "exit_ts": "2026-07-20T03:10:00+00:00",
+  "rung_name": "P",
+  "rung_price": 13453.916666666666,
+  "next6": {
+   "bars": 6,
+   "beyond": -5.233333333335395
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -5.233333333335395
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 2.2,
+  "ladder_pnl": 1.5499999999992724
+ },
+ {
+  "fire": {
+   "ts": "2026-07-20T03:25:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13459.1,
+   "actual_pnl": -0.9,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "exit_ts": "2026-07-20T03:45:00+00:00",
+  "rung_name": "P",
+  "rung_price": 13453.916666666666,
+  "next6": {
+   "bars": 6,
+   "beyond": -7.133333333333212
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -7.133333333333212
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -0.9,
+  "ladder_pnl": -1.8500000000003638
+ },
+ {
+  "fire": {
+   "ts": "2026-07-20T10:40:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13474.0,
+   "actual_pnl": -11.65,
+   "actual_reason": "SL hit"
+  },
+  "exit_ts": "2026-07-20T11:40:00+00:00",
+  "rung_name": "PDH",
+  "rung_price": 13480.95,
+  "next6": {
+   "bars": 6,
+   "beyond": -14.600000000002183
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -14.600000000002183
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -11.65,
+  "ladder_pnl": -5.349999999998545
+ },
+ {
+  "fire": {
+   "ts": "2026-07-21T10:30:00Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13427.4,
+   "actual_pnl": 13.05,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "exit_ts": "2026-07-21T11:00:00+00:00",
+  "rung_name": "PDL",
+  "rung_price": 13413.25,
+  "next6": {
+   "bars": 6,
+   "beyond": 4.900000000001455
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 11.200000000000728
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 13.05,
+  "ladder_pnl": 7.350000000000364
+ },
+ {
+  "fire": {
+   "ts": "2026-07-22T09:30:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13369.7,
+   "actual_pnl": -11.65,
+   "actual_reason": "External/manual close detected (IG open positions)"
+  },
+  "exit_ts": "2026-07-22T11:35:00+00:00",
+  "rung_name": "PDL",
+  "rung_price": 13359.45,
+  "next6": {
+   "bars": 6,
+   "beyond": -7.799999999999272
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -7.700000000000728
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -11.65,
+  "ladder_pnl": -0.25
+ },
+ {
+  "fire": {
+   "ts": "2026-07-30T09:35:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13373.8,
+   "actual_pnl": 14.25,
+   "actual_reason": "TP hit"
+  },
+  "exit_ts": "2026-07-30T09:55:00+00:00",
+  "rung_name": "PDH",
+  "rung_price": 13387.25,
+  "next6": {
+   "bars": 6,
+   "beyond": -0.2000000000007276
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 19.299999999999272
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 14.25,
+  "ladder_pnl": 6.650000000001455
+ },
+ {
+  "fire": {
+   "ts": "2026-07-30T10:45:01Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13398.6,
+   "actual_pnl": -0.25,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "exit_ts": "2026-07-30T11:00:00+00:00",
+  "rung_name": "R1",
+  "rung_price": 13409.616666666665,
+  "next6": {
+   "bars": 6,
+   "beyond": -21.066666666665697
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -18.566666666665697
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -0.25,
+  "ladder_pnl": -5.550000000001091
+ },
+ {
+  "fire": {
+   "ts": "2026-08-03T14:15:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13445.1,
+   "actual_pnl": 16.05,
+   "actual_reason": "TP hit"
+  },
+  "exit_ts": "2026-08-03T15:20:00+00:00",
+  "rung_name": "S1",
+  "rung_price": 13421.98333333333,
+  "next6": {
+   "bars": 6,
+   "beyond": -2.366666666668607
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -2.366666666668607
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 16.05,
+  "ladder_pnl": 17.44999999999891
+ },
+ {
+  "fire": {
+   "ts": "2026-08-07T13:00:01Z",
+   "strategy": "GBPUSD_TREND_V3_S",
+   "direction": "SELL",
+   "entry": 13499.8,
+   "actual_pnl": 1.9,
+   "actual_reason": "TREND_V3_REGIME_LEFT"
+  },
+  "exit_ts": "2026-08-07T13:15:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13494.55,
+  "next6": {
+   "bars": 6,
+   "beyond": -1.1000000000021828
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 9.5
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 1.9,
+  "ladder_pnl": 2.349999999998545
+ },
+ {
+  "fire": {
+   "ts": "2026-08-07T13:15:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13503.4,
+   "actual_pnl": -11.85,
+   "actual_reason": "SL hit"
+  },
+  "exit_ts": "2026-08-07T13:30:00+00:00",
+  "rung_name": "R3",
+  "rung_price": 13509.849999999999,
+  "next6": {
+   "bars": 6,
+   "beyond": -5.69999999999709
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -5.69999999999709
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -11.85,
+  "ladder_pnl": -7.749999999998181
+ },
+ {
+  "fire": {
+   "ts": "2026-08-10T08:10:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13501.2,
+   "actual_pnl": -10.8,
+   "actual_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13492.15000 < prior_5_low=13493.35000, pnl=-10.4p"
+  },
+  "exit_ts": "2026-08-10T08:25:00+00:00",
+  "rung_name": "PDH",
+  "rung_price": 13508.650000000001,
+  "next6": {
+   "bars": 6,
+   "beyond": -5.0
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -1.9000000000014552
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -10.8,
+  "ladder_pnl": 2.149999999997817
+ },
+ {
+  "fire": {
+   "ts": "2026-08-13T07:10:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13478.8,
+   "actual_pnl": -6.4,
+   "actual_reason": "AUTO_K_PREMISE"
+  },
+  "exit_ts": "2026-08-13T07:25:00+00:00",
+  "rung_name": "S1",
+  "rung_price": 13474.416666666664,
+  "next6": {
+   "bars": 6,
+   "beyond": -6.9333333333343035
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -3.8333333333357587
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -6.4,
+  "ladder_pnl": -4.950000000000728
+ },
+ {
+  "fire": {
+   "ts": "2026-08-14T08:05:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13516.3,
+   "actual_pnl": 32.75,
+   "actual_reason": "External close (not initiated by this host)"
+  },
+  "exit_ts": "2026-08-14T08:50:00+00:00",
+  "rung_name": "R2",
+  "rung_price": 13531.516666666666,
+  "next6": {
+   "bars": 6,
+   "beyond": -8.866666666664969
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -7.866666666664969
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 32.75,
+  "ladder_pnl": 5.75
+ },
+ {
+  "fire": {
+   "ts": "2026-08-20T07:35:01Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13621.2,
+   "actual_pnl": 0.75,
+   "actual_reason": "BE_STOP_POST_SCALEOUT"
+  },
+  "exit_ts": "2026-08-20T07:50:00+00:00",
+  "rung_name": "PDH",
+  "rung_price": 13630.55,
+  "next6": {
+   "bars": 6,
+   "beyond": 4.100000000002183
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 5.900000000001455
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": 0.75,
+  "ladder_pnl": 2.9500000000007276
+ },
+ {
+  "fire": {
+   "ts": "2026-08-20T08:00:03Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_L",
+   "direction": "BUY",
+   "entry": 13624.8,
+   "actual_pnl": 4.75,
+   "actual_reason": "FLOOR_STOP_POST_SCALEOUT"
+  },
+  "exit_ts": "2026-08-20T09:20:00+00:00",
+  "rung_name": "R1",
+  "rung_price": 13645.649999999998,
+  "next6": {
+   "bars": 6,
+   "beyond": 3.637978807091713e-12
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 8.700000000000728
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 4.75,
+  "ladder_pnl": 16.75
+ },
+ {
+  "fire": {
+   "ts": "2026-08-20T08:45:02Z",
+   "strategy": "GBPUSD_TREND_V3_L",
+   "direction": "BUY",
+   "entry": 13633.2,
+   "actual_pnl": 10.45,
+   "actual_reason": "TP hit"
+  },
+  "exit_ts": "2026-08-20T09:20:00+00:00",
+  "rung_name": "R1",
+  "rung_price": 13645.649999999998,
+  "next6": {
+   "bars": 6,
+   "beyond": 3.637978807091713e-12
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": 8.700000000000728
+  },
+  "verdict": "ROBBED",
+  "actual_pnl": 10.45,
+  "ladder_pnl": 8.349999999998545
+ },
+ {
+  "fire": {
+   "ts": "2026-08-21T13:10:02Z",
+   "strategy": "GBPUSD_EMA_PULLBACK_S",
+   "direction": "SELL",
+   "entry": 13639.1,
+   "actual_pnl": -6.9,
+   "actual_reason": "AUTO_K_PREMISE"
+  },
+  "exit_ts": "2026-08-21T13:25:00+00:00",
+  "rung_name": "P",
+  "rung_price": 13632.583333333334,
+  "next6": {
+   "bars": 6,
+   "beyond": -3.866666666666788
+  },
+  "next12": {
+   "bars": 12,
+   "beyond": -0.16666666666606034
+  },
+  "verdict": "RIGHT",
+  "actual_pnl": -6.9,
+  "ladder_pnl": 2.750000000001819
+ }
+]
