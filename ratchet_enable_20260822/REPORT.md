@@ -33,13 +33,35 @@ post-restart report's "all three commits are LOCAL only" claim was
 true at 15:00 UTC but stale by the time of this run. Operator
 confirmed the earlier pushes were authorised.
 
-**C8. Classify DOES run at boot.** Item 0(a) of the earlier report
-claimed "classify_regime is NOT called at startup at all." Journal shows
-otherwise — see boot proof (b) below. Both symbols hit
-`_compute_trend_subtype` at 20:13:42-43 UTC with
-`reason=insufficient_history` (not `baseline_stale` — correct branch).
-This is a real re-scoping of item 0(a); not investigated further this
-turn since the outcome is benign for Sunday's open.
+**C8. Classify DOES run at boot — false negative in 0(a), corrected;
+ruling 0(e) still stands.** Item 0(a) of
+`post_restart_20260822_88f075d/REPORT.md` claimed "classify_regime is
+NOT called at startup at all," derived from a `grep -rn
+"regime_engine\.emit\|regime_engine\.classify_regime"` search across the
+production tree that surfaced only one production call site
+(`autobot.py:8585`, the 5m-close callback). Journal at 20:13:42-43 UTC
+shows two `[trend_subtype] transition` lines for GBPUSD and EURUSD with
+`ts=None` and `reason=insufficient_history` — evidence of a
+boot-time call path the grep missed (probably a briefing / dispatch
+path that calls `classify_regime` indirectly on an incomplete buffer).
+That grep-only method was insufficient; the correct verification is
+"run the service and read the journal," which was not done at the time.
+
+**Ledger consequence.** The false negative shaped **ruling 0(e) =
+Option C** ("no boot-time classify — cost is one 5m bar after any
+restart"). The premise the ruling accepted ("first classify happens on
+the first 5m close after Sunday's open") is factually incorrect — a
+classify runs at boot, it just terminates on `insufficient_history`
+because the buffer isn't populated. The **outcome** of ruling 0(e) is
+unchanged: a classify that returns `subtype=null,
+reason=insufficient_history` produces the same downstream behaviour
+(router inactive, null subtype until enough real bars accumulate) as
+"no classify at all." **Ruling 0(e) = C stands unchanged**; the
+factual record is corrected — the cost is not "one 5m bar per restart
+of missed classify," it's "one 5m bar per restart of null-subtype
+classify due to insufficient buffer" (same behavioural cost, different
+mechanism). Re-open only if the boot-time null path is found to have
+side effects beyond returning null.
 
 ---
 
@@ -128,19 +150,22 @@ Resolution order (highest → lowest priority):
 is consulted. BIG_NEWS's `_DEFAULT_TREND_MAP[LADDER_PATIENT]` value is
 never seen.
 
-**Flag — unruled interaction:** on the first BIG_NEWS day, the operator's
-`EXIT_STACK_...=TIERED_RATCHET` override WINS over `_DEFAULT_TREND_MAP`'s
-`LADDER_PATIENT` for all four trend modes. Prior to today's change, a
-BIG_NEWS-tagged day would have dressed the trend book with LADDER_PATIENT
-(assess-bars+1, stop-buffer+1p, session-end exhaustion overlays). It now
-routes to TIERED_RATCHET instead — the 12p init SL + 15/40/75 lock ladder
-+ strict-beyond-BE exhaustion + 20:40 flat replace the patient overlay.
-That is `Option A` semantics as stated ("routes ALL trend-book fires to
-TIERED_RATCHET regardless of day_ctx"), but the LADDER_PATIENT default was
-put there deliberately for news days. If the intent is to keep
-LADDER_PATIENT on BIG_NEWS days and TIERED_RATCHET everywhere else, the
-override needs conditional wiring (currently a single-precedence step-1
-match wins always). No code change made — flagging for a ruling.
+**Ruling (2026-08-22, operator).** Option A stands unconditionally. The
+step-1 `EXIT_STACK_` precedence winning over BIG_NEWS is intended
+semantics — the trend book wears `TIERED_RATCHET` on all day contexts
+including BIG_NEWS. `LADDER_PATIENT` remains dead in this configuration
+(priced negative on its own target days). Revisit **only if** DAY_CTX
+is ever enabled AND a day-conditional dress prices positive on live
+telemetry. No conditional wiring; the resolution order stands as
+documented.
+
+For posterity — what changes on the first BIG_NEWS day: the trend book
+(TREND_V3_L/S, EMA_PULLBACK_L/S) dresses TIERED_RATCHET (12p init SL +
+15/40/75 lock ladder + strict-beyond-BE exhaustion + 20:40 UTC flat)
+instead of the built-in LADDER_PATIENT default (assess-bars+1,
+stop-buffer+1p, session-end exhaustion overlays). That is Option A
+semantics as declared ("routes ALL trend-book fires to TIERED_RATCHET
+regardless of day_ctx"), per the ruling.
 
 ### (d) — reconcile hooks + book state — PROVEN
 
