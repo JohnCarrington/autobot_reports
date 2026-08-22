@@ -1,0 +1,1866 @@
+{
+ "per_day": {
+  "2026-08-10": {
+   "arms": [
+    {
+     "ts": "2026-08-10T06:05:00+00:00",
+     "dir": "LONG",
+     "close": 13496.45,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 3.8748774470568605
+    },
+    {
+     "ts": "2026-08-10T06:15:00+00:00",
+     "dir": "LONG",
+     "close": 13495.150000000001,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 4.100270505248773
+    },
+    {
+     "ts": "2026-08-10T06:25:00+00:00",
+     "dir": "LONG",
+     "close": 13495.45,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 4.321226057340027
+    },
+    {
+     "ts": "2026-08-10T06:55:00+00:00",
+     "dir": "LONG",
+     "close": 13494.55,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 3.2089017349353526
+    },
+    {
+     "ts": "2026-08-10T07:15:00+00:00",
+     "dir": "LONG",
+     "close": 13495.150000000001,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 3.0466821129102755
+    },
+    {
+     "ts": "2026-08-10T07:20:00+00:00",
+     "dir": "LONG",
+     "close": 13495.150000000001,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 3.0987767884962523
+    },
+    {
+     "ts": "2026-08-10T07:40:00+00:00",
+     "dir": "LONG",
+     "close": 13498.45,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 3.2464054529264104
+    },
+    {
+     "ts": "2026-08-10T07:55:00+00:00",
+     "dir": "LONG",
+     "close": 13496.55,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 3.28674726162717
+    },
+    {
+     "ts": "2026-08-10T08:05:00+00:00",
+     "dir": "LONG",
+     "close": 13500.75,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 4.112936137715224
+    },
+    {
+     "ts": "2026-08-10T08:10:00+00:00",
+     "dir": "LONG",
+     "close": 13504.55,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 5.344991369885975
+    },
+    {
+     "ts": "2026-08-10T08:25:00+00:00",
+     "dir": "LONG",
+     "close": 13503.349999999999,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 6.728708876427845
+    },
+    {
+     "ts": "2026-08-10T08:35:00+00:00",
+     "dir": "LONG",
+     "close": 13502.45,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 6.540323778313905
+    },
+    {
+     "ts": "2026-08-10T08:50:00+00:00",
+     "dir": "LONG",
+     "close": 13502.45,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 5.86503350255407
+    },
+    {
+     "ts": "2026-08-10T08:55:00+00:00",
+     "dir": "LONG",
+     "close": 13503.650000000001,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 6.002054803580904
+    },
+    {
+     "ts": "2026-08-10T09:05:00+00:00",
+     "dir": "LONG",
+     "close": 13504.05,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 5.85322466150501
+    },
+    {
+     "ts": "2026-08-10T09:10:00+00:00",
+     "dir": "LONG",
+     "close": 13506.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 6.40752480527226
+    },
+    {
+     "ts": "2026-08-10T09:20:00+00:00",
+     "dir": "LONG",
+     "close": 13505.55,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 6.282071987176096
+    },
+    {
+     "ts": "2026-08-10T09:25:00+00:00",
+     "dir": "LONG",
+     "close": 13505.55,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 6.3444196451400785
+    },
+    {
+     "ts": "2026-08-10T13:30:00+00:00",
+     "dir": "LONG",
+     "close": 13505.95,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 3.194829427429795
+    },
+    {
+     "ts": "2026-08-10T13:40:00+00:00",
+     "dir": "LONG",
+     "close": 13503.349999999999,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 3.32220821185183
+    },
+    {
+     "ts": "2026-08-10T13:55:00+00:00",
+     "dir": "LONG",
+     "close": 13505.05,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 3.008005891384528
+    },
+    {
+     "ts": "2026-08-10T14:00:00+00:00",
+     "dir": "LONG",
+     "close": 13509.05,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 4.103369846872738
+    },
+    {
+     "ts": "2026-08-10T14:05:00+00:00",
+     "dir": "LONG",
+     "close": 13513.55,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 5.709679993593454
+    },
+    {
+     "ts": "2026-08-10T14:10:00+00:00",
+     "dir": "LONG",
+     "close": 13516.849999999999,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 7.464202129436671
+    },
+    {
+     "ts": "2026-08-10T14:25:00+00:00",
+     "dir": "LONG",
+     "close": 13517.95,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 9.639530295313307
+    },
+    {
+     "ts": "2026-08-10T14:35:00+00:00",
+     "dir": "LONG",
+     "close": 13519.25,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 10.815516953351107
+    },
+    {
+     "ts": "2026-08-10T14:40:00+00:00",
+     "dir": "LONG",
+     "close": 13525.349999999999,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 12.355735787354206
+    },
+    {
+     "ts": "2026-08-10T14:45:00+00:00",
+     "dir": "LONG",
+     "close": 13528.45,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 13.966350421156676
+    },
+    {
+     "ts": "2026-08-10T14:55:00+00:00",
+     "dir": "LONG",
+     "close": 13520.55,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 13.171448953811705
+    },
+    {
+     "ts": "2026-08-10T15:10:00+00:00",
+     "dir": "LONG",
+     "close": 13522.25,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 11.442107385191775
+    },
+    {
+     "ts": "2026-08-10T15:15:00+00:00",
+     "dir": "LONG",
+     "close": 13522.849999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 11.601584568081307
+    },
+    {
+     "ts": "2026-08-10T15:20:00+00:00",
+     "dir": "LONG",
+     "close": 13524.05,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 11.839262858840812
+    },
+    {
+     "ts": "2026-08-10T15:35:00+00:00",
+     "dir": "LONG",
+     "close": 13524.55,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 11.273396597662213
+    },
+    {
+     "ts": "2026-08-10T15:40:00+00:00",
+     "dir": "LONG",
+     "close": 13525.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 11.50629283634953
+    },
+    {
+     "ts": "2026-08-10T15:55:00+00:00",
+     "dir": "LONG",
+     "close": 13526.150000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 10.856013522614376
+    },
+    {
+     "ts": "2026-08-10T16:25:00+00:00",
+     "dir": "LONG",
+     "close": 13523.349999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 7.802336100558023
+    }
+   ],
+   "fires": [
+    {
+     "ts": "2026-08-10T08:10:01Z",
+     "strat": "GBPUSD_EMA_PULLBACK_L",
+     "dir": "BUY",
+     "entry": 13501.2,
+     "pnl": -10.8,
+     "outcome": "STRUCTURE_EXIT:structure_flip_down: last_close=13492.15000 < prior_5_low=13493.35000, pnl=-10.4p",
+     "sl": 13489.2,
+     "tp1": 13516.2
+    },
+    {
+     "ts": "2026-08-10T14:30:02Z",
+     "strat": "GBPUSD_EMA_PULLBACK_L",
+     "dir": "BUY",
+     "entry": 13518.6,
+     "pnl": 0.25,
+     "outcome": "Breakeven stop hit (IG server-side)",
+     "sl": 13506.6,
+     "tp1": 13533.6
+    }
+   ],
+   "holes": [
+    {
+     "hours": [
+      10,
+      11,
+      12
+     ],
+     "first_ts": "2026-08-10T10:00:00+00:00",
+     "last_ts": "2026-08-10T12:55:00+00:00",
+     "first_close": 13494.05,
+     "last_close": 13494.650000000001,
+     "move_pips": 0.6000000000021828,
+     "n_bars": 36
+    }
+   ],
+   "dom_move": 44.400000000001455,
+   "dom_dir": "up"
+  },
+  "2026-08-14": {
+   "arms": [
+    {
+     "ts": "2026-08-14T06:00:00+00:00",
+     "dir": "LONG",
+     "close": 13501.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 3.6114199754392757
+    },
+    {
+     "ts": "2026-08-14T06:10:00+00:00",
+     "dir": "LONG",
+     "close": 13501.349999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 3.7327871877241705
+    },
+    {
+     "ts": "2026-08-14T06:35:00+00:00",
+     "dir": "LONG",
+     "close": 13501.849999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 3.025965485277993
+    },
+    {
+     "ts": "2026-08-14T06:40:00+00:00",
+     "dir": "LONG",
+     "close": 13502.849999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 3.355515723935241
+    },
+    {
+     "ts": "2026-08-14T06:45:00+00:00",
+     "dir": "LONG",
+     "close": 13503.349999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 3.664042235837769
+    },
+    {
+     "ts": "2026-08-14T06:55:00+00:00",
+     "dir": "LONG",
+     "close": 13504.45,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 3.9624802597554662
+    },
+    {
+     "ts": "2026-08-14T07:00:00+00:00",
+     "dir": "LONG",
+     "close": 13506.45,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 4.587361021491233
+    },
+    {
+     "ts": "2026-08-14T07:05:00+00:00",
+     "dir": "LONG",
+     "close": 13506.55,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 5.032643499027472
+    },
+    {
+     "ts": "2026-08-14T07:15:00+00:00",
+     "dir": "LONG",
+     "close": 13507.05,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 5.541997055082902
+    },
+    {
+     "ts": "2026-08-14T07:30:00+00:00",
+     "dir": "LONG",
+     "close": 13505.25,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 4.84532950040375
+    },
+    {
+     "ts": "2026-08-14T07:35:00+00:00",
+     "dir": "LONG",
+     "close": 13507.25,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 5.084512693145371
+    },
+    {
+     "ts": "2026-08-14T07:45:00+00:00",
+     "dir": "LONG",
+     "close": 13512.55,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 6.216814412788153
+    },
+    {
+     "ts": "2026-08-14T07:55:00+00:00",
+     "dir": "LONG",
+     "close": 13512.95,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 7.323434149604509
+    },
+    {
+     "ts": "2026-08-14T08:00:00+00:00",
+     "dir": "LONG",
+     "close": 13515.349999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 8.152698355756002
+    },
+    {
+     "ts": "2026-08-14T08:05:00+00:00",
+     "dir": "LONG",
+     "close": 13519.95,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 9.543170750717763
+    },
+    {
+     "ts": "2026-08-14T08:20:00+00:00",
+     "dir": "LONG",
+     "close": 13519.349999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 10.60176389634944
+    },
+    {
+     "ts": "2026-08-14T08:25:00+00:00",
+     "dir": "LONG",
+     "close": 13521.95,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 11.388886994191125
+    },
+    {
+     "ts": "2026-08-14T08:35:00+00:00",
+     "dir": "LONG",
+     "close": 13525.349999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 12.775444338212765
+    },
+    {
+     "ts": "2026-08-14T08:55:00+00:00",
+     "dir": "LONG",
+     "close": 13522.55,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 12.002457820432028
+    },
+    {
+     "ts": "2026-08-14T09:00:00+00:00",
+     "dir": "LONG",
+     "close": 13522.650000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 11.82047252528173
+    },
+    {
+     "ts": "2026-08-14T09:20:00+00:00",
+     "dir": "LONG",
+     "close": 13521.45,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 10.071715741931257
+    },
+    {
+     "ts": "2026-08-14T09:25:00+00:00",
+     "dir": "LONG",
+     "close": 13522.349999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 9.845914160012398
+    },
+    {
+     "ts": "2026-08-14T09:45:00+00:00",
+     "dir": "LONG",
+     "close": 13522.45,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 8.498023195452333
+    },
+    {
+     "ts": "2026-08-14T09:50:00+00:00",
+     "dir": "LONG",
+     "close": 13523.650000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 8.512090111316866
+    },
+    {
+     "ts": "2026-08-14T09:55:00+00:00",
+     "dir": "LONG",
+     "close": 13524.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 8.649729744642173
+    },
+    {
+     "ts": "2026-08-14T10:05:00+00:00",
+     "dir": "LONG",
+     "close": 13526.25,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 8.923661676995835
+    },
+    {
+     "ts": "2026-08-14T10:10:00+00:00",
+     "dir": "LONG",
+     "close": 13526.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 9.094218313728561
+    },
+    {
+     "ts": "2026-08-14T10:15:00+00:00",
+     "dir": "LONG",
+     "close": 13527.349999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 9.25222278680667
+    },
+    {
+     "ts": "2026-08-14T10:35:00+00:00",
+     "dir": "LONG",
+     "close": 13528.150000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 8.930020839628924
+    },
+    {
+     "ts": "2026-08-14T10:40:00+00:00",
+     "dir": "LONG",
+     "close": 13528.45,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 8.93510431912
+    },
+    {
+     "ts": "2026-08-14T11:15:00+00:00",
+     "dir": "LONG",
+     "close": 13534.05,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 8.734669838422633
+    },
+    {
+     "ts": "2026-08-14T11:20:00+00:00",
+     "dir": "LONG",
+     "close": 13536.150000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 9.617175739365848
+    },
+    {
+     "ts": "2026-08-14T11:30:00+00:00",
+     "dir": "LONG",
+     "close": 13538.25,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 10.769833361806377
+    },
+    {
+     "ts": "2026-08-14T11:35:00+00:00",
+     "dir": "LONG",
+     "close": 13539.849999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 11.550393414330756
+    },
+    {
+     "ts": "2026-08-14T11:40:00+00:00",
+     "dir": "LONG",
+     "close": 13540.650000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 12.17943595106044
+    },
+    {
+     "ts": "2026-08-14T12:00:00+00:00",
+     "dir": "LONG",
+     "close": 13537.349999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 10.832394423609003
+    },
+    {
+     "ts": "2026-08-14T12:15:00+00:00",
+     "dir": "LONG",
+     "close": 13537.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 9.633940690921008
+    },
+    {
+     "ts": "2026-08-14T12:20:00+00:00",
+     "dir": "LONG",
+     "close": 13543.05,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 10.418019985758292
+    },
+    {
+     "ts": "2026-08-14T12:30:00+00:00",
+     "dir": "LONG",
+     "close": 13543.650000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 11.297858583538982
+    },
+    {
+     "ts": "2026-08-14T13:05:00+00:00",
+     "dir": "LONG",
+     "close": 13538.55,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 7.059608333276628
+    },
+    {
+     "ts": "2026-08-14T13:20:00+00:00",
+     "dir": "LONG",
+     "close": 13540.650000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 6.251474240922107
+    },
+    {
+     "ts": "2026-08-14T13:25:00+00:00",
+     "dir": "LONG",
+     "close": 13542.55,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 6.837094184134912
+    },
+    {
+     "ts": "2026-08-14T13:30:00+00:00",
+     "dir": "LONG",
+     "close": 13547.349999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 8.09356316841695
+    },
+    {
+     "ts": "2026-08-14T13:45:00+00:00",
+     "dir": "LONG",
+     "close": 13557.650000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 13.570637581866322
+    },
+    {
+     "ts": "2026-08-14T13:55:00+00:00",
+     "dir": "LONG",
+     "close": 13552.150000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 13.469614558405738
+    },
+    {
+     "ts": "2026-08-14T14:00:00+00:00",
+     "dir": "LONG",
+     "close": 13555.150000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 13.857680096618424
+    },
+    {
+     "ts": "2026-08-14T14:20:00+00:00",
+     "dir": "LONG",
+     "close": 13556.349999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 12.794374249029715
+    },
+    {
+     "ts": "2026-08-14T14:25:00+00:00",
+     "dir": "LONG",
+     "close": 13558.05,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 13.308274571176298
+    },
+    {
+     "ts": "2026-08-14T14:35:00+00:00",
+     "dir": "LONG",
+     "close": 13553.650000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 11.852893726354523
+    },
+    {
+     "ts": "2026-08-14T15:45:00+00:00",
+     "dir": "LONG",
+     "close": 13555.25,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 5.987187735521729
+    },
+    {
+     "ts": "2026-08-14T16:00:00+00:00",
+     "dir": "LONG",
+     "close": 13555.45,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 6.988850798168642
+    },
+    {
+     "ts": "2026-08-14T16:15:00+00:00",
+     "dir": "LONG",
+     "close": 13552.849999999999,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 5.662736718653832
+    }
+   ],
+   "fires": [],
+   "holes": [],
+   "dom_move": 68.59999999999854,
+   "dom_dir": "up"
+  },
+  "2026-06-17": {
+   "arms": [
+    {
+     "ts": "2026-06-17T06:15:00+00:00",
+     "dir": "SHORT",
+     "close": 13419.849999999999,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 3.7798311044753063
+    },
+    {
+     "ts": "2026-06-17T06:20:00+00:00",
+     "dir": "SHORT",
+     "close": 13417.95,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 4.873750111220943
+    },
+    {
+     "ts": "2026-06-17T06:25:00+00:00",
+     "dir": "SHORT",
+     "close": 13415.150000000001,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.161155816818791
+    },
+    {
+     "ts": "2026-06-17T06:30:00+00:00",
+     "dir": "SHORT",
+     "close": 13410.150000000001,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 7.984544779243151
+    },
+    {
+     "ts": "2026-06-17T06:50:00+00:00",
+     "dir": "SHORT",
+     "close": 13412.25,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 9.528850449125457
+    },
+    {
+     "ts": "2026-06-17T07:20:00+00:00",
+     "dir": "SHORT",
+     "close": 13416.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.811093879718101
+    },
+    {
+     "ts": "2026-06-17T07:25:00+00:00",
+     "dir": "SHORT",
+     "close": 13414.349999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.888863209756892
+    },
+    {
+     "ts": "2026-06-17T07:30:00+00:00",
+     "dir": "SHORT",
+     "close": 13412.25,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 7.271258476343064
+    },
+    {
+     "ts": "2026-06-17T07:40:00+00:00",
+     "dir": "SHORT",
+     "close": 13414.75,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.718011863595166
+    },
+    {
+     "ts": "2026-06-17T08:35:00+00:00",
+     "dir": "SHORT",
+     "close": 13411.45,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 5.8551300248545886
+    },
+    {
+     "ts": "2026-06-17T11:00:00+00:00",
+     "dir": "SHORT",
+     "close": 13411.75,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 3.09576915892103
+    },
+    {
+     "ts": "2026-06-17T11:05:00+00:00",
+     "dir": "SHORT",
+     "close": 13409.25,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 3.632910228547189
+    },
+    {
+     "ts": "2026-06-17T11:10:00+00:00",
+     "dir": "SHORT",
+     "close": 13406.75,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 4.460160219765385
+    },
+    {
+     "ts": "2026-06-17T11:20:00+00:00",
+     "dir": "SHORT",
+     "close": 13406.05,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 5.380863171198143
+    },
+    {
+     "ts": "2026-06-17T11:30:00+00:00",
+     "dir": "SHORT",
+     "close": 13401.25,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 6.842942130562733
+    },
+    {
+     "ts": "2026-06-17T11:40:00+00:00",
+     "dir": "SHORT",
+     "close": 13402.45,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 7.686086495048585
+    },
+    {
+     "ts": "2026-06-17T11:55:00+00:00",
+     "dir": "SHORT",
+     "close": 13404.849999999999,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 7.125588269072978
+    },
+    {
+     "ts": "2026-06-17T14:00:00+00:00",
+     "dir": "SHORT",
+     "close": 13402.150000000001,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 3.2028392895172146
+    },
+    {
+     "ts": "2026-06-17T14:05:00+00:00",
+     "dir": "SHORT",
+     "close": 13401.349999999999,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 4.28262292153704
+    },
+    {
+     "ts": "2026-06-17T14:20:00+00:00",
+     "dir": "SHORT",
+     "close": 13402.45,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 5.494236487196758
+    },
+    {
+     "ts": "2026-06-17T14:25:00+00:00",
+     "dir": "SHORT",
+     "close": 13401.55,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 5.783550492436916
+    },
+    {
+     "ts": "2026-06-17T14:35:00+00:00",
+     "dir": "SHORT",
+     "close": 13400.45,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 5.952380153179547
+    },
+    {
+     "ts": "2026-06-17T14:45:00+00:00",
+     "dir": "SHORT",
+     "close": 13394.95,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 6.931383517396171
+    },
+    {
+     "ts": "2026-06-17T15:05:00+00:00",
+     "dir": "SHORT",
+     "close": 13388.849999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 10.380400464380727
+    },
+    {
+     "ts": "2026-06-17T15:20:00+00:00",
+     "dir": "SHORT",
+     "close": 13393.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 9.737951017952582
+    },
+    {
+     "ts": "2026-06-17T15:35:00+00:00",
+     "dir": "SHORT",
+     "close": 13394.55,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 8.524733139136515
+    },
+    {
+     "ts": "2026-06-17T15:50:00+00:00",
+     "dir": "SHORT",
+     "close": 13393.45,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 7.2765959259941155
+    },
+    {
+     "ts": "2026-06-17T16:00:00+00:00",
+     "dir": "SHORT",
+     "close": 13394.45,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.732431571765119
+    },
+    {
+     "ts": "2026-06-17T16:10:00+00:00",
+     "dir": "SHORT",
+     "close": 13390.150000000001,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 7.2574511313359835
+    },
+    {
+     "ts": "2026-06-17T16:25:00+00:00",
+     "dir": "SHORT",
+     "close": 13393.25,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.7287459975359525
+    },
+    {
+     "ts": "2026-06-17T16:30:00+00:00",
+     "dir": "SHORT",
+     "close": 13390.849999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.983550844968704
+    }
+   ],
+   "fires": [
+    {
+     "ts": "2026-06-17T14:05:02Z",
+     "strat": "GBPUSD_EMA_PULLBACK_S",
+     "dir": "SELL",
+     "entry": 13401.8,
+     "pnl": 10.75,
+     "outcome": "External/manual close detected (IG open positions)",
+     "sl": 13421.8,
+     "tp1": 13386.8
+    },
+    {
+     "ts": "2026-06-17T15:10:02Z",
+     "strat": "GBPUSD_EMA_PULLBACK_S",
+     "dir": "SELL",
+     "entry": 13388.8,
+     "pnl": -10.9,
+     "outcome": "STRUCTURE_EXIT:structure_flip_up: last_close=13397.95000 > prior_5_high=13397.65000, pnl=-10.5p",
+     "sl": 13408.8,
+     "tp1": 13373.8
+    }
+   ],
+   "holes": [
+    {
+     "hours": [
+      9,
+      10
+     ],
+     "first_ts": "2026-06-17T09:00:00+00:00",
+     "last_ts": "2026-06-17T10:55:00+00:00",
+     "first_close": 13416.75,
+     "last_close": 13412.349999999999,
+     "move_pips": -4.400000000001455,
+     "n_bars": 24
+    },
+    {
+     "hours": [
+      12,
+      13
+     ],
+     "first_ts": "2026-06-17T12:00:00+00:00",
+     "last_ts": "2026-06-17T13:55:00+00:00",
+     "first_close": 13406.849999999999,
+     "last_close": 13405.55,
+     "move_pips": -1.2999999999992724,
+     "n_bars": 24
+    }
+   ],
+   "dom_move": 167.60000000000218,
+   "dom_dir": "dn"
+  },
+  "2026-06-18": {
+   "arms": [
+    {
+     "ts": "2026-06-18T06:40:00+00:00",
+     "dir": "LONG",
+     "close": 13323.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 5.439581942717268
+    },
+    {
+     "ts": "2026-06-18T07:20:00+00:00",
+     "dir": "SHORT",
+     "close": 13295.95,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 5.8421852907849825
+    },
+    {
+     "ts": "2026-06-18T07:25:00+00:00",
+     "dir": "SHORT",
+     "close": 13295.650000000001,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 7.48827258511119
+    },
+    {
+     "ts": "2026-06-18T07:55:00+00:00",
+     "dir": "SHORT",
+     "close": 13297.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 8.969951848635901
+    },
+    {
+     "ts": "2026-06-18T08:00:00+00:00",
+     "dir": "SHORT",
+     "close": 13290.849999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 10.12964619311606
+    },
+    {
+     "ts": "2026-06-18T08:10:00+00:00",
+     "dir": "SHORT",
+     "close": 13280.75,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 13.16182620339714
+    },
+    {
+     "ts": "2026-06-18T08:20:00+00:00",
+     "dir": "SHORT",
+     "close": 13278.75,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 16.054770789420218
+    },
+    {
+     "ts": "2026-06-18T08:25:00+00:00",
+     "dir": "SHORT",
+     "close": 13276.849999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 17.422687486714494
+    },
+    {
+     "ts": "2026-06-18T08:30:00+00:00",
+     "dir": "SHORT",
+     "close": 13271.75,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 19.226401380450625
+    },
+    {
+     "ts": "2026-06-18T08:40:00+00:00",
+     "dir": "SHORT",
+     "close": 13262.650000000001,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 23.181760423594824
+    },
+    {
+     "ts": "2026-06-18T08:45:00+00:00",
+     "dir": "SHORT",
+     "close": 13258.150000000001,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 25.466720321963294
+    },
+    {
+     "ts": "2026-06-18T08:50:00+00:00",
+     "dir": "SHORT",
+     "close": 13254.25,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 27.666010875016582
+    },
+    {
+     "ts": "2026-06-18T08:55:00+00:00",
+     "dir": "SHORT",
+     "close": 13245.75,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 30.623946858017007
+    },
+    {
+     "ts": "2026-06-18T09:05:00+00:00",
+     "dir": "SHORT",
+     "close": 13243.95,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 33.76805992397567
+    },
+    {
+     "ts": "2026-06-18T09:10:00+00:00",
+     "dir": "SHORT",
+     "close": 13236.45,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 36.04437252629941
+    },
+    {
+     "ts": "2026-06-18T09:25:00+00:00",
+     "dir": "SHORT",
+     "close": 13238.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 36.12214730423693
+    },
+    {
+     "ts": "2026-06-18T09:30:00+00:00",
+     "dir": "SHORT",
+     "close": 13234.25,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 36.95411326260728
+    },
+    {
+     "ts": "2026-06-18T09:50:00+00:00",
+     "dir": "SHORT",
+     "close": 13244.75,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 30.54259030582398
+    },
+    {
+     "ts": "2026-06-18T09:55:00+00:00",
+     "dir": "SHORT",
+     "close": 13239.95,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 30.272492283052998
+    },
+    {
+     "ts": "2026-06-18T10:20:00+00:00",
+     "dir": "SHORT",
+     "close": 13233.75,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 29.80438928249896
+    },
+    {
+     "ts": "2026-06-18T10:35:00+00:00",
+     "dir": "SHORT",
+     "close": 13232.45,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 27.586821855349626
+    },
+    {
+     "ts": "2026-06-18T10:40:00+00:00",
+     "dir": "SHORT",
+     "close": 13230.55,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 27.43204128045909
+    },
+    {
+     "ts": "2026-06-18T11:10:00+00:00",
+     "dir": "SHORT",
+     "close": 13214.849999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 29.667171938290267
+    },
+    {
+     "ts": "2026-06-18T11:15:00+00:00",
+     "dir": "SHORT",
+     "close": 13212.150000000001,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 30.66506386650144
+    },
+    {
+     "ts": "2026-06-18T11:25:00+00:00",
+     "dir": "SHORT",
+     "close": 13220.349999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 28.593664215453828
+    },
+    {
+     "ts": "2026-06-18T11:35:00+00:00",
+     "dir": "SHORT",
+     "close": 13218.95,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 26.513995196773976
+    },
+    {
+     "ts": "2026-06-18T11:40:00+00:00",
+     "dir": "SHORT",
+     "close": 13215.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 26.53613864237923
+    },
+    {
+     "ts": "2026-06-18T11:45:00+00:00",
+     "dir": "SHORT",
+     "close": 13213.650000000001,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 26.577643320531934
+    },
+    {
+     "ts": "2026-06-18T11:50:00+00:00",
+     "dir": "SHORT",
+     "close": 13207.55,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 27.493385218844196
+    },
+    {
+     "ts": "2026-06-18T15:35:00+00:00",
+     "dir": "SHORT",
+     "close": 13228.150000000001,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 3.0868692460298917
+    },
+    {
+     "ts": "2026-06-18T15:50:00+00:00",
+     "dir": "SHORT",
+     "close": 13227.75,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 5.164648169547945
+    },
+    {
+     "ts": "2026-06-18T16:10:00+00:00",
+     "dir": "SHORT",
+     "close": 13218.55,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 10.945154084578462
+    },
+    {
+     "ts": "2026-06-18T16:15:00+00:00",
+     "dir": "SHORT",
+     "close": 13214.75,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 12.299422880605562
+    },
+    {
+     "ts": "2026-06-18T16:30:00+00:00",
+     "dir": "SHORT",
+     "close": 13218.05,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 12.796017595055673
+    },
+    {
+     "ts": "2026-06-18T16:40:00+00:00",
+     "dir": "SHORT",
+     "close": 13218.849999999999,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 11.781983553642931
+    },
+    {
+     "ts": "2026-06-18T16:50:00+00:00",
+     "dir": "SHORT",
+     "close": 13217.95,
+     "regime": "TREND_FORMING_DOWN",
+     "fan_p": 11.283633984003245
+    }
+   ],
+   "fires": [
+    {
+     "ts": "2026-06-18T07:25:02Z",
+     "strat": "GBPUSD_EMA_PULLBACK_S",
+     "dir": "SELL",
+     "entry": 13295.3,
+     "pnl": 14.95,
+     "outcome": "TP hit",
+     "sl": 13315.3,
+     "tp1": 13280.3
+    },
+    {
+     "ts": "2026-06-18T16:45:03Z",
+     "strat": "GBPUSD_EMA_PULLBACK_S",
+     "dir": "SELL",
+     "entry": 13218.4,
+     "pnl": -10.6,
+     "outcome": "STRUCTURE_EXIT:structure_flip_up: last_close=13226.65000 > prior_5_high=13225.85000, pnl=-10.1p",
+     "sl": 13238.4,
+     "tp1": 13203.4
+    }
+   ],
+   "holes": [
+    {
+     "hours": [
+      12,
+      13,
+      14
+     ],
+     "first_ts": "2026-06-18T12:00:00+00:00",
+     "last_ts": "2026-06-18T14:55:00+00:00",
+     "first_close": 13222.349999999999,
+     "last_close": 13251.75,
+     "move_pips": 29.400000000001455,
+     "n_bars": 36
+    }
+   ],
+   "dom_move": 129.29999999999927,
+   "dom_dir": "dn"
+  },
+  "2026-07-15": {
+   "arms": [
+    {
+     "ts": "2026-07-15T06:00:00+00:00",
+     "dir": "LONG",
+     "close": 13413.650000000001,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 6.019813921542664
+    },
+    {
+     "ts": "2026-07-15T06:05:00+00:00",
+     "dir": "LONG",
+     "close": 13414.150000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 6.4298653340465535
+    },
+    {
+     "ts": "2026-07-15T06:10:00+00:00",
+     "dir": "LONG",
+     "close": 13416.55,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 7.1194691971231805
+    },
+    {
+     "ts": "2026-07-15T06:15:00+00:00",
+     "dir": "LONG",
+     "close": 13419.650000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 8.140071045156219
+    },
+    {
+     "ts": "2026-07-15T06:40:00+00:00",
+     "dir": "LONG",
+     "close": 13415.150000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 7.043879414335606
+    },
+    {
+     "ts": "2026-07-15T06:50:00+00:00",
+     "dir": "LONG",
+     "close": 13415.45,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 6.510715303322286
+    },
+    {
+     "ts": "2026-07-15T07:05:00+00:00",
+     "dir": "LONG",
+     "close": 13415.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 6.041954311842346
+    },
+    {
+     "ts": "2026-07-15T09:10:00+00:00",
+     "dir": "SHORT",
+     "close": 13395.75,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.955489597732594
+    },
+    {
+     "ts": "2026-07-15T09:25:00+00:00",
+     "dir": "SHORT",
+     "close": 13393.55,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.680972623105845
+    },
+    {
+     "ts": "2026-07-15T09:30:00+00:00",
+     "dir": "SHORT",
+     "close": 13390.55,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 7.340902409518094
+    },
+    {
+     "ts": "2026-07-15T09:35:00+00:00",
+     "dir": "SHORT",
+     "close": 13390.849999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 7.715177588388542
+    },
+    {
+     "ts": "2026-07-15T09:45:00+00:00",
+     "dir": "SHORT",
+     "close": 13392.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 7.608470497551025
+    },
+    {
+     "ts": "2026-07-15T09:55:00+00:00",
+     "dir": "SHORT",
+     "close": 13390.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 7.427280007119407
+    },
+    {
+     "ts": "2026-07-15T10:00:00+00:00",
+     "dir": "SHORT",
+     "close": 13389.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 7.782050959662229
+    },
+    {
+     "ts": "2026-07-15T10:05:00+00:00",
+     "dir": "SHORT",
+     "close": 13386.75,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 8.400260617358072
+    },
+    {
+     "ts": "2026-07-15T10:10:00+00:00",
+     "dir": "SHORT",
+     "close": 13385.849999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 8.953735279932516
+    },
+    {
+     "ts": "2026-07-15T10:15:00+00:00",
+     "dir": "SHORT",
+     "close": 13384.95,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 9.454011681113116
+    },
+    {
+     "ts": "2026-07-15T10:20:00+00:00",
+     "dir": "SHORT",
+     "close": 13382.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 10.27618762639031
+    },
+    {
+     "ts": "2026-07-15T10:25:00+00:00",
+     "dir": "SHORT",
+     "close": 13382.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 10.80102771075508
+    },
+    {
+     "ts": "2026-07-15T11:50:00+00:00",
+     "dir": "LONG",
+     "close": 13409.45,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 4.990317093002886
+    },
+    {
+     "ts": "2026-07-15T11:55:00+00:00",
+     "dir": "LONG",
+     "close": 13409.95,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 6.123964859049011
+    },
+    {
+     "ts": "2026-07-15T12:10:00+00:00",
+     "dir": "LONG",
+     "close": 13408.95,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 6.737210565086571
+    },
+    {
+     "ts": "2026-07-15T12:20:00+00:00",
+     "dir": "LONG",
+     "close": 13408.05,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 6.778599675413716
+    },
+    {
+     "ts": "2026-07-15T12:25:00+00:00",
+     "dir": "LONG",
+     "close": 13408.85,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 6.916763872734009
+    },
+    {
+     "ts": "2026-07-15T12:30:00+00:00",
+     "dir": "LONG",
+     "close": 13414.849999999999,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 8.057773162907324
+    },
+    {
+     "ts": "2026-07-15T12:40:00+00:00",
+     "dir": "LONG",
+     "close": 13421.05,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 10.104042799883246
+    },
+    {
+     "ts": "2026-07-15T12:45:00+00:00",
+     "dir": "LONG",
+     "close": 13423.650000000001,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 11.819163731790468
+    },
+    {
+     "ts": "2026-07-15T12:50:00+00:00",
+     "dir": "LONG",
+     "close": 13424.150000000001,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 13.089337641851671
+    },
+    {
+     "ts": "2026-07-15T12:55:00+00:00",
+     "dir": "LONG",
+     "close": 13428.150000000001,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 14.65646683702289
+    },
+    {
+     "ts": "2026-07-15T13:00:00+00:00",
+     "dir": "LONG",
+     "close": 13432.55,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 16.505049509343735
+    },
+    {
+     "ts": "2026-07-15T13:05:00+00:00",
+     "dir": "LONG",
+     "close": 13433.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 17.96222523607321
+    },
+    {
+     "ts": "2026-07-15T13:15:00+00:00",
+     "dir": "LONG",
+     "close": 13431.849999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 18.200428625932545
+    },
+    {
+     "ts": "2026-07-15T13:30:00+00:00",
+     "dir": "LONG",
+     "close": 13428.849999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 16.22790580533183
+    },
+    {
+     "ts": "2026-07-15T13:35:00+00:00",
+     "dir": "LONG",
+     "close": 13431.45,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 16.426433617931252
+    },
+    {
+     "ts": "2026-07-15T13:45:00+00:00",
+     "dir": "LONG",
+     "close": 13437.650000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 17.264780376614
+    },
+    {
+     "ts": "2026-07-15T13:55:00+00:00",
+     "dir": "LONG",
+     "close": 13440.95,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 18.594612983270054
+    },
+    {
+     "ts": "2026-07-15T14:05:00+00:00",
+     "dir": "LONG",
+     "close": 13441.55,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 19.606495180749334
+    },
+    {
+     "ts": "2026-07-15T14:10:00+00:00",
+     "dir": "LONG",
+     "close": 13443.150000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 20.003614571402068
+    },
+    {
+     "ts": "2026-07-15T14:15:00+00:00",
+     "dir": "LONG",
+     "close": 13444.849999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 20.437160307148588
+    },
+    {
+     "ts": "2026-07-15T14:25:00+00:00",
+     "dir": "LONG",
+     "close": 13444.95,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 20.490427072967577
+    },
+    {
+     "ts": "2026-07-15T14:30:00+00:00",
+     "dir": "LONG",
+     "close": 13457.45,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 22.57126444027199
+    },
+    {
+     "ts": "2026-07-15T14:40:00+00:00",
+     "dir": "LONG",
+     "close": 13466.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 26.397399694747946
+    },
+    {
+     "ts": "2026-07-15T14:45:00+00:00",
+     "dir": "LONG",
+     "close": 13474.25,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 29.42511728487625
+    },
+    {
+     "ts": "2026-07-15T14:50:00+00:00",
+     "dir": "LONG",
+     "close": 13477.55,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 32.0351535904847
+    },
+    {
+     "ts": "2026-07-15T14:55:00+00:00",
+     "dir": "LONG",
+     "close": 13478.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 33.92600726905039
+    },
+    {
+     "ts": "2026-07-15T15:15:00+00:00",
+     "dir": "LONG",
+     "close": 13476.650000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 34.10748250753022
+    },
+    {
+     "ts": "2026-07-15T15:20:00+00:00",
+     "dir": "LONG",
+     "close": 13483.95,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 34.919814522310844
+    },
+    {
+     "ts": "2026-07-15T15:25:00+00:00",
+     "dir": "LONG",
+     "close": 13487.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 35.91796402771433
+    },
+    {
+     "ts": "2026-07-15T15:30:00+00:00",
+     "dir": "LONG",
+     "close": 13488.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 36.53385384087778
+    },
+    {
+     "ts": "2026-07-15T15:40:00+00:00",
+     "dir": "LONG",
+     "close": 13489.849999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 36.271450715812534
+    },
+    {
+     "ts": "2026-07-15T15:45:00+00:00",
+     "dir": "LONG",
+     "close": 13491.05,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 36.26946326808684
+    },
+    {
+     "ts": "2026-07-15T15:50:00+00:00",
+     "dir": "LONG",
+     "close": 13498.150000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 37.251250745992365
+    },
+    {
+     "ts": "2026-07-15T16:15:00+00:00",
+     "dir": "LONG",
+     "close": 13499.95,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 35.38308961275652
+    },
+    {
+     "ts": "2026-07-15T16:20:00+00:00",
+     "dir": "LONG",
+     "close": 13503.849999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 35.726083686051425
+    },
+    {
+     "ts": "2026-07-15T16:25:00+00:00",
+     "dir": "LONG",
+     "close": 13511.75,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 37.116808375369146
+    },
+    {
+     "ts": "2026-07-15T16:35:00+00:00",
+     "dir": "LONG",
+     "close": 13511.25,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 37.56785381895497
+    },
+    {
+     "ts": "2026-07-15T16:45:00+00:00",
+     "dir": "LONG",
+     "close": 13520.650000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 38.41594919040108
+    },
+    {
+     "ts": "2026-07-15T16:50:00+00:00",
+     "dir": "LONG",
+     "close": 13527.150000000001,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 40.31168630074171
+    }
+   ],
+   "fires": [
+    {
+     "ts": "2026-07-15T06:10:01Z",
+     "strat": "GBPUSD_EMA_PULLBACK_L",
+     "dir": "BUY",
+     "entry": 13414.8,
+     "pnl": -12.7,
+     "outcome": "STRUCTURE_EXIT:structure_flip_down: last_close=13402.55000 < prior_5_low=13402.75000, pnl=-12.3p",
+     "sl": 13394.8,
+     "tp1": 13454.8
+    },
+    {
+     "ts": "2026-07-15T12:10:00Z",
+     "strat": "GBPUSD_EMA_PULLBACK_L",
+     "dir": "BUY",
+     "entry": 13405.1,
+     "pnl": 30.35,
+     "outcome": "TP hit",
+     "sl": 13385.1,
+     "tp1": 13445.1
+    },
+    {
+     "ts": "2026-07-15T14:35:01Z",
+     "strat": "GBPUSD_EMA_PULLBACK_L",
+     "dir": "BUY",
+     "entry": 13447.19137,
+     "pnl": 16.25,
+     "outcome": "BE_STOP_POST_SCALEOUT",
+     "sl": 13427.19137,
+     "tp1": 13487.19137
+    }
+   ],
+   "holes": [
+    {
+     "hours": [
+      8
+     ],
+     "first_ts": "2026-07-15T08:00:00+00:00",
+     "last_ts": "2026-07-15T08:55:00+00:00",
+     "first_close": 13406.150000000001,
+     "last_close": 13395.849999999999,
+     "move_pips": -10.30000000000291,
+     "n_bars": 12
+    }
+   ],
+   "dom_move": 176.10000000000218,
+   "dom_dir": "up"
+  },
+  "2026-07-29": {
+   "arms": [
+    {
+     "ts": "2026-07-29T06:00:00+00:00",
+     "dir": "LONG",
+     "close": 13302.05,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 3.112938074453268
+    },
+    {
+     "ts": "2026-07-29T08:45:00+00:00",
+     "dir": "LONG",
+     "close": 13308.849999999999,
+     "regime": "STRONG_TREND_UP",
+     "fan_p": 3.546962349137175
+    },
+    {
+     "ts": "2026-07-29T11:05:00+00:00",
+     "dir": "SHORT",
+     "close": 13291.349999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 5.295943845454531
+    },
+    {
+     "ts": "2026-07-29T12:05:00+00:00",
+     "dir": "SHORT",
+     "close": 13287.849999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 3.7146966754244204
+    },
+    {
+     "ts": "2026-07-29T12:10:00+00:00",
+     "dir": "SHORT",
+     "close": 13286.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 4.6328517905330955
+    },
+    {
+     "ts": "2026-07-29T12:15:00+00:00",
+     "dir": "SHORT",
+     "close": 13283.650000000001,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 5.717809954629047
+    },
+    {
+     "ts": "2026-07-29T12:20:00+00:00",
+     "dir": "SHORT",
+     "close": 13283.849999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.442144182226912
+    },
+    {
+     "ts": "2026-07-29T12:25:00+00:00",
+     "dir": "SHORT",
+     "close": 13283.45,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 7.000484189497001
+    },
+    {
+     "ts": "2026-07-29T12:40:00+00:00",
+     "dir": "SHORT",
+     "close": 13286.45,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.279236069707622
+    },
+    {
+     "ts": "2026-07-29T12:45:00+00:00",
+     "dir": "SHORT",
+     "close": 13285.25,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.317767776336041
+    },
+    {
+     "ts": "2026-07-29T12:50:00+00:00",
+     "dir": "SHORT",
+     "close": 13283.849999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.5477139729973715
+    },
+    {
+     "ts": "2026-07-29T12:55:00+00:00",
+     "dir": "SHORT",
+     "close": 13283.75,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.6807873707384715
+    },
+    {
+     "ts": "2026-07-29T13:05:00+00:00",
+     "dir": "SHORT",
+     "close": 13282.849999999999,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.696746347057342
+    },
+    {
+     "ts": "2026-07-29T13:15:00+00:00",
+     "dir": "SHORT",
+     "close": 13281.75,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 6.8825931058236165
+    },
+    {
+     "ts": "2026-07-29T13:30:00+00:00",
+     "dir": "SHORT",
+     "close": 13284.95,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 4.984824915374702
+    },
+    {
+     "ts": "2026-07-29T14:30:00+00:00",
+     "dir": "LONG",
+     "close": 13299.45,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 3.455797288885151
+    },
+    {
+     "ts": "2026-07-29T14:35:00+00:00",
+     "dir": "LONG",
+     "close": 13302.150000000001,
+     "regime": "TREND_FORMING_UP",
+     "fan_p": 4.618068217814653
+    },
+    {
+     "ts": "2026-07-29T15:35:00+00:00",
+     "dir": "SHORT",
+     "close": 13286.05,
+     "regime": "STRONG_TREND_DOWN",
+     "fan_p": 3.2022223453641345
+    }
+   ],
+   "fires": [],
+   "holes": [
+    {
+     "hours": [
+      7
+     ],
+     "first_ts": "2026-07-29T07:00:00+00:00",
+     "last_ts": "2026-07-29T07:55:00+00:00",
+     "first_close": 13299.55,
+     "last_close": 13302.349999999999,
+     "move_pips": 2.7999999999992724,
+     "n_bars": 12
+    },
+    {
+     "hours": [
+      9,
+      10
+     ],
+     "first_ts": "2026-07-29T09:00:00+00:00",
+     "last_ts": "2026-07-29T10:55:00+00:00",
+     "first_close": 13304.95,
+     "last_close": 13291.55,
+     "move_pips": -13.400000000001455,
+     "n_bars": 24
+    },
+    {
+     "hours": [
+      16
+     ],
+     "first_ts": "2026-07-29T16:00:00+00:00",
+     "last_ts": "2026-07-29T16:55:00+00:00",
+     "first_close": 13285.25,
+     "last_close": 13289.45,
+     "move_pips": 4.200000000000728,
+     "n_bars": 12
+    }
+   ],
+   "dom_move": 102.10000000000218,
+   "dom_dir": "up"
+  }
+ },
+ "meta": {
+  "note": "downstream-kill is aggregate (arms\u2212fires); per-gate breakdown not feasible without persistent decision log for legacy detect path"
+ }
+}
