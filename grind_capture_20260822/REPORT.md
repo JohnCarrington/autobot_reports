@@ -528,6 +528,153 @@ not this report.
 
 ---
 
+---
+
+## Q6 — Per-gate counterfactual (extension)
+
+Reproducer: `q6_gate_attrib.py` → `q6_gate_attrib.json`.
+
+**Method.** For each of 6 gates (news_blackout, h1_direction,
+ribbon_state, velocity_join, pullback_shape approximation, cooldown),
+re-run the arm walk on all 73 regime-log-covered days with that ONE
+gate disabled (all others still active), one-position rule enforced,
+ladder-surrogate exit stack (same as Q2). Compare to baseline (all
+gates active) fires + PnL. Positive `pnl_delta` = the gate is COSTING
+money on that day set; negative delta = the gate SAVES money.
+
+### 6.1  Full-window aggregate
+
+**Grind days (6 target days, 231 arms, baseline 14 fires / +143.4 p):**
+
+| gate | days | fires baseline | fires gate-off | Δfires | pnl baseline | pnl gate-off | **pnl Δ (gate cost)** |
+|:---|--:|--:|--:|--:|--:|--:|--:|
+| news_blackout | 6 | 14 | 16 | +2 | +143.4 | +163.2 | **+19.8** |
+| h1_direction  | 6 | 14 | 17 | +3 | +143.4 | +143.7 | **+0.3** |
+| ribbon_state  | 6 | 14 | 14 |  0 | +143.4 | +143.4 |  0.0 |
+| velocity_join | 6 | 14 | 14 |  0 | +143.4 | +143.4 |  0.0 |
+| **pullback_shape** | 6 | 14 | 14 |  0 | +143.4 | +207.4 | **+64.0** |
+| cooldown       | 6 | 14 | 14 |  0 | +143.4 | +143.4 |  0.0 |
+
+**Non-grind days (53 traded days out of 67 remaining, 118 baseline
+fires / −208.4 p):**
+
+| gate | days | fires baseline | fires gate-off | Δfires | pnl baseline | pnl gate-off | **pnl Δ (gate cost)** |
+|:---|--:|--:|--:|--:|--:|--:|--:|
+| news_blackout | 53 | 118 | 121 |  +3 | −208.4 | −222.2 | **−13.8** |
+| h1_direction  | 53 | 118 | 160 | +42 | −208.4 | −201.1 | **+7.3** |
+| ribbon_state  | 53 | 118 | 118 |   0 | −208.4 | −208.4 |  0.0 |
+| velocity_join | 53 | 118 | 118 |   0 | −208.4 | −208.4 |  0.0 |
+| **pullback_shape** | 53 | 118 | 131 | +13 | −208.4 | −150.2 | **+58.2** |
+| cooldown       | 53 | 118 | 119 |  +1 | −208.4 | −201.2 | **+7.2** |
+
+### 6.2  Per-arm kill-attribution on grind days
+
+Each arm can trigger multiple gates; these counts are OR (arm blocked
+by ≥1 gate). Total grind-day arms = 231.
+
+| gate | arms killed | share of 231 |
+|:---|--:|--:|
+| news_blackout       | 22 | 9.5 % |
+| h1_direction        | 17 | 7.4 % |
+| pullback_shape      | 21 | 9.1 % |
+| ribbon_state (repro)|  0 | 0.0 % |
+| velocity_join (repro)|  1 | 0.4 % |
+
+Attributed kills: **61 of 231 arms (26 %).** Remaining **170 arms
+(74 %) are eaten by cooldown + one-position** constraint (baseline
+walker only fires when no other position is open AND ≥ 60 min since
+last exit). This is not a "gate kill" — it's structural.
+
+The Q1 report's "222 killed" figure counted `arms − actual_fires`
+(231 − 9 = 222). The dispatch machinery kills ~170 of those to
+cooldown/one-position; the remaining ~52 are attributable to
+downstream gates. **The 96 % downstream kill rate reported in Q1 is
+mostly a dispatch-throughput effect, not a gate-suppression effect.**
+
+### 6.3  Table — gate × grind-day cost × normal-day role
+
+| gate | grind Δpnl | non-grind Δpnl | grind fires added | non-grind fires added | pattern |
+|:---|:---:|:---:|:---:|:---:|:---|
+| **news_blackout** | **+19.8** | **−13.8** | +2 | +3 | **Conditional:** costs money on grinds, saves money on non-grinds. Points at a conditional (e.g., exempt tier-1-news grind days), not deletion. |
+| **h1_direction** | +0.3 | +7.3 | +3 | +42 | Marginal both sides; kills many arms but pnl neutral. Small pass-through effect. |
+| **ribbon_state** | 0.0 | 0.0 | 0 | 0 | My repro of ribbon_state.classify never returned BRAIDED/opposing-FANNED on the walked bars. Either live ribbon gate is genuinely rare on this tape OR my repro under-fires ⚠. |
+| **velocity_join** | 0.0 | 0.0 | 0 | 0 | Only 1 grind arm hit the velocity_join criterion; that arm was already killed by another gate. Effective on JOIN-into-spent-spike scenarios, not present here. |
+| **pullback_shape** (repro) | **+64.0** | **+58.2** | 0 | +13 | **Costs money on BOTH categories.** Disabling doesn't add fires on grind days (one-position + cooldown eats them) but *shifts arm selection* to earlier arms with better outcomes. On non-grind days, adds +13 fires and +58p. Suggests the pb-shape gate is timing-selective in a way that misses value ⚠ (approximation-driven — see 6.4). |
+| **cooldown** | 0.0 | +7.2 | 0 | +1 | Cooldown adds very few extra fires; not the dominant kill mechanism on either day set. |
+
+### 6.4  Load-bearing caveats
+
+1. **⚠ ribbon_state repro fires zero kills on the walked bars.** My
+   Python reproduction of `ribbon_state.classify` uses the same
+   `spread_norm / cross_count / pitch50` thresholds from the live
+   module, but on all 6 target days the classifier returned mostly
+   FANNED_UP / FANNED_DOWN / TRANSITIONAL — never BRAIDED, never
+   opposing-FANNED. This means either (a) live ribbon-gate is
+   genuinely rarely triggered on the walked bars, OR (b) my
+   reproduction misses the exact live thresholds (esp. `pitch50` calc
+   — I approximate with the last 8 bars, live may use a different
+   window). Trust the ribbon column with a "possibly under-firing"
+   caveat.
+
+2. **⚠ pullback_shape is a heuristic proxy.** The legacy `_detect`'s
+   Gate 5-6 (pullback START + invalidation walk) is complex; my
+   reproduction checks "any bar in last 5 had a high touching ema8
+   AND no close through ema21." Real gate is stricter. Actual pb-gate
+   effect could be smaller than my +64p / +58p suggests.
+
+3. **⚠ velocity_join repro finds only 1 hit.** The live velocity gate
+   has additional shape checks (DEAD_TAPE, JOIN direction alignment
+   with prior 12 bars). My repro applies the atr_mult ≥ 2.5 AND
+   accel < 0.9 rule but may under-fire on JOIN classification.
+
+4. **Cooldown = 60 min** — matches live `EMA_PULLBACK_COOLDOWN_BARS=12`
+   (12 × 5 min).
+
+5. **News window = 30 min pre + 30 min post** — code default is
+   `EMA_PULLBACK_NEWS_BLACKOUT_PRE_MINUTES=30`; post window varies
+   with strategy. I used a symmetric 30/30 window as an approximation.
+
+6. **Ladder-surrogate exit stack** (12p SL / ratchet BE at +10 /
+   tiered lock at +30/+60/+100 / exhaustion / 20:40 flat) — same as
+   Q2. Not the live level_ladder pivot/PDH-driven state machine.
+
+7. **n = 6 grind days, n = 53 traded non-grind days.** Every headline
+   cell is thin. Do not read `+19.8 p` news-cost or `+64 p` pb-cost as
+   point estimates.
+
+### 6.5  What each gate does per grind day (single-day slices)
+
+| day | news off | h1 off | ribbon off | velo off | pb off | baseline |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| 2026-06-17 | 0.0 | +12.0 | 0.0 | 0.0 | **+52.0** | −12.0 |
+| 2026-06-18 | +12.0 | −16.8 | 0.0 | 0.0 | 0.0 | +51.2 |
+| 2026-07-15 | +7.8 | +5.1 | 0.0 | 0.0 | 0.0 | +101.1 |
+| 2026-07-29 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | −24.0 |
+| 2026-08-10 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | +4.8 |
+| 2026-08-14 | 0.0 | 0.0 | 0.0 | 0.0 | **+12.0** | +22.3 |
+| **totals** | **+19.8** | **+0.3** | **0.0** | **0.0** | **+64.0** | **+143.4** |
+
+**Concentration:** Every gate's grind-day value lives in 1-2 days.
+- News off's +19.8 p total comes almost entirely from **06-18 (+12)** and **07-15 (+7.8)** — days where the pb-shape gate + one-position rule was already suboptimal and news-off shifted arms into better timing.
+- Pullback-shape off's +64 p total comes from **06-17 (+52)** and **08-14 (+12)** — different days than news. No overlap.
+- H1 off's +0.3 p total is a wash after 06-18's −16.8 penalty (h1-off fires an extra losing arm) offsets 06-17's +12.0.
+
+### 6.6  Cross-check on non-grind arms
+
+Non-grind Δpnl is small on every gate except pb (+58) and news
+(−13.8). news_blackout is the only gate with **opposite signs**
+between grind and non-grind — the conditional signature the operator's
+prompt named.
+
+The other gates that show grind-cost (h1 +0.3, pb +64) also show
+non-grind cost (h1 +7.3, pb +58) — those are gate-fault-on-both, not
+conditional.
+
+Checkpoint files:
+`q6_gate_attrib.py`, `q6_gate_attrib.json`.
+
+---
+
 ## Artefacts
 
 Under `/opt/tradingbot/reports-public/grind_capture_20260822/`:
@@ -536,6 +683,7 @@ Under `/opt/tradingbot/reports-public/grind_capture_20260822/`:
 * `q2_bandwalk.py`, `q2_bandwalk_v2.py`, `q2_bandwalk_result.json`
 * `q3_overlap.py` + `q3_overlap_result.json`
 * `q4_tv3_sweep.py` + `q4_tv3_sweep_result.json`
+* `q6_gate_attrib.py` + `q6_gate_attrib.json`
 * This report: `REPORT.md`
 
 
