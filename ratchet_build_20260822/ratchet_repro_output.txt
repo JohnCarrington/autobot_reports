@@ -1,0 +1,100 @@
+Loaded 131 real fires from /opt/tradingbot/reports-public/ladder_real_fires_20260822/ladder_fires.jsonl
+
+========================================================================
+  AGGREGATE
+========================================================================
+  Priceable fires:     131 / 131
+  Unpriceable:         0
+  FRESH walker total:  +119.0 p
+  Report column (c):   +318.3 p  (reports-public/ladder_real_fires_20260822/REPORT.md §2)
+  Report per-fire sum: +318.4 p  (from ladder_real_walk.json.RATCHET.pnl)
+  Δ vs report §2:      -199.33 p  (-62.62%)
+  Δ vs per-fire sum:   -199.47 p
+
+  mode                          n        FRESH       REPORT      delta
+  GBPUSD_EMA_PULLBACK_L        37        -40.3        +41.3      -81.6
+  GBPUSD_EMA_PULLBACK_S        46        -38.2        -24.5      -13.7
+  GBPUSD_TREND_V3_L            36       +281.7       +382.6     -100.9
+  GBPUSD_TREND_V3_S            12        -84.3        -81.0       -3.3
+
+========================================================================
+  PER-FIRE DIVERGENCES > 2 p (FRESH vs report per-fire)
+========================================================================
+  n = 74
+  entry_ts            mode                        dir    FRESH   REPORT   delta  FRESH_reason             REPORT_reason           
+  2026-07-15T13:00:05 GBPUSD_TREND_V3_L           BUY    +16.2   +111.6   -95.4  RATCHET_EXHAUSTION       EXHAUSTION              
+  2026-07-21T10:30:00 GBPUSD_EMA_PULLBACK_S      SELL    +15.6    +40.0   -24.4  RATCHET_EXHAUSTION       SL                      
+  2026-06-29T12:40:03 GBPUSD_EMA_PULLBACK_L       BUY     +7.2    +30.2   -23.0  RATCHET_EXHAUSTION       EXHAUSTION              
+  2026-06-03T08:40:03 GBPUSD_EMA_PULLBACK_S      SELL    +11.0    -12.0   +23.0  RATCHET_EXHAUSTION       SL                      
+  2026-07-28T13:10:02 GBPUSD_TREND_V3_L           BUY     +6.5    -12.0   +18.6  RATCHET_EXHAUSTION       SL                      
+  2026-06-09T09:50:01 GBPUSD_EMA_PULLBACK_L       BUY    +16.3     +0.0   +16.3  RATCHET_EXHAUSTION       SL                      
+  2026-06-09T07:45:05 GBPUSD_EMA_PULLBACK_L       BUY    +19.5    +35.5   -16.0  RATCHET_EXHAUSTION       EXHAUSTION              
+  2026-08-10T08:10:01 GBPUSD_EMA_PULLBACK_L       BUY    +21.6     +6.3   +15.3  RATCHET_EXHAUSTION       FLAT_2040               
+  2026-08-14T08:05:02 GBPUSD_TREND_V3_L           BUY     +5.3    +19.8   -14.4  RATCHET_EXHAUSTION       EXHAUSTION              
+  2026-08-20T08:45:02 GBPUSD_TREND_V3_L           BUY    +14.2     +0.0   +14.2  RATCHET_EXHAUSTION       SL                      
+  2026-06-01T08:25:02 GBPUSD_EMA_PULLBACK_L       BUY    -25.8    -12.0   -13.8  RATCHET_STOP             SL                      
+  2026-07-01T13:10:02 GBPUSD_EMA_PULLBACK_S      SELL    -13.6     +0.0   -13.6  RATCHET_STOP             SL                      
+  2026-07-15T12:05:04 GBPUSD_TREND_V3_L           BUY    +22.6    +36.2   -13.5  RATCHET_EXHAUSTION       EXHAUSTION              
+  2026-07-15T12:15:03 GBPUSD_TREND_V3_L           BUY    +22.1    +35.7   -13.5  RATCHET_EXHAUSTION       EXHAUSTION              
+  2026-07-15T11:55:01 GBPUSD_TREND_V3_L           BUY    +22.1    +35.6   -13.5  RATCHET_EXHAUSTION       EXHAUSTION              
+  2026-07-15T12:00:09 GBPUSD_TREND_V3_L           BUY    +19.8    +33.2   -13.5  RATCHET_EXHAUSTION       EXHAUSTION              
+  2026-06-01T12:30:02 GBPUSD_EMA_PULLBACK_L       BUY    -24.9    -12.0   -12.9  RATCHET_STOP             SL                      
+  2026-08-21T13:10:02 GBPUSD_EMA_PULLBACK_S      SELL    +12.7     +0.0   +12.7  RATCHET_EXHAUSTION       SL                      
+  2026-07-02T07:45:02 GBPUSD_TREND_V3_L           BUY    +12.4     +0.0   +12.4  RATCHET_EXHAUSTION       SL                      
+  2026-06-24T09:35:01 GBPUSD_EMA_PULLBACK_S      SELL    +22.1    +34.0   -11.8  RATCHET_EXHAUSTION       EXHAUSTION              
+  2026-06-05T09:10:06 GBPUSD_EMA_PULLBACK_L       BUY    +11.1     +0.0   +11.1  RATCHET_EXHAUSTION       SL                      
+  2026-06-24T07:00:01 GBPUSD_EMA_PULLBACK_S      SELL     -1.4    -12.0   +10.7  RATCHET_STOP             SL                      
+  2026-07-09T11:35:02 GBPUSD_TREND_V3_L           BUY     +9.8     +0.0    +9.8  RATCHET_EXHAUSTION       SL                      
+  2026-07-17T08:35:01 GBPUSD_EMA_PULLBACK_S      SELL     +9.1     +0.0    +9.1  RATCHET_EXHAUSTION       SL                      
+  2026-06-26T14:00:02 GBPUSD_EMA_PULLBACK_L       BUY    -20.8    -12.0    -8.8  RATCHET_STOP             SL                      
+  2026-07-09T11:05:01 GBPUSD_TREND_V3_L           BUY     +8.2     +0.0    +8.2  RATCHET_EXHAUSTION       SL                      
+  2026-07-02T07:30:02 GBPUSD_TREND_V3_L           BUY    +22.9    +15.0    +7.9  RATCHET_EXHAUSTION       SL                      
+  2026-06-24T13:10:02 GBPUSD_EMA_PULLBACK_S      SELL    -19.2    -12.0    -7.2  RATCHET_STOP             SL                      
+  2026-07-17T09:10:01 GBPUSD_TREND_V3_S          SELL     +7.2     +0.0    +7.2  RATCHET_EXHAUSTION       SL                      
+  2026-07-20T04:45:01 GBPUSD_TREND_V3_L           BUY     +7.2     +0.0    +7.2  RATCHET_EXHAUSTION       SL                      
+  2026-05-27T14:30:01 GBPUSD_EMA_PULLBACK_L       BUY    -19.1    -12.0    -7.1  RATCHET_STOP             SL                      
+  2026-06-30T11:15:04 GBPUSD_EMA_PULLBACK_S      SELL     +7.0     +0.0    +7.0  RATCHET_EXHAUSTION       SL                      
+  2026-07-09T11:10:02 GBPUSD_TREND_V3_L           BUY     +7.0     +0.0    +7.0  RATCHET_EXHAUSTION       SL                      
+  2026-06-11T14:05:03 GBPUSD_EMA_PULLBACK_S      SELL     +6.8     +0.0    +6.8  RATCHET_EXHAUSTION       SL                      
+  2026-07-07T08:55:01 GBPUSD_EMA_PULLBACK_L       BUY    -18.8    -12.0    -6.8  RATCHET_STOP             SL                      
+  2026-07-20T03:25:01 GBPUSD_TREND_V3_S          SELL    -18.6    -12.0    -6.6  RATCHET_STOP             SL                      
+  2026-06-29T14:55:00 GBPUSD_EMA_PULLBACK_L       BUY    +10.2    +16.8    -6.6  RATCHET_EXHAUSTION       FLAT_2040               
+  2026-08-07T12:35:01 GBPUSD_TREND_V3_S          SELL     -5.7    -12.0    +6.3  RATCHET_STOP             SL                      
+  2026-05-27T08:10:01 GBPUSD_EMA_PULLBACK_S      SELL     +6.3     +0.0    +6.3  RATCHET_EXHAUSTION       SL                      
+  2026-07-06T16:25:02 GBPUSD_EMA_PULLBACK_L       BUY    +10.3    +16.5    -6.2  RATCHET_EXHAUSTION       FLAT_2040               
+  2026-07-06T16:25:02 GBPUSD_TREND_V3_L           BUY    +10.4    +16.5    -6.1  RATCHET_EXHAUSTION       FLAT_2040               
+  2026-08-07T12:40:01 GBPUSD_TREND_V3_S          SELL     -6.0    -12.0    +6.0  RATCHET_STOP             SL                      
+  2026-06-01T16:50:02 GBPUSD_EMA_PULLBACK_L       BUY     +9.8     +4.5    +5.3  RATCHET_EXHAUSTION       FLAT_2040               
+  2026-07-02T06:30:01 GBPUSD_EMA_PULLBACK_L       BUY     +9.8    +15.0    -5.2  RATCHET_STOP             SL                      
+  2026-06-03T06:50:04 GBPUSD_EMA_PULLBACK_S      SELL    -17.2    -12.0    -5.2  RATCHET_STOP             SL                      
+  2026-06-23T15:00:01 GBPUSD_EMA_PULLBACK_S      SELL     +5.0     +0.0    +5.0  RATCHET_EXHAUSTION       SL                      
+  2026-06-17T14:05:02 GBPUSD_EMA_PULLBACK_S      SELL     +4.8     +0.0    +4.8  RATCHET_EXHAUSTION       SL                      
+  2026-06-03T13:15:03 GBPUSD_EMA_PULLBACK_S      SELL     +4.8     +0.0    +4.8  RATCHET_EXHAUSTION       SL                      
+  2026-07-20T02:55:01 GBPUSD_TREND_V3_S          SELL    -16.8    -12.0    -4.8  RATCHET_STOP             SL                      
+  2026-07-02T08:10:02 GBPUSD_TREND_V3_L           BUY     -4.7     +0.0    -4.7  RATCHET_STOP             SL                      
+  2026-06-30T12:25:02 GBPUSD_EMA_PULLBACK_S      SELL    -16.4    -12.0    -4.4  RATCHET_STOP             SL                      
+  2026-07-30T10:45:01 GBPUSD_TREND_V3_L           BUY    -16.4    -12.0    -4.4  RATCHET_STOP             SL                      
+  2026-07-15T17:05:02 GBPUSD_TREND_V3_L           BUY     +4.0     +0.0    +4.0  RATCHET_EXHAUSTION       SL                      
+  2026-07-17T12:40:02 GBPUSD_EMA_PULLBACK_S      SELL    -15.9    -12.0    -3.9  RATCHET_STOP             SL                      
+  2026-06-24T10:50:01 GBPUSD_EMA_PULLBACK_S      SELL     -3.8     +0.0    -3.8  RATCHET_STOP             SL                      
+  2026-07-15T18:05:01 GBPUSD_TREND_V3_L           BUY    -15.8    -12.0    -3.8  RATCHET_STOP             SL                      
+  2026-06-11T09:30:06 GBPUSD_EMA_PULLBACK_S      SELL     +3.7     +0.0    +3.7  RATCHET_EXHAUSTION       SL                      
+  2026-07-24T07:15:03 GBPUSD_TREND_V3_L           BUY    -15.3    -12.0    -3.3  RATCHET_STOP             SL                      
+  2026-07-07T11:25:01 GBPUSD_EMA_PULLBACK_L       BUY    -15.2    -12.0    -3.2  RATCHET_STOP             SL                      
+  2026-06-09T16:40:25 GBPUSD_EMA_PULLBACK_S      SELL    -15.1    -12.0    -3.1  RATCHET_STOP             SL                      
+  2026-07-21T12:45:02 GBPUSD_TREND_V3_S          SELL     -3.0     +0.0    -3.0  RATCHET_STOP             SL                      
+  2026-07-01T06:45:02 GBPUSD_EMA_PULLBACK_S      SELL    -14.9    -12.0    -2.9  RATCHET_STOP             SL                      
+  2026-08-12T15:30:06 GBPUSD_EMA_PULLBACK_S      SELL    +10.8    +13.5    -2.8  RATCHET_EXHAUSTION       FLAT_2040               
+  2026-07-17T03:00:03 GBPUSD_TREND_V3_S          SELL    -14.8    -12.0    -2.8  RATCHET_STOP             SL                      
+  2026-05-27T10:40:01 GBPUSD_EMA_PULLBACK_S      SELL    -14.4    -12.0    -2.4  RATCHET_STOP             SL                      
+  2026-07-08T09:10:01 GBPUSD_TREND_V3_S          SELL    -14.3    -12.0    -2.3  RATCHET_STOP             SL                      
+  2026-06-18T16:45:03 GBPUSD_EMA_PULLBACK_S      SELL    +10.2    +12.4    -2.3  RATCHET_EXHAUSTION       FLAT_2040               
+  2026-07-02T06:50:01 GBPUSD_TREND_V3_L           BUY    -14.2    -12.0    -2.2  RATCHET_STOP             SL                      
+  2026-07-07T16:10:02 GBPUSD_EMA_PULLBACK_S      SELL    +12.2    +14.4    -2.2  RATCHET_EXHAUSTION       FLAT_2040               
+  2026-06-12T08:45:02 GBPUSD_EMA_PULLBACK_L       BUY    -14.2    -12.0    -2.2  RATCHET_STOP             SL                      
+  2026-07-21T11:55:01 GBPUSD_TREND_V3_S          SELL    +12.8    +15.0    -2.2  RATCHET_STOP             SL                      
+  2026-06-05T13:30:03 GBPUSD_EMA_PULLBACK_S      SELL     -2.1     +0.0    -2.1  RATCHET_STOP             SL                      
+  2026-06-22T13:05:01 GBPUSD_EMA_PULLBACK_L       BUY    -14.1    -12.0    -2.1  RATCHET_STOP             SL                      
+  2026-08-10T14:30:02 GBPUSD_EMA_PULLBACK_L       BUY     -2.0     +0.0    -2.0  RATCHET_STOP             SL                      
+
+fresh per-fire → /opt/tradingbot/reports-public/ratchet_build_20260822/fresh_walker_per_fire.jsonl

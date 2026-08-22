@@ -1,0 +1,145 @@
+==============================================================================
+  TIERED_RATCHET end-to-end proof
+==============================================================================
+AutoBot: [RATCHET] boot init_sl=12.0p exhaust_bars=6 flat_hhmm=20:40 tiers=[(10.0, 0.0), (30.0, 15.0), (60.0, 40.0), (100.0, 75.0)] state=/tmp/ratchet_proof_ttah2eup/state.json telemetry=/tmp/ratchet_proof_ttah2eup/tele.jsonl
+AutoBot: [RATCHET] boot init_sl=12.0p exhaust_bars=6 flat_hhmm=20:40 tiers=[(10.0, 0.0), (30.0, 15.0), (60.0, 40.0), (100.0, 75.0)] state=/tmp/ratchet_proof_ttah2eup/state.json telemetry=/tmp/ratchet_proof_ttah2eup/tele.jsonl
+exit_dress: [EXIT_DRESS] boot maps={'BIG_NEWS': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'PRE_BIG': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'POST_BIG': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'CLEAR': {}}
+exit_dress: [EXIT_DRESS] boot maps={'BIG_NEWS': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'PRE_BIG': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'POST_BIG': {'GBPUSD_TREND_V3_L': 'LADDER_PATIENT', 'GBPUSD_TREND_V3_S': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_L': 'LADDER_PATIENT', 'GBPUSD_EMA_PULLBACK_S': 'LADDER_PATIENT'}, 'CLEAR': {}}
+
+[3] Dress resolution at shipped env template (no operator overrides):
+  mode                                    CLEAR           BIG_NEWS            PRE_BIG           POST_BIG
+AutoBot: [LADDER] boot enabled=False managed_modes=[] at_level=5.00p assess_bars=3 stop_buffer=3.00p broker_tp=100.00p
+  GBPUSD_TREND_V3_L                     MANAGED     LADDER_PATIENT     LADDER_PATIENT     LADDER_PATIENT
+  GBPUSD_TREND_V3_S                     MANAGED     LADDER_PATIENT     LADDER_PATIENT     LADDER_PATIENT
+  GBPUSD_EMA_PULLBACK_L                 MANAGED     LADDER_PATIENT     LADDER_PATIENT     LADDER_PATIENT
+  GBPUSD_EMA_PULLBACK_S                 MANAGED     LADDER_PATIENT     LADDER_PATIENT     LADDER_PATIENT
+  GBPUSD_BB_BOUNCE_L                    MANAGED            MANAGED            MANAGED            MANAGED
+  → confirmed: no mode resolves to TIERED_RATCHET at boot config
+
+[1] Synthetic walk — BUY entry at 13000.0, tape reaches +30p then flat 6+ bars
+    Expect: tier 0 (BE) → tier 1 (+15) → exhaustion at 6 flat bars beyond BE.
+AutoBot: [RATCHET] boot init_sl=12.0p exhaust_bars=6 flat_hhmm=20:40 tiers=[(10.0, 0.0), (30.0, 15.0), (60.0, 40.0), (100.0, 75.0)] state=/tmp/ratchet_proof_ttah2eup/state.json telemetry=/tmp/ratchet_proof_ttah2eup/tele.jsonl
+AutoBot: [RATCHET] armed pos_key=PK|MODE mode=GBPUSD_TREND_V3_L dir=BUY entry=13000.00000 init_sl=12.0p tiers=[(10.0, 0.0), (30.0, 15.0), (60.0, 40.0), (100.0, 75.0)] exhaust_bars=6
+  bar# 0 ts=08:00 O=-- H=-- L=-- C=-- | sw=12988.0000 (-12.0p) br=-- tier=-1 max_fav=   0.0p no_new=0 closed=False
+  bar# 1 ts=08:05 O=13000.0000 H=13012.0000 L=12999.0000 C=13008.0000 | sw=13000.0000 ( 0.0p) br=12996.0000 tier=0 max_fav=  12.0p no_new=0 closed=False
+        → Action: amend_sl_price=12996.0000 close=False reason=None
+  bar# 2 ts=08:10 O=13008.0000 H=13032.0000 L=13005.0000 C=13025.0000 | sw=13015.0000 (15.0p) br=13013.0000 tier=1 max_fav=  32.0p no_new=0 closed=False
+        → Action: amend_sl_price=13013.0000 close=False reason=None
+  bar# 3 ts=08:15 O=13025.0000 H=13031.0000 L=13022.0000 C=13024.0000 | sw=13015.0000 (15.0p) br=13013.0000 tier=1 max_fav=  32.0p no_new=1 closed=False
+  bar# 4 ts=08:20 O=13024.0000 H=13030.0000 L=13022.0000 C=13023.0000 | sw=13015.0000 (15.0p) br=13013.0000 tier=1 max_fav=  32.0p no_new=2 closed=False
+  bar# 5 ts=08:25 O=13023.0000 H=13029.0000 L=13021.0000 C=13024.0000 | sw=13015.0000 (15.0p) br=13013.0000 tier=1 max_fav=  32.0p no_new=3 closed=False
+  bar# 6 ts=08:30 O=13024.0000 H=13031.0000 L=13022.0000 C=13023.0000 | sw=13015.0000 (15.0p) br=13013.0000 tier=1 max_fav=  32.0p no_new=4 closed=False
+  bar# 7 ts=08:35 O=13023.0000 H=13029.0000 L=13021.0000 C=13024.0000 | sw=13015.0000 (15.0p) br=13013.0000 tier=1 max_fav=  32.0p no_new=5 closed=False
+  bar# 8 ts=08:40 O=13024.0000 H=13030.0000 L=13021.0000 C=13022.0000 | sw=13015.0000 (15.0p) br=13013.0000 tier=1 max_fav=  32.0p no_new=0 closed=True
+        → Action: amend_sl_price=-- close=True reason=RATCHET_EXHAUSTION
+
+  Final state: closed=True tier=1 sw_stop_pips=15.0 max_fav=32.0p
+
+[2] Synthetic walk — BUY entry at 13000.0, tape falls below init 12p SL
+    Expect: init 12p stop breach → RATCHET_STOP close on first breach bar.
+AutoBot: [RATCHET] boot init_sl=12.0p exhaust_bars=6 flat_hhmm=20:40 tiers=[(10.0, 0.0), (30.0, 15.0), (60.0, 40.0), (100.0, 75.0)] state=/tmp/ratchet_proof_hmqs3hom/state.json telemetry=/tmp/ratchet_proof_hmqs3hom/tele.jsonl
+AutoBot: [RATCHET] armed pos_key=SUB|BE mode=GBPUSD_TREND_V3_L dir=BUY entry=13000.00000 init_sl=12.0p tiers=[(10.0, 0.0), (30.0, 15.0), (60.0, 40.0), (100.0, 75.0)] exhaust_bars=6
+  bar# 0 ts=08:00 O=-- H=-- L=-- C=-- | sw=-- (Nonep) br=-- tier=None max_fav=  Nonep no_new=None closed=False
+  bar# 1 ts=08:05 O=13000.0000 H=13001.0000 L=12995.0000 C=12998.0000 | sw=-- (Nonep) br=-- tier=None max_fav=  Nonep no_new=None closed=False
+  bar# 2 ts=08:10 O=12998.0000 H=12999.0000 L=12992.0000 C=12995.0000 | sw=-- (Nonep) br=-- tier=None max_fav=  Nonep no_new=None closed=False
+  bar# 3 ts=08:15 O=12995.0000 H=12996.0000 L=12986.0000 C=12987.0000 | sw=-- (Nonep) br=-- tier=None max_fav=  Nonep no_new=None closed=False
+        → Action: amend_sl_price=-- close=True reason=RATCHET_STOP
+
+[4] Activation — RESTART REQUIRED to pick up new code paths
+    (autobot loads exit_dress + tiered_ratchet at import; the running
+     autobot.service has neither).
+
+    To activate for one mode, on the host:
+      sudo systemctl edit autobot.service   # or edit /opt/tradingbot/.env
+      # add e.g.
+      EXIT_STACK_GBPUSD_TREND_V3_L=TIERED_RATCHET
+      EXIT_STACK_GBPUSD_TREND_V3_S=TIERED_RATCHET
+      sudo systemctl restart autobot.service
+
+    Only autobot.service reads these envs — no other unit. The nightly
+    grind-baseline.timer + daily-journal.timer are unaffected.
+
+    To roll back: unset EXIT_STACK_<MODE> and restart. State file
+    at /opt/tradingbot/cache/tiered_ratchet_state.json is orphaned
+    but harmless (reconcile_on_startup drops keys not in EPIC_STATE).
+
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+  END proof
+==============================================================================
