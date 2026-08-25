@@ -129,8 +129,8 @@ Cut line stated in §11. **Local commit:** `3239beb qm(session_b_plus)`.
   - Journal lines emitted per bar; see §7 below for a sample.
 - [x] **Full pytest suite delta** — 75 QM tests pass in isolation. Full-suite baseline on this branch: 177 pre-existing failures + 28 errors (unrelated). Zero of them are `qm_*` (grep -c returned 0). Delta from my changes = zero new failures.
 - [ ] **Integration into `trade_manager.py` exit flow — NOT SHIPPED TONIGHT.** See §10.
-- [ ] **Integration of BUILDS 1/2/3/5 into runtime pipeline — NOT SHIPPED TONIGHT.** Modules exist; nothing calls them yet. Files load without effect.
-- [ ] **BUILD 4 EOD backfill hook — NOT SHIPPED TONIGHT.** `score_touch()` is ready; the backfill driver (that walks the eod-review family) is not written.
+- [x] **Integration of BUILDS 1/2/3/5 into runtime pipeline** — see §13.1 (post-clarification amendment). Wired via `qm_hooks.py` 5m-close callback, `autobot.py:122` import.
+- [ ] **BUILD 4 runtime caller + EOD backfill hook — NOT SHIPPED TONIGHT.** `score_touch()` is ready; on-fill touch watcher and backfill driver not written.
 
 ---
 
@@ -289,8 +289,8 @@ sudo systemctl restart autobot.service
 ## 12. Follow-ups (bounded next turn)
 
 - Wire `qm_adaptive_exit.evaluate()` into `trade_manager.py:5536` (BB_RANGE_TARGET touch site) and the 5m-close handler for non-flip positions.
-- Register 5m-close callers for BUILDS 1, 2, 3, 5.
-- Write `_qm_shadow_backfill.py` for BUILD 4 EOD gap-fill (pattern from `standdown_shadow_backfill`).
+- ~~Register 5m-close callers for BUILDS 1, 2, 3, 5.~~ Done post-operator-clarification in commit `e9c7d0b`; see §13.1.
+- Add BUILD 4 runtime caller: on-fill touch watcher for the six in-scope modes + `_qm_shadow_backfill.py` EOD gap-fill (pattern from `standdown_shadow_backfill`).
 - Byte-identity integration tests for out-of-scope exit paths.
 - Once above green: flip `QM_ADAPTIVE_EXIT_ENABLED=1` — no restart.
 
@@ -300,7 +300,59 @@ sudo systemctl restart autobot.service
 
 ```
 3239beb qm(session_b_plus): spec v2 saved + BUILDS 1-5 + Part 2 module + tests
+e9c7d0b qm(session_b_plus): wire BUILDS 1/2/3/5 telemetry hooks (fail-silent)
 ```
+
+### 13.1 Amendment (post-operator-clarification): telemetry hooks wired
+
+Prior to `e9c7d0b`, the modules from `3239beb` were on-disk but **no
+code called them at runtime** — a restart would have yielded zero QM
+telemetry. `e9c7d0b` fixes this:
+
+* New module: `qm_hooks.py` — a single 5m-close callback that runs
+  BUILDS 1/2/3/5 as pure telemetry with zero exit authority. Auto-installs
+  on import via `install()` (idempotent). Kill-switch `QM_HOOKS_ENABLED=1`
+  read per-call (no restart to flip).
+* Wire-up: `autobot.py:122` — `import qm_hooks` in the
+  `candle_archive` neighbourhood (same side-effect-registers-callback
+  pattern). Wrapped in try/except so an import failure logs a WARN and
+  leaves autobot init untouched.
+* Live call site: `candle_builder._5M_CLOSE_CALLBACKS` (registration at
+  `candle_builder.py:483`; fan-out per-callback try/except at
+  `candle_builder.py:484-488`). Sample startup log line:
+
+  ```
+  [qm_hooks] registered 5m-close callback (BUILDS 1/2/3/5 telemetry)
+  ```
+
+Runtime call sites per build (all through the single `_on_5m_close`
+callback in `qm_hooks.py`):
+
+| build | invoked by | writes to |
+| --- | --- | --- |
+| BUILD 1 | `qm_hooks._run_build1` on every 5m close | `logs/qm_level_map.jsonl` |
+| BUILD 2 | `qm_hooks._run_build2` on every 5m close | `logs/qm_level_interactions.jsonl` (on finalize) |
+| BUILD 3 | `qm_hooks._run_build3` — iterates `trade_executor.EPIC_STATE`, filters to the six in-scope modes only | `logs/qm_trade_state.jsonl` |
+| BUILD 5 | `qm_hooks._run_build5` on every 5m close | `logs/qm_chop_features.jsonl` |
+| BUILD 4 | **still no runtime caller** — deferred with the Part 2 integration | `logs/qm_exit_shadow.jsonl` (empty tonight) |
+
+Structural guarantee that the wire-up cannot cause a trade action:
+`test_qm_hooks::test_zero_exit_authority_no_trade_executor_writes`
+greps `qm_hooks.py` for `open_sb_now`, `close_position(`, `place_order`,
+`modify_stop`, `modify_limit`, `adjust_position`, `_exec.close`,
+`_exec.open`, `trade_executor.close` — none may appear. Passes.
+
+Import + registration verified with `python3 -c "import autobot"`
+(startup log line confirmed).
+
+**Test count now: 82 green** (75 + 7 in `test_qm_hooks`). Boot check
+still green.
+
+**BUILD 4 remains unwired at runtime.** It needs per-fill touch detection
+plus candle lookahead — not appropriate to bolt onto the 5m-close
+callback without a fill-registry hook. The module `qm_exit_shadow.py` is
+importable and unit-tested; the EOD-backfill driver + on-fill touch
+watcher are next-turn work.
 
 No push. Files created:
 ```
