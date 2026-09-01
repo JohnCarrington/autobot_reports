@@ -243,30 +243,74 @@ is untouched.
 
 ## D5 — GRIND SCRATCH LIMITER (live, env-gated)
 
-**Commit** `fc44d44`.
+**Commits** `fc44d44` (initial), `2d114c3` (wiring fix — see below).
 
-New module `qm_grind_scratch_limiter.py`. Wired at
-`autobot.py:_apply_trend_v3_um_sma_cross_close` — the single call site
-that issues GRIND_SMA_CROSS closes.
+New module `qm_grind_scratch_limiter.py`.
 
-**Contract**:
-- On every GRIND_SMA_CROSS close-decision, check `is_suppressed(dir)` before firing.
-- If suppressed: log `[GRIND-PATH] block reason=scratch_limit dir=...`; write ledger row; skip the close.
-- On close: compute `pnl_pips = (bar_close − entry_price) × dir_sign`. If `pnl_pips <= 0`, call `record_scratch(dir, pnl_pips)`.
-- `is_suppressed` returns True iff same-direction same-UTC-day scratch count >= `QM_GRIND_SCRATCH_LIMIT` (default 2) AND now is within `QM_GRIND_SCRATCH_COOLDOWN_HRS` (default 4) of the last scratch.
+### Wiring fix (2026-09-01, micro-verify)
+
+The initial commit `fc44d44` placed `is_suppressed()` at the CLOSE
+site (inside `_apply_trend_v3_um_sma_cross_close`). That was a defect:
+a suppressed EXIT converts a 2p scratch into an unbounded loss (the
+UM bracket is 12p SL / 100p TP; leaving a UM position past its
+SMA-cross signal is exactly the failure mode the limiter is meant to
+prevent — not extend). Caught by operator verification.
+
+Corrected in commit `2d114c3`:
+- **CLOSE site**: `is_suppressed()` REMOVED. Closes now execute
+  unconditionally. `record_scratch()` REMAINS — the close site is
+  observation only (feeds the counter).
+- **ENTRY site**: `is_suppressed()` INSTALLED at the TV3 UM entry
+  in `autobot.py` inside the `if _um_active:` branch, BEFORE
+  `execute_trade(_dec, epic_s)`. A suppressed direction returns
+  before the decision mutation, no fire, refusal ledger row.
+
+New log line at the entry site:
+`[TREND_V3_UM] entry suppressed by grind scratch limiter dir=... ...`
+
+### Contract (post-fix)
+
+- On every TV3 UM entry decision (post `_um_active=True`):
+  consult `is_suppressed(direction)`. If suppressed → log +
+  ledger row, return (no fire).
+- On every GRIND_SMA_CROSS close: the close ALWAYS executes.
+  Post-close: compute `pnl_pips = (bar_close − entry_price) × dir_sign`.
+  If `pnl_pips <= 0`, call `record_scratch(dir, pnl_pips)`.
+- `is_suppressed` returns True iff same-direction same-UTC-day
+  scratch count >= `QM_GRIND_SCRATCH_LIMIT` (default 2) AND now is
+  within `QM_GRIND_SCRATCH_COOLDOWN_HRS` (default 4) of the last
+  scratch.
 
 **Ledger**: `logs/grind_scratch_suppressions.jsonl`.
-
 **Env**: `QM_GRIND_SCRATCH_LIMITER_ENABLED=1` (default ON),
 `QM_GRIND_SCRATCH_LIMIT=2`, `QM_GRIND_SCRATCH_COOLDOWN_HRS=4`.
-Fail-open — limiter errors do not affect the close call.
+Fail-open — limiter errors do not affect the entry decision.
 
-**Fixture** (`test_replay_2026_08_28_fires_3_4_5_would_have_been_suppressed`):
-5 same-direction GRIND fires spanning ~90 min. Fires 1 and 2 record
-scratches (arm the limiter). Fires 3, 4, 5 return `is_suppressed=True`
-with `count=2`, `scratch_limit` reason.
+### Fixture (rewritten)
 
-**All 9 tests pass**, `test_qm_grind_scratch_limiter.py`.
+`test_replay_2026_08_28_fires_3_4_5_entry_suppressed_all_closes_execute`
+asserts:
+
+- fires 1, 2 execute (their scratches arm the limiter),
+- fires 3, 4, 5 are ENTRY-suppressed (no `execute_trade` call),
+- ALL opened positions CLOSED (2 closes for the 2 executed entries),
+- ZERO closes suppressed (`closes_suppressed == []`).
+
+### Regression guards
+
+- `test_close_path_never_consults_is_suppressed` — parses
+  `_apply_trend_v3_um_sma_cross_close` body, asserts `"is_suppressed"`
+  NOT present, `"record_scratch"` IS present. Ships forever as a
+  guard against the same defect landing again.
+- `test_entry_path_installs_the_suppression_consult` — asserts the
+  consult sits inside an `if _um_active:` branch and BEFORE
+  `execute_trade(_dec, epic_s)`.
+
+**All 11 tests pass**, `test_qm_grind_scratch_limiter.py`.
+Pre-existing `test_grind_sma_cross_reachability.py` — 9/9 pass
+unchanged (those tests exercise the close path directly with a
+mocked `close_fn`; the close is now unconditional so behaviour is
+byte-identical to pre-Session B).
 
 ---
 
@@ -433,8 +477,9 @@ first boot with the new code:
   post-restart still shows `null`, that is a regression and worth
   investigating before enabling any downstream floor consumer.
 
-Head after session:
+Head after session (including the D5 wiring fix commit):
 ```
+2d114c3 fix(qm_grind): D5 wiring — move is_suppressed() from CLOSE to ENTRY site
 9efd893 feat(qm_sde): _ACCEPTANCE_WEIGHTS mirror + doc corrections (§23-24 BUILT, M8 floor)
 a09f8c0 feat(qm_early): early-session fade weight — pre-08:00 UTC BB/LEVEL_BOUNCE at 0.5× (live, env-gated)
 fc44d44 feat(qm_grind): scratch limiter — suppress GRIND_SMA_CROSS after N same-dir same-day scratches (live, env-gated)
