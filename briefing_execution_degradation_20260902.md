@@ -421,3 +421,37 @@ broke at all.
 3. Stop drawing conclusions from 20-trade windows. At 14.5 pips SD, distinguishing a 2-pip/trade edge
    change from noise at p<0.05 needs on the order of 400 trades — roughly **four years** at this box's
    ~1.5 fills/week. Any future "it degraded" claim should be tested against that bar before config is changed.
+
+---
+
+## 6. Addendum — cross-check against the same-day host 161 audit
+
+`host161_briefing_era_audit_20260902.md` (commit `71574eb`, landed on the reports remote while this
+investigation was running) reaches the same conclusion about the premise, independently and on a
+different host and corpus:
+
+> **Class A (BRIEFING_EXECUTION) — verdict.** Not "accurate historically". Aggregate −340p / 313 fires.
+
+Two independent hosts, two independent corpora, same finding: the belief that standalone briefing
+execution was once highly accurate is not supported by either box's fill record.
+
+**But 161's root cause does not transfer to 144, and this must not be mis-applied.** 161 diagnoses a
+schema orphan — `briefing_execution.py` reads `briefing["trading_plans"]` while its BriefingV5 files
+carry a flat single-plan schema, so the lookup returns `None` and the strategy silently no-ops from
+~W22. On 144 the executor resolves its briefings from `LOG_DIR` (`briefing_execution.py:3932-3940`),
+and those files are intact:
+
+| Corpus on 144 | Files | With non-empty `trading_plans[]` |
+|---|---:|---:|
+| `logs/briefing_<PAIR>_<DATE>_<Session>.json` (**what the executor reads**) | 500 | **500 (100%)** |
+| `logs/…` restricted to 2026-08 / 2026-09 | 165 | **165 (100%)** |
+| `briefings/v5_fxi/` (flat schema — the shape that orphaned 161) | 604 | 0 |
+
+144's Class A is alive: it fired 85 times through 2026-09-02 and every one of those fills matched
+back to a real plan (§2). The dormancy cliff described on 161 did not happen here.
+
+**Latent risk worth recording, though.** 144 holds *both* schemas on disk, and the 604 `v5_fxi` files
+are exactly the flat shape that silenced 161. If 144 is ever repointed at the v5 corpus — or if the
+producer stops emitting `trading_plans[]` into `LOG_DIR` — this box will go silently dormant in the
+same way, with no error beyond a `"no trading_plans in briefing"` log line. That is a monitoring gap,
+not a present defect.
