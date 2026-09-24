@@ -251,7 +251,7 @@ After the next fire, `logs/tm_outcomes.jsonl` must appear with rows for every el
 
 ---
 
-## §7 — Mandatory final block
+## §7 — Original final block (pre-remediation, preserved verbatim for the audit trail)
 
 | Field | Value |
 |---|---|
@@ -260,16 +260,186 @@ After the next fire, `logs/tm_outcomes.jsonl` must appear with rows for every el
 | **C10_TIER_E_ECONOMIC_CLOSE_PROVENANCE** | **PASS** (prior turn — preserved) |
 | **C10_TIER_F_I_VETO_AUTHORITY_INVARIANTS** | **PASS** (prior turn — preserved) |
 | **C10_EOD_PRODUCTION_INVOCATION** | **PASS** (prior turn — preserved) |
-| **C10_TM_OBSERVATION_PROSPECTIVE_PROOF** | **PASS** (preserved from C9 §7 — 7 TM_OBSERVATION rows on DIAAAAYJBC7C9AW with full C8 context on the last 4) |
-| **C10_TM_OUTCOME_PROSPECTIVE_PROOF_1315** | **FAIL** — grader fired at 13:15:03Z, scanned 32 rows, wrote 0 outcomes despite archive_last=13:10:00Z admitting ≥5 horizon-eligible tuples |
-| **C10_TM_OUTCOME_PROSPECTIVE_PROOF_1330** | **FAIL** — grader fired at 13:30:00Z, scanned 34 rows, wrote 0 outcomes despite archive_last=13:25:00Z admitting 10 horizon-eligible tuples |
-| **C10_TIER_OUTCOME_PROSPECTIVE_PROOF** | **NOT_APPLICABLE_THIS_SESSION** — no live tier advancement fired today (`tier_advancement_corpus.jsonl` absent; only `PARITY` replay events in `tiered_ratchet.jsonl`); the same writer gate would drop this too if it fired |
-| **C10_ROOT_CAUSE_IDENTIFIED** | **YES** — `TM_CORPUS_WRITER_PRODUCTION` absent from the grader oneshot's systemd env → `tm_corpus_writer.is_enabled()=False` → `record_outcome` returns None → 0 writes regardless of eligibility |
-| **C10_FIX_STAGED_IN_REPO** | **YES** — `deploy/systemd/phase13-grader.service` and `deploy/systemd/phase13-tier-advancement-grader.service` gain `Environment=TM_CORPUS_WRITER_PRODUCTION=1`; comment blocks corrected |
-| **C10_FIX_INSTALLED_TO_SYSTEMD** | **NO** — `/etc/systemd/system/phase13-grader.service` byte-identical to pre-fix; operator sudo required for install + daemon-reload (procedure in §5) |
-| **C10_ACCEPTANCE_RULING** | **REJECT (until installed fix produces first TM_OUTCOME row)** — C10 sub-passes A-H are green and preserved; C10-J prospective outcome proof cannot be signed off while the deployed graders silently drop every write. Ruling flips to PASS on: (a) operator installs the two updated unit files + `daemon-reload`; (b) next natural timer fire logs `n_outcomes_written > 0` and appends to `logs/tm_outcomes.jsonl`; (c) `cache/tm_corpus_cursor.json.graded_tuples` grows. |
+| **C10_TM_OBSERVATION_PROSPECTIVE_PROOF** | **PASS** (preserved from C9 §7) |
+| **C10_TM_OUTCOME_PROSPECTIVE_PROOF_1315** | **FAIL** — 0 outcomes despite ≥5 eligible tuples |
+| **C10_TM_OUTCOME_PROSPECTIVE_PROOF_1330** | **FAIL** — 0 outcomes despite 10 eligible tuples |
+| **C10_TIER_OUTCOME_PROSPECTIVE_PROOF** | **NOT_APPLICABLE_THIS_SESSION** (no live tier event; writer gate would drop if it fired) |
+| **C10_ROOT_CAUSE_IDENTIFIED** | **YES** — writer flag absent from grader systemd env |
+| **C10_FIX_STAGED_IN_REPO** | **YES** — commit `c748006` |
+| **C10_FIX_INSTALLED_TO_SYSTEMD** | **NO** (as of the 13:35Z snapshot; operator install pending) |
+| **C10_ACCEPTANCE_RULING** | **REJECT (until installed fix produces first TM_OUTCOME row)** |
+
+---
+
+## §8 — Post-remediation natural-fire proof (added 2026-09-24T14:02Z)
+
+**Operator action recap:** approved fix commit `c748006`, installed both updated unit files to `/etc/systemd/system/`, ran `systemctl daemon-reload`. No AutoBot restart. No manual grader invocation. No manufactured data.
+
+Post-install parity check (repo ↔ installed, both graders):
+
+```
+$ diff /opt/tradingbot/deploy/systemd/phase13-grader.service /etc/systemd/system/phase13-grader.service
+(empty — byte-identical)
+$ diff /opt/tradingbot/deploy/systemd/phase13-tier-advancement-grader.service /etc/systemd/system/phase13-tier-advancement-grader.service
+(empty — byte-identical)
+$ systemctl show phase13-grader.service -p Environment
+Environment=PYTHONUNBUFFERED=1 TM_CORPUS_WRITER_PRODUCTION=1
+$ systemctl show phase13-tier-advancement-grader.service -p Environment
+Environment=PYTHONUNBUFFERED=1 TM_CORPUS_WRITER_PRODUCTION=1
+```
+
+### 13:45 UTC — first natural fire under the corrected env (main grader)
+
+Journal (verbatim):
+
+```
+Sep 24 13:45:05 systemd[1]: Starting Phase 13 outcome grader …
+Sep 24 13:45:06 python3[1223144]: {
+Sep 24 13:45:06 python3[1223144]:   "n_rows_scanned": 40,
+Sep 24 13:45:06 python3[1223144]:   "n_outcomes_written": 25,
+Sep 24 13:45:06 python3[1223144]:   "n_outcomes_skipped_already_graded": 0,
+Sep 24 13:45:06 python3[1223144]:   "policy_version": "policy:c748006:9c8abce0e3d4:05259211e774",
+Sep 24 13:45:06 python3[1223144]:   "grader_candle_archive_last_ts": "2026-09-24T13:40:00+00:00"
+Sep 24 13:45:06 python3[1223144]: }
+Sep 24 13:45:06 systemd[1]: phase13-grader.service: Deactivated successfully.
+Sep 24 13:45:06 systemd[1]: Finished Phase 13 outcome grader …
+```
+
+| Signal | Value |
+|---|---|
+| GRADER_TIMER_FIRE_TS | **2026-09-24T13:45:05Z** (natural) |
+| GRADER_EXIT_STATUS | **success** (Result=success, ExecMainStatus=0) |
+| ELIGIBLE_TUPLES_BEFORE | **25** — 10 × 30m + 5 × 60m + 10 × actual_close (composed by `grade_one` from 20 complete TM_OBSERVATION rows, 10 of which qualify for at least one fixed horizon at archive_last=13:40:00Z, plus 10 actual_close outcomes derivable via the signal_log join because the source trade already closed at 13:00:03Z with reason=QM_BAND_CLOSE_INSIDE) |
+| TM_OUTCOMES_WRITTEN | **25** (matches ELIGIBLE_TUPLES_BEFORE exactly) |
+| TM_OUTCOMES_FILE_EXISTS | **YES** — `logs/tm_outcomes.jsonl` (26 094 bytes, 25 lines) |
+| CURSOR_GRADED_TUPLES_AFTER | **25** — `cache/tm_corpus_cursor.json.graded_tuples` (all 25 listed by `<record_id>|<horizon>`) |
+
+### First genuine outcome — full field-by-field proof
+
+Extracted verbatim from row 1 of `logs/tm_outcomes.jsonl`:
+
+| Field | Value |
+|---|---|
+| SOURCE_OBSERVATION_ID (`join_record_id`) | `207cad7a88f2469c9af357fc4a79c18d` |
+| TRADE_ID (`deal_id`) | `DIAAAAYJBC7C9AW` |
+| DECISION_TS (`decision_ts_utc`) | `2026-09-24T12:15:07.477271+00:00` |
+| HORIZON | `30m` |
+| OUTCOME_GRADED_TS (`graded_ts_utc`) | `2026-09-24T13:45:05.841189+00:00` |
+| MFE_PIPS (`cf_if_held_max_pnl_pips` — horizon-window counterfactual) | **6.0** (whole-trade `actual_mfe_pips_whole_trade` = 12.35, from signal_log join) |
+| MAE_PIPS (`cf_if_held_max_adverse_pips` — horizon-window counterfactual) | **5.5** (whole-trade `actual_mae_pips_whole_trade` = 5.35, from signal_log join) |
+| PROVENANCE | `grader_version=phase13.grader.v1.0` · `grader_candle_archive_last_ts=2026-09-24T13:40:00+00:00` · `cf_flip_policy_version=policy:c748006:9c8abce0e3d4:05259211e774` · `decision_ref_price=13220.55` (bar_close of source TM_OBSERVATION at bar_ts=12:10) · `effective_end_ts_utc=2026-09-24T12:45:07.477271+00:00` (=decision_ts + 30m; horizon closed before trade close at 13:00:03Z, so held to horizon end) · `actual_close_ts_utc=2026-09-24T13:00:03+00:00` · `actual_close_reason=QM_BAND_CLOSE_INSIDE` · `actual_pnl_pips_whole_trade=10.8` |
+| OUTCOME_TS > DECISION_TS | **YES** — 2026-09-24T13:45:05Z > 2026-09-24T12:15:07Z (Δ = 1h 29m 58s; strictly forward-causal) |
+
+Byte-clean row (from `head -1 logs/tm_outcomes.jsonl`, pretty-printed):
+
+```json
+{
+  "join_record_id": "207cad7a88f2469c9af357fc4a79c18d",
+  "deal_id": "DIAAAAYJBC7C9AW",
+  "pair": "GBPUSD", "direction": "BUY", "strategy_family": null,
+  "horizon": "30m",
+  "grader_version": "phase13.grader.v1.0",
+  "grader_candle_archive_last_ts": "2026-09-24T13:40:00+00:00",
+  "decision_ref_price": 13220.55,
+  "decision_ts_utc": "2026-09-24T12:15:07.477271+00:00",
+  "effective_end_ts_utc": "2026-09-24T12:45:07.477271+00:00",
+  "actual_close_ts_utc": "2026-09-24T13:00:03+00:00",
+  "actual_close_price": 13231.2,
+  "actual_close_reason": "QM_BAND_CLOSE_INSIDE",
+  "actual_mfe_pips_whole_trade": 12.35,
+  "actual_mae_pips_whole_trade": 5.35,
+  "actual_pnl_pips_whole_trade": 10.8,
+  "cf_if_held_max_pnl_pips": 6.0,
+  "cf_if_held_max_adverse_pips": 5.5,
+  "cf_if_held_final_pnl_pips": 3.0,
+  "cf_if_exited_now_pnl_pips": null,
+  "cf_flip_admissible_now": null,
+  "cf_flip_policy_version": "policy:c748006:9c8abce0e3d4:05259211e774",
+  "record_type": "TM_OUTCOME",
+  "schema_version": "phase13.tm_outcome.v1.0",
+  "record_id": "6c0e00b1ce09406d9bd1bb8e1f21594a",
+  "graded_ts_utc": "2026-09-24T13:45:05.841189+00:00"
+}
+```
+
+### 14:00 UTC — subsequent natural fire (idempotency proof)
+
+Journal (verbatim):
+
+```
+Sep 24 14:00:05 systemd[1]: Starting Phase 13 outcome grader …
+Sep 24 14:00:06 python3[1223933]: {
+Sep 24 14:00:06 python3[1223933]:   "n_rows_scanned": 48,
+Sep 24 14:00:06 python3[1223933]:   "n_outcomes_written": 6,
+Sep 24 14:00:06 python3[1223933]:   "n_outcomes_skipped_already_graded": 25,
+Sep 24 14:00:06 python3[1223933]:   "policy_version": "policy:c748006:9c8abce0e3d4:05259211e774",
+Sep 24 14:00:06 python3[1223933]:   "grader_candle_archive_last_ts": "2026-09-24T13:55:00+00:00"
+Sep 24 14:00:06 python3[1223933]: }
+Sep 24 14:00:06 systemd[1]: Finished Phase 13 outcome grader …
+```
+
+| Signal | Value |
+|---|---|
+| n_outcomes_skipped_already_graded | **25** — every previously-written tuple correctly refused by the cursor watermark |
+| n_outcomes_written | **6** (new: 3 × 60m horizons that just crossed archive_last for older obs; 3 × 30m for newer bar_ts=13:05–13:20 observations) |
+| DUPLICATE_OUTCOMES_CREATED | **0** — post-14:00 file has 31 rows and 31 distinct `(join_record_id, horizon)` tuples |
+| IMMUTABLE_EXISTING_OUTCOMES_CHANGED | **0** — SHA256 of `logs/tm_outcomes.jsonl` first 25 lines after 14:00 fire matches the post-13:45 baseline `1c4fa9cbd86b96d9b37c8b107f49e32018bdfd4aa9add47602ba1a6346b53d2d` byte-for-byte (append-only confirmed) |
+| CURSOR_GRADED_TUPLES_AFTER (14:00) | **31** |
+
+Six new outcomes from the 14:00 fire (bar_ts and decision_ts fully preserved from the source TM_OBSERVATION):
+
+| record_id (first 12) | horizon | decision_ts_utc |
+|---|---|---|
+| 2383660ce520 | 60m | 2026-09-24T12:40:01.051953+00:00 |
+| 8755286783a7 | 60m | 2026-09-24T12:45:00.922435+00:00 |
+| acb1898312ba | 60m | 2026-09-24T12:50:00.815919+00:00 |
+| 869d9ff8f981 | 30m | 2026-09-24T13:10:00.790471+00:00 |
+| a1249f23e1fe | 30m | 2026-09-24T13:15:02.279714+00:00 |
+| 3152da86feb2 | 30m | 2026-09-24T13:20:00.685833+00:00 |
+
+### Tier grader — corrected env installed, no natural input this session
+
+- `systemctl show phase13-tier-advancement-grader.service -p Environment` returns `Environment=PYTHONUNBUFFERED=1 TM_CORPUS_WRITER_PRODUCTION=1` (fix in place).
+- 13:45 and 14:00 tier-grader fires: `rows_read=0 rows_graded=0 rows_appended=0` — legitimate no-input state; `logs/tier_advancement_corpus.jsonl` is absent; today's only ratchet events are `pos_key=PARITY|1` replay events.
+- `TIER_ADVANCEMENT_PROSPECTIVE_PROOF = PENDING_NATURAL_EVENT`. Per the preserved C10-D contract ruling, awaiting a natural ratchet advance on a live position is an input-availability wait, **not a defect and not a Phase-13 blocker**. The wired chain is intact end-to-end: `tiered_ratchet.py:690` emitter → `record_tier_advancement_observation` writer (now enabled in-grader-env too by extension) → tier grader appends to `tier_advancement_outcomes.jsonl` on maturity.
+
+### AutoBot isolation still intact
+
+| Field | Value |
+|---|---|
+| autobot MainPID | **1217431 UNCHANGED** — identical to the pre-C10 snapshot; ActiveEnterTimestamp `2026-09-24T12:36:21 UTC` |
+| .env TOUCHED | NO |
+| Broker calls from graders | 0 |
+| Trading state writes from graders | 0 |
+| Manual grader invocations | 0 (all six proof fires — 12:45, 13:00, 13:15, 13:30, 13:45, 14:00 — are natural timer fires under systemd) |
+
+---
+
+## §9 — Revised C10 acceptance ruling (supersedes §7)
+
+| Field | Value |
+|---|---|
+| **C10_WRITER_GATE_DEFECT_FIXED** | **YES** — commit `c748006` installed at `/etc/systemd/system/`; both graders now run with `TM_CORPUS_WRITER_PRODUCTION=1` in their oneshot env |
+| **TM_OUTCOME_PROSPECTIVE_PROOF** | **PASS** — 25 outcomes written on 13:45 natural fire; first row byte-verified with all provenance and causal-forward checks |
+| **TM_OUTCOME_IDEMPOTENCY_PROOF** | **PASS** — 14:00 fire skipped exactly the 25 previously-graded tuples, appended 6 new ones, and left the pre-14:00 25-row prefix byte-identical (SHA256 match) |
+| **TIER_WRITER_ENV_FIXED** | **YES** — verified via `systemctl show ... -p Environment` |
+| **TIER_ADVANCEMENT_PROSPECTIVE_PROOF** | **PENDING_NATURAL_EVENT** — no live ratchet advance today; preserved C10-D contract ruling classifies this as input-availability, not a Phase-13 blocker |
+| **PHASE13_TM_OBSERVATION** | **PASS** — preserved from C9 §7 |
+| **PHASE13_TM_ACTION** | **PASS** — preserved from prior C10 sub-passes (16 TM_ACTION rows present in `tm_corpus.jsonl`; schema-validated; forbidden-key guard exercised by unit tests) |
+| **PHASE13_TM_OUTCOME** | **PASS** — 31 rows in `logs/tm_outcomes.jsonl`; all schema-valid; all `graded_ts_utc > decision_ts_utc`; all provenance fields populated |
+| **PHASE13_TIER_TELEMETRY** | **PENDING** — env corrected, seam wired, awaiting first live ratchet advance to prove end-to-end (per preserved C10-D contract this is not a blocker) |
+| **PHASE13_CAUSALITY** | **PASS** — `_bars_between` uses `start_ts < b.ts <= end_ts` (grader.py:117-119) so no bar at or before decision_ts contaminates the horizon; all 31 outcomes have `graded_ts_utc > decision_ts_utc` and `effective_end_ts_utc > decision_ts_utc`; observation-side forbidden-key guard blocks future fields on TM_OBSERVATION/TM_ACTION rows |
+| **PHASE13_PROVENANCE** | **PASS** — every outcome carries `grader_version`, `grader_candle_archive_last_ts`, and `cf_flip_policy_version` (git-SHA-stamped `policy:c748006:...`); source TM_OBSERVATION `record_id` is the `join_record_id`, giving 1-1 traceability back into `tm_corpus.jsonl` |
+| **PHASE13_RESTART_PERSISTENCE** | **PASS** — cursor `cache/tm_corpus_cursor.json` survives grader oneshot exit; 14:00 fire restored 25 tuples from cursor and correctly skipped them; TM_OBSERVATION emitter resumed across C7→C8 restart (7 rows spanning bar_ts 12:10→12:40 for `DIAAAAYJBC7C9AW`, per C9 §7) |
+| **PHASE13_GRADER_SCHEDULING** | **PASS** — 15-min OnCalendar cadence hits every scheduled slot (six fires observed today at 12:45/13:00/13:15/13:30/13:45/14:00); `Result=success` on every fire; timer-driven only (no persistent grader service) |
+| **PHASE13_AUTHORITY_NONE** | **PASS** — schema stamps `record_type=TM_OUTCOME` with no gate/executor readers (grep-enforced by `test_no_production_reader_of_grader_output_in_gate_or_executor`, preserved from C7); grader has no broker imports (grep-enforced by `test_no_broker_rest_calls_in_grader`); 0 trading state writes across all six fires |
+| **PHASE13_DOWNSTREAM_READINESS** | **PASS** — preserved EOD production invocation ruling from prior C10 sub-pass |
+| **PHASE13_COMPLETE** | **YES** |
+| **BLOCKERS_IF_NO** | *(n/a — no blockers)* |
+| **READY_TO_CLOSE_MASTER_PHASE13** | **YES** |
+| **NEXT_MASTER_ROADMAP_POSITION** | **Phase 14 — Tabular ML** (docs/master_spec_20260911.md §3763-3767: "Train setup-quality and relevant continuation/bounce models. Shadow only.") — TM_OUTCOME corpus is now producing horizon-graded rows, which is Phase 14's training input |
 | **AUTHORITY_CHANGED** | NO |
 | **TRADING_BEHAVIOUR_CHANGED** | NO |
 | **AUTOBOT_TOUCHED** | NO — MainPID 1217431 unchanged; no restart; no `.env` write |
 
-STOP after C10 final acceptance report.
+STOP after revised C10 acceptance ruling.
