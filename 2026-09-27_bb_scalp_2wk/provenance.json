@@ -1,0 +1,150 @@
+{
+  "GBPUSD": {
+    "2026-09-14": {
+      "src": "MINUTE_5",
+      "file": "2026-09-14_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-13T23:00:00+00:00",
+      "last_ts": "2026-09-14T22:55:00+00:00"
+    },
+    "2026-09-15": {
+      "src": "MINUTE_5",
+      "file": "2026-09-15_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-14T23:00:00+00:00",
+      "last_ts": "2026-09-15T22:55:00+00:00"
+    },
+    "2026-09-16": {
+      "src": "MINUTE_5",
+      "file": "2026-09-16_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-15T23:00:00+00:00",
+      "last_ts": "2026-09-16T22:55:00+00:00"
+    },
+    "2026-09-17": {
+      "src": "MINUTE_5",
+      "file": "2026-09-17_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-16T23:00:00+00:00",
+      "last_ts": "2026-09-17T22:55:00+00:00"
+    },
+    "2026-09-18": {
+      "src": "MINUTE_5",
+      "file": "2026-09-18_minute_5_bidask.csv",
+      "raw_rows": 264,
+      "bars_after_aggregation": 264,
+      "first_ts": "2026-09-17T23:00:00+00:00",
+      "last_ts": "2026-09-18T20:55:00+00:00"
+    },
+    "2026-09-21": {
+      "src": "MINUTE_5",
+      "file": "2026-09-21_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-20T23:00:00+00:00",
+      "last_ts": "2026-09-21T22:55:00+00:00"
+    },
+    "2026-09-22": {
+      "src": "MINUTE_5",
+      "file": "2026-09-22_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-21T23:00:00+00:00",
+      "last_ts": "2026-09-22T22:55:00+00:00"
+    },
+    "2026-09-23": {
+      "src": "MINUTE_5",
+      "file": "2026-09-23_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-22T23:00:00+00:00",
+      "last_ts": "2026-09-23T22:55:00+00:00"
+    },
+    "2026-09-25": {
+      "src": "MINUTE(\u21925m agg)",
+      "file": "2026-09-25_minute_bidask.csv",
+      "raw_rows": 1317,
+      "bars_after_aggregation": 264,
+      "first_ts": "2026-09-24T23:00:00+00:00",
+      "last_ts": "2026-09-25T20:55:00+00:00"
+    }
+  },
+  "EURUSD": {
+    "2026-09-14": {
+      "src": "MINUTE_5",
+      "file": "2026-09-14_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-13T23:00:00+00:00",
+      "last_ts": "2026-09-14T22:55:00+00:00"
+    },
+    "2026-09-15": {
+      "src": "MINUTE_5",
+      "file": "2026-09-15_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-14T23:00:00+00:00",
+      "last_ts": "2026-09-15T22:55:00+00:00"
+    },
+    "2026-09-16": {
+      "src": "MINUTE_5",
+      "file": "2026-09-16_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-15T23:00:00+00:00",
+      "last_ts": "2026-09-16T22:55:00+00:00"
+    },
+    "2026-09-17": {
+      "src": "MINUTE_5",
+      "file": "2026-09-17_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-16T23:00:00+00:00",
+      "last_ts": "2026-09-17T22:55:00+00:00"
+    },
+    "2026-09-18": {
+      "src": "MINUTE_5",
+      "file": "2026-09-18_minute_5_bidask.csv",
+      "raw_rows": 264,
+      "bars_after_aggregation": 264,
+      "first_ts": "2026-09-17T23:00:00+00:00",
+      "last_ts": "2026-09-18T20:55:00+00:00"
+    },
+    "2026-09-21": {
+      "src": "MINUTE_5",
+      "file": "2026-09-21_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-20T23:00:00+00:00",
+      "last_ts": "2026-09-21T22:55:00+00:00"
+    },
+    "2026-09-22": {
+      "src": "MINUTE_5",
+      "file": "2026-09-22_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-21T23:00:00+00:00",
+      "last_ts": "2026-09-22T22:55:00+00:00"
+    },
+    "2026-09-23": {
+      "src": "MINUTE_5",
+      "file": "2026-09-23_minute_5_bidask.csv",
+      "raw_rows": 288,
+      "bars_after_aggregation": 288,
+      "first_ts": "2026-09-22T23:00:00+00:00",
+      "last_ts": "2026-09-23T22:55:00+00:00"
+    },
+    "2026-09-25": {
+      "src": "MINUTE(\u21925m agg)",
+      "file": "2026-09-25_minute_bidask.csv",
+      "raw_rows": 1317,
+      "bars_after_aggregation": 264,
+      "first_ts": "2026-09-24T23:00:00+00:00",
+      "last_ts": "2026-09-25T20:55:00+00:00"
+    }
+  }
+}

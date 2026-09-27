@@ -1,0 +1,66 @@
+{
+  "captured_at_utc": "2026-09-27T22:14:06.992911+00:00",
+  "account_id": "Z3G4CJ",
+  "acc_type": "DEMO",
+  "product": "SPREADBET",
+  "markets": {
+    "GBPUSD": {
+      "epic": "CS.D.GBPUSD.TODAY.IP",
+      "instrumentName": "GBP/USD",
+      "type": "CURRENCIES",
+      "dealingRules": {
+        "minNormalStopOrLimitDistance": {
+          "unit": "POINTS",
+          "value": 4.0
+        },
+        "minControlledRiskStopDistance": {
+          "unit": "POINTS",
+          "value": 8.0
+        },
+        "minStepDistance": {
+          "unit": "POINTS",
+          "value": 1.0
+        },
+        "minDealSize": {
+          "unit": "PERCENTAGE",
+          "value": 0.03
+        }
+      },
+      "snapshot": {
+        "bid": 13233.2,
+        "offer": 13238.0,
+        "updateTime": "22:14:06",
+        "marketStatus": "TRADEABLE"
+      }
+    },
+    "EURUSD": {
+      "epic": "CS.D.EURUSD.TODAY.IP",
+      "instrumentName": "EUR/USD",
+      "type": "CURRENCIES",
+      "dealingRules": {
+        "minNormalStopOrLimitDistance": {
+          "unit": "POINTS",
+          "value": 2.0
+        },
+        "minControlledRiskStopDistance": {
+          "unit": "POINTS",
+          "value": 5.0
+        },
+        "minStepDistance": {
+          "unit": "POINTS",
+          "value": 5.0
+        },
+        "minDealSize": {
+          "unit": "POINTS",
+          "value": 0.04
+        }
+      },
+      "snapshot": {
+        "bid": 11383.1,
+        "offer": 11384.0,
+        "updateTime": "22:14:06",
+        "marketStatus": "TRADEABLE"
+      }
+    }
+  }
+}

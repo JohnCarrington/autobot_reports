@@ -1,0 +1,37 @@
+{
+  "generated_at_utc": "2026-09-27T22:21:10.686772+00:00",
+  "pairs": [
+    "GBPUSD",
+    "EURUSD"
+  ],
+  "current_ig_min_stop": {
+    "GBPUSD": 4,
+    "EURUSD": 2
+  },
+  "bot_min_stop": {
+    "GBPUSD": 12,
+    "EURUSD": 6
+  },
+  "candidates_per_pair": {
+    "GBPUSD": 138,
+    "EURUSD": 128
+  },
+  "candidates_per_pair_side": {
+    "GBPUSD_BUY": 69,
+    "GBPUSD_SELL": 69,
+    "EURUSD_BUY": 72,
+    "EURUSD_SELL": 56
+  },
+  "bars_per_pair": {
+    "GBPUSD": 2544,
+    "EURUSD": 2544
+  },
+  "coverage_first_ts": {
+    "GBPUSD": "2026-09-13T23:00:00+00:00",
+    "EURUSD": "2026-09-13T23:00:00+00:00"
+  },
+  "coverage_last_ts": {
+    "GBPUSD": "2026-09-25T20:55:00+00:00",
+    "EURUSD": "2026-09-25T20:55:00+00:00"
+  }
+}
