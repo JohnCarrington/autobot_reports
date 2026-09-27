@@ -1,0 +1,34 @@
+{
+  "GBPUSD": {
+    "bars": 201892,
+    "days_covered": 852,
+    "first_date": "2024-01-01",
+    "last_date": "2026-09-27",
+    "missing_weekdays": [
+      "2026-05-15",
+      "2026-07-13"
+    ],
+    "source_counts": {
+      "candles_ext": 627,
+      "candles": 207,
+      "fill": 18
+    }
+  },
+  "EURUSD": {
+    "bars": 201091,
+    "days_covered": 851,
+    "first_date": "2024-01-01",
+    "last_date": "2026-09-27",
+    "missing_weekdays": [
+      "2026-05-04",
+      "2026-05-05",
+      "2026-05-15",
+      "2026-07-13"
+    ],
+    "source_counts": {
+      "candles_ext": 627,
+      "candles": 149,
+      "fill": 75
+    }
+  }
+}
