@@ -1,0 +1,48 @@
+{
+  "GBPUSD": {
+    "5": {
+      "total_ambig": 3540,
+      "in_range": 2928,
+      "unresolved": 612,
+      "true_reached": 2844,
+      "true_not_reached": 84
+    },
+    "8": {
+      "total_ambig": 1924,
+      "in_range": 1600,
+      "unresolved": 324,
+      "true_reached": 1500,
+      "true_not_reached": 100
+    },
+    "10": {
+      "total_ambig": 1237,
+      "in_range": 1032,
+      "unresolved": 205,
+      "true_reached": 957,
+      "true_not_reached": 75
+    }
+  },
+  "EURUSD": {
+    "5": {
+      "total_ambig": 2592,
+      "in_range": 2249,
+      "unresolved": 343,
+      "true_reached": 2206,
+      "true_not_reached": 43
+    },
+    "8": {
+      "total_ambig": 1196,
+      "in_range": 1065,
+      "unresolved": 131,
+      "true_reached": 1021,
+      "true_not_reached": 44
+    },
+    "10": {
+      "total_ambig": 778,
+      "in_range": 704,
+      "unresolved": 74,
+      "true_reached": 678,
+      "true_not_reached": 26
+    }
+  }
+}
