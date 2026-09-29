@@ -1,0 +1,75 @@
+{
+  "broker_submission_enabled": false,
+  "variants": [
+    {
+      "variant": "0.5",
+      "raw_fires": 101,
+      "after_counter_h1_and_slot_fires": 61,
+      "matched_ledger": 27,
+      "false_positives": 34,
+      "false_negatives": 9,
+      "match_rate_pct": 75.0,
+      "counter_h1_blocks": 0,
+      "slot_blocks": 0
+    },
+    {
+      "variant": "1.0",
+      "raw_fires": 80,
+      "after_counter_h1_and_slot_fires": 55,
+      "matched_ledger": 27,
+      "false_positives": 28,
+      "false_negatives": 9,
+      "match_rate_pct": 75.0,
+      "counter_h1_blocks": 0,
+      "slot_blocks": 0
+    },
+    {
+      "variant": "2.0",
+      "raw_fires": 42,
+      "after_counter_h1_and_slot_fires": 33,
+      "matched_ledger": 14,
+      "false_positives": 19,
+      "false_negatives": 22,
+      "match_rate_pct": 38.9,
+      "counter_h1_blocks": 0,
+      "slot_blocks": 0
+    },
+    {
+      "variant": "env",
+      "raw_fires": 63,
+      "after_counter_h1_and_slot_fires": 45,
+      "matched_ledger": 22,
+      "false_positives": 23,
+      "false_negatives": 14,
+      "match_rate_pct": 61.1,
+      "counter_h1_blocks": 0,
+      "slot_blocks": 0
+    }
+  ],
+  "env_variant_totals": {
+    "matched": 22,
+    "false_positives": 23,
+    "ledger_replayable_closes": 10,
+    "ledger_non_replayable_closes": 26,
+    "bench_total_pips": 58.4,
+    "ledger_total_pips": 395.4
+  },
+  "fp_reason_distribution_env_variant": {
+    "UNRESOLVED": 45,
+    "REJECTED_BY_POSITION_SLOT": 18
+  },
+  "fp_reason_distribution_0.5_variant": {
+    "REJECTED_BY_ENV_PIERCE_THRESHOLD": 23,
+    "REJECTED_BY_POSITION_SLOT": 40,
+    "UNRESOLVED": 38
+  },
+  "fp_reason_distribution_1.0_variant": {
+    "REJECTED_BY_ENV_PIERCE_THRESHOLD": 11,
+    "REJECTED_BY_POSITION_SLOT": 25,
+    "UNRESOLVED": 44
+  },
+  "fp_reason_distribution_2.0_variant": {
+    "UNRESOLVED": 33,
+    "REJECTED_BY_POSITION_SLOT": 9
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "spec_pin_commit": "714af5b (github.com/JohnCarrington/autobot_reports)",
+  "source_pin_commit": "c85481c (github.com/JohnCarrington/AutoBot, plus e8fc9dd within-day; both dated 2026-05-23)",
+  "pinned_spec_files": {
+    "host_161_bb_bounce_s_deal_reference_20260929.csv": "f19141457ef96280b30930d8a27121cf4e9e37f697b5a4b8755f0c2f20ac124c",
+    "SPEC_PIN.txt": "ac383292b9b9675d6dcbf154cceecb168d5368f41393cd2b3d8e07b323d7ce0b",
+    "gbpusd_bb_bounce_s_implementation_spec_20260929.md": "c4219f8ca4a7e677c27d0620c01699d1e5e3f1413570fbd3e86f21171b599ae2",
+    "20260528085743_.env.bak-2026-05-28-cleanup": "4d2d2323ce234a84e94b120a961d273a55d4691ad79ff01e1628bf7e796aa5b1",
+    "20260523181634_.env": "8b4b3317a9212c0f672f7f7eda337d9183f31cf96590a9954c488c6f7b406906",
+    "20260616120455_.env.2026-06-16T120455Z.bak": "754eeab28085885162ed3c6f9d1c7be40b13b6e0cf29d8e016f556b4bacfe51d",
+    "20260527191524_.env.bak-2026-05-27.c": "88c119950c6c0f9e80410b8c2c9e9aab83d2e6a86c1c02ae7350100776ef17c3",
+    "20260615070004_.env.bak.structure_break_enable-pre.20260615_120821": "754eeab28085885162ed3c6f9d1c7be40b13b6e0cf29d8e016f556b4bacfe51d",
+    "20260525085358_.env": "ae0b031725e12ae20c1df545c2fba3dacaca9e85b81b928e0c63b4acd98faa6c",
+    "20260615162630_.env": "754eeab28085885162ed3c6f9d1c7be40b13b6e0cf29d8e016f556b4bacfe51d",
+    "20260605035226_.env.bak.bb_trail-pre.20260605_035226": "c87fb5a828001731f1d0b53d9fce5712782cffe3e0039d6183aba63c15475dab",
+    "20260523173407_.env": "8bc16efdec1cca4d7f1695b33c9250812228947786a95a5ddde88b02a26a854a",
+    "20260605041746_.env.bak.pierce_thresh-pre.20260605_041746": "03e18df13aa96ea1e03a4905bd132f6bedbd034f9aae3e542cb041e0152b13d8",
+    "20260525183638_.env": "526a366980636fcc841f7a7f0152719fb42c5371c9cb400493c29f79afefde0b",
+    "20260527181138_.env.bak-2026-05-27": "88c119950c6c0f9e80410b8c2c9e9aab83d2e6a86c1c02ae7350100776ef17c3",
+    "20260524152536_.env": "ae0b031725e12ae20c1df545c2fba3dacaca9e85b81b928e0c63b4acd98faa6c",
+    "20260525085123_.env": "ae0b031725e12ae20c1df545c2fba3dacaca9e85b81b928e0c63b4acd98faa6c",
+    "20260525184717_.env": "526a366980636fcc841f7a7f0152719fb42c5371c9cb400493c29f79afefde0b"
+  },
+  "pinned_source_files": {
+    "gbpusd_bb_bounce_c85481c.py": "b7f2d3de18e1aea84a8584c7161da5b11cceccccbe696e7204d93ea43d7eab26",
+    "gbpusd_bb_bounce_e8fc9dd.py": "ba77200be2f3a1c12bf580093a5594580342ed59a1a13304e10cb1fc9cb21ab9",
+    "autobot_c85481c.py": "4ed1d6abb2c3f319a45bee6e4647a1426beac1a978abfbfeef188500fdd6960d",
+    "trade_manager_c85481c.py": "94c116c2b18172d4cd18953c60da321bd67a81e1b89ac76bacd7eca941dc5742"
+  },
+  "env_snapshots_count": 15
+}
