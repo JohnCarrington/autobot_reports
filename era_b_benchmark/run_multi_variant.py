@@ -380,9 +380,18 @@ def main() -> None:
     for v in variants:
         raw = variant_results[v]["result_raw"]
         raw_fires = raw["fires"]
-        matched_ids = {id(variant_results[v]["matched"][d]) for d in variant_results[v]["matched"]}
+        # Bug fix (2026-09-29): the gated and raw runs create separate
+        # Signal instances, so id() comparison always failed and marked
+        # matched signals as FP. Use (rejection_bar_ts, direction) — the
+        # same key match_ledger uses.
+        matched_keys = {
+            (variant_results[v]["matched"][d].rejection_bar.ts.isoformat(),
+             variant_results[v]["matched"][d].direction)
+            for d in variant_results[v]["matched"]
+        }
         for sig in raw_fires:
-            if id(sig) in matched_ids:
+            key = (sig.rejection_bar.ts.isoformat(), sig.direction)
+            if key in matched_keys:
                 continue
             # Compute H1 direction at fire ts
             idx = next((i for i, b in enumerate(bars) if b.ts == sig.rejection_bar.ts), None)

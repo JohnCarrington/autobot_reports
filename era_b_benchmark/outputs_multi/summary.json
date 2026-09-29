@@ -55,21 +55,21 @@
     "ledger_total_pips": 395.4
   },
   "fp_reason_distribution_env_variant": {
-    "UNRESOLVED": 45,
+    "UNRESOLVED": 23,
     "REJECTED_BY_POSITION_SLOT": 18
   },
   "fp_reason_distribution_0.5_variant": {
-    "REJECTED_BY_ENV_PIERCE_THRESHOLD": 23,
+    "REJECTED_BY_ENV_PIERCE_THRESHOLD": 12,
     "REJECTED_BY_POSITION_SLOT": 40,
-    "UNRESOLVED": 38
+    "UNRESOLVED": 22
   },
   "fp_reason_distribution_1.0_variant": {
-    "REJECTED_BY_ENV_PIERCE_THRESHOLD": 11,
+    "REJECTED_BY_ENV_PIERCE_THRESHOLD": 6,
     "REJECTED_BY_POSITION_SLOT": 25,
-    "UNRESOLVED": 44
+    "UNRESOLVED": 22
   },
   "fp_reason_distribution_2.0_variant": {
-    "UNRESOLVED": 33,
+    "UNRESOLVED": 19,
     "REJECTED_BY_POSITION_SLOT": 9
   }
 }
