@@ -1,0 +1,36 @@
+Era B GBPUSD_BB_BOUNCE_S benchmark — pinned inputs
+====================================================
+
+Source repository : github.com/JohnCarrington/autobot_reports
+Pinned commit     : 714af5b
+Pinned tree hash  : (see `git rev-parse 714af5b^{tree}`)
+Fetched (UTC)     : 2026-09-29
+
+Files copied verbatim from that commit (bytes-identical):
+
+  gbpusd_bb_bounce_s_implementation_spec_20260929.md
+    git blob SHA-1 : ace97a3a0a21138d3762d9837daa51171f3357dd
+    SHA-256        : c4219f8ca4a7e677c27d0620c01699d1e5e3f1413570fbd3e86f21171b599ae2
+
+  host_161_bb_bounce_s_deal_reference_20260929.csv
+    git blob SHA-1 : 38d45bb5042bb36e75f69131cde83bffdbfe03d1
+    SHA-256        : f19141457ef96280b30930d8a27121cf4e9e37f697b5a4b8755f0c2f20ac124c
+
+Verification recipe (run in any clone of autobot_reports):
+
+  git rev-parse 714af5b:gbpusd_bb_bounce_s_implementation_spec_20260929.md
+    → ace97a3a0a21138d3762d9837daa51171f3357dd
+  git rev-parse 714af5b:host_161_bb_bounce_s_deal_reference_20260929.csv
+    → 38d45bb5042bb36e75f69131cde83bffdbfe03d1
+
+These files are the sole source-of-truth for the benchmark's entry
+rules, exit rules, effective thresholds, and the 36 Era B reference
+fills. Do NOT edit these files; edit the benchmark modules that
+consume them instead.
+
+Also pinned by reference (not copied):
+
+  5-minute GBPUSD candles → /opt/tradingbot/data/candles/GBPUSD/YYYY-MM-DD.csv
+    format: timestamp,open,high,low,close (UTC; prices = mid × 10000;
+    1 pip = 1 CSV unit; bar timestamp = bar open, close = ts + 5min)
+    Era B window consulted: 2026-05-25 .. 2026-06-30 (31 business days)

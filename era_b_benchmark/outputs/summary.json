@@ -1,0 +1,39 @@
+{
+  "pin": {
+    "source_repo": "github.com/JohnCarrington/autobot_reports",
+    "commit": "714af5b",
+    "spec_sha256": "c4219f8ca4a7e677c27d0620c01699d1e5e3f1413570fbd3e86f21171b599ae2",
+    "ledger_sha256": "f19141457ef96280b30930d8a27121cf4e9e37f697b5a4b8755f0c2f20ac124c"
+  },
+  "run": {
+    "window": [
+      "2026-05-23",
+      "2026-06-25"
+    ],
+    "pierce_thresh_pips_used": 0.5,
+    "broker_submission_enabled": false
+  },
+  "signals": {
+    "benchmark_fires_total": 101,
+    "ledger_rows_total": 36,
+    "matched": 36,
+    "false_positives_benchmark_only": 65,
+    "false_negatives_ledger_only": 0,
+    "match_rate_pct": 100.0,
+    "matched_with_price_delta_over_2pips": 1,
+    "price_delta_pips_avg": 0.099,
+    "price_delta_pips_max_abs": 2.15
+  },
+  "exit_reproducibility": {
+    "ledger_reproducible_close_count": 3,
+    "ledger_unreproducible_close_count": 33,
+    "sum_pips_ledger_reproducible_only": -3.85,
+    "sum_pips_benchmark_matched_reproducible_only": 20.6
+  },
+  "totals_all_rows": {
+    "ledger_pips": 395.4,
+    "benchmark_pips": 228.7,
+    "delta_pips": -166.7,
+    "caveat": "Benchmark cannot reproduce soft-exit reasons; the total_pips delta is dominated by that gap, not by disagreement."
+  }
+}
