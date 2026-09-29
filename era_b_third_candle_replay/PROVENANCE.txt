@@ -1,0 +1,77 @@
+Era B GBPUSD_BB_BOUNCE_S third-candle-break replay — inputs & outputs
+=====================================================================
+
+Generated: 2026-09-29 on host 161 (AutoBotV1, IG DEMO).
+Repository: github.com/JohnCarrington/autobot_reports @ branch main.
+
+Read-only research artifact. No AutoBot configuration or service was
+modified; no IG order was placed.
+
+
+SHA-256 of the input files (unmodified during this run):
+--------------------------------------------------------
+
+  f19141457ef96280b30930d8a27121cf4e9e37f697b5a4b8755f0c2f20ac124c
+    reports-public/host_161_bb_bounce_s_deal_reference_20260929.csv
+
+  76de747082614c39268622443c8060579095517c464c7d17543addaedb84ff0a
+    reports-public/host_161_trade_profitability_audit_20260927.md
+
+  c4219f8ca4a7e677c27d0620c01699d1e5e3f1413570fbd3e86f21171b599ae2
+    reports-public/gbpusd_bb_bounce_s_implementation_spec_20260929.md
+
+
+SHA-256 of the outputs:
+----------------------
+
+  e06791ec1ce6fb2f54dba0c4dbbde1d171df5e4b37cf449b221f60e0fb1de8d7
+    era_b_third_candle_replay/replay_era_b_vs_third_candle.py
+
+  70f5ad94f6752e35c7b72030d437dd1d3f2dffe327f8bef62c56f5c964ec601a
+    era_b_third_candle_replay/era_b_baseline_vs_third_candle_20260929.csv
+
+  c006e46289071264c90ce39b556526edb8a4a368e065adbd9b59f7732cde72f1
+    era_b_third_candle_replay/era_b_summary_20260929.json
+
+  eeefe150bc30612b7e1616d64c24b7e45ddf086306cc16c73eae62a457ddce07
+    era_b_third_candle_replay/era_b_third_candle_report_20260929.md
+
+
+Candle inputs (5-minute OHLC), one file per calendar day:
+---------------------------------------------------------
+
+  /opt/tradingbot/data/candles/GBPUSD/YYYY-MM-DD.csv
+  Format: timestamp,open,high,low,close
+    timestamp = bar OPEN time, UTC (ISO 8601 w/ +00:00 offset)
+    prices    = GBPUSD_mid × 10000  (i.e. 13436.65 ↔ mid = 1.343665)
+    interval  = 5 minutes; bar covers [timestamp, timestamp + 5min)
+
+  Files consulted (31, 2026-05-25 → 2026-06-30):
+    2026-05-25.csv .. 2026-06-30.csv (all business days present)
+
+  These files are RECEIVED, not modified. They are the same candles the
+  live strategy's CandleBuilder produced during Era B and are the same
+  files consulted by other public reports in this repo (see e.g.
+  reports-public/2026-09-25_bb_scalp/).
+
+
+Reproducibility:
+----------------
+
+  cd /opt/tradingbot/reports-public/era_b_third_candle_replay
+  python3 replay_era_b_vs_third_candle.py
+
+  Expected: writes era_b_baseline_vs_third_candle_20260929.csv and
+  era_b_summary_20260929.json; prints the summary JSON to stdout.
+  No arguments. No network. Deterministic given the same input CSVs.
+
+
+What is NOT in these files (deliberate):
+----------------------------------------
+
+  - No credentials, API keys, account IDs, session tokens.
+  - No IG broker export (activity CSV, deal-history) — the audit's
+    §Q2 note applies here too: pip figures only, no per-deal £ from
+    the broker.
+  - No tick-level data (Era B is beyond the tick-archive horizon of
+    2026-04-10; see report §7).

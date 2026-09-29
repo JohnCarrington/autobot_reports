@@ -1,0 +1,76 @@
+{
+  "period_utc": "2026-05-23 \u2192 2026-06-24 (entry-date window, Era B)",
+  "n_setups": 36,
+  "baseline_actual_ledger": {
+    "label": "baseline_actual_ledger",
+    "n_active_days": 16,
+    "total_pips": 395.4,
+    "median_day_pips": 26.25,
+    "pos_days": 15,
+    "neg_days": 1,
+    "flat_days": 0,
+    "pct_pos_days": 93.8,
+    "max_drawdown_pips": -0.85,
+    "top3_days_share_pct": 40.0,
+    "best_day_pips": 55.4,
+    "worst_day_pips": -0.85,
+    "n_fills": 36,
+    "n_unreconciled": 0,
+    "reconciliation_check_vs_ledger": {
+      "reconstructed_total_pips": 395.4,
+      "ledger_total_pips": 395.4,
+      "match": true
+    }
+  },
+  "baseline_4exit_simulator": {
+    "label": "baseline_actual_entry_thru_4exit_sim",
+    "n_active_days": 16,
+    "total_pips": 216.8,
+    "median_day_pips": 13.38,
+    "pos_days": 14,
+    "neg_days": 2,
+    "flat_days": 0,
+    "pct_pos_days": 87.5,
+    "max_drawdown_pips": -19.35,
+    "top3_days_share_pct": 48.4,
+    "best_day_pips": 52.67,
+    "worst_day_pips": -19.35,
+    "n_fills": 36,
+    "note": "SAME entry as actual (rejection close market SELL); same 4-exit sim as alt (SL / scale-out+BE / broker-TP / 240m). Enables like-for-like comparison isolating entry-timing, since the actual ledger includes TRAIL_STOP / QM / STRUCTURE / BB_FLIP soft exits that 5m OHLC cannot replicate."
+  },
+  "alt_third_candle": {
+    "label": "alt_third_candle_break",
+    "n_active_days": 16,
+    "total_pips": 172.3,
+    "median_day_pips": 12.35,
+    "pos_days": 14,
+    "neg_days": 2,
+    "flat_days": 0,
+    "pct_pos_days": 87.5,
+    "max_drawdown_pips": -15.0,
+    "top3_days_share_pct": 44.1,
+    "best_day_pips": 36.0,
+    "worst_day_pips": -15.0,
+    "n_fills": 32,
+    "n_missed": 4,
+    "pct_missed": 11.1
+  },
+  "delta_actual_ledger_vs_alt_sim": {
+    "total_pips": -223.1,
+    "caveat": "Cross-comparison \u2014 baseline includes soft exits alt sim cannot model."
+  },
+  "delta_like_for_like_sim": {
+    "total_pips": -44.5,
+    "note": "Both use the 4-exit simulator. Delta \u2248 entry-timing effect only.",
+    "wins_kept": 24,
+    "wins_lost_to_miss": 2,
+    "losses_avoided_by_miss": 2
+  },
+  "exit_reason_distribution_alt": {
+    "OPEN_END_SCALED": 14,
+    "SL": 5,
+    "OPEN_END": 3,
+    "SCALE_OUT_BE": 10,
+    "MISSED": 4
+  }
+}
