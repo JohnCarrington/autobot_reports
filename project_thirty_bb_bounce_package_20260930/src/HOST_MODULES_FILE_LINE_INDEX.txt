@@ -1,0 +1,82 @@
+# Host-modules file:line index — code NOT copied verbatim into this package
+#
+# The BB_BOUNCE fill path traverses four host modules that are much larger
+# than the strategy proper and share code with dozens of unrelated
+# strategies. Copying them whole would balloon this package to > 1MB of
+# code Project Thirty does not need. Instead the four pinned entry points
+# are listed here with commit `HEAD` = 3df0a50 as-of 2026-09-29.
+#
+# If you need a byte-exact copy for parity replay, ask host 161 to bundle
+# the specific function bodies — the identifiers below are unique enough
+# to grep for at any commit reachable in the git history.
+#
+# Repository (host 161)  : /opt/tradingbot
+# Branch                 : feat/trend-stretch-brake-adx-floor
+# HEAD commit            : 3df0a50
+#
+# ---------------------------------------------------------------
+# strategy_logic.py — signal dispatcher / execution seam
+# ---------------------------------------------------------------
+#   line   252   def get_latest_regime_state(symbol)              — cached
+#                                                                   regime_state read;
+#                                                                   BB_BOUNCE.evaluate calls
+#                                                                   this indirectly through
+#                                                                   the strategy_dispatch_adapter
+#                                                                   for fire-time regime tagging.
+#   line  1817   def evaluate_signals(symbol, epic, bid, ask,     — tick-time dispatcher; walks
+#                                     update_time, update_micro,     the strategy list.
+#                                     htf_snapshot, levels_snapshot,   BB_BOUNCE is invoked from
+#                                     **kwargs)                       within this walk via the
+#                                                                     strategy_dispatch_adapter.
+#   line  1844   def _apply_exec_entry(decision)                  — CHOP_MODE gate,
+#                                                                   concurrent-cap gate,
+#                                                                   posture observer, then
+#                                                                   trade_executor.execute_trade().
+#
+# ---------------------------------------------------------------
+# trade_executor.py — StrategyDecision → IG REST
+# ---------------------------------------------------------------
+#   line  2381   def execute_trade(decision, epic, *,             — top-level executor.
+#                                  identity_context=None)             Firewall (2426-2448),
+#                                                                     RACE_CAUGHT staleness
+#                                                                     recheck (2477-2520),
+#                                                                     NEWS_POST_RELEASE lockout
+#                                                                     (2571-2616), sizing and
+#                                                                     multipliers, then
+#                                                                     open_sb_now().
+#   line  3549   QM_CONTEXT size multiplier (extra-close confirm) — trade_size × qm factor.
+#   line  3565   D6 EARLY-SESSION fade weight                     — BB_BOUNCE / LEVEL_BOUNCE
+#                                                                   entry before 08:00 UTC gets
+#                                                                   × 0.5 (kill-switch
+#                                                                   QM_EARLY_WEIGHT_ENABLED=1).
+#   line  3636   DAY_CTX BIG_NEWS bounce-family half-size         — bounce-family × 0.5 inside
+#                                                                   ±45min of TIER1 release;
+#                                                                   default OFF
+#                                                                   (DAY_CTX_BOUNCE_HALF_SIZE=0).
+#   line  3677   open_sb_now(direction, epic, size,               — the IG REST seam.
+#                            limit_distance, stop_distance)          Delegates to
+#                                                                   IGService.create_open_position
+#                                                                   in open_sb_now.py:17-72
+#                                                                   (COPIED verbatim in this
+#                                                                   package as src/open_sb_now.py).
+#
+# ---------------------------------------------------------------
+# regime_engine.py — H1 MACD / cascade / regime_label producer
+# ---------------------------------------------------------------
+#   line  2422   def latest_result(symbol)                        — cached most-recent emit()
+#                                                                   result; BB_BOUNCE calls this
+#                                                                   at gbpusd_bb_bounce.py:1199-1215
+#                                                                   for h1_macd_hist,
+#                                                                   h1_macd_hist_slope.
+#   line  2430   def emit(symbol, recent_rows, telemetry_path)    — computed once per 5M close
+#                                                                   from the CandleBuilder;
+#                                                                   result cached and served
+#                                                                   to all readers.
+#
+# ---------------------------------------------------------------
+# open_sb_now.py — 3KB IG REST wrapper, COPIED whole in this package
+# ---------------------------------------------------------------
+#   line    17   def open_sb_now(direction, epic, size,           — synchronous IGService
+#                                limit_distance, stop_distance)     .create_open_position wrapper.
+#                                                                   Returns dict with dealReference
+#                                                                   on success.
