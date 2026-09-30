@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AutoBot">
+<meta name="theme-color" content="#0a0a0f">
+<title>AutoBot</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: #ffffff0f;
+    --border2: #ffffff18;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --accent: #00ff88;
+    --accent-dim: #00ff8820;
+    --accent-mid: #00ff8840;
+    --red: #ff4466;
+    --red-dim: #ff446620;
+    --amber: #ffaa00;
+    --amber-dim: #ffaa0020;
+    --blue: #4488ff;
+    --blue-dim: #4488ff15;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Syne', sans-serif;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* PASSWORD GATE */
+  .auth-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  .auth-overlay.hidden { display: none; }
+
+  .auth-logo {
+    width: 48px; height: 48px;
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+
+  .auth-logo::before {
+    content: '';
+    position: absolute;
+    width: 16px; height: 16px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .auth-title {
+    font-family: var(--sans);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .auth-title span { color: var(--accent); }
+
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .auth-input {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    text-align: center;
+    letter-spacing: 0.15em;
+  }
+
+  .auth-input:focus { border-color: var(--accent); }
+
+  .auth-submit {
+    background: var(--accent-dim);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .auth-submit:active { background: var(--accent-mid); }
+
+  .auth-error {
+    font-size: 11px;
+    color: var(--red);
+    text-align: center;
+    min-height: 16px;
+  }
+
+  /* HEADER */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: calc(var(--safe-top) + 12px) 16px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-logo {
+    width: 28px; height: 28px;
+    border: 1.5px solid var(--accent);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+
+  .header-logo::before {
+    content: '';
+    position: absolute;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .header-title {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .header-title span { color: var(--accent); }
+
+  .live-badge {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 10px; font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .live-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  /* NEWS BANNER */
+  .news-banner {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 16px 0;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    border: 1px solid transparent;
+  }
+  .news-banner.show { display: flex; }
+  .news-banner .nb-icon { font-size: 10px; flex-shrink: 0; }
+  .news-banner .nb-text { flex: 1; }
+  .news-banner .nb-meta { color: var(--muted); font-size: 10px; white-space: nowrap; }
+  .news-banner.state-amber { background: var(--amber-dim); color: var(--amber); border-color: #ffaa0040; }
+  .news-banner.state-red   { background: var(--red-dim);   color: var(--red);   border-color: #ff446640; }
+  .news-banner.state-blue  { background: var(--blue-dim);  color: var(--blue);  border-color: #4488ff40; }
+  .news-banner.state-green { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-mid); }
+
+  /* PERIOD SWITCHER */
+  .period-bar {
+    display: flex;
+    gap: 0;
+    margin: 16px 16px 0;
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 3px;
+    border: 1px solid var(--border);
+  }
+
+  .period-btn {
+    flex: 1;
+    padding: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    color: var(--muted);
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .period-btn.active {
+    background: var(--surface2);
+    color: var(--accent);
+    border: 1px solid var(--border2);
+  }
+
+  /* DATE-PICKER BAR (Day / Week / Month tabs) */
+  .date-picker-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px 6px;
+    flex-wrap: wrap;
+  }
+
+  .dpb-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .dpb-input {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+    font-family: inherit;
+  }
+
+  /* Display button that opens the custom picker on desktop; on touch
+     devices it forwards to the hidden native <input type="date"> so
+     iOS gets its full-screen month grid. */
+  .dpb-display {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    min-width: 130px;
+    text-align: left;
+  }
+  .dpb-display:hover { border-color: var(--accent-mid); color: var(--accent); }
+  .dpb-input-hidden {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px; border: 0;
+  }
+
+  /* Custom desktop month-grid picker (dp-*). */
+  .dp-overlay {
+    position: absolute;
+    z-index: 9999;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.55);
+    font-family: inherit;
+    color: var(--text);
+    user-select: none;
+    min-width: 260px;
+  }
+  .dp-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; padding: 2px 4px 8px;
+  }
+  .dp-nav {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border2); border-radius: 6px;
+    padding: 2px 10px; cursor: pointer; font-family: inherit; font-size: 14px;
+  }
+  .dp-nav:hover { border-color: var(--accent-mid); color: var(--accent); }
+  .dp-title {
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  }
+  .dp-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .dp-dow {
+    text-align: center; font-family: var(--mono); font-size: 10px;
+    color: var(--muted); padding: 4px 0; letter-spacing: 0.08em;
+  }
+  .dp-cell {
+    aspect-ratio: 1; background: transparent; color: var(--text);
+    border: 1px solid transparent; border-radius: 6px; cursor: pointer;
+    font-family: inherit; font-size: 12px; padding: 0;
+  }
+  .dp-cell.dim { color: var(--muted); opacity: 0.4; }
+  .dp-cell:hover:not([disabled]) { background: var(--surface2); }
+  .dp-cell.today { border-color: var(--accent-mid); color: var(--accent); }
+  .dp-cell.sel   { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-mid); }
+  .dp-cell[disabled] { cursor: not-allowed; opacity: 0.25; }
+  .dp-foot { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; }
+  .dp-btn {
+    flex: 1; background: var(--surface2); color: var(--text);
+    border: 1px solid var(--border2); border-radius: 6px;
+    padding: 6px 10px; cursor: pointer; font-family: inherit;
+    font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .dp-btn.primary { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-mid); }
+  .dp-btn:hover { border-color: var(--accent-mid); }
+
+  .dpb-today {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid var(--accent-mid);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-family: inherit;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .dpb-historical {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .dpb-live {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* OUT-OF-RANGE / EMPTY STATE */
+  .empty-state {
+    margin: 24px 16px;
+    padding: 24px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .empty-state-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--amber);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .empty-state-sub {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* STAT CARDS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card.wide { grid-column: 1 / -1; }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-mid), transparent);
+  }
+
+  .stat-label {
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-family: var(--sans);
+    font-size: 28px; font-weight: 800;
+    line-height: 1; letter-spacing: -1px;
+  }
+
+  .stat-value.positive { color: var(--accent); }
+  .stat-value.negative { color: var(--red); }
+  .stat-value.neutral { color: var(--text); }
+
+  .stat-sub { font-size: 10px; color: var(--muted); margin-top: 4px; }
+
+  /* EQUITY CURVE */
+  .equity-card {
+    margin: 0 16px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .equity-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    opacity: 0.5;
+  }
+
+  .equity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .equity-title {
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .equity-value {
+    font-family: var(--sans);
+    font-size: 16px; font-weight: 800;
+    color: var(--accent);
+  }
+
+  canvas { width: 100%; display: block; }
+
+  /* PAIR SCORECARDS */
+  .section-title {
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 16px 10px;
+  }
+
+  .pairs-scroll {
+    display: flex;
+    gap: 10px;
+    padding: 0 16px 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .pairs-scroll::-webkit-scrollbar { display: none; }
+
+  .pair-card {
+    flex-shrink: 0; width: 140px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    position: relative; overflow: hidden;
+  }
+
+  .pair-card.net-positive { border-color: #00ff8830; }
+  .pair-card.net-negative { border-color: #ff446630; }
+
+  .pair-name {
+    font-family: var(--sans);
+    font-size: 14px; font-weight: 800;
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+  }
+
+  .pair-pips { font-size: 20px; font-weight: 700; line-height: 1; margin-bottom: 2px; }
+  .pair-pips.pos { color: var(--accent); }
+  .pair-pips.neg { color: var(--red); }
+
+  .pair-meta { font-size: 9px; color: var(--muted); margin-bottom: 8px; }
+
+  .pair-sparkline { height: 28px; width: 100%; }
+
+  .pair-winrate { display: flex; align-items: center; gap: 4px; margin-top: 6px; }
+
+  .winrate-bar { flex: 1; height: 3px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
+  .winrate-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .winrate-fill.low { background: var(--red); }
+  .winrate-fill.mid { background: var(--amber); }
+  .winrate-pct { font-size: 9px; color: var(--muted); min-width: 28px; text-align: right; }
+
+  /* TRADE LIST */
+  .trades-section {
+    padding: 0 16px;
+    padding-bottom: calc(var(--safe-bottom) + 80px);
+  }
+
+  .trades-filter {
+    display: flex; gap: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .trades-filter::-webkit-scrollbar { display: none; }
+
+  .filter-chip {
+    flex-shrink: 0;
+    padding: 5px 10px;
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.05em;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .filter-chip.active {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .trade-row {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    animation: fadeIn 0.3s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .trade-row:active { border-color: var(--border2); }
+
+  .trade-dir {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+  }
+
+  .trade-dir.buy { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-mid); }
+  .trade-dir.sell { background: var(--red-dim); color: var(--red); border: 1px solid #ff446640; }
+
+  .trade-info { min-width: 0; }
+
+  .trade-pair {
+    font-family: var(--sans);
+    font-size: 13px; font-weight: 600; letter-spacing: -0.2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .trade-meta {
+    font-size: 9px; color: var(--muted); margin-top: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .trade-pnl { text-align: left; min-width: 56px; }
+
+  .trade-pips { font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
+  .trade-pips.pos { color: var(--accent); }
+  .trade-pips.neg { color: var(--red); }
+
+  .trade-close { font-size: 9px; color: var(--muted); margin-top: 1px; }
+
+  /* Exit-type pill — replaces .trade-close text, tinted by exit_type. */
+  .trade-exit-pill {
+    display: inline-block;
+    padding: 3px 9px;
+    margin-top: 3px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: lowercase;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .trade-exit-pill.target    { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-mid); }
+  .trade-exit-pill.stop      { background: var(--red-dim);    color: var(--red);    border-color: #ff446640; }
+  .trade-exit-pill.early     { background: var(--amber-dim);  color: var(--amber);  border-color: #ffaa0040; }
+  .trade-exit-pill.breakeven { background: #6b6b8020;         color: var(--muted);  border-color: #6b6b8040; }
+  .trade-exit-pill.external  { background: var(--blue-dim);   color: var(--blue);   border-color: #4488ff40; }
+  .trade-exit-pill.unknown   { background: transparent;       color: var(--muted);  border-color: var(--border); opacity: 0.6; }
+  .trade-exit-pill.live      { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-mid); opacity: 0.65; }
+  /* IG-only inferred (level-based guess, not signal_log-confirmed) */
+  .trade-exit-pill.inferred  { border-style: dotted; opacity: 0.7; }
+
+  /* BRIEFING ACCURACY STATS BAR */
+  .briefing-stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 16px 16px 0;
+  }
+
+  .bs-stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bs-stat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.3;
+  }
+
+  .bs-val {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--accent);
+  }
+
+  .bs-label {
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  /* BRIEFING CARDS */
+  .briefings-container {
+    padding: 16px;
+    padding-bottom: calc(var(--safe-bottom) + 80px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .briefing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease forwards;
+    opacity: 0;
+  }
+
+  .briefing-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    opacity: 0.5;
+  }
+
+  .briefing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .briefing-pair {
+    font-family: var(--sans);
+    font-size: 16px; font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+
+  .briefing-session {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .briefing-bias-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .briefing-bias-badge.bullish { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-mid); }
+  .briefing-bias-badge.bearish { background: var(--red-dim); color: var(--red); border: 1px solid #ff446640; }
+  .briefing-bias-badge.neutral { background: var(--amber-dim); color: var(--amber); border: 1px solid #ffaa0040; }
+
+  .briefing-confidence {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .confidence-bar {
+    flex: 1; height: 4px;
+    background: var(--surface2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .confidence-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .confidence-pct {
+    font-size: 10px;
+    color: var(--muted);
+    min-width: 32px;
+    text-align: right;
+  }
+
+  .briefing-plan {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    background: var(--surface2);
+    border-radius: 8px;
+    border-left: 2px solid var(--blue);
+  }
+
+  .briefing-narrative {
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .briefing-levels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .levels-group {
+    font-size: 10px;
+  }
+
+  .levels-label {
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .levels-label.res { color: var(--red); }
+  .levels-label.sup { color: var(--accent); }
+
+  .level-val {
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* LOADING */
+  .loading {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 60px 20px; gap: 12px;
+  }
+
+  .loading-spinner {
+    width: 32px; height: 32px;
+    border: 2px solid var(--border2);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-text { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .empty {
+    text-align: center; padding: 40px 20px;
+    color: var(--muted); font-size: 11px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .error-banner {
+    margin: 16px; padding: 12px;
+    background: var(--red-dim);
+    border: 1px solid #ff446630;
+    border-radius: 10px;
+    font-size: 11px; color: var(--red);
+    display: none;
+  }
+
+  .last-updated {
+    text-align: center; font-size: 9px;
+    color: var(--muted); padding: 8px 16px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── DASHBOARD CONTROLS (env tabs + who pills + fallback chip) ──── */
+  .dash-controls {
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 8px 16px 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .dash-row {
+    display: flex; gap: 6px; align-items: center; flex-wrap: wrap;
+  }
+  .dash-row.hidden { display: none; }
+  .dash-label {
+    font-size: 10px; letter-spacing: 0.12em; color: var(--muted);
+    text-transform: uppercase; min-width: 38px;
+  }
+  .env-tab, .who-pill {
+    background: transparent;
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .env-tab.active { border-color: var(--accent); color: var(--accent); }
+  .env-tab.live.active { border-color: var(--red); color: var(--red); }
+  .who-pill.active { border-color: var(--accent); color: var(--accent); }
+  .who-pill[disabled] {
+    opacity: 0.35; cursor: not-allowed;
+  }
+  .source-chip {
+    display: none;
+    margin-left: auto;
+    font-size: 10px; letter-spacing: 0.1em;
+    padding: 4px 8px; border-radius: 4px;
+    background: var(--amber-dim);
+    color: var(--amber);
+    border: 1px solid var(--amber);
+  }
+  .source-chip.show { display: inline-flex; }
+
+  /* ─── LIVE BANNER (red, persistent, unmissable) ──────────────────── */
+  .live-banner {
+    display: none;
+    padding: 14px 16px;
+    background: var(--red-dim);
+    border-top: 2px solid var(--red);
+    border-bottom: 2px solid var(--red);
+    color: var(--red);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-align: center;
+    font-size: 13px;
+  }
+  .live-banner.show { display: block; }
+  .live-banner-pulse {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+
+  /* ─── UNCONFIGURED PANEL (in #app when source=unconfigured) ──────── */
+  .unconfigured-panel {
+    padding: 32px 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .unconfigured-panel h3 {
+    color: var(--amber); font-family: var(--sans);
+    letter-spacing: 0.12em; margin-bottom: 12px;
+  }
+  .unconfigured-panel code {
+    color: var(--text); background: var(--surface2);
+    padding: 2px 6px; border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-logo"></div>
+  <div class="auth-title">Auto<span>Bot</span></div>
+  <form class="auth-form" id="authForm">
+    <input class="auth-input" id="authPassword" type="password" placeholder="Password" autocomplete="current-password">
+    <button class="auth-submit" type="submit">Unlock</button>
+    <div class="auth-error" id="authError"></div>
+  </form>
+</div>
+
+<div class="header">
+  <div class="header-brand">
+    <div class="header-logo"></div>
+    <div class="header-title">Auto<span>Bot</span></div>
+  </div>
+  <div class="live-badge">
+    <div class="live-dot"></div>
+    Demo
+  </div>
+</div>
+
+<div class="news-banner" id="newsBanner">
+  <span class="nb-icon">◆</span>
+  <span class="nb-text" id="newsBannerText"></span>
+  <span class="nb-meta" id="newsBannerMeta"></span>
+</div>
+
+<div class="period-bar">
+  <button class="period-btn active" data-period="day">Day</button>
+  <button class="period-btn" data-period="week">Week</button>
+  <button class="period-btn" data-period="month">Month</button>
+  <button class="period-btn" data-period="all">All</button>
+  <button class="period-btn" data-period="briefings">Briefings</button>
+</div>
+
+<!-- LIVE banner: persistent, unmissable. Only visible when env=live. -->
+<div class="live-banner" id="liveBanner">
+  <span class="live-banner-pulse"></span>
+  LIVE ACCOUNT &nbsp;—&nbsp; real money &nbsp;—&nbsp; orders are real
+</div>
+
+<!-- Env tabs (hidden when DASHBOARD_ENV_TOGGLE_ENABLED=0) + who pills -->
+<div class="dash-controls" id="dashControls">
+  <div class="dash-row hidden" id="envRow">
+    <span class="dash-label">Env</span>
+    <button class="env-tab live" data-env="live">LIVE</button>
+    <button class="env-tab active" data-env="demo">DEMO</button>
+  </div>
+  <div class="dash-row" id="whoRow">
+    <span class="dash-label">Who</span>
+    <button class="who-pill" data-who="mine">AutoBot</button>
+    <button class="who-pill" data-who="other">FXi</button>
+    <button class="who-pill active" data-who="all">All</button>
+    <span class="source-chip" id="sourceChip"></span>
+  </div>
+</div>
+
+<div class="error-banner" id="errorBanner"></div>
+
+<div id="app">
+  <div class="loading">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Fetching trades</div>
+  </div>
+</div>
+
+<script>
+const API = '/trades';
+const BRIEFINGS_API = '/briefings';
+const ACCURACY_API = '/briefing-accuracy';
+const PAIRS = ['GBPUSD', 'EURUSD', 'USDJPY', 'USDCAD', 'GBPJPY'];
+const PAIR_COLORS = {
+  GBPUSD: '#00ff88', EURUSD: '#4488ff',
+  USDJPY: '#ffaa00', USDCAD: '#ff44aa', GBPJPY: '#aa44ff'
+};
+
+// Cookie-based auth (2026-06-16). Nginx auth_request gates the data
+// endpoints; the browser sends the signed session cookie automatically
+// on same-origin fetches. No client-side credential storage — the
+// cookie IS the gate.
+
+let allTrades = [];
+let allBriefings = [];
+let briefingAccuracy = null;
+let briefingDate = ''; // empty = today (live cache); YYYY-MM-DD = historical
+let activePeriod = 'day';
+let activeFilter = 'all';
+// Per-period date selection. Empty = live/current period; anything else = historical.
+let dayDate = '';     // 'YYYY-MM-DD' or '' (today)
+let weekDate = '';    // 'YYYY-MM-DD' (any date in target week) or '' (current week)
+let monthDate = '';   // 'YYYY-MM' or '' (current month)
+// Optimistic: assume the cookie is valid until the first 401 says otherwise.
+// First fetchTrades() either succeeds and we render, or 401s and the modal
+// pops via handle401().
+let isAuthed = true;
+
+// ─── DASHBOARD STATE: who-filter + env toggle ────────────────────────
+// activeWho:    'all' | 'mine' | 'other'
+// activeEnv:    'demo' | 'live'        (only honoured if envToggleEnabled)
+// activeView:   'grouped' | 'raw'      (Raw = one row per IG deal, IG-style)
+// envToggleEnabled: discovered from server response payload
+// dataSource:   'spine' | 'signal_log_fallback' | 'unconfigured' | ''
+// whoDisabled:  filters the server has flagged as unavailable
+let activeWho        = localStorage.getItem('autobot_who') || 'all';
+let activeEnv        = localStorage.getItem('autobot_env') || 'demo';
+let activeView       = localStorage.getItem('autobot_view') || 'grouped';
+// 2026-07-29: pips ⇄ cash display toggle. 'pips' preserves the historical
+// dashboard shape (numbers in size-weighted pips, suffix "p"). 'cash'
+// switches every P&L display — stats, pair cards, trade rows, equity
+// curve — to £ (uses t.pnl_gbp / t.cash_gbp already sent by trades_api).
+// Pure display switch; the underlying trades[] is untouched.
+let activeUnit       = localStorage.getItem('autobot_unit') || 'pips';
+let envToggleEnabled = false;
+let dataSource       = '';
+let whoDisabled      = [];
+
+// ─── AUTH ────────────────────────────────────────────────────────────────────
+// Cookie-based: nginx auth_request gates the data endpoints, validating
+// the signed Flask session cookie set by POST /auth. The browser sends
+// the cookie automatically on same-origin fetches; the client never
+// touches credentials after the unlock modal.
+
+// Kept as a no-op stub so existing call sites (`headers: authHeaders()`)
+// don't need editing. The session cookie travels via the default
+// same-origin credentials mode.
+function authHeaders() { return {}; }
+
+function handle401() {
+  isAuthed = false;
+  const o = document.getElementById('authOverlay');
+  if (o) o.classList.remove('hidden');
+}
+
+document.getElementById('authForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const pw = document.getElementById('authPassword').value;
+  const errEl = document.getElementById('authError');
+  errEl.textContent = '';
+
+  try {
+    const r = await fetch('/auth', {
+      method: 'POST',
+      cache: 'no-store',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw }),
+    });
+    if (r.ok) {
+      isAuthed = true;
+      document.getElementById('authOverlay').classList.add('hidden');
+      document.getElementById('authPassword').value = '';
+      fetchTrades();
+      if (typeof fetchNewsState === 'function') fetchNewsState();
+    } else if (r.status === 401) {
+      errEl.textContent = 'Wrong password';
+      document.getElementById('authPassword').value = '';
+      document.getElementById('authPassword').focus();
+    } else {
+      errEl.textContent = 'Server error ' + r.status;
+    }
+  } catch (err) {
+    errEl.textContent = 'Connection error';
+  }
+});
+
+// ─── DATA ────────────────────────────────────────────────────────────────────
+
+function buildTradesUrl() {
+  // Always include ?who= so the server returns the payload shape with
+  // source/env metadata. ?env= is included only when the toggle has
+  // been observed enabled — sending it under a disabled toggle is a
+  // server-side no-op but unnecessary URL noise. ?view=raw is included
+  // only when the Raw chip is active so grouped responses keep the
+  // existing cache key.
+  const p = new URLSearchParams({ t: Date.now() });
+  p.set('who', activeWho || 'all');
+  if (envToggleEnabled) p.set('env', activeEnv || 'demo');
+  if (activeView === 'raw') p.set('view', 'raw');
+  return API + '?' + p.toString();
+}
+
+async function fetchTrades() {
+  if (!isAuthed) return;
+  try {
+    const r = await fetch(buildTradesUrl(), { cache: 'no-store', headers: authHeaders() });
+    if (r.status === 401) { handle401(); return; }
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data = await r.json();
+    if (Array.isArray(data)) {
+      // Server toggle off + no params recognised → bare list.
+      allTrades        = data;
+      dataSource       = '';
+      whoDisabled      = [];
+      envToggleEnabled = false;
+    } else {
+      allTrades        = data.trades || [];
+      dataSource       = data.source || '';
+      whoDisabled      = data.who_disabled || [];
+      envToggleEnabled = !!data.toggle_enabled;
+      if (data.env) activeEnv = data.env;
+    }
+    document.getElementById('errorBanner').style.display = 'none';
+    renderDashControls();
+  } catch (e) {
+    showError(`Could not reach AutoBot API: ${e.message}`);
+    allTrades = getMockData();
+  }
+  render();
+}
+
+// ─── DASH CONTROLS RENDER (pills, tabs, LIVE banner, fallback chip) ───
+function renderDashControls() {
+  // Env tabs visibility
+  const envRow = document.getElementById('envRow');
+  if (envRow) envRow.classList.toggle('hidden', !envToggleEnabled);
+  document.querySelectorAll('.env-tab').forEach(b => {
+    b.classList.toggle('active', b.dataset.env === activeEnv);
+  });
+
+  // LIVE banner: only when env=live AND toggle on.
+  const liveBanner = document.getElementById('liveBanner');
+  if (liveBanner) {
+    liveBanner.classList.toggle('show', envToggleEnabled && activeEnv === 'live');
+  }
+
+  // Live badge in header mirrors the active env (defaults to Demo
+  // copy from the existing dashboard for backwards compat).
+  const badge = document.querySelector('.live-badge');
+  if (badge) {
+    const txt = badge.lastChild;
+    const label = (envToggleEnabled ? activeEnv : 'demo').toUpperCase();
+    if (txt && txt.nodeType === 3) txt.textContent = ' ' + (label === 'LIVE' ? 'Live' : 'Demo');
+  }
+
+  // Who pills: active state + disabled state.
+  document.querySelectorAll('.who-pill').forEach(b => {
+    const w = b.dataset.who;
+    b.classList.toggle('active', w === activeWho);
+    const isDisabled = whoDisabled.indexOf(w) !== -1;
+    if (isDisabled) {
+      b.setAttribute('disabled', 'disabled');
+    } else {
+      b.removeAttribute('disabled');
+    }
+  });
+
+  // Source chip: amber "FALLBACK" or amber "UNCONFIGURED".
+  const chip = document.getElementById('sourceChip');
+  if (chip) {
+    chip.classList.remove('show');
+    chip.textContent = '';
+    if (dataSource === 'signal_log_fallback') {
+      chip.textContent = 'spine offline — local signal_log only';
+      chip.classList.add('show');
+    } else if (dataSource === 'unconfigured') {
+      chip.textContent = 'env not configured';
+      chip.classList.add('show');
+    }
+  }
+}
+
+async function fetchBriefings() {
+  if (!isAuthed) return;
+  try {
+    const params = new URLSearchParams({ t: Date.now() });
+    if (briefingDate) params.set('date', briefingDate);
+    const r = await fetch(BRIEFINGS_API + '?' + params.toString(), { cache: 'no-store', headers: authHeaders() });
+    if (r.status === 401) { handle401(); return; }
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    allBriefings = await r.json();
+  } catch (e) {
+    allBriefings = [];
+  }
+  // Fetch accuracy stats in parallel (non-blocking)
+  fetch(ACCURACY_API + '?t=' + Date.now(), { cache: 'no-store', headers: authHeaders() })
+    .then(r => r.ok ? r.json() : null)
+    .then(d => { briefingAccuracy = d; render(); })
+    .catch(() => {});
+  render();
+}
+
+function showError(msg) {
+  const b = document.getElementById('errorBanner');
+  b.textContent = '\u26a0 ' + msg + ' \u2014 showing cached data';
+  b.style.display = 'block';
+}
+
+// ─── DATE / PERIOD HELPERS ───────────────────────────────────────────────────
+// Browser-local time. The /trades API surfaces UTC timestamps; the period
+// boundaries are computed in local time so "Day" matches the user's calendar.
+
+function todayStr() {
+  // Local-date YYYY-MM-DD (toISOString would be UTC).
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${dd}`;
+}
+
+function thisMonthStr() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  return `${y}-${m}`;
+}
+
+function getDayBounds(dateStr) {
+  // dateStr is YYYY-MM-DD or empty/null → today.
+  const base = dateStr ? new Date(dateStr + 'T00:00:00') : new Date();
+  const start = new Date(base);
+  start.setHours(0, 0, 0, 0);
+  const end = new Date(start);
+  end.setDate(end.getDate() + 1);
+  return { start, end };
+}
+
+function getWeekBounds(dateStr) {
+  // Monday-Sunday week containing dateStr (or today if empty).
+  const base = dateStr ? new Date(dateStr + 'T00:00:00') : new Date();
+  const start = new Date(base);
+  const dayOfWeek = (start.getDay() + 6) % 7;  // Mon=0 .. Sun=6
+  start.setDate(start.getDate() - dayOfWeek);
+  start.setHours(0, 0, 0, 0);
+  const end = new Date(start);
+  end.setDate(end.getDate() + 7);
+  return { start, end };
+}
+
+function getMonthBounds(monthStr) {
+  // monthStr is YYYY-MM or empty/null → current month.
+  let y, m;
+  if (monthStr) {
+    const parts = monthStr.split('-').map(Number);
+    y = parts[0]; m = parts[1] - 1;
+  } else {
+    const d = new Date();
+    y = d.getFullYear(); m = d.getMonth();
+  }
+  const start = new Date(y, m, 1);
+  const end = new Date(y, m + 1, 1);
+  return { start, end };
+}
+
+function getActiveBounds() {
+  if (activePeriod === 'day') return getDayBounds(dayDate);
+  if (activePeriod === 'week') return getWeekBounds(weekDate);
+  if (activePeriod === 'month') return getMonthBounds(monthDate);
+  return null;
+}
+
+function isHistorical() {
+  // True when the user is viewing a non-current period (suppress auto-refresh).
+  if (activePeriod === 'day') return !!dayDate && dayDate !== todayStr();
+  if (activePeriod === 'week') {
+    if (!weekDate) return false;
+    const { start, end } = getWeekBounds(weekDate);
+    const now = new Date();
+    return !(now >= start && now < end);
+  }
+  if (activePeriod === 'month') return !!monthDate && monthDate !== thisMonthStr();
+  return false;
+}
+
+function isOutOfRange() {
+  // /trades returns up to 30 days of IG history. If the selected period
+  // ends before that cutoff, no data will be available client-side.
+  const bounds = getActiveBounds();
+  if (!bounds) return false;
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 30);
+  cutoff.setHours(0, 0, 0, 0);
+  return bounds.end <= cutoff;
+}
+
+function filterByPeriod(trades, period) {
+  if (period === 'all') return trades;
+  const bounds = getActiveBounds();
+  if (!bounds) return trades;
+  return trades.filter(t => {
+    const ts = new Date(t.timestamp);
+    return ts >= bounds.start && ts < bounds.end;
+  });
+}
+
+function filterByPair(trades, pair) {
+  if (pair === 'all') return trades;
+  return trades.filter(t => t.pair === pair);
+}
+
+// ─── Unit-aware P&L helpers (2026-07-29) ─────────────────────────────
+// Single source of truth for the pips ⇄ cash toggle. pnlVal() returns
+// the raw number in the active unit; pnlFmt() formats it with the right
+// suffix. Every P&L render site funnels through these — one flip of
+// activeUnit re-renders the whole dashboard consistently.
+function pnlVal(t) {
+  if (!t) return 0;
+  if (activeUnit === 'cash') {
+    // pnl_gbp is the size-weighted cash figure (populated for both bot
+    // and IG-only trades). Fall back to 0 when missing.
+    return (typeof t.pnl_gbp === 'number') ? t.pnl_gbp : 0;
+  }
+  // 'pips' default. pips_pnl is now the size-weighted pip figure
+  // (2026-07-29) that reconciles with cash at ×TRADE_SIZE.
+  return (typeof t.pips_pnl === 'number') ? t.pips_pnl : 0;
+}
+function pnlFmt(v, opts) {
+  const dp = (opts && opts.dp !== undefined) ? opts.dp : (activeUnit === 'cash' ? 2 : 1);
+  const sign = v >= 0 ? '+' : '-';
+  const abs = Math.abs(v).toFixed(dp);
+  if (activeUnit === 'cash') return sign + '£' + abs;
+  return sign + abs + 'p';
+}
+function pnlUnitLabel() { return activeUnit === 'cash' ? '£' : 'p'; }
+
+function getStats(trades) {
+  const wins = trades.filter(t => pnlVal(t) > 0).length;
+  const total = trades.length;
+  const totalPnl = trades.reduce((s, t) => s + pnlVal(t), 0);
+  const avgPnl = total ? totalPnl / total : 0;
+  const best = total ? Math.max(...trades.map(pnlVal)) : 0;
+  const worst = total ? Math.min(...trades.map(pnlVal)) : 0;
+  // Keep legacy field names (totalPips, avgPips) so downstream renderers
+  // don't need dual-shape handling — the value is unit-aware regardless.
+  return { wins, total, totalPips: totalPnl, avgPips: avgPnl,
+           winRate: total ? (wins/total*100) : 0, best, worst };
+}
+
+function getPairStats(trades, pair) {
+  return getStats(trades.filter(t => t.pair === pair));
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+
+function render() {
+  const app = document.getElementById('app');
+
+  if (activePeriod === 'briefings') {
+    app.innerHTML = renderBriefings();
+    bindEvents();
+    return;
+  }
+
+  // Unconfigured env (LIVE tab without IG_LIVE_* creds) — replace the
+  // whole trades view with a dedicated panel so the user sees an
+  // explicit state rather than empty stats + zero-trade table.
+  if (dataSource === 'unconfigured') {
+    const envLabel = (activeEnv || 'demo').toUpperCase();
+    app.innerHTML = `
+      <div class="unconfigured-panel">
+        <h3>${envLabel} ACCOUNT NOT CONFIGURED</h3>
+        Set <code>IG_${envLabel}_USERNAME</code>, <code>IG_${envLabel}_PASSWORD</code>
+        and <code>IG_${envLabel}_API_KEY</code> in the host's <code>.env</code>,
+        then restart <code>trades-api.service</code> to enable this tab.
+      </div>
+    `;
+    bindEvents();
+    return;
+  }
+
+  const showPicker = ['day', 'week', 'month'].includes(activePeriod);
+  const pickerHtml = showPicker ? renderDatePicker() : '';
+
+  if (showPicker && isOutOfRange()) {
+    app.innerHTML = pickerHtml + renderOutOfRange();
+    bindEvents();
+    return;
+  }
+
+  const periodTrades = filterByPeriod(allTrades, activePeriod);
+  const viewTrades = filterByPair(periodTrades, activeFilter);
+  const stats = getStats(viewTrades);
+
+  app.innerHTML = `
+    ${pickerHtml}
+    ${renderStats(stats)}
+    ${renderEquity(viewTrades)}
+    <div class="section-title">Pairs</div>
+    ${renderPairs(periodTrades)}
+    <div class="trades-section">
+      <div class="section-title" style="padding:0 0 10px">Trades <span style="color:var(--muted)">(${viewTrades.length})</span></div>
+      ${renderFilters()}
+      ${renderTrades(viewTrades)}
+    </div>
+    <div class="last-updated">${isHistorical() ? 'Historical view' : 'Updated ' + new Date().toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'})}</div>
+  `;
+
+  drawEquity(viewTrades);
+  drawSparklines(periodTrades);
+  bindEvents();
+}
+
+function formatDisplayDate(iso) {
+  // 'YYYY-MM-DD' → '29 Jul 2026' (matches en-GB short-month format).
+  const d = new Date(iso + 'T00:00:00');
+  return d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+}
+
+// Desktop month-grid picker. Mobile keeps the native <input type="date">
+// so iOS renders its full-screen picker.
+function openCustomDatePicker(anchor, curVal, maxVal, onPick) {
+  document.querySelectorAll('.dp-overlay').forEach(el => el.remove());
+
+  const cur   = curVal ? new Date(curVal + 'T00:00:00') : new Date();
+  const maxD  = maxVal ? new Date(maxVal + 'T00:00:00') : null;
+  const today = new Date(); today.setHours(0,0,0,0);
+  let viewY = cur.getFullYear();
+  let viewM = cur.getMonth();
+
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DOW    = ['Mo','Tu','We','Th','Fr','Sa','Su'];
+  const iso = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  const eq  = (a,b) => a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate();
+
+  const overlay = document.createElement('div');
+  overlay.className = 'dp-overlay';
+
+  function draw() {
+    const first     = new Date(viewY, viewM, 1);
+    const firstDow  = (first.getDay() + 6) % 7;   // Monday=0
+    const inMonth   = new Date(viewY, viewM + 1, 0).getDate();
+    const inPrev    = new Date(viewY, viewM, 0).getDate();
+
+    let cells = DOW.map(d => `<div class="dp-dow">${d}</div>`).join('');
+    for (let i = firstDow - 1; i >= 0; i--) {
+      const d = new Date(viewY, viewM - 1, inPrev - i);
+      const dis = maxD && d > maxD;
+      cells += `<button type="button" class="dp-cell dim" data-iso="${iso(d)}"${dis?' disabled':''}>${d.getDate()}</button>`;
+    }
+    for (let day = 1; day <= inMonth; day++) {
+      const d = new Date(viewY, viewM, day);
+      const dis = maxD && d > maxD;
+      const cls = ['dp-cell'];
+      if (eq(d, today)) cls.push('today');
+      if (curVal && eq(d, cur)) cls.push('sel');
+      cells += `<button type="button" class="${cls.join(' ')}" data-iso="${iso(d)}"${dis?' disabled':''}>${day}</button>`;
+    }
+    const totalCells = firstDow + inMonth;
+    const trail = (7 - (totalCells % 7)) % 7;
+    for (let day = 1; day <= trail; day++) {
+      const d = new Date(viewY, viewM + 1, day);
+      const dis = maxD && d > maxD;
+      cells += `<button type="button" class="dp-cell dim" data-iso="${iso(d)}"${dis?' disabled':''}>${day}</button>`;
+    }
+
+    overlay.innerHTML = `
+      <div class="dp-head">
+        <button type="button" class="dp-nav" data-nav="prev" aria-label="Previous month">‹</button>
+        <div class="dp-title">${MONTHS[viewM]} ${viewY}</div>
+        <button type="button" class="dp-nav" data-nav="next" aria-label="Next month">›</button>
+      </div>
+      <div class="dp-grid">${cells}</div>
+      <div class="dp-foot">
+        <button type="button" class="dp-btn primary" data-act="today">Today</button>
+        <button type="button" class="dp-btn" data-act="close">Close</button>
+      </div>`;
+
+    overlay.querySelector('[data-nav="prev"]').addEventListener('click', () => {
+      viewM--; if (viewM < 0) { viewM = 11; viewY--; } draw();
+    });
+    overlay.querySelector('[data-nav="next"]').addEventListener('click', () => {
+      viewM++; if (viewM > 11) { viewM = 0; viewY++; } draw();
+    });
+    overlay.querySelectorAll('.dp-cell').forEach(cell => {
+      if (cell.disabled) return;
+      cell.addEventListener('click', () => { cleanup(); onPick(cell.dataset.iso); });
+    });
+    overlay.querySelector('[data-act="today"]').addEventListener('click', () => {
+      cleanup(); onPick(iso(today));
+    });
+    overlay.querySelector('[data-act="close"]').addEventListener('click', cleanup);
+  }
+
+  function position() {
+    const r = anchor.getBoundingClientRect();
+    overlay.style.left = (r.left + window.scrollX) + 'px';
+    overlay.style.top  = (r.bottom + window.scrollY + 4) + 'px';
+  }
+  function cleanup() {
+    overlay.remove();
+    document.removeEventListener('click', outside, true);
+    document.removeEventListener('keydown', keys);
+    window.removeEventListener('resize', position);
+  }
+  const outside = e => { if (!overlay.contains(e.target) && e.target !== anchor) cleanup(); };
+  const keys    = e => { if (e.key === 'Escape') cleanup(); };
+
+  draw();
+  document.body.appendChild(overlay);
+  position();
+  window.addEventListener('resize', position);
+  setTimeout(() => {
+    document.addEventListener('click', outside, true);
+    document.addEventListener('keydown', keys);
+  }, 0);
+}
+
+function renderDatePicker() {
+  const today = todayStr();
+  const month = thisMonthStr();
+  let inputHtml = '';
+  let live = false;
+  let label = '';
+  if (activePeriod === 'day') {
+    label = 'Day';
+    live = !dayDate || dayDate === today;
+    const val = dayDate || today;
+    inputHtml = `
+      <button type="button" id="dpDisplay" class="dpb-display">${formatDisplayDate(val)}</button>
+      <input type="date" id="dpInput" value="${val}" max="${today}" class="dpb-input-hidden" tabindex="-1" aria-hidden="true">`;
+  } else if (activePeriod === 'week') {
+    label = 'Week';
+    live = !isHistorical();
+    const val = weekDate || today;
+    inputHtml = `
+      <button type="button" id="dpDisplay" class="dpb-display">${formatDisplayDate(val)}</button>
+      <input type="date" id="dpInput" value="${val}" max="${today}" class="dpb-input-hidden" tabindex="-1" aria-hidden="true">`;
+  } else if (activePeriod === 'month') {
+    label = 'Month';
+    live = !monthDate || monthDate === month;
+    const val = monthDate || month;
+    inputHtml = `<input type="month" id="dpInput" value="${val}" max="${month}" class="dpb-input">`;
+  }
+  const todayBtn = live
+    ? `<span class="dpb-live">● Live</span>`
+    : `<button id="dpTodayBtn" class="dpb-today">Today</button>
+       <span class="dpb-historical">Historical view</span>`;
+  return `
+    <div class="date-picker-bar">
+      <span class="dpb-label">${label}</span>
+      ${inputHtml}
+      ${todayBtn}
+    </div>
+  `;
+}
+
+function renderOutOfRange() {
+  return `
+    <div class="empty-state">
+      <div class="empty-state-title">Outside 30-day history window</div>
+      <div class="empty-state-sub">IG only returns up to 30 days of transaction history. Pick a more recent date.</div>
+    </div>
+  `;
+}
+
+function renderStats(s) {
+  const pnl = s.totalPips;   // unit-aware value (see getStats comment)
+  const pnlStr = pnlFmt(pnl);
+  const pnlClass = pnl >= 0 ? 'positive' : 'negative';
+  const wr = s.winRate.toFixed(0) + '%';
+  return `
+  <div class="stats-grid">
+    <div class="stat-card wide">
+      <div class="stat-label">Net P&L</div>
+      <div class="stat-value ${pnlClass}">${pnlStr}</div>
+      <div class="stat-sub">${s.total} trades \u00b7 avg ${pnlFmt(s.avgPips)}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Win Rate</div>
+      <div class="stat-value ${s.winRate >= 50 ? 'positive' : s.winRate >= 35 ? 'neutral' : 'negative'}">${wr}</div>
+      <div class="stat-sub">${s.wins}W \u00b7 ${s.total - s.wins}L</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Best Trade</div>
+      <div class="stat-value positive">${pnlFmt(s.best)}</div>
+      <div class="stat-sub">Worst: ${pnlFmt(s.worst)}</div>
+    </div>
+  </div>`;
+}
+
+function renderEquity(trades) {
+  const sorted = [...trades].sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp));
+  const total = sorted.reduce((s,t) => s + pnlVal(t), 0);
+  const col = total >= 0 ? 'var(--accent)' : 'var(--red)';
+  return `
+  <div class="equity-card">
+    <div class="equity-header">
+      <div class="equity-title">Equity Curve</div>
+      <div class="equity-value" style="color:${col}">${pnlFmt(total)}</div>
+    </div>
+    <canvas id="equityCanvas" height="70"></canvas>
+  </div>`;
+}
+
+function renderPairs(trades) {
+  return `<div class="pairs-scroll">${PAIRS.map(p => renderPairCard(trades, p)).join('')}</div>`;
+}
+
+function renderPairCard(trades, pair) {
+  const s = getPairStats(trades, pair);
+  const pnlStr = pnlFmt(s.totalPips);
+  const pnlClass = s.totalPips >= 0 ? 'pos' : 'neg';
+  const cls = s.totalPips >= 0 ? 'net-positive' : s.total > 0 ? 'net-negative' : '';
+  const wr = s.winRate;
+  const wrClass = wr >= 50 ? '' : wr >= 35 ? 'mid' : 'low';
+  const color = PAIR_COLORS[pair] || 'var(--accent)';
+  return `
+  <div class="pair-card ${cls}" data-pair="${pair}">
+    <div class="pair-name" style="color:${color}">${pair}</div>
+    <div class="pair-pips ${pnlClass}">${pnlStr}</div>
+    <div class="pair-meta">${s.total} trades</div>
+    <canvas class="pair-sparkline" id="spark_${pair}" height="28"></canvas>
+    <div class="pair-winrate">
+      <div class="winrate-bar">
+        <div class="winrate-fill ${wrClass}" style="width:${wr}%"></div>
+      </div>
+      <div class="winrate-pct">${wr.toFixed(0)}%</div>
+    </div>
+  </div>`;
+}
+
+function renderFilters() {
+  const chips = ['all', ...PAIRS];
+  return `<div class="trades-filter">
+    <button class="filter-chip ${activeView==='grouped'?'active':''}" data-view="grouped">Grouped</button>
+    <button class="filter-chip ${activeView==='raw'?'active':''}" data-view="raw">Raw</button>
+    <button class="filter-chip ${activeUnit==='pips'?'active':''}" data-unit="pips">Pips</button>
+    <button class="filter-chip ${activeUnit==='cash'?'active':''}" data-unit="cash">£</button>
+    ${chips.map(p => `<button class="filter-chip ${activeFilter===p?'active':''}" data-filter="${p}">${p==='all'?'All':p}</button>`).join('')}
+  </div>`;
+}
+
+function renderTrades(trades) {
+  if (!trades.length) return '<div class="empty">No trades in period</div>';
+  const sorted = [...trades].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+  return sorted.map((t, i) => {
+    // Raw / IG-style row: one per IG close deal — £ P&L primary, no
+    // exit pill, meta = open→close levels. Open positions stay on the
+    // grouped renderer below (they're atomic — can't be exploded).
+    // Raw view is £-native by design (matches IG Closed tab). The
+    // unit toggle affects the grouped view only.
+    if (activeView === 'raw' && !t.is_open) {
+      const gbp = (typeof t.pnl_gbp === 'number') ? t.pnl_gbp : null;
+      const gbpStr = gbp === null ? '—'
+        : (gbp >= 0 ? '+£' : '-£') + Math.abs(gbp).toFixed(2);
+      const gbpCls = (gbp === null) ? '' : (gbp >= 0 ? 'pos' : 'neg');
+      const dir = (t.direction || '').toUpperCase();
+      const dirCls = dir === 'BUY' ? 'buy' : 'sell';
+      const ts = new Date(t.timestamp);
+      const dateStr = ts.toLocaleDateString('en-GB', {day:'numeric',month:'short'});
+      const timeStr = ts.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
+      const entry = (t.entry_price !== null && t.entry_price !== undefined) ? t.entry_price : '—';
+      const close = (t.close_price !== null && t.close_price !== undefined) ? t.close_price : '—';
+      return `<div class="trade-row" style="animation-delay:${i*0.03}s">
+        <div class="trade-dir ${dirCls}">${dir.slice(0,1)}</div>
+        <div class="trade-pnl">
+          <div class="trade-pips ${gbpCls}">${gbpStr}</div>
+        </div>
+        <div class="trade-info">
+          <div class="trade-pair">${t.pair || '—'}</div>
+          <div class="trade-meta">${dateStr} ${timeStr} · ${entry} → ${close}</div>
+        </div>
+      </div>`;
+    }
+    const pnl = pnlVal(t);
+    const pnlStr = pnlFmt(pnl);
+    const pnlCls = pnl >= 0 ? 'pos' : 'neg';
+    const dir = (t.direction || '').toUpperCase();
+    const dirCls = dir === 'BUY' ? 'buy' : 'sell';
+    const ts = new Date(t.timestamp);
+    const dateStr = ts.toLocaleDateString('en-GB', {day:'numeric',month:'short'});
+    const timeStr = ts.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
+    const strat = (t.strategy || '').replace(/_/g,' ').toLowerCase();
+    return `<div class="trade-row" style="animation-delay:${i*0.03}s">
+      <div class="trade-dir ${dirCls}">${dir.slice(0,1)}</div>
+      <div class="trade-pnl">
+        <div class="trade-pips ${pnlCls}">${pnlStr}</div>
+        ${(() => {
+          const exitType = (t.exit_type || '').toLowerCase();
+          const closeReason = (t.close_reason || '').trim();
+          const hasStrategy = !!(t.strategy && String(t.strategy).trim());
+          if (t.is_open) {
+            return '<div class="trade-exit-pill live">live</div>';
+          }
+          if (exitType) {
+            const known = ['target','stop','early','breakeven','external','unknown'];
+            const tintCls = known.includes(exitType) ? exitType : 'unknown';
+            const inferredCls = hasStrategy ? '' : ' inferred';
+            const label = (hasStrategy && closeReason)
+              ? closeReason.split(' ')[0].toLowerCase()
+              : exitType;
+            return `<div class="trade-exit-pill ${tintCls}${inferredCls}">${label}</div>`;
+          }
+          // Defensive fallback: pre-spine rows have no exit_type.
+          return `<div class="trade-close">${closeReason ? closeReason.split(' ')[0].toLowerCase() : '\u2014'}</div>`;
+        })()}
+      </div>
+      <div class="trade-info">
+        <div class="trade-pair">${t.pair || '\u2014'}</div>
+        <div class="trade-meta">${dateStr} ${timeStr} \u00b7 ${strat}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ─── BRIEFINGS ──────────────────────────────────────────────────────────────
+
+function renderBriefingCardBody(b, animIndex) {
+  const bias = (b.daily_bias || '').toUpperCase();
+  const biasClass = bias === 'BULLISH' ? 'bullish' : bias === 'BEARISH' ? 'bearish' : 'neutral';
+  const biasIcon = bias === 'BULLISH' ? '\u2197' : bias === 'BEARISH' ? '\u2198' : '\u2194';
+  const conf = ((b.bias_confidence || 0) * 100).toFixed(0);
+  const confColor = b.bias_confidence >= 0.7 ? 'var(--accent)' : b.bias_confidence >= 0.4 ? 'var(--amber)' : 'var(--red)';
+  const pairColor = PAIR_COLORS[b.symbol] || 'var(--text)';
+
+  const session = b.session || '';
+  const expectation = (b.session_expectation || '').replace(/_/g, ' ');
+  const plan = b.plan_summary || '';
+  const narrative = b.bias_reasoning || '';
+
+  const kl = b.key_levels || {};
+  const res = (kl.resistance || []).slice(0, 4);
+  const sup = (kl.support || []).slice(0, 4);
+
+  const delay = animIndex != null ? `style="animation-delay:${animIndex*0.05}s"` : '';
+
+  return `<div class="briefing-card" ${delay}>
+    <div class="briefing-header">
+      <div>
+        <div class="briefing-pair" style="color:${pairColor}">${b.symbol || '?'}</div>
+        <div class="briefing-session">${session}${expectation ? ' \u00b7 ' + expectation : ''}</div>
+      </div>
+      <div class="briefing-bias-badge ${biasClass}">${biasIcon} ${bias || 'N/A'}</div>
+    </div>
+    <div class="briefing-confidence">
+      <div class="stat-label" style="margin:0;min-width:72px">Confidence</div>
+      <div class="confidence-bar">
+        <div class="confidence-fill" style="width:${conf}%;background:${confColor}"></div>
+      </div>
+      <div class="confidence-pct">${conf}%</div>
+    </div>
+    ${plan ? `<div class="briefing-plan">${escHtml(plan)}</div>` : ''}
+    ${narrative ? `<details><summary style="font-size:10px;color:var(--muted);cursor:pointer;margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase">Narrative</summary><div class="briefing-narrative">${escHtml(narrative)}</div></details>` : ''}
+    ${(res.length || sup.length) ? `
+    <div class="briefing-levels">
+      <div class="levels-group">
+        <div class="levels-label res">Resistance</div>
+        ${res.map(v => `<div class="level-val">${Number(v).toFixed(1)}</div>`).join('')}
+      </div>
+      <div class="levels-group">
+        <div class="levels-label sup">Support</div>
+        ${sup.map(v => `<div class="level-val">${Number(v).toFixed(1)}</div>`).join('')}
+      </div>
+    </div>` : ''}
+  </div>`;
+}
+
+function formatBriefingTime(iso) {
+  if (!iso) return '';
+  try {
+    const d = new Date(iso);
+    if (isNaN(d)) return iso;
+    return d.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'}) +
+           ' · ' + d.toLocaleDateString('en-GB', {day:'2-digit', month:'short'});
+  } catch (e) { return iso; }
+}
+
+function renderBriefingsDatePicker() {
+  const today = new Date().toISOString().slice(0,10);
+  const val = briefingDate || today;
+  const isLive = !briefingDate;
+  return `<div class="briefing-datepicker" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--card);border-radius:8px;margin-bottom:12px;flex-wrap:wrap">
+    <label style="font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase">Date</label>
+    <input type="date" id="briefingDateInput" value="${val}" max="${today}" style="background:var(--bg);color:var(--text);border:1px solid var(--border,#333);border-radius:6px;padding:6px 8px;font-size:13px;font-family:inherit">
+    ${!isLive ? `<button id="briefingDateTodayBtn" style="background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-mid);border-radius:6px;padding:6px 10px;font-size:11px;cursor:pointer;letter-spacing:0.05em;text-transform:uppercase">Today (live)</button>` : `<span style="font-size:10px;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase">● Live</span>`}
+  </div>`;
+}
+
+function renderBriefings() {
+  const header = renderBriefingsDatePicker();
+
+  if (!allBriefings.length) {
+    const label = briefingDate ? `No briefings for ${briefingDate}` : 'No briefings for today';
+    return renderAccuracyBar() + header + `<div class="briefings-container"><div class="empty">${label}</div></div>
+    <div class="last-updated">Updated ${new Date().toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'})}</div>`;
+  }
+
+  // Group by symbol; API already returns most-recent first.
+  const bySymbol = new Map();
+  for (const b of allBriefings) {
+    const k = b.symbol || '?';
+    if (!bySymbol.has(k)) bySymbol.set(k, []);
+    bySymbol.get(k).push(b);
+  }
+
+  let i = 0;
+  const groups = [];
+  for (const [sym, list] of bySymbol) {
+    const active = list[0];
+    const history = list.slice(1);
+    const activeCard = renderBriefingCardBody(active, i++);
+
+    let historyBlock = '';
+    if (history.length) {
+      const items = history.map(b => {
+        const ts = formatBriefingTime(b.briefing_time);
+        const session = b.session || '';
+        const bias = (b.daily_bias || '').toUpperCase();
+        const line = (b.plan_summary || b.bias_reasoning || '').replace(/\s+/g, ' ').trim();
+        const preview = line.length > 110 ? line.slice(0, 107) + '\u2026' : line;
+        return `<details class="briefing-history-item" style="margin-top:8px;border-top:1px solid var(--border,#222);padding-top:8px">
+          <summary style="cursor:pointer;list-style:none;display:flex;gap:8px;align-items:baseline;font-size:12px">
+            <span style="color:var(--muted);min-width:110px">${ts}</span>
+            <span style="color:var(--text);opacity:0.75">${session}${bias ? ' · ' + bias : ''}</span>
+            <span style="color:var(--muted);font-size:11px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escHtml(preview)}</span>
+          </summary>
+          <div style="margin-top:10px">${renderBriefingCardBody(b)}</div>
+        </details>`;
+      }).join('');
+      historyBlock = `<details class="briefing-history" style="margin-top:10px;background:var(--card);border-radius:8px;padding:10px 14px">
+        <summary style="cursor:pointer;font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase">${history.length} earlier briefing${history.length>1?'s':''}</summary>
+        <div style="margin-top:6px">${items}</div>
+      </details>`;
+    }
+
+    groups.push(`<div class="briefing-group" style="margin-bottom:18px">${activeCard}${historyBlock}</div>`);
+  }
+
+  return renderAccuracyBar() + header + `<div class="briefings-container">${groups.join('')}</div>
+    <div class="last-updated">Updated ${new Date().toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'})}</div>`;
+}
+
+function renderAccuracyBar() {
+  if (!briefingAccuracy || !briefingAccuracy.overall || !briefingAccuracy.overall.n) return '';
+  const o = briefingAccuracy.overall;
+  return `<div class="briefing-stats-bar">
+    <div class="bs-stat"><div class="bs-val">${o.sweep_rate}%</div><div class="bs-label">Sweep Rate</div></div>
+    <div class="bs-stat"><div class="bs-val">${o.reversal_after_sweep_rate != null ? o.reversal_after_sweep_rate + '%' : '--'}</div><div class="bs-label">Reversal Rate</div></div>
+    <div class="bs-stat"><div class="bs-val">${o.avg_reversal_depth_pips != null ? o.avg_reversal_depth_pips : '--'}</div><div class="bs-label">Avg Rev Depth</div></div>
+    <div class="bs-stat"><div class="bs-val">${o.avg_time_to_sweep_min != null ? Math.round(o.avg_time_to_sweep_min) + 'm' : '--'}</div><div class="bs-label">Time to Sweep</div></div>
+  </div>`;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ─── CHARTS ─────────────────────────────────────────────────────────────────
+
+function drawEquity(trades) {
+  const canvas = document.getElementById('equityCanvas');
+  if (!canvas) return;
+  const sorted = [...trades].sort((a,b) => new Date(a.timestamp)-new Date(b.timestamp));
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.offsetWidth;
+  const h = 70;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  ctx.scale(dpr, dpr);
+
+  let running = 0;
+  const points = [0, ...sorted.map(t => { running += pnlVal(t); return running; })];
+  if (points.length < 2) return;
+
+  const min = Math.min(...points);
+  const max = Math.max(...points);
+  const range = max - min || 1;
+  const pad = 8;
+
+  const x = i => (i / (points.length-1)) * (w - pad*2) + pad;
+  const y = v => h - pad - ((v - min) / range) * (h - pad*2);
+
+  const isPositive = points[points.length-1] >= 0;
+  const lineColor = isPositive ? '#00ff88' : '#ff4466';
+
+  const grad = ctx.createLinearGradient(0, pad, 0, h);
+  grad.addColorStop(0, isPositive ? '#00ff8830' : '#ff446630');
+  grad.addColorStop(1, 'transparent');
+  ctx.beginPath();
+  ctx.moveTo(x(0), y(points[0]));
+  for (let i = 1; i < points.length; i++) {
+    const xp = x(i-1), yp = y(points[i-1]);
+    const xc = x(i), yc = y(points[i]);
+    ctx.bezierCurveTo((xp+xc)/2, yp, (xp+xc)/2, yc, xc, yc);
+  }
+  ctx.lineTo(x(points.length-1), h);
+  ctx.lineTo(x(0), h);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(x(0), y(points[0]));
+  for (let i = 1; i < points.length; i++) {
+    const xp = x(i-1), yp = y(points[i-1]);
+    const xc = x(i), yc = y(points[i]);
+    ctx.bezierCurveTo((xp+xc)/2, yp, (xp+xc)/2, yc, xc, yc);
+  }
+  ctx.strokeStyle = lineColor;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  const lastX = x(points.length-1);
+  const lastY = y(points[points.length-1]);
+  ctx.beginPath();
+  ctx.arc(lastX, lastY, 3, 0, Math.PI*2);
+  ctx.fillStyle = lineColor;
+  ctx.fill();
+}
+
+function drawSparklines(trades) {
+  PAIRS.forEach(pair => {
+    const canvas = document.getElementById('spark_' + pair);
+    if (!canvas) return;
+    const pt = trades.filter(t => t.pair === pair)
+                     .sort((a,b) => new Date(a.timestamp)-new Date(b.timestamp));
+    if (!pt.length) return;
+
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const w = canvas.offsetWidth || 116;
+    const h = 28;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.scale(dpr, dpr);
+
+    let running = 0;
+    const points = pt.map(t => { running += pnlVal(t); return running; });
+    if (points.length < 2) return;
+
+    const min = Math.min(0, ...points);
+    const max = Math.max(0, ...points);
+    const range = max - min || 1;
+    const x = i => (i / (points.length-1)) * w;
+    const y = v => h - ((v - min) / range) * h;
+
+    const isPos = points[points.length-1] >= 0;
+    const color = PAIR_COLORS[pair] || (isPos ? '#00ff88' : '#ff4466');
+
+    ctx.beginPath();
+    ctx.moveTo(x(0), y(points[0]));
+    for (let i = 1; i < points.length; i++) {
+      ctx.lineTo(x(i), y(points[i]));
+    }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
+    ctx.globalAlpha = 0.8;
+    ctx.stroke();
+  });
+}
+
+// ─── NEWS BANNER ─────────────────────────────────────────────────────────────
+const NEWS_API = '/news-state';
+
+async function fetchNewsState() {
+  if (!isAuthed) return;
+  const banner = document.getElementById('newsBanner');
+  if (!banner) return;
+  try {
+    const r = await fetch(NEWS_API + '?t=' + Date.now(), { cache: 'no-store', headers: authHeaders() });
+    if (!r.ok) { banner.classList.remove('show'); return; }
+    const ns = await r.json();           // throws if the HTML fallback is served → caught
+    renderNewsBanner(ns);
+  } catch (e) {
+    banner.classList.remove('show');     // fail silent — never break the board
+  }
+}
+
+function fmtMins(m) {
+  if (m < 60) return m + 'm';
+  const h = Math.floor(m / 60), mm = m % 60;
+  return mm ? `${h}h${mm}m` : `${h}h`;
+}
+
+function renderNewsBanner(ns) {
+  const banner = document.getElementById('newsBanner');
+  const textEl = document.getElementById('newsBannerText');
+  const metaEl = document.getElementById('newsBannerMeta');
+  if (!banner || !textEl || !metaEl) return;
+  if (!ns || typeof ns !== 'object') { banner.classList.remove('show'); return; }
+
+  const state = (ns.news_state || 'NORMAL').toUpperCase();
+  const inWindow = !!ns.in_pre_release_window;
+  const ccys = Array.isArray(ns.news_currencies_today) ? ns.news_currencies_today.join('/') : '';
+  const mins = (typeof ns.minutes_to_next_release === 'number') ? ns.minutes_to_next_release : null;
+
+  let relTime = '';
+  if (ns.next_release_ts) {
+    const d = new Date(ns.next_release_ts);
+    if (!isNaN(d)) relTime = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  let text = '', tint = '', show = true;
+  if (inWindow) {
+    tint = 'state-red';
+    text = ccys ? `NEWS IMMINENT · ${ccys}` : 'NEWS IMMINENT';
+  } else if (state === 'BIG_NEWS_DAY') {
+    tint = 'state-amber';
+    text = ccys ? `BIG NEWS DAY · ${ccys}` : 'BIG NEWS DAY';
+  } else if (state === 'PRE_BIG_NEWS') {
+    tint = 'state-amber';
+    text = ccys ? `PRE-NEWS · high-impact ${ccys} ahead` : 'PRE-NEWS · high-impact ahead';
+  } else if (state === 'POST_BIG_NEWS') {
+    tint = 'state-green';
+    text = ccys ? `POST-NEWS · ${ccys}` : 'POST-NEWS';
+  } else {
+    show = false;
+  }
+
+  if (!show) { banner.classList.remove('show'); return; }
+
+  let meta = '';
+  const forward = inWindow || state === 'BIG_NEWS_DAY' || state === 'PRE_BIG_NEWS';
+  if (forward && relTime) {
+    meta = (mins != null && mins >= 0 && mins < 1440) ? `${relTime} · in ${fmtMins(mins)}` : relTime;
+  }
+
+  textEl.textContent = text;
+  metaEl.textContent = meta;
+  banner.classList.remove('state-amber', 'state-red', 'state-blue');
+  banner.classList.add(tint, 'show');
+}
+
+// ─── EVENTS ─────────────────────────────────────────────────────────────────
+
+function bindEvents() {
+  document.querySelectorAll('.period-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activePeriod = btn.dataset.period;
+      if (activePeriod === 'briefings') {
+        fetchBriefings();
+      } else {
+        render();
+      }
+    });
+  });
+
+  // Env tabs (LIVE | DEMO).
+  document.querySelectorAll('.env-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const env = btn.dataset.env;
+      if (!env || env === activeEnv) return;
+      activeEnv = env;
+      localStorage.setItem('autobot_env', activeEnv);
+      renderDashControls();
+      fetchTrades();
+    });
+  });
+
+  // Who pills (MINE | OTHER | ALL).
+  document.querySelectorAll('.who-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.hasAttribute('disabled')) return;
+      const who = btn.dataset.who;
+      if (!who || who === activeWho) return;
+      activeWho = who;
+      localStorage.setItem('autobot_who', activeWho);
+      renderDashControls();
+      fetchTrades();
+    });
+  });
+
+  // Per-period date picker (day / week / month tabs).
+  const dpInput = document.getElementById('dpInput');
+  if (dpInput) {
+    dpInput.addEventListener('change', () => {
+      const v = dpInput.value || '';
+      if (activePeriod === 'day') {
+        dayDate = v && v !== todayStr() ? v : '';
+      } else if (activePeriod === 'week') {
+        // The picker returns a YYYY-MM-DD inside the target week.
+        // Persist it; week-bounds derivation handles the Monday-anchor.
+        weekDate = v || '';
+      } else if (activePeriod === 'month') {
+        monthDate = v && v !== thisMonthStr() ? v : '';
+      }
+      render();
+    });
+  }
+  // Day/week display-button: on touch devices forward to native input
+  // (iOS full-screen picker); on desktop open the custom month grid.
+  const dpDisplay = document.getElementById('dpDisplay');
+  if (dpDisplay && dpInput) {
+    const isTouch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    dpDisplay.addEventListener('click', () => {
+      if (isTouch) {
+        if (typeof dpInput.showPicker === 'function') { try { dpInput.showPicker(); return; } catch(_){} }
+        dpInput.focus(); dpInput.click();
+        return;
+      }
+      openCustomDatePicker(dpDisplay, dpInput.value, dpInput.max, (picked) => {
+        dpInput.value = picked;
+        dpInput.dispatchEvent(new Event('change'));
+      });
+    });
+  }
+  const dpTodayBtn = document.getElementById('dpTodayBtn');
+  if (dpTodayBtn) {
+    dpTodayBtn.addEventListener('click', () => {
+      if (activePeriod === 'day') dayDate = '';
+      else if (activePeriod === 'week') weekDate = '';
+      else if (activePeriod === 'month') monthDate = '';
+      render();
+    });
+  }
+
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (chip.dataset.view !== undefined) {
+        const v = chip.dataset.view;
+        if (!v || v === activeView) return;
+        activeView = v;
+        localStorage.setItem('autobot_view', activeView);
+        fetchTrades();
+        return;
+      }
+      if (chip.dataset.unit !== undefined) {
+        // 2026-07-29: pips ⇄ cash display toggle. Pure client-side —
+        // no re-fetch (both units are already in each trade row).
+        const u = chip.dataset.unit;
+        if (!u || u === activeUnit) return;
+        activeUnit = u;
+        localStorage.setItem('autobot_unit', activeUnit);
+        render();
+        return;
+      }
+      activeFilter = chip.dataset.filter;
+      render();
+    });
+  });
+
+  const dateInput = document.getElementById('briefingDateInput');
+  if (dateInput) {
+    dateInput.addEventListener('change', () => {
+      const today = new Date().toISOString().slice(0,10);
+      briefingDate = (dateInput.value && dateInput.value !== today) ? dateInput.value : '';
+      fetchBriefings();
+    });
+  }
+  const todayBtn = document.getElementById('briefingDateTodayBtn');
+  if (todayBtn) {
+    todayBtn.addEventListener('click', () => {
+      briefingDate = '';
+      fetchBriefings();
+    });
+  }
+
+  document.querySelectorAll('.pair-card').forEach(card => {
+    card.addEventListener('click', () => {
+      activeFilter = card.dataset.pair;
+      render();
+      document.querySelector('.trades-section').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+}
+
+// ─── MOCK DATA ──────────────────────────────────────────────────────────────
+
+function getMockData() {
+  const strategies = ['BRIEFING_LIQUIDITY','NEWS_STRATEGY','WINDOW_SWEEP','3CO'];
+  const sessions = ['Asian','London','NY'];
+  const closeReasons = ['TP hit','SL hit','Breakeven stop hit','Trailing stop'];
+  const trades = [];
+  const now = new Date();
+  for (let i = 0; i < 60; i++) {
+    const pair = PAIRS[Math.floor(Math.random() * PAIRS.length)];
+    const isBuy = Math.random() > 0.5;
+    const pips = (Math.random() > 0.45 ? 1 : -1) * (Math.random() * 40 + 2);
+    const d = new Date(now.getTime() - i * 8 * 3600000);
+    trades.push({
+      timestamp: d.toISOString(),
+      pair, direction: isBuy ? 'BUY' : 'SELL',
+      entry_price: 13000 + Math.random() * 1000,
+      close_price: 13000 + Math.random() * 1000,
+      pips_pnl: parseFloat(pips.toFixed(1)),
+      strategy: strategies[Math.floor(Math.random() * strategies.length)],
+      close_reason: closeReasons[Math.floor(Math.random() * closeReasons.length)],
+      session: sessions[Math.floor(Math.random() * sessions.length)]
+    });
+  }
+  return trades;
+}
+
+// ─── INIT ───────────────────────────────────────────────────────────────────
+// Fire the data fetches unconditionally. The cookie is the gate: if it's
+// valid we render; if not, fetchTrades / fetchNewsState catch the 401
+// and handle401() pops the unlock modal.
+
+fetchTrades();
+fetchNewsState();
+setInterval(() => {
+  // Pause auto-refresh on historical views so the picker selection sticks.
+  if (isAuthed && activePeriod !== 'briefings' && !isHistorical()) fetchTrades();
+  if (isAuthed) fetchNewsState();
+}, 60000);
+</script>
+</body>
+</html>

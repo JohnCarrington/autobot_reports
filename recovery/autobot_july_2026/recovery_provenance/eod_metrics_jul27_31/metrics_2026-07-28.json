@@ -1,0 +1,63 @@
+{
+  "date": "2026-07-28",
+  "generated_at_utc": "2026-07-29T08:14:08.920021+00:00",
+  "trade_size_used": 2.0,
+  "totals": {
+    "fills": 9,
+    "wins": 5,
+    "losses": 4,
+    "scratches": 0,
+    "net_pips": 9.94,
+    "net_cash_gbp": 19.9
+  },
+  "per_strategy": {
+    "BRIEFING_EXECUTION": {
+      "fills": 3,
+      "wins": 2,
+      "losses": 1,
+      "scratches": 0,
+      "net_pips": 18.05,
+      "net_cash_gbp": 36.1
+    },
+    "GBPUSD_BB_BOUNCE_S": {
+      "fills": 3,
+      "wins": 1,
+      "losses": 2,
+      "scratches": 0,
+      "net_pips": -9.95,
+      "net_cash_gbp": -19.9
+    },
+    "GBPUSD_STRUCTURE_BREAK_L": {
+      "fills": 1,
+      "wins": 1,
+      "losses": 0,
+      "scratches": 0,
+      "net_pips": 6.17,
+      "net_cash_gbp": 12.35
+    },
+    "GBPUSD_TREND_V3_L": {
+      "fills": 1,
+      "wins": 0,
+      "losses": 1,
+      "scratches": 0,
+      "net_pips": -12.05,
+      "net_cash_gbp": -24.1
+    },
+    "GBPUSD_BB_BOUNCE_L": {
+      "fills": 1,
+      "wins": 1,
+      "losses": 0,
+      "scratches": 0,
+      "net_pips": 7.72,
+      "net_cash_gbp": 15.45
+    }
+  },
+  "scale_out_count": 3,
+  "runner_exit_reasons": {
+    "other": 1,
+    "BE_STOP_POST_SCALEOUT": 1,
+    "FLOOR_STOP_POST_SCALEOUT": 1
+  },
+  "open_positions": [],
+  "rows_read": 9
+}

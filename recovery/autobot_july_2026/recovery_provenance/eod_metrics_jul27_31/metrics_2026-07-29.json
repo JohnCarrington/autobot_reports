@@ -1,0 +1,27 @@
+{
+  "date": "2026-07-29",
+  "generated_at_utc": "2026-07-29T22:05:00.804805+00:00",
+  "trade_size_used": 2.0,
+  "totals": {
+    "fills": 1,
+    "wins": 0,
+    "losses": 1,
+    "scratches": 0,
+    "net_pips": -14.3,
+    "net_cash_gbp": -28.6
+  },
+  "per_strategy": {
+    "BRIEFING_V5": {
+      "fills": 1,
+      "wins": 0,
+      "losses": 1,
+      "scratches": 0,
+      "net_pips": -14.3,
+      "net_cash_gbp": -28.6
+    }
+  },
+  "scale_out_count": 0,
+  "runner_exit_reasons": {},
+  "open_positions": [],
+  "rows_read": 1
+}

@@ -1,0 +1,13 @@
+[Unit]
+Description=AutoBot fires-silence watchdog (ITEM 3) — daily digest of strategies with zero fills today vs their trailing 10-trading-day average
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=autobot
+WorkingDirectory=/opt/tradingbot
+EnvironmentFile=/opt/tradingbot/.env
+ExecStart=/opt/tradingbot/venv/bin/python /opt/tradingbot/scripts/fires_watchdog.py
+StandardOutput=journal
+StandardError=journal

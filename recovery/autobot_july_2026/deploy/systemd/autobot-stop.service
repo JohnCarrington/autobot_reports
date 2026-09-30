@@ -1,0 +1,17 @@
+# /etc/systemd/system/autobot-stop.service
+#
+# One-shot unit that stops autobot.service. Triggered by autobot-stop.timer
+# at Friday 22:00 UTC as part of the weekend-shutdown rotation.
+#
+# Runs as root so systemctl stop can act on the system-level service. The
+# actual autobot process continues to run as the `autobot` user because
+# autobot.service already specifies `User=autobot`.
+
+[Unit]
+Description=Stop AutoBot for weekend
+Documentation=file:///opt/tradingbot/deploy/WEEKEND_SHUTDOWN.md
+After=autobot.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/systemctl stop autobot.service

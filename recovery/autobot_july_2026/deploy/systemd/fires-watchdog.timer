@@ -1,0 +1,14 @@
+[Unit]
+Description=AutoBot fires-silence watchdog daily timer (ITEM 3)
+Documentation=file:/opt/tradingbot/scripts/fires_watchdog.py
+
+[Timer]
+# Default daily at 17:30 UTC. Override with a drop-in on the unit at
+# /etc/systemd/system/fires-watchdog.timer.d/override.conf if the estate
+# schedule changes.
+OnCalendar=*-*-* 17:30:00 UTC
+Persistent=true
+Unit=fires-watchdog.service
+
+[Install]
+WantedBy=timers.target

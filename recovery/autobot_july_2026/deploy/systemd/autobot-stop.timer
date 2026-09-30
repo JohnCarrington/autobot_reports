@@ -1,0 +1,19 @@
+# /etc/systemd/system/autobot-stop.timer
+#
+# Fires autobot-stop.service every Friday at 22:00 UTC (FX market close).
+# Persistent=false: if the droplet was down at the scheduled time, do NOT
+# replay a stop event at the next boot — we want to resume Monday from
+# whatever state we're in, not suppress a start.
+
+[Unit]
+Description=Weekly weekend shutdown of AutoBot (Friday 22:00 UTC)
+Documentation=file:///opt/tradingbot/deploy/WEEKEND_SHUTDOWN.md
+
+[Timer]
+OnCalendar=Fri *-*-* 22:00:00 UTC
+Persistent=false
+AccuracySec=30s
+Unit=autobot-stop.service
+
+[Install]
+WantedBy=timers.target

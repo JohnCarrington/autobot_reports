@@ -1,0 +1,25 @@
+# Never commit real env to autobot_reports.
+.env
+.env.local
+.env.production
+.env.bak
+.env.bak.*
+.env.pre-golive.*
+.env.pre-qmlive.*
+env-history/
+
+# Local venv / caches
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local logs and state (recovery package is code+config only)
+logs/
+cache/
+data/candles/
+data/tick_cache_daily/
+backups/
+briefings/
+reports/eod/
