@@ -1,0 +1,7 @@
+# Trend Runner — runtime requirements.
+# Only stdlib is required for offline replay, observation mode and unit tests.
+# ``requests`` is required only when TREND_EXECUTION_ENABLED=1 and the IG
+# executor is wired in.
+
+requests>=2.31,<3.0        # broker HTTP client (execution only)
+pytest>=8.0,<9.0           # development / CI

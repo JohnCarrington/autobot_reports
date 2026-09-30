@@ -1,0 +1,269 @@
+[
+  {
+    "day": "2026-09-23",
+    "fills": [
+      {
+        "ts": "2026-09-23T10:35:00+00:00",
+        "accepted": true,
+        "reject_reason": null,
+        "entry_price": 13279.349999999999,
+        "stop_price": 13289.55,
+        "risk_pips": 10.200000000000728,
+        "late_entry_pips": 1.6000000000021828,
+        "mode": "GRIND",
+        "direction": "DOWN",
+        "reason": "grind_pause_break_down"
+      }
+    ],
+    "exits": [
+      {
+        "ts": "2026-09-23T10:55:00+00:00",
+        "reason": "PROTECTIVE_STOP",
+        "exit_price": 13289.55,
+        "detail": "stop_hit"
+      }
+    ],
+    "trades": [
+      {
+        "direction": "DOWN",
+        "regime": "GRIND",
+        "entry_time": "2026-09-23T10:35:00+00:00",
+        "entry_price": 13279.349999999999,
+        "stop_price": 13289.55,
+        "exit_time": "2026-09-23T10:55:00+00:00",
+        "exit_price": 13289.55,
+        "exit_reason": "PROTECTIVE_STOP",
+        "net_pips": -10.200000000000728
+      }
+    ],
+    "regimes_at_london_hours": {
+      "2026-09-23T06:00": "EMERGING_DOWN",
+      "2026-09-23T06:30": "PULLBACK_DOWN",
+      "2026-09-23T07:00": "EMERGING_DOWN",
+      "2026-09-23T07:30": "PULLBACK_UP",
+      "2026-09-23T08:00": "PULLBACK_UP",
+      "2026-09-23T08:30": "EMERGING_DOWN",
+      "2026-09-23T09:00": "EMERGING_DOWN",
+      "2026-09-23T09:30": "EMERGING_DOWN",
+      "2026-09-23T10:00": "PULLBACK_DOWN",
+      "2026-09-23T10:30": "TREND_DOWN_GRIND",
+      "2026-09-23T11:00": "EMERGING_DOWN",
+      "2026-09-23T11:30": "PULLBACK_UP",
+      "2026-09-23T12:00": "EMERGING_DOWN",
+      "2026-09-23T12:30": "TREND_DOWN_GRIND",
+      "2026-09-23T13:00": "PULLBACK_DOWN",
+      "2026-09-23T13:30": "EMERGING_DOWN",
+      "2026-09-23T14:00": "EMERGING_UP",
+      "2026-09-23T14:30": "PULLBACK_DOWN",
+      "2026-09-23T15:00": "EMERGING_DOWN",
+      "2026-09-23T15:30": "EMERGING_DOWN",
+      "2026-09-23T16:00": "TREND_DOWN_GRIND",
+      "2026-09-23T16:30": "EMERGING_DOWN"
+    },
+    "note": "Sustained DOWN trend on GBPUSD."
+  },
+  {
+    "day": "2026-09-25",
+    "fills": [
+      {
+        "ts": "2026-09-23T10:35:00+00:00",
+        "accepted": true,
+        "reject_reason": null,
+        "entry_price": 13279.349999999999,
+        "stop_price": 13289.55,
+        "risk_pips": 10.200000000000728,
+        "late_entry_pips": 1.6000000000021828,
+        "mode": "GRIND",
+        "direction": "DOWN",
+        "reason": "grind_pause_break_down"
+      }
+    ],
+    "exits": [
+      {
+        "ts": "2026-09-23T10:55:00+00:00",
+        "reason": "PROTECTIVE_STOP",
+        "exit_price": 13289.55,
+        "detail": "stop_hit"
+      }
+    ],
+    "trades": [],
+    "regimes_at_london_hours": {
+      "2026-09-25T06:00": "EMERGING_UP",
+      "2026-09-25T06:30": "PULLBACK_UP",
+      "2026-09-25T07:00": "PULLBACK_UP",
+      "2026-09-25T07:30": "PULLBACK_DOWN",
+      "2026-09-25T08:00": "PULLBACK_DOWN",
+      "2026-09-25T08:30": "PULLBACK_UP",
+      "2026-09-25T09:00": "PULLBACK_UP",
+      "2026-09-25T09:30": "EMERGING_UP",
+      "2026-09-25T10:00": "TREND_UP_GRIND",
+      "2026-09-25T10:30": "PULLBACK_UP",
+      "2026-09-25T11:00": "EMERGING_UP",
+      "2026-09-25T11:30": "PULLBACK_UP",
+      "2026-09-25T12:00": "EMERGING_UP",
+      "2026-09-25T12:30": "EMERGING_DOWN",
+      "2026-09-25T13:00": "EMERGING_DOWN",
+      "2026-09-25T13:30": "EMERGING_UP",
+      "2026-09-25T14:00": "EMERGING_DOWN",
+      "2026-09-25T14:30": "PULLBACK_DOWN",
+      "2026-09-25T15:00": "EMERGING_DOWN",
+      "2026-09-25T15:30": "PULLBACK_DOWN",
+      "2026-09-25T16:00": "PULLBACK_DOWN",
+      "2026-09-25T16:30": "PULLBACK_UP"
+    },
+    "note": "Slow UP staircase followed by loss of progress."
+  },
+  {
+    "day": "2026-09-30",
+    "fills": [
+      {
+        "ts": "2026-09-23T10:35:00+00:00",
+        "accepted": true,
+        "reject_reason": null,
+        "entry_price": 13279.349999999999,
+        "stop_price": 13289.55,
+        "risk_pips": 10.200000000000728,
+        "late_entry_pips": 1.6000000000021828,
+        "mode": "GRIND",
+        "direction": "DOWN",
+        "reason": "grind_pause_break_down"
+      }
+    ],
+    "exits": [
+      {
+        "ts": "2026-09-23T10:55:00+00:00",
+        "reason": "PROTECTIVE_STOP",
+        "exit_price": 13289.55,
+        "detail": "stop_hit"
+      }
+    ],
+    "trades": [],
+    "regimes_at_london_hours": {
+      "2026-09-30T06:00": "PULLBACK_DOWN",
+      "2026-09-30T06:30": "EMERGING_DOWN",
+      "2026-09-30T07:00": "EMERGING_UP",
+      "2026-09-30T07:30": "PULLBACK_UP",
+      "2026-09-30T08:00": "EMERGING_UP",
+      "2026-09-30T08:30": "PULLBACK_DOWN",
+      "2026-09-30T09:00": "EMERGING_UP",
+      "2026-09-30T09:30": "PULLBACK_UP",
+      "2026-09-30T10:00": "EMERGING_UP",
+      "2026-09-30T10:30": "TREND_UP_GRIND",
+      "2026-09-30T11:00": "PULLBACK_UP",
+      "2026-09-30T11:30": "PULLBACK_UP",
+      "2026-09-30T12:00": "PULLBACK_UP",
+      "2026-09-30T12:30": "EMERGING_UP",
+      "2026-09-30T13:00": "PULLBACK_UP",
+      "2026-09-30T13:30": "EMERGING_UP",
+      "2026-09-30T14:00": "EMERGING_UP",
+      "2026-09-30T14:30": "PULLBACK_DOWN",
+      "2026-09-30T15:00": "EMERGING_DOWN",
+      "2026-09-30T15:30": "EMERGING_DOWN",
+      "2026-09-30T16:00": "TREND_DOWN_GRIND",
+      "2026-09-30T16:30": "EMERGING_DOWN"
+    },
+    "note": "Strong UP breakout toward R3."
+  },
+  {
+    "day": "2026-09-24",
+    "fills": [
+      {
+        "ts": "2026-09-23T10:35:00+00:00",
+        "accepted": true,
+        "reject_reason": null,
+        "entry_price": 13279.349999999999,
+        "stop_price": 13289.55,
+        "risk_pips": 10.200000000000728,
+        "late_entry_pips": 1.6000000000021828,
+        "mode": "GRIND",
+        "direction": "DOWN",
+        "reason": "grind_pause_break_down"
+      }
+    ],
+    "exits": [
+      {
+        "ts": "2026-09-23T10:55:00+00:00",
+        "reason": "PROTECTIVE_STOP",
+        "exit_price": 13289.55,
+        "detail": "stop_hit"
+      }
+    ],
+    "trades": [],
+    "regimes_at_london_hours": {
+      "2026-09-24T06:00": "EMERGING_UP",
+      "2026-09-24T06:30": "PULLBACK_UP",
+      "2026-09-24T07:00": "PULLBACK_UP",
+      "2026-09-24T07:30": "EMERGING_DOWN",
+      "2026-09-24T08:00": "PULLBACK_DOWN",
+      "2026-09-24T08:30": "EMERGING_UP",
+      "2026-09-24T09:00": "PULLBACK_UP",
+      "2026-09-24T09:30": "EMERGING_DOWN",
+      "2026-09-24T10:00": "EMERGING_DOWN",
+      "2026-09-24T10:30": "PULLBACK_DOWN",
+      "2026-09-24T11:00": "EMERGING_DOWN",
+      "2026-09-24T11:30": "EMERGING_DOWN",
+      "2026-09-24T12:00": "PULLBACK_UP",
+      "2026-09-24T12:30": "EMERGING_DOWN",
+      "2026-09-24T13:00": "EMERGING_DOWN",
+      "2026-09-24T13:30": "EMERGING_UP",
+      "2026-09-24T14:00": "EMERGING_UP",
+      "2026-09-24T14:30": "EMERGING_UP",
+      "2026-09-24T15:00": "EMERGING_DOWN",
+      "2026-09-24T15:30": "EMERGING_DOWN",
+      "2026-09-24T16:00": "PULLBACK_DOWN",
+      "2026-09-24T16:30": "PULLBACK_UP"
+    },
+    "note": "Chop day \u2014 expected no valid trend/no trade."
+  },
+  {
+    "day": "2026-09-29",
+    "fills": [
+      {
+        "ts": "2026-09-23T10:35:00+00:00",
+        "accepted": true,
+        "reject_reason": null,
+        "entry_price": 13279.349999999999,
+        "stop_price": 13289.55,
+        "risk_pips": 10.200000000000728,
+        "late_entry_pips": 1.6000000000021828,
+        "mode": "GRIND",
+        "direction": "DOWN",
+        "reason": "grind_pause_break_down"
+      }
+    ],
+    "exits": [
+      {
+        "ts": "2026-09-23T10:55:00+00:00",
+        "reason": "PROTECTIVE_STOP",
+        "exit_price": 13289.55,
+        "detail": "stop_hit"
+      }
+    ],
+    "trades": [],
+    "regimes_at_london_hours": {
+      "2026-09-29T06:00": "PULLBACK_DOWN",
+      "2026-09-29T06:30": "PULLBACK_UP",
+      "2026-09-29T07:00": "EMERGING_UP",
+      "2026-09-29T07:30": "PULLBACK_UP",
+      "2026-09-29T08:00": "PULLBACK_DOWN",
+      "2026-09-29T08:30": "EMERGING_DOWN",
+      "2026-09-29T09:00": "EMERGING_DOWN",
+      "2026-09-29T09:30": "PULLBACK_DOWN",
+      "2026-09-29T10:00": "TREND_DOWN_GRIND",
+      "2026-09-29T10:30": "EMERGING_DOWN",
+      "2026-09-29T11:00": "EMERGING_DOWN",
+      "2026-09-29T11:30": "PULLBACK_UP",
+      "2026-09-29T12:00": "EMERGING_UP",
+      "2026-09-29T12:30": "PULLBACK_UP",
+      "2026-09-29T13:00": "EMERGING_UP",
+      "2026-09-29T13:30": "EMERGING_DOWN",
+      "2026-09-29T14:00": "PULLBACK_DOWN",
+      "2026-09-29T14:30": "EMERGING_DOWN",
+      "2026-09-29T15:00": "TREND_DOWN_GRIND",
+      "2026-09-29T15:30": "PULLBACK_DOWN",
+      "2026-09-29T16:00": "EMERGING_DOWN",
+      "2026-09-29T16:30": "PULLBACK_DOWN"
+    },
+    "note": "Range/chop with intraday reversal."
+  }
+]

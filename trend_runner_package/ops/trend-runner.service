@@ -1,0 +1,25 @@
+[Unit]
+Description=Trend Runner (observation mode)
+After=network.target
+# NOTE: this unit runs OBSERVATION mode – it reads the AutoBot recorder tail.
+# It does NOT open an IG session or submit orders unless TREND_EXECUTION_ENABLED=1
+# is set in EnvironmentFile and the broker path has been explicitly wired.
+
+[Service]
+Type=simple
+User=autobot
+Group=autobot
+WorkingDirectory=/home/autobot/trend-runner
+EnvironmentFile=/home/autobot/trend-runner/.env
+ExecStart=/home/autobot/trend-runner/venv/bin/python -m trend_runner.observation_runner \
+    --archive-root /home/autobot/trend-runner/candles/GBPUSD
+Restart=on-failure
+RestartSec=15
+StandardOutput=append:/home/autobot/trend-runner/logs/trend-runner.stdout.log
+StandardError=append:/home/autobot/trend-runner/logs/trend-runner.stderr.log
+
+# Runs alongside the AutoBot recorder and does not share order-ownership with it.
+# Only one Trend Runner process may hold the ProcessLock on TREND_LOCK_PATH.
+
+[Install]
+WantedBy=multi-user.target

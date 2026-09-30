@@ -1,0 +1,5 @@
+exit_reason,trades,net_pips,avg_pips,median_pips
+PROTECTIVE_STOP,26,-435.6,-16.75,-16.35
+R3_TARGET,2,121.1,60.57,60.57
+S3_TARGET,1,121.2,121.17,121.17
+SESSION_END,17,174.5,10.26,6.8
