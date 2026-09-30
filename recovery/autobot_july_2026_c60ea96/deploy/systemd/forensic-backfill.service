@@ -1,0 +1,24 @@
+[Unit]
+Description=Forensic Outcome Backfill — populate forensic_fires.jsonl outcomes via JOIN to signal_log.jsonl
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=autobot
+Group=autobot
+WorkingDirectory=/opt/tradingbot
+ExecStart=/opt/tradingbot/venv/bin/python /opt/tradingbot/scripts/forensic_outcome_backfill.py
+# Freshness marker — only runs if ExecStart exited 0. Future alerting
+# checks the mtime / contents of this file; out-of-scope to wire the
+# alert here, but the file MUST exist for any future check to use.
+# Path lives under /opt/tradingbot/logs/ (autobot-writable) rather than
+# /var/log (root-only) to keep the User=autobot service simple. Uses
+# a wrapper script because systemd's percent-escape + sh-quote-escape +
+# printf-format-escape interaction eats JSON's required " characters
+# when written inline; the script keeps the JSON well-formed.
+ExecStartPost=/opt/tradingbot/scripts/write_forensic_backfill_freshness.sh
+StandardOutput=journal
+StandardError=journal
+TimeoutStartSec=120
+# No Restart= — oneshot. A failed run is logged in the journal; the
+# next OnCalendar tick retries automatically.

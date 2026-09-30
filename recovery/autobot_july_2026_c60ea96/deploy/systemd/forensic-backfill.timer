@@ -1,0 +1,15 @@
+[Unit]
+Description=Forensic Outcome Backfill timer (every hour at HH:05 UTC)
+
+[Timer]
+# Hourly at HH:05 — chosen to avoid hour-boundary collisions with
+# briefing/news cron and end-of-bar candle close work that lands on HH:00.
+OnCalendar=*-*-* *:05:00 UTC
+# Catch up on missed runs (e.g. after a host reboot or outage) — the
+# backfill is idempotent, so re-running buys back any window where it
+# would have been due but didn't fire.
+Persistent=true
+Unit=forensic-backfill.service
+
+[Install]
+WantedBy=timers.target

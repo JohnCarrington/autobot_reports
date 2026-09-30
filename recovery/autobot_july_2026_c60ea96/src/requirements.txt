@@ -1,0 +1,26 @@
+# --- Core runtime ---
+python-dotenv==1.0.1
+requests==2.31.0
+
+# --- Data stack (stable with our shim) ---
+pandas==2.1.4
+numpy==1.26.4
+
+# --- IG + Lightstreamer ---
+trading-ig==0.0.16
+munch==4.0.0
+lightstreamer-client-lib==1.0.3
+
+# --- Telegram Alerts ---
+python-telegram-bot==20.7
+
+# --- Improvement Agent ----
+pytest
+
+# --- briefing.v5_pia (Phase 2: Pydantic schema) ---
+pydantic>=2.0,<3.0
+
+# --- Dashboard ----
+Flask==3.1.2
+torch
+scikit-learn

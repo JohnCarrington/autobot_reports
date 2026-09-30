@@ -1,0 +1,33 @@
+# Per-pair thresholds for compute_d1_direction (9-check daily scoring).
+#
+# Cache units (the HTF cache and _TF_CTX._d1_closed both store prices as
+# rate × 10000 for 4-dp pairs, rate × 100 for JPY pairs — POINTS_PER_PIP
+# is 1.0 for every pair, so 1 pip == 1 cache unit and thresholds below
+# are in pips with no per-pair conversion).
+#
+# Tune from replay; initial values intentionally conservative.
+
+defaults:
+  pair_minimum_fan_pips: 30.0
+  pair_minimum_slope_pips: 15.0
+  atr_buffer_multiplier: 0.3
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+
+pairs:
+  GBPUSD:
+    pair_minimum_fan_pips: 30.0
+    pair_minimum_slope_pips: 15.0
+  EURUSD:
+    pair_minimum_fan_pips: 30.0
+    pair_minimum_slope_pips: 15.0
+  USDJPY:
+    pair_minimum_fan_pips: 30.0
+    pair_minimum_slope_pips: 15.0
+  USDCAD:
+    pair_minimum_fan_pips: 30.0
+    pair_minimum_slope_pips: 15.0
+  GBPJPY:
+    pair_minimum_fan_pips: 30.0
+    pair_minimum_slope_pips: 15.0

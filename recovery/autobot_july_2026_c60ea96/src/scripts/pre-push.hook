@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+# Pre-push static-analysis gate.
+# Checks files changed in this push range. Blocks if pyflakes finds undefined
+# names / referenced-before-assignment, or if pylint -E reports any error.
+# Bypass only in genuine emergencies with: git push --no-verify
+set -u
+
+REPO="/opt/tradingbot"
+cd "$REPO" || exit 1
+
+PYFLAKES="$REPO/venv/bin/pyflakes"
+PYLINT="$REPO/venv/bin/pylint"
+if [[ ! -x "$PYFLAKES" || ! -x "$PYLINT" ]]; then
+    echo "pre-push: pyflakes or pylint missing in $REPO/venv/bin — skipping" >&2
+    exit 0
+fi
+
+# git pushes a ref-list on stdin: <local_ref> <local_sha> <remote_ref> <remote_sha>
+# Collect the union of files changed across all ref updates being pushed.
+changed_files=()
+while read -r local_ref local_sha remote_ref remote_sha; do
+    [[ -z "$local_sha" || "$local_sha" == "0000000000000000000000000000000000000000" ]] && continue
+    if [[ "$remote_sha" == "0000000000000000000000000000000000000000" ]]; then
+        # New branch — diff against upstream default (origin/main).
+        range="origin/main..$local_sha"
+    else
+        range="$remote_sha..$local_sha"
+    fi
+    while IFS= read -r f; do
+        changed_files+=("$f")
+    done < <(git diff --name-only --diff-filter=ACMR "$range" 2>/dev/null || true)
+done
+
+# Dedup and keep only tracked top-level .py files under the prod set.
+mapfile -t FILES < <(
+    printf '%s\n' "${changed_files[@]}" | sort -u \
+        | grep -E '\.py$' \
+        | grep -v '^tests/' \
+        | grep -v '^tests_quarantine/' \
+        | grep -v '^ui_experiments/' \
+        | grep -v '^rest_experiments/' \
+        | grep -Ev '^(test_|backtest_|scan_|replay_|true_replay|fast_replay|sweep_replay|run_replay_batch|regen_replay|regen_briefings|backfill_|scripts/)' \
+        | while read -r f; do [[ -f "$f" ]] && echo "$f"; done
+)
+if [[ ${#FILES[@]} -eq 0 ]]; then
+    echo "pre-push: no prod .py files changed — skipping static analysis."
+else
+    echo "pre-push: static analysis on ${#FILES[@]} changed file(s)…"
+
+    # 1. pyflakes: block on undefined name / referenced before assignment.
+    PYFLAKES_OUT=$("$PYFLAKES" "${FILES[@]}" 2>&1 || true)
+    CRIT=$(echo "$PYFLAKES_OUT" | grep -E 'undefined name|referenced before assignment' || true)
+    if [[ -n "$CRIT" ]]; then
+        echo "pre-push: BLOCKED — pyflakes found undefined names or unbound locals:" >&2
+        echo "$CRIT" >&2
+        exit 1
+    fi
+
+    # 2. pylint -E: block on any error-level finding.
+    PYLINT_OUT=$("$PYLINT" -E --score=n --disable=import-error,no-name-in-module "${FILES[@]}" 2>&1 || true)
+    PYLINT_ERRS=$(echo "$PYLINT_OUT" | grep -E ':[0-9]+:[0-9]+: E[0-9]+:' || true)
+    if [[ -n "$PYLINT_ERRS" ]]; then
+        echo "pre-push: BLOCKED — pylint errors:" >&2
+        echo "$PYLINT_ERRS" >&2
+        exit 1
+    fi
+fi
+
+# 3. Strategy smoke test — always runs, not scoped to changed files,
+# because any strategy import can break from an unrelated module edit.
+echo "pre-push: strategy smoke test…"
+SMOKE="$REPO/scripts/smoke_strategies.py"
+PYBIN="$REPO/venv/bin/python3"
+if [[ -x "$SMOKE" && -x "$PYBIN" ]]; then
+    SMOKE_OUT=$("$PYBIN" "$SMOKE" 2>&1)
+    SMOKE_RC=$?
+    if [[ $SMOKE_RC -ne 0 ]]; then
+        echo "pre-push: BLOCKED — strategy smoke test failed:" >&2
+        echo "$SMOKE_OUT" >&2
+        exit 1
+    fi
+    # Print the summary line only for a clean run.
+    echo "$SMOKE_OUT" | grep -E "strategies, .* OK" || true
+else
+    echo "pre-push: smoke test script missing — skipping" >&2
+fi
+
+echo "pre-push: clean."
+exit 0

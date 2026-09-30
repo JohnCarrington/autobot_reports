@@ -1,0 +1,14 @@
+[Unit]
+Description=Refresh Finnhub economic calendar into cache/news_state_finnhub_YYYY-MM-DD.json
+Documentation=file:/opt/tradingbot/scripts/refresh_news_calendar.py
+
+[Service]
+Type=oneshot
+User=autobot
+Group=autobot
+WorkingDirectory=/opt/tradingbot
+EnvironmentFile=/opt/tradingbot/.env
+ExecStart=/opt/tradingbot/venv/bin/python /opt/tradingbot/scripts/refresh_news_calendar.py
+StandardOutput=journal
+StandardError=journal
+TimeoutStartSec=60

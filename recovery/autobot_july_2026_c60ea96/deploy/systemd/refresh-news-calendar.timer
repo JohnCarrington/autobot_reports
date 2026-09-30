@@ -1,0 +1,14 @@
+[Unit]
+Description=Refresh news calendar — every NEWS_CALENDAR_REFRESH_HOURS (4h default) on weekdays
+Documentation=file:/opt/tradingbot/scripts/refresh_news_calendar.py
+
+# Weekday-only, every 4h from 00:00 UTC. If the operator overrides
+# NEWS_CALENDAR_REFRESH_HOURS, edit this file and reload systemd; keep
+# the calendar shell env in env/10-infrastructure.env in sync.
+[Timer]
+OnCalendar=Mon..Fri *-*-* 00,04,08,12,16,20:00:00
+Unit=refresh-news-calendar.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target
