@@ -1,0 +1,152 @@
+{
+  "schema_version": "v5_pia",
+  "pair": "EURUSD",
+  "session": "NY",
+  "generated_at_utc": "2026-07-23T12:39:35Z",
+  "valid_until_utc": "2026-07-23T20:39:35Z",
+  "direction": "STAND_ASIDE",
+  "state": "STAND_ASIDE",
+  "confidence": 0,
+  "confidence_bucket": "STAND_ASIDE",
+  "confidence_breakdown": {
+    "schema_version": "v5_pia.scorer.v1",
+    "awards": {
+      "d1_ema_alignment": 15,
+      "h4_ema_alignment": 15,
+      "h4_ema_slope": 0,
+      "h1_momentum": 10,
+      "entry_proximity": 0,
+      "structural_stop": 10,
+      "rr_base": 0,
+      "rr_bonus": 0,
+      "atr_regime": 0,
+      "news_clear": 0,
+      "phase4_structure": 0
+    },
+    "diagnostics": {
+      "pre_news_bypass": {
+        "applied": false,
+        "hours_to_news": null,
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "nearest_event": null,
+        "bypass_hours_env": 48,
+        "d1_h4_disagree": false
+      },
+      "d1_ema_alignment": {
+        "d1_close": 11410.2,
+        "d1_ema_20": 11421.48835384212,
+        "aligned": true
+      },
+      "h4_ema_alignment": {
+        "h4_close": 11394.9,
+        "h4_ema_20": 11414.852325798445,
+        "aligned": true
+      },
+      "h4_ema_slope": {
+        "diff_pips": -1.7063,
+        "threshold_pips": 2.0,
+        "ok": false
+      },
+      "h1_momentum": {
+        "aligned_bars": 4,
+        "needed": 3
+      },
+      "entry_proximity": {
+        "entry": 11414.85233,
+        "nearest_level": 11452.2,
+        "distance_pips": 37.35,
+        "threshold_pips": 7.67,
+        "ok": false
+      },
+      "structural_stop": {
+        "stop": 11423.0,
+        "nearest_structural_level": 11421.0,
+        "distance_pips": 2.0,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "rr_base": {
+        "rr": 1.516,
+        "threshold": 2.0
+      },
+      "rr_bonus": {
+        "rr": 1.516,
+        "threshold": 3.0
+      },
+      "atr_regime": {
+        "reason": "missing_atr_pctl_14"
+      },
+      "news_clear": {
+        "window_utc": [
+          "2026-07-23T12:39:35.976755+00:00",
+          "2026-07-23T14:39:35.976755+00:00"
+        ],
+        "hits_in_window": [
+          {
+            "time": "12:45",
+            "currency": "EUR",
+            "event_name": "ECB Press Conference",
+            "impact": "High",
+            "forecast": "",
+            "previous": "",
+            "_dt_utc": "2026-07-23T12:45:00+00:00"
+          }
+        ],
+        "ok": false
+      },
+      "phase4_structure": {
+        "phase4_structure": "NEUTRAL",
+        "raw": "NEUTRAL",
+        "trending": false
+      }
+    },
+    "total": 50,
+    "capped": 50,
+    "displayed": 0,
+    "hard_gate_failures": [
+      "red_news_in_entry_window: ['ECB Press Conference']"
+    ],
+    "bucket": "STAND_ASIDE",
+    "pre_scoring_context": {}
+  },
+  "bias_anchor": 11414.85233,
+  "bias_anchor_label": "H4_EMA20",
+  "entry": 11414.85233,
+  "stop": 11423.0,
+  "target": 11402.5,
+  "rr": 1.516,
+  "stop_structural_level": "swing_high",
+  "target_structural_level": "swing_low",
+  "support_levels": [
+    11394.7,
+    11402.5,
+    11405.8
+  ],
+  "resistance_levels": [
+    11482.1,
+    11476.2,
+    11452.2
+  ],
+  "rationale": "We stand aside on EURUSD at this time. The ECB Press Conference is live now, creating an immediate and unquantifiable volatility risk that prevents clean entry execution. Price has drifted below the H4 EMA20 at 11414.85, and the broader structure across H1, H4, and D1 timeframes reads NEUTRAL, offering no directional conviction to lean on. Calendar pressure remains elevated with EUR-side events continuing into tomorrow, including GfK Consumer Confidence and S&P Global Manufacturing PMI Flash. No trade is taken until the news window clears and structure reasserts.",
+  "stand_aside_reason": "red_news_in_entry_window: ['ECB Press Conference']",
+  "news_in_window": true,
+  "news_event": {
+    "time": "12:45",
+    "currency": "EUR",
+    "event_name": "ECB Press Conference",
+    "impact": "High",
+    "forecast": "",
+    "previous": "",
+    "_dt_utc": "2026-07-23T12:45:00+00:00"
+  },
+  "execution": {
+    "min_confidence_to_arm": 70,
+    "executed": false,
+    "executed_at_utc": null,
+    "deal_id": null,
+    "outcome": null
+  }
+}

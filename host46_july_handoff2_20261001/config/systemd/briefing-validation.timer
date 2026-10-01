@@ -1,0 +1,10 @@
+[Unit]
+Description=Briefing schema validator timer (Mon-Fri 05:35 UTC)
+
+[Timer]
+OnCalendar=Mon-Fri *-*-* 05:35:00 UTC
+Persistent=true
+Unit=briefing-validation.service
+
+[Install]
+WantedBy=timers.target

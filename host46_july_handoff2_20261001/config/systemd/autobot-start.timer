@@ -1,0 +1,18 @@
+# /etc/systemd/system/autobot-start.timer
+#
+# Fires autobot-start.service every Sunday at 22:00 London time (FX market open).
+# Europe/London tracks BST/GMT automatically (22:00 BST = 21:00 UTC summer, 22:00 GMT
+# = 22:00 UTC winter) and stays aligned with the NY 17:00 Sunday open.
+# Persistent=true: if the droplet was down at fire time, replay the start on boot.
+[Unit]
+Description=Weekly start of AutoBot at FX market open (Sunday 22:00 London)
+Documentation=file:///opt/tradingbot/deploy/WEEKEND_SHUTDOWN.md
+
+[Timer]
+OnCalendar=Sun *-*-* 22:00:00 Europe/London
+Persistent=true
+AccuracySec=30s
+Unit=autobot-start.service
+
+[Install]
+WantedBy=timers.target

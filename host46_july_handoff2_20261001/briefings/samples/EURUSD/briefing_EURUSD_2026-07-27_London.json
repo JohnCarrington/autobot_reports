@@ -1,0 +1,33 @@
+{
+  "schema_version": "v5_pia",
+  "pair": "EURUSD",
+  "session": "London",
+  "generated_at_utc": "2026-07-27T05:36:15Z",
+  "valid_until_utc": "2026-07-27T12:36:15Z",
+  "direction": "STAND_ASIDE",
+  "state": "STAND_ASIDE",
+  "confidence": 0,
+  "confidence_bucket": "STAND_ASIDE",
+  "confidence_breakdown": {},
+  "bias_anchor": null,
+  "bias_anchor_label": null,
+  "entry": null,
+  "stop": null,
+  "target": null,
+  "rr": 0.0,
+  "stop_structural_level": null,
+  "target_structural_level": null,
+  "support_levels": [],
+  "resistance_levels": [],
+  "rationale": "No trade is taken at this time. The H4 dataset contains only four completed bars, which is insufficient to establish reliable intraday structure or confirm a momentum bias. With the 4-hour EMA unavailable and phase structure reading neutral across all timeframes, confluence conditions cannot be met. Heavy calendar pressure is present on both sides of the pair, with EUR Ifo Business Climate due imminently and USD Durable Goods Orders later today, followed by the Fed Rate Decision mid-week and a cluster of EUR and USD GDP prints on Thursday.",
+  "stand_aside_reason": "insufficient_h4_bars",
+  "news_in_window": false,
+  "news_event": null,
+  "execution": {
+    "min_confidence_to_arm": 70,
+    "executed": false,
+    "executed_at_utc": null,
+    "deal_id": null,
+    "outcome": null
+  }
+}

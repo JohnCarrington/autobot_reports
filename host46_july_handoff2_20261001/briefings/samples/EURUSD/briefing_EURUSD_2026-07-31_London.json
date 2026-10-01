@@ -1,0 +1,150 @@
+{
+  "schema_version": "v5_pia",
+  "pair": "EURUSD",
+  "session": "London",
+  "generated_at_utc": "2026-07-31T05:33:30Z",
+  "valid_until_utc": "2026-07-31T12:33:30Z",
+  "direction": "BUY",
+  "state": "ARMED",
+  "confidence": 70,
+  "confidence_bucket": "ARMED",
+  "confidence_breakdown": {
+    "schema_version": "v5_pia.scorer.v1",
+    "awards": {
+      "d1_ema_alignment": 15,
+      "h4_ema_alignment": 15,
+      "h4_ema_slope": 10,
+      "h1_momentum": 0,
+      "entry_proximity": 0,
+      "structural_stop": 10,
+      "rr_base": 15,
+      "rr_bonus": 5,
+      "atr_regime": 0,
+      "news_clear": 0,
+      "phase4_structure": 0
+    },
+    "diagnostics": {
+      "pre_news_bypass": {
+        "applied": false,
+        "hours_to_news": null,
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "nearest_event": null,
+        "bypass_hours_env": 48,
+        "d1_h4_disagree": false
+      },
+      "d1_ema_alignment": {
+        "d1_close": 11522.8,
+        "d1_ema_20": 11423.445716121614,
+        "aligned": true
+      },
+      "h4_ema_alignment": {
+        "h4_close": 11513.6,
+        "h4_ema_20": 11452.767127914445,
+        "aligned": true
+      },
+      "h4_ema_slope": {
+        "diff_pips": 39.9191,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "h1_momentum": {
+        "aligned_bars": 2,
+        "needed": 3
+      },
+      "entry_proximity": {
+        "entry": 11452.76713,
+        "nearest_level": 11364.5,
+        "distance_pips": 88.27,
+        "threshold_pips": 14.31,
+        "ok": false
+      },
+      "structural_stop": {
+        "stop": 11432.1,
+        "nearest_structural_level": 11434.1,
+        "distance_pips": 2.0,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "rr_base": {
+        "rr": 4.09,
+        "threshold": 2.0
+      },
+      "rr_bonus": {
+        "rr": 4.09,
+        "threshold": 3.0
+      },
+      "atr_regime": {
+        "reason": "missing_atr_pctl_14"
+      },
+      "news_clear": {
+        "window_utc": [
+          "2026-07-31T05:33:30.093667+00:00",
+          "2026-07-31T07:33:30.093667+00:00"
+        ],
+        "hits_in_window": [
+          {
+            "time": "06:45",
+            "currency": "EUR",
+            "event_name": "Inflation Rate YoY Prel",
+            "impact": "High",
+            "forecast": "1.8",
+            "previous": "1.8",
+            "_dt_utc": "2026-07-31T06:45:00+00:00"
+          }
+        ],
+        "ok": false
+      },
+      "phase4_structure": {
+        "phase4_structure": "NEUTRAL",
+        "raw": "NEUTRAL",
+        "trending": false
+      }
+    },
+    "total": 70,
+    "capped": 70,
+    "displayed": 70,
+    "hard_gate_failures": [],
+    "bucket": "ARMED",
+    "pre_scoring_context": {}
+  },
+  "bias_anchor": 11452.76713,
+  "bias_anchor_label": "H4_EMA20",
+  "entry": 11452.76713,
+  "stop": 11432.1,
+  "target": 11537.3,
+  "rr": 4.09,
+  "stop_structural_level": "swing_low",
+  "target_structural_level": "swing_high",
+  "support_levels": [
+    11352.9,
+    11363.8,
+    11364.5
+  ],
+  "resistance_levels": [
+    11537.3,
+    11474.2,
+    11435.7
+  ],
+  "rationale": null,
+  "stand_aside_reason": null,
+  "news_in_window": true,
+  "news_event": {
+    "time": "06:45",
+    "currency": "EUR",
+    "event_name": "Inflation Rate YoY Prel",
+    "impact": "High",
+    "forecast": "1.8",
+    "previous": "1.8",
+    "_dt_utc": "2026-07-31T06:45:00+00:00"
+  },
+  "execution": {
+    "min_confidence_to_arm": 70,
+    "executed": false,
+    "executed_at_utc": null,
+    "deal_id": null,
+    "outcome": null
+  }
+}

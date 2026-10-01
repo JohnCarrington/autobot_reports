@@ -1,0 +1,8 @@
+[Unit]
+Description=Briefing schema validator (one-shot)
+
+[Service]
+Type=oneshot
+User=autobot
+Group=autobot
+ExecStart=/opt/tradingbot/venv/bin/python3 /opt/tradingbot/scripts/validate_briefing.py

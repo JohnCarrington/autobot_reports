@@ -1,0 +1,16 @@
+[Unit]
+Description=TIME SERIES - AUTOBOT V3 - GBPUSD
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=autobot
+WorkingDirectory=/opt/tradingbot
+EnvironmentFile=/opt/tradingbot/.env
+ExecStart=/opt/tradingbot/venv/bin/python /opt/tradingbot/autobot.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

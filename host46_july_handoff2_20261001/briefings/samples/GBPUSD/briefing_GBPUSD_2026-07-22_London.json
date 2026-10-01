@@ -1,0 +1,150 @@
+{
+  "schema_version": "v5_pia",
+  "pair": "GBPUSD",
+  "session": "London",
+  "generated_at_utc": "2026-07-22T05:33:09Z",
+  "valid_until_utc": "2026-07-22T12:33:09Z",
+  "direction": "STAND_ASIDE",
+  "state": "STAND_ASIDE",
+  "confidence": 50,
+  "confidence_bucket": "WATCH",
+  "confidence_breakdown": {
+    "schema_version": "v5_pia.scorer.v1",
+    "awards": {
+      "d1_ema_alignment": 15,
+      "h4_ema_alignment": 15,
+      "h4_ema_slope": 10,
+      "h1_momentum": 0,
+      "entry_proximity": 0,
+      "structural_stop": 10,
+      "rr_base": 0,
+      "rr_bonus": 0,
+      "atr_regime": 0,
+      "news_clear": 0,
+      "phase4_structure": 0
+    },
+    "diagnostics": {
+      "pre_news_bypass": {
+        "applied": false,
+        "hours_to_news": null,
+        "currencies": [
+          "GBP",
+          "USD"
+        ],
+        "nearest_event": null,
+        "bypass_hours_env": 48,
+        "d1_h4_disagree": false
+      },
+      "d1_ema_alignment": {
+        "d1_close": 13378.25,
+        "d1_ema_20": 13406.897603920197,
+        "aligned": true
+      },
+      "h4_ema_alignment": {
+        "h4_close": 13383.15,
+        "h4_ema_20": 13418.484765824327,
+        "aligned": true
+      },
+      "h4_ema_slope": {
+        "diff_pips": -25.7042,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "h1_momentum": {
+        "aligned_bars": 2,
+        "needed": 3
+      },
+      "entry_proximity": {
+        "entry": 13418.48477,
+        "nearest_level": 13454.7,
+        "distance_pips": 36.22,
+        "threshold_pips": 12.28,
+        "ok": false
+      },
+      "structural_stop": {
+        "stop": 13456.7,
+        "nearest_structural_level": 13454.7,
+        "distance_pips": 2.0,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "rr_base": {
+        "rr": 1.557,
+        "threshold": 2.0
+      },
+      "rr_bonus": {
+        "rr": 1.557,
+        "threshold": 3.0
+      },
+      "atr_regime": {
+        "reason": "missing_atr_pctl_14"
+      },
+      "news_clear": {
+        "window_utc": [
+          "2026-07-22T05:33:09.490034+00:00",
+          "2026-07-22T07:33:09.490034+00:00"
+        ],
+        "hits_in_window": [
+          {
+            "time": "06:00",
+            "currency": "GBP",
+            "event_name": "Inflation Rate YoY",
+            "impact": "High",
+            "forecast": "2.7",
+            "previous": "2.8",
+            "_dt_utc": "2026-07-22T06:00:00+00:00"
+          }
+        ],
+        "ok": false
+      },
+      "phase4_structure": {
+        "phase4_structure": "NEUTRAL",
+        "raw": "NEUTRAL",
+        "trending": false
+      }
+    },
+    "total": 50,
+    "capped": 50,
+    "displayed": 50,
+    "hard_gate_failures": [],
+    "bucket": "WATCH",
+    "pre_scoring_context": {}
+  },
+  "bias_anchor": 13418.48477,
+  "bias_anchor_label": "H4_EMA20",
+  "entry": 13418.48477,
+  "stop": 13456.7,
+  "target": 13359.0,
+  "rr": 1.557,
+  "stop_structural_level": "swing_high",
+  "target_structural_level": "swing_low",
+  "support_levels": [
+    13359.0,
+    13380.4,
+    13412.8
+  ],
+  "resistance_levels": [
+    13557.9,
+    13480.5,
+    13454.7
+  ],
+  "rationale": null,
+  "stand_aside_reason": "bucket=WATCH_below_arm_threshold",
+  "news_in_window": true,
+  "news_event": {
+    "time": "06:00",
+    "currency": "GBP",
+    "event_name": "Inflation Rate YoY",
+    "impact": "High",
+    "forecast": "2.7",
+    "previous": "2.8",
+    "_dt_utc": "2026-07-22T06:00:00+00:00"
+  },
+  "execution": {
+    "min_confidence_to_arm": 70,
+    "executed": false,
+    "executed_at_utc": null,
+    "deal_id": null,
+    "outcome": null
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "v5_pia",
+  "pair": "USDJPY",
+  "session": "London",
+  "generated_at_utc": "2026-07-01T05:34:39Z",
+  "valid_until_utc": "2026-07-01T12:34:39Z",
+  "direction": "STAND_ASIDE",
+  "state": "STAND_ASIDE",
+  "confidence": 0,
+  "confidence_bucket": "STAND_ASIDE",
+  "confidence_breakdown": {},
+  "bias_anchor": null,
+  "bias_anchor_label": null,
+  "entry": null,
+  "stop": null,
+  "target": null,
+  "rr": 0.0,
+  "stop_structural_level": null,
+  "target_structural_level": null,
+  "support_levels": [],
+  "resistance_levels": [],
+  "rationale": null,
+  "stand_aside_reason": "data_unavailable",
+  "news_in_window": false,
+  "news_event": null,
+  "execution": {
+    "min_confidence_to_arm": 70,
+    "executed": false,
+    "executed_at_utc": null,
+    "deal_id": null,
+    "outcome": null
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "schema_version": "v5_pia",
+  "pair": "GBPUSD",
+  "session": "London",
+  "generated_at_utc": "2026-07-29T05:35:22Z",
+  "valid_until_utc": "2026-07-29T12:35:22Z",
+  "direction": "SELL",
+  "state": "ARMED",
+  "confidence": 75,
+  "confidence_bucket": "ARMED",
+  "confidence_breakdown": {
+    "schema_version": "v5_pia.scorer.v1",
+    "awards": {
+      "d1_ema_alignment": 15,
+      "h4_ema_alignment": 15,
+      "h4_ema_slope": 10,
+      "h1_momentum": 0,
+      "entry_proximity": 0,
+      "structural_stop": 10,
+      "rr_base": 15,
+      "rr_bonus": 0,
+      "atr_regime": 0,
+      "news_clear": 10,
+      "phase4_structure": 0
+    },
+    "diagnostics": {
+      "pre_news_bypass": {
+        "applied": false,
+        "hours_to_news": null,
+        "currencies": [
+          "GBP",
+          "USD"
+        ],
+        "nearest_event": null,
+        "bypass_hours_env": 48,
+        "d1_h4_disagree": false
+      },
+      "d1_ema_alignment": {
+        "d1_close": 13287.25,
+        "d1_ema_20": 13354.32445777709,
+        "aligned": true
+      },
+      "h4_ema_alignment": {
+        "h4_close": 13295.45,
+        "h4_ema_20": 13309.137331035,
+        "aligned": true
+      },
+      "h4_ema_slope": {
+        "diff_pips": -12.6388,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "h1_momentum": {
+        "aligned_bars": 1,
+        "needed": 3
+      },
+      "entry_proximity": {
+        "entry": 13309.13733,
+        "nearest_level": 13363.7,
+        "distance_pips": 54.56,
+        "threshold_pips": 10.53,
+        "ok": false
+      },
+      "structural_stop": {
+        "stop": 13313.2,
+        "nearest_structural_level": 13311.2,
+        "distance_pips": 2.0,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "rr_base": {
+        "rr": 2.717,
+        "threshold": 2.0
+      },
+      "rr_bonus": {
+        "rr": 2.717,
+        "threshold": 3.0
+      },
+      "atr_regime": {
+        "atr_pctl_14": 2.7777777777777777,
+        "ok": false,
+        "band": [
+          30.0,
+          80.0
+        ]
+      },
+      "news_clear": {
+        "window_utc": [
+          "2026-07-29T05:35:22.030038+00:00",
+          "2026-07-29T07:35:22.030038+00:00"
+        ],
+        "hits_in_window": [],
+        "ok": true
+      },
+      "phase4_structure": {
+        "phase4_structure": "NEUTRAL",
+        "raw": "NEUTRAL",
+        "trending": false
+      }
+    },
+    "total": 75,
+    "capped": 75,
+    "displayed": 75,
+    "hard_gate_failures": [],
+    "bucket": "ARMED",
+    "pre_scoring_context": {}
+  },
+  "bias_anchor": 13309.13733,
+  "bias_anchor_label": "H4_EMA20",
+  "entry": 13309.13733,
+  "stop": 13313.2,
+  "target": 13298.1,
+  "rr": 2.717,
+  "stop_structural_level": "swing_high",
+  "target_structural_level": "swing_low",
+  "support_levels": [
+    13272.9,
+    13283.8,
+    13298.1
+  ],
+  "resistance_levels": [
+    13454.7,
+    13394.9,
+    13363.7
+  ],
+  "rationale": null,
+  "stand_aside_reason": null,
+  "news_in_window": false,
+  "news_event": null,
+  "execution": {
+    "min_confidence_to_arm": 70,
+    "executed": false,
+    "executed_at_utc": null,
+    "deal_id": null,
+    "outcome": null
+  }
+}

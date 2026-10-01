@@ -1,0 +1,13 @@
+# /etc/systemd/system/autobot-start.service
+#
+# One-shot unit that starts autobot.service. Triggered by autobot-start.timer
+# at Monday 06:00 UTC — well before London Open (07:00 UTC) to give preload
+# + morning briefing time to complete.
+
+[Unit]
+Description=Start AutoBot after weekend
+Documentation=file:///opt/tradingbot/deploy/WEEKEND_SHUTDOWN.md
+
+[Service]
+Type=oneshot
+ExecStart=/bin/systemctl start autobot.service

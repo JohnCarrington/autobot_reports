@@ -1,0 +1,164 @@
+{
+  "schema_version": "v5_pia",
+  "pair": "EURUSD",
+  "session": "NY",
+  "generated_at_utc": "2026-07-01T12:30:56Z",
+  "valid_until_utc": "2026-07-01T20:30:56Z",
+  "direction": "STAND_ASIDE",
+  "state": "STAND_ASIDE",
+  "confidence": 55,
+  "confidence_bucket": "WATCH",
+  "confidence_breakdown": {
+    "schema_version": "v5_pia.scorer.v1",
+    "awards": {
+      "d1_ema_alignment": 15,
+      "h4_ema_alignment": 15,
+      "h4_ema_slope": 0,
+      "h1_momentum": 10,
+      "entry_proximity": 0,
+      "structural_stop": 10,
+      "rr_base": 0,
+      "rr_bonus": 0,
+      "atr_regime": 5,
+      "news_clear": 0,
+      "phase4_structure": 0
+    },
+    "diagnostics": {
+      "pre_news_bypass": {
+        "applied": false,
+        "hours_to_news": null,
+        "currencies": [
+          "EUR",
+          "USD"
+        ],
+        "nearest_event": null,
+        "bypass_hours_env": 48,
+        "d1_h4_disagree": false
+      },
+      "d1_ema_alignment": {
+        "d1_close": 11413.3,
+        "d1_ema_20": 11442.371196862126,
+        "aligned": true
+      },
+      "h4_ema_alignment": {
+        "h4_close": 11385.8,
+        "h4_ema_20": 11401.546670933249,
+        "aligned": true
+      },
+      "h4_ema_slope": {
+        "diff_pips": -1.0599,
+        "threshold_pips": 2.0,
+        "ok": false
+      },
+      "h1_momentum": {
+        "aligned_bars": 5,
+        "needed": 3
+      },
+      "entry_proximity": {
+        "entry": 11401.54667,
+        "nearest_level": 11388.0,
+        "distance_pips": 13.55,
+        "threshold_pips": 10.1,
+        "ok": false
+      },
+      "structural_stop": {
+        "stop": 11432.4,
+        "nearest_structural_level": 11430.4,
+        "distance_pips": 2.0,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "rr_base": {
+        "rr": 1.541,
+        "threshold": 2.0
+      },
+      "rr_bonus": {
+        "rr": 1.541,
+        "threshold": 3.0
+      },
+      "atr_regime": {
+        "atr_pctl_14": 75.34722222222221,
+        "ok": true,
+        "band": [
+          30.0,
+          80.0
+        ]
+      },
+      "news_clear": {
+        "window_utc": [
+          "2026-07-01T12:30:56.542343+00:00",
+          "2026-07-01T14:30:56.542343+00:00"
+        ],
+        "hits_in_window": [
+          {
+            "time": "13:00",
+            "currency": "USD",
+            "event_name": "Fed Chair Warsh Speech",
+            "impact": "High",
+            "forecast": "",
+            "previous": "",
+            "_dt_utc": "2026-07-01T13:00:00+00:00"
+          },
+          {
+            "time": "14:00",
+            "currency": "USD",
+            "event_name": "ISM Manufacturing PMI",
+            "impact": "High",
+            "forecast": "54",
+            "previous": "54",
+            "_dt_utc": "2026-07-01T14:00:00+00:00"
+          }
+        ],
+        "ok": false
+      },
+      "phase4_structure": {
+        "phase4_structure": "NEUTRAL",
+        "raw": "NEUTRAL",
+        "trending": false
+      }
+    },
+    "total": 55,
+    "capped": 55,
+    "displayed": 55,
+    "hard_gate_failures": [],
+    "bucket": "WATCH",
+    "pre_scoring_context": {}
+  },
+  "bias_anchor": 11401.54667,
+  "bias_anchor_label": "H4_EMA20",
+  "entry": 11401.54667,
+  "stop": 11432.4,
+  "target": 11354.0,
+  "rr": 1.541,
+  "stop_structural_level": "swing_high",
+  "target_structural_level": "swing_low",
+  "support_levels": [
+    11324.2,
+    11332.9,
+    11354.0
+  ],
+  "resistance_levels": [
+    11434.0,
+    11388.0,
+    11368.0
+  ],
+  "rationale": null,
+  "stand_aside_reason": "bucket=WATCH_below_arm_threshold",
+  "news_in_window": true,
+  "news_event": {
+    "time": "13:00",
+    "currency": "USD",
+    "event_name": "Fed Chair Warsh Speech",
+    "impact": "High",
+    "forecast": "",
+    "previous": "",
+    "_dt_utc": "2026-07-01T13:00:00+00:00"
+  },
+  "execution": {
+    "min_confidence_to_arm": 70,
+    "executed": false,
+    "executed_at_utc": null,
+    "deal_id": null,
+    "outcome": null
+  }
+}

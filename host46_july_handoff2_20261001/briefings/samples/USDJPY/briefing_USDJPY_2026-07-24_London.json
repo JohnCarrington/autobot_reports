@@ -1,0 +1,132 @@
+{
+  "schema_version": "v5_pia",
+  "pair": "USDJPY",
+  "session": "London",
+  "generated_at_utc": "2026-07-24T05:41:02Z",
+  "valid_until_utc": "2026-07-24T12:41:02Z",
+  "direction": "BUY",
+  "state": "ARMED",
+  "confidence": 75,
+  "confidence_bucket": "ARMED",
+  "confidence_breakdown": {
+    "schema_version": "v5_pia.scorer.v1",
+    "awards": {
+      "d1_ema_alignment": 15,
+      "h4_ema_alignment": 15,
+      "h4_ema_slope": 10,
+      "h1_momentum": 0,
+      "entry_proximity": 0,
+      "structural_stop": 10,
+      "rr_base": 15,
+      "rr_bonus": 0,
+      "atr_regime": 0,
+      "news_clear": 10,
+      "phase4_structure": 0
+    },
+    "diagnostics": {
+      "pre_news_bypass": {
+        "applied": false,
+        "hours_to_news": null,
+        "currencies": [
+          "USD",
+          "JPY"
+        ],
+        "nearest_event": null,
+        "bypass_hours_env": 48,
+        "d1_h4_disagree": false
+      },
+      "d1_ema_alignment": {
+        "d1_close": 16383.8,
+        "d1_ema_20": 16267.525266170238,
+        "aligned": true
+      },
+      "h4_ema_alignment": {
+        "h4_close": 16380.8,
+        "h4_ema_20": 16327.756763464102,
+        "aligned": true
+      },
+      "h4_ema_slope": {
+        "diff_pips": 36.076,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "h1_momentum": {
+        "aligned_bars": 2,
+        "needed": 3
+      },
+      "entry_proximity": {
+        "entry": 16327.75676,
+        "nearest_level": 16219.2,
+        "distance_pips": 108.56,
+        "threshold_pips": 11.15,
+        "ok": false
+      },
+      "structural_stop": {
+        "stop": 16297.0,
+        "nearest_structural_level": 16299.0,
+        "distance_pips": 2.0,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "rr_base": {
+        "rr": 2.313,
+        "threshold": 2.0
+      },
+      "rr_bonus": {
+        "rr": 2.313,
+        "threshold": 3.0
+      },
+      "atr_regime": {
+        "reason": "missing_atr_pctl_14"
+      },
+      "news_clear": {
+        "window_utc": [
+          "2026-07-24T05:41:02.337481+00:00",
+          "2026-07-24T07:41:02.337481+00:00"
+        ],
+        "hits_in_window": [],
+        "ok": true
+      },
+      "phase4_structure": {
+        "phase4_structure": "NEUTRAL",
+        "raw": "NEUTRAL",
+        "trending": false
+      }
+    },
+    "total": 75,
+    "capped": 75,
+    "displayed": 75,
+    "hard_gate_failures": [],
+    "bucket": "ARMED",
+    "pre_scoring_context": {}
+  },
+  "bias_anchor": 16327.75676,
+  "bias_anchor_label": "H4_EMA20",
+  "entry": 16327.75676,
+  "stop": 16297.0,
+  "target": 16398.9,
+  "rr": 2.313,
+  "stop_structural_level": "swing_low",
+  "target_structural_level": "swing_high",
+  "support_levels": [
+    16198.0,
+    16211.9,
+    16219.2
+  ],
+  "resistance_levels": [
+    16398.9,
+    16324.0,
+    16254.3
+  ],
+  "rationale": null,
+  "stand_aside_reason": null,
+  "news_in_window": false,
+  "news_event": null,
+  "execution": {
+    "min_confidence_to_arm": 70,
+    "executed": false,
+    "executed_at_utc": null,
+    "deal_id": null,
+    "outcome": null
+  }
+}

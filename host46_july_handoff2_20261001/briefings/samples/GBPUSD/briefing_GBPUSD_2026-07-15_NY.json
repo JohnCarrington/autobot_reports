@@ -1,0 +1,152 @@
+{
+  "schema_version": "v5_pia",
+  "pair": "GBPUSD",
+  "session": "NY",
+  "generated_at_utc": "2026-07-15T12:34:40Z",
+  "valid_until_utc": "2026-07-15T20:34:40Z",
+  "direction": "STAND_ASIDE",
+  "state": "STAND_ASIDE",
+  "confidence": 0,
+  "confidence_bucket": "STAND_ASIDE",
+  "confidence_breakdown": {
+    "schema_version": "v5_pia.scorer.v1",
+    "awards": {
+      "d1_ema_alignment": 15,
+      "h4_ema_alignment": 15,
+      "h4_ema_slope": 10,
+      "h1_momentum": 10,
+      "entry_proximity": 0,
+      "structural_stop": 10,
+      "rr_base": 0,
+      "rr_bonus": 0,
+      "atr_regime": 0,
+      "news_clear": 0,
+      "phase4_structure": 0
+    },
+    "diagnostics": {
+      "pre_news_bypass": {
+        "applied": false,
+        "hours_to_news": null,
+        "currencies": [
+          "GBP",
+          "USD"
+        ],
+        "nearest_event": null,
+        "bypass_hours_env": 48,
+        "d1_h4_disagree": false
+      },
+      "d1_ema_alignment": {
+        "d1_close": 13396.25,
+        "d1_ema_20": 13338.396598798217,
+        "aligned": true
+      },
+      "h4_ema_alignment": {
+        "h4_close": 13409.95,
+        "h4_ema_20": 13389.624115576247,
+        "aligned": true
+      },
+      "h4_ema_slope": {
+        "diff_pips": 7.5347,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "h1_momentum": {
+        "aligned_bars": 3,
+        "needed": 3
+      },
+      "entry_proximity": {
+        "entry": 13389.62412,
+        "nearest_level": 13366.6,
+        "distance_pips": 23.02,
+        "threshold_pips": 15.05,
+        "ok": false
+      },
+      "structural_stop": {
+        "stop": 13364.6,
+        "nearest_structural_level": 13366.6,
+        "distance_pips": 2.0,
+        "threshold_pips": 2.0,
+        "ok": true
+      },
+      "rr_base": {
+        "rr": 1.613,
+        "threshold": 2.0
+      },
+      "rr_bonus": {
+        "rr": 1.613,
+        "threshold": 3.0
+      },
+      "atr_regime": {
+        "reason": "missing_atr_pctl_14"
+      },
+      "news_clear": {
+        "window_utc": [
+          "2026-07-15T12:34:40.518847+00:00",
+          "2026-07-15T14:34:40.518847+00:00"
+        ],
+        "hits_in_window": [
+          {
+            "time": "14:00",
+            "currency": "USD",
+            "event_name": "Fed Chair Warsh Testimony",
+            "impact": "High",
+            "forecast": "",
+            "previous": "",
+            "_dt_utc": "2026-07-15T14:00:00+00:00"
+          }
+        ],
+        "ok": false
+      },
+      "phase4_structure": {
+        "phase4_structure": "NEUTRAL",
+        "raw": "NEUTRAL",
+        "trending": false
+      }
+    },
+    "total": 60,
+    "capped": 60,
+    "displayed": 0,
+    "hard_gate_failures": [
+      "red_news_in_entry_window: ['PPI MoM']"
+    ],
+    "bucket": "STAND_ASIDE",
+    "pre_scoring_context": {}
+  },
+  "bias_anchor": 13389.62412,
+  "bias_anchor_label": "H4_EMA20",
+  "entry": 13389.62412,
+  "stop": 13364.6,
+  "target": 13430.0,
+  "rr": 1.613,
+  "stop_structural_level": "swing_low",
+  "target_structural_level": "swing_high",
+  "support_levels": [
+    13322.0,
+    13340.1,
+    13366.6
+  ],
+  "resistance_levels": [
+    13451.8,
+    13443.3,
+    13430.0
+  ],
+  "rationale": null,
+  "stand_aside_reason": "red_news_in_entry_window: ['PPI MoM']",
+  "news_in_window": true,
+  "news_event": {
+    "time": "14:00",
+    "currency": "USD",
+    "event_name": "Fed Chair Warsh Testimony",
+    "impact": "High",
+    "forecast": "",
+    "previous": "",
+    "_dt_utc": "2026-07-15T14:00:00+00:00"
+  },
+  "execution": {
+    "min_confidence_to_arm": 70,
+    "executed": false,
+    "executed_at_utc": null,
+    "deal_id": null,
+    "outcome": null
+  }
+}
