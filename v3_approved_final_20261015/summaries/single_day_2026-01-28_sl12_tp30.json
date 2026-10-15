@@ -1,0 +1,1705 @@
+{
+  "target_date": "2026-01-28",
+  "mode": "sl12_tp30",
+  "warmup_days": 60,
+  "cfg": {
+    "exit_mode": "june",
+    "june_sl_pips": 12.0,
+    "june_tp_pips": 30.0,
+    "june_partial_pips": 10.0,
+    "squeeze_enabled": true,
+    "trend_enabled": true,
+    "htf_direction_enabled": true
+  },
+  "use_ticks": true,
+  "use_qm": true,
+  "journal_target_day": [
+    {
+      "text": "Ignored long signal at 00:10: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "A"
+    },
+    {
+      "text": "Pullback in the proven long trend: 00:10 candle dipped to 13789.2 at h1_swing (13790.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 00:15 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 00:15 candle dipped to 13795.3 at 5M EMA13 (13797.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 00:20 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 00:20 candle dipped to 13797.5 at 5M middle band (13797.6) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M middle band"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 00:25 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 00:25 candle dipped to 13797.1 at 5M middle band (13797.7) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M middle band"
+    },
+    {
+      "text": "Ignored short signal at 00:30: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "SHORT",
+      "setup": "A"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 00:30 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 00:35 candle dipped to 13797.5 at 5M middle band (13797.4) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M middle band"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 00:40 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 00:40 candle dipped to 13798.0 at 5M middle band (13797.6) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M middle band"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 00:45 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 00:55 candle dipped to 13800.6 at 5M EMA13 (13800.2) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 01:00 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 01:00 candle dipped to 13804.0 at 5M EMA13 (13801.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 01:05 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 01:05 candle dipped to 13804.2 at 5M EMA13 (13801.8) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 01:10 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 01:10 candle dipped to 13805.1 at 5M EMA13 (13802.8) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 01:15 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 01:15 candle dipped to 13808.4 at 5M EMA13 (13804.3) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Ignored short signal at 01:20: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "SHORT",
+      "setup": "A"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 01:20 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 01:25 candle dipped to 13804.8 at 5M EMA13 (13805.2) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 01:30 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 01:30 candle dipped to 13809.0 at 5M EMA13 (13805.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 01:35 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 01:50 candle dipped to 13804.0 at 5M middle band (13804.6) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M middle band"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 01:55 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 02:05 candle dipped to 13805.3 at 5M EMA21 (13805.3) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA21"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 02:10 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 02:10 candle dipped to 13807.5 at 5M EMA21 (13807.3) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA21"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 02:15 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Ignored short signal at 02:20: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "SHORT",
+      "setup": "A"
+    },
+    {
+      "text": "Ignored short signal at 02:25: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "SHORT",
+      "setup": "A"
+    },
+    {
+      "text": "Pullback in the proven long trend: 02:40 candle dipped to 13794.6 at h1_swing (13790.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 02:45 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 02:50 candle dipped to 13794.3 at h1_swing (13790.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 02:55 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 02:55 candle dipped to 13796.2 at round_00 (13800.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "round_00"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 03:00 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 03:05 candle dipped to 13794.4 at h1_swing (13790.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 03:10 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 03:15 candle dipped to 13794.8 at h1_swing (13790.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 03:20 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 03:20 candle dipped to 13804.2 at 5M EMA21 (13804.1) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA21"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 03:25 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 03:25 candle dipped to 13804.0 at 5M EMA13 (13804.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 03:30 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Exhaustion candidate: the down-move has travelled 33 pips into h1_swing_low (13774.9). No new short continuation entries. Evidence: MACD histogram -0.37 (expanding), RSI(3) 5, H1 Aroon 21/0.",
+      "event": "EXHAUSTION_CANDIDATE",
+      "move": "SHORT",
+      "travelled": 32.95000000000073,
+      "level": "h1_swing_low"
+    },
+    {
+      "text": "Ignored long signal at 03:55: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "A"
+    },
+    {
+      "text": "Pullback in the proven long trend: 04:15 candle dipped to 13778.2 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 04:20 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 04:20 candle dipped to 13777.8 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 04:25 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 04:50 candle dipped to 13784.8 at 5M EMA13 (13787.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 04:55 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 05:05 candle dipped to 13779.8 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 05:10 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 05:10 candle dipped to 13784.4 at 5M middle band (13786.8) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M middle band"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 05:15 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Ignored long signal at 05:25: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "A"
+    },
+    {
+      "text": "Pullback in the proven long trend: 05:25 candle dipped to 13776.5 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 05:30 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 05:30 candle dipped to 13779.2 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 05:35 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 05:35 candle dipped to 13785.3 at 5M middle band (13785.1) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M middle band"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 05:40 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 05:40 candle dipped to 13788.9 at 5M EMA21 (13788.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA21"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 05:45 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 05:45 candle dipped to 13790.9 at h1_swing (13790.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing"
+    },
+    {
+      "text": "Ignored short signal at 05:50: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "SHORT",
+      "setup": "A"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 05:50 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Signal: long at 06:20 \u2014 pierced the lower band to 13770.6 at h1_swing_low (13774.9) and closed back inside. Waiting for confirmation.",
+      "event": "SIGNAL",
+      "side": "LONG",
+      "level": "h1_swing_low"
+    },
+    {
+      "text": "Pullback in the proven long trend: 06:20 candle dipped to 13770.6 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "No confirmation at 06:25: the long signal from 06:20 at h1_swing_low (13774.9) lapsed.",
+      "event": "NO_CONFIRMATION"
+    },
+    {
+      "text": "Pullback hold at h1_swing_low not confirmed at 06:25.",
+      "event": "PULLBACK_NO_CONFIRMATION"
+    },
+    {
+      "text": "Pullback in the proven long trend: 06:40 candle dipped to 13773.2 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Armed: buy when price trades above 13782.7 (trend pullback held h1_swing_low at 13774.9; confirmation 06:45).",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13782.7,
+      "setup": "TREND"
+    },
+    {
+      "text": "Opened long at 13782.7, stop 13770.7 (12.0 pips). Trend pullback at h1_swing_low (13774.9); signal 06:40, confirmation 06:45. TP 13812.7 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "LONG",
+      "entry": 13782.7,
+      "stop": 13770.7,
+      "setup": "TREND",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": "WAITING",
+      "mode": "BOUNCE_TR_L"
+    },
+    {
+      "text": "Pullback in the proven long trend: 07:05 candle dipped to 13770.8 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Armed: buy when price trades above 13783.6 (trend pullback held h1_swing_low at 13774.9; confirmation 07:10).",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13783.65,
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 07:20 candle dipped to 13779.1 at 5M EMA13 (13778.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Opened long at 13783.6, stop 13771.6 (12.0 pips). Trend pullback at h1_swing_low (13774.9); signal 07:05, confirmation 07:10. TP 13813.6 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "LONG",
+      "entry": 13783.65,
+      "stop": 13771.65,
+      "setup": "TREND",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": "WAITING",
+      "mode": "BOUNCE_TR_L"
+    },
+    {
+      "text": "Trend pullback long confirmation at 07:25 ignored \u2014 busy with position TREND long entry 13783.6.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "TREND",
+      "level": "5M EMA13",
+      "busy_with": "position TREND long entry 13783.6"
+    },
+    {
+      "text": "Ignored short setup-A signal at 07:40: HTF direction is BUY (D1 close 13801.85 vs EMA20 13484.669439419675; H4 close 13786.8 vs EMA20 13683.40777768352).",
+      "event": "SKIP_AGAINST_HTF_DIRECTION",
+      "side": "SHORT",
+      "setup": "A",
+      "htf_direction": "BUY"
+    },
+    {
+      "text": "Partial banked: closed 1 of 2 at 13793.6 (+10.0 pips, weighted +10.00).",
+      "event": "PARTIAL_BANKED",
+      "exit": 13793.65,
+      "size_closed": 1.0,
+      "pips_leg": 10.0,
+      "pips_weighted": 10.0,
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Stop moved from 13771.6 to entry 13783.6 after partial bank.",
+      "event": "STOP_TO_BE",
+      "stop": 13783.65,
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Pullback in the proven long trend: 08:30 candle dipped to 13772.1 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Pullback hold at h1_swing_low not confirmed at 08:35.",
+      "event": "PULLBACK_NO_CONFIRMATION"
+    },
+    {
+      "text": "Pullback in the proven long trend: 08:40 candle dipped to 13776.1 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Pullback hold at h1_swing_low not confirmed at 08:45.",
+      "event": "PULLBACK_NO_CONFIRMATION"
+    },
+    {
+      "text": "Ignored long signal at 08:55: band pierce at 13765.2 is not within 5 pips of a view level.",
+      "event": "SIGNAL_NOT_AT_LEVEL",
+      "extreme": 13765.25
+    },
+    {
+      "text": "Pullback in the proven long trend: 09:05 candle dipped to 13770.2 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Armed: buy when price trades above 13779.5 (trend pullback held h1_swing_low at 13774.9; confirmation 09:10).",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13779.5,
+      "setup": "TREND"
+    },
+    {
+      "text": "Opened long at 13779.5, stop 13767.5 (12.0 pips). Trend pullback at h1_swing_low (13774.9); signal 09:05, confirmation 09:10. TP 13809.5 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "LONG",
+      "entry": 13779.5,
+      "stop": 13767.5,
+      "setup": "TREND",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": "WAITING",
+      "mode": "BOUNCE_TR_L"
+    },
+    {
+      "text": "Partial banked: closed 1 of 2 at 13789.5 (+10.0 pips, weighted +10.00).",
+      "event": "PARTIAL_BANKED",
+      "exit": 13789.5,
+      "size_closed": 1.0,
+      "pips_leg": 10.0,
+      "pips_weighted": 10.0,
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Stop moved from 13767.5 to entry 13779.5 after partial bank.",
+      "event": "STOP_TO_BE",
+      "stop": 13779.5,
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Ignored short setup-A signal at 09:45: HTF direction is BUY (D1 close 13801.85 vs EMA20 13484.669439419675; H4 close 13793.55 vs EMA20 13693.897513142232).",
+      "event": "SKIP_AGAINST_HTF_DIRECTION",
+      "side": "SHORT",
+      "setup": "A",
+      "htf_direction": "BUY"
+    },
+    {
+      "text": "Exhaustion candidate: the up-move has travelled 25 pips into round_00 (13800.0). No new long continuation entries. Evidence: MACD histogram +0.83 (expanding), RSI(3) 72, H1 Aroon 0/100.",
+      "event": "EXHAUSTION_CANDIDATE",
+      "move": "LONG",
+      "travelled": 25.19999999999891,
+      "level": "round_00"
+    },
+    {
+      "text": "Exhaustion demonstrated at 09:45: the push to 13801.4 through round_00 (13800.0) / the band failed and closed back at 13795.2. Evidence: MACD histogram +0.83 (expanding), RSI(3) 72, H1 Aroon 0/100.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "LONG",
+      "level": "round_00"
+    },
+    {
+      "text": "June exhaustion-close skipped at 09:45: MACD histogram expanding on failure candle at round_00 (|hist| 0.826 >= max |hist| of last 12 = 0.826).",
+      "event": "JUNE_EXHAUSTION_CLOSE_SKIP_MOMENTUM",
+      "level": "round_00",
+      "move": "LONG",
+      "hist_cur": 0.8256033381995185,
+      "hist_baseline": 0.8256033381995185,
+      "window": 12
+    },
+    {
+      "text": "Ignored short setup-A signal at 09:50: HTF direction is BUY (D1 close 13801.85 vs EMA20 13484.669439419675; H4 close 13793.55 vs EMA20 13693.897513142232).",
+      "event": "SKIP_AGAINST_HTF_DIRECTION",
+      "side": "SHORT",
+      "setup": "A",
+      "htf_direction": "BUY"
+    },
+    {
+      "text": "Armed: sell when price trades below 13784.1 \u2014 reversal confirmed: 09:50 failed to reclaim 13801.4 and closed away from it.",
+      "event": "ARMED",
+      "side": "SHORT",
+      "trigger": 13784.15,
+      "setup": "C"
+    },
+    {
+      "text": "Opened short at 13784.1, stop 13796.1 (12.0 pips). Exhaustion reversal at round_00 (13800.0); signal 09:45, confirmation 09:50. TP 13754.1 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "SHORT",
+      "entry": 13784.15,
+      "stop": 13796.15,
+      "setup": "C",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": "WAITING",
+      "mode": "BOUNCE_C_S"
+    },
+    {
+      "text": "Exhaustion candidate: the down-move has travelled 46 pips into round_50 (13750.0). No new short continuation entries. Evidence: MACD histogram +0.58 (contracting), RSI(3) 19, H1 Aroon 50/93.",
+      "event": "EXHAUSTION_CANDIDATE",
+      "move": "SHORT",
+      "travelled": 45.75,
+      "level": "round_50"
+    },
+    {
+      "text": "Signal: long at 10:15 \u2014 pierced the lower band to 13749.9 at round_50 (13750.0) and closed back inside. Waiting for confirmation.",
+      "event": "SIGNAL",
+      "side": "LONG",
+      "level": "round_50"
+    },
+    {
+      "text": "Exhaustion demonstrated at 10:15: the push to 13749.9 through round_50 (13750.0) / the band failed and closed back at 13761.0. Evidence: MACD histogram +0.05 (contracting), RSI(3) 28, H1 Aroon 50/93.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "SHORT",
+      "level": "round_50"
+    },
+    {
+      "text": "No confirmation at 10:20: the long signal from 10:15 at round_50 (13750.0) lapsed.",
+      "event": "NO_CONFIRMATION"
+    },
+    {
+      "text": "No setup C entry at 10:20: the candle did not close away from the extreme.",
+      "event": "C_NO_CONFIRMATION"
+    },
+    {
+      "text": "Exhaustion demonstrated at 11:00: the push to 13794.1 through h1_swing (13790.9) / the band failed and closed back at 13790.6. Evidence: MACD histogram +0.06 (contracting), RSI(3) 83, H1 Aroon 43/100.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "LONG",
+      "level": "h1_swing"
+    },
+    {
+      "text": "Armed: sell when price trades below 13784.5 \u2014 reversal confirmed: 11:05 failed to reclaim 13794.1 and closed away from it.",
+      "event": "ARMED",
+      "side": "SHORT",
+      "trigger": 13784.5,
+      "setup": "C"
+    },
+    {
+      "text": "Opened short at 13784.5, stop 13796.5 (12.0 pips). Exhaustion reversal at h1_swing (13790.9); signal 11:00, confirmation 11:05. TP 13754.5 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "SHORT",
+      "entry": 13784.5,
+      "stop": 13796.5,
+      "setup": "C",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": "WAITING",
+      "mode": "BOUNCE_C_S"
+    },
+    {
+      "text": "Partial banked: closed 1 of 2 at 13774.5 (+10.0 pips, weighted +10.00).",
+      "event": "PARTIAL_BANKED",
+      "exit": 13774.5,
+      "size_closed": 1.0,
+      "pips_leg": 10.0,
+      "pips_weighted": 10.0,
+      "setup": "C",
+      "side": "SHORT"
+    },
+    {
+      "text": "Stop moved from 13796.5 to entry 13784.5 after partial bank.",
+      "event": "STOP_TO_BE",
+      "stop": 13784.5,
+      "setup": "C",
+      "side": "SHORT"
+    },
+    {
+      "text": "Pullback in the proven long trend: 11:45 candle dipped to 13774.4 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Armed: buy when price trades above 13779.6 (trend pullback held h1_swing_low at 13774.9; confirmation 11:50).",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13779.6,
+      "setup": "TREND"
+    },
+    {
+      "text": "Opened long at 13779.6, stop 13767.6 (12.0 pips). Trend pullback at h1_swing_low (13774.9); signal 11:45, confirmation 11:50. TP 13809.6 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "LONG",
+      "entry": 13779.6,
+      "stop": 13767.6,
+      "setup": "TREND",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": "WAITING",
+      "mode": "BOUNCE_TR_L"
+    },
+    {
+      "text": "Partial banked: closed 1 of 2 at 13789.6 (+10.0 pips, weighted +10.00).",
+      "event": "PARTIAL_BANKED",
+      "exit": 13789.6,
+      "size_closed": 1.0,
+      "pips_leg": 10.0,
+      "pips_weighted": 10.0,
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Stop moved from 13767.6 to entry 13779.6 after partial bank.",
+      "event": "STOP_TO_BE",
+      "stop": 13779.6,
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Ignored short setup-A signal at 13:00: HTF direction is BUY (D1 close 13801.85 vs EMA20 13484.669439419675; H4 close 13784.35 vs EMA20 13702.512035700114).",
+      "event": "SKIP_AGAINST_HTF_DIRECTION",
+      "side": "SHORT",
+      "setup": "A",
+      "htf_direction": "BUY"
+    },
+    {
+      "text": "Ignored short setup-A signal at 13:05: HTF direction is BUY (D1 close 13801.85 vs EMA20 13484.669439419675; H4 close 13784.35 vs EMA20 13702.512035700114).",
+      "event": "SKIP_AGAINST_HTF_DIRECTION",
+      "side": "SHORT",
+      "setup": "A",
+      "htf_direction": "BUY"
+    },
+    {
+      "text": "Pullback in the proven long trend: 13:55 candle dipped to 13771.5 at h1_swing_low (13774.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Exhaustion candidate: the down-move has travelled 34 pips into round_50 (13750.0). No new short continuation entries. Evidence: MACD histogram -0.16 (contracting), RSI(3) 30, H1 Aroon 21/79.",
+      "event": "EXHAUSTION_CANDIDATE",
+      "move": "SHORT",
+      "travelled": 34.44999999999891,
+      "level": "round_50"
+    },
+    {
+      "text": "Exhaustion demonstrated at 14:00: the push to 13752.6 through round_50 (13750.0) / the band failed and closed back at 13766.5. Evidence: MACD histogram -0.16 (contracting), RSI(3) 30, H1 Aroon 21/79.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "SHORT",
+      "level": "round_50"
+    },
+    {
+      "text": "Pullback hold at h1_swing_low not confirmed at 14:00.",
+      "event": "PULLBACK_NO_CONFIRMATION"
+    },
+    {
+      "text": "Ignored long signal at 14:05: band pierce at 13761.8 is not within 5 pips of a view level.",
+      "event": "SIGNAL_NOT_AT_LEVEL",
+      "extreme": 13761.8
+    },
+    {
+      "text": "Armed: buy when price trades above 13773.1 \u2014 reversal confirmed: 14:05 failed to reclaim 13752.6 and closed away from it.",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13773.1,
+      "setup": "C"
+    },
+    {
+      "text": "Opened long at 13773.1, stop 13761.1 (12.0 pips). Exhaustion reversal at round_50 (13750.0); signal 14:00, confirmation 14:05. TP 13803.1 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "LONG",
+      "entry": 13773.1,
+      "stop": 13761.1,
+      "setup": "C",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": "WAITING",
+      "mode": "BOUNCE_C_L"
+    },
+    {
+      "text": "Pullback in the proven long trend: 14:35 candle dipped to 13772.8 at 5M EMA13 (13772.1) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pullback hold at 5M EMA13 not confirmed at 14:40.",
+      "event": "PULLBACK_NO_CONFIRMATION"
+    },
+    {
+      "text": "Pullback in the proven long trend: 14:45 candle dipped to 13771.2 at 5M middle band (13774.1) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M middle band"
+    },
+    {
+      "text": "Armed: buy when price trades above 13787.0 (trend pullback held 5M middle band at 13774.1; confirmation 14:50).",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13787.0,
+      "setup": "TREND"
+    },
+    {
+      "text": "Opened long at 13787.0, stop 13775.0 (12.0 pips). Trend pullback at 5M middle band (13774.1); signal 14:45, confirmation 14:50. TP 13817.0 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "LONG",
+      "entry": 13787.0,
+      "stop": 13775.0,
+      "setup": "TREND",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": "WAITING",
+      "mode": "BOUNCE_TR_L"
+    },
+    {
+      "text": "Exhaustion candidate: the up-move has travelled 26 pips into round_00 (13800.0). No new long continuation entries. Evidence: MACD histogram +0.24 (contracting), RSI(3) 84, H1 Aroon 21/79.",
+      "event": "EXHAUSTION_CANDIDATE",
+      "move": "LONG",
+      "travelled": 25.700000000000728,
+      "level": "round_00"
+    },
+    {
+      "text": "Partial banked: closed 1 of 2 at 13797.0 (+10.0 pips, weighted +10.00).",
+      "event": "PARTIAL_BANKED",
+      "exit": 13797.0,
+      "size_closed": 1.0,
+      "pips_leg": 10.0,
+      "pips_weighted": 10.0,
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Stop moved from 13775.0 to entry 13787.0 after partial bank.",
+      "event": "STOP_TO_BE",
+      "stop": 13787.0,
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Exhaustion demonstrated at 15:00: the push to 13800.1 through round_00 (13800.0) / the band failed and closed back at 13799.4. Evidence: MACD histogram +0.49 (contracting), RSI(3) 89, H1 Aroon 14/71.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "LONG",
+      "level": "round_00"
+    },
+    {
+      "text": "Kept the TREND long: QM says the move continues.",
+      "event": "EXHAUSTION_HOLD_QM",
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Ignored short setup-A signal at 15:05: HTF direction is BUY (D1 close 13801.85 vs EMA20 13484.669439419675; H4 close 13784.35 vs EMA20 13702.512035700114).",
+      "event": "SKIP_AGAINST_HTF_DIRECTION",
+      "side": "SHORT",
+      "setup": "A",
+      "htf_direction": "BUY"
+    },
+    {
+      "text": "No setup C entry at 15:05: price reclaimed the extreme.",
+      "event": "C_NO_CONFIRMATION"
+    },
+    {
+      "text": "Exhaustion demonstrated at 15:05: the push to 13800.5 through round_00 (13800.0) / the band failed and closed back at 13794.6. Evidence: MACD histogram +0.63 (expanding), RSI(3) 65, H1 Aroon 14/71.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "LONG",
+      "level": "round_00"
+    },
+    {
+      "text": "June exhaustion-close skipped at 15:05: MACD histogram expanding on failure candle at round_00 (|hist| 0.633 >= max |hist| of last 12 = 0.633).",
+      "event": "JUNE_EXHAUSTION_CLOSE_SKIP_MOMENTUM",
+      "level": "round_00",
+      "move": "LONG",
+      "hist_cur": 0.633188192653289,
+      "hist_baseline": 0.633188192653289,
+      "window": 12
+    },
+    {
+      "text": "Armed: sell when price trades below 13786.2 \u2014 reversal confirmed: 15:10 failed to reclaim 13800.5 and closed away from it.",
+      "event": "ARMED",
+      "side": "SHORT",
+      "trigger": 13786.25,
+      "setup": "C"
+    },
+    {
+      "text": "Exhaustion demonstrated at 15:40: the push to 13802.5 through round_00 (13800.0) / the band failed and closed back at 13797.7. Evidence: MACD histogram +1.17 (expanding), RSI(3) 53, H1 Aroon 14/71.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "LONG",
+      "level": "round_00"
+    },
+    {
+      "text": "June exhaustion-close skipped at 15:40: MACD histogram expanding on failure candle at round_00 (|hist| 1.170 >= max |hist| of last 12 = 1.170).",
+      "event": "JUNE_EXHAUSTION_CLOSE_SKIP_MOMENTUM",
+      "level": "round_00",
+      "move": "LONG",
+      "hist_cur": 1.1703013005679341,
+      "hist_baseline": 1.1703013005679341,
+      "window": 12
+    },
+    {
+      "text": "No setup C entry at 15:45: the candle did not close away from the extreme.",
+      "event": "C_NO_CONFIRMATION"
+    },
+    {
+      "text": "Cancelled short stop order at 13786.2: close 13801.8 invalidated the signal (stop_extreme=13800.5).",
+      "event": "ARM_CANCELLED",
+      "reason": "INVALIDATED",
+      "trigger": 13786.25,
+      "setup": "C",
+      "side": "SHORT",
+      "stop_extreme": 13800.45,
+      "close": 13801.75
+    },
+    {
+      "text": "Pullback in the proven long trend: 16:05 candle dipped to 13801.8 at round_00 (13800.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "round_00"
+    },
+    {
+      "text": "Pullback hold at round_00 not confirmed at 16:10.",
+      "event": "PULLBACK_NO_CONFIRMATION"
+    },
+    {
+      "text": "Pullback in the proven long trend: 16:30 candle dipped to 13799.8 at round_00 (13800.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "round_00"
+    },
+    {
+      "text": "Armed: buy when price trades above 13805.5 (trend pullback held round_00 at 13800.0; confirmation 16:35).",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13805.55,
+      "setup": "TREND"
+    },
+    {
+      "text": "Opened long at 13805.5, stop 13793.5 (12.0 pips). Trend pullback at round_00 (13800.0); signal 16:30, confirmation 16:35. TP 13835.5 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "LONG",
+      "entry": 13805.55,
+      "stop": 13793.55,
+      "setup": "TREND",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": "WAITING",
+      "mode": "BOUNCE_TR_L"
+    },
+    {
+      "text": "Pullback in the proven long trend: 17:25 candle dipped to 13800.4 at round_00 (13800.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "round_00"
+    },
+    {
+      "text": "Armed: buy when price trades above 13804.6 (trend pullback held round_00 at 13800.0; confirmation 17:30).",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13804.6,
+      "setup": "TREND"
+    },
+    {
+      "text": "Opened long at 13804.6, stop 13792.6 (12.0 pips). Trend pullback at round_00 (13800.0); signal 17:25, confirmation 17:30. TP 13834.6 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "LONG",
+      "entry": 13804.6,
+      "stop": 13792.6,
+      "setup": "TREND",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": "WAITING",
+      "mode": "BOUNCE_TR_L"
+    },
+    {
+      "text": "Partial banked: closed 1 of 2 at 13814.6 (+10.0 pips, weighted +10.00).",
+      "event": "PARTIAL_BANKED",
+      "exit": 13814.6,
+      "size_closed": 1.0,
+      "pips_leg": 10.0,
+      "pips_weighted": 10.0,
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Stop moved from 13792.6 to entry 13804.6 after partial bank.",
+      "event": "STOP_TO_BE",
+      "stop": 13804.6,
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Ignored short signal at 18:25: setup A does not fade a strong H1 trend \u2014 the H1 EMAs are stacked up (13796.0 > 13793.7 > 13789.8) and H1 closed above them at 13803.9.",
+      "event": "SKIP_AGAINST_H1_TREND",
+      "side": "SHORT"
+    },
+    {
+      "text": "Ignored short signal at 18:40: setup A does not fade a strong H1 trend \u2014 the H1 EMAs are stacked up (13796.0 > 13793.7 > 13789.8) and H1 closed above them at 13803.9.",
+      "event": "SKIP_AGAINST_H1_TREND",
+      "side": "SHORT"
+    },
+    {
+      "text": "Ignored short signal at 18:45: setup A does not fade a strong H1 trend \u2014 the H1 EMAs are stacked up (13796.0 > 13793.7 > 13789.8) and H1 closed above them at 13803.9.",
+      "event": "SKIP_AGAINST_H1_TREND",
+      "side": "SHORT"
+    },
+    {
+      "text": "Target hit: closed long at 13834.6 (+30.0 pips, weighted +30.00, size 1).",
+      "event": "TARGET_HIT",
+      "exit": 13834.6,
+      "pips_leg": 30.0,
+      "pips_weighted": 30.0,
+      "size": 1.0,
+      "setup": "TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Signal: long at 20:25 \u2014 pierced the lower band to 13800.2 at round_00 (13800.0) and closed back inside. Waiting for confirmation.",
+      "event": "SIGNAL",
+      "side": "LONG",
+      "level": "round_00"
+    },
+    {
+      "text": "Exhaustion candidate: the down-move has travelled 25 pips into round_00 (13800.0). No new short continuation entries. Evidence: MACD histogram -0.84 (expanding), RSI(3) 23, H1 Aroon 100/36.",
+      "event": "EXHAUSTION_CANDIDATE",
+      "move": "SHORT",
+      "travelled": 25.200000000000728,
+      "level": "round_00"
+    },
+    {
+      "text": "Exhaustion demonstrated at 20:25: the push to 13800.2 through round_00 (13800.0) / the band failed and closed back at 13804.0. Evidence: MACD histogram -0.84 (expanding), RSI(3) 23, H1 Aroon 100/36.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "SHORT",
+      "level": "round_00"
+    },
+    {
+      "text": "June exhaustion-close skipped at 20:25: MACD histogram expanding on failure candle at round_00 (|hist| 0.844 >= max |hist| of last 12 = 0.844).",
+      "event": "JUNE_EXHAUSTION_CLOSE_SKIP_MOMENTUM",
+      "level": "round_00",
+      "move": "SHORT",
+      "hist_cur": 0.8436747553008646,
+      "hist_baseline": 0.8436747553008646,
+      "window": 12
+    },
+    {
+      "text": "Pullback in the proven long trend: 20:25 candle dipped to 13800.2 at round_00 (13800.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "round_00"
+    },
+    {
+      "text": "Armed: buy when price trades above 13809.0 (confirmation candle 20:30). QM verdict: none. Expires after 5 candles.",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13809.05,
+      "qm": null,
+      "setup": "A"
+    },
+    {
+      "text": "Armed: buy when price trades above 13809.0 \u2014 reversal confirmed: 20:30 failed to reclaim 13800.2 and closed away from it.",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13809.05,
+      "setup": "C"
+    },
+    {
+      "text": "Armed: buy when price trades above 13809.0 (trend pullback held round_00 at 13800.0; confirmation 20:30).",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13809.05,
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 20:40 candle dipped to 13804.0 at round_00 (13800.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "round_00"
+    },
+    {
+      "text": "Pullback hold at round_00 not confirmed at 20:45.",
+      "event": "PULLBACK_NO_CONFIRMATION"
+    },
+    {
+      "text": "Pullback in the proven long trend: 20:50 candle dipped to 13801.4 at round_00 (13800.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "round_00"
+    },
+    {
+      "text": "Pullback hold at round_00 not confirmed at 20:55.",
+      "event": "PULLBACK_NO_CONFIRMATION"
+    },
+    {
+      "text": "Cancelled long stop order at 13809.0: entry window ended (21:00 UTC).",
+      "event": "ARM_CANCELLED",
+      "reason": "WINDOW_END",
+      "trigger": 13809.05,
+      "setup": "A",
+      "side": "LONG",
+      "stop_extreme": 13800.25,
+      "close": 13798.95
+    },
+    {
+      "text": "Cancelled long stop order at 13809.0: entry window ended (21:00 UTC).",
+      "event": "ARM_CANCELLED",
+      "reason": "WINDOW_END",
+      "trigger": 13809.05,
+      "setup": "TREND",
+      "side": "LONG",
+      "stop_extreme": 13800.25,
+      "close": 13798.95
+    },
+    {
+      "text": "Cancelled long stop order at 13809.0: entry window ended (21:00 UTC).",
+      "event": "ARM_CANCELLED",
+      "reason": "WINDOW_END",
+      "trigger": 13809.05,
+      "setup": "C",
+      "side": "LONG",
+      "stop_extreme": 13800.25,
+      "close": 13798.95
+    },
+    {
+      "text": "Pullback in the proven long trend: 21:05 candle dipped to 13793.5 at h1_swing (13790.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 21:10 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 21:10 candle dipped to 13798.6 at round_00 (13800.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "round_00"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 21:15 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 21:15 candle dipped to 13799.0 at round_00 (13800.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "round_00"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 21:20 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 21:20 candle dipped to 13801.1 at round_00 (13800.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "round_00"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 21:25 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 21:25 candle dipped to 13805.3 at 5M EMA13 (13805.3) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 21:30 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 21:30 candle dipped to 13808.1 at 5M EMA21 (13807.5) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA21"
+    },
+    {
+      "text": "Ignored short signal at 21:35: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "SHORT",
+      "setup": "A"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 21:35 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 21:40 candle dipped to 13808.6 at 5M EMA21 (13808.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA21"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 21:45 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 21:50 candle dipped to 13809.4 at 5M EMA21 (13808.6) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA21"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 21:55 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 21:55 candle dipped to 13812.0 at 5M EMA13 (13809.0) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Trend long proven at 21:00: Aroon Up 86, H1 EMAs stacked, higher high + higher low. Invalidated by an H1 close below 13752.6.",
+      "event": "TREND_PROVEN",
+      "side": "LONG",
+      "guard": 13752.6
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 22:00 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 22:00 candle dipped to 13811.2 at 5M EMA13 (13809.8) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 22:05 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 22:05 candle dipped to 13814.3 at 5M EMA13 (13810.8) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 22:10 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 22:10 candle dipped to 13816.5 at 5M EMA13 (13812.2) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 22:15 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 22:35 candle dipped to 13818.2 at 5M EMA13 (13816.6) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 22:40 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 22:40 candle dipped to 13820.6 at 5M EMA13 (13817.8) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 22:45 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 22:50 candle dipped to 13825.0 at 5M EMA13 (13820.2) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 22:55 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 23:15 candle dipped to 13828.6 at 5M EMA13 (13826.8) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 23:20 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 23:20 candle dipped to 13824.3 at 5M EMA21 (13824.3) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA21"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 23:25 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 23:30 candle dipped to 13829.7 at 5M EMA13 (13829.3) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 23:35 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 23:45 candle dipped to 13831.0 at 5M EMA13 (13830.9) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 23:50 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    },
+    {
+      "text": "Pullback in the proven long trend: 23:50 candle dipped to 13835.2 at 5M EMA13 (13832.2) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pending trend pullback long confirmation at 23:55 dropped: outside entry hours (06-21 UTC).",
+      "event": "SKIP_OUTSIDE_ENTRY_HOURS",
+      "side": "LONG",
+      "setup": "TREND"
+    }
+  ],
+  "trades_target_day": [
+    {
+      "open_ts": "2026-01-28T06:50:00+00:00",
+      "side": "LONG",
+      "setup": "TREND",
+      "entry_price": 13782.7,
+      "stop": 13770.7,
+      "close_ts": "2026-01-28T06:57:35.326000+00:00",
+      "close_price": 13770.7,
+      "close_reason": "STOP",
+      "fill_source": "tick",
+      "realised_pips": -12.0,
+      "net_pips": -12.9,
+      "partials": [],
+      "stop_history": []
+    },
+    {
+      "open_ts": "2026-01-28T07:25:00+00:00",
+      "side": "LONG",
+      "setup": "TREND",
+      "entry_price": 13783.65,
+      "stop": 13783.65,
+      "close_ts": "2026-01-28T08:12:09.684000+00:00",
+      "close_price": 13783.5,
+      "close_reason": "STOP",
+      "fill_source": "tick",
+      "realised_pips": 4.93,
+      "net_pips": 4.03,
+      "partials": [
+        {
+          "ts": "2026-01-28T07:55:00+00:00",
+          "price": 13793.65,
+          "size_ratio": 0.5,
+          "reason": "June partial +10p",
+          "pips": 10.0
+        }
+      ],
+      "stop_history": [
+        {
+          "ts": "2026-01-28T07:55:00+00:00",
+          "stop": 13783.65,
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "open_ts": "2026-01-28T09:15:00+00:00",
+      "side": "LONG",
+      "setup": "TREND",
+      "entry_price": 13779.5,
+      "stop": 13779.5,
+      "close_ts": "2026-01-28T10:07:18.437000+00:00",
+      "close_price": 13778.8,
+      "close_reason": "STOP",
+      "fill_source": "tick",
+      "realised_pips": 4.65,
+      "net_pips": 3.75,
+      "partials": [
+        {
+          "ts": "2026-01-28T09:35:00+00:00",
+          "price": 13789.5,
+          "size_ratio": 0.5,
+          "reason": "June partial +10p",
+          "pips": 10.0
+        }
+      ],
+      "stop_history": [
+        {
+          "ts": "2026-01-28T09:35:00+00:00",
+          "stop": 13779.5,
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "open_ts": "2026-01-28T09:55:00+00:00",
+      "side": "SHORT",
+      "setup": "C",
+      "entry_price": 13784.15,
+      "stop": 13796.15,
+      "close_ts": "2026-01-28T10:02:20.531000+00:00",
+      "close_price": 13796.4,
+      "close_reason": "STOP",
+      "fill_source": "tick",
+      "realised_pips": -12.25,
+      "net_pips": -13.15,
+      "partials": [],
+      "stop_history": []
+    },
+    {
+      "open_ts": "2026-01-28T11:10:00+00:00",
+      "side": "SHORT",
+      "setup": "C",
+      "entry_price": 13784.5,
+      "stop": 13784.5,
+      "close_ts": "2026-01-28T11:59:48.927000+00:00",
+      "close_price": 13784.5,
+      "close_reason": "STOP",
+      "fill_source": "tick",
+      "realised_pips": 5.0,
+      "net_pips": 4.1,
+      "partials": [
+        {
+          "ts": "2026-01-28T11:20:00+00:00",
+          "price": 13774.5,
+          "size_ratio": 0.5,
+          "reason": "June partial +10p",
+          "pips": 10.0
+        }
+      ],
+      "stop_history": [
+        {
+          "ts": "2026-01-28T11:20:00+00:00",
+          "stop": 13784.5,
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "open_ts": "2026-01-28T11:55:00+00:00",
+      "side": "LONG",
+      "setup": "TREND",
+      "entry_price": 13779.6,
+      "stop": 13779.6,
+      "close_ts": "2026-01-28T13:34:10.603000+00:00",
+      "close_price": 13779.2,
+      "close_reason": "STOP",
+      "fill_source": "tick",
+      "realised_pips": 4.8,
+      "net_pips": 3.9,
+      "partials": [
+        {
+          "ts": "2026-01-28T12:55:00+00:00",
+          "price": 13789.6,
+          "size_ratio": 0.5,
+          "reason": "June partial +10p",
+          "pips": 10.0
+        }
+      ],
+      "stop_history": [
+        {
+          "ts": "2026-01-28T12:55:00+00:00",
+          "stop": 13779.6,
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "open_ts": "2026-01-28T14:15:00+00:00",
+      "side": "LONG",
+      "setup": "C",
+      "entry_price": 13773.1,
+      "stop": 13761.1,
+      "close_ts": "2026-01-28T14:22:00.385000+00:00",
+      "close_price": 13760.9,
+      "close_reason": "STOP",
+      "fill_source": "tick",
+      "realised_pips": -12.2,
+      "net_pips": -13.1,
+      "partials": [],
+      "stop_history": []
+    },
+    {
+      "open_ts": "2026-01-28T14:55:00+00:00",
+      "side": "LONG",
+      "setup": "TREND",
+      "entry_price": 13787.0,
+      "stop": 13787.0,
+      "close_ts": "2026-01-28T15:13:05.245000+00:00",
+      "close_price": 13787.0,
+      "close_reason": "STOP",
+      "fill_source": "tick",
+      "realised_pips": 5.0,
+      "net_pips": 4.1,
+      "partials": [
+        {
+          "ts": "2026-01-28T15:00:00+00:00",
+          "price": 13797.0,
+          "size_ratio": 0.5,
+          "reason": "June partial +10p",
+          "pips": 10.0
+        }
+      ],
+      "stop_history": [
+        {
+          "ts": "2026-01-28T15:00:00+00:00",
+          "stop": 13787.0,
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "open_ts": "2026-01-28T16:40:00+00:00",
+      "side": "LONG",
+      "setup": "TREND",
+      "entry_price": 13805.55,
+      "stop": 13793.55,
+      "close_ts": "2026-01-28T17:25:39.811000+00:00",
+      "close_price": 13793.5,
+      "close_reason": "STOP",
+      "fill_source": "tick",
+      "realised_pips": -12.05,
+      "net_pips": -12.95,
+      "partials": [],
+      "stop_history": []
+    },
+    {
+      "open_ts": "2026-01-28T17:35:00+00:00",
+      "side": "LONG",
+      "setup": "TREND",
+      "entry_price": 13804.6,
+      "stop": 13804.6,
+      "close_ts": "2026-01-28T19:35:00+00:00",
+      "close_price": 13834.6,
+      "close_reason": "June TP +30p",
+      "fill_source": "",
+      "realised_pips": 20.0,
+      "net_pips": 19.1,
+      "partials": [
+        {
+          "ts": "2026-01-28T18:15:00+00:00",
+          "price": 13814.6,
+          "size_ratio": 0.5,
+          "reason": "June partial +10p",
+          "pips": 10.0
+        }
+      ],
+      "stop_history": [
+        {
+          "ts": "2026-01-28T18:15:00+00:00",
+          "stop": 13804.6,
+          "reason": ""
+        }
+      ]
+    }
+  ],
+  "qm_verdicts": {
+    "CONTINUATION": 72,
+    "NONE": 114,
+    "ERROR": 0
+  }
+}
