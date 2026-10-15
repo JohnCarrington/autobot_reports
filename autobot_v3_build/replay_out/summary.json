@@ -1,0 +1,84 @@
+{
+  "dataset": "reports-public/2026-09-27_bb_reversal_census/events_GBPUSD.csv",
+  "n_days": 837,
+  "first_day": "2024-01-02",
+  "last_day": "2026-09-27",
+  "qualifying_filter": {
+    "sessions": {
+      "LONDON": [
+        7,
+        16
+      ],
+      "NY": [
+        13,
+        22
+      ]
+    },
+    "min_rev_pips": 30.0
+  },
+  "anticipation_thresholds": {
+    "extreme_to_level_p": 10.0,
+    "extreme_to_cluster_p": 15.0
+  },
+  "per_session": {
+    "LONDON": {
+      "qualifying_events": 259,
+      "anticipated_by_level": 170,
+      "anticipated_by_cluster": 101,
+      "anticipated_either": 177,
+      "entry_formed_at_5p": 259,
+      "clean_10p_reversal": 137
+    },
+    "NY": {
+      "qualifying_events": 247,
+      "anticipated_by_level": 159,
+      "anticipated_by_cluster": 86,
+      "anticipated_either": 169,
+      "entry_formed_at_5p": 247,
+      "clean_10p_reversal": 134
+    }
+  },
+  "per_day_quality": {
+    "neither": 624,
+    "both": 125,
+    "one": 88
+  },
+  "per_session_rev_size_counts_cumulative": {
+    "LONDON": {
+      ">= 10p": 3424,
+      ">= 15p": 1827,
+      ">= 20p": 920,
+      ">= 25p": 453,
+      ">= 30p": 259,
+      ">= 35p": 165,
+      ">= 40p": 113,
+      ">= 50p": 58
+    },
+    "NY": {
+      ">= 10p": 2687,
+      ">= 15p": 1455,
+      ">= 20p": 764,
+      ">= 25p": 407,
+      ">= 30p": 247,
+      ">= 35p": 159,
+      ">= 40p": 118,
+      ">= 50p": 64
+    }
+  },
+  "per_session_remaining_mid_pips": {
+    "LONDON": {
+      "n": 259,
+      "median": 33.6,
+      "mean": 39.15,
+      "min": 25.0,
+      "max": 171.65
+    },
+    "NY": {
+      "n": 247,
+      "median": 34.1,
+      "mean": 40.28,
+      "min": 25.0,
+      "max": 125.2
+    }
+  }
+}
