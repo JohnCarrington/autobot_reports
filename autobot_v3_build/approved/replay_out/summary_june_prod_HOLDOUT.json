@@ -1,0 +1,48 @@
+{
+  "mode": "june_prod",
+  "partition": "HOLDOUT",
+  "n_clean_days": 139,
+  "n_bars_processed": 37104,
+  "n_trades_closed": 746,
+  "n_trades_still_open": 10,
+  "win_rate_pct": 25.1,
+  "gross_pips": -498.4,
+  "net_pips": -1448.3,
+  "profit_factor": 0.76,
+  "max_drawdown_pips": 1535.6,
+  "by_session": {
+    "LONDON": {
+      "n": 228,
+      "wins": 53,
+      "net_pips": -400.3,
+      "winpct": 23.2
+    },
+    "NY": {
+      "n": 451,
+      "wins": 122,
+      "net_pips": -799.1,
+      "winpct": 27.1
+    },
+    "OTHER": {
+      "n": 67,
+      "wins": 12,
+      "net_pips": -248.9,
+      "winpct": 17.9
+    }
+  },
+  "by_exit_reason": {
+    "STOP": 557,
+    "June TP +30p": 137,
+    "Exhaustion at round_00": 5,
+    "Exhaustion at h1_swing": 11,
+    "Exhaustion at 2w_low": 10,
+    "Exhaustion at pdl": 3,
+    "Exhaustion at 2w_high": 12,
+    "Exhaustion at h1_swing_low": 2,
+    "Exhaustion at round_50": 5,
+    "Exhaustion at h1_swing_high": 3,
+    "Exhaustion at pdh": 1
+  },
+  "captures_ge_30p": 1,
+  "captures_ge_30p_pips": 31.4
+}
