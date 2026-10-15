@@ -1,0 +1,51 @@
+{
+  "n_signals_total": 68,
+  "n_matched": 16,
+  "n_unmatched": 52,
+  "by_strategy_matched": {
+    "GBPUSD_TREND_V3_L": {
+      "n": 3,
+      "mean_lag_bars": -4.99,
+      "mean_capture_ratio": 0.515
+    },
+    "GBPUSD_TREND_V3_UM_L": {
+      "n": 5,
+      "mean_lag_bars": -2.39,
+      "mean_capture_ratio": 0.394
+    },
+    "GBPUSD_TREND_V3_S": {
+      "n": 4,
+      "mean_lag_bars": -5.98,
+      "mean_capture_ratio": 0.47
+    },
+    "GBPUSD_TREND_V3_UM_S": {
+      "n": 4,
+      "mean_lag_bars": -5.74,
+      "mean_capture_ratio": 0.401
+    }
+  },
+  "lag_bars_summary": {
+    "n": 16,
+    "min": -22.98,
+    "max": 7.01,
+    "median": -0.99,
+    "mean": -4.61
+  },
+  "capture_ratio_summary": {
+    "n": 16,
+    "min": 0.0,
+    "max": 0.908,
+    "median": 0.635,
+    "mean": 0.44
+  },
+  "potential_capture_summary": {
+    "n": 16,
+    "min": 0.0,
+    "max": 10.85,
+    "median": 4.55,
+    "mean": 4.14
+  },
+  "n_lag_le_0_leading": 11,
+  "n_lag_in_1_to_3_bars": 4,
+  "n_lag_gt_3_bars": 1
+}

@@ -1,0 +1,33 @@
+{
+  "htf_direction_counts": {
+    "UNKNOWN": 225,
+    "DOWN": 5585,
+    "UP": 6113,
+    "FLAT": 28
+  },
+  "htf_vs_outcome": {
+    "UNKNOWN_HTF": {
+      "REVERSED_5": 60,
+      "FAILED": 55,
+      "REVERSED_10": 138
+    },
+    "WITH_HTF": {
+      "REVERSED_5": 2141,
+      "FAILED": 1452,
+      "REVERSED_10": 2271
+    },
+    "AGAINST_HTF": {
+      "FAILED": 1497,
+      "REVERSED_5": 2023,
+      "REVERSED_10": 2314
+    }
+  },
+  "qm_coverage_window": {
+    "first_day": "2026-04-23",
+    "last_day": "2026-10-15",
+    "days": 21
+  },
+  "qm_events_in_window": 1955,
+  "qm_match_count": 66,
+  "paa_coverage": "NO_COVERAGE_FOR_CENSUS_WINDOW"
+}
