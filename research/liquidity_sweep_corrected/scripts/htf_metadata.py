@@ -94,7 +94,7 @@ def _htf_bias_at(start_ts: datetime, ts_list: List[datetime],
 
 def compute_htf_for_day(
     fx_date: date, candle_src: str, episodes_df: pd.DataFrame,
-    history_days: int = 60,
+    history_days: int = 90,
 ) -> pd.DataFrame:
     """Attach d1_bias, h4_bias, h1_bias, d1_h4_aligned columns to episodes_df
     for a single FX day.  Mutates nothing — returns a new DataFrame.
