@@ -334,10 +334,16 @@ def _process_bar(
     else:
         ep._curr_run_closes_beyond = 0
 
-    # Rejection detection (first bar only)
+    # Rejection detection (first bar only).  level_ladder._is_rejection_at_rung
+    # uses the LADDER convention: `direction="BUY"` means "a long position
+    # approaching its target resistance", which detects the bearish-rejection
+    # pattern (high > rung, close < rung, close in bottom third).  Our trade
+    # direction is the OPPOSITE of the ladder direction: a bearish rejection
+    # at resistance produces a SELL entry, not a BUY.  Invert when calling.
+    ladder_dir = "SELL" if ep.rejection_direction == "BUY" else "BUY"
     if ep.first_rejection_ts is None and (in_band or signed_bar_depth <= 0):
         is_rej = _is_rejection_at_rung(
-            direction=ep.rejection_direction,
+            direction=ladder_dir,
             bar_open=bar.open,
             bar_high=bar.high,
             bar_low=bar.low,

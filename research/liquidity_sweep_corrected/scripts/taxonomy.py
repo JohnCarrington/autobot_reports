@@ -23,53 +23,36 @@ import pandas as pd
 def classify_sweep_type(row: pd.Series) -> str:
     """Classify a single approach episode's sweep type.
 
-    An episode is a sweep when:
-      1. It penetrated the level: max_penetration_pips > 0.
-      2. Price returned through the level during the episode — proxied by
-         the presence of a `_is_rejection_at_rung` rejection (which by
-         construction penetrates and closes back) OR by the mix of closes
-         beyond and closes on the original side within the same episode.
+    Per spec §6, the type is a *price-pattern* label, independent of whether
+    the AMB-1 rejection detector fired (which is a separate gating question
+    for entry).
 
-    Type A — immediate sweep:
-      - A rejection bar exists AND no sustained acceptance (max_consec_closes_beyond == 0).
-      - Equivalently: in-bar wick penetration + close back + no subsequent
-        completed close beyond.
+    - **NONE**: never penetrated and no completed close beyond.
+    - **TYPE_A** (immediate sweep): bar(s) wick-penetrated the level but NO
+      completed M5 close beyond.  By definition the penetrating bar(s)
+      closed back on the original side — "price penetrates and returns
+      through it without establishing sustained acceptance beyond the level".
+    - **TYPE_B** (delayed failed breakout): ≥1 completed M5 close beyond the
+      level AND ≥1 M5 bar in the episode closed on the original side
+      (close_beyond_count < bars_in_episode).  Market went both ways
+      within the 12-p tracking window.
+    - **NONE** (final branch): every bar in the episode closed beyond
+      (breakout continuation, not a sweep).
 
-    Type B — delayed failed breakout:
-      - ≥1 completed M5 close beyond the level,
-      - AND the episode subsequently has close(s) on the original side
-        (close_beyond_count < bars_in_episode) OR a rejection bar.
-      - "Delayed" implies the breakout bars came first, then return — our
-        monotonic schema cannot prove ordering without extra fields, so we
-        use the mix-of-close-sides condition as a conservative proxy.
-
-    NONE — not a sweep (touch, breakout continuation, failed-approach, etc.).
+    Caveat: without end_signed_dist tracked in the scanner, TYPE_B does not
+    distinguish "breakout-then-return" from "return-then-breakout".  The
+    ordering question can be answered in a follow-up pass.
     """
     max_pen = row["max_penetration_pips"]
     cb_count = row["close_beyond_count"]
-    mcb = row["max_consec_closes_beyond"]
     bars = row["bars_in_episode"]
-    had_rej = pd.notna(row["first_rejection_ts"])
 
     if max_pen <= 0 and cb_count == 0:
-        return "NONE"                       # never reached the level
-
-    if mcb >= 1:
-        # Sustained-beyond was present at some point.  Did we return?
-        # Proxy: not all bars closed beyond.
-        if cb_count < bars:
-            return "TYPE_B"
-        else:
-            # Every bar in episode closed beyond — this is a breakout
-            # continuation, not a sweep.
-            return "NONE"
-
-    # No completed close beyond.  Did we have a rejection?
-    if had_rej:
+        return "NONE"
+    if cb_count == 0:
         return "TYPE_A"
-
-    # Penetrated via wick but no rejection fired and no close beyond.
-    # Not a sweep by spec — classify as "wicked_no_rejection".
+    if cb_count < bars:
+        return "TYPE_B"
     return "NONE"
 
 
