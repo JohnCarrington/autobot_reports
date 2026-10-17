@@ -140,12 +140,17 @@ def load_m5_window(
 
 def load_m5_fx_day(d: date, candle_src: str) -> List[M5Bar]:
     """Return bars for the FX trading day labelled `d`:
-    [d-1 22:00 UTC, d 22:00 UTC).  The calling convention matches the project's
-    FX-day boundary used for D1 aggregation.
+    [d-1 22:00 UTC, d 22:00 UTC).
+
+    The previous calendar day's 22:00-23:55 bars may live in a DIFFERENT
+    archive than the current day (the 2025→2026 boundary crosses from
+    candles_ext_v2 to candles).  Pick the right source for each half.
     """
     start = datetime(d.year, d.month, d.day, tzinfo=timezone.utc) - timedelta(hours=2)
     end = datetime(d.year, d.month, d.day, 22, tzinfo=timezone.utc)
-    bars = load_m5_window(d, days_before=1, days_after=0, candle_src=candle_src)
+    prev = d - timedelta(days=1)
+    prev_src = "candles" if prev >= date(2026, 1, 1) else "candles_ext_v2"
+    bars = load_m5_day(prev, prev_src) + load_m5_day(d, candle_src)
     return [b for b in bars if start <= b.ts < end]
 
 
