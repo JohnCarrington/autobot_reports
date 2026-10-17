@@ -314,21 +314,48 @@ def section_I(df_trades: pd.DataFrame) -> str:
 
 
 def section_J(df_trades: pd.DataFrame) -> str:
+    from scripts.bootstrap_ci import day_cluster_bootstrap, expectancy, win_rate
     lines = ["## Deliverable J — Chronological validation",
              "",
              "Rules frozen at Stage 0 (commit c2dd613 → tag stage0-frozen).",
              "Measurement partitions: DEV = 2024-01-01…2025-06-30, "
              "HOLDOUT = 2025-07-01…2025-12-31, OOS = 2026-01-01…2026-03-31.",
              "",
-             "Overall expectancy per partition (wick entry rule, all sweep types):",
+             "Point estimates + 95% CI from a day-clustered bootstrap (1,000 iterations).",
+             "",
+             "### Expectancy (pips / trade) — wick entry, all sweep types",
              ""]
     for part in ["DEV", "HOLDOUT", "OOS"]:
-        sub = df_trades[(df_trades["partition"] == part) & (df_trades["entry_rule"] == "wick")]
-        lines.append(f"  {part:<8} {_trades_table(summarise_trades(sub))}")
+        sub = df_trades[(df_trades["partition"] == part) & (df_trades["entry_rule"] == "wick")].copy()
+        sub = sub.reset_index(drop=True)
+        point, (lo, hi) = day_cluster_bootstrap(sub, expectancy)
+        lines.append(f"  {part:<8} n={len(sub):>5,}  E = {point:+.2f}p  CI95 = [{lo:+.2f}, {hi:+.2f}]")
     lines.append("")
-    lines.append("Caveat: DEV/HOLDOUT use BID basis (candles_ext_v2); OOS uses MID basis (candles). "
+    lines.append("### Win rate — wick entry, all sweep types")
+    lines.append("")
+    for part in ["DEV", "HOLDOUT", "OOS"]:
+        sub = df_trades[(df_trades["partition"] == part) & (df_trades["entry_rule"] == "wick")].copy()
+        sub = sub.reset_index(drop=True)
+        point, (lo, hi) = day_cluster_bootstrap(sub, win_rate)
+        lines.append(f"  {part:<8} n={len(sub):>5,}  WR = {point*100:.1f}%  CI95 = [{lo*100:.1f}%, {hi*100:.1f}%]")
+    lines.append("")
+    lines.append("### Expectancy by sweep type and partition (wick entry)")
+    lines.append("")
+    for stype in ["TYPE_A", "TYPE_B"]:
+        for part in ["DEV", "HOLDOUT", "OOS"]:
+            sub = df_trades[(df_trades["partition"] == part)
+                           & (df_trades["entry_rule"] == "wick")
+                           & (df_trades["sweep_type"] == stype)].copy()
+            sub = sub.reset_index(drop=True)
+            point, (lo, hi) = day_cluster_bootstrap(sub, expectancy)
+            lines.append(f"  {stype:<8} {part:<8} n={len(sub):>5,}  E = {point:+.2f}p  "
+                         f"CI95 = [{lo:+.2f}, {hi:+.2f}]")
+        lines.append("")
+    lines.append("### Caveat")
+    lines.append("DEV/HOLDOUT use BID basis (candles_ext_v2); OOS uses MID basis (candles). "
                  "A sign change between HOLDOUT and OOS cannot be unambiguously attributed to market "
-                 "behaviour vs measurement-basis change.")
+                 "behaviour vs measurement-basis change.  See `implementation_notes.md` §3 and the "
+                 "spec §11 explicit investigation request.")
     return "\n".join(lines)
 
 
