@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 *.pyo
 .ipynb_checkpoints/
+data/approaches_progress.log
+data/*.v1

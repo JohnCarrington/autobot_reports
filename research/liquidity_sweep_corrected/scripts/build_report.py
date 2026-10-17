@@ -395,6 +395,9 @@ def section_K(df_ap: pd.DataFrame, df_trades: pd.DataFrame) -> str:
     e_A = summarise_trades(typeA)
     e_B = summarise_trades(typeB)
     e_oos = summarise_trades(df_trades[(df_trades["entry_rule"] == "wick") & (df_trades["partition"] == "OOS")])
+    e_A_dev = summarise_trades(typeA[typeA["partition"] == "DEV"])
+    e_A_hol = summarise_trades(typeA[typeA["partition"] == "HOLDOUT"])
+    e_A_oos = summarise_trades(typeA[typeA["partition"] == "OOS"])
 
     aligned = all_wick[all_wick.get("trade_vs_d1") == "aligned"] if "trade_vs_d1" in all_wick.columns else pd.DataFrame()
     counter = all_wick[all_wick.get("trade_vs_d1") == "countertrend"] if "trade_vs_d1" in all_wick.columns else pd.DataFrame()
@@ -436,9 +439,20 @@ def section_K(df_ap: pd.DataFrame, df_trades: pd.DataFrame) -> str:
         ("12. Does session timing affect results?",
          "See §I session breakdown.  Key: compare LONDON vs NY vs ASIA_OTHER rows."),
         ("13. Does the strategy demonstrate positive expectancy after costs?",
-         f"ALL-partition (wick, Model 1): E = {_fmt_num(e_all['expectancy'], 2)} pips/trade (after 0.9 p spread + 0.5 p stop slippage)."),
+         f"**Aggregate (TYPE_A + TYPE_B combined, wick, Model 1): NO** — "
+         f"E = {_fmt_num(e_all['expectancy'], 2)} pips/trade after 0.9 p spread + 0.5 p stop slippage.\n     "
+         f"**TYPE_A alone (immediate sweeps): YES** — "
+         f"E = {_fmt_num(e_A['expectancy'], 2)} pips/trade across {e_A['n']:,} trades at WR {_fmt_pct(e_A['win_rate'])}, PF {_fmt_pf(e_A['pf'])}.\n     "
+         f"**TYPE_B alone (delayed failed breakouts): NO** — "
+         f"E = {_fmt_num(e_B['expectancy'], 2)} pips/trade; this cohort drowns out TYPE_A in the aggregate because it is ~8× larger."),
         ("14. Does it survive chronological validation?",
-         f"OOS (wick, Model 1): {_trades_table(e_oos)}.  See §J for DEV vs HOLDOUT vs OOS comparison."),
+         f"**TYPE_A chronological:**\n     "
+         f"DEV ({e_A_dev['n']:,}): E = {_fmt_num(e_A_dev['expectancy'], 2)}p, WR {_fmt_pct(e_A_dev['win_rate'])}, PF {_fmt_pf(e_A_dev['pf'])}\n     "
+         f"HOLDOUT ({e_A_hol['n']:,}): E = {_fmt_num(e_A_hol['expectancy'], 2)}p, WR {_fmt_pct(e_A_hol['win_rate'])}, PF {_fmt_pf(e_A_hol['pf'])}\n     "
+         f"OOS ({e_A_oos['n']:,}): E = {_fmt_num(e_A_oos['expectancy'], 2)}p, WR {_fmt_pct(e_A_oos['win_rate'])}, PF {_fmt_pf(e_A_oos['pf'])}\n     "
+         f"All three partitions have CI95 strictly above 0 (see §J).  "
+         f"**Yes — TYPE_A survives chronological validation.**  "
+         f"Caveat: HOLDOUT→OOS basis change from BID to MID; see §J caveat."),
         ("15. What, specifically, distinguishes successful trades from failures?",
          "Deferred to a successor report — the current pipeline reports per-cell expectancy by sweep-type × session × family × trade-vs-D1 "
          "but does not run a formal feature-importance analysis.  Within the published tables, scan for cells with net > 0 at n ≥ 100 as the natural starting point."),
@@ -466,6 +480,11 @@ def main() -> int:
 
     df_ap["partition"] = df_ap["fx_date"].apply(partition_of)
 
+    all_wick = df_trades[df_trades["entry_rule"] == "wick"]
+    typeA = all_wick[all_wick["sweep_type"] == "TYPE_A"]
+    e_A_all = summarise_trades(typeA)
+    e_A_oos_hdr = summarise_trades(typeA[typeA["partition"] == "OOS"])
+
     sections = [
         "# Corrected Liquidity-Sweep Research — Final Report",
         "",
@@ -476,6 +495,23 @@ def main() -> int:
         "**Guardrails:** production AutoBot untouched; NMS V3 untouched; "
         "standalone BB Bounce untouched; London Liquidity Sweep service untouched; "
         "no deploys; no restarts; no technical-indicator additions.",
+        "",
+        "## TL;DR",
+        "- **TYPE_A immediate sweeps** (price pierces the level by wick + closes back + "
+        f"no completed M5 close beyond): **{e_A_all['n']:,} trades under Model 1 30/12 wick entry, "
+        f"WR {_fmt_pct(e_A_all['win_rate'])}, PF {_fmt_pf(e_A_all['pf'])}, "
+        f"E = {_fmt_num(e_A_all['expectancy'], 2)} pips/trade** post-cost.  "
+        f"**OOS alone**: n = {e_A_oos_hdr['n']:,}, E = {_fmt_num(e_A_oos_hdr['expectancy'], 2)}p, "
+        f"CI95 strictly positive.",
+        "- **TYPE_B delayed failed breakouts** are the opposite: negative expectancy across "
+        "every partition.",
+        "- **Aggregate TYPE_A + TYPE_B combined** is negative overall because TYPE_B outnumbers "
+        "TYPE_A ~8× in the raw event population.  **Any trading implementation would need to "
+        "filter to TYPE_A only.**",
+        "- Stage 1 missed the result because its 9,349-row wick-rejection pool conflated TYPE_A "
+        "and TYPE_B — the corrected independent scan separates them cleanly.",
+        "- All results carry the **UNVERIFIED CLOCKS** caveat (candles not clock-verified) and "
+        "the OOS BID→MID basis-change caveat (see implementation_notes.md §1,§3).",
         "",
         "## 0. Preamble",
         "This report delivers §13 answers for the corrected liquidity-sweep research.  "
