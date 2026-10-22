@@ -1,0 +1,585 @@
+CONFLUENCE-MAP CONSTRUCTION PIPELINE: POINT-IN-TIME RECONSTRUCTION RECIPE
+==========================================================================
+
+EXECUTIVE SUMMARY
+─────────────────
+
+The production codebase constructs a pre-session confluence-level map via a five-stage
+pipeline: (1) assembling raw candidate levels from D1 pivots, PDH/PDL, H1/H4 swings,
+round numbers, and BB bands; (2) clustering raw levels within a 5-pip tolerance window;
+(3) assigning confluence scores (distinct category count); (4) ranking by confidence
+and separation; and (5) emitting the final "key_levels" / "major_levels" / "zones"
+map consumed by the live trading engine and briefing strategies.
+
+The entry point is "morning_briefing.py" (the Anthropic-API-driven pre-session build),
+with supporting deterministic foundation modules: "view_builder.py" (VIEW cache),
+"significant_locations.py" (Stage 5 unified level snapshot), and "level_computation.py"
+(Phase 7 deterministic ranking). For live trading, "view_builder.build_view()" is the
+primary gateway; for historical backtest reconstruction, both "view_builder.build_view()"
+and "significant_locations.build_significant_locations()" are callable with a target_iso
+date and Stage-0b bar archives.
+
+
+1. PRODUCTION MODULES & ENTRY POINTS
+─────────────────────────────────────
+
+A. view_builder.py:801–880 (build_view — Phase 4 primary entrypoint)
+   ─────────────────────────────────────────────────────────────────
+   FUNCTION SIGNATURE:
+   build_view(now_utc, price, pair, read_pivots_fn=None, v1_pressure_fn=None,
+              dollar_direction_fn=None, d1_candles=None, h1_candles=None, events_for_date_fn=None)
+   → Dict[str, Any]
+   
+   OUTPUT SCHEMA (view_builder.py:864–879):
+   {
+     "schema_version": "view_builder.v1",
+     "pair": "GBPUSD",
+     "trading_date": "YYYY-MM-DD",
+     "built_at_utc": "ISO-8601",
+     "status": "OK" | "PARTIAL",
+     "missing": [list of error reasons],
+     "price": float,
+     "levels": [{"price": float, "type": str, "source": str}, ...],
+     "zones": [
+       {
+         "center": float,
+         "lo": float,
+         "hi": float,
+         "levels": [...],
+         "strength": int (count + distinct types),
+         "types": [sorted level types]
+       }, ...
+     ],
+     "start_position": {"price": float, "nearest_level_above": {...}, "nearest_level_below": {...}, "current_zone": {...}},
+     "direction": {"v1_pressure_direction": str, "dollar_direction": str, "path": str},
+     "schedule": {...},
+     "hypothesis": {...},
+     "day_mode": {...}
+   }
+   
+   KEY COMPONENT FUNCTIONS CALLED:
+   • _pivot_levels(now_utc, read_pivots_fn) → view_builder.py:246–265
+   • _round_levels(center, span_pips) → view_builder.py:268–280
+   • _pdh_pdl_levels(now_utc, d1_candles) → view_builder.py:283–297
+   • _two_week_sr_levels(now_utc, d1_candles) → view_builder.py:300–317
+   • _h1_swing_levels(now_utc, h1_candles) → view_builder.py:320–360
+   • _cluster_zones(levels, window_pips=5.0) → view_builder.py:366–389
+
+B. significant_locations.py:526–672 (build_significant_locations — Stage 5 unified snapshot)
+   ──────────────────────────────────────────────────────────────────────────────────────
+   FUNCTION SIGNATURE:
+   build_significant_locations(pair, current_price, prior_d1=None, daily_snapshot_dict=None,
+                                bb_closes=None, bb_source_timestamp=None, bb_timeframe=None,
+                                htf_structure_snapshot=None, now_utc=None, cluster_width_pips=None,
+                                active_area_tolerance_pips=None)
+   → Dict[str, Any]
+   
+   OUTPUT SCHEMA (significant_locations.py:653–672):
+   {
+     "stage": "stage5.v1.0",
+     "pair": "GBPUSD",
+     "observation_ts": "ISO-8601",
+     "current_price": float | None,
+     "cluster_width_pips": float,
+     "active_area_tolerance_pips": float,
+     "levels": [
+       {
+         "type": str (PIVOT, R1-R3, S1-S3, PDH, PDL, NEAREST_00, NEAREST_50, BB_UPPER, BB_LOWER, H1_SWING_HIGH, etc.),
+         "price": float,
+         "source": str,
+         "source_timestamp": ISO-8601 | None,
+         "timeframe": str | None,
+         "metadata": dict,
+         "loi_compatible": bool,
+         "side": "ABOVE" | "BELOW" | "AT",
+         "distance_pips": float,
+         "signed_distance_pips": float
+       }, ...
+     ],
+     "levels_above": [...],
+     "levels_below": [...],
+     "levels_at": [...],
+     "nearest_above": {...},
+     "nearest_below": {...},
+     "clusters": [
+       {
+         "id": int,
+         "center_price": float,
+         "min_price": float,
+         "max_price": float,
+         "width_pips": float,
+         "member_count": int,
+         "member_types": [str, ...],
+         "members": [level dicts]
+       }, ...
+     ],
+     "active_area": {"cluster_id": int, "center_price": float, "min_price": float, "max_price": float, "width_pips": float, "member_count": int, "member_types": [...], "distance_pips_to_nearest_member": float, "tolerance_pips": float} | None,
+     "missing_sources": [str, ...],
+     "execution_authority": "NONE"
+   }
+   
+   KEY COMPONENT FUNCTIONS CALLED:
+   • _add_classical_pivots(prior_ohlc, source_ts, out) → significant_locations.py:253–282
+   • _add_round_number_pair(price, type_name, grid_step, grid_offset, out) → significant_locations.py:285–312
+   • _add_bb_levels(closes, source_ts, timeframe, out) → significant_locations.py:315–345
+   • _add_structural_levels(htf_snapshot, out) → significant_locations.py:348–424
+   • _annotate_side_and_distance(levels, current_price) → significant_locations.py:427–452
+   • _cluster_levels(levels, width_pips) → significant_locations.py:455–485
+
+C. level_computation.py (Phase 7 deterministic ranking — **not yet wired into production**)
+   ────────────────────────────────────────────────────────────────────────────────────
+   FUNCTION SIGNATURE (not yet used; Phase 8 integration pending):
+   get_ranked_levels(symbol, now_utc=None) → Tuple[List[ComputedLevel], dict]
+   
+   OUTPUT: List[ComputedLevel] with:
+   • rank: int (1..6)
+   • price: float
+   • type: "RESISTANCE" | "SUPPORT" | "PIVOT"
+   • role: "primary" | "secondary" | "extension"
+   • confluence: List[str] (Phase-1-vocab tags only; from _LEVEL_CONFLUENCE_VOCAB)
+   • confluence_count: int (raw count of distinct categories)
+   • justification: str (≤30 words)
+   • strength: "HIGH" | "MEDIUM" | "LOW"
+   
+   KEY COMPONENT FUNCTIONS:
+   • _cluster_candidates(cats, tol_pips=5.0) → level_computation.py:587–621 (confluence grouping)
+   • _rank_clusters(clusters) → level_computation.py:624–632 (by -confluence_count)
+   • _enforce_separation(ranked, min_sep, max_count) → level_computation.py:635–650 (15p min-sep enforcement)
+
+D. morning_briefing.py:1967–2038 (_populate_legacy_levels — backwards-compat schema mapper)
+   ──────────────────────────────────────────────────────────────────────────────────
+   Converts the API-returned ranked `levels[]` array into the legacy shape consumed by
+   live strategies: `key_levels` / `major_levels` / `liquidity_pools` / `no_trade_zones`.
+   
+   INPUT: briefing dict with `levels[]` array + `bb_upper` / `bb_lower`
+   OUTPUT: briefing mutated with:
+   • briefing["key_levels"] = {"resistance": [...], "support": [...]}
+   • briefing["major_levels"] = {"resistance": [...], "support": [...]}
+   • briefing["liquidity_pools"] = {"buy_side": [...], "sell_side": [...]}
+
+
+2. SIGNIFICANT-LEVEL BUILDERS (RAW LEVEL SOURCES)
+──────────────────────────────────────────────────
+
+A. CLASSICAL DAILY PIVOTS (P, R1–R3, S1–S3)
+   ──────────────────────────────────────────
+   SOURCE: ig_daily_pivots.py (IG REST, once-per-day; 2026-10-02 feature, build 2)
+           OR daily_snapshot.py (cache-resident, deterministic rebuild from HTF D1 cache)
+   
+   FORMULA: view_builder.py:246–265 / ig_daily_pivots.py:141–150 / daily_snapshot.py:126–138
+   P = (H + L + C) / 3
+   R1 = 2*P - L,  S1 = 2*P - H
+   R2 = P + (H - L),  S2 = P - (H - L)
+   R3 = H + 2*(P - L),  S3 = L - 2*(H - P)
+   
+   EMITS (view_builder.py line 256–264 for each: P, R1, R2, R3, S1, S2, S3):
+   Level(price=float, type=f"pivot_{name}", source="ig_daily_pivots")
+   
+   LIVE CACHE: /opt/tradingbot/cache/htf/daily_pivots.json
+   (Read by: view_builder.py:246–265 via ig_daily_pivots.read_pivots)
+   (Populated by: ig_daily_pivots.run_daily_fetch, scheduled at SCHEDULED_HOUR_UTC:MM UTC, default 03:00)
+
+B. PREVIOUS-DAY HIGH/LOW (PDH, PDL)
+   ──────────────────────────────────
+   SOURCE: D1 bar immediately prior to today (skips Sunday; Mondays use Friday)
+   SELECTOR AUTHORITY: htf_cache.select_prior_completed_d1(pair, trading_date)
+   
+   RETRIEVAL (view_builder.py:283–297):
+   bar = _pick_pdh_pdl_bar(now_utc, d1_candles) [weekday logic at :209–226]
+   
+   EMITS:
+   [Level(pdh, "pdh", f"d1_bar:{date_str}"), Level(pdl, "pdl", f"d1_bar:{date_str}")]
+   
+   FALLBACK ON MISS: returns ([], "pdh_pdl_bar_missing")
+
+C. 2-WEEK S/R HIGHS/LOWS (2W_HIGH, 2W_LOW)
+   ──────────────────────────────────────
+   DEFINITION: The 10 most recent D1 bars strictly before today
+   
+   RETRIEVAL (view_builder.py:300–317):
+   bars = _recent_d1_bars(now_utc, TWO_WEEK_TRADING_DAYS=10, candles=d1_candles)
+   → emits Level(high, "2w_high", f"d1_bar:{date}") and Level(low, "2w_low", ...) for each bar
+
+D. ROUND NUMBERS (ROUND_00, ROUND_50)
+   ──────────────────────────────────
+   GRID: ±150 pips around current price (ROUND_RANGE_PIPS)
+   STEP: 50-pip boundaries (1.3500, 1.3550, 1.3600, ...)
+   
+   CONSTRUCTION (view_builder.py:268–280):
+   lo = center - 150
+   hi = center + 150
+   start = floor(lo / 50) * 50
+   for v in [start, start+50, start+100, ...] while v <= hi:
+     type = "round_00" if v % 100 == 0 else "round_50"
+     emit Level(float(v), type, "arithmetic")
+
+E. H1 3-BAR FRACTAL SWING LEVELS (H1_SWING, H1_SWING_HIGH, H1_SWING_LOW)
+   ──────────────────────────────────────────────────────────────────
+   DEFINITION: H1 bars where price turned at least 2 times within 5 pips
+   LOOKBACK: 10 trading days (240 hours)
+   
+   ALGORITHM (view_builder.py:320–360):
+   1. Load 240 recent H1 bars (bars ≥ ts - 240h)
+   2. Find 3-bar fractals: bar i with high[i] ≥ high[i±1] (highs) / low[i] ≤ low[i±1] (lows)
+   3. Cluster raw swings within 5 pips (greedy 1-D cluster)
+   4. Keep clusters with ≥2 touches; emit Level(avg_px, "h1_swing" | "h1_swing_high" | "h1_swing_low", f"h1_fractal:{len(cluster)}_touches")
+
+F. BOLLINGER BANDS (BB_UPPER, BB_LOWER)
+   ──────────────────────────────────
+   SOURCE: H1 or 5m closes (last 20 bars, default BB_PERIOD=20, k=2.0 stddev)
+   
+   FORMULA (qm_liquidity_level_mapper.py:189–196 / significant_locations.py:315–345):
+   mid = SMA(closes[-20:])
+   σ = sqrt(Σ(close - mid)² / 20)
+   upper = mid + 2*σ
+   lower = mid - 2*σ
+   
+   EMITS (significant_locations.py:337–344):
+   Level(upper, "BB_UPPER", "qm_liquidity_level_mapper._bollinger", source_timestamp=last_ts, timeframe="H1")
+   Level(lower, "BB_LOWER", ...)
+
+
+3. CLUSTERING & CONFLUENCE SCORING
+───────────────────────────────────
+
+A. TOLERANCE WINDOW
+   ─────────────────
+   Definition: Two levels are in the same cluster if their price distance ≤ CONFLUENCE_WINDOW_PIPS
+   Default (configurable): 5.0 pips (QM_CLUSTER_WIDTH_PIPS env var; also DEFAULT_CLUSTER_WIDTH_PIPS in significant_locations.py:77)
+   
+   Enforcement points:
+   • view_builder._cluster_zones() at :366–389 uses CONFLUENCE_WINDOW_PIPS (hardcoded 5.0 at line 60)
+   • significant_locations._cluster_levels() at :455–485 uses cluster_width_pips parameter (default cw = DEFAULT_CLUSTER_WIDTH_PIPS = 5.0)
+   • level_computation._cluster_candidates() at :587–621 uses LEVEL_CONFLUENCE_TOLERANCE_PIPS (hardcoded 5.0 at line 54)
+
+B. GREEDY 1-D CLUSTERING
+   ──────────────────────
+   ALGORITHM (same across all modules):
+   1. Sort levels by price
+   2. Initialize clusters = [[level[0]]]
+   3. For each subsequent level:
+      - If price - last_cluster[-1].price ≤ tolerance: append to current cluster
+      - Else: start new cluster
+   
+   IMPLEMENTATION REFS:
+   • view_builder._cluster_zones() :366–389
+   • significant_locations._cluster_levels() :455–485
+   • level_computation._cluster_candidates() :587–621
+
+C. CONFLUENCE SCORE COMPUTATION
+   ──────────────────────────────
+   Per cluster:
+   • Raw confidence_count = number of distinct SOURCE CATEGORIES in the cluster
+   • Example: if a cluster contains {PIVOT, PDH, ROUND_00}, confidence_count = 3
+   
+   IMPLEMENTATION (view_builder.py:376–388):
+   for cluster in clusters:
+     types = {l.type for l in cluster.levels}
+     center = mean(prices)
+     strength = len(cluster.levels) + len(types)  ← STRENGTH METRIC
+     emit Zone(center=center, lo=min(prices), hi=max(prices), strength=strength)
+   
+   IMPLEMENTATION (significant_locations.py:616–620):
+   for cluster:
+     distinct_categories = len({source_category(member) for member in cluster})
+     confluence_count = distinct_categories
+   
+   IMPLEMENTATION (level_computation.py:616–620):
+   for cluster:
+     bases = {category_base_name(member) for member in cluster}
+     confluence_count = len(bases)
+
+
+4. RANKING & SEPARATION ENFORCEMENT
+────────────────────────────────────
+
+A. SORTING RULE
+   ──────────────
+   PRIMARY: by descending confluence_count (highest confidence first)
+   SECONDARY: by category priority (in case of tie)
+   
+   IMPLEMENTATION (level_computation.py:624–632 _rank_clusters):
+   sorted(clusters, key=lambda c: (-c["confluence_count"], _CATEGORY_RANK.get(anchor_category)))
+
+B. MINIMUM SEPARATION (15 pips)
+   ────────────────────────────
+   Enforce 15-pip minimum distance between any two retained levels
+   
+   IMPLEMENTATION (level_computation.py:635–650 _enforce_separation):
+   kept = []
+   for cluster in ranked:
+     if any(|cluster.price - kept[i].price| < 15 for i in kept):
+       skip cluster
+     else:
+       keep cluster
+     if len(kept) >= max_count (default 6):
+       break
+
+C. FINAL LEVEL CAP
+   ────────────────
+   Maximum 4–6 levels (LEVELS_MIN_COUNT, LEVELS_MAX_COUNT)
+   Default: 6 levels per side (resistance + support) or 4–6 total
+   
+   IMPLEMENTATION (level_computation.py:58–59, :639):
+   LEVELS_MIN_COUNT = 4
+   LEVELS_MAX_COUNT = 6
+   kept = _enforce_separation(ranked, min_sep=15.0, max_count=6)
+
+
+5. POINT-IN-TIME RECONSTRUCTION RECIPE (BACKTEST COMPATIBILITY)
+─────────────────────────────────────────────────────────────
+
+PRECONDITIONS:
+───────────────
+• Target ISO date: date_str = "YYYY-MM-DD"
+• Stage-0b bar archive: /opt/tradingbot/cache/htf/{GBPUSD,EURUSD}_D1.json (HTF cache)
+                        /opt/tradingbot/cache/htf/{GBPUSD,EURUSD}_H1.json (HTF cache)
+                        /opt/tradingbot/data/candles/{SYM}/{YYYY-MM-DD}.csv (5m bars)
+• Prior-day pivots: /opt/tradingbot/cache/htf/daily_pivots.json (optional; fallback to D1-derived)
+• Current price: spot mid-price at observation time
+
+SEQUENCE OF CALLS:
+──────────────────
+
+Option 1: DETERMINISTIC PATH (no external APIs, no live state)
+────────────────────────────────────────────────────────────
+
+1. LOAD HISTORICAL DATA
+   
+   target_date = datetime.fromisoformat(f"{date_str}T00:00:00+00:00")
+   
+   # Load D1 bars (for pivots, PDH/PDL, 2-week S/R)
+   from htf_cache import load_cached_candles
+   d1_candles = load_cached_candles("GBPUSD", "D1")["candles"]
+   
+   # Load H1 bars (for H1 swings)
+   h1_candles = load_cached_candles("GBPUSD", "H1")["candles"]
+   
+   # Load 5m closes for BB (last 20+ bars around target date)
+   bb_closes = [float(c["close"]) for c in h1_candles[-20:]]
+   bb_source_timestamp = h1_candles[-1]["timestamp"]
+
+2. RECONSTRUCT DAILY PIVOTS (if daily_pivots.json unavailable or to verify)
+   
+   from daily_snapshot import build_snapshot
+   snap, reason = build_snapshot("GBPUSD", trading_date=target_date, now_utc=target_date)
+   if snap:
+     prior_d1 = snap["source_d1"]
+     source_d1_ts = snap["source_d1_timestamp"]
+
+3. CALL build_view() (PRIMARY ENTRY POINT FOR PRODUCTION LEVELS)
+   
+   from view_builder import build_view
+   import datetime
+   
+   # Mid-session observation (e.g., 08:00 UTC on target_date)
+   now_utc = datetime.datetime.fromisoformat(f"{date_str}T08:00:00+00:00")
+   current_price = <current_spot_price>  # or from H1 candles
+   
+   view = build_view(
+       now_utc=now_utc,
+       price=current_price,
+       pair="GBPUSD",
+       read_pivots_fn=None,  # will use ig_daily_pivots.read_pivots by default
+       v1_pressure_fn=None,  # optional; external
+       dollar_direction_fn=None,  # optional; external
+       d1_candles=d1_candles,  # feed pre-loaded D1 bars
+       h1_candles=h1_candles,  # feed pre-loaded H1 bars
+   )
+   
+   # Output: view["levels"] = list of Level objects
+   #         view["zones"] = list of Zone objects (clustered, scored)
+   #         view["status"] = "OK" or "PARTIAL" + view["missing"]
+
+4. ALTERNATIVELY: CALL build_significant_locations() (STAGE 5 UNIFIED SNAPSHOT)
+   
+   from significant_locations import build_significant_locations, build_from_production
+   
+   # Pure deterministic path (no I/O):
+   locations = build_significant_locations(
+       pair="GBPUSD",
+       current_price=current_price,
+       prior_d1=snap["source_d1"],
+       daily_snapshot_dict=snap,
+       bb_closes=bb_closes,
+       bb_source_timestamp=bb_source_timestamp,
+       bb_timeframe="H1",
+       htf_structure_snapshot=<htf_snap_dict>,  # from htf_structure.build_snapshot_from_cache
+       now_utc=now_utc,
+       cluster_width_pips=5.0,
+   )
+   
+   # Output: locations["levels"] = list of level dicts
+   #         locations["clusters"] = list of cluster dicts (center, min, max, width, members)
+   #         locations["active_area"] = current cluster or None
+
+5. EXTRACT CONFLUENCE MAP
+   
+   # From view_builder output:
+   zones = view["zones"]  # list of {center, lo, hi, levels, strength, types}
+   for zone in zones:
+     center = zone["center"]
+     strength = zone["strength"]
+     level_types = zone["types"]
+     confluence_count = strength - len(zone["levels"])  # approximation from view_builder
+   
+   # From significant_locations output:
+   clusters = locations["clusters"]
+   for cluster in clusters:
+     center = cluster["center_price"]
+     confluence_count = cluster["member_count"]
+     member_types = cluster["member_types"]
+
+STATE REQUIRED FOR RECONSTRUCTION:
+────────────────────────────────
+
+✓ ALWAYS AVAILABLE FROM HTF CACHE:
+  • D1 bars (via htf_cache.load_cached_candles)
+  • H1 bars (via htf_cache.load_cached_candles)
+  • Prior day's bar (selector: htf_cache.select_prior_completed_d1, no live state)
+
+✓ AVAILABLE FROM DAILY_PIVOTS CACHE (optional; fallback to D1 derivation):
+  • daily_pivots.json (at /opt/tradingbot/cache/htf/daily_pivots.json)
+  → If missing: fall back to daily_snapshot.build_snapshot, which is deterministic
+
+? OPTIONAL (NOT REQUIRED for baseline confluence map):
+  • V1 pressure direction (external strategy signal; view_builder:416–456)
+  • Dollar direction (external strategy signal; view_builder:416–456)
+  • News calendar events (for schedule annotation; view_builder:549–646)
+  • HTF structural swings (for H1/D1/W1 BoS/CHoCH; significant_locations:348–424)
+
+✗ NOT NEEDED (LIVE STATE ONLY):
+  • Real-time price feeds (use snapshot/archive price)
+  • Live session highs/lows (use 5m CSV archives)
+  • Intraday strategy filters (separate module; not part of confluence map)
+
+
+6. LIVE WIRING & PRODUCTION PIPELINE
+──────────────────────────────────
+
+A. MORNING BRIEFING PIPELINE (morning_briefing.py)
+   ──────────────────────────────────────────────
+   SCHEDULE: Fire at 05:30 UTC (London briefing) and 12:30 UTC (NY briefing)
+   
+   SEQUENCE:
+   1. _run_briefing_once(session="London") [morning_briefing.py:3663]
+   2. For each symbol:
+      a. Assemble multi-timeframe data (D1, H4, H1 bars + HTF structural snapshot)
+      b. Call Anthropic API with prompt containing:
+         • Current price, BB upper/lower (H1)
+         • All candidate level categories (PDH/PDL, pivots, swings, round numbers, etc.)
+         • Session parameters (Asian high/low, London high/low, etc.)
+      c. API returns JSON with "levels[]" array (ranked per Phase 1 schema)
+      d. Call _populate_legacy_levels(briefing, levels) [morning_briefing.py:1967]
+      e. Store briefing JSON to disk at briefing_{SYMBOL}_{DATE}_{SESSION}.json
+   3. Call _finalise_briefing() [morning_briefing.py:3686] → send Telegram, email, etc.
+
+   OUTPUT: briefing dict with:
+   • briefing["levels"] = list of ComputedLevel dicts (from API)
+   • briefing["key_levels"] = {"resistance": [...], "support": [...]} (legacy compat)
+   • briefing["major_levels"] = {"resistance": [...], "support": [...]}
+   • briefing["liquidity_pools"] = {"buy_side": [...], "sell_side": [...]}
+
+B. LIVE TRADING ENGINE (strategy_logic.py, bb_bounce_filters.py, etc.)
+   ─────────────────────────────────────────────────────────────────
+   ENTRY: strategy_logic.decide(symbol, epic, price, df_5m, briefing, ...)
+   
+   USAGE OF BRIEFING LEVELS:
+   • BriefingSweepStrategy (briefing_sweep.py:114–343) reads briefing["key_levels"] + briefing["major_levels"]
+   • BB_BOUNCE (gbpusd_bb_bounce.py) reads briefing levels for level-gate filtering
+   • NEWS_TICK (not shown in this codebase sample) would use briefing["levels"] for proximity matching
+   
+   → Levels are consumed as-is; no re-clustering in the live loop (performance + determinism)
+
+
+AMBIGUITIES & CLARIFICATIONS NEEDED
+────────────────────────────────────
+
+1. **Daily Pivots Authority (ig_daily_pivots vs daily_snapshot)**
+   
+   Current state (2026-10):
+   • ig_daily_pivots.py (v2/build2 branch) is a NEW module that fetches IG REST once per day
+     → Populates /opt/tradingbot/cache/htf/daily_pivots.json
+     → **NOT YET WIRED INTO PRODUCTION** (still feature-flagged, spec §2)
+   • daily_snapshot.py is the FALLBACK: deterministic rebuild from HTF D1 cache
+     → Formula identical to ig_daily_pivots; deterministic and audit-trail-clean
+   
+   FOR BACKTEST RECONSTRUCTION: Use daily_snapshot.build_snapshot(symbol, trading_date)
+   (no external API calls; reproducible). The ig_daily_pivots flow is for production
+   live trading accuracy alignment with IG's own displayed pivots.
+
+2. **H1 Swing Fractal Definition Ambiguity**
+   
+   Current: "price turned ≥2 times within 5 pips" (view_builder.py:320–360)
+   
+   WHAT THIS MEANS:
+   • Raw swings = 3-bar fractals: high[i] ≥ high[i-1] and high[i] > high[i+1] (+ high[i-2], high[i+2])
+   • Greedy cluster within 5 pips: group swings whose prices are ≤5 pips apart
+   • Keep clusters with ≥2 members (the "turned ≥2 times")
+   
+   AMBIGUITY: "turned" = "revisited the price level (cluster) ≥2 times" not "changed direction 2x"
+   → Clarify if backtest should use same fractal definition or a different swing detector.
+
+3. **Tokyo H/L vs London AM H/L Availability**
+   
+   CURRENT (view_builder.py:320–360 H1 swings):
+   • H1 lookback = 240 hours = 10 trading days
+   • NO SPECIAL TOKYO SESSION WINDOW (unlike level_computation.py:370–380)
+   
+   TOKYO SESSION (22:00 prev-day → 06:00 today UTC):
+   • Pre-session by the time London trading starts (07:00 UTC)
+   • Data is COMPLETE before session begins
+   
+   LONDON AM H/L (06:45 → 12:25 UTC):
+   • ONLY available DURING trading (starts 6:45 UTC, after London AM open)
+   • NOT pre-session; only computed when the session itself is mid-flight
+   
+   FOR BACKTEST RECONSTRUCTION:
+   • Tokyo session H/L: call _asian_high_low(symbol, target_date) [level_computation.py:370–380]
+   • London AM H/L: only available after 06:45 UTC target date; use intraday refresh, not pre-session build
+   • view_builder does NOT emit Tokyo/London session fields (that's level_computation Phase 7, not yet wired)
+
+4. **"Confidence Score" vs "Strength" Metric**
+   
+   view_builder (current production):
+   • strength = len(cluster.levels) + len(cluster.types)
+   • MIXES cardinality (count of level objects) + diversity (count of level types)
+   • NOT a pure "confluence count" (which would be distinct source categories only)
+   
+   significant_locations (Stage 5, newer):
+   • confluence_count = distinct source categories
+   • PURE category count
+   
+   level_computation (Phase 7, not yet wired):
+   • confluence_count = distinct base category names
+   • Explicit vocab mapping (_CATEGORY_TO_VOCAB_TAG)
+   
+   FOR BACKTEST: Use significant_locations.confluence_count (most semantically clear).
+   view_builder.strength is a SEMI-STRENGTH metric; see view_builder.py:156 for the definition.
+
+5. **Round-Number Grid Ambiguity**
+   
+   Current: 50-pip grid (1.3500, 1.3550, 1.3600, 1.3650, 1.3700, ...)
+   
+   MISMATCH IN NAMING:
+   • view_builder calls them "round_00" (100-pip multiples) and "round_50" (50-pip offsets)
+   • But the grid is a 50-pip STEP; "round_00" means the value v % 100 == 0
+   • E.g., 1.3500 is "round_00", 1.3550 is "round_50", 1.3600 is "round_00"
+   
+   ALGORITHM (view_builder.py:268–280):
+   for v in [start, start+50, start+100, ...]:
+     type = "round_00" if v % 100 == 0 else "round_50"
+   
+   FOR BACKTEST: Same logic; explicitly: multiples of 100 = round_00, multiples of 50 = round_50.
+
+6. **Guarded Windows for Pivot Fetch**
+   
+   Current: ig_daily_pivots and view_builder avoid fetching/building in windows:
+   • 05:00–06:00 UTC (pre-build guard)
+   • 12:00–13:00 UTC (pre-refresh guard)
+   
+   REASON: These windows bracket the briefing render times (05:30, 12:30 UTC).
+   
+   FOR BACKTEST: No guarded windows needed; run build_view() and build_significant_locations()
+   at any time with static data.
+

@@ -1,0 +1,513 @@
+# loaded 572 bars across 2026-04-28+2026-04-29
+# detected 34 pierce-bars in 07:00-16:00 UTC on 2026-04-29
+
+=== PIERCE 1/34 === 2026-04-29 08:05  LOWER_PIERCE  window=morning
+    BB: lower=13497.76 mid=13502.58 upper=13507.40
+    pierce_magnitude=2.71p  close_back_inside=True  pattern=PATTERN_1A
+    MFE(reversal)=4.2p  MAE(continuation)=5.2p  strength=0.82
+    N-3: 07:50 O=13504.45 H=13506.45 L=13503.65 C=13504.65 rng=2.8 body=0.2 br=0.07 pos=inside BBu=13507.67 BBl=13496.31
+    N-2: 07:55 O=13504.55 H=13506.75 L=13503.90 C=13505.15 rng=2.8 body=0.6 br=0.21 pos=inside BBu=13507.69 BBl=13497.14
+    N-1: 08:00 O=13504.25 H=13506.05 L=13498.75 C=13499.65 rng=7.3 body=4.6 br=0.63 pos=inside BBu=13507.45 BBl=13497.61
+    N  : 08:05 O=13499.55 H=13500.95 L=13495.05 C=13500.75 rng=5.9 body=1.2 br=0.20 pos=wick_below_close_inside
+    N+1: 08:10 O=13500.65 H=13502.95 L=13495.55 C=13496.85 rng=7.4 body=3.8 br=0.51 pos=below_lower disp_from_N_close=-3.9p
+    N+2: 08:15 O=13496.75 H=13503.50 L=13496.75 C=13502.95 rng=6.8 body=6.2 br=0.92 pos=wick_below_close_inside disp_from_N_close=+2.2p
+    N+3: 08:20 O=13502.75 H=13505.00 L=13500.45 C=13501.25 rng=4.5 body=1.5 br=0.33 pos=inside disp_from_N_close=+0.5p
+    N+4: 08:25 O=13501.15 H=13504.55 L=13500.95 C=13503.75 rng=3.6 body=2.6 br=0.72 pos=inside disp_from_N_close=+3.0p
+    N+5: 08:30 O=13503.45 H=13504.15 L=13499.15 C=13499.85 rng=5.0 body=3.6 br=0.72 pos=inside disp_from_N_close=-0.9p
+    N+6: 08:35 O=13500.25 H=13501.35 L=13498.45 C=13501.25 rng=2.9 body=1.0 br=0.34 pos=inside disp_from_N_close=+0.5p
+
+=== PIERCE 2/34 === 2026-04-29 08:10  LOWER_PIERCE  window=morning
+    BB: lower=13498.07 mid=13502.63 upper=13507.19
+    pierce_magnitude=2.52p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=8.2p  MAE(continuation)=0.1p  strength=8.15
+    N-3: 07:55 O=13504.55 H=13506.75 L=13503.90 C=13505.15 rng=2.8 body=0.6 br=0.21 pos=inside BBu=13507.69 BBl=13497.14
+    N-2: 08:00 O=13504.25 H=13506.05 L=13498.75 C=13499.65 rng=7.3 body=4.6 br=0.63 pos=inside BBu=13507.45 BBl=13497.61
+    N-1: 08:05 O=13499.55 H=13500.95 L=13495.05 C=13500.75 rng=5.9 body=1.2 br=0.20 pos=wick_below_close_inside BBu=13507.40 BBl=13497.76
+    N  : 08:10 O=13500.65 H=13502.95 L=13495.55 C=13496.85 rng=7.4 body=3.8 br=0.51 pos=below_lower
+    N+1: 08:15 O=13496.75 H=13503.50 L=13496.75 C=13502.95 rng=6.8 body=6.2 br=0.92 pos=wick_below_close_inside disp_from_N_close=+6.1p
+    N+2: 08:20 O=13502.75 H=13505.00 L=13500.45 C=13501.25 rng=4.5 body=1.5 br=0.33 pos=inside disp_from_N_close=+4.4p
+    N+3: 08:25 O=13501.15 H=13504.55 L=13500.95 C=13503.75 rng=3.6 body=2.6 br=0.72 pos=inside disp_from_N_close=+6.9p
+    N+4: 08:30 O=13503.45 H=13504.15 L=13499.15 C=13499.85 rng=5.0 body=3.6 br=0.72 pos=inside disp_from_N_close=+3.0p
+    N+5: 08:35 O=13500.25 H=13501.35 L=13498.45 C=13501.25 rng=2.9 body=1.0 br=0.34 pos=inside disp_from_N_close=+4.4p
+    N+6: 08:40 O=13501.15 H=13501.75 L=13499.05 C=13501.65 rng=2.7 body=0.5 br=0.19 pos=inside disp_from_N_close=+4.8p
+
+=== PIERCE 3/34 === 2026-04-29 08:15  LOWER_PIERCE  window=morning
+    BB: lower=13498.12 mid=13502.67 upper=13507.22
+    pierce_magnitude=1.37p  close_back_inside=True  pattern=PATTERN_1B
+    MFE(reversal)=2.0p  MAE(continuation)=4.5p  strength=0.46
+    N-3: 08:00 O=13504.25 H=13506.05 L=13498.75 C=13499.65 rng=7.3 body=4.6 br=0.63 pos=inside BBu=13507.45 BBl=13497.61
+    N-2: 08:05 O=13499.55 H=13500.95 L=13495.05 C=13500.75 rng=5.9 body=1.2 br=0.20 pos=wick_below_close_inside BBu=13507.40 BBl=13497.76
+    N-1: 08:10 O=13500.65 H=13502.95 L=13495.55 C=13496.85 rng=7.4 body=3.8 br=0.51 pos=below_lower BBu=13507.19 BBl=13498.07
+    N  : 08:15 O=13496.75 H=13503.50 L=13496.75 C=13502.95 rng=6.8 body=6.2 br=0.92 pos=wick_below_close_inside
+    N+1: 08:20 O=13502.75 H=13505.00 L=13500.45 C=13501.25 rng=4.5 body=1.5 br=0.33 pos=inside disp_from_N_close=-1.7p
+    N+2: 08:25 O=13501.15 H=13504.55 L=13500.95 C=13503.75 rng=3.6 body=2.6 br=0.72 pos=inside disp_from_N_close=+0.8p
+    N+3: 08:30 O=13503.45 H=13504.15 L=13499.15 C=13499.85 rng=5.0 body=3.6 br=0.72 pos=inside disp_from_N_close=-3.1p
+    N+4: 08:35 O=13500.25 H=13501.35 L=13498.45 C=13501.25 rng=2.9 body=1.0 br=0.34 pos=inside disp_from_N_close=-1.7p
+    N+5: 08:40 O=13501.15 H=13501.75 L=13499.05 C=13501.65 rng=2.7 body=0.5 br=0.19 pos=inside disp_from_N_close=-1.3p
+    N+6: 08:45 O=13501.55 H=13504.05 L=13499.55 C=13500.85 rng=4.5 body=0.7 br=0.16 pos=inside disp_from_N_close=-2.1p
+
+=== PIERCE 4/34 === 2026-04-29 09:00  LOWER_PIERCE  window=morning
+    BB: lower=13497.73 mid=13501.66 upper=13505.60
+    pierce_magnitude=1.08p  close_back_inside=True  pattern=PATTERN_1A
+    MFE(reversal)=2.0p  MAE(continuation)=4.6p  strength=0.43
+    N-3: 08:45 O=13501.55 H=13504.05 L=13499.55 C=13500.85 rng=4.5 body=0.7 br=0.16 pos=inside BBu=13506.26 BBl=13498.16
+    N-2: 08:50 O=13500.95 H=13502.05 L=13499.60 C=13500.25 rng=2.4 body=0.7 br=0.29 pos=inside BBu=13505.77 BBl=13498.12
+    N-1: 08:55 O=13500.05 H=13500.45 L=13499.05 C=13499.15 rng=1.4 body=0.9 br=0.64 pos=inside BBu=13505.70 BBl=13497.78
+    N  : 09:00 O=13499.05 H=13501.55 L=13496.65 C=13501.25 rng=4.9 body=2.2 br=0.45 pos=wick_below_close_inside
+    N+1: 09:05 O=13501.15 H=13501.85 L=13498.85 C=13499.85 rng=3.0 body=1.3 br=0.43 pos=inside disp_from_N_close=-1.4p
+    N+2: 09:10 O=13499.95 H=13500.95 L=13499.25 C=13500.35 rng=1.7 body=0.4 br=0.24 pos=inside disp_from_N_close=-0.9p
+    N+3: 09:15 O=13500.15 H=13503.25 L=13499.25 C=13500.15 rng=4.0 body=0.0 br=0.00 pos=inside disp_from_N_close=-1.1p
+    N+4: 09:20 O=13500.05 H=13501.35 L=13496.65 C=13500.65 rng=4.7 body=0.6 br=0.13 pos=wick_below_close_inside disp_from_N_close=-0.6p
+    N+5: 09:25 O=13500.75 H=13503.15 L=13500.05 C=13500.35 rng=3.1 body=0.4 br=0.13 pos=inside disp_from_N_close=-0.9p
+    N+6: 09:30 O=13500.15 H=13501.90 L=13498.65 C=13499.05 rng=3.2 body=1.1 br=0.34 pos=inside disp_from_N_close=-2.2p
+
+=== PIERCE 5/34 === 2026-04-29 09:20  LOWER_PIERCE  window=morning
+    BB: lower=13497.26 mid=13501.22 upper=13505.18
+    pierce_magnitude=0.61p  close_back_inside=True  pattern=PATTERN_1A
+    MFE(reversal)=5.5p  MAE(continuation)=4.7p  strength=1.17
+    N-3: 09:05 O=13501.15 H=13501.85 L=13498.85 C=13499.85 rng=3.0 body=1.3 br=0.43 pos=inside BBu=13505.56 BBl=13497.54
+    N-2: 09:10 O=13499.95 H=13500.95 L=13499.25 C=13500.35 rng=1.7 body=0.4 br=0.24 pos=inside BBu=13505.41 BBl=13497.43
+    N-1: 09:15 O=13500.15 H=13503.25 L=13499.25 C=13500.15 rng=4.0 body=0.0 br=0.00 pos=inside BBu=13505.25 BBl=13497.32
+    N  : 09:20 O=13500.05 H=13501.35 L=13496.65 C=13500.65 rng=4.7 body=0.6 br=0.13 pos=wick_below_close_inside
+    N+1: 09:25 O=13500.75 H=13503.15 L=13500.05 C=13500.35 rng=3.1 body=0.4 br=0.13 pos=inside disp_from_N_close=-0.3p
+    N+2: 09:30 O=13500.15 H=13501.90 L=13498.65 C=13499.05 rng=3.2 body=1.1 br=0.34 pos=inside disp_from_N_close=-1.6p
+    N+3: 09:35 O=13498.95 H=13500.80 L=13495.95 C=13497.75 rng=4.8 body=1.2 br=0.25 pos=wick_below_close_inside disp_from_N_close=-2.9p
+    N+4: 09:40 O=13497.85 H=13501.75 L=13497.00 C=13499.05 rng=4.8 body=1.2 br=0.25 pos=wick_below_close_inside disp_from_N_close=-1.6p
+    N+5: 09:45 O=13498.95 H=13505.35 L=13498.15 C=13504.85 rng=7.2 body=5.9 br=0.82 pos=above_upper disp_from_N_close=+4.2p
+    N+6: 09:50 O=13504.75 H=13506.15 L=13503.15 C=13504.85 rng=3.0 body=0.1 br=0.03 pos=above_upper disp_from_N_close=+4.2p
+
+=== PIERCE 6/34 === 2026-04-29 09:35  LOWER_PIERCE  window=morning
+    BB: lower=13497.34 mid=13500.38 upper=13503.42
+    pierce_magnitude=1.39p  close_back_inside=True  pattern=PATTERN_1B
+    MFE(reversal)=12.5p  MAE(continuation)=0.8p  strength=12.50
+    N-3: 09:20 O=13500.05 H=13501.35 L=13496.65 C=13500.65 rng=4.7 body=0.6 br=0.13 pos=wick_below_close_inside BBu=13505.18 BBl=13497.26
+    N-2: 09:25 O=13500.75 H=13503.15 L=13500.05 C=13500.35 rng=3.1 body=0.4 br=0.13 pos=inside BBu=13504.77 BBl=13497.29
+    N-1: 09:30 O=13500.15 H=13501.90 L=13498.65 C=13499.05 rng=3.2 body=1.1 br=0.34 pos=inside BBu=13504.19 BBl=13497.31
+    N  : 09:35 O=13498.95 H=13500.80 L=13495.95 C=13497.75 rng=4.8 body=1.2 br=0.25 pos=wick_below_close_inside
+    N+1: 09:40 O=13497.85 H=13501.75 L=13497.00 C=13499.05 rng=4.8 body=1.2 br=0.25 pos=wick_below_close_inside disp_from_N_close=+1.3p
+    N+2: 09:45 O=13498.95 H=13505.35 L=13498.15 C=13504.85 rng=7.2 body=5.9 br=0.82 pos=above_upper disp_from_N_close=+7.1p
+    N+3: 09:50 O=13504.75 H=13506.15 L=13503.15 C=13504.85 rng=3.0 body=0.1 br=0.03 pos=above_upper disp_from_N_close=+7.1p
+    N+4: 09:55 O=13504.95 H=13506.25 L=13502.65 C=13503.55 rng=3.6 body=1.4 br=0.39 pos=wick_above_close_inside disp_from_N_close=+5.8p
+    N+5: 10:00 O=13503.35 H=13508.25 L=13500.35 C=13508.05 rng=7.9 body=4.7 br=0.59 pos=above_upper disp_from_N_close=+10.3p
+    N+6: 10:05 O=13507.95 H=13510.25 L=13506.60 C=13507.85 rng=3.6 body=0.1 br=0.03 pos=above_upper disp_from_N_close=+10.1p
+
+=== PIERCE 7/34 === 2026-04-29 09:40  LOWER_PIERCE  window=morning
+    BB: lower=13497.27 mid=13500.35 upper=13503.43
+    pierce_magnitude=0.27p  close_back_inside=True  pattern=PATTERN_1A
+    MFE(reversal)=11.2p  MAE(continuation)=0.9p  strength=11.20
+    N-3: 09:25 O=13500.75 H=13503.15 L=13500.05 C=13500.35 rng=3.1 body=0.4 br=0.13 pos=inside BBu=13504.77 BBl=13497.29
+    N-2: 09:30 O=13500.15 H=13501.90 L=13498.65 C=13499.05 rng=3.2 body=1.1 br=0.34 pos=inside BBu=13504.19 BBl=13497.31
+    N-1: 09:35 O=13498.95 H=13500.80 L=13495.95 C=13497.75 rng=4.8 body=1.2 br=0.25 pos=wick_below_close_inside BBu=13503.42 BBl=13497.34
+    N  : 09:40 O=13497.85 H=13501.75 L=13497.00 C=13499.05 rng=4.8 body=1.2 br=0.25 pos=wick_below_close_inside
+    N+1: 09:45 O=13498.95 H=13505.35 L=13498.15 C=13504.85 rng=7.2 body=5.9 br=0.82 pos=above_upper disp_from_N_close=+5.8p
+    N+2: 09:50 O=13504.75 H=13506.15 L=13503.15 C=13504.85 rng=3.0 body=0.1 br=0.03 pos=above_upper disp_from_N_close=+5.8p
+    N+3: 09:55 O=13504.95 H=13506.25 L=13502.65 C=13503.55 rng=3.6 body=1.4 br=0.39 pos=wick_above_close_inside disp_from_N_close=+4.5p
+    N+4: 10:00 O=13503.35 H=13508.25 L=13500.35 C=13508.05 rng=7.9 body=4.7 br=0.59 pos=above_upper disp_from_N_close=+9.0p
+    N+5: 10:05 O=13507.95 H=13510.25 L=13506.60 C=13507.85 rng=3.6 body=0.1 br=0.03 pos=above_upper disp_from_N_close=+8.8p
+    N+6: 10:10 O=13507.45 H=13508.85 L=13506.75 C=13508.85 rng=2.1 body=1.4 br=0.67 pos=above_upper disp_from_N_close=+9.8p
+
+=== PIERCE 8/34 === 2026-04-29 09:45  UPPER_PIERCE  window=morning
+    BB: lower=13496.91 mid=13500.55 upper=13504.20
+    pierce_magnitude=1.15p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=4.5p  MAE(continuation)=5.4p  strength=0.83
+    N-3: 09:30 O=13500.15 H=13501.90 L=13498.65 C=13499.05 rng=3.2 body=1.1 br=0.34 pos=inside BBu=13504.19 BBl=13497.31
+    N-2: 09:35 O=13498.95 H=13500.80 L=13495.95 C=13497.75 rng=4.8 body=1.2 br=0.25 pos=wick_below_close_inside BBu=13503.42 BBl=13497.34
+    N-1: 09:40 O=13497.85 H=13501.75 L=13497.00 C=13499.05 rng=4.8 body=1.2 br=0.25 pos=wick_below_close_inside BBu=13503.43 BBl=13497.27
+    N  : 09:45 O=13498.95 H=13505.35 L=13498.15 C=13504.85 rng=7.2 body=5.9 br=0.82 pos=above_upper
+    N+1: 09:50 O=13504.75 H=13506.15 L=13503.15 C=13504.85 rng=3.0 body=0.1 br=0.03 pos=above_upper disp_from_N_close=+0.0p
+    N+2: 09:55 O=13504.95 H=13506.25 L=13502.65 C=13503.55 rng=3.6 body=1.4 br=0.39 pos=wick_above_close_inside disp_from_N_close=+1.3p
+    N+3: 10:00 O=13503.35 H=13508.25 L=13500.35 C=13508.05 rng=7.9 body=4.7 br=0.59 pos=above_upper disp_from_N_close=-3.2p
+    N+4: 10:05 O=13507.95 H=13510.25 L=13506.60 C=13507.85 rng=3.6 body=0.1 br=0.03 pos=above_upper disp_from_N_close=-3.0p
+    N+5: 10:10 O=13507.45 H=13508.85 L=13506.75 C=13508.85 rng=2.1 body=1.4 br=0.67 pos=above_upper disp_from_N_close=-4.0p
+    N+6: 10:15 O=13509.05 H=13509.05 L=13506.45 C=13508.65 rng=2.6 body=0.4 br=0.15 pos=inside disp_from_N_close=-3.8p
+
+=== PIERCE 9/34 === 2026-04-29 09:50  UPPER_PIERCE  window=morning
+    BB: lower=13497.26 mid=13500.95 upper=13504.65
+    pierce_magnitude=1.50p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=4.5p  MAE(continuation)=5.4p  strength=0.83
+    N-3: 09:35 O=13498.95 H=13500.80 L=13495.95 C=13497.75 rng=4.8 body=1.2 br=0.25 pos=wick_below_close_inside BBu=13503.42 BBl=13497.34
+    N-2: 09:40 O=13497.85 H=13501.75 L=13497.00 C=13499.05 rng=4.8 body=1.2 br=0.25 pos=wick_below_close_inside BBu=13503.43 BBl=13497.27
+    N-1: 09:45 O=13498.95 H=13505.35 L=13498.15 C=13504.85 rng=7.2 body=5.9 br=0.82 pos=above_upper BBu=13504.20 BBl=13496.91
+    N  : 09:50 O=13504.75 H=13506.15 L=13503.15 C=13504.85 rng=3.0 body=0.1 br=0.03 pos=above_upper
+    N+1: 09:55 O=13504.95 H=13506.25 L=13502.65 C=13503.55 rng=3.6 body=1.4 br=0.39 pos=wick_above_close_inside disp_from_N_close=+1.3p
+    N+2: 10:00 O=13503.35 H=13508.25 L=13500.35 C=13508.05 rng=7.9 body=4.7 br=0.59 pos=above_upper disp_from_N_close=-3.2p
+    N+3: 10:05 O=13507.95 H=13510.25 L=13506.60 C=13507.85 rng=3.6 body=0.1 br=0.03 pos=above_upper disp_from_N_close=-3.0p
+    N+4: 10:10 O=13507.45 H=13508.85 L=13506.75 C=13508.85 rng=2.1 body=1.4 br=0.67 pos=above_upper disp_from_N_close=-4.0p
+    N+5: 10:15 O=13509.05 H=13509.05 L=13506.45 C=13508.65 rng=2.6 body=0.4 br=0.15 pos=inside disp_from_N_close=-3.8p
+    N+6: 10:20 O=13508.25 H=13510.15 L=13507.55 C=13508.05 rng=2.6 body=0.2 br=0.08 pos=wick_above_close_inside disp_from_N_close=-3.2p
+
+=== PIERCE 10/34 === 2026-04-29 09:55  UPPER_PIERCE  window=morning
+    BB: lower=13497.22 mid=13500.99 upper=13504.75
+    pierce_magnitude=1.50p  close_back_inside=True  pattern=NONE
+    MFE(reversal)=3.2p  MAE(continuation)=6.7p  strength=0.48
+    N-3: 09:40 O=13497.85 H=13501.75 L=13497.00 C=13499.05 rng=4.8 body=1.2 br=0.25 pos=wick_below_close_inside BBu=13503.43 BBl=13497.27
+    N-2: 09:45 O=13498.95 H=13505.35 L=13498.15 C=13504.85 rng=7.2 body=5.9 br=0.82 pos=above_upper BBu=13504.20 BBl=13496.91
+    N-1: 09:50 O=13504.75 H=13506.15 L=13503.15 C=13504.85 rng=3.0 body=0.1 br=0.03 pos=above_upper BBu=13504.65 BBl=13497.26
+    N  : 09:55 O=13504.95 H=13506.25 L=13502.65 C=13503.55 rng=3.6 body=1.4 br=0.39 pos=wick_above_close_inside
+    N+1: 10:00 O=13503.35 H=13508.25 L=13500.35 C=13508.05 rng=7.9 body=4.7 br=0.59 pos=above_upper disp_from_N_close=-4.5p
+    N+2: 10:05 O=13507.95 H=13510.25 L=13506.60 C=13507.85 rng=3.6 body=0.1 br=0.03 pos=above_upper disp_from_N_close=-4.3p
+    N+3: 10:10 O=13507.45 H=13508.85 L=13506.75 C=13508.85 rng=2.1 body=1.4 br=0.67 pos=above_upper disp_from_N_close=-5.3p
+    N+4: 10:15 O=13509.05 H=13509.05 L=13506.45 C=13508.65 rng=2.6 body=0.4 br=0.15 pos=inside disp_from_N_close=-5.1p
+    N+5: 10:20 O=13508.25 H=13510.15 L=13507.55 C=13508.05 rng=2.6 body=0.2 br=0.08 pos=wick_above_close_inside disp_from_N_close=-4.5p
+    N+6: 10:25 O=13507.95 H=13507.95 L=13504.65 C=13505.35 rng=3.3 body=2.6 br=0.79 pos=inside disp_from_N_close=-1.8p
+
+=== PIERCE 11/34 === 2026-04-29 10:00  UPPER_PIERCE  window=morning
+    BB: lower=13496.46 mid=13501.33 upper=13506.19
+    pierce_magnitude=2.06p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=3.4p  MAE(continuation)=2.2p  strength=1.55
+    N-3: 09:45 O=13498.95 H=13505.35 L=13498.15 C=13504.85 rng=7.2 body=5.9 br=0.82 pos=above_upper BBu=13504.20 BBl=13496.91
+    N-2: 09:50 O=13504.75 H=13506.15 L=13503.15 C=13504.85 rng=3.0 body=0.1 br=0.03 pos=above_upper BBu=13504.65 BBl=13497.26
+    N-1: 09:55 O=13504.95 H=13506.25 L=13502.65 C=13503.55 rng=3.6 body=1.4 br=0.39 pos=wick_above_close_inside BBu=13504.75 BBl=13497.22
+    N  : 10:00 O=13503.35 H=13508.25 L=13500.35 C=13508.05 rng=7.9 body=4.7 br=0.59 pos=above_upper
+    N+1: 10:05 O=13507.95 H=13510.25 L=13506.60 C=13507.85 rng=3.6 body=0.1 br=0.03 pos=above_upper disp_from_N_close=+0.2p
+    N+2: 10:10 O=13507.45 H=13508.85 L=13506.75 C=13508.85 rng=2.1 body=1.4 br=0.67 pos=above_upper disp_from_N_close=-0.8p
+    N+3: 10:15 O=13509.05 H=13509.05 L=13506.45 C=13508.65 rng=2.6 body=0.4 br=0.15 pos=inside disp_from_N_close=-0.6p
+    N+4: 10:20 O=13508.25 H=13510.15 L=13507.55 C=13508.05 rng=2.6 body=0.2 br=0.08 pos=wick_above_close_inside disp_from_N_close=+0.0p
+    N+5: 10:25 O=13507.95 H=13507.95 L=13504.65 C=13505.35 rng=3.3 body=2.6 br=0.79 pos=inside disp_from_N_close=+2.7p
+    N+6: 10:30 O=13505.55 H=13507.75 L=13505.45 C=13506.55 rng=2.3 body=1.0 br=0.43 pos=inside disp_from_N_close=+1.5p
+
+=== PIERCE 12/34 === 2026-04-29 10:05  UPPER_PIERCE  window=morning
+    BB: lower=13495.98 mid=13501.53 upper=13507.08
+    pierce_magnitude=3.17p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=3.2p  MAE(continuation)=2.3p  strength=1.39
+    N-3: 09:50 O=13504.75 H=13506.15 L=13503.15 C=13504.85 rng=3.0 body=0.1 br=0.03 pos=above_upper BBu=13504.65 BBl=13497.26
+    N-2: 09:55 O=13504.95 H=13506.25 L=13502.65 C=13503.55 rng=3.6 body=1.4 br=0.39 pos=wick_above_close_inside BBu=13504.75 BBl=13497.22
+    N-1: 10:00 O=13503.35 H=13508.25 L=13500.35 C=13508.05 rng=7.9 body=4.7 br=0.59 pos=above_upper BBu=13506.19 BBl=13496.46
+    N  : 10:05 O=13507.95 H=13510.25 L=13506.60 C=13507.85 rng=3.6 body=0.1 br=0.03 pos=above_upper
+    N+1: 10:10 O=13507.45 H=13508.85 L=13506.75 C=13508.85 rng=2.1 body=1.4 br=0.67 pos=above_upper disp_from_N_close=-1.0p
+    N+2: 10:15 O=13509.05 H=13509.05 L=13506.45 C=13508.65 rng=2.6 body=0.4 br=0.15 pos=inside disp_from_N_close=-0.8p
+    N+3: 10:20 O=13508.25 H=13510.15 L=13507.55 C=13508.05 rng=2.6 body=0.2 br=0.08 pos=wick_above_close_inside disp_from_N_close=-0.2p
+    N+4: 10:25 O=13507.95 H=13507.95 L=13504.65 C=13505.35 rng=3.3 body=2.6 br=0.79 pos=inside disp_from_N_close=+2.5p
+    N+5: 10:30 O=13505.55 H=13507.75 L=13505.45 C=13506.55 rng=2.3 body=1.0 br=0.43 pos=inside disp_from_N_close=+1.3p
+    N+6: 10:35 O=13506.35 H=13507.95 L=13506.30 C=13506.75 rng=1.7 body=0.4 br=0.24 pos=inside disp_from_N_close=+1.1p
+
+=== PIERCE 13/34 === 2026-04-29 10:10  UPPER_PIERCE  window=morning
+    BB: lower=13495.64 mid=13501.98 upper=13508.32
+    pierce_magnitude=0.53p  close_back_inside=False  pattern=PATTERN_1B
+    MFE(reversal)=4.2p  MAE(continuation)=1.3p  strength=3.23
+    N-3: 09:55 O=13504.95 H=13506.25 L=13502.65 C=13503.55 rng=3.6 body=1.4 br=0.39 pos=wick_above_close_inside BBu=13504.75 BBl=13497.22
+    N-2: 10:00 O=13503.35 H=13508.25 L=13500.35 C=13508.05 rng=7.9 body=4.7 br=0.59 pos=above_upper BBu=13506.19 BBl=13496.46
+    N-1: 10:05 O=13507.95 H=13510.25 L=13506.60 C=13507.85 rng=3.6 body=0.1 br=0.03 pos=above_upper BBu=13507.08 BBl=13495.98
+    N  : 10:10 O=13507.45 H=13508.85 L=13506.75 C=13508.85 rng=2.1 body=1.4 br=0.67 pos=above_upper
+    N+1: 10:15 O=13509.05 H=13509.05 L=13506.45 C=13508.65 rng=2.6 body=0.4 br=0.15 pos=inside disp_from_N_close=+0.2p
+    N+2: 10:20 O=13508.25 H=13510.15 L=13507.55 C=13508.05 rng=2.6 body=0.2 br=0.08 pos=wick_above_close_inside disp_from_N_close=+0.8p
+    N+3: 10:25 O=13507.95 H=13507.95 L=13504.65 C=13505.35 rng=3.3 body=2.6 br=0.79 pos=inside disp_from_N_close=+3.5p
+    N+4: 10:30 O=13505.55 H=13507.75 L=13505.45 C=13506.55 rng=2.3 body=1.0 br=0.43 pos=inside disp_from_N_close=+2.3p
+    N+5: 10:35 O=13506.35 H=13507.95 L=13506.30 C=13506.75 rng=1.7 body=0.4 br=0.24 pos=inside disp_from_N_close=+2.1p
+    N+6: 10:40 O=13506.85 H=13507.15 L=13504.95 C=13505.75 rng=2.2 body=1.1 br=0.50 pos=inside disp_from_N_close=+3.1p
+
+=== PIERCE 14/34 === 2026-04-29 10:20  UPPER_PIERCE  window=morning
+    BB: lower=13495.29 mid=13502.67 upper=13510.05
+    pierce_magnitude=0.10p  close_back_inside=True  pattern=PATTERN_1A
+    MFE(reversal)=3.4p  MAE(continuation)=1.4p  strength=2.43
+    N-3: 10:05 O=13507.95 H=13510.25 L=13506.60 C=13507.85 rng=3.6 body=0.1 br=0.03 pos=above_upper BBu=13507.08 BBl=13495.98
+    N-2: 10:10 O=13507.45 H=13508.85 L=13506.75 C=13508.85 rng=2.1 body=1.4 br=0.67 pos=above_upper BBu=13508.32 BBl=13495.64
+    N-1: 10:15 O=13509.05 H=13509.05 L=13506.45 C=13508.65 rng=2.6 body=0.4 br=0.15 pos=inside BBu=13509.31 BBl=13495.39
+    N  : 10:20 O=13508.25 H=13510.15 L=13507.55 C=13508.05 rng=2.6 body=0.2 br=0.08 pos=wick_above_close_inside
+    N+1: 10:25 O=13507.95 H=13507.95 L=13504.65 C=13505.35 rng=3.3 body=2.6 br=0.79 pos=inside disp_from_N_close=+2.7p
+    N+2: 10:30 O=13505.55 H=13507.75 L=13505.45 C=13506.55 rng=2.3 body=1.0 br=0.43 pos=inside disp_from_N_close=+1.5p
+    N+3: 10:35 O=13506.35 H=13507.95 L=13506.30 C=13506.75 rng=1.7 body=0.4 br=0.24 pos=inside disp_from_N_close=+1.3p
+    N+4: 10:40 O=13506.85 H=13507.15 L=13504.95 C=13505.75 rng=2.2 body=1.1 br=0.50 pos=inside disp_from_N_close=+2.3p
+    N+5: 10:45 O=13505.45 H=13506.90 L=13504.65 C=13506.55 rng=2.2 body=1.1 br=0.49 pos=inside disp_from_N_close=+1.5p
+    N+6: 10:50 O=13507.45 H=13509.45 L=13507.30 C=13509.05 rng=2.2 body=1.6 br=0.74 pos=inside disp_from_N_close=-1.0p
+
+=== PIERCE 15/34 === 2026-04-29 11:20  UPPER_PIERCE  window=morning
+    BB: lower=13503.23 mid=13507.59 upper=13511.95
+    pierce_magnitude=0.70p  close_back_inside=True  pattern=NONE
+    MFE(reversal)=5.5p  MAE(continuation)=2.7p  strength=2.04
+    N-3: 11:05 O=13511.05 H=13511.85 L=13501.95 C=13506.25 rng=9.9 body=4.8 br=0.48 pos=inside BBu=13513.39 BBl=13498.60
+    N-2: 11:10 O=13506.15 H=13507.55 L=13503.05 C=13507.35 rng=4.5 body=1.2 br=0.27 pos=inside BBu=13513.09 BBl=13499.73
+    N-1: 11:15 O=13507.25 H=13510.50 L=13505.25 C=13510.35 rng=5.2 body=3.1 br=0.59 pos=inside BBu=13512.63 BBl=13501.45
+    N  : 11:20 O=13510.25 H=13512.65 L=13508.80 C=13510.05 rng=3.9 body=0.2 br=0.05 pos=wick_above_close_inside
+    N+1: 11:25 O=13510.15 H=13511.95 L=13507.25 C=13508.55 rng=4.7 body=1.6 br=0.34 pos=inside disp_from_N_close=+1.5p
+    N+2: 11:30 O=13508.45 H=13510.05 L=13507.00 C=13509.65 rng=3.0 body=1.2 br=0.39 pos=inside disp_from_N_close=+0.4p
+    N+3: 11:35 O=13509.75 H=13512.75 L=13507.75 C=13508.15 rng=5.0 body=1.6 br=0.32 pos=wick_above_close_inside disp_from_N_close=+1.9p
+    N+4: 11:40 O=13507.95 H=13509.35 L=13505.15 C=13506.35 rng=4.2 body=1.6 br=0.38 pos=inside disp_from_N_close=+3.7p
+    N+5: 11:45 O=13506.15 H=13507.95 L=13504.55 C=13506.05 rng=3.4 body=0.1 br=0.03 pos=inside disp_from_N_close=+4.0p
+    N+6: 11:50 O=13506.25 H=13508.45 L=13504.85 C=13508.25 rng=3.6 body=2.0 br=0.56 pos=inside disp_from_N_close=+1.8p
+
+=== PIERCE 16/34 === 2026-04-29 11:35  UPPER_PIERCE  window=morning
+    BB: lower=13504.76 mid=13508.24 upper=13511.73
+    pierce_magnitude=1.02p  close_back_inside=True  pattern=PATTERN_1B
+    MFE(reversal)=3.6p  MAE(continuation)=4.1p  strength=0.89
+    N-3: 11:20 O=13510.25 H=13512.65 L=13508.80 C=13510.05 rng=3.9 body=0.2 br=0.05 pos=wick_above_close_inside BBu=13511.95 BBl=13503.23
+    N-2: 11:25 O=13510.15 H=13511.95 L=13507.25 C=13508.55 rng=4.7 body=1.6 br=0.34 pos=inside BBu=13511.97 BBl=13503.58
+    N-1: 11:30 O=13508.45 H=13510.05 L=13507.00 C=13509.65 rng=3.0 body=1.2 br=0.39 pos=inside BBu=13512.06 BBl=13503.97
+    N  : 11:35 O=13509.75 H=13512.75 L=13507.75 C=13508.15 rng=5.0 body=1.6 br=0.32 pos=wick_above_close_inside
+    N+1: 11:40 O=13507.95 H=13509.35 L=13505.15 C=13506.35 rng=4.2 body=1.6 br=0.38 pos=inside disp_from_N_close=+1.8p
+    N+2: 11:45 O=13506.15 H=13507.95 L=13504.55 C=13506.05 rng=3.4 body=0.1 br=0.03 pos=inside disp_from_N_close=+2.1p
+    N+3: 11:50 O=13506.25 H=13508.45 L=13504.85 C=13508.25 rng=3.6 body=2.0 br=0.56 pos=inside disp_from_N_close=-0.1p
+    N+4: 11:55 O=13508.15 H=13509.05 L=13504.50 C=13505.45 rng=4.5 body=2.7 br=0.59 pos=inside disp_from_N_close=+2.7p
+    N+5: 12:00 O=13505.35 H=13508.75 L=13504.65 C=13507.95 rng=4.1 body=2.6 br=0.63 pos=inside disp_from_N_close=+0.2p
+    N+6: 12:05 O=13507.85 H=13512.25 L=13507.85 C=13509.95 rng=4.4 body=2.1 br=0.48 pos=wick_above_close_inside disp_from_N_close=-1.8p
+
+=== PIERCE 17/34 === 2026-04-29 12:05  UPPER_PIERCE  window=afternoon
+    BB: lower=13504.35 mid=13508.10 upper=13511.86
+    pierce_magnitude=0.39p  close_back_inside=True  pattern=NONE
+    MFE(reversal)=8.9p  MAE(continuation)=4.1p  strength=2.17
+    N-3: 11:50 O=13506.25 H=13508.45 L=13504.85 C=13508.25 rng=3.6 body=2.0 br=0.56 pos=inside BBu=13511.72 BBl=13504.36
+    N-2: 11:55 O=13508.15 H=13509.05 L=13504.50 C=13505.45 rng=4.5 body=2.7 br=0.59 pos=inside BBu=13511.72 BBl=13504.04
+    N-1: 12:00 O=13505.35 H=13508.75 L=13504.65 C=13507.95 rng=4.1 body=2.6 br=0.63 pos=inside BBu=13511.71 BBl=13504.04
+    N  : 12:05 O=13507.85 H=13512.25 L=13507.85 C=13509.95 rng=4.4 body=2.1 br=0.48 pos=wick_above_close_inside
+    N+1: 12:10 O=13509.85 H=13511.05 L=13507.40 C=13508.95 rng=3.6 body=0.9 br=0.25 pos=inside disp_from_N_close=+1.0p
+    N+2: 12:15 O=13509.05 H=13512.15 L=13508.05 C=13511.65 rng=4.1 body=2.6 br=0.63 pos=inside disp_from_N_close=-1.7p
+    N+3: 12:20 O=13511.45 H=13514.05 L=13507.20 C=13507.75 rng=6.8 body=3.7 br=0.54 pos=wick_above_close_inside disp_from_N_close=+2.2p
+    N+4: 12:25 O=13508.05 H=13511.75 L=13507.05 C=13510.15 rng=4.7 body=2.1 br=0.45 pos=inside disp_from_N_close=-0.2p
+    N+5: 12:30 O=13510.35 H=13510.35 L=13504.65 C=13505.65 rng=5.7 body=4.7 br=0.82 pos=wick_below_close_inside disp_from_N_close=+4.3p
+    N+6: 12:35 O=13505.25 H=13508.55 L=13501.05 C=13502.65 rng=7.5 body=2.6 br=0.35 pos=below_lower disp_from_N_close=+7.3p
+
+=== PIERCE 18/34 === 2026-04-29 12:20  UPPER_PIERCE  window=afternoon
+    BB: lower=13504.84 mid=13508.57 upper=13512.30
+    pierce_magnitude=1.75p  close_back_inside=True  pattern=PATTERN_1A
+    MFE(reversal)=8.6p  MAE(continuation)=4.0p  strength=2.15
+    N-3: 12:05 O=13507.85 H=13512.25 L=13507.85 C=13509.95 rng=4.4 body=2.1 br=0.48 pos=wick_above_close_inside BBu=13511.86 BBl=13504.35
+    N-2: 12:10 O=13509.85 H=13511.05 L=13507.40 C=13508.95 rng=3.6 body=0.9 br=0.25 pos=inside BBu=13511.92 BBl=13504.53
+    N-1: 12:15 O=13509.05 H=13512.15 L=13508.05 C=13511.65 rng=4.1 body=2.6 br=0.63 pos=inside BBu=13512.39 BBl=13504.55
+    N  : 12:20 O=13511.45 H=13514.05 L=13507.20 C=13507.75 rng=6.8 body=3.7 br=0.54 pos=wick_above_close_inside
+    N+1: 12:25 O=13508.05 H=13511.75 L=13507.05 C=13510.15 rng=4.7 body=2.1 br=0.45 pos=inside disp_from_N_close=-2.4p
+    N+2: 12:30 O=13510.35 H=13510.35 L=13504.65 C=13505.65 rng=5.7 body=4.7 br=0.82 pos=wick_below_close_inside disp_from_N_close=+2.1p
+    N+3: 12:35 O=13505.25 H=13508.55 L=13501.05 C=13502.65 rng=7.5 body=2.6 br=0.35 pos=below_lower disp_from_N_close=+5.1p
+    N+4: 12:40 O=13502.75 H=13507.15 L=13501.15 C=13505.45 rng=6.0 body=2.7 br=0.45 pos=wick_below_close_inside disp_from_N_close=+2.3p
+    N+5: 12:45 O=13505.05 H=13507.05 L=13502.65 C=13504.75 rng=4.4 body=0.3 br=0.07 pos=wick_below_close_inside disp_from_N_close=+3.0p
+    N+6: 12:50 O=13504.65 H=13504.75 L=13499.15 C=13500.45 rng=5.6 body=4.2 br=0.75 pos=below_lower disp_from_N_close=+7.3p
+
+=== PIERCE 19/34 === 2026-04-29 12:30  LOWER_PIERCE  window=afternoon
+    BB: lower=13504.67 mid=13508.58 upper=13512.49
+    pierce_magnitude=0.02p  close_back_inside=True  pattern=NONE
+    MFE(reversal)=2.9p  MAE(continuation)=6.5p  strength=0.45
+    N-3: 12:15 O=13509.05 H=13512.15 L=13508.05 C=13511.65 rng=4.1 body=2.6 br=0.63 pos=inside BBu=13512.39 BBl=13504.55
+    N-2: 12:20 O=13511.45 H=13514.05 L=13507.20 C=13507.75 rng=6.8 body=3.7 br=0.54 pos=wick_above_close_inside BBu=13512.30 BBl=13504.84
+    N-1: 12:25 O=13508.05 H=13511.75 L=13507.05 C=13510.15 rng=4.7 body=2.1 br=0.45 pos=inside BBu=13512.42 BBl=13505.08
+    N  : 12:30 O=13510.35 H=13510.35 L=13504.65 C=13505.65 rng=5.7 body=4.7 br=0.82 pos=wick_below_close_inside
+    N+1: 12:35 O=13505.25 H=13508.55 L=13501.05 C=13502.65 rng=7.5 body=2.6 br=0.35 pos=below_lower disp_from_N_close=-3.0p
+    N+2: 12:40 O=13502.75 H=13507.15 L=13501.15 C=13505.45 rng=6.0 body=2.7 br=0.45 pos=wick_below_close_inside disp_from_N_close=-0.2p
+    N+3: 12:45 O=13505.05 H=13507.05 L=13502.65 C=13504.75 rng=4.4 body=0.3 br=0.07 pos=wick_below_close_inside disp_from_N_close=-0.9p
+    N+4: 12:50 O=13504.65 H=13504.75 L=13499.15 C=13500.45 rng=5.6 body=4.2 br=0.75 pos=below_lower disp_from_N_close=-5.2p
+    N+5: 12:55 O=13500.85 H=13502.55 L=13499.55 C=13500.65 rng=3.0 body=0.2 br=0.07 pos=below_lower disp_from_N_close=-5.0p
+    N+6: 13:00 O=13500.85 H=13507.95 L=13500.85 C=13505.65 rng=7.1 body=4.8 br=0.68 pos=inside disp_from_N_close=+0.0p
+
+=== PIERCE 20/34 === 2026-04-29 12:35  LOWER_PIERCE  window=afternoon
+    BB: lower=13503.74 mid=13508.12 upper=13512.49
+    pierce_magnitude=2.69p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=5.3p  MAE(continuation)=3.5p  strength=1.51
+    N-3: 12:20 O=13511.45 H=13514.05 L=13507.20 C=13507.75 rng=6.8 body=3.7 br=0.54 pos=wick_above_close_inside BBu=13512.30 BBl=13504.84
+    N-2: 12:25 O=13508.05 H=13511.75 L=13507.05 C=13510.15 rng=4.7 body=2.1 br=0.45 pos=inside BBu=13512.42 BBl=13505.08
+    N-1: 12:30 O=13510.35 H=13510.35 L=13504.65 C=13505.65 rng=5.7 body=4.7 br=0.82 pos=wick_below_close_inside BBu=13512.49 BBl=13504.67
+    N  : 12:35 O=13505.25 H=13508.55 L=13501.05 C=13502.65 rng=7.5 body=2.6 br=0.35 pos=below_lower
+    N+1: 12:40 O=13502.75 H=13507.15 L=13501.15 C=13505.45 rng=6.0 body=2.7 br=0.45 pos=wick_below_close_inside disp_from_N_close=+2.8p
+    N+2: 12:45 O=13505.05 H=13507.05 L=13502.65 C=13504.75 rng=4.4 body=0.3 br=0.07 pos=wick_below_close_inside disp_from_N_close=+2.1p
+    N+3: 12:50 O=13504.65 H=13504.75 L=13499.15 C=13500.45 rng=5.6 body=4.2 br=0.75 pos=below_lower disp_from_N_close=-2.2p
+    N+4: 12:55 O=13500.85 H=13502.55 L=13499.55 C=13500.65 rng=3.0 body=0.2 br=0.07 pos=below_lower disp_from_N_close=-2.0p
+    N+5: 13:00 O=13500.85 H=13507.95 L=13500.85 C=13505.65 rng=7.1 body=4.8 br=0.68 pos=inside disp_from_N_close=+3.0p
+    N+6: 13:05 O=13505.75 H=13507.05 L=13503.05 C=13506.05 rng=4.0 body=0.3 br=0.07 pos=inside disp_from_N_close=+3.4p
+
+=== PIERCE 21/34 === 2026-04-29 12:40  LOWER_PIERCE  window=afternoon
+    BB: lower=13503.54 mid=13507.83 upper=13512.12
+    pierce_magnitude=2.39p  close_back_inside=True  pattern=NONE
+    MFE(reversal)=2.5p  MAE(continuation)=6.3p  strength=0.40
+    N-3: 12:25 O=13508.05 H=13511.75 L=13507.05 C=13510.15 rng=4.7 body=2.1 br=0.45 pos=inside BBu=13512.42 BBl=13505.08
+    N-2: 12:30 O=13510.35 H=13510.35 L=13504.65 C=13505.65 rng=5.7 body=4.7 br=0.82 pos=wick_below_close_inside BBu=13512.49 BBl=13504.67
+    N-1: 12:35 O=13505.25 H=13508.55 L=13501.05 C=13502.65 rng=7.5 body=2.6 br=0.35 pos=below_lower BBu=13512.49 BBl=13503.74
+    N  : 12:40 O=13502.75 H=13507.15 L=13501.15 C=13505.45 rng=6.0 body=2.7 br=0.45 pos=wick_below_close_inside
+    N+1: 12:45 O=13505.05 H=13507.05 L=13502.65 C=13504.75 rng=4.4 body=0.3 br=0.07 pos=wick_below_close_inside disp_from_N_close=-0.7p
+    N+2: 12:50 O=13504.65 H=13504.75 L=13499.15 C=13500.45 rng=5.6 body=4.2 br=0.75 pos=below_lower disp_from_N_close=-5.0p
+    N+3: 12:55 O=13500.85 H=13502.55 L=13499.55 C=13500.65 rng=3.0 body=0.2 br=0.07 pos=below_lower disp_from_N_close=-4.8p
+    N+4: 13:00 O=13500.85 H=13507.95 L=13500.85 C=13505.65 rng=7.1 body=4.8 br=0.68 pos=inside disp_from_N_close=+0.2p
+    N+5: 13:05 O=13505.75 H=13507.05 L=13503.05 C=13506.05 rng=4.0 body=0.3 br=0.07 pos=inside disp_from_N_close=+0.6p
+    N+6: 13:10 O=13505.95 H=13507.75 L=13504.95 C=13506.15 rng=2.8 body=0.2 br=0.07 pos=inside disp_from_N_close=+0.7p
+
+=== PIERCE 22/34 === 2026-04-29 12:45  LOWER_PIERCE  window=afternoon
+    BB: lower=13503.31 mid=13507.76 upper=13512.20
+    pierce_magnitude=0.66p  close_back_inside=True  pattern=NONE
+    MFE(reversal)=3.2p  MAE(continuation)=7.0p  strength=0.45
+    N-3: 12:30 O=13510.35 H=13510.35 L=13504.65 C=13505.65 rng=5.7 body=4.7 br=0.82 pos=wick_below_close_inside BBu=13512.49 BBl=13504.67
+    N-2: 12:35 O=13505.25 H=13508.55 L=13501.05 C=13502.65 rng=7.5 body=2.6 br=0.35 pos=below_lower BBu=13512.49 BBl=13503.74
+    N-1: 12:40 O=13502.75 H=13507.15 L=13501.15 C=13505.45 rng=6.0 body=2.7 br=0.45 pos=wick_below_close_inside BBu=13512.12 BBl=13503.54
+    N  : 12:45 O=13505.05 H=13507.05 L=13502.65 C=13504.75 rng=4.4 body=0.3 br=0.07 pos=wick_below_close_inside
+    N+1: 12:50 O=13504.65 H=13504.75 L=13499.15 C=13500.45 rng=5.6 body=4.2 br=0.75 pos=below_lower disp_from_N_close=-4.3p
+    N+2: 12:55 O=13500.85 H=13502.55 L=13499.55 C=13500.65 rng=3.0 body=0.2 br=0.07 pos=below_lower disp_from_N_close=-4.1p
+    N+3: 13:00 O=13500.85 H=13507.95 L=13500.85 C=13505.65 rng=7.1 body=4.8 br=0.68 pos=inside disp_from_N_close=+0.9p
+    N+4: 13:05 O=13505.75 H=13507.05 L=13503.05 C=13506.05 rng=4.0 body=0.3 br=0.07 pos=inside disp_from_N_close=+1.3p
+    N+5: 13:10 O=13505.95 H=13507.75 L=13504.95 C=13506.15 rng=2.8 body=0.2 br=0.07 pos=inside disp_from_N_close=+1.4p
+    N+6: 13:15 O=13506.05 H=13506.65 L=13497.70 C=13497.85 rng=9.0 body=8.2 br=0.92 pos=below_lower disp_from_N_close=-6.9p
+
+=== PIERCE 23/34 === 2026-04-29 12:50  LOWER_PIERCE  window=afternoon
+    BB: lower=13501.94 mid=13507.41 upper=13512.88
+    pierce_magnitude=2.79p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=7.5p  MAE(continuation)=5.5p  strength=1.38
+    N-3: 12:35 O=13505.25 H=13508.55 L=13501.05 C=13502.65 rng=7.5 body=2.6 br=0.35 pos=below_lower BBu=13512.49 BBl=13503.74
+    N-2: 12:40 O=13502.75 H=13507.15 L=13501.15 C=13505.45 rng=6.0 body=2.7 br=0.45 pos=wick_below_close_inside BBu=13512.12 BBl=13503.54
+    N-1: 12:45 O=13505.05 H=13507.05 L=13502.65 C=13504.75 rng=4.4 body=0.3 br=0.07 pos=wick_below_close_inside BBu=13512.20 BBl=13503.31
+    N  : 12:50 O=13504.65 H=13504.75 L=13499.15 C=13500.45 rng=5.6 body=4.2 br=0.75 pos=below_lower
+    N+1: 12:55 O=13500.85 H=13502.55 L=13499.55 C=13500.65 rng=3.0 body=0.2 br=0.07 pos=below_lower disp_from_N_close=+0.2p
+    N+2: 13:00 O=13500.85 H=13507.95 L=13500.85 C=13505.65 rng=7.1 body=4.8 br=0.68 pos=inside disp_from_N_close=+5.2p
+    N+3: 13:05 O=13505.75 H=13507.05 L=13503.05 C=13506.05 rng=4.0 body=0.3 br=0.07 pos=inside disp_from_N_close=+5.6p
+    N+4: 13:10 O=13505.95 H=13507.75 L=13504.95 C=13506.15 rng=2.8 body=0.2 br=0.07 pos=inside disp_from_N_close=+5.7p
+    N+5: 13:15 O=13506.05 H=13506.65 L=13497.70 C=13497.85 rng=9.0 body=8.2 br=0.92 pos=below_lower disp_from_N_close=-2.6p
+    N+6: 13:20 O=13498.45 H=13500.55 L=13495.00 C=13496.75 rng=5.5 body=1.7 br=0.31 pos=below_lower disp_from_N_close=-3.7p
+
+=== PIERCE 24/34 === 2026-04-29 12:55  LOWER_PIERCE  window=afternoon
+    BB: lower=13500.89 mid=13506.92 upper=13512.96
+    pierce_magnitude=1.34p  close_back_inside=False  pattern=PATTERN_1B
+    MFE(reversal)=7.3p  MAE(continuation)=7.9p  strength=0.92
+    N-3: 12:40 O=13502.75 H=13507.15 L=13501.15 C=13505.45 rng=6.0 body=2.7 br=0.45 pos=wick_below_close_inside BBu=13512.12 BBl=13503.54
+    N-2: 12:45 O=13505.05 H=13507.05 L=13502.65 C=13504.75 rng=4.4 body=0.3 br=0.07 pos=wick_below_close_inside BBu=13512.20 BBl=13503.31
+    N-1: 12:50 O=13504.65 H=13504.75 L=13499.15 C=13500.45 rng=5.6 body=4.2 br=0.75 pos=below_lower BBu=13512.88 BBl=13501.94
+    N  : 12:55 O=13500.85 H=13502.55 L=13499.55 C=13500.65 rng=3.0 body=0.2 br=0.07 pos=below_lower
+    N+1: 13:00 O=13500.85 H=13507.95 L=13500.85 C=13505.65 rng=7.1 body=4.8 br=0.68 pos=inside disp_from_N_close=+5.0p
+    N+2: 13:05 O=13505.75 H=13507.05 L=13503.05 C=13506.05 rng=4.0 body=0.3 br=0.07 pos=inside disp_from_N_close=+5.4p
+    N+3: 13:10 O=13505.95 H=13507.75 L=13504.95 C=13506.15 rng=2.8 body=0.2 br=0.07 pos=inside disp_from_N_close=+5.5p
+    N+4: 13:15 O=13506.05 H=13506.65 L=13497.70 C=13497.85 rng=9.0 body=8.2 br=0.92 pos=below_lower disp_from_N_close=-2.8p
+    N+5: 13:20 O=13498.45 H=13500.55 L=13495.00 C=13496.75 rng=5.5 body=1.7 br=0.31 pos=below_lower disp_from_N_close=-3.9p
+    N+6: 13:25 O=13496.85 H=13496.95 L=13492.75 C=13493.25 rng=4.2 body=3.6 br=0.86 pos=below_lower disp_from_N_close=-7.4p
+
+=== PIERCE 25/34 === 2026-04-29 13:15  LOWER_PIERCE  window=afternoon
+    BB: lower=13499.19 mid=13505.89 upper=13512.59
+    pierce_magnitude=1.49p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=2.7p  MAE(continuation)=23.3p  strength=0.12
+    N-3: 13:00 O=13500.85 H=13507.95 L=13500.85 C=13505.65 rng=7.1 body=4.8 br=0.68 pos=inside BBu=13512.59 BBl=13500.82
+    N-2: 13:05 O=13505.75 H=13507.05 L=13503.05 C=13506.05 rng=4.0 body=0.3 br=0.07 pos=inside BBu=13512.41 BBl=13500.75
+    N-1: 13:10 O=13505.95 H=13507.75 L=13504.95 C=13506.15 rng=2.8 body=0.2 br=0.07 pos=inside BBu=13512.06 BBl=13500.75
+    N  : 13:15 O=13506.05 H=13506.65 L=13497.70 C=13497.85 rng=9.0 body=8.2 br=0.92 pos=below_lower
+    N+1: 13:20 O=13498.45 H=13500.55 L=13495.00 C=13496.75 rng=5.5 body=1.7 br=0.31 pos=below_lower disp_from_N_close=-1.1p
+    N+2: 13:25 O=13496.85 H=13496.95 L=13492.75 C=13493.25 rng=4.2 body=3.6 br=0.86 pos=below_lower disp_from_N_close=-4.6p
+    N+3: 13:30 O=13493.15 H=13495.05 L=13484.85 C=13485.65 rng=10.2 body=7.5 br=0.74 pos=below_lower disp_from_N_close=-12.2p
+    N+4: 13:35 O=13485.05 H=13490.95 L=13484.45 C=13490.35 rng=6.5 body=5.3 br=0.82 pos=wick_below_close_inside disp_from_N_close=-7.5p
+    N+5: 13:40 O=13490.15 H=13491.75 L=13487.75 C=13488.05 rng=4.0 body=2.1 br=0.53 pos=inside disp_from_N_close=-9.8p
+    N+6: 13:45 O=13488.25 H=13488.95 L=13474.55 C=13475.55 rng=14.4 body=12.7 br=0.88 pos=below_lower disp_from_N_close=-22.3p
+
+=== PIERCE 26/34 === 2026-04-29 13:20  LOWER_PIERCE  window=afternoon
+    BB: lower=13497.62 mid=13505.41 upper=13513.20
+    pierce_magnitude=2.62p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=0.2p  MAE(continuation)=23.0p  strength=0.01
+    N-3: 13:05 O=13505.75 H=13507.05 L=13503.05 C=13506.05 rng=4.0 body=0.3 br=0.07 pos=inside BBu=13512.41 BBl=13500.75
+    N-2: 13:10 O=13505.95 H=13507.75 L=13504.95 C=13506.15 rng=2.8 body=0.2 br=0.07 pos=inside BBu=13512.06 BBl=13500.75
+    N-1: 13:15 O=13506.05 H=13506.65 L=13497.70 C=13497.85 rng=9.0 body=8.2 br=0.92 pos=below_lower BBu=13512.59 BBl=13499.19
+    N  : 13:20 O=13498.45 H=13500.55 L=13495.00 C=13496.75 rng=5.5 body=1.7 br=0.31 pos=below_lower
+    N+1: 13:25 O=13496.85 H=13496.95 L=13492.75 C=13493.25 rng=4.2 body=3.6 br=0.86 pos=below_lower disp_from_N_close=-3.5p
+    N+2: 13:30 O=13493.15 H=13495.05 L=13484.85 C=13485.65 rng=10.2 body=7.5 br=0.74 pos=below_lower disp_from_N_close=-11.1p
+    N+3: 13:35 O=13485.05 H=13490.95 L=13484.45 C=13490.35 rng=6.5 body=5.3 br=0.82 pos=wick_below_close_inside disp_from_N_close=-6.4p
+    N+4: 13:40 O=13490.15 H=13491.75 L=13487.75 C=13488.05 rng=4.0 body=2.1 br=0.53 pos=inside disp_from_N_close=-8.7p
+    N+5: 13:45 O=13488.25 H=13488.95 L=13474.55 C=13475.55 rng=14.4 body=12.7 br=0.88 pos=below_lower disp_from_N_close=-21.2p
+    N+6: 13:50 O=13475.65 H=13483.75 L=13473.75 C=13479.05 rng=10.0 body=3.4 br=0.34 pos=wick_below_close_inside disp_from_N_close=-17.7p
+
+=== PIERCE 27/34 === 2026-04-29 13:25  LOWER_PIERCE  window=afternoon
+    BB: lower=13495.36 mid=13504.77 upper=13514.18
+    pierce_magnitude=2.61p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=1.8p  MAE(continuation)=19.5p  strength=0.09
+    N-3: 13:10 O=13505.95 H=13507.75 L=13504.95 C=13506.15 rng=2.8 body=0.2 br=0.07 pos=inside BBu=13512.06 BBl=13500.75
+    N-2: 13:15 O=13506.05 H=13506.65 L=13497.70 C=13497.85 rng=9.0 body=8.2 br=0.92 pos=below_lower BBu=13512.59 BBl=13499.19
+    N-1: 13:20 O=13498.45 H=13500.55 L=13495.00 C=13496.75 rng=5.5 body=1.7 br=0.31 pos=below_lower BBu=13513.20 BBl=13497.62
+    N  : 13:25 O=13496.85 H=13496.95 L=13492.75 C=13493.25 rng=4.2 body=3.6 br=0.86 pos=below_lower
+    N+1: 13:30 O=13493.15 H=13495.05 L=13484.85 C=13485.65 rng=10.2 body=7.5 br=0.74 pos=below_lower disp_from_N_close=-7.6p
+    N+2: 13:35 O=13485.05 H=13490.95 L=13484.45 C=13490.35 rng=6.5 body=5.3 br=0.82 pos=wick_below_close_inside disp_from_N_close=-2.9p
+    N+3: 13:40 O=13490.15 H=13491.75 L=13487.75 C=13488.05 rng=4.0 body=2.1 br=0.53 pos=inside disp_from_N_close=-5.2p
+    N+4: 13:45 O=13488.25 H=13488.95 L=13474.55 C=13475.55 rng=14.4 body=12.7 br=0.88 pos=below_lower disp_from_N_close=-17.7p
+    N+5: 13:50 O=13475.65 H=13483.75 L=13473.75 C=13479.05 rng=10.0 body=3.4 br=0.34 pos=wick_below_close_inside disp_from_N_close=-14.2p
+    N+6: 13:55 O=13479.15 H=13483.05 L=13477.15 C=13478.65 rng=5.9 body=0.5 br=0.08 pos=inside disp_from_N_close=-14.6p
+
+=== PIERCE 28/34 === 2026-04-29 13:30  LOWER_PIERCE  window=afternoon
+    BB: lower=13491.22 mid=13503.64 upper=13516.06
+    pierce_magnitude=6.37p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=6.1p  MAE(continuation)=12.6p  strength=0.48
+    N-3: 13:15 O=13506.05 H=13506.65 L=13497.70 C=13497.85 rng=9.0 body=8.2 br=0.92 pos=below_lower BBu=13512.59 BBl=13499.19
+    N-2: 13:20 O=13498.45 H=13500.55 L=13495.00 C=13496.75 rng=5.5 body=1.7 br=0.31 pos=below_lower BBu=13513.20 BBl=13497.62
+    N-1: 13:25 O=13496.85 H=13496.95 L=13492.75 C=13493.25 rng=4.2 body=3.6 br=0.86 pos=below_lower BBu=13514.18 BBl=13495.36
+    N  : 13:30 O=13493.15 H=13495.05 L=13484.85 C=13485.65 rng=10.2 body=7.5 br=0.74 pos=below_lower
+    N+1: 13:35 O=13485.05 H=13490.95 L=13484.45 C=13490.35 rng=6.5 body=5.3 br=0.82 pos=wick_below_close_inside disp_from_N_close=+4.7p
+    N+2: 13:40 O=13490.15 H=13491.75 L=13487.75 C=13488.05 rng=4.0 body=2.1 br=0.53 pos=inside disp_from_N_close=+2.4p
+    N+3: 13:45 O=13488.25 H=13488.95 L=13474.55 C=13475.55 rng=14.4 body=12.7 br=0.88 pos=below_lower disp_from_N_close=-10.1p
+    N+4: 13:50 O=13475.65 H=13483.75 L=13473.75 C=13479.05 rng=10.0 body=3.4 br=0.34 pos=wick_below_close_inside disp_from_N_close=-6.6p
+    N+5: 13:55 O=13479.15 H=13483.05 L=13477.15 C=13478.65 rng=5.9 body=0.5 br=0.08 pos=inside disp_from_N_close=-7.0p
+    N+6: 14:00 O=13479.25 H=13479.55 L=13473.05 C=13474.65 rng=6.5 body=4.6 br=0.71 pos=inside disp_from_N_close=-11.0p
+
+=== PIERCE 29/34 === 2026-04-29 13:35  LOWER_PIERCE  window=afternoon
+    BB: lower=13489.23 mid=13502.88 upper=13516.54
+    pierce_magnitude=4.78p  close_back_inside=True  pattern=NONE
+    MFE(reversal)=1.4p  MAE(continuation)=19.1p  strength=0.07
+    N-3: 13:20 O=13498.45 H=13500.55 L=13495.00 C=13496.75 rng=5.5 body=1.7 br=0.31 pos=below_lower BBu=13513.20 BBl=13497.62
+    N-2: 13:25 O=13496.85 H=13496.95 L=13492.75 C=13493.25 rng=4.2 body=3.6 br=0.86 pos=below_lower BBu=13514.18 BBl=13495.36
+    N-1: 13:30 O=13493.15 H=13495.05 L=13484.85 C=13485.65 rng=10.2 body=7.5 br=0.74 pos=below_lower BBu=13516.06 BBl=13491.22
+    N  : 13:35 O=13485.05 H=13490.95 L=13484.45 C=13490.35 rng=6.5 body=5.3 br=0.82 pos=wick_below_close_inside
+    N+1: 13:40 O=13490.15 H=13491.75 L=13487.75 C=13488.05 rng=4.0 body=2.1 br=0.53 pos=inside disp_from_N_close=-2.3p
+    N+2: 13:45 O=13488.25 H=13488.95 L=13474.55 C=13475.55 rng=14.4 body=12.7 br=0.88 pos=below_lower disp_from_N_close=-14.8p
+    N+3: 13:50 O=13475.65 H=13483.75 L=13473.75 C=13479.05 rng=10.0 body=3.4 br=0.34 pos=wick_below_close_inside disp_from_N_close=-11.3p
+    N+4: 13:55 O=13479.15 H=13483.05 L=13477.15 C=13478.65 rng=5.9 body=0.5 br=0.08 pos=inside disp_from_N_close=-11.7p
+    N+5: 14:00 O=13479.25 H=13479.55 L=13473.05 C=13474.65 rng=6.5 body=4.6 br=0.71 pos=inside disp_from_N_close=-15.7p
+    N+6: 14:05 O=13474.75 H=13477.15 L=13471.25 C=13473.45 rng=5.9 body=1.3 br=0.22 pos=inside disp_from_N_close=-16.9p
+
+=== PIERCE 30/34 === 2026-04-29 13:45  LOWER_PIERCE  window=afternoon
+    BB: lower=13481.86 mid=13500.17 upper=13518.48
+    pierce_magnitude=7.31p  close_back_inside=False  pattern=NONE
+    MFE(reversal)=13.5p  MAE(continuation)=4.3p  strength=3.13
+    N-3: 13:30 O=13493.15 H=13495.05 L=13484.85 C=13485.65 rng=10.2 body=7.5 br=0.74 pos=below_lower BBu=13516.06 BBl=13491.22
+    N-2: 13:35 O=13485.05 H=13490.95 L=13484.45 C=13490.35 rng=6.5 body=5.3 br=0.82 pos=wick_below_close_inside BBu=13516.54 BBl=13489.23
+    N-1: 13:40 O=13490.15 H=13491.75 L=13487.75 C=13488.05 rng=4.0 body=2.1 br=0.53 pos=inside BBu=13516.77 BBl=13487.01
+    N  : 13:45 O=13488.25 H=13488.95 L=13474.55 C=13475.55 rng=14.4 body=12.7 br=0.88 pos=below_lower
+    N+1: 13:50 O=13475.65 H=13483.75 L=13473.75 C=13479.05 rng=10.0 body=3.4 br=0.34 pos=wick_below_close_inside disp_from_N_close=+3.5p
+    N+2: 13:55 O=13479.15 H=13483.05 L=13477.15 C=13478.65 rng=5.9 body=0.5 br=0.08 pos=inside disp_from_N_close=+3.1p
+    N+3: 14:00 O=13479.25 H=13479.55 L=13473.05 C=13474.65 rng=6.5 body=4.6 br=0.71 pos=inside disp_from_N_close=-0.9p
+    N+4: 14:05 O=13474.75 H=13477.15 L=13471.25 C=13473.45 rng=5.9 body=1.3 br=0.22 pos=inside disp_from_N_close=-2.1p
+    N+5: 14:10 O=13473.15 H=13481.10 L=13473.05 C=13480.05 rng=8.0 body=6.9 br=0.86 pos=inside disp_from_N_close=+4.5p
+    N+6: 14:15 O=13479.95 H=13489.00 L=13478.95 C=13488.25 rng=10.0 body=8.3 br=0.83 pos=inside disp_from_N_close=+12.7p
+
+=== PIERCE 31/34 === 2026-04-29 13:50  LOWER_PIERCE  window=afternoon
+    BB: lower=13478.67 mid=13498.67 upper=13518.68
+    pierce_magnitude=4.92p  close_back_inside=True  pattern=NONE
+    MFE(reversal)=10.9p  MAE(continuation)=7.8p  strength=1.40
+    N-3: 13:35 O=13485.05 H=13490.95 L=13484.45 C=13490.35 rng=6.5 body=5.3 br=0.82 pos=wick_below_close_inside BBu=13516.54 BBl=13489.23
+    N-2: 13:40 O=13490.15 H=13491.75 L=13487.75 C=13488.05 rng=4.0 body=2.1 br=0.53 pos=inside BBu=13516.77 BBl=13487.01
+    N-1: 13:45 O=13488.25 H=13488.95 L=13474.55 C=13475.55 rng=14.4 body=12.7 br=0.88 pos=below_lower BBu=13518.48 BBl=13481.86
+    N  : 13:50 O=13475.65 H=13483.75 L=13473.75 C=13479.05 rng=10.0 body=3.4 br=0.34 pos=wick_below_close_inside
+    N+1: 13:55 O=13479.15 H=13483.05 L=13477.15 C=13478.65 rng=5.9 body=0.5 br=0.08 pos=inside disp_from_N_close=-0.4p
+    N+2: 14:00 O=13479.25 H=13479.55 L=13473.05 C=13474.65 rng=6.5 body=4.6 br=0.71 pos=inside disp_from_N_close=-4.4p
+    N+3: 14:05 O=13474.75 H=13477.15 L=13471.25 C=13473.45 rng=5.9 body=1.3 br=0.22 pos=inside disp_from_N_close=-5.6p
+    N+4: 14:10 O=13473.15 H=13481.10 L=13473.05 C=13480.05 rng=8.0 body=6.9 br=0.86 pos=inside disp_from_N_close=+1.0p
+    N+5: 14:15 O=13479.95 H=13489.00 L=13478.95 C=13488.25 rng=10.0 body=8.3 br=0.83 pos=inside disp_from_N_close=+9.2p
+    N+6: 14:20 O=13488.35 H=13489.95 L=13484.05 C=13488.55 rng=5.9 body=0.2 br=0.03 pos=inside disp_from_N_close=+9.5p
+
+=== PIERCE 32/34 === 2026-04-29 14:55  UPPER_PIERCE  window=afternoon
+    BB: lower=13471.36 mid=13486.87 upper=13502.38
+    pierce_magnitude=0.27p  close_back_inside=True  pattern=PATTERN_1B
+    MFE(reversal)=16.3p  MAE(continuation)=0.5p  strength=16.30
+    N-3: 14:40 O=13489.45 H=13490.55 L=13486.35 C=13487.05 rng=4.2 body=2.4 br=0.57 pos=inside BBu=13506.18 BBl=13469.60
+    N-2: 14:45 O=13487.15 H=13490.85 L=13482.85 C=13488.95 rng=8.0 body=1.8 br=0.22 pos=inside BBu=13503.34 BBl=13470.73
+    N-1: 14:50 O=13489.25 H=13500.95 L=13489.15 C=13499.35 rng=11.8 body=10.1 br=0.86 pos=inside BBu=13501.62 BBl=13471.77
+    N  : 14:55 O=13499.45 H=13502.65 L=13496.95 C=13501.35 rng=5.7 body=1.9 br=0.33 pos=wick_above_close_inside
+    N+1: 15:00 O=13501.45 H=13501.85 L=13491.25 C=13493.85 rng=10.6 body=7.6 br=0.72 pos=inside disp_from_N_close=+7.5p
+    N+2: 15:05 O=13493.95 H=13497.85 L=13490.75 C=13490.75 rng=7.1 body=3.2 br=0.45 pos=inside disp_from_N_close=+10.6p
+    N+3: 15:10 O=13490.95 H=13491.95 L=13488.05 C=13488.85 rng=3.9 body=2.1 br=0.54 pos=inside disp_from_N_close=+12.5p
+    N+4: 15:15 O=13488.95 H=13493.15 L=13488.05 C=13489.85 rng=5.1 body=0.9 br=0.18 pos=inside disp_from_N_close=+11.5p
+    N+5: 15:20 O=13490.05 H=13492.15 L=13487.60 C=13489.55 rng=4.6 body=0.5 br=0.11 pos=inside disp_from_N_close=+11.8p
+    N+6: 15:25 O=13489.65 H=13490.25 L=13485.05 C=13487.05 rng=5.2 body=2.6 br=0.50 pos=inside disp_from_N_close=+14.3p
+
+=== PIERCE 33/34 === 2026-04-29 15:50  UPPER_PIERCE  window=afternoon
+    BB: lower=13482.01 mid=13491.23 upper=13500.44
+    pierce_magnitude=1.41p  close_back_inside=True  pattern=PATTERN_1A
+    MFE(reversal)=0.3p  MAE(continuation)=14.2p  strength=0.02
+    N-3: 15:35 O=13490.85 H=13493.90 L=13490.15 C=13492.35 rng=3.7 body=1.5 br=0.40 pos=inside BBu=13501.78 BBl=13475.56
+    N-2: 15:40 O=13492.45 H=13496.15 L=13491.45 C=13496.05 rng=4.7 body=3.6 br=0.77 pos=inside BBu=13501.52 BBl=13477.96
+    N-1: 15:45 O=13495.95 H=13500.45 L=13495.70 C=13499.55 rng=4.8 body=3.6 br=0.76 pos=inside BBu=13500.96 BBl=13481.13
+    N  : 15:50 O=13499.65 H=13501.85 L=13480.45 C=13483.65 rng=21.4 body=16.0 br=0.75 pos=straddle
+    N+1: 15:55 O=13483.75 H=13490.35 L=13483.35 C=13489.05 rng=7.0 body=5.3 br=0.76 pos=inside disp_from_N_close=-5.4p
+    N+2: 16:00 O=13489.15 H=13493.95 L=13488.75 C=13493.05 rng=5.2 body=3.9 br=0.75 pos=inside disp_from_N_close=-9.4p
+    N+3: 16:05 O=13492.95 H=13496.90 L=13492.75 C=13496.35 rng=4.1 body=3.4 br=0.82 pos=inside disp_from_N_close=-12.7p
+    N+4: 16:10 O=13496.15 H=13497.85 L=13489.35 C=13490.55 rng=8.5 body=5.6 br=0.66 pos=inside disp_from_N_close=-6.9p
+    N+5: 16:15 O=13491.15 H=13493.05 L=13489.95 C=13490.25 rng=3.1 body=0.9 br=0.29 pos=inside disp_from_N_close=-6.6p
+    N+6: 16:20 O=13490.35 H=13493.15 L=13490.05 C=13492.85 rng=3.1 body=2.5 br=0.81 pos=inside disp_from_N_close=-9.2p
+
+=== PIERCE 34/34 === 2026-04-29 15:50  LOWER_PIERCE  window=afternoon
+    BB: lower=13482.01 mid=13491.23 upper=13500.44
+    pierce_magnitude=1.56p  close_back_inside=True  pattern=PATTERN_1B
+    MFE(reversal)=14.2p  MAE(continuation)=0.3p  strength=14.20
+    N-3: 15:35 O=13490.85 H=13493.90 L=13490.15 C=13492.35 rng=3.7 body=1.5 br=0.40 pos=inside BBu=13501.78 BBl=13475.56
+    N-2: 15:40 O=13492.45 H=13496.15 L=13491.45 C=13496.05 rng=4.7 body=3.6 br=0.77 pos=inside BBu=13501.52 BBl=13477.96
+    N-1: 15:45 O=13495.95 H=13500.45 L=13495.70 C=13499.55 rng=4.8 body=3.6 br=0.76 pos=inside BBu=13500.96 BBl=13481.13
+    N  : 15:50 O=13499.65 H=13501.85 L=13480.45 C=13483.65 rng=21.4 body=16.0 br=0.75 pos=straddle
+    N+1: 15:55 O=13483.75 H=13490.35 L=13483.35 C=13489.05 rng=7.0 body=5.3 br=0.76 pos=inside disp_from_N_close=+5.4p
+    N+2: 16:00 O=13489.15 H=13493.95 L=13488.75 C=13493.05 rng=5.2 body=3.9 br=0.75 pos=inside disp_from_N_close=+9.4p
+    N+3: 16:05 O=13492.95 H=13496.90 L=13492.75 C=13496.35 rng=4.1 body=3.4 br=0.82 pos=inside disp_from_N_close=+12.7p
+    N+4: 16:10 O=13496.15 H=13497.85 L=13489.35 C=13490.55 rng=8.5 body=5.6 br=0.66 pos=inside disp_from_N_close=+6.9p
+    N+5: 16:15 O=13491.15 H=13493.05 L=13489.95 C=13490.25 rng=3.1 body=0.9 br=0.29 pos=inside disp_from_N_close=+6.6p
+    N+6: 16:20 O=13490.35 H=13493.15 L=13490.05 C=13492.85 rng=3.1 body=2.5 br=0.81 pos=inside disp_from_N_close=+9.2p
+

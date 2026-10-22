@@ -1,0 +1,301 @@
+=== DAY-TYPE CLASSIFICATION ===
+Rules (session-mean based; 5m ER-max/ADX-max saturate):
+  TRENDING : max-session ADX-mean >= 28  AND  max-session ER-mean >= 0.42  AND  |net|/range >= 0.55
+  CHOP     : max-session ADX-mean <  22  AND  max-session ER-mean <  0.36  AND  |net|/range <  0.30
+  QUIET    : (ADX-mean < 22 OR ER-mean < 0.36) AND day_range < corpus-p25 (49.3 pips)
+  MIXED    : otherwise (the muddled middle)
+Corpus: 168 days (GBPUSD), spans 2026-01-01 → 2026-08-11
+  TRENDING:   20  ( 11.9%)
+  MIXED   :  135  ( 80.4%)
+  QUIET   :    9  (  5.4%)
+  CHOP    :    4  (  2.4%)
+
+=== CORPUS PERCENTILES (all days) ===
+  range            n=168  p10=   29.60  p25=   49.30  p50=   68.30  p75=   88.00  p90=  117.30  mean=   73.19
+  net_abs          n=168  p10=    5.45  p25=   12.15  p50=   32.60  p75=   50.90  p90=   77.15  mean=   37.32
+  trendiness       n=168  p10=    0.13  p25=    0.24  p50=    0.49  p75=    0.66  p90=    0.78  mean=    0.46
+  close_pos        n=168  p10=    0.10  p25=    0.21  p50=    0.45  p75=    0.74  p90=    0.88  mean=    0.47
+  adx_mean_best    n=149  p10=   19.77  p25=   24.57  p50=   30.78  p75=   37.69  p90=   45.13  mean=   31.69
+  er_mean_best     n=150  p10=    0.33  p25=    0.37  p50=    0.41  p75=    0.45  p90=    0.51  mean=    0.42
+  adx_max_any      n=149  p10=   31.24  p25=   37.46  p50=   46.20  p75=   55.61  p90=   64.64  mean=   47.15
+  er_max_any       n=150  p10=    0.88  p25=    0.93  p50=    0.97  p75=    1.00  p90=    1.00  mean=    0.95
+  Asian_range      n=135  p10=   19.00  p25=   24.30  p50=   31.80  p75=   45.90  p90=   55.90  mean=   35.33
+  London_range     n=137  p10=   22.40  p25=   29.80  p50=   42.30  p75=   54.80  p90=   70.40  mean=   45.45
+  NY_range         n=147  p10=   23.30  p25=   32.60  p50=   44.30  p75=   60.15  p90=   87.90  mean=   51.02
+  Asian_bbw        n=135  p10=    9.07  p25=   10.74  p50=   13.93  p75=   19.19  p90=   25.32  mean=   15.51
+  London_bbw       n=137  p10=   11.70  p25=   15.37  p50=   20.10  p75=   30.29  p90=   39.10  mean=   24.05
+  NY_bbw           n=147  p10=    9.69  p25=   13.42  p50=   17.27  p75=   25.67  p90=   31.84  mean=   20.08
+
+=== 2026-08-10 & 08-11 PLACEMENT vs corpus percentile ===
+
+2026-08-10  class=QUIET  dow=Mon
+  range            =    47.10  (p= 24.4)
+  net_abs          =    21.60  (p= 35.7)
+  trendiness       =     0.46  (p= 45.2)
+  close_pos        =     0.58  (p= 64.3)
+  adx_mean_best    =    23.50  (p= 20.8)
+  er_mean_best     =     0.33  (p=  6.7)
+  adx_max_any      =    39.77  (p= 28.9)
+  er_max_any       =     0.91  (p= 18.7)
+  Asian_range      =    13.70  (p=  1.5)
+  London_range     =    15.70  (p=  1.5)
+  NY_range         =    40.00  (p= 42.2)
+  Asian_bbw        =     6.45  (p=  1.5)
+  London_bbw       =    11.55  (p=  9.5)
+  NY_bbw           =    14.41  (p= 28.6)
+
+2026-08-11  class=CHOP  dow=Tue
+  range            =    23.90  (p=  7.7)
+  net_abs          =     5.45  (p= 10.1)
+  trendiness       =     0.23  (p= 23.8)
+  close_pos        =     0.58  (p= 63.1)
+  adx_mean_best    =    21.10  (p= 14.1)
+  er_mean_best     =     0.30  (p=  5.3)
+  adx_max_any      =    34.10  (p= 16.8)
+  er_max_any       =     0.79  (p=  4.0)
+  Asian_range      =    14.20  (p=  3.0)
+  London_range     =    15.90  (p=  2.2)
+  NY_range         =    23.90  (p= 12.9)
+  Asian_bbw        =     9.07  (p= 10.4)
+  London_bbw       =     8.99  (p=  2.2)
+  NY_bbw           =     9.71  (p= 10.9)
+
+[wrote /tmp/dta/day_class.json and pdhl.json]
+Corpus: n=240 scored BB_BOUNCE fires with realised pnl
+Coverage: 2026-05-04 -> 2026-08-11 across 57 distinct trading dates
+Direction: BUY=116  SELL=124
+Overall WR=52.9%  sum_pnl=-21.2 pips  avg_pnl=-0.09  median_mfe=9.9
+
+### Feature distributions ###
+    abs_near_any: n=240 min=0.10 p10=1.40 p25=3.80 med=7.00 p75=12.43 p90=17.90 max=43.55
+         abs_rel: n=240 min=0.10 p10=2.40 p25=5.75 med=12.08 p75=24.17 p90=46.25 max=163.17
+            rsi3: n=240 min=10.42 p10=24.42 p25=33.31 med=48.64 p75=63.84 p90=75.68 max=88.10
+           rsi14: n=240 min=18.51 p10=36.55 p25=42.31 med=49.49 p75=56.85 p90=62.32 max=80.91
+     pierce_pips: n=240 min=0.00 p10=0.00 p25=0.00 med=0.74 p75=2.37 p90=4.10 max=14.63
+          pd_pct: n=240 min=-77.73 p10=-3.82 p25=21.72 med=56.38 p75=85.26 p90=128.09 max=233.25
+
+### Directionally-relevant pivot distance (|rel|) ###
+
+== Outcomes by directionally-relevant pivot distance
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+<=3p           | 31             | 67.74          | 61.95          | 2.00           | 10.07         
+3-8p           | 58             | 55.17          | 74.55          | 1.29           | 11.35         
+8-15p          | 45             | 53.33          | 98.20          | 2.18           | 9.23          
+>15p           | 106            | 47.17          | -255.95        | -2.41          | 8.75          
+
+### Nearest-of-any pivot distance (|near_any|) ###
+
+== Outcomes by nearest-of-any pivot distance
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+<=3p           | 48             | 58.33          | -18.35         | -0.38          | 8.85          
+3-8p           | 84             | 50.00          | -81.95         | -0.98          | 10.35         
+8-15p          | 65             | 46.15          | -29.90         | -0.46          | 7.35          
+>15p           | 43             | 62.79          | 108.95         | 2.53           | 15.20         
+
+### RSI(3) deciles ###
+
+== Outcomes by RSI(3) decile
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+d1[-inf,24.42) | 24             | 45.83          | -57.85         | -2.41          | 6.85          
+d2[24.42,30.44) | 24             | 62.50          | 16.40          | 0.68           | 12.80         
+d3[30.44,36.57) | 24             | 41.67          | -78.45         | -3.27          | 8.05          
+d4[36.57,41.64) | 24             | 41.67          | -76.35         | -3.18          | 6.10          
+d5[41.64,48.64) | 24             | 58.33          | 3.95           | 0.16           | 12.70         
+d6[48.64,53.73) | 24             | 45.83          | -56.50         | -2.35          | 10.35         
+d7[53.73,59.77) | 24             | 66.67          | 99.40          | 4.14           | 10.35         
+d8[59.77,67.53) | 24             | 45.83          | -45.00         | -1.88          | 7.60          
+d9[67.53,75.68) | 24             | 66.67          | 72.50          | 3.02           | 12.30         
+d10[75.68,inf) | 24             | 54.17          | 100.65         | 4.19           | 9.40          
+
+### RSI(14) deciles ###
+
+== Outcomes by RSI(14) decile
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+d1[-inf,36.55) | 24             | 33.33          | -157.45        | -6.56          | 0.25          
+d2[36.55,40.61) | 24             | 50.00          | -72.60         | -3.02          | 8.95          
+d3[40.61,43.62) | 24             | 41.67          | -1.30          | -0.05          | 12.25         
+d4[43.62,46.17) | 24             | 58.33          | -34.70         | -1.45          | 8.45          
+d5[46.17,49.49) | 24             | 70.83          | 106.75         | 4.45           | 10.82         
+d6[49.49,53.75) | 24             | 66.67          | 77.45          | 3.23           | 9.85          
+d7[53.75,56.06) | 24             | 45.83          | 22.65          | 0.94           | 10.80         
+d8[56.06,58.40) | 24             | 45.83          | -6.65          | -0.28          | 8.45          
+d9[58.40,62.32) | 24             | 66.67          | 82.90          | 3.45           | 12.90         
+d10[62.32,inf) | 24             | 50.00          | -38.30         | -1.60          | 5.15          
+
+### Pierce depth on setup bar N-1 (pips beyond band) ###
+
+== Outcomes by pierce depth (setup bar)
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+=0 (near-touch) | 81             | 49.38          | -54.00         | -0.67          | 9.65          
+0-1p           | 50             | 56.00          | 65.00          | 1.30           | 9.10          
+1-3p           | 67             | 55.22          | 10.05          | 0.15           | 10.80         
+>3p            | 42             | 52.38          | -42.30         | -1.01          | 8.75          
+
+### Signed setup-bar wick vs band (negative=inside; positive=beyond) ###
+
+== Outcomes by setup-bar signed distance quartile
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+q1[-inf,-0.70) | 60             | 38.33          | -211.15        | -3.52          | 9.23          
+q2[-0.70,0.74) | 60             | 60.00          | 124.50         | 2.07           | 9.05          
+q3[0.74,2.37)  | 60             | 68.33          | 246.50         | 4.11           | 14.02         
+q4[2.37,inf)   | 60             | 45.00          | -181.10        | -3.02          | 4.95          
+
+### Close came back inside band vs did not ###
+  close_inside=True: n=220 wr=53.2% sum_pnl=-5.8 med_mfe=9.8
+  close_inside=False: n=20 wr=50.0% sum_pnl=-15.4 med_mfe=14.6
+
+### Outcomes by directionally-relevant pivot identity ###
+
+== Outcomes by relevant pivot identity
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+P              | 166            | 45.78          | -448.75        | -2.70          | 8.15          
+R1             | 29             | 65.52          | 167.60         | 5.78           | 12.25         
+R2             | 10             | 80.00          | 109.15         | 10.91          | 17.20         
+R3             | 6              | 83.33          | 44.25          | 7.38           | 9.70          
+S1             | 23             | 69.57          | 102.80         | 4.47           | 10.35         
+S2             | 6              | 50.00          | 3.70           | 0.62           | 15.55         
+
+### Outcomes by relevant pivot identity, only when |rel|<=8p ###
+
+== Outcomes by relevant pivot identity when close (n=89)
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+P              | 47             | 53.19          | -49.00         | -1.04          | 10.35         
+R1             | 14             | 57.14          | 51.75          | 3.70           | 12.25         
+R2             | 6              | 66.67          | 43.05          | 7.17           | 15.85         
+R3             | 3              | 100.00         | 17.55          | 5.85           | 7.75          
+S1             | 15             | 80.00          | 93.25          | 6.22           | 9.45          
+S2             | 4              | 25.00          | -20.10         | -5.03          | 0.00          
+
+### Outcomes by nearest-of-any identity, |near_any|<=8p ###
+
+== Outcomes by nearest-of-any identity when close (n=132)
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+P              | 44             | 52.27          | -39.90         | -0.91          | 12.15         
+R1             | 27             | 51.85          | 29.75          | 1.10           | 10.45         
+R2             | 15             | 53.33          | -18.40         | -1.23          | 9.55          
+R3             | 6              | 50.00          | -41.40         | -6.90          | 2.80          
+S1             | 33             | 60.61          | 22.70          | 0.69           | 10.20         
+S2             | 6              | 33.33          | -39.45         | -6.58          | 0.35          
+S3             | 1              | 0.00           | -13.60         | -13.60         | 10.35         
+
+Directional RSI(3) extreme thresholds (top/bot 25%):  SELL>=64.6  BUY<=31.3
+Directional RSI(14) extreme thresholds (top/bot 25%): SELL>=60.8  BUY<=37.8
+Deep pierce cut (top quartile pierce_pips): >= 2.37p
+
+### Confluence 2x2x2 (at-pivot<=8p) x (RSI3 extreme directional) x (deep pierce) ###
+
+== Confluence cells (RSI3 extreme)
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+piv=True rsi3=True deep=True | 4              | 50.00          | -28.55         | -7.14          | 4.20          
+piv=True rsi3=True deep=False | 10             | 60.00          | 2.95           | 0.29           | 11.55         
+piv=True rsi3=False deep=True | 18             | 61.11          | 71.45          | 3.97           | 12.70         
+piv=True rsi3=False deep=False | 57             | 59.65          | 90.65          | 1.59           | 10.35         
+piv=False rsi3=True deep=True | 8              | 37.50          | -49.80         | -6.22          | 0.85          
+piv=False rsi3=True deep=False | 39             | 51.28          | 0.50           | 0.01           | 7.70          
+piv=False rsi3=False deep=True | 12             | 50.00          | -35.40         | -2.95          | 8.75          
+piv=False rsi3=False deep=False | 92             | 48.91          | -73.05         | -0.79          | 9.15          
+
+### Same, but RSI(14) extreme instead of RSI(3) ###
+
+== Confluence cells (RSI14 extreme)
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+piv=True rsi14=True deep=True | 8              | 37.50          | -50.85         | -6.36          | 4.20          
+piv=True rsi14=True deep=False | 7              | 42.86          | -22.90         | -3.27          | 13.50         
+piv=True rsi14=False deep=True | 14             | 71.43          | 93.75          | 6.70           | 12.70         
+piv=True rsi14=False deep=False | 60             | 61.67          | 116.50         | 1.94           | 10.40         
+piv=False rsi14=True deep=True | 11             | 36.36          | -80.45         | -7.31          | 4.95          
+piv=False rsi14=True deep=False | 35             | 42.86          | -125.95        | -3.60          | 2.70          
+piv=False rsi14=False deep=True | 9              | 55.56          | -4.75          | -0.53          | 10.80         
+piv=False rsi14=False deep=False | 96             | 52.08          | 53.40          | 0.56           | 10.25         
+
+### pd_pct vs pivot proximity ###
+corr(abs_rel_pivot, pd_pct)              = +0.164
+corr(abs_rel_pivot, |pd_pct - 50|)       = +0.385
+
+### Outcomes by |rel_pivot| within pd_pct bands ###
+
+pd<25: n=63
+
+== |rel| bucketed inside pd<25
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+<=8p           | 20             | 65.00          | 59.55          | 2.98           | 9.45          
+>8p            | 43             | 41.86          | -182.85        | -4.25          | 9.90          
+
+pd 25-50: n=41
+
+== |rel| bucketed inside pd 25-50
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+<=8p           | 17             | 58.82          | 13.55          | 0.80           | 12.70         
+>8p            | 24             | 33.33          | -50.80         | -2.12          | 7.20          
+
+pd 50-75: n=55
+
+== |rel| bucketed inside pd 50-75
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+<=8p           | 34             | 47.06          | -56.30         | -1.66          | 8.65          
+>8p            | 21             | 57.14          | 38.70          | 1.84           | 11.68         
+
+pd>=75: n=81
+
+== |rel| bucketed inside pd>=75
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+<=8p           | 18             | 77.78          | 119.70         | 6.65           | 12.75         
+>8p            | 63             | 57.14          | 37.20          | 0.59           | 8.65          
+
+### Outcomes by day-type ###
+day-type counts of fires: Counter({'MIXED': 196, 'TRENDING': 27, 'CHOP': 9, 'QUIET': 8})
+
+== TRENDING: n=27 WR=37.0% sum_pnl=-148.2
+
+== |rel| split inside TRENDING
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+<=8p           | 4              | 25.00          | -39.05         | -9.76          | 4.58          
+>8p            | 23             | 39.13          | -109.10        | -4.74          | 5.50          
+   rsi3_ext: n=8 WR=25.0% sum=-88.1
+   rsi3_not: n=19 WR=42.1% sum=-60.1
+
+== MIXED: n=196 WR=56.1% sum_pnl=+179.9
+
+== |rel| split inside MIXED
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+<=8p           | 78             | 61.54          | 171.95         | 2.20           | 12.15         
+>8p            | 118            | 52.54          | 7.95           | 0.07           | 10.25         
+   rsi3_ext: n=50 WR=52.0% sum=-18.3
+   rsi3_not: n=146 WR=57.5% sum=+198.2
+
+== QUIET: n=8 WR=37.5% sum_pnl=-51.1
+
+== |rel| split inside QUIET
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+<=8p           | 3              | 100.00         | 15.50          | 5.17           | 10.35         
+>8p            | 5              | 0.00           | -66.55         | -13.31         | 2.45          
+   rsi3_ext: n=3 WR=33.3% sum=-35.5
+   rsi3_not: n=5 WR=40.0% sum=-15.6
+
+== CHOP: n=9 WR=44.4% sum_pnl=-1.9
+
+== |rel| split inside CHOP
+bucket         | n              | wr             | sum_pnl        | avg_pnl        | med_mfe       
+---------------------------------------------------------------------------------------------------
+<=8p           | 4              | 25.00          | -11.90         | -2.97          | 9.55          
+>8p            | 5              | 60.00          | 9.95           | 1.99           | 12.70         
+   rsi3_ext: n=4 WR=50.0% sum=-4.3
+   rsi3_not: n=5 WR=40.0% sum=+2.3

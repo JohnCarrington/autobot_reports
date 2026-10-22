@@ -1,0 +1,135 @@
+=== PARSING FLAGS (rows_total=4054)
+  source_missing_revised: 4054
+  source_missing_last_update: 4054
+  source_missing_provider_event_id: 4054
+  source_missing_te_forecast: 4054
+  consensus_forecast_not_numeric: 2343
+  actual_not_numeric: 595
+  previous_not_numeric: 571
+
+=== TIER DISTRIBUTION (by country)
+  GB: {'MIDDLE': 173, 'BIG': 68, 'SMALL': 554}
+  US: {'MIDDLE': 541, 'BIG': 106, 'SMALL': 2612}
+
+=== EXCLUSIONS (by country × reason)
+  GB: {'tier_small': 554, 'actual_not_numeric': 47, 'consensus_forecast_not_numeric': 36}
+  US: {'tier_small': 2612, 'actual_not_numeric': 54, 'consensus_forecast_not_numeric': 192}
+
+=== COMPONENT direction_for_currency ===
+  IN_LINE: 248
+  STRENGTHEN: 172
+  WEAKEN: 139
+=== COMPONENT direction_for_gbpusd ===
+  IN_LINE: 248
+  DOWN: 158
+  UP: 153
+=== polarity_not_found: 175
+
+=== EVENT CLASSIFICATION ===
+  DOWN: 68
+  UP: 66
+  IN_LINE: 58
+  CONFLICTED: 17
+
+=== CONFLICTED events (17) ===
+
+  2026-01-14T13:30:00+00:00 (top=MIDDLE):
+    [US/MIDDLE] Core PPI MoM: actual=0.0 forecast=0.2 gbpusd=UP
+    [US/MIDDLE] Core PPI YoY: actual=3.0 forecast=2.7 gbpusd=DOWN
+    [US/MIDDLE] PPI MoM: actual=0.2 forecast=0.2 gbpusd=IN_LINE
+    [US/MIDDLE] PPI YoY: actual=3.0 forecast=2.7 gbpusd=DOWN
+    [US/MIDDLE] Retail Sales Control Group MoM: actual=0.4 forecast=0.4 gbpusd=IN_LINE
+    [US/MIDDLE] Retail Sales Ex Autos MoM: actual=0.5 forecast=0.4 gbpusd=DOWN
+    [US/MIDDLE] Retail Sales MoM: actual=0.6 forecast=0.4 gbpusd=DOWN
+
+  2026-02-02T15:00:00+00:00 (top=MIDDLE):
+    [US/MIDDLE] ISM Manufacturing PMI: actual=52.6 forecast=48.5 gbpusd=DOWN
+    [US/MIDDLE] ISM Manufacturing Prices: actual=59.0 forecast=60.5 gbpusd=UP
+
+  2026-02-04T15:00:00+00:00 (top=MIDDLE):
+    [US/MIDDLE] ISM Services Employment: actual=50.3 forecast=52.3 gbpusd=UP
+    [US/MIDDLE] ISM Services PMI: actual=53.8 forecast=53.5 gbpusd=DOWN
+
+  2026-02-20T13:30:00+00:00 (top=BIG):
+    [US/BIG] GDP Growth Rate QoQ Adv: actual=1.4 forecast=3.0 gbpusd=UP
+    [US/BIG] GDP Price Index QoQ Adv: actual=3.7 forecast=2.8 gbpusd=DOWN
+
+  2026-04-22T06:00:00+00:00 (top=BIG):
+    [GB/BIG] Core Inflation Rate MoM: actual=0.4 forecast=0.5 gbpusd=DOWN
+    [GB/BIG] Core Inflation Rate YoY: actual=3.1 forecast=3.2 gbpusd=DOWN
+    [GB/BIG] Inflation Rate MoM: actual=0.7 forecast=0.6 gbpusd=UP
+    [GB/BIG] Inflation Rate YoY: actual=3.3 forecast=3.3 gbpusd=IN_LINE
+
+  2026-04-24T06:00:00+00:00 (top=MIDDLE):
+    [GB/MIDDLE] Retail Sales ex Fuel MoM: actual=0.2 forecast=0.2 gbpusd=IN_LINE
+    [GB/MIDDLE] Retail Sales ex Fuel YoY: actual=1.7 forecast=2.0 gbpusd=DOWN
+    [GB/MIDDLE] Retail Sales MoM: actual=0.7 forecast=0.2 gbpusd=UP
+    [GB/MIDDLE] Retail Sales YoY: actual=1.7 forecast=1.3 gbpusd=UP
+
+  2026-04-30T12:30:00+00:00 (top=BIG):
+    [US/BIG] GDP Growth Rate QoQ Adv: actual=2.0 forecast=2.3 gbpusd=UP
+    [US/BIG] GDP Price Index QoQ Adv: actual=4.5 forecast=3.8 gbpusd=DOWN
+
+  2026-05-01T14:00:00+00:00 (top=MIDDLE):
+    [US/MIDDLE] ISM Manufacturing Employment: actual=46.4 forecast=49.0 gbpusd=UP
+    [US/MIDDLE] ISM Manufacturing PMI: actual=52.7 forecast=53.0 gbpusd=UP
+    [US/MIDDLE] ISM Manufacturing Prices: actual=84.6 forecast=80.0 gbpusd=DOWN
+
+  2026-05-14T12:30:00+00:00 (top=MIDDLE):
+    [US/MIDDLE] Continuing Jobless Claims: actual=1782.0 forecast=1790.0 gbpusd=IN_LINE
+    [US/MIDDLE] Initial Jobless Claims: actual=211.0 forecast=205.0 gbpusd=UP
+    [US/MIDDLE] Retail Sales Control Group MoM: actual=0.5 forecast=0.4 gbpusd=DOWN
+    [US/MIDDLE] Retail Sales Ex Autos MoM: actual=0.7 forecast=0.6 gbpusd=DOWN
+    [US/MIDDLE] Retail Sales MoM: actual=0.5 forecast=0.5 gbpusd=IN_LINE
+
+  2026-06-01T14:00:00+00:00 (top=MIDDLE):
+    [US/MIDDLE] ISM Manufacturing PMI: actual=54.0 forecast=53.0 gbpusd=DOWN
+    [US/MIDDLE] ISM Manufacturing Prices: actual=82.1 forecast=85.5 gbpusd=UP
+
+  2026-06-10T12:30:00+00:00 (top=BIG):
+    [US/BIG] Core Inflation Rate MoM: actual=0.2 forecast=0.3 gbpusd=UP
+    [US/BIG] Core Inflation Rate YoY: actual=2.9 forecast=2.9 gbpusd=IN_LINE
+    [US/BIG] CPI: actual=335.12 forecast=335.11 gbpusd=DOWN
+    [US/BIG] Inflation Rate MoM: actual=0.5 forecast=0.5 gbpusd=IN_LINE
+    [US/BIG] Inflation Rate YoY: actual=4.2 forecast=4.2 gbpusd=IN_LINE
+
+  2026-06-11T12:30:00+00:00 (top=MIDDLE):
+    [US/MIDDLE] Continuing Jobless Claims: actual=1795.0 forecast=1780.0 gbpusd=IN_LINE
+    [US/MIDDLE] Core PPI MoM: actual=0.4 forecast=0.5 gbpusd=UP
+    [US/MIDDLE] Core PPI YoY: actual=4.9 forecast=5.4 gbpusd=UP
+    [US/MIDDLE] Initial Jobless Claims: actual=229.0 forecast=219.0 gbpusd=UP
+    [US/MIDDLE] PPI MoM: actual=1.1 forecast=0.7 gbpusd=DOWN
+    [US/MIDDLE] PPI YoY: actual=6.5 forecast=6.4 gbpusd=DOWN
+
+  2026-07-16T12:30:00+00:00 (top=MIDDLE):
+    [US/MIDDLE] Continuing Jobless Claims: actual=1805.0 forecast=1820.0 gbpusd=IN_LINE
+    [US/MIDDLE] Initial Jobless Claims: actual=208.0 forecast=217.0 gbpusd=DOWN
+    [US/MIDDLE] Retail Sales Control Group MoM: actual=0.5 forecast=0.5 gbpusd=IN_LINE
+    [US/MIDDLE] Retail Sales Ex Autos MoM: actual=-0.2 forecast=-0.1 gbpusd=UP
+    [US/MIDDLE] Retail Sales MoM: actual=0.2 forecast=0.2 gbpusd=IN_LINE
+
+  2026-07-22T06:00:00+00:00 (top=BIG):
+    [GB/BIG] Core Inflation Rate YoY: actual=2.6 forecast=2.5 gbpusd=UP
+    [GB/BIG] Inflation Rate MoM: actual=0.1 forecast=0.1 gbpusd=IN_LINE
+    [GB/BIG] Inflation Rate YoY: actual=2.6 forecast=2.7 gbpusd=DOWN
+
+  2026-07-30T12:30:00+00:00 (top=BIG):
+    [US/BIG] GDP Growth Rate QoQ Adv: actual=1.5 forecast=2.1 gbpusd=UP
+    [US/BIG] GDP Price Index QoQ Adv: actual=6.3 forecast=3.6 gbpusd=DOWN
+
+  2026-09-10T12:30:00+00:00 (top=MIDDLE):
+    [US/MIDDLE] Continuing Jobless Claims: actual=1774.0 forecast=1780.0 gbpusd=IN_LINE
+    [US/MIDDLE] Core PPI MoM: actual=0.2 forecast=0.3 gbpusd=UP
+    [US/MIDDLE] Core PPI YoY: actual=4.6 forecast=4.6 gbpusd=IN_LINE
+    [US/MIDDLE] Initial Jobless Claims: actual=206.0 forecast=205.0 gbpusd=UP
+    [US/MIDDLE] PPI MoM: actual=0.4 forecast=0.4 gbpusd=IN_LINE
+    [US/MIDDLE] PPI YoY: actual=5.4 forecast=5.3 gbpusd=DOWN
+
+  2026-10-01T14:00:00+00:00 (top=MIDDLE):
+    [US/MIDDLE] ISM Manufacturing PMI: actual=54.5 forecast=55.0 gbpusd=UP
+    [US/MIDDLE] ISM Manufacturing Prices: actual=77.9 forecast=72.3 gbpusd=DOWN
+
+=== FIRST-PRINT SOURCE ===
+  no_series_mapping: 313
+  unavailable_no_fred_key: 178
+  ons_vintage_not_api_accessible: 68

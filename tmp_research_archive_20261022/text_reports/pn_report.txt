@@ -1,0 +1,148 @@
+VERDICT: Post-news set is DISTINGUISHABLE from control on candle statistics (n_pn=9, n_ct=33; samples are small — treat as descriptive, not statistical).
+  On the hypothesised shape (quiet morning → afternoon expansion): 1/9 post-news vs 6/33 control — NOT confirmed; the pattern is not more frequent on post-news days.
+  Where post-news does differ: mornings run hotter, not quieter (mean ADX 27.89 vs 24.72; mean ER 0.36 vs 0.31; mean range 58.17p vs 45.19p), and when the day does resolve, it agrees with the D1 bias more often (5/8 vs 6/20).
+
+Window: 2026-01-01 → 2026-08-11 (candles). Events window: 2026-06-06 → 2026-08-11.
+Post-news day count: 9. Control day count: 33 (all other trading days in [2026-06-08, 2026-08-09]).
+D1-bias method: d1_direction.compute_d1_direction_from_candles (9-check score; cache /opt/tradingbot/cache/htf/GBPUSD_D1.json; 'bias for day D' uses D1 bars strictly before D)
+Event-match rule: impact=HIGH AND currency in {USD,GBP} AND event title exact/contains: 'Non Farm Payrolls' | 'Inflation Rate YoY' | 'Core Inflation Rate YoY' | 'Fed Interest Rate Decision' | 'BoE Interest Rate Decision'
+
+POST-NEWS DAYS (per-day; "*" after date = partial morning session, indicator means may be understated/absent)
+date        tag                m_rng  m_net  m_adx   m_er m_x    a_rng  a_net  a_adx   a_er a_x     reso dir   bias  sc agr
+---------------------------------------------------------------------------------------------------------------------------
+2026-06-08* NFP                 22.0  -11.0      —  0.528   0     30.9  -10.9  18.95  0.246  19    14:20  DN   BEAR  -6 yes
+2026-06-11  CPI(USD),CoreCPI(USD)    51.4  -17.6  24.15  0.337  17     83.1   35.1  22.32  0.348   5    14:15  DN   NEUT  +0   —
+2026-06-18  CPI(GBP),FOMC      120.0  -84.1  35.21  0.370  12     50.9  -30.6  20.48  0.336   8    18:50  DN   BEAR  -9 yes
+2026-06-19  BoE                 78.1   48.5  34.75  0.380  11     25.1   -2.0  13.74  0.254  12        —   —   BEAR  -9   —
+2026-07-03  NFP                 32.0   -6.6  20.21  0.255  21     13.6    1.3  17.36  0.191  15    13:50  DN   NEUT  +3   —
+2026-07-15  CPI(USD),CoreCPI(USD)    49.3   23.9  24.37  0.367   8    136.8  108.2  61.25  0.555   1    13:00  UP   BULL  +6 yes
+2026-07-23* CPI(GBP)            42.9  -24.8  32.26  0.336   0     46.7  -26.2  29.71  0.281  12    13:05  DN   BEAR  -7 yes
+2026-07-30  FOMC                74.7   26.3  30.83  0.353  14    109.1  104.5  33.31  0.429   3    13:40  UP   BULL  +8 yes
+2026-07-31  BoE                 53.1  -30.9  21.35  0.346  17     88.7   62.2  37.32  0.341   5    13:10  DN   BULL  +9  no
+
+SUMMARY
+post-news:
+  n=  9  quiet-morn=  5  expansion(afternoon>morn_rng)=  3  quiet+expansion=  1  resolutions_seen=  8  resolution_agreed_with_D1=  5
+        means: morn(rng=58.17, adx=27.89, er=0.36, xings=11.11)  aftn(rng=64.99, adx=28.27, er=0.33, xings=8.89)  median_morn_rng=51.4
+control:
+  n= 33  quiet-morn= 18  expansion(afternoon>morn_rng)=  7  quiet+expansion=  6  resolutions_seen= 20  resolution_agreed_with_D1=  6
+        means: morn(rng=45.19, adx=24.72, er=0.31, xings=14.48)  aftn(rng=43.34, adx=23.35, er=0.31, xings=9.12)  median_morn_rng=41.7
+
+CONTROL DAYS (per-day)
+date        tag                m_rng  m_net  m_adx   m_er m_x    a_rng  a_net  a_adx   a_er a_x     reso dir   bias  sc agr
+---------------------------------------------------------------------------------------------------------------------------
+2026-06-09                      60.7   54.6  32.67  0.346   2     53.2  -15.7  20.92  0.249  16        —   —   BEAR  -5   —
+2026-06-10                      32.7    0.5  20.05  0.359  17     53.0   -9.4  24.46  0.327  11    13:35  UP   BEAR  -4  no
+2026-06-12                      41.7  -20.5  25.05  0.347  15     33.6   22.2  23.68  0.262  14        —   —   NEUT  +2   —
+2026-06-15                      43.9  -13.0  27.99  0.299  11     25.9  -11.0  14.85  0.300  13        —   —   BULL  +4   —
+2026-06-16                      41.7   12.9  30.50  0.332  13     40.0   12.2  17.64  0.336  12    15:50  UP   NEUT  -2   —
+2026-06-17                      37.7  -12.8  22.07  0.311  14     84.2  -77.8  26.74  0.357   7    14:45  DN   BEAR  -9 yes
+2026-06-22                      90.2   49.1  35.28  0.421  15     29.0  -17.8  18.79  0.294  13        —   —   BEAR  -5   —
+2026-06-23                      43.2  -36.4  19.09  0.292  19     39.7  -23.3  21.86  0.275   9    14:15  DN   BEAR  -8 yes
+2026-06-24                      67.6  -48.1  20.04  0.275  18     39.2   11.1  19.31  0.315  10        —   —   BEAR  -6   —
+2026-06-25                      45.9   -6.0  28.07  0.384  12     45.9   21.4  29.00  0.302   5    13:35  UP   NEUT  -3   —
+2026-06-26                      37.8   12.7  20.78  0.246   7     34.1  -10.5  20.10  0.310   9        —   —   BEAR  -6   —
+2026-06-29                      43.6   35.1  27.54  0.368  13     27.7   24.7  29.20  0.230   6    13:25  UP   NEUT  +0   —
+2026-06-30                      35.2  -17.8  23.56  0.298  16     62.7   39.0  24.65  0.376  16    14:40  UP   NEUT  +1   —
+2026-07-01                      28.2    0.9  22.05  0.292  14     73.2   41.6  22.49  0.272   7    13:10  DN   BULL  +4  no
+2026-07-02                      98.4   78.5  35.82  0.431   8     47.2  -17.8  27.99  0.329  10        —   —   BULL  +4   —
+2026-07-06                      22.9    0.4  18.46  0.242  16     55.8   52.6  31.66  0.408   6    13:15  UP   NEUT  +3   —
+2026-07-07                      25.1   -4.3  17.26  0.272  20     27.0  -21.8  14.47  0.275  10    14:00  DN   BULL  +4  no
+2026-07-08                      48.3  -13.7  23.37  0.335  12     69.8   59.0  26.89  0.367   3    13:35  UP   BULL  +6 yes
+2026-07-09                      49.2  -11.5  27.16  0.300  16     35.3   31.6  22.26  0.310   9        —   —   BULL  +6   —
+2026-07-16                      47.9  -35.0  28.01  0.289  17     58.2  -28.0  26.57  0.339  11    14:50  DN   BULL  +5  no
+2026-07-17                      54.8  -33.9  29.66  0.356  12     31.6   22.3  17.80  0.281  13        —   —   BULL  +7   —
+2026-07-20                      33.0   -6.0  26.80  0.329  19     45.7  -18.9  28.36  0.325   5    14:30  DN   NEUT  -2   —
+2026-07-21                      72.9  -47.3  34.35  0.345   5     40.1   -9.2  27.93  0.326   7    13:20  DN   NEUT  -3   —
+2026-07-22                      40.0  -23.6  13.79  0.222  26     31.3   14.5  17.08  0.273  11        —   —   BEAR  -7   —
+2026-07-24                      38.4   -4.0  23.04  0.312  12     42.7   15.4  28.81  0.383   4        —   —   BEAR  -7   —
+2026-07-27                      56.0  -39.0  28.58  0.278  15     36.8  -25.7  24.97  0.254   8    14:50  DN   BEAR  -9 yes
+2026-07-28                      32.2    0.4  25.32  0.325  11     26.2   -8.7  24.44  0.362   5    15:30  UP   BEAR  -4  no
+2026-07-29                      30.1  -11.8  20.18  0.243  21     86.1   81.3  28.59  0.364   7    18:00  UP   NEUT  +3   —
+2026-08-03                      30.1   -3.4  21.38  0.260  18     50.1  -33.1  27.51  0.358   4    14:10  DN   BULL  +6  no
+2026-08-04                      35.7   16.1  25.72  0.228  14     17.4    8.6  19.69  0.305   7        —   —   BULL  +6   —
+2026-08-05                      33.0   14.4  21.57  0.323  21     31.4   -0.2  22.47  0.301   9    14:15  UP   BULL  +7 yes
+2026-08-06                      19.2   10.2  20.65  0.274  11     29.8  -13.1  18.55  0.219  16    13:30  UP   BULL  +7 yes
+2026-08-07                      74.1   47.1  20.05  0.297  18     26.2   -0.2  20.86  0.194   8        —   —   BULL  +7   —
+
+NATIVE FILLS — signal_log GBPUSD fires on POST-NEWS days (kept separate from candle stats)
+  total: 77  (before 13:00Z: 45, after 13:00Z: 32)
+  BEFORE 13:00Z
+    2026-06-11 06:15  GBPUSD_BB_BOUNCE_L                 BUY  pnl=  +1.9  outcome=Breakeven stop hit (IG server-side)
+    2026-06-11 07:35  GBPUSD_BB_BOUNCE_S                SELL  pnl= +23.2  outcome=MANUAL
+    2026-06-11 09:00  GBPUSD_BB_BOUNCE_L                 BUY  pnl= -10.1  outcome=MANUAL
+    2026-06-11 09:30  GBPUSD_EMA_PULLBACK_S             SELL  pnl= +13.2  outcome=TP1
+    2026-06-11 12:31  NEWS_STRATEGY_CONT                SELL  pnl= -12.1  outcome=SL
+    2026-06-18 06:05  GBPUSD_BB_BOUNCE_L                 BUY  pnl=  +6.3  outcome=TRAIL_STOP
+    2026-06-18 06:15  GBPUSD_STRUCTURE_BREAK_L           BUY  pnl= -10.7  outcome=STRUCTURE_EXIT:structure_flip_down: last_close=13312.15000 < prior_5_low=13314.65000, pnl=-10.2p
+    2026-06-18 06:40  GBPUSD_BB_BOUNCE_S                SELL  pnl= +19.5  outcome=TP1
+    2026-06-18 07:25  GBPUSD_STRUCTURE_BREAK_S          SELL  pnl= +15.6  outcome=REGIME_MAX_HOLD
+    2026-06-18 07:25  GBPUSD_EMA_PULLBACK_S             SELL  pnl= +14.9  outcome=TP1
+    2026-06-18 08:35  GBPUSD_STRUCTURE_BREAK_S          SELL  pnl= +21.6  outcome=BE_STOP_POST_SCALEOUT
+    2026-06-18 10:10  GBPUSD_STRUCTURE_BREAK_S          SELL  pnl= -11.7  outcome=SL
+    2026-06-18 11:04  NEWS_STRATEGY_FADE                SELL  pnl=  -6.5  outcome=REGIME_MAX_HOLD
+    2026-06-18 11:55  GBPUSD_STRUCTURE_BREAK_S          SELL  pnl= -11.8  outcome=SL
+    2026-06-19 06:35  GBPUSD_STRUCTURE_BREAK_S          SELL  pnl= -11.8  outcome=SL
+    2026-06-19 08:20  GBPUSD_STRUCTURE_BREAK_L           BUY  pnl= +19.9  outcome=BE_STOP_POST_SCALEOUT
+    2026-06-19 11:00  GBPUSD_STRUCTURE_BREAK_L           BUY  pnl= -10.5  outcome=STRUCTURE_EXIT:structure_flip_down: last_close=13225.55000 < prior_5_low=13228.65000, pnl=-10.0p
+    2026-07-03 06:30  GBPUSD_EMA_PULLBACK_L              BUY  pnl=  +0.5  outcome=BE_STOP_POST_SCALEOUT
+    2026-07-03 06:55  GBPUSD_BB_BOUNCE_S                SELL  pnl=  +4.7  outcome=TRAIL_STOP
+    2026-07-03 08:45  GBPUSD_BB_BOUNCE_L                 BUY  pnl= -13.9  outcome=MANUAL
+    2026-07-03 09:10  GBPUSD_STRUCTURE_BREAK_S          SELL  pnl=  +6.5  outcome=REGIME_MAX_HOLD
+    2026-07-15 06:10  GBPUSD_EMA_PULLBACK_L              BUY  pnl= -12.7  outcome=STRUCTURE_EXIT:structure_flip_down: last_close=13402.55000 < prior_5_low=13402.75000, pnl=-12.3p
+    2026-07-15 06:20  GBPUSD_STRUCTURE_BREAK_L           BUY  pnl= -11.9  outcome=SL
+    2026-07-15 07:30  GBPUSD_BB_BOUNCE_L                 BUY  pnl= -19.9  outcome=SL
+    2026-07-15 09:45  GBPUSD_BB_BOUNCE_L                 BUY  pnl= +14.2  outcome=BE_STOP_POST_SCALEOUT
+    2026-07-15 10:35  GBPUSD_CONFIRMATION_FALLBACK_L     BUY  pnl= +20.9  outcome=BE_STOP_POST_SCALEOUT
+    2026-07-15 11:15  GBPUSD_BB_BOUNCE_S                SELL  pnl= -17.4  outcome=SL
+    2026-07-15 11:55  GBPUSD_TREND_V3_L                  BUY  pnl=  +1.6  outcome=TREND_V3_REGIME_LEFT
+    2026-07-15 12:00  GBPUSD_STRUCTURE_BREAK_L           BUY  pnl= +30.4  outcome=TP1
+    2026-07-15 12:00  GBPUSD_TREND_V3_L                  BUY  pnl=  -4.0  outcome=IG_RECONCILE
+    2026-07-15 12:05  GBPUSD_TREND_V3_L                  BUY  pnl=  -4.3  outcome=TREND_V3_REGIME_LEFT
+    2026-07-15 12:10  GBPUSD_EMA_PULLBACK_L              BUY  pnl= +30.4  outcome=TP1
+    2026-07-15 12:10  GBPUSD_TREND_V3_L                  BUY  pnl=  +3.5  outcome=TREND_V3_REGIME_LEFT
+    2026-07-15 12:15  GBPUSD_TREND_V3_L                  BUY  pnl=  -2.5  outcome=TREND_V3_REGIME_LEFT
+    2026-07-15 12:55  GBPUSD_TREND_V3_L                  BUY  pnl=  +2.4  outcome=TREND_V3_REGIME_LEFT
+    2026-07-23 10:55  RSI_FADE_GBPUSD_SHORT             SELL  pnl= +20.1  outcome=TP1
+    2026-07-23 12:50  BRIEFING_EXECUTION                SELL  pnl= +18.6  outcome=TP1
+    2026-07-30 09:35  GBPUSD_TREND_V3_L                  BUY  pnl= +14.2  outcome=TP1
+    2026-07-30 10:45  GBPUSD_TREND_V3_L                  BUY  pnl=  -0.2  outcome=BE_STOP_POST_SCALEOUT
+    2026-07-31 06:15  BRIEFING_EXECUTION                 BUY  pnl= -12.1  outcome=STRUCTURE_EXIT:structure_flip_down: last_close=13442.55000 < prior_5_low=13447.65000, pnl=-11.6p
+    2026-07-31 07:00  GBPUSD_BB_BOUNCE_S                SELL  pnl=  +5.7  outcome=FLOOR_STOP_POST_SCALEOUT
+    2026-07-31 08:05  GBPUSD_CONFIRMATION_FALLBACK_S    SELL  pnl=  +0.8  outcome=BE_STOP_POST_SCALEOUT
+    2026-07-31 08:20  GBPUSD_BB_BOUNCE_L                 BUY  pnl= +14.2  outcome=FLOOR_STOP_POST_SCALEOUT
+    2026-07-31 09:15  GBPUSD_BB_BOUNCE_S                SELL  pnl=  +8.7  outcome=FLOOR_STOP_POST_SCALEOUT
+    2026-07-31 11:55  GBPUSD_TREND_V3_S                 SELL  pnl=  +1.4  outcome=BE_STOP_POST_SCALEOUT
+  AFTER 13:00Z
+    2026-06-11 13:10  GBPUSD_EMA_PULLBACK_S             SELL  pnl=  +0.6  outcome=Breakeven stop hit (IG server-side)
+    2026-06-11 14:05  GBPUSD_EMA_PULLBACK_S             SELL  pnl= +14.9  outcome=TP1
+    2026-06-11 14:50  GBPUSD_EMA_PULLBACK_S             SELL  pnl= -10.6  outcome=STRUCTURE_EXIT:structure_flip_up: last_close=13337.65000 > prior_5_high=13336.95000, pnl=-10.2p
+    2026-06-18 13:35  GBPUSD_STRUCTURE_BREAK_L           BUY  pnl= -11.7  outcome=SL
+    2026-06-18 13:45  GBPUSD_BB_BOUNCE_S                SELL  pnl= +21.4  outcome=TRAIL_STOP
+    2026-06-18 16:45  GBPUSD_EMA_PULLBACK_S             SELL  pnl= -10.6  outcome=STRUCTURE_EXIT:structure_flip_up: last_close=13226.65000 > prior_5_high=13225.85000, pnl=-10.1p
+    2026-06-19 13:00  GBPUSD_BB_BOUNCE_S                SELL  pnl= +12.8  outcome=TRAIL_STOP
+    2026-06-19 13:30  GBPUSD_BB_BOUNCE_L                 BUY  pnl= -10.5  outcome=STRUCTURE_EXIT:structure_flip_down: last_close=13219.25000 < prior_5_low=13220.75000, pnl=-10.1p
+    2026-06-19 13:55  GBPUSD_BB_BOUNCE_L                 BUY  pnl=  +3.4  outcome=TRAIL_STOP
+    2026-06-19 14:55  GBPUSD_BB_BOUNCE_S                SELL  pnl= -12.8  outcome=STRUCTURE_EXIT:structure_flip_up: last_close=13236.25000 > prior_5_high=13234.05000, pnl=-12.4p
+    2026-07-03 13:15  GBPUSD_BB_BOUNCE_L                 BUY  pnl=  +4.2  outcome=MANUAL
+    2026-07-03 14:45  GBPUSD_BB_REV_PAT_S               SELL  pnl=  +0.1  outcome=BE_STOP_POST_SCALEOUT
+    2026-07-03 15:05  GBPUSD_BB_BOUNCE_S                SELL  pnl=  +8.8  outcome=TRAIL_STOP
+    2026-07-15 13:00  GBPUSD_TREND_V3_L                  BUY  pnl=  +1.3  outcome=TREND_V3_FLATTEN_EXHAUSTION
+    2026-07-15 13:15  GBPUSD_BB_BOUNCE_S                SELL  pnl= -22.1  outcome=SL
+    2026-07-15 14:35  GBPUSD_EMA_PULLBACK_L              BUY  pnl= +16.2  outcome=BE_STOP_POST_SCALEOUT
+    2026-07-15 14:50  GBPUSD_TREND_V3_L                  BUY  pnl= +17.4  outcome=TP1
+    2026-07-15 15:10  GBPUSD_BB_BOUNCE_S                SELL  pnl= -20.1  outcome=SL
+    2026-07-15 15:55  GBPUSD_TREND_V3_L                  BUY  pnl= +16.1  outcome=TP1
+    2026-07-15 16:35  GBPUSD_BB_BOUNCE_S                SELL  pnl= -19.8  outcome=SL
+    2026-07-15 16:50  GBPUSD_TREND_V3_L                  BUY  pnl= +15.8  outcome=TP1
+    2026-07-15 17:05  GBPUSD_TREND_V3_L                  BUY  pnl=  +3.6  outcome=TREND_V3_FLATTEN_EXHAUSTION
+    2026-07-15 17:40  GBPUSD_TREND_V3_L                  BUY  pnl= +10.4  outcome=TP1
+    2026-07-15 18:05  GBPUSD_TREND_V3_L                  BUY  pnl= -24.1  outcome=SL
+    2026-07-23 13:10  MACD_EXTREME_GBPUSD_LONG           BUY  pnl=  +2.0  outcome=Breakeven stop hit (IG server-side)
+    2026-07-23 14:20  MACD_EXTREME_GBPUSD_LONG           BUY  pnl= -10.6  outcome=STRUCTURE_EXIT:structure_flip_down: last_close=13317.35000 < prior_5_low=13318.55000, pnl=-10.2p
+    2026-07-23 15:20  MACD_EXTREME_GBPUSD_LONG           BUY  pnl= -11.7  outcome=STRUCTURE_EXIT:structure_flip_down: last_close=13301.85000 < prior_5_low=13306.05000, pnl=-12.0p
+    2026-07-30 13:50  GBPUSD_BB_BOUNCE_S                SELL  pnl= -20.2  outcome=SL
+    2026-07-30 14:10  GBPUSD_STRUCTURE_BREAK_L           BUY  pnl=  +0.1  outcome=BE_STOP_POST_SCALEOUT
+    2026-07-31 13:15  BRIEFING_EXECUTION                 BUY  pnl= -12.9  outcome=STRUCTURE_EXIT:structure_flip_down: last_close=13403.65000 < prior_5_low=13409.85000, pnl=-12.4p
+    2026-07-31 13:25  GBPUSD_BB_BOUNCE_L                 BUY  pnl= -20.0  outcome=SL
+    2026-07-31 13:35  GBPUSD_BB_BOUNCE_S                SELL  pnl= +14.4  outcome=FLOOR_STOP_POST_SCALEOUT

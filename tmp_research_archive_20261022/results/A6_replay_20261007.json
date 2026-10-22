@@ -1,0 +1,716 @@
+{
+  "run_at": "2026-10-07T20:25:41.029056+00:00",
+  "target_date": "2026-10-07",
+  "warmup": {
+    "days_requested": 25,
+    "bars_loaded": 9666,
+    "first_bar_ts": "2026-08-20T00:00:00+00:00",
+    "last_bar_ts": "2026-10-06T23:55:00+00:00",
+    "d1_bars_built": 26,
+    "h4_bars_built": 199,
+    "htf_direction_at_warmup_end": "NONE"
+  },
+  "day_bars": 245,
+  "levels_used": [
+    {
+      "name": "2w_low",
+      "price": 13251.9
+    },
+    {
+      "name": "2w_low",
+      "price": 13223.6
+    },
+    {
+      "name": "2w_low",
+      "price": 13216.9
+    },
+    {
+      "name": "h1_swing",
+      "price": 13257.3
+    },
+    {
+      "name": "h1_swing",
+      "price": 13231.8
+    },
+    {
+      "name": "h1_swing",
+      "price": 13225.6
+    },
+    {
+      "name": "h1_swing",
+      "price": 13221.4
+    },
+    {
+      "name": "h1_swing",
+      "price": 13203.1
+    },
+    {
+      "name": "h1_swing_low",
+      "price": 13213.5
+    },
+    {
+      "name": "h1_swing_low",
+      "price": 13190.3
+    },
+    {
+      "name": "pivot_S2",
+      "price": 13236.4
+    }
+  ],
+  "order_calls": [
+    {
+      "op": "open",
+      "side": "LONG",
+      "price": 13263.45,
+      "stop": 13243.45,
+      "ts": "2026-10-07T00:45:00+00:00",
+      "reason": "Setup A at h1_swing"
+    },
+    {
+      "op": "open",
+      "side": "SHORT",
+      "price": 13246.650000000001,
+      "stop": 13266.650000000001,
+      "ts": "2026-10-07T06:45:00+00:00",
+      "reason": "Setup A at 2w_low"
+    },
+    {
+      "op": "partial_close",
+      "price": 13236.650000000001,
+      "ts": "2026-10-07T07:50:00+00:00",
+      "size_ratio": 0.5,
+      "reason": "June partial +10p"
+    },
+    {
+      "op": "move_stop",
+      "stop": 13246.650000000001,
+      "ts": "2026-10-07T07:50:00+00:00"
+    },
+    {
+      "op": "close",
+      "price": 13216.650000000001,
+      "ts": "2026-10-07T10:45:00+00:00",
+      "reason": "June TP +30p"
+    },
+    {
+      "op": "open",
+      "side": "LONG",
+      "price": 13210.25,
+      "stop": 13190.25,
+      "ts": "2026-10-07T11:55:00+00:00",
+      "reason": "Exhaustion reversal at h1_swing"
+    },
+    {
+      "op": "partial_close",
+      "price": 13220.25,
+      "ts": "2026-10-07T15:00:00+00:00",
+      "size_ratio": 0.5,
+      "reason": "June partial +10p"
+    },
+    {
+      "op": "move_stop",
+      "stop": 13210.25,
+      "ts": "2026-10-07T15:00:00+00:00"
+    },
+    {
+      "op": "close",
+      "price": 13210.25,
+      "ts": "2026-10-07T15:20:00+00:00",
+      "reason": "June BE exit after partial"
+    },
+    {
+      "op": "open",
+      "side": "SHORT",
+      "price": 13208.25,
+      "stop": 13228.25,
+      "ts": "2026-10-07T16:40:00+00:00",
+      "reason": "Trend pullback at h1_swing_low"
+    }
+  ],
+  "journal_events": [
+    {
+      "text": "Signal: long at 00:35 \u2014 pierced the lower band to 13261.2 at h1_swing (13257.3) and closed back inside. Waiting for confirmation.",
+      "event": "SIGNAL",
+      "side": "LONG",
+      "level": "h1_swing"
+    },
+    {
+      "text": "Pullback in the proven long trend: 00:35 candle dipped to 13261.2 at h1_swing (13257.3) and closed back above it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "LONG",
+      "value": "h1_swing"
+    },
+    {
+      "text": "Armed: buy when price trades above 13263.5 (confirmation candle 00:40). QM verdict: none. Expires after 5 candles.",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13263.45,
+      "qm": null
+    },
+    {
+      "text": "Trend pullback long confirmation at 00:40 ignored \u2014 busy with armed long trigger 13263.5.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "TREND",
+      "level": "h1_swing",
+      "busy_with": "armed long trigger 13263.5"
+    },
+    {
+      "text": "Opened long at 13263.5, stop 13243.5 (20.0 pips). Setup A at h1_swing (13257.3); signal 00:35, confirmation 00:40. TP 13293.5 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "LONG",
+      "entry": 13263.45,
+      "stop": 13243.45,
+      "setup": "A",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": null
+    },
+    {
+      "text": "Trend long invalidated at 00:00: H1 closed 13262.8, below the higher low 13263.3.",
+      "event": "TREND_INVALIDATED",
+      "side": "LONG"
+    },
+    {
+      "text": "Setup A long signal at 01:05 ignored \u2014 busy with position long entry 13263.5.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "h1_swing",
+      "busy_with": "position long entry 13263.5"
+    },
+    {
+      "text": "Setup A long signal at 02:15 ignored \u2014 busy with position long entry 13263.5.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "2w_low",
+      "busy_with": "position long entry 13263.5"
+    },
+    {
+      "text": "Setup A short signal at 03:40 ignored \u2014 busy with position long entry 13263.5.",
+      "event": "SKIP_BUSY",
+      "side": "SHORT",
+      "setup": "A",
+      "level": "h1_swing",
+      "busy_with": "position long entry 13263.5"
+    },
+    {
+      "text": "Setup A long signal at 04:20 ignored \u2014 busy with position long entry 13263.5.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "2w_low",
+      "busy_with": "position long entry 13263.5"
+    },
+    {
+      "text": "Setup A long signal at 04:35 ignored \u2014 busy with position long entry 13263.5.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "2w_low",
+      "busy_with": "position long entry 13263.5"
+    },
+    {
+      "text": "Setup A short signal at 05:55 ignored \u2014 busy with position long entry 13263.5.",
+      "event": "SKIP_BUSY",
+      "side": "SHORT",
+      "setup": "A",
+      "level": "2w_low",
+      "busy_with": "position long entry 13263.5"
+    },
+    {
+      "text": "Setup A long signal at 06:15 ignored \u2014 busy with position long entry 13263.5.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": null,
+      "busy_with": "position long entry 13263.5"
+    },
+    {
+      "text": "Position closed by SIM_STOP at 13243.5. Result -20.0 pips.",
+      "event": "CLOSED_EXTERNAL",
+      "exit": 13243.45,
+      "reason": "SIM_STOP"
+    },
+    {
+      "text": "Ignored long signal at 06:25: band pierce at 13242.5 is not within 5 pips of a view level.",
+      "event": "SIGNAL_NOT_AT_LEVEL",
+      "extreme": 13242.45
+    },
+    {
+      "text": "Signal: short at 06:35 \u2014 pierced the upper band to 13254.5 at 2w_low (13251.9) and closed back inside. Waiting for confirmation.",
+      "event": "SIGNAL",
+      "side": "SHORT",
+      "level": "2w_low"
+    },
+    {
+      "text": "Armed: sell when price trades below 13246.7 (confirmation candle 06:40). QM verdict: REVERSAL. Expires after 5 candles.",
+      "event": "ARMED",
+      "side": "SHORT",
+      "trigger": 13246.650000000001,
+      "qm": "REVERSAL"
+    },
+    {
+      "text": "Opened short at 13246.7, stop 13266.7 (20.0 pips). Setup A at 2w_low (13251.9); signal 06:35, confirmation 06:40. TP 13216.7 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "SHORT",
+      "entry": 13246.650000000001,
+      "stop": 13266.650000000001,
+      "setup": "A",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": null
+    },
+    {
+      "text": "Setup A short signal at 07:10 ignored \u2014 busy with position short entry 13246.7.",
+      "event": "SKIP_BUSY",
+      "side": "SHORT",
+      "setup": "A",
+      "level": "h1_swing",
+      "busy_with": "position short entry 13246.7"
+    },
+    {
+      "text": "Partial banked: closed 1 of 2 at 13236.7 (+10.0 pips, weighted +10.00).",
+      "event": "PARTIAL_BANKED",
+      "exit": 13236.650000000001,
+      "size_closed": 1.0,
+      "pips_leg": 10.0,
+      "pips_weighted": 10.0
+    },
+    {
+      "text": "Stop moved from 13266.7 to entry 13246.7 after partial bank.",
+      "event": "STOP_TO_BE",
+      "stop": 13246.650000000001
+    },
+    {
+      "text": "Setup A long signal at 08:00 ignored \u2014 busy with position short entry 13246.7.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "pivot_S2",
+      "busy_with": "position short entry 13246.7"
+    },
+    {
+      "text": "Trend short proven by HTF direction (SELL) \u2014 pullback entries enabled without H1 HH+HL / LH+LL.",
+      "event": "TREND_PROVEN_HTF",
+      "side": "SHORT",
+      "htf_direction": "SELL"
+    },
+    {
+      "text": "Setup A long signal at 08:15 ignored \u2014 busy with position short entry 13246.7.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "h1_swing",
+      "busy_with": "position short entry 13246.7"
+    },
+    {
+      "text": "Setup A long signal at 09:35 ignored \u2014 busy with position short entry 13246.7.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "h1_swing",
+      "busy_with": "position short entry 13246.7"
+    },
+    {
+      "text": "Setup A long signal at 09:40 ignored \u2014 busy with position short entry 13246.7.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "h1_swing",
+      "busy_with": "position short entry 13246.7"
+    },
+    {
+      "text": "Target hit: closed short at 13216.7 (+30.0 pips, weighted +30.00, size 1).",
+      "event": "TARGET_HIT",
+      "exit": 13216.650000000001,
+      "pips_leg": 30.0,
+      "pips_weighted": 30.0,
+      "size": 1.0
+    },
+    {
+      "text": "Exhaustion candidate: the down-move has travelled 29 pips into 2w_low (13216.9). No new short continuation entries. Evidence: MACD histogram -0.54 (contracting), RSI(3) 20, H1 Aroon 0/100.",
+      "event": "EXHAUSTION_CANDIDATE",
+      "move": "SHORT",
+      "travelled": 29.200000000000728,
+      "level": "2w_low"
+    },
+    {
+      "text": "Exhaustion demonstrated at 10:45: the push to 13216.0 through 2w_low (13216.9) / the band failed and closed back at 13218.7. Evidence: MACD histogram -0.54 (contracting), RSI(3) 20, H1 Aroon 0/100.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "SHORT",
+      "level": "2w_low"
+    },
+    {
+      "text": "Ignored long signal at 10:50: setup A does not fade a strong H1 trend \u2014 the H1 EMAs are stacked down (13245.5 < 13250.0 < 13251.7) and H1 closed below them at 13232.8.",
+      "event": "SKIP_AGAINST_H1_TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Armed: buy when price trades above 13223.2 \u2014 reversal confirmed: 10:50 failed to reclaim 13216.0 and closed away from it.",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13223.25,
+      "setup": "C"
+    },
+    {
+      "text": "Setup A long signal at 11:00 ignored \u2014 busy with armed long trigger 13223.2.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "h1_swing_low",
+      "busy_with": "armed long trigger 13223.2"
+    },
+    {
+      "text": "Exhaustion demonstrated at 11:00: the push to 13213.2 through h1_swing_low (13213.5) / the band failed and closed back at 13218.0. Evidence: MACD histogram -0.60 (expanding), RSI(3) 33, H1 Aroon 0/100.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "SHORT",
+      "level": "h1_swing_low"
+    },
+    {
+      "text": "No setup C entry at 11:05: the candle did not close away from the extreme.",
+      "event": "C_NO_CONFIRMATION"
+    },
+    {
+      "text": "Cancelled long stop order at 13223.2: not triggered within 5 candles.",
+      "event": "ARM_EXPIRED",
+      "trigger": 13223.25
+    },
+    {
+      "text": "Exhaustion demonstrated at 11:25: the push to 13206.2 through h1_swing (13203.1) / the band failed and closed back at 13212.8. Evidence: MACD histogram -0.65 (expanding), RSI(3) 12, H1 Aroon 0/100.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "SHORT",
+      "level": "h1_swing"
+    },
+    {
+      "text": "No setup C entry at 11:30: the candle did not close away from the extreme.",
+      "event": "C_NO_CONFIRMATION"
+    },
+    {
+      "text": "Ignored long signal at 11:45: setup A does not fade a strong H1 trend \u2014 the H1 EMAs are stacked down (13239.3 < 13245.3 < 13248.6) and H1 closed below them at 13217.2.",
+      "event": "SKIP_AGAINST_H1_TREND",
+      "side": "LONG"
+    },
+    {
+      "text": "Exhaustion demonstrated at 11:45: the push to 13203.2 through h1_swing (13203.1) / the band failed and closed back at 13208.0. Evidence: MACD histogram -0.84 (expanding), RSI(3) 45, H1 Aroon 0/100.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "SHORT",
+      "level": "h1_swing"
+    },
+    {
+      "text": "Armed: buy when price trades above 13210.2 \u2014 reversal confirmed: 11:50 failed to reclaim 13203.2 and closed away from it.",
+      "event": "ARMED",
+      "side": "LONG",
+      "trigger": 13210.25,
+      "setup": "C"
+    },
+    {
+      "text": "Opened long at 13210.2, stop 13190.2 (20.0 pips). Exhaustion reversal at h1_swing (13203.1); signal 11:45, confirmation 11:50. TP 13240.2 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "LONG",
+      "entry": 13210.25,
+      "stop": 13190.25,
+      "setup": "C",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": null
+    },
+    {
+      "text": "Exhaustion demonstrated at 12:10: the push to 13201.5 through h1_swing (13203.1) / the band failed and closed back at 13203.2. Evidence: MACD histogram -0.78 (contracting), RSI(3) 21, H1 Aroon 7/100.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "SHORT",
+      "level": "h1_swing"
+    },
+    {
+      "text": "No setup C entry at 12:15: price reclaimed the extreme.",
+      "event": "C_NO_CONFIRMATION"
+    },
+    {
+      "text": "Exhaustion candidate: the down-move has travelled 51 pips into h1_swing_low (13190.3). No new short continuation entries. Evidence: MACD histogram -0.89 (expanding), RSI(3) 7, H1 Aroon 7/100.",
+      "event": "EXHAUSTION_CANDIDATE",
+      "move": "SHORT",
+      "travelled": 51.099999999998545,
+      "level": "h1_swing_low"
+    },
+    {
+      "text": "Exhaustion demonstrated at 12:25: the push to 13194.2 through h1_swing_low (13190.3) / the band failed and closed back at 13196.2. Evidence: MACD histogram -0.89 (expanding), RSI(3) 7, H1 Aroon 7/100.",
+      "event": "EXHAUSTION_DEMONSTRATED",
+      "move": "SHORT",
+      "level": "h1_swing_low"
+    },
+    {
+      "text": "Setup A long signal at 12:30 ignored \u2014 busy with position long entry 13210.2.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "h1_swing_low",
+      "busy_with": "position long entry 13210.2"
+    },
+    {
+      "text": "Setup C long entry at 12:30 ignored \u2014 busy with position long entry 13210.2.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "C",
+      "level": "h1_swing_low",
+      "busy_with": "position long entry 13210.2"
+    },
+    {
+      "text": "No setup C entry at 12:30: the candle did not close away from the extreme.",
+      "event": "C_NO_CONFIRMATION"
+    },
+    {
+      "text": "Setup A short signal at 14:00 ignored \u2014 busy with position long entry 13210.2.",
+      "event": "SKIP_BUSY",
+      "side": "SHORT",
+      "setup": "A",
+      "level": "h1_swing_low",
+      "busy_with": "position long entry 13210.2"
+    },
+    {
+      "text": "Setup A short signal at 14:25 ignored \u2014 busy with position long entry 13210.2.",
+      "event": "SKIP_BUSY",
+      "side": "SHORT",
+      "setup": "A",
+      "level": "2w_low",
+      "busy_with": "position long entry 13210.2"
+    },
+    {
+      "text": "Partial banked: closed 1 of 2 at 13220.2 (+10.0 pips, weighted +10.00).",
+      "event": "PARTIAL_BANKED",
+      "exit": 13220.25,
+      "size_closed": 1.0,
+      "pips_leg": 10.0,
+      "pips_weighted": 10.0
+    },
+    {
+      "text": "Stop moved from 13190.2 to entry 13210.2 after partial bank.",
+      "event": "STOP_TO_BE",
+      "stop": 13210.25
+    },
+    {
+      "text": "Setup A short signal at 15:00 ignored \u2014 busy with position long entry 13210.2.",
+      "event": "SKIP_BUSY",
+      "side": "SHORT",
+      "setup": "A",
+      "level": "h1_swing",
+      "busy_with": "position long entry 13210.2"
+    },
+    {
+      "text": "Setup A short signal at 15:10 ignored \u2014 busy with position long entry 13210.2.",
+      "event": "SKIP_BUSY",
+      "side": "SHORT",
+      "setup": "A",
+      "level": "2w_low",
+      "busy_with": "position long entry 13210.2"
+    },
+    {
+      "text": "BE exit: closed long remainder at 13210.2 (0.0 pips, size 1).",
+      "event": "BE_EXIT",
+      "exit": 13210.25,
+      "pips_leg": 0.0,
+      "pips_weighted": 0.0,
+      "size": 1.0
+    },
+    {
+      "text": "Pullback in the proven short trend: 15:25 candle dipped to 13213.0 at h1_swing_low (13213.5) and closed back below it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "SHORT",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Pullback hold at h1_swing_low not confirmed at 15:30.",
+      "event": "PULLBACK_NO_CONFIRMATION"
+    },
+    {
+      "text": "Pullback in the proven short trend: 15:35 candle dipped to 13211.3 at 5M EMA13 (13210.8) and closed back below it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "SHORT",
+      "value": "5M EMA13"
+    },
+    {
+      "text": "Pullback hold at 5M EMA13 not confirmed at 15:40.",
+      "event": "PULLBACK_NO_CONFIRMATION"
+    },
+    {
+      "text": "Pullback in the proven short trend: 15:45 candle dipped to 13209.3 at 5M EMA21 (13209.6) and closed back below it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "SHORT",
+      "value": "5M EMA21"
+    },
+    {
+      "text": "Armed: sell when price trades below 13204.5 (trend pullback held 5M EMA21 at 13209.6; confirmation 15:50).",
+      "event": "ARMED",
+      "side": "SHORT",
+      "trigger": 13204.45,
+      "setup": "TREND"
+    },
+    {
+      "text": "Trend short proven at 15:00: Aroon Down 86, H1 EMAs stacked, lower high + lower low. Invalidated by an H1 close above 13254.8.",
+      "event": "TREND_PROVEN",
+      "side": "SHORT",
+      "guard": 13254.75
+    },
+    {
+      "text": "Cancelled short stop order at 13204.5: not triggered within 5 candles.",
+      "event": "ARM_EXPIRED",
+      "trigger": 13204.45
+    },
+    {
+      "text": "Pullback in the proven short trend: 16:20 candle dipped to 13217.3 at 2w_low (13216.9) and closed back below it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "SHORT",
+      "value": "2w_low"
+    },
+    {
+      "text": "Pullback hold at 2w_low not confirmed at 16:25.",
+      "event": "PULLBACK_NO_CONFIRMATION"
+    },
+    {
+      "text": "Pullback in the proven short trend: 16:30 candle dipped to 13213.5 at h1_swing_low (13213.5) and closed back below it. Waiting for confirmation.",
+      "event": "PULLBACK_HOLD",
+      "side": "SHORT",
+      "value": "h1_swing_low"
+    },
+    {
+      "text": "Armed: sell when price trades below 13208.2 (trend pullback held h1_swing_low at 13213.5; confirmation 16:35).",
+      "event": "ARMED",
+      "side": "SHORT",
+      "trigger": 13208.25,
+      "setup": "TREND"
+    },
+    {
+      "text": "Opened short at 13208.2, stop 13228.2 (20.0 pips). Trend pullback at h1_swing_low (13213.5); signal 16:30, confirmation 16:35. TP 13178.2 (+30 pips, size 2).",
+      "event": "OPENED",
+      "side": "SHORT",
+      "entry": 13208.25,
+      "stop": 13228.25,
+      "setup": "TREND",
+      "exit_mode": "june",
+      "size": 2.0,
+      "news": null
+    },
+    {
+      "text": "Setup A short signal at 18:05 ignored \u2014 busy with position short entry 13208.2.",
+      "event": "SKIP_BUSY",
+      "side": "SHORT",
+      "setup": "A",
+      "level": "h1_swing",
+      "busy_with": "position short entry 13208.2"
+    },
+    {
+      "text": "Setup A long signal at 19:50 ignored \u2014 busy with position short entry 13208.2.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "h1_swing_low",
+      "busy_with": "position short entry 13208.2"
+    },
+    {
+      "text": "Setup A long signal at 19:55 ignored \u2014 busy with position short entry 13208.2.",
+      "event": "SKIP_BUSY",
+      "side": "LONG",
+      "setup": "A",
+      "level": "h1_swing_low",
+      "busy_with": "position short entry 13208.2"
+    }
+  ],
+  "required_signals_check": [
+    {
+      "hhmm": "06:35",
+      "side": "SHORT",
+      "level": "2w_low 13251.9",
+      "want": "SIGNAL+ARMED",
+      "found_events": [
+        "SIGNAL",
+        "ARMED",
+        "OPENED"
+      ],
+      "found_texts": [
+        "Signal: short at 06:35 \u2014 pierced the upper band to 13254.5 at 2w_low (13251.9) and closed back inside. Waiting for confirmation.",
+        "Armed: sell when price trades below 13246.7 (confirmation candle 06:40). QM verdict: REVERSAL. Expires after 5 candles.",
+        "Opened short at 13246.7, stop 13266.7 (20.0 pips). Setup A at 2w_low (13251.9); signal 06:35, confirmation 06:40. TP 13216.7 (+30 pips, size 2)."
+      ],
+      "passed": true
+    },
+    {
+      "hhmm": "07:10",
+      "side": "SHORT",
+      "level": "h1_swing 13257.3",
+      "want": "SIGNAL+ARMED",
+      "found_events": [
+        "SKIP_BUSY"
+      ],
+      "found_texts": [
+        "Setup A short signal at 07:10 ignored \u2014 busy with position short entry 13246.7."
+      ],
+      "passed": false
+    },
+    {
+      "hhmm": "08:15",
+      "side": "LONG",
+      "level": "setup A",
+      "want": "SKIP_AGAINST_HTF_DIRECTION",
+      "found_events": [
+        "SKIP_BUSY"
+      ],
+      "found_texts": [
+        "Setup A long signal at 08:15 ignored \u2014 busy with position short entry 13246.7."
+      ],
+      "passed": false
+    },
+    {
+      "hhmm": "09:35",
+      "side": "LONG",
+      "level": "setup A",
+      "want": "SKIP_AGAINST_HTF_DIRECTION",
+      "found_events": [
+        "SKIP_BUSY",
+        "SKIP_BUSY"
+      ],
+      "found_texts": [
+        "Setup A long signal at 09:35 ignored \u2014 busy with position short entry 13246.7.",
+        "Setup A long signal at 09:40 ignored \u2014 busy with position short entry 13246.7."
+      ],
+      "passed": false
+    },
+    {
+      "hhmm": "11:45",
+      "side": "LONG",
+      "level": "setup C",
+      "want": "SKIP_C_MOMENTUM_EXPANDING",
+      "found_events": [
+        "SKIP_AGAINST_H1_TREND",
+        "EXHAUSTION_DEMONSTRATED",
+        "ARMED",
+        "OPENED"
+      ],
+      "found_texts": [
+        "Ignored long signal at 11:45: setup A does not fade a strong H1 trend \u2014 the H1 EMAs are stacked down (13239.3 < 13245.3 < 13248.6) and H1 closed below them at 13217.2.",
+        "Exhaustion demonstrated at 11:45: the push to 13203.2 through h1_swing (13203.1) / the band failed and closed back at 13208.0. Evidence: MACD histogram -0.84 (expanding), RSI(3) 45, H1 Aroon 0/100.",
+        "Armed: buy when price trades above 13210.2 \u2014 reversal confirmed: 11:50 failed to reclaim 13203.2 and closed away from it.",
+        "Opened long at 13210.2, stop 13190.2 (20.0 pips). Exhaustion reversal at h1_swing (13203.1); signal 11:45, confirmation 11:50. TP 13240.2 (+30 pips, size 2)."
+      ],
+      "passed": false
+    },
+    {
+      "hhmm": "12:25",
+      "side": "LONG",
+      "level": "setup C",
+      "want": "SKIP_C_MOMENTUM_EXPANDING",
+      "found_events": [
+        "EXHAUSTION_DEMONSTRATED",
+        "SKIP_BUSY",
+        "SKIP_BUSY",
+        "C_NO_CONFIRMATION"
+      ],
+      "found_texts": [
+        "Exhaustion demonstrated at 12:25: the push to 13194.2 through h1_swing_low (13190.3) / the band failed and closed back at 13196.2. Evidence: MACD histogram -0.89 (expanding), RSI(3) 7, H1 Aroon 7/100.",
+        "Setup A long signal at 12:30 ignored \u2014 busy with position long entry 13210.2.",
+        "Setup C long entry at 12:30 ignored \u2014 busy with position long entry 13210.2.",
+        "No setup C entry at 12:30: the candle did not close away from the extreme."
+      ],
+      "passed": false
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+STAGE 2 SILENT DATA INGESTION MECHANISMS FOUND
+===============================================
+
+1. SILENT BAR OVERWRITE IN TIMEFRAME_CONTEXT @ timeframe_context.py:412-416
+   - MECHANISM: Dedup guard silently replaces the last HTF closed candle if a duplicate bucket_epoch arrives
+   - VISIBILITY: GUARDED+LOGGED (only "dedup guard" comment; no info/warning log emission)
+   - IMPACT: Strategies reading HTF state between the first and replacement receive stale price context
+   - CONTRACT: _update_timeframe() can replace closed_map[symbol][-1] without any logger.info/warning
+   
+2. HTF CACHE INJECTION WITHOUT VALIDATION @ autobot.py:5167 + timeframe_context.py:768-771
+   - MECHANISM: inject_htf_candles() accepts arbitrary candle lists from disk without schema/run-id versioning
+   - VISIBILITY: SILENT+UNFLAGGED 
+   - RISK: A corrupted or stale HTF cache file (e.g. from a crashed restart on 2026-05-23) is silently loaded and fed to regime_vote without timestamp freshness re-check per-pair
+   - CONTRACT: No version check, no "loaded stale cache for TF X from Y" log when the cache is older than HTF_*_FRESH_SECS
+   
+3. HTF FRESHNESS THRESHOLDS SILENTLY RELAXED @ htf_cache.py:55-60
+   - MECHANISM: H1_FRESH_THRESHOLD_SECS=3600 (1h), H4=14400 (4h), D1=86400 (24h)
+   - VISIBILITY: SILENT+POLICY (logged at startup_load_or_flag line 290-299, but threshold choice is env-driven and not re-logged at use time)
+   - RISK: Regime/H1 votes can be computed from H1 data closed >1h ago without any alert. A feed outage at 12:00 UTC leaves 1h of stale H1 context feeding trades until 13:00 UTC.
+   - CONTRACT: autobot.py:5128 logs "fresh" but does NOT log the threshold age, making staleness invisible to operators
+   
+4. SILENT NAN PROPAGATION IN INDICATORS ON SHORT WINDOWS @ indicators.py:137-142, 238-239, 310-311
+   - MECHANISM: BB(20) uses min_periods=period → NaN until 20 bars; Aroon(14) uses min_periods=14 → NaN until 14 bars
+   - VISIBILITY: SILENT+BY-DESIGN (indicators return NaN, no downstream guard)
+   - RISK: A strategy comparing `BB_UPPER > price` silently fails (NaN comparison is always False); on warmup bars 0-19 the strategy gate silently DENIES all trades without logging
+   - CONTRACT: No indicator returns a default/substitute value; early-warmup bars silently NaN and downstream comparators treat NaN as False
+   
+5. ROLLING CACHE BUFFER DIVERGENCE @ candle_builder.py:160-212 
+   - MECHANISM: _persist_rolling_cache writes ROLLING_CACHE_BARS (default 600) to a separate rolling CSV; seed_builder_from_cache reads only the main _candles.csv
+   - VISIBILITY: SILENT+UNFLAGGED
+   - RISK: Native 5M listener appends to candle_builder.candles[sym], but if candle_builder fails to rebuild_symbol_dfs (exception at line 405-408), the rolling cache is stale and a restart will seed from stale 600-bar rolling buffer
+   - CONTRACT: rolling_cache_write is non-critical try/except at line 152-155; failure is logged as WARNING but does not break the close; next restart may use stale rolling buffer without re-validation
+   
+6. SILENT SCHEMA MISMATCH BETWEEN REST AND STREAMING @ autobot.py:851-936, 987-1009
+   - MECHANISM: _normalize_hist_to_df accepts trading_ig MultiIndex or dict formats; _standardize_hist_df accepts CSV; no enforcement that both paths produce identical output
+   - VISIBILITY: SILENT+UNFLAGGED
+   - RISK: REST preload (REST) returns df with one schema; streaming 5M close callback (native_5m_source) appends rows with another schema; if column order or dtype differs, downstream code sees mixed formats
+   - CONTRACT: autobot.py:1055 calls _standardize_hist_df on REST; candle_builder:391-396 calls indicators.add_indicators on streaming; no guarantee both produce identical output before merging
+   
+7. INDICATOR WARMUP SILENT ABSTENTION @ indicators.py:2387-2396
+   - MECHANISM: PRICE_VS_EMA50_PIPS skipped if pip_size is None; no return value, column absent
+   - VISIBILITY: GUARDED+WARNED (one-shot warning per caller at line 60, but warning is INFO-level and may be in noise)
+   - RISK: Regime classifier depends on PRICE_VS_EMA50_PIPS; if pip_size not plumbed, regime_classifier may emit NEUTRAL votes when intended column is absent
+   - CONTRACT: Indicator returns gracefully (column absent), but regime_classifier does not validate column presence before using it
+   
+8. PER-PAIR BUFFER ASYNC DISPATCH RACE @ native_5m_source.py:392-423
+   - MECHANISM: onItemUpdate checks pair_workers.get_worker(symbol) and enqueues; race exists between the check and use
+   - VISIBILITY: GUARDED+LOGGED (line 401-406 logs warning on race; fallback to sync at 408)
+   - RISK: A rare timing glitch causes 5m_close to fire async on one pair and sync on another; if pair_workers queue is near-full (drop-none policy at line 396), one pair's 5m_close may be dropped silently
+   - CONTRACT: Line 396 uses drop-none policy; no log of dropped payloads
+   
+9. SILENT CACHE FILE SCHEMA EVOLUTION @ htf_cache.py:89-98, 100-102
+   - MECHANISM: load_cached_candles checks candles is a list but does NOT validate schema (timestamp vs ts, bucket_epoch presence, etc.)
+   - VISIBILITY: SILENT+UNFLAGGED
+   - RISK: Old cache format with different column names silently loads and is used; inject_htf_candles will fail at key lookups downstream with cryptic KeyError
+   - CONTRACT: No version field in cache JSON; format changes require manual file deletion
+   
+10. WEEKEND/EXTENDED-GAP SILENT HANDLING @ candle_builder.py:419-482
+    - MECHANISM: _truncate_to_contiguous_tail truncates on gaps > 360s; weekend Friday 17:00 UTC → Monday 07:00 UTC is 54k seconds, but code only runs if gap is in one pair's buffer
+    - VISIBILITY: GUARDED+LOGGED (warning at line 474-480)
+    - RISK: If native 5M closes at Friday 16:55 UTC and restarts Monday 08:00 UTC, Friday's bar at :55 + Monday's at :00 = 5+ minute gap but within session boundaries; contiguity guard may or may not fire depending on exact timestamp
+    - CONTRACT: max_gap threshold (360s) is hardcoded; no per-session weekend detection
+    
+11. HTF CACHE FRESH/STALE THRESHOLD NOT RE-CHECKED AFTER INJECTION @ autobot.py:5125-5129, 5167-5171
+    - MECHANISM: startup_load_or_flag returns "fresh"/"gap_fill"/"cold_start"; inject_htf_candles executes without re-validating age
+    - VISIBILITY: SILENT+UNFLAGGED
+    - RISK: Age check occurs once at startup; if a cached H1 file is 50 minutes old at startup (just under 1h threshold), it is injected as "fresh", but then no further staleness checks occur; at 65 minutes into session it remains in context as "fresh" data
+    - CONTRACT: No staleness re-validation during live trading; only at startup via startup_load_or_flag
+    
+12. SILENT BAR DEDUP KEYED ON BUCKET_EPOCH WITHOUT TIMESTAMP VALIDATION @ native_5m_source.py:327-328, 363-364
+    - MECHANISM: _last_emitted_utm dedup only checks UTM equality; no fallback to timestamp-based dedup if UTM is None
+    - VISIBILITY: SILENT+UNFLAGGED
+    - RISK: If IG's UTM field ever diverges from actual bar close time (e.g. clock drift on IG servers), multiple "bars" with the same close time but different UTM values may be emitted as distinct closes
+    - CONTRACT: No timestamp-based fallback; UTM is trusted blindly
+    
+13. EXCHANGE-RATE NORMALIZATION MISSING IN STREAMING PATH @ autobot.py:687-694
+    - MECHANISM: _standardize_cache_df normalizes REST prices to numeric; but native_5m_source appends dicts directly without schema enforcement
+    - VISIBILITY: SILENT+UNFLAGGED
+    - RISK: native_5m_source.py:340-343 creates candle_row with _mid() values; if _mid returns None (line 348-361 checks and rejects), bar is skipped; but if _mid returns NaN, bar is silently appended with NaN OHLC
+    - CONTRACT: NaN rejection at line 348 only catches "any(v is None ...)", not np.nan or np.inf
+    
+14. INDICATOR PARTIAL-WINDOW PERCENTILE SILENTLY NaN @ indicators.py:2476-2479, 2528-2531
+    - MECHANISM: BB_WIDTH_PCTL uses min_periods=120 (strict); ATR_PCTL uses min_periods=576 (strict)
+    - VISIBILITY: SILENT+BY-DESIGN
+    - RISK: Regime classifier depends on these percentile columns; warmup bars 0-119 (20 min on 5M) have NaN percentiles; strategy may fire on partial-data signals if regime_classifier does not validate column NaN count
+    - CONTRACT: No downstream NaN validation; regime_classifier receives NaN and may produce NEUTRAL votes when calculation is incomplete
+
+========================================================================================
+STAGE 2 COVERAGE:
+  Files walked: 8 (candle_builder.py, native_5m_source.py, htf_cache.py, indicators.py, 
+                   timeframe_context.py, cascade_state.py, autobot.py, usd_strength.py)
+  Mechanisms enumerated: 14
+  GUARDED+VISIBLE/LOGGED: 5 (1, 7, 8, 10, — but mostly comment-only or one-shot warning)
+  SILENT+UNFLAGGED: 9 (2, 3, 5, 6, 9, 11, 12, 13, 14)
+========================================================================================

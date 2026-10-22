@@ -1,0 +1,179 @@
+### FIRST LINE VERDICT ###
+Coincidence claim: H1-extreme :00-:05 slot %>=10p = 52.3% vs other slots 38.6%.
+                   5m pierce :00 slot         %>=10p = 18.1% vs other slots 17.6%.
+Operator hours vs rest (H1): %>=10p = 43.5% vs 38.6%.
+Best 5m entry vs A (baseline exp/trade +1.29p): E1 -0.47p, E2 -0.36p, E3 -0.79p — TP=10 model.
+Numbers below.
+
+Caveats:
+  * Fills modeled at 5m closes only (no fills at intra-bar levels).
+    In particular, E2 ("break past E1 extreme") is filled at the
+    CLOSE of the break bar rather than at the exact trigger level —
+    this typically WORSENS E2's numbers vs. a real limit/stop fill.
+  * No spread or slippage applied.
+  * Excursion measured until a re-touch of the H1 pierce extreme,
+    or 288 5m bars (24h), whichever comes first.
+  * Cells with n<25 flagged [THIN].
+
+# Pierce coincidence + 5m entry replay — GBPUSD
+# corpus: 22353 5m bars, 1865 H1 bars, 90 valid days
+
+H1 pierces (unfiltered):  n=546
+  confirmed:              n=341  (62.5%)
+  invalidated:            n=205  (37.5%)
+5m pierces (unfiltered):  n=5842
+
+==========================================================================
+PART 1 — COINCIDENCE
+==========================================================================
+
+-- H1 pierces by minute-of-hour of piercing EXTREME (5m slot)
+  slot     n  med_exc    p25     p75   %>=5p  %>=10p  %>=25p med_adv
+  00-04   79    13.65   5.55   43.05   77.2%   60.8%   35.4%   9.20
+  05-09   32     5.45   1.72   19.78   53.1%   31.2%   21.9%  10.50
+  10-14   35    12.10   3.30   35.05   65.7%   57.1%   28.6%   9.50
+  15-19   28    17.20   4.13   42.07   67.9%   60.7%   39.3%   8.22
+  20-24   41     9.70   3.20   24.80   68.3%   48.8%   24.4%  11.10
+  25-29   17     4.90   2.40   17.15   47.1%   35.3%   17.6%   7.10 [THIN]
+  30-34   37     7.60   1.40   32.00   51.4%   43.2%   29.7%   8.80
+  35-39   41     7.90   2.50   18.90   63.4%   48.8%   22.0%   7.30
+  40-44   40    10.15   4.10   28.71   70.0%   50.0%   27.5%   7.70
+  45-49   42     6.85   1.80   22.12   52.4%   42.9%   21.4%   7.75
+  50-54   39     3.90   1.38    9.35   43.6%   25.6%   10.3%   6.80
+  55-59  115     2.80   1.10    7.65   33.9%   18.3%    7.0%   4.50
+
+-- 5m pierces by minute-of-hour of the 5m bar
+  slot     n  med_exc    p25     p75   %>=5p  %>=10p  %>=25p med_adv
+  00     626     2.50   0.90    7.17   32.9%   19.3%    7.3%   3.40
+  05     537     2.30   0.80    6.00   30.4%   16.8%    6.9%   2.90
+  10     509     2.10   0.80    5.60   28.5%   16.1%    5.7%   3.00
+  15     498     2.25   0.83    6.05   28.5%   17.5%    6.6%   2.90
+  20     483     2.20   0.80    6.85   31.1%   18.0%    7.9%   2.90
+  25     423     2.10   0.80    6.00   29.1%   14.4%    5.7%   2.90
+  30     472     2.40   0.99    6.97   32.0%   21.0%    8.3%   3.20
+  35     433     2.00   0.80    5.70   26.3%   17.3%    7.2%   2.90
+  40     443     2.05   0.80    6.40   31.8%   17.8%    7.4%   3.10
+  45     444     2.10   0.80    6.73   31.5%   16.9%    6.3%   3.00
+  50     445     2.40   0.70    6.40   31.7%   17.1%    7.9%   3.20
+  55     529     2.80   1.00    7.30   32.9%   19.3%    8.5%   3.45
+
+-- Focus: :00-:05 vs other slots (both TFs)
+  H1 zero-slot :00-:05: n=111  med_exc=11.90p  %>=10=52.3%  %>=25=31.5%
+  H1 other slots     : n=435  med_exc=6.00p  %>=10=38.6%  %>=25=19.8%
+  5m zero-slot :00-:05: n=1163  med_exc=2.40p  %>=10=18.1%  %>=25=7.1%
+  5m other slots     : n=4679  med_exc=2.20p  %>=10=17.6%  %>=25=7.2%
+
+-- Outcomes by HOUR-OF-DAY (UTC), H1 pierces
+hour    n  med_exc  %>=10p  %>=25p  op
+  00    7     1.90   14.3%   14.3%    [THIN]
+  01    7     8.20   42.9%    0.0%    [THIN]
+  02    8     3.85   37.5%   25.0%    [THIN]
+  03    5     4.60   40.0%   20.0%    [THIN]
+  04    9     4.60   22.2%   11.1%    [THIN]
+  05    9     4.50   22.2%   22.2%    [THIN]
+  06   18     7.55   44.4%   27.8%   
+  07   27     5.50   33.3%   25.9% OP
+  08   30     6.15   40.0%   20.0% OP
+  09   35     4.90   37.1%   14.3%   
+  10   39     7.90   43.6%   20.5% OP
+  11   41    11.00   51.2%   31.7% OP
+  12   42    10.10   52.4%   31.0% OP
+  13   45     4.90   37.8%   22.2%   
+  14   51     6.40   39.2%   23.5% OP
+  15   43     7.10   44.2%   30.2% OP
+  16   40     7.00   40.0%   17.5% OP
+  17   25     6.30   40.0%    8.0%   
+  18   19     4.35   42.1%   15.8%   
+  19   13    14.00   61.5%   30.8%    [THIN]
+  20   13    10.80   61.5%   23.1%    [THIN]
+  21    9     1.60   33.3%   22.2%    [THIN]
+  22    5     1.30    0.0%    0.0%    [THIN]
+  23    6     2.10   33.3%   16.7%    [THIN]
+
+  Operator hours (H1)  {07,08,10,11,12,14,15,16 UTC}:
+    n=313  med_exc=7.20p  %>=10=43.5%  %>=25=25.2%
+  Other hours (H1):
+    n=233  med_exc=5.00p  %>=10=38.6%  %>=25=18.0%
+  Operator hours (5m):
+    n=1921  med_exc=2.90p  %>=10=21.1%  %>=25=10.1%
+  Other hours (5m):
+    n=3921  med_exc=2.00p  %>=10=16.0%  %>=25=5.7%
+
+-- Coincidence cells (H1 pierces)
+  operator coincidence  (5m pierce in :00-:05 of same or prior hour, same side):
+    n=324  med_exc=6.90p  %>=10=42.3%  %>=25=25.9%
+  any 5m pierce SAME hour SAME side:
+    n=391  med_exc=6.30p  %>=10=39.6%  %>=25=21.5%
+  no coincidence:
+    n=96  med_exc=6.93p  %>=10=42.7%  %>=25=20.8%
+
+==========================================================================
+PART 2 — 5m ENTRIES OFF H1 PIERCES
+==========================================================================
+
+Baseline replayed inline: A = H1 j+1 CLOSE (only if confirmed).
+Entries:
+  E1 first 5m in j+1 whose CLOSE is inside H1(j) band (at close)
+  E2 E1 + next 5m to trade beyond E1 extreme in reversal dir (fill @ close)
+  E3 first 5m in j+1 that is itself a 5m pierce+reject (enter next close)
+
+-- A  (H1 confirming close)
+  n eligible: 339  (from 546 H1 pierces)
+  median entry offset from H1 extreme: 12.20 p
+  median excursion:                    12.20 p  (p25 3.30, p75 34.85)
+  median adverse:                      11.25 p  (p75 16.88)
+  %>=5p: 67.8%  %>=10p: 54.9%  %>=25p: 33.3%
+  median time to peak: 105 min
+  TP=10: hit=54.9%  med_loss=9.30p  exp/trade=+1.29p  total=+437p
+  TP=25: hit=33.3%  med_loss=11.40p  exp/trade=+0.73p  total=+249p
+  --- confirmed subset (H1 j+1 closed inside):  n=339
+     med_exc=12.20p  %>=10=54.9%  %>=25=33.3%  exp10=+1.29p  exp25=+0.73p
+  --- invalidated subset (H1 j+1 stayed outside): n=0
+  invalidation rate: 0.0% of A entries came from invalidated pierces
+
+-- E1  (first 5m close-back-inside)
+  n eligible: 398  (from 546 H1 pierces)
+  median entry offset from H1 extreme: 10.25 p
+  median excursion:                    8.70 p  (p25 2.70, p75 28.75)
+  median adverse:                      9.75 p  (p75 14.88)
+  %>=5p: 62.6%  %>=10p: 47.2%  %>=25p: 28.6%
+  median time to peak: 60 min
+  TP=10: hit=47.2%  med_loss=9.85p  exp/trade=-0.47p  total=-189p
+  TP=25: hit=28.6%  med_loss=10.50p  exp/trade=-0.33p  total=-132p
+  --- confirmed subset (H1 j+1 closed inside):  n=311
+     med_exc=14.00p  %>=10=58.5%  %>=25=35.7%  exp10=+1.83p  exp25=+2.17p
+  --- invalidated subset (H1 j+1 stayed outside): n=87
+     med_exc=1.70p  %>=10=6.9%  %>=25=3.4%  exp10=-8.62p  exp25=-9.18p
+  invalidation rate: 21.9% of E1 entries came from invalidated pierces
+
+-- E2  (E1 + break)
+  n eligible: 322  (from 546 H1 pierces)
+  median entry offset from H1 extreme: 11.70 p
+  median excursion:                    11.30 p  (p25 3.30, p75 34.37)
+  median adverse:                      11.12 p  (p75 16.98)
+  %>=5p: 69.3%  %>=10p: 53.4%  %>=25p: 32.0%
+  median time to peak: 90 min
+  TP=10: hit=53.4%  med_loss=12.25p  exp/trade=-0.36p  total=-117p
+  TP=25: hit=32.0%  med_loss=12.30p  exp/trade=-0.37p  total=-119p
+  --- confirmed subset (H1 j+1 closed inside):  n=273
+     med_exc=14.80p  %>=10=61.2%  %>=25=37.0%  exp10=+1.34p  exp25=+1.50p
+  --- invalidated subset (H1 j+1 stayed outside): n=49
+     med_exc=1.80p  %>=10=10.2%  %>=25=4.1%  exp10=-9.80p  exp25=-10.59p
+  invalidation rate: 15.2% of E2 entries came from invalidated pierces
+
+-- E3  (5m pierce+reject)
+  n eligible: 236  (from 546 H1 pierces)
+  median entry offset from H1 extreme: 1.10 p
+  median excursion:                    2.30 p  (p25 1.17, p75 6.18)
+  median adverse:                      3.80 p  (p75 6.53)
+  %>=5p: 29.7%  %>=10p: 20.3%  %>=25p: 11.0%
+  median time to peak: 5 min
+  TP=10: hit=20.3%  med_loss=3.55p  exp/trade=-0.79p  total=-187p
+  TP=25: hit=11.0%  med_loss=3.80p  exp/trade=-0.63p  total=-148p
+  --- confirmed subset (H1 j+1 closed inside):  n=94
+     med_exc=3.95p  %>=10=36.2%  %>=25=21.3%  exp10=+1.19p  exp25=+1.89p
+  --- invalidated subset (H1 j+1 stayed outside): n=142
+     med_exc=2.05p  %>=10=9.9%  %>=25=4.2%  exp10=-2.08p  exp25=-2.25p
+  invalidation rate: 60.2% of E3 entries came from invalidated pierces
+
+# wrote /tmp/pierce_coincidence_entry_rows.csv

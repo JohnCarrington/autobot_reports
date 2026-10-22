@@ -1,0 +1,200 @@
+FORENSIC INVESTIGATION: HISTORICAL ECONOMIC RELEASE SPECIMENS
+==============================================================
+
+ENUMERATION OF DATA SOURCES
+---------------------------
+logs/news_strategy_evals.jsonl:          9.2K (Sep 25 live)
+logs/news_strategy_evals.jsonl-20260925: 1.6M (full day archive)
+logs/news_strategy_evals.jsonl-20260917.gz: 55K (compressed)
+logs/news_strategy_evals.jsonl-20260918.gz: 33K (compressed)
+logs/news_strategy_evals.jsonl-20260914.gz: 31K (compressed)
+logs/news_trend_entry.jsonl: 313K (Sep 25 live)
+logs/news_followthrough.jsonl: 102K (Sep 25 live)
+logs/news_tier_classification.jsonl: 917K (Sep 25)
+logs/signal_log.jsonl: 362K (Sep 25 16:00)
+logs/bb_pierce_trades.jsonl: 469K (Sep 25 21:56)
+cache/GBPUSD_candles.csv: 82.8K (Sep 25 21:56, 5m)
+cache/GBPUSD_candles_rolling.csv: 481K (rolling window)
+cache/EURUSD_candles.csv: 81K (5m)
+cache/USDCAD_candles.csv: 17K (5m)
+cache/news_calendar_cache.json: present
+
+SCHEMA ANALYSIS (news_strategy_evals.jsonl)
+-------------------------------------------
+Fields: 25 total
+Core: kind, ts_utc, symbol, release_name, release_currency, release_key, scheduled_time_iso
+Economic: surprise_actual, surprise_forecast, surprise_deviation, surprise_beat_miss, surprise_direction
+Spike: spike_magnitude_pips, spike_direction, spike_extreme_price
+Decision: verdict, reason, bars_seen, decision_candles, params
+
+Forecast/Actual/Previous: YES - captured in surprise_* fields
+Previous proxy: surprise_deviation (deviation from forecast to actual)
+
+========================
+SPECIMEN EXTRACTION: 5 MAJOR RELEASES (MIXED CURRENCIES)
+========================
+
+SPECIMEN 1: RETAIL SALES MoM (GBP)
+----------------------------------
+Timestamp (action):  2026-09-18T06:07:02+00:00
+Scheduled:           2026-09-18T06:00:00+00:00
+Event:               Retail Sales MoM
+Currency:            GBP
+Forecast:            -0.2%
+Actual:              0.5%
+Previous:            UNKNOWN (not in log)
+Surprise/Beat-Miss:  BEAT +3.5 pips deviation
+Symbol:              GBPUSD
+Spike @ T+7min:      null
+Candidate Created:   YES (SKIP_ARMED_TIMEOUT with CONTINUATION leg)
+Trade Fired:         DECLINE verdict (spike_below_min, no execution)
+
+SPECIMEN 2: S&P GLOBAL MANUFACTURING PMI FLASH (GBP)
+---------------------------------------------------
+Timestamp:           2026-09-23T08:37:00.102000+00:00
+Scheduled:           2026-09-23T08:30:00+00:00
+Event:               S&P Global Manufacturing PMI Flash
+Currency:            GBP
+Forecast:            51.5
+Actual:              52.0
+Previous:            UNKNOWN
+Surprise/Beat-Miss:  IN_LINE +0.97% deviation
+Symbol:              GBPUSD (inferred)
+Spike @ T+7min:      null
+Candidate Created:   YES (ARMED phase before release)
+Trade Fired:         DECLINE verdict attempted (spike_below_min)
+
+SPECIMEN 3: IFO BUSINESS CLIMATE (EUR)
+--------------------------------------
+Timestamp:           2026-09-24T08:07:00.121000+00:00
+Scheduled:           2026-09-24T08:00:00+00:00
+Event:               Ifo Business Climate
+Currency:            EUR
+Forecast:            89.0
+Actual:              89.9
+Previous:            UNKNOWN
+Surprise/Beat-Miss:  IN_LINE +1.01% deviation
+Symbol:              EURUSD (inferred)
+Spike @ T+7min:      null
+Candidate Created:   YES (ARMED phase before release)
+Trade Fired:         DECLINE verdict attempted (spike_below_min)
+
+SPECIMEN 4: BOC INTEREST RATE DECISION (CAD)
+--------------------------------------------
+Timestamp:           2026-09-23T08:19:00.174582+00:00
+Scheduled:           2026-09-23T08:18:00+00:00
+Event:               BOC Interest Rate Decision
+Currency:            CAD
+Forecast:            2.25%
+Actual:              2.25%
+Previous:            UNKNOWN
+Surprise/Beat-Miss:  IN_LINE (no deviation)
+Symbol:              USDCAD
+Spike @ T+1min:      5.5 pips DOWN
+Candidate Created:   YES (ARMED phase triggered)
+Trade Fired:         DECLINE verdict (spike 5.5 pips < 25 pips min threshold)
+
+SPECIMEN 5: DURABLE GOODS ORDERS MoM (USD) [TARGET EVENT]
+----------------------------------------------------------
+Timestamp:           2026-09-25T12:37:01.242000+00:00 (confidence @ T+7min)
+Scheduled:           2026-09-25T12:30:00+00:00
+Event:               Durable Goods Orders MoM
+Currency:            USD
+Forecast:            -0.4%
+Actual:              0.0%
+Previous:            UNKNOWN
+Surprise/Beat-Miss:  BEAT +1.0 pips deviation
+Symbol:              GBPUSD
+Spike @ T+15min:     4.7 pips DOWN (confirmed at T+15min decision)
+Candidate Created:   YES (ARMED @ T-5min for both GBPUSD & EURUSD)
+Trade Fired:         DECLINE verdict (spike 4.7 pips < 25 pips min, insufficient magnitude)
+
+========================
+TARGET EVENT RECONSTRUCTION: 2026-09-25 12:30 UTC USD DURABLE GOODS ORDERS
+========================
+
+TIMELINE (GBPUSD)
+-----------------
+T-5 min  (12:25:00.107): ARMED
+         Anchor Price: 13255.95
+         Seconds from Release: -299.893
+         ATR (5m proxy): 4.2 pips
+         Pre-release range: 0.0 pips
+         
+T0       (12:30:00):     RELEASE_ANCHORED_ANCHORED
+         Release bar captured at anchor 13255.95
+         bars_seen: 1
+         
+T+5 min  (12:35:00):     RELEASE_ANCHORED_OBSERVING
+         Price close: 13255.65
+         bars_seen: 2
+         Movement: -0.30 pips from anchor
+         
+T+10 min (12:40:00):     RELEASE_ANCHORED_OBSERVING
+         Price close: 13252.05
+         bars_seen: 3
+         Movement: -3.9 pips from anchor
+         
+T+15 min (12:45:00):     RELEASE_ANCHORED_DECISION
+         Price extreme: 13251.25 (LOW)
+         Close: 13254.15
+         Spike magnitude: 4.7 pips DOWN
+         Retrace fraction: 61.7%
+         Verdict: DECLINE (spike below 25 pips minimum)
+         
+T+30 min (13:00:00):     Price close: 13254.95
+         Movement: -1.0 pips from anchor (net)
+
+PRICE PROGRESSION (GBPUSD 5m candles)
+--------------------------------------
+12:30:00  13253.95  (release bar)
+12:35:00  13255.65  (+1.70 close rebound)
+12:40:00  13252.05  (-1.90 pullback)
+12:45:00  13254.15  (+2.10 recovery)
+12:50:00  13254.95  (+0.80 continuation)
+12:55:00  13256.55  (+1.60 upside move)
+13:00:00  13254.95  (-1.60 pullback)
+13:05:00  13261.85  (+6.90 strong rally)
+
+========================
+CROSS-SPECIMEN ANALYSIS
+========================
+
+Command used for extraction:
+  grep -h "release_key\|surprise_actual" /opt/tradingbot/logs/news_strategy_evals.jsonl-20260925 | jq -c
+  zcat /opt/tradingbot/logs/news_strategy_evals.jsonl-20260917.gz | jq -c
+  
+Specimens with recorded forecast/actual:
+  All 5 specimens have forecast & actual captured ✓
+  
+Specimens with spike data:
+  Specimens 1-2: spike_magnitude = null (below detection threshold or no rapid move)
+  Specimen 3: Ifo (EUR) - spike not captured in GBPUSD pair log
+  Specimen 4: BOC (CAD) - spike 5.5 pips (sub-threshold)
+  Specimen 5: Durable Goods - spike 4.7 pips DOWN detected at T+15
+  
+Candidate corpus correlation:
+  All 5 triggered ARMED phase (candidacy confirmed by phase="NEWS_WATCH_ARMED")
+  Timeout outcomes: 4/5 (Retail Sales, Ifo, BOC, Durable Goods)
+  
+Trade execution:
+  0/5 executed (all failed minimum spike requirement of 25 pips)
+  All returned DECLINE verdict with reason="spike_below_min"
+
+========================
+DATA GAPS & UNKNOWNS
+========================
+
+Previous values:        Not captured in news_strategy_evals.jsonl
+                        Would require external calendar lookup
+                        
+Candle data for Sept 18-24: Not in current cache files
+                        Only Sep 25 data + rolling window
+                        Sept 18-24 candles: REQUEST data archive
+                        
+Actual trade_ledger:    Not found in investigation scope
+                        signal_log lacks entry/exit confirmation
+                        
+Impact classification:  "HIGH/MEDIUM/LOW" not in logs
+                        Only release names and currency available
+

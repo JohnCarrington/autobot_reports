@@ -1,0 +1,162 @@
+## Section 0 — SANITY CHECKS
+
+### 0.1 Median 5M candle range (pips)
+
+- **GBPUSD**: median range = **3.50 pips** (pip = 1.0 price unit, 50307 rows)
+- **EURUSD**: median range = **2.50 pips** (pip = 1.0 price unit, 36157 rows)
+
+### 0.2 Sample trades (variant TP10/SL12 DIR-ON, first 5 by signal_ts)
+
+| # | pair | side | signal_ts | fill_price | TP_price | SL_price | TP dist (pips) | SL dist (pips) |
+|---|---|---|---|---|---|---|---|---|
+| 1 | GBPUSD | BUY | 2026-01-29T06:00:00+00:00 | 13790.400 | 13800.400 | 13778.400 | 10.0 | 12.0 |
+| 2 | GBPUSD | BUY | 2026-01-29T07:20:00+00:00 | 13801.900 | 13811.900 | 13789.900 | 10.0 | 12.0 |
+| 3 | GBPUSD | BUY | 2026-01-29T07:50:00+00:00 | 13814.150 | 13824.150 | 13802.150 | 10.0 | 12.0 |
+| 4 | GBPUSD | BUY | 2026-01-29T09:00:00+00:00 | 13814.900 | 13824.900 | 13802.900 | 10.0 | 12.0 |
+| 5 | GBPUSD | BUY | 2026-01-29T09:05:00+00:00 | 13826.400 | 13836.400 | 13814.400 | 10.0 | 12.0 |
+
+### 0.3 Share of trades where TP and SL both fell inside the FILL candle (TP10/SL12 DIR-ON)
+
+- **Trades (TP10/SL12 DIR-ON)**: 1249
+- **Same-bar fill+both-hit**: 1
+- **Share**: **0.08%**
+
+
+[meta] abort threshold = 20%; measured = 0.08%
+
+Report written to /opt/tradingbot/reports-public/replay_htf_10pip_20261007_v2.md
+
+================ RETURN BLOCK ================
+
+## Section 0 — SANITY CHECKS
+
+### 0.1 Median 5M candle range (pips)
+
+- **GBPUSD**: median range = **3.50 pips** (pip = 1.0 price unit, 50307 rows)
+- **EURUSD**: median range = **2.50 pips** (pip = 1.0 price unit, 36157 rows)
+
+### 0.2 Sample trades (variant TP10/SL12 DIR-ON, first 5 by signal_ts)
+
+| # | pair | side | signal_ts | fill_price | TP_price | SL_price | TP dist (pips) | SL dist (pips) |
+|---|---|---|---|---|---|---|---|---|
+| 1 | GBPUSD | BUY | 2026-01-29T06:00:00+00:00 | 13790.400 | 13800.400 | 13778.400 | 10.0 | 12.0 |
+| 2 | GBPUSD | BUY | 2026-01-29T07:20:00+00:00 | 13801.900 | 13811.900 | 13789.900 | 10.0 | 12.0 |
+| 3 | GBPUSD | BUY | 2026-01-29T07:50:00+00:00 | 13814.150 | 13824.150 | 13802.150 | 10.0 | 12.0 |
+| 4 | GBPUSD | BUY | 2026-01-29T09:00:00+00:00 | 13814.900 | 13824.900 | 13802.900 | 10.0 | 12.0 |
+| 5 | GBPUSD | BUY | 2026-01-29T09:05:00+00:00 | 13826.400 | 13836.400 | 13814.400 | 10.0 | 12.0 |
+
+### 0.3 Share of trades where TP and SL both fell inside the FILL candle (TP10/SL12 DIR-ON)
+
+- **Trades (TP10/SL12 DIR-ON)**: 1249
+- **Same-bar fill+both-hit**: 1
+- **Share**: **0.08%**
+
+
+## Section 3 — Variant leaderboard
+
+| Rank | Variant | Trades | Win% | Net pips | Pips/day |
+|---|---|---|---|---|---|
+| 1 | TP12_SL20_DIR | 870 | 61.6% | -665.3 | -3.08 |
+| 2 | TP15_SL20_DIR | 757 | 55.0% | -764.2 | -3.54 |
+| 3 | TP15_SL15_DIR | 874 | 48.7% | -767.6 | -3.55 |
+| 4 | TP10_SL20_DIR | 997 | 65.7% | -833.3 | -3.86 |
+| 5 | TP12_SL15_DIR | 1019 | 54.8% | -875.4 | -4.05 |
+| 6 | TP10_SL15_DIR | 1151 | 59.0% | -1081.1 | -5.01 |
+| 7 | TP12_SL12_DIR | 1120 | 48.8% | -1147.9 | -5.31 |
+| 8 | TP15_SL12_DIR | 972 | 42.3% | -1189.0 | -5.50 |
+| 9 | TP10_SL12_DIR | 1249 | 53.6% | -1229.4 | -5.69 |
+| 10 | TP10_SL12_CTRL | 2823 | 51.5% | -4234.4 | -19.60 |
+
+## Headline blocks (Section 2)
+
+### TP10_SL12_DIR
+```
+Variant: TP=10 / SL=12 / DirFilter=ON
+  Trades: 1249          Trades/day: 5.78
+  Win rate: 53.6%    Net pips: -1229.4
+  Pips/day avg: -5.7   Worst day: -108.0
+  Max drawdown: 1388.7 pips   Longest losing streak: 7
+```
+
+### TP10_SL15_DIR
+```
+Variant: TP=10 / SL=15 / DirFilter=ON
+  Trades: 1151          Trades/day: 5.33
+  Win rate: 59.0%    Net pips: -1081.1
+  Pips/day avg: -5.0   Worst day: -109.2
+  Max drawdown: 1167.1 pips   Longest losing streak: 6
+```
+
+### TP10_SL20_DIR
+```
+Variant: TP=10 / SL=20 / DirFilter=ON
+  Trades: 997          Trades/day: 4.62
+  Win rate: 65.7%    Net pips: -833.3
+  Pips/day avg: -3.9   Worst day: -107.2
+  Max drawdown: 944.3 pips   Longest losing streak: 6
+```
+
+### TP12_SL12_DIR
+```
+Variant: TP=12 / SL=12 / DirFilter=ON
+  Trades: 1120          Trades/day: 5.19
+  Win rate: 48.8%    Net pips: -1147.9
+  Pips/day avg: -5.3   Worst day: -100.9
+  Max drawdown: 1248.0 pips   Longest losing streak: 10
+```
+
+### TP12_SL15_DIR
+```
+Variant: TP=12 / SL=15 / DirFilter=ON
+  Trades: 1019          Trades/day: 4.72
+  Win rate: 54.8%    Net pips: -875.4
+  Pips/day avg: -4.1   Worst day: -114.2
+  Max drawdown: 919.5 pips   Longest losing streak: 8
+```
+
+### TP12_SL20_DIR
+```
+Variant: TP=12 / SL=20 / DirFilter=ON
+  Trades: 870          Trades/day: 4.03
+  Win rate: 61.6%    Net pips: -665.3
+  Pips/day avg: -3.1   Worst day: -94.0
+  Max drawdown: 756.4 pips   Longest losing streak: 5
+```
+
+### TP15_SL12_DIR
+```
+Variant: TP=15 / SL=12 / DirFilter=ON
+  Trades: 972          Trades/day: 4.50
+  Win rate: 42.3%    Net pips: -1189.0
+  Pips/day avg: -5.5   Worst day: -108.9
+  Max drawdown: 1272.1 pips   Longest losing streak: 11
+```
+
+### TP15_SL15_DIR
+```
+Variant: TP=15 / SL=15 / DirFilter=ON
+  Trades: 874          Trades/day: 4.05
+  Win rate: 48.7%    Net pips: -767.6
+  Pips/day avg: -3.6   Worst day: -98.0
+  Max drawdown: 947.6 pips   Longest losing streak: 9
+```
+
+### TP15_SL20_DIR
+```
+Variant: TP=15 / SL=20 / DirFilter=ON
+  Trades: 757          Trades/day: 3.50
+  Win rate: 55.0%    Net pips: -764.2
+  Pips/day avg: -3.5   Worst day: -105.0
+  Max drawdown: 935.2 pips   Longest losing streak: 6
+```
+
+### TP10_SL12_CTRL
+```
+Variant: TP=10 / SL=12 / DirFilter=OFF
+  Trades: 2823          Trades/day: 13.07
+  Win rate: 51.5%    Net pips: -4234.4
+  Pips/day avg: -19.6   Worst day: -170.0
+  Max drawdown: 4340.3 pips   Longest losing streak: 14
+```
+
+## Causality: PASS=10  FAIL=0  (seed 161)

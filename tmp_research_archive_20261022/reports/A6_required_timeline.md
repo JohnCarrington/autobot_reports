@@ -1,0 +1,26 @@
+  - **SIGNAL** — Signal: short at 06:35 — pierced the upper band to 13254.5 at 2w_low (13251.9) and closed back inside. Waiting for confirmation.
+  - **ARMED** — Armed: sell when price trades below 13246.7 (confirmation candle 06:40). QM verdict: REVERSAL. Expires after 5 candles.
+  - **OPENED** — Opened short at 13246.7, stop 13266.7 (20.0 pips). Setup A at 2w_low (13251.9); signal 06:35, confirmation 06:40. TP 13216.7 (+30 pips, size
+  - **SKIP_BUSY** — Setup A short signal at 07:10 ignored — busy with position short entry 13246.7.
+  - **SKIP_BUSY** — Setup A long signal at 08:00 ignored — busy with position short entry 13246.7.
+  - **SKIP_BUSY** — Setup A long signal at 08:15 ignored — busy with position short entry 13246.7.
+  - **SKIP_BUSY** — Setup A long signal at 09:35 ignored — busy with position short entry 13246.7.
+  - **SKIP_BUSY** — Setup A long signal at 09:40 ignored — busy with position short entry 13246.7.
+  - **EXHAUSTION_DEMONSTRATED** — Exhaustion demonstrated at 10:45: the push to 13216.0 through 2w_low (13216.9) / the band failed and closed back at 13218.7. Evidence: MACD 
+  - **SKIP_AGAINST_H1_TREND** — Ignored long signal at 10:50: setup A does not fade a strong H1 trend — the H1 EMAs are stacked down (13245.5 < 13250.0 < 13251.7) and H1 cl
+  - **ARMED** — Armed: buy when price trades above 13223.2 — reversal confirmed: 10:50 failed to reclaim 13216.0 and closed away from it.
+  - **SKIP_BUSY** — Setup A long signal at 11:00 ignored — busy with armed long trigger 13223.2.
+  - **EXHAUSTION_DEMONSTRATED** — Exhaustion demonstrated at 11:00: the push to 13213.2 through h1_swing_low (13213.5) / the band failed and closed back at 13218.0. Evidence:
+  - **C_NO_CONFIRMATION** — No setup C entry at 11:05: the candle did not close away from the extreme.
+  - **EXHAUSTION_DEMONSTRATED** — Exhaustion demonstrated at 11:25: the push to 13206.2 through h1_swing (13203.1) / the band failed and closed back at 13212.8. Evidence: MAC
+  - **C_NO_CONFIRMATION** — No setup C entry at 11:30: the candle did not close away from the extreme.
+  - **SKIP_AGAINST_H1_TREND** — Ignored long signal at 11:45: setup A does not fade a strong H1 trend — the H1 EMAs are stacked down (13239.3 < 13245.3 < 13248.6) and H1 cl
+  - **EXHAUSTION_DEMONSTRATED** — Exhaustion demonstrated at 11:45: the push to 13203.2 through h1_swing (13203.1) / the band failed and closed back at 13208.0. Evidence: MAC
+  - **ARMED** — Armed: buy when price trades above 13210.2 — reversal confirmed: 11:50 failed to reclaim 13203.2 and closed away from it.
+  - **OPENED** — Opened long at 13210.2, stop 13190.2 (20.0 pips). Exhaustion reversal at h1_swing (13203.1); signal 11:45, confirmation 11:50. TP 13240.2 (+
+  - **EXHAUSTION_DEMONSTRATED** — Exhaustion demonstrated at 12:10: the push to 13201.5 through h1_swing (13203.1) / the band failed and closed back at 13203.2. Evidence: MAC
+  - **C_NO_CONFIRMATION** — No setup C entry at 12:15: price reclaimed the extreme.
+  - **EXHAUSTION_DEMONSTRATED** — Exhaustion demonstrated at 12:25: the push to 13194.2 through h1_swing_low (13190.3) / the band failed and closed back at 13196.2. Evidence:
+  - **SKIP_BUSY** — Setup A long signal at 12:30 ignored — busy with position long entry 13210.2.
+  - **SKIP_BUSY** — Setup C long entry at 12:30 ignored — busy with position long entry 13210.2.
+  - **C_NO_CONFIRMATION** — No setup C entry at 12:30: the candle did not close away from the extreme.

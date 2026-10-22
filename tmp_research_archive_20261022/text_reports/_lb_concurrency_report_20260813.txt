@@ -1,0 +1,166 @@
+LEVEL_BOUNCE — entry frequency, concurrency, stop-exposure
+==========================================================================
+Corpus: 90d GBPUSD 5m, 2026-04-24 .. 2026-08-13
+Assumptions: 100p stop (LEVEL_BOUNCE_STOP_PIPS default); exit at first-of {SL-breach, EOD}; EOD = last 5m bar of trading date; 5m-bar granularity for stop-time.
+
+--- NEAR_PIPS = 3.0 — 131 entries ------------------------
+  Per-day entry count histogram (days with N entries)
+    0   entries:   43 days
+    1   entries:   13 days
+    2   entries:   14 days
+    3   entries:    8 days
+    4   entries:    6 days
+    5+  entries:    6 days
+  median=1.0  p90=4.0  max=10  on 2026-05-26, 2026-07-23
+  zero-entry days: 43/90 (47.8%)   longest zero-run: 4 day(s)
+  Concurrent open positions (100p stop; exit=SL or EOD):
+    max concurrent: 10   first hit at 2026-05-26T23:55:00+00:00
+    minutes @0open:  74155  @1: 11885  @2:  9335  @3:  5160  @4+:  5370   (total 105905 min)
+    exposure at peak = 1000p (10 positions × 100p SL)
+    positions open at peak:
+       2026-05-26T09:40:00+00:00  SELL   R2 entry=13480.25  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T09:45:00+00:00  SELL   R2 entry=13478.85  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T10:05:00+00:00  SELL   R2 entry=13479.35  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T10:40:00+00:00  SELL   R2 entry=13481.25  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:00:00+00:00  SELL   R2 entry=13485.25  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:15:00+00:00  SELL   R2 entry=13485.15  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:20:00+00:00  SELL   R2 entry=13484.05  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:25:00+00:00  SELL   R2 entry=13483.65  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T23:50:00+00:00  SELL   R1 entry=13456.55  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T23:55:00+00:00  SELL   R1 entry=13455.65  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+  Same-direction concurrency max:
+    BUY  peak: 10   at 2026-07-23T22:00:00+00:00
+    SELL peak: 10  at 2026-05-26T23:55:00+00:00
+  Clustering: 75/131 entries within 30 min of another same-direction entry (57.3%)
+
+--- NEAR_PIPS = 5.0 — 216 entries ------------------------
+  Per-day entry count histogram (days with N entries)
+    0   entries:   36 days
+    1   entries:   11 days
+    2   entries:    8 days
+    3   entries:    9 days
+    4   entries:    8 days
+    5+  entries:   18 days
+  median=1.0  p90=6.0  max=12  on 2026-05-26, 2026-07-23, 2026-08-05
+  zero-entry days: 36/90 (40.0%)   longest zero-run: 4 day(s)
+  Concurrent open positions (100p stop; exit=SL or EOD):
+    max concurrent: 12   first hit at 2026-05-26T23:55:00+00:00
+    minutes @0open:  68160  @1:  8445  @2:  9010  @3:  6575  @4+: 13715   (total 105905 min)
+    exposure at peak = 1200p (12 positions × 100p SL)
+    positions open at peak:
+       2026-05-26T09:25:00+00:00  SELL   R2 entry=13476.55  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T09:40:00+00:00  SELL   R2 entry=13480.25  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T09:45:00+00:00  SELL   R2 entry=13478.85  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T10:05:00+00:00  SELL   R2 entry=13479.35  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T10:40:00+00:00  SELL   R2 entry=13481.25  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:00:00+00:00  SELL   R2 entry=13485.25  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:15:00+00:00  SELL   R2 entry=13485.15  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:20:00+00:00  SELL   R2 entry=13484.05  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:25:00+00:00  SELL   R2 entry=13483.65  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T21:50:00+00:00  SELL   R1 entry=13448.70  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T23:50:00+00:00  SELL   R1 entry=13456.55  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T23:55:00+00:00  SELL   R1 entry=13455.65  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+  Same-direction concurrency max:
+    BUY  peak: 12   at 2026-07-23T22:00:00+00:00
+    SELL peak: 12  at 2026-05-26T23:55:00+00:00
+  Clustering: 142/216 entries within 30 min of another same-direction entry (65.7%)
+
+--- NEAR_PIPS = 8.0 — 356 entries ------------------------
+  Per-day entry count histogram (days with N entries)
+    0   entries:   31 days
+    1   entries:    5 days
+    2   entries:   10 days
+    3   entries:    7 days
+    4   entries:    8 days
+    5+  entries:   29 days
+  median=2.0  p90=12.0  max=18  on 2026-05-26
+  zero-entry days: 31/90 (34.4%)   longest zero-run: 3 day(s)
+  Concurrent open positions (100p stop; exit=SL or EOD):
+    max concurrent: 18   first hit at 2026-05-26T23:55:00+00:00
+    minutes @0open:  60770  @1:  6000  @2:  9830  @3:  6435  @4+: 22870   (total 105905 min)
+    exposure at peak = 1800p (18 positions × 100p SL)
+    positions open at peak:
+       2026-05-26T03:30:00+00:00  SELL   R2 entry=13489.55  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T03:35:00+00:00  SELL   R2 entry=13489.05  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T09:00:00+00:00  SELL   R2 entry=13474.45  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T09:25:00+00:00  SELL   R2 entry=13476.55  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T09:40:00+00:00  SELL   R2 entry=13480.25  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T09:45:00+00:00  SELL   R2 entry=13478.85  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T10:05:00+00:00  SELL   R2 entry=13479.35  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T10:40:00+00:00  SELL   R2 entry=13481.25  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:00:00+00:00  SELL   R2 entry=13485.25  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:15:00+00:00  SELL   R2 entry=13485.15  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:20:00+00:00  SELL   R2 entry=13484.05  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T11:25:00+00:00  SELL   R2 entry=13483.65  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T20:15:00+00:00  SELL   R1 entry=13451.95  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T20:20:00+00:00  SELL   R1 entry=13451.15  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T21:45:00+00:00  SELL   R1 entry=13452.05  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T21:50:00+00:00  SELL   R1 entry=13448.70  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T23:50:00+00:00  SELL   R1 entry=13456.55  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+       2026-05-26T23:55:00+00:00  SELL   R1 entry=13455.65  opened_to=2026-05-26T23:55:00+00:00 (EOD)
+  Same-direction concurrency max:
+    BUY  peak: 15   at 2026-07-23T22:00:00+00:00
+    SELL peak: 18  at 2026-05-26T23:55:00+00:00
+  Clustering: 250/356 entries within 30 min of another same-direction entry (70.2%)
+
+--- NEAR_PIPS = 12.0 — 521 entries ------------------------
+  Per-day entry count histogram (days with N entries)
+    0   entries:   23 days
+    1   entries:    3 days
+    2   entries:   11 days
+    3   entries:    4 days
+    4   entries:    7 days
+    5+  entries:   42 days
+  median=4.0  p90=14.1  max=23  on 2026-08-07
+  zero-entry days: 23/90 (25.6%)   longest zero-run: 3 day(s)
+  Concurrent open positions (100p stop; exit=SL or EOD):
+    max concurrent: 23   first hit at 2026-08-07T19:10:00+00:00
+    minutes @0open:  48615  @1:  6125  @2: 10905  @3:  4205  @4+: 36055   (total 105905 min)
+    exposure at peak = 2300p (23 positions × 100p SL)
+    positions open at peak:
+       2026-08-07T00:30:00+00:00   BUY   S1 entry=13451.95  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T00:45:00+00:00   BUY   S1 entry=13451.45  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T00:50:00+00:00   BUY   S1 entry=13451.55  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T01:00:00+00:00   BUY   S1 entry=13450.95  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T01:05:00+00:00   BUY   S1 entry=13451.45  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T03:35:00+00:00   BUY   S1 entry=13452.05  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T06:15:00+00:00   BUY   S1 entry=13455.45  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T07:15:00+00:00   BUY   S1 entry=13453.05  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T07:30:00+00:00   BUY   S1 entry=13450.75  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T07:45:00+00:00   BUY   S1 entry=13448.85  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T07:50:00+00:00   BUY   S1 entry=13450.45  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T08:40:00+00:00   BUY   S1 entry=13448.25  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T09:10:00+00:00   BUY   S1 entry=13442.95  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T09:15:00+00:00   BUY   S1 entry=13446.45  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T09:50:00+00:00   BUY   S1 entry=13442.55  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T10:35:00+00:00   BUY   S1 entry=13439.05  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T10:50:00+00:00   BUY   S1 entry=13437.25  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T12:55:00+00:00  SELL   R2 entry=13499.95  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T13:00:00+00:00  SELL   R3 entry=13495.95  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T16:55:00+00:00  SELL   R2 entry=13497.15  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T17:00:00+00:00  SELL   R2 entry=13495.15  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T18:55:00+00:00  SELL   R2 entry=13499.15  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+       2026-08-07T19:10:00+00:00  SELL   R2 entry=13499.45  opened_to=2026-08-07T20:55:00+00:00 (EOD)
+  Same-direction concurrency max:
+    BUY  peak: 18   at 2026-07-23T22:00:00+00:00
+    SELL peak: 20  at 2026-05-26T23:55:00+00:00
+  Clustering: 380/521 entries within 30 min of another same-direction entry (72.9%)
+
+
+==========================================================================
+FIRST LINE (NEAR=5): max entries in one day = 12 (on 2026-05-26, 2026-07-23, 2026-08-05)  |  max concurrent open positions = 12 at 2026-05-26T23:55:00+00:00  |  worst-case simultaneous stop exposure = 1200p
+
+SENSITIVITY TO A PER-STRATEGY CONCURRENCY CAP
+--------------------------------------------------------------------------
+  NEAR=3.0  cap=1: taken=47/131 (35.9%)  dropped=84
+  NEAR=3.0  cap=2: taken=81/131 (61.8%)  dropped=50
+  NEAR=3.0  cap=3: taken=101/131 (77.1%)  dropped=30
+  NEAR=5.0  cap=1: taken=54/216 (25.0%)  dropped=162
+  NEAR=5.0  cap=2: taken=97/216 (44.9%)  dropped=119
+  NEAR=5.0  cap=3: taken=132/216 (61.1%)  dropped=84
+  NEAR=8.0  cap=1: taken=59/356 (16.6%)  dropped=297
+  NEAR=8.0  cap=2: taken=113/356 (31.7%)  dropped=243
+  NEAR=8.0  cap=3: taken=157/356 (44.1%)  dropped=199
+  NEAR=12.0  cap=1: taken=67/521 (12.9%)  dropped=454
+  NEAR=12.0  cap=2: taken=131/521 (25.1%)  dropped=390
+  NEAR=12.0  cap=3: taken=184/521 (35.3%)  dropped=337

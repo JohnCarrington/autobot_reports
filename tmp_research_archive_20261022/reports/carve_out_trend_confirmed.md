@@ -1,0 +1,37 @@
+
+### `trend_confirmed_only_softens` — every carve-out fire (32 closed trades)
+
+| ts_open | strategy | dir | entry | close | pnl_pips | overridden reason |
+|---|---|---|---|---|---|---|
+| 2026-06-22T13:50:02Z | GBPUSD_BB_BOUNCE_L | BUY | 13245.7 | 13254.35 | +8.7 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=1/3 |
+| 2026-06-22T15:10:01Z | GBPUSD_BB_BOUNCE_S | SELL | 13260.2 | 13246.85 | +13.3 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=1/3 |
+| 2026-06-23T06:30:01Z | GBPUSD_BB_BOUNCE_S | SELL | 13238.7 | 13238.75 | -0.1 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=1/3 |
+| 2026-06-23T06:55:01Z | GBPUSD_BB_BOUNCE_L | BUY | 13233.9 | 13244.05 | +10.2 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=1/3 |
+| 2026-06-23T07:15:01Z | GBPUSD_BB_BOUNCE_S | SELL | 13246.8 | 13227.15 | +19.6 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=1/3 |
+| 2026-06-23T08:00:01Z | GBPUSD_BB_BOUNCE_L | BUY | 13227.9 | 13217.7 | -10.2 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=1/3 |
+| 2026-06-23T10:10:01Z | GBPUSD_BB_BOUNCE_S | SELL | 13222.6 | 13212.95 | +9.7 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=1/3 |
+| 2026-06-24T06:20:02Z | GBPUSD_BB_BOUNCE_S | SELL | 13197.9 | 13186.85 | +11.1 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=1/3 |
+| 2026-06-24T07:20:02Z | GBPUSD_BB_BOUNCE_L | BUY | 13185.9 | 13192.65 | +6.8 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=1/3 |
+| 2026-06-24T08:20:02Z | GBPUSD_BB_BOUNCE_L | BUY | 13181.1 | 13188.55 | +7.5 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=1/3 |
+| 2026-06-24T12:00:19Z | GBPUSD_BB_BOUNCE_S | SELL | 13163.5 | 13142.3 | +21.2 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=1/3 |
+| 2026-06-24T15:00:03Z | GBPUSD_BB_BOUNCE_L | BUY | 13148.5 | 13165.9 | +17.4 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=1/3 |
+| 2026-06-24T15:35:02Z | GBPUSD_BB_BOUNCE_S | SELL | 13163.5 | 13183.85 | -20.4 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=1/3 |
+| 2026-06-25T12:55:02Z | GBPUSD_BB_BOUNCE_S | SELL | 13179.9 | 13199.9 | -20.0 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=0/3 |
+| 2026-06-25T14:10:02Z | GBPUSD_BB_BOUNCE_S | SELL | 13210.2 | 13197.55 | +12.7 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=0/3 |
+| 2026-06-25T15:15:01Z | GBPUSD_BB_BOUNCE_S | SELL | 13200.4 | 13191.8 | +8.6 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=0/3 |
+| 2026-06-26T09:55:04Z | GBPUSD_BB_BOUNCE_S | SELL | 13223.7 | 13216.15 | +7.5 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=0/3 |
+| 2026-06-26T12:00:03Z | GBPUSD_BB_BOUNCE_L | BUY | 13217.0 | 13223.95 | +7.0 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=2/3 |
+| 2026-06-26T14:30:02Z | GBPUSD_BB_BOUNCE_S | SELL | 13222.4 | 13203.75 | +18.6 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=1/3 |
+| 2026-06-29T08:35:04Z | GBPUSD_BB_BOUNCE_L | BUY | 13211.7 | 13223.45 | +11.8 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=1/3 |
+| 2026-06-29T12:40:02Z | GBPUSD_BB_BOUNCE_S | SELL | 13230.9 | 13250.65 | -19.8 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=2/3 |
+| 2026-06-29T15:40:02Z | GBPUSD_BB_BOUNCE_S | SELL | 13247.3 | 13247.05 | +0.2 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=1/3 |
+| 2026-06-30T08:25:02Z | GBPUSD_BB_BOUNCE_L | BUY | 13230.7 | 13231.05 | +0.3 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=0/3 |
+| 2026-06-30T15:05:02Z | GBPUSD_BB_BOUNCE_S | SELL | 13266.9 | 13260.05 | +6.8 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=0/3 |
+| 2026-07-01T16:20:01Z | GBPUSD_BB_BOUNCE_S | SELL | 13281.9 | 13281.25 | +0.7 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=1/3 |
+| 2026-07-03T06:55:01Z | GBPUSD_BB_BOUNCE_S | SELL | 13370.5 | 13365.85 | +4.7 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=2/3 |
+| 2026-07-03T13:15:01Z | GBPUSD_BB_BOUNCE_L | BUY | 13351.0 | 13355.15 | +4.2 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=0/3 |
+| 2026-07-07T08:45:01Z | GBPUSD_BB_BOUNCE_S | SELL | 13387.2 | 13375.55 | +11.7 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=2/3 |
+| 2026-07-07T12:40:02Z | GBPUSD_BB_BOUNCE_S | SELL | 13384.9 | 13384.55 | +0.3 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=2/3 |
+| 2026-07-07T13:35:02Z | GBPUSD_BB_BOUNCE_L | BUY | 13382.2 | 13364.45 | -17.8 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=0/3 |
+| 2026-07-08T08:35:02Z | GBPUSD_BB_BOUNCE_L | BUY | 13353.1 | 13333.1 | -20.0 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_L:frames=0/3 |
+| 2026-07-08T13:55:02Z | GBPUSD_BB_BOUNCE_S | SELL | 13365.2 | 13364.55 | +0.7 | PASS:TREND_reversal_unconfirmed:GBPUSD_BB_BOUNCE_S:frames=2/3 |

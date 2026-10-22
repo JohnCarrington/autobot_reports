@@ -1,0 +1,356 @@
+================================================================================
+ROOT CAUSE TRACE: London Liquidity Sweep 403 Warnings (60-second cadence)
+================================================================================
+
+SERVICE: london-liquidity-sweep.service @ /opt/london_liquidity_sweep/main.py
+SYMPTOM: IG `/prices/CS.D.GBPUSD.TODAY.IP` HTTP 403 
+         "error.public-api.exceeded-account-historical-data-allowance"
+         Every 60 seconds continuously for 40+ minutes
+         Expected: 1 attempt then 2-hour (7200s) backoff silence
+         Observed: 1 attempt, 60s, attempt, 60s, attempt... (repeating)
+
+================================================================================
+1. BACKOFF STATE MANAGEMENT
+================================================================================
+
+SET (on 403):
+  /opt/london_liquidity_sweep/market_data.py:224     
+    self._quota_resumes_at_monotonic: float = 0.0    [initial, zero]
+  
+  /opt/london_liquidity_sweep/market_data.py:244
+    self._quota_resumes_at_monotonic = mono + self.allowance_backoff_s
+    [Triggered when fetch_recent_m5 returns None (403 case)]
+    [allowance_backoff_s = 7200.0 seconds = 2 hours by default]
+
+CHECKED (before each /prices call):
+  /opt/london_liquidity_sweep/market_data.py:234-235
+    if mono < self._quota_resumes_at_monotonic:
+        return []
+    [Should block fetcher for 2 hours after 403]
+
+PROBLEM: Backoff is set correctly but 403 repeats every 60s, not 7200s.
+
+================================================================================
+2. 403 PATTERN MATCH (HTTP RESPONSE HANDLING)
+================================================================================
+
+OBSERVED ERROR BODY:
+  {"errorCode":"error.public-api.exceeded-account-historical-data-allowance"}
+
+DOCUMENTED TRIGGER (market_data.py:206):
+  "on any error return from the fetcher (incl. HTTP 403
+   `exceeded-account-historical-data-allowance`), stops calling
+   for ``allowance_backoff_s`` seconds (default 2 h)."
+
+ACTUAL CODE PATH:
+  /opt/london_liquidity_sweep/ig_execution.py:295-298
+    if resp.status_code != 200:
+        logger.warning("[ig] /prices/%s HTTP %d body=%s", ...)
+        return None
+    [403 matches != 200, returns None]
+  
+  /opt/london_liquidity_sweep/market_data.py:240-241
+    rows = self.fetcher(...)  # fetch_recent_m5
+    if rows is None:          # 403 returns None ✓
+  
+  /opt/london_liquidity_sweep/market_data.py:244
+    self._quota_resumes_at_monotonic = mono + self.allowance_backoff_s
+    [EXECUTED: backoff IS set on observed 403 pattern]
+
+CONCLUSION: Pattern match is correct. Backoff setter DOES execute on 403.
+
+================================================================================
+3. MIN POLL INTERVAL GATE
+================================================================================
+
+DEFINITION:
+  /opt/london_liquidity_sweep/market_data.py:215-216
+    min_poll_interval_s: float = 300.0  [5 minutes, one call per M5 bar]
+
+ENFORCEMENT:
+  /opt/london_liquidity_sweep/market_data.py:236-238
+    if (mono - self._last_poll_monotonic) < self.min_poll_interval_s:
+        return []
+    self._last_poll_monotonic = mono
+    [Prevents fetcher calls within 300s window]
+
+OBSERVED BEHAVIOR: 403 warnings every ~60 seconds, not 300s.
+  This is INCONSISTENT with min_poll_interval preventing fetcher calls.
+  If fetcher only called once per 300s, we should see 403 every 300s.
+  
+  POSSIBLE EXPLANATIONS:
+  a) Backoff expiration is 60s not 7200s (parameter override?)
+  b) Fetcher is called from a different code path NOT through IGPricesFeed
+  c) IGPricesFeed instance is recreated per call, losing backoff state
+  d) Monotonic timer overflow/reset at 60s interval (unlikely)
+
+================================================================================
+4. FALLBACK TRIGGERING CONDITION (THE ROOT ISSUE)
+================================================================================
+
+LOCATION:
+  /opt/london_liquidity_sweep/main.py:301-317
+
+CODE:
+  301:  arc_new = archive_tail.poll()
+  302:  new_candles = list(arc_new) if arc_new else []
+  303:  now_utc = datetime.now(timezone.utc)
+  304:  archive_fresh = (
+  305:      archive_tail.last_ts is not None
+  306:      and (now_utc - archive_tail.last_ts).total_seconds()
+  307:           <= STALE_CANDLE_SECONDS
+  308:  )
+  309:  if archive_fresh and new_candles:
+  310:      # Keep IG feed in sync (only sync, no fetch)
+  311:      if (ig_feed.last_ts is None or ...):
+  312:          ig_feed.last_ts = new_candles[-1][0]
+  313:  else:
+  314:      # Archive stale OR no new rows → fallback to IG
+  315:      ig_new = ig_feed.poll(now_utc=now_utc)
+
+ARCHIVE STATE (Oct 15 10:06 UTC, while 403s still active):
+  /opt/tradingbot/data/candles/GBPUSD/2026-10-15.csv
+    Mtime: 2026-10-15 10:05:01 (111 seconds ago)
+    Newest row: 2026-10-15T10:00:00 (6 minutes ago)
+    STALE_CANDLE_SECONDS = 900 (15 minutes)
+    
+  Archive is FRESH (111s < 900s)
+
+CANDLE WRITE PATTERN:
+  M5 candles close every 300 seconds (5 minutes)
+  Between closes, no new rows exist
+  archive_tail.poll(after_ts=last_ts) returns [] when no rows added
+  
+LOOP CADENCE:
+  POLL_SECONDS = 2.0
+  Main loop runs every 2 seconds
+  Between M5 closes (4+ minutes), arc_new = [] repeatedly
+
+CONDITION EVALUATION:
+  Line 309: if archive_fresh and new_candles:
+  = if True and []:
+  = if True and False:
+  = False
+  
+  TAKES ELSE BRANCH → calls ig_feed.poll() on nearly every iteration
+  
+RESULT:
+  With POLL_SECONDS = 2.0:
+  - 150 iterations × 2s = 300s between M5 closes
+  - ig_feed.poll() called 150 times per 300s interval
+  - min_poll_interval_s = 300 gate lets fetcher through ~once per window
+  - On 403, backoff set
+  - BUT 60-second observation suggests backoff is being reset or
+    bypassed by a separate code path
+
+================================================================================
+5. ARCHIVE PRIMARY VS. FALLBACK DESIGN
+================================================================================
+
+INTENDED BEHAVIOR (from comments):
+  /opt/london_liquidity_sweep/main.py:296-300
+  "AutoBot archive is preferred (local file, no IG historical-data quota).
+   IG /prices is only consulted when the archive has gone stale, and it
+   self-throttles on 403 allowance errors so a quota exhaustion doesn't
+   spin the loop."
+
+ACTUAL BEHAVIOR:
+  Archive IS fresh and being actively written
+  Archive DOES have new rows (every 5 minutes)
+  But condition at 309 requires BOTH fresh AND new_candles in SAME call
+  Between M5 closes, new_candles is [] even though archive is fresh
+  Result: IG fetcher is called 150+ times per 300-second window
+
+DESIGN FLAW:
+  The condition should be:
+    if archive_fresh:  # Trust archive is providing current data
+        ... sync IG cursor ...
+    else:
+        ... fallback to IG ...
+  
+  NOT:
+    if archive_fresh and new_candles:  # Requires both conditions in same loop
+    
+  Current: Treats empty poll() (between M5 closes) as archive_stale fallback.
+
+================================================================================
+6. ALTERNATIVE CODE PATHS
+================================================================================
+
+DIRECT IG CALLS (checking for unthrottled /prices endpoints):
+  
+  /opt/london_liquidity_sweep/ig_execution.py:274-303
+    fetch_recent_m5(epic, max_bars) → only called from IGPricesFeed
+  
+  /opt/london_liquidity_sweep/ig_execution.py:259-272
+    fetch_market(epic) → calls /markets endpoint (not /prices) 
+  
+  /opt/london_liquidity_sweep/ig_execution.py:306-335
+    get_open_positions() → calls /positions endpoint (not /prices)
+  
+  VERDICT: No unthrottled /prices calls found. Only fetch_recent_m5.
+
+MULTIPLE IG_FEED INSTANCES:
+  /opt/london_liquidity_sweep/main.py:261
+    ig_feed = IGPricesFeed(EPIC, fetch_recent_m5)
+    [Created once before main loop, persists through all iterations]
+  
+  VERDICT: Single instance, backoff state should persist.
+
+================================================================================
+7. 60-SECOND INTERVAL SOURCE
+================================================================================
+
+BROKER CHECK INTERVAL:
+  /opt/london_liquidity_sweep/main.py:285
+    broker_check_interval_s = 60.0
+  
+  /opt/london_liquidity_sweep/main.py:290-295
+    [Executes _check_broker_closes every 60s, calls /positions not /prices]
+  
+  VERDICT: Unrelated to /prices 403s.
+
+POLL_SECONDS * N:
+  POLL_SECONDS = 2.0
+  60s / 2.0 = 30 iterations
+  Could represent every 30th loop iteration attempting IG?
+  But min_poll_interval_s = 300 should gate, not 60.
+
+UNIDENTIFIED TIMER:
+  No external script, cron job, or systemd timer found.
+  No second Thread spawning in code.
+  No module-level initialization calling fetcher.
+
+HYPOTHESIS:
+  The 60-second cadence suggests either:
+  a) A retry loop external to main.py (unobserved)
+  b) Backoff value being set to 60 (no evidence found)
+  c) Each IGPricesFeed call is stateless, not persisting _quota_resumes_at
+  d) Monotonic timer has 60s periodicity (system issue, unlikely)
+
+================================================================================
+8. BACKOFF DURATION VERIFICATION
+================================================================================
+
+DEFAULT PARAMETER:
+  /opt/london_liquidity_sweep/market_data.py:216
+    allowance_backoff_s: float = 7200.0
+  
+ENVIRONMENT OVERRIDE:
+  /opt/london_liquidity_sweep/.env
+    [No LLS_BACKOFF_* or similar variable]
+  
+CONFIG OVERRIDE:
+  /opt/london_liquidity_sweep/config.py
+    [No allowance_backoff_s tuning]
+  
+INSTANTIATION:
+  /opt/london_liquidity_sweep/main.py:261
+    ig_feed = IGPricesFeed(EPIC, fetch_recent_m5)
+    [Uses default parameters, no override passed]
+
+VERDICT: Backoff should be 7200 seconds. No override found.
+
+================================================================================
+9. AUTOBOT ARCHIVE TAIL STATE
+================================================================================
+
+ARCHIVE DIRECTORY:
+  /opt/tradingbot/data/candles/GBPUSD/
+
+FILE ACTIVITY:
+  2026-10-14.csv: 288 candles (day complete, no new writes)
+  2026-10-15.csv: 121 candles (active, last write 10:05:01 UTC)
+  
+NEWEST CANDLE TIMESTAMP:
+  2026-10-15T10:00:00+00:00 (5-minute bar closing at 10:00)
+  
+CURRENT TIME: 2026-10-15 10:06:53 UTC
+CANDLE AGE: 6 minutes 53 seconds
+STALE THRESHOLD: 900 seconds (15 minutes)
+
+ARCHIVE STATUS: FRESH (not stale)
+
+LIVETAIL.POLL() BEHAVIOR:
+  /opt/london_liquidity_sweep/market_data.py:127-138
+  Reads from yesterday + today files after last_ts
+  Returns [] when no new rows after last_ts
+  Updates last_ts only if new rows found
+  
+  During inter-M5-close gaps (4+ minutes): returns []
+  At M5 close (every 300s): returns [new_candle]
+  
+VERDICT: Archive is being actively written by AutoBot.
+         Poll() returns [] between M5 closes.
+         This triggers the else branch at main.py:315 every 2s
+         (even though archive is fresh).
+
+================================================================================
+10. SERVICE CONFIGURATION & TIMING
+================================================================================
+
+POLL_SECONDS: 2.0 (main loop iteration cadence)
+STALE_CANDLE_SECONDS: 900.0 (15 minutes freshness threshold)
+LLS_POLL_SECONDS env: not overridden
+LLS_STALE_CANDLE_SECONDS env: not overridden
+
+LOOP RUNS: every 2 seconds (~300 times per 10 minutes)
+IG FALLBACK CALLS: 150+ times per 300-second window (between M5 closes)
+IG FETCHER ACTUAL CALLS: limited by min_poll_interval_s to ~once per 300s
+OBSERVED 403 RATE: once per 60 seconds (NOT matching any known interval)
+
+================================================================================
+11. MISSING PIECE: WHY 60-SECOND BACKOFF?
+================================================================================
+
+The observed 60-second 403 cadence is UNEXPLAINED by the code.
+
+Possible root causes (ranked by likelihood):
+
+1. [MOST LIKELY] The min_poll_interval_s = 300 gate is being bypassed
+   by a second call path not traced in static analysis.
+   The fetcher is being invoked every ~60 seconds despite the gate.
+   Backoff IS set correctly (prevents 2h silence),
+   but then 60s cadence fetcher invocation re-triggers 403.
+
+2. The backoff_expiration calculation is wrong.
+   mono + allowance_backoff_s should compute to 7200s offset,
+   but calculated offset is effectively 60s (possible mono wraparound
+   or arithmetic overflow in rare systems, unlikely on Linux).
+
+3. Multiple IGPricesFeed instances are being created,
+   each with fresh _quota_resumes_at_monotonic = 0.0,
+   bypassing the shared backoff state.
+   Static analysis shows only one instance, but runtime might differ.
+
+4. A race condition in the main loop or exception handler is calling
+   fetch_recent_m5 directly, bypassing IGPricesFeed.poll() entirely.
+   fetch_recent_m5 itself logs the 403 and doesn't apply any backoff,
+   so repeated calls hit 403 immediately.
+
+================================================================================
+SUMMARY
+================================================================================
+
+ROOT CAUSE (Confirmed):
+  Main loop calls ig_feed.poll() every 2 seconds because archive_tail.poll()
+  returns [] between M5 candle closes, triggering the else branch at
+  main.py:315 even though the archive is fresh (not stale).
+
+60-SECOND CADENCE (Unresolved):
+  The backoff mechanism at market_data.py:244 is correctly triggered on 403,
+  setting _quota_resumes_at_monotonic = mono + 7200.
+  
+  However, observed 403s occur every 60 seconds, not every 7200 seconds.
+  
+  This suggests either:
+  - min_poll_interval_s gate is bypassed (untraced code path)
+  - Backoff state is not persisted between calls
+  - External mechanism calling fetcher every 60 seconds
+  - Logic error in backoff calculation
+
+NO PROPOSED FIX: Code tracing complete. Analysis shows both the documented
+backoff mechanism AND the condition triggering repeated IG calls, but the
+60-second interval cannot be fully explained from static code analysis alone.
+
+================================================================================
