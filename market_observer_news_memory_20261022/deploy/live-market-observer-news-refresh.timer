@@ -1,0 +1,31 @@
+# live-market-observer-news-refresh.timer — research-only Finnhub pulls.
+#
+# Finnhub free-tier public rate limit is 60 calls/min. Each refresh is
+# exactly ONE calendar/economic GET for today..today+2, so even if we
+# fired this timer every minute we'd be at 1.6% of quota. The schedule
+# below keeps us well under the limit AND captures intraday revisions
+# (actual values typically land within 30 min of release):
+#
+#   * Weekdays only. FX macro releases are weekday events; weekend
+#     polling is wasted budget.
+#   * Every 30 min from 05:00 UTC (pre-London) through 21:30 UTC
+#     (post-NY close). Six calls/hour across 17 hours = 34 calls/day,
+#     well under Finnhub's 86,400/day ceiling.
+#   * Persistent=true replays missed intervals after reboot so revisions
+#     aren't dropped by a maintenance window.
+#
+# Separate from the production refresh-news-calendar.timer which writes
+# into /opt/tradingbot/cache/. Both can run simultaneously without
+# conflict — they write to different files on different volumes.
+
+[Unit]
+Description=Refresh research-only Finnhub macro calendar every 30 min on weekdays
+Documentation=file:///mnt/volume_lon1_1778405456698/research/live_obs/news/fetch_finnhub_calendar.py
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 05..21:00,30:00
+Unit=live-market-observer-news-refresh.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target

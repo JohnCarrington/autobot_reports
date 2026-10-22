@@ -1,0 +1,55 @@
+# live-market-observer-shadow.service — deterministic history-informed shadow.
+#
+# Reads primary observer snapshots, retrieves historical analogues from
+# the phase7b.v1.0 interaction corpus, and writes one row per
+# (bar_ts, interaction) into a SEPARATE journal:
+#
+#   /mnt/.../live_obs/journal_shadow/analogues.jsonl
+#
+# No LLM calls. No broker calls. No writes outside the shadow journal.
+# Independent of the primary live-market-observer.service — the two
+# never share a journal file or lock.
+#
+# Install (operator, run as root):
+#
+#   sudo install -o root -g root -m 0644 \
+#       /mnt/volume_lon1_1778405456698/research/live_obs/deploy/live-market-observer-shadow.service \
+#       /etc/systemd/system/live-market-observer-shadow.service
+#   sudo install -o root -g root -m 0644 \
+#       /mnt/volume_lon1_1778405456698/research/live_obs/deploy/live-market-observer-shadow.timer \
+#       /etc/systemd/system/live-market-observer-shadow.timer
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now live-market-observer-shadow.timer
+
+[Unit]
+Description=History-informed shadow observer (deterministic retrieval into separate journal)
+Documentation=file:///mnt/volume_lon1_1778405456698/research/live_obs/agent/history_informed_shadow_observer.py
+
+[Service]
+Type=oneshot
+User=autobot
+Group=autobot
+
+WorkingDirectory=/mnt/volume_lon1_1778405456698/research/live_obs
+
+ExecStart=/mnt/volume_lon1_1778405456698/research/live_obs/bin/run_shadow_observer.sh
+
+Environment=TZ=UTC
+
+# Hardening identical to the primary observer: read-only on autobot,
+# read-write only on the research volume.
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=yes
+NoNewPrivileges=yes
+ReadOnlyPaths=/opt/tradingbot
+ReadWritePaths=/mnt/volume_lon1_1778405456698/research/live_obs
+
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=live-observer-shadow
+
+TimeoutStartSec=120s

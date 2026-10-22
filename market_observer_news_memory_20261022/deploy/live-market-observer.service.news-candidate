@@ -1,0 +1,69 @@
+# /etc/systemd/system/live-market-observer.service — NEWS-ENRICHED candidate.
+#
+# Byte-identical to the production unit EXCEPT:
+#   ExecStart points at run_observer_news.sh (news-enriched wrapper).
+#   Description is updated to say "news-enriched".
+#
+# Rollback: the prior unit lives alongside this file as
+# live-market-observer.service.pre-news-YYYYMMDDTHHMMSSZ. To roll back,
+# install that file in place.
+#
+# Install (run as root, after today's 17:00 UK session has ended and the
+# existing live-market-observer.service is `inactive`):
+#
+#   sudo cp /etc/systemd/system/live-market-observer.service \
+#           /etc/systemd/system/live-market-observer.service.pre-news-ROLLBACK
+#   sudo install -o root -g root -m 0644 \
+#       /mnt/volume_lon1_1778405456698/research/live_obs/deploy/live-market-observer.service.news-candidate \
+#       /etc/systemd/system/live-market-observer.service
+#   sudo systemctl daemon-reload
+#
+# Start operator-manually inside tomorrow's 07:00-17:00 UK window:
+#
+#   sudo systemctl start   live-market-observer
+
+[Unit]
+Description=Live GBPUSD Market Observation Agent (news-enriched, research-only, read-only)
+Documentation=file:///mnt/volume_lon1_1778405456698/research/live_obs/agent/live_market_observer_agent_news.py
+After=network-online.target
+Wants=network-online.target
+StartLimitBurst=3
+StartLimitIntervalSec=300
+
+[Service]
+Type=simple
+User=autobot
+Group=autobot
+
+WorkingDirectory=/mnt/volume_lon1_1778405456698/research/live_obs
+
+# Entry point: NEWS-ENRICHED wrapper. Enforces 07:00-17:00 UK window and
+# loads ANTHROPIC_API_KEY from /opt/tradingbot/.env in-process.
+ExecStart=/mnt/volume_lon1_1778405456698/research/live_obs/bin/run_observer_news.sh
+
+Environment=TZ=UTC
+
+# Hardening unchanged.
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=yes
+NoNewPrivileges=yes
+ReadOnlyPaths=/opt/tradingbot
+ReadWritePaths=/mnt/volume_lon1_1778405456698/research/live_obs
+
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+Restart=on-failure
+RestartSec=15
+
+KillSignal=SIGTERM
+TimeoutStopSec=15s
+SendSIGKILL=yes
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=live-market-observer
+
+[Install]
+# Intentionally no WantedBy=multi-user.target — operator starts manually.

@@ -1,0 +1,61 @@
+# live-market-observer-news-refresh.service — research-only Finnhub refresh.
+#
+# Twin to /opt/tradingbot's refresh-news-calendar.service, but writes to
+# the observer-owned news/verified_events.jsonl under the research volume.
+# The production path is unaffected.
+#
+# Hard guarantees (same as fetch_finnhub_calendar.py):
+#   * Reads FINNHUB_API_KEY from /opt/tradingbot/.env (value never printed).
+#   * Hits ONLY https://finnhub.io/api/v1/calendar/economic.
+#   * Writes ONLY under /mnt/.../research/live_obs/news/.
+#   * No systemd changes to any trading service.
+#
+# Install (operator, run as root):
+#
+#   sudo install -o root -g root -m 0644 \
+#       /mnt/volume_lon1_1778405456698/research/live_obs/deploy/live-market-observer-news-refresh.service \
+#       /etc/systemd/system/live-market-observer-news-refresh.service
+#   sudo install -o root -g root -m 0644 \
+#       /mnt/volume_lon1_1778405456698/research/live_obs/deploy/live-market-observer-news-refresh.timer \
+#       /etc/systemd/system/live-market-observer-news-refresh.timer
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now live-market-observer-news-refresh.timer
+
+[Unit]
+Description=Research-only Finnhub calendar refresh into observer verified_events.jsonl
+Documentation=file:///mnt/volume_lon1_1778405456698/research/live_obs/news/fetch_finnhub_calendar.py
+
+[Service]
+Type=oneshot
+User=autobot
+Group=autobot
+
+WorkingDirectory=/mnt/volume_lon1_1778405456698/research/live_obs
+
+# fetch_finnhub_calendar.py reads /opt/tradingbot/.env in-process for the
+# FINNHUB_API_KEY only — no EnvironmentFile pulling other autobot env.
+ExecStart=/opt/tradingbot/venv/bin/python \
+    /mnt/volume_lon1_1778405456698/research/live_obs/news/fetch_finnhub_calendar.py \
+    --env /opt/tradingbot/.env \
+    --out /mnt/volume_lon1_1778405456698/research/live_obs/news/verified_events.jsonl \
+    --days-ahead 2 \
+    --commit
+
+Environment=TZ=UTC
+
+# Same hardening posture as the primary observer unit.
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=yes
+NoNewPrivileges=yes
+ReadOnlyPaths=/opt/tradingbot
+ReadWritePaths=/mnt/volume_lon1_1778405456698/research/live_obs
+
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=live-observer-news-refresh
+
+TimeoutStartSec=60s

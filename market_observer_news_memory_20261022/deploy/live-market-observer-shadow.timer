@@ -1,0 +1,19 @@
+# live-market-observer-shadow.timer — sweep every 5 min.
+#
+# Fire 5 min after boot and every 5 min thereafter. The sweeper is
+# resumable (byte-offset cursor + dedup set) so missed intervals are
+# simply caught up on the next tick. OnBootSec primes the first run
+# so freshly booted hosts don't wait a full 5 min for the first sweep.
+
+[Unit]
+Description=Trigger history-informed shadow observer every 5 min
+Documentation=file:///mnt/volume_lon1_1778405456698/research/live_obs/agent/history_informed_shadow_observer.py
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min
+Unit=live-market-observer-shadow.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target
