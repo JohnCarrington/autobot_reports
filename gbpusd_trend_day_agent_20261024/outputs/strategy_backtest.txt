@@ -1,0 +1,15 @@
+
+═══ Entry P(trend)>=0.5, direction conf >= 0.5 ═══
+  Dev        fires= 182  mean_pips= +53.1  median= +51.1  win=92.9%  hit20=81.9%  MFE=79.9  MAE=23.1  best=212.4  worst=-49.3  total=9667.9
+  Holdout    fires= 119  mean_pips=  -1.8  median=  -3.8  win=45.4%  hit20=28.6%  MFE=38.3  MAE=36.1  best=104.1  worst=-128.8  total=-208.3
+  Conf2026   fires= 147  mean_pips=  -0.5  median=  -1.7  win=48.3%  hit20=29.9%  MFE=34.4  MAE=33.8  best=142.3  worst=-144.7  total=-68.7
+
+═══ Entry P(trend)>=0.6, direction conf >= 0.6 ═══
+  Dev        fires= 182  mean_pips= +53.0  median= +50.4  win=92.9%  hit20=81.9%  MFE=79.7  MAE=23.2  best=212.4  worst=-49.3  total=9642.6
+  Holdout    fires=  90  mean_pips=  -0.9  median=  -0.6  win=48.9%  hit20=30.0%  MFE=38.4  MAE=36.6  best=102.9  worst=-128.8  total=-83.3
+  Conf2026   fires= 122  mean_pips=  -0.8  median=  +0.3  win=50.0%  hit20=30.3%  MFE=34.9  MAE=33.8  best=142.3  worst=-144.7  total=-94.9
+
+═══ Entry P(trend)>=0.7, direction conf >= 0.7 ═══
+  Dev        fires= 182  mean_pips= +53.1  median= +50.4  win=92.9%  hit20=81.9%  MFE=79.8  MAE=23.1  best=212.4  worst=-49.3  total=9666.6
+  Holdout    fires=  71  mean_pips=  +0.1  median=  -0.9  win=46.5%  hit20=29.6%  MFE=37.6  MAE=37.1  best=102.9  worst=-78.8  total=10.2
+  Conf2026   fires=  84  mean_pips=  -5.5  median=  -5.8  win=44.0%  hit20=23.8%  MFE=32.1  MAE=35.6  best=115.5  worst=-130.3  total=-462.7

@@ -1,0 +1,4 @@
+partition,n_fires,GOOD_FIRE_%,FALSE_POSITIVE_%,WRONG_DIR_%,LATE_INSUFFICIENT_%,SMALL_TRUE_MOVE_%,undetermined_%
+Dev,240,36.2,33.3,21.2,8.8,0.4,0.0
+Holdout,103,32.0,46.6,17.5,2.9,1.0,0.0
+Conf2026,110,26.4,49.1,18.2,5.5,0.9,0.0

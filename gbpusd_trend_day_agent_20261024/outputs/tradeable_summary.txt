@@ -1,0 +1,13 @@
+Days: 706
+Full-day trend days (>=80 pips): 309 (43.8%)
+Within 07-22 UK trend days: 256 (36.3%)
+Both full and window-constrained: 256
+07:00 UK — remaining pips (trend days): median 77.1, mean 81.9, >=50 share 86.7%, >=25 share 97.4%
+08:00 UK — remaining pips (trend days): median 72.7, mean 76.8, >=50 share 79.6%, >=25 share 94.2%
+09:00 UK — remaining pips (trend days): median 69.8, mean 72.7, >=50 share 76.4%, >=25 share 93.9%
+10:00 UK — remaining pips (trend days): median 63.8, mean 68.3, >=50 share 68.9%, >=25 share 91.6%
+11:00 UK — remaining pips (trend days): median 62.5, mean 65.3, >=50 share 64.7%, >=25 share 88.3%
+12:00 UK — remaining pips (trend days): median 56.4, mean 61.9, >=50 share 58.3%, >=25 share 87.1%
+13:00 UK — remaining pips (trend days): median 54.1, mean 56.8, >=50 share 54.7%, >=25 share 82.5%
+14:00 UK — remaining pips (trend days): median 41.6, mean 47.8, >=50 share 40.8%, >=25 share 73.8%
+15:00 UK — remaining pips (trend days): median 33.0, mean 39.7, >=50 share 30.7%, >=25 share 59.9%

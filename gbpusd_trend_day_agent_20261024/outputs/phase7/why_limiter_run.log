@@ -1,0 +1,38 @@
+n=453
+
+═══ Limiter classification by partition ═══
+limiter    FALSE_POSITIVE  GOOD_FIRE  INSUFFICIENT_MOVE_ALL_DIRECTIONS  LATE_FIRE_INSUFFICIENT_REMAIN  WRONG_DIR
+partition                                                                                                       
+Conf2026               54         29                                 1                              6         20
+Dev                    80         87                                 1                             21         51
+Holdout                48         33                                 1                              3         18
+
+Percentages:
+limiter    FALSE_POSITIVE  GOOD_FIRE  INSUFFICIENT_MOVE_ALL_DIRECTIONS  LATE_FIRE_INSUFFICIENT_REMAIN  WRONG_DIR
+partition                                                                                                       
+Conf2026             49.1       26.4                               0.9                            5.5       18.2
+Dev                  33.3       36.2                               0.4                            8.8       21.2
+Holdout              46.6       32.0                               1.0                            2.9       17.5
+
+═══ MFE distribution by limiter class (Conf2026 + Holdout) ═══
+                                  count  mean   50%   75%    max
+limiter                                                         
+FALSE_POSITIVE                    102.0  23.2  21.1  35.7   59.6
+GOOD_FIRE                          62.0  75.8  68.7  85.3  158.8
+INSUFFICIENT_MOVE_ALL_DIRECTIONS    2.0  31.2  31.2  37.5   43.8
+LATE_FIRE_INSUFFICIENT_REMAIN       9.0  33.9  35.5  37.9   38.7
+WRONG_DIR                          38.0  16.9  14.4  24.5   46.6
+
+═══ Late-fire magnitude on true trend days (Conf2026 + Holdout) ═══
+Mean pips_before_signal (in true dir): 47.5
+Mean true_pips: 110.7
+% of trend-day fires with >50% move already done: 35.1%
+% with >75% move already done: 6.3%
+% with >=45 pips remaining in TRUE direction: 88.3%
+% with >=45 pips remaining in PREDICTED direction: 57.7%
+
+═══ Headline limiter summary ═══
+partition  n_fires  GOOD_FIRE_%  FALSE_POSITIVE_%  WRONG_DIR_%  LATE_INSUFFICIENT_%  SMALL_TRUE_MOVE_%  undetermined_%
+      Dev      240         36.2              33.3         21.2                  8.8                0.4             0.0
+  Holdout      103         32.0              46.6         17.5                  2.9                1.0             0.0
+ Conf2026      110         26.4              49.1         18.2                  5.5                0.9             0.0

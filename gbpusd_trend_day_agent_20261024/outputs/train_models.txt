@@ -1,0 +1,59 @@
+Features: 99; rows: 4182
+Partition sizes: {'Dev': 2334, 'Conf2026': 1056, 'Holdout': 792}
+Trend-day rate per partition: {'Conf2026': 0.345, 'Dev': 0.468, 'Holdout': 0.492}
+────────────────────────────────────────────────────────────────────────────────
+HOUR 07 UK — N(tr/va/te)=389/132/175 — trend-rate val=0.492, test=0.343
+  val_gbm    auc=0.561  pr_auc=0.6  brier=0.277  acc=0.53  prec=0.521  rec=0.585  pos_rate=0.492
+  val_lr     auc=0.532  pr_auc=0.557  brier=0.284  acc=0.508  prec=0.5  rec=0.415  pos_rate=0.492
+  test_gbm   auc=0.632  pr_auc=0.538  brier=0.29  acc=0.526  prec=0.394  rec=0.717  pos_rate=0.343
+  val_dir   auc=0.559 acc=0.6 prec=0.556 rec=0.667
+  test_dir  auc=0.54 acc=0.567 prec=0.583 rec=0.656
+  val_rem   {'mae': 21.84, 'corr': 0.211, 'mean_true': 78.2, 'mean_pred': 80.6}
+  test_rem  {'mae': 28.82, 'corr': 0.128, 'mean_true': 83.5, 'mean_pred': 82.5}
+────────────────────────────────────────────────────────────────────────────────
+HOUR 08 UK — N(tr/va/te)=389/132/175 — trend-rate val=0.492, test=0.343
+  val_gbm    auc=0.637  pr_auc=0.661  brier=0.252  acc=0.614  prec=0.606  rec=0.615  pos_rate=0.492
+  val_lr     auc=0.556  pr_auc=0.564  brier=0.275  acc=0.53  prec=0.527  rec=0.446  pos_rate=0.492
+  test_gbm   auc=0.689  pr_auc=0.62  brier=0.237  acc=0.594  prec=0.437  rec=0.633  pos_rate=0.343
+  val_dir   auc=0.596 acc=0.477 prec=0.417 rec=0.333
+  test_dir  auc=0.61 acc=0.533 prec=0.567 rec=0.531
+  val_rem   {'mae': 23.29, 'corr': 0.215, 'mean_true': 72.3, 'mean_pred': 70.9}
+  test_rem  {'mae': 27.23, 'corr': 0.224, 'mean_true': 78.6, 'mean_pred': 77.7}
+────────────────────────────────────────────────────────────────────────────────
+HOUR 09 UK — N(tr/va/te)=389/132/175 — trend-rate val=0.492, test=0.343
+  val_gbm    auc=0.641  pr_auc=0.687  brier=0.25  acc=0.583  prec=0.581  rec=0.554  pos_rate=0.492
+  val_lr     auc=0.642  pr_auc=0.648  brier=0.247  acc=0.583  prec=0.593  rec=0.492  pos_rate=0.492
+  test_gbm   auc=0.737  pr_auc=0.663  brier=0.209  acc=0.703  prec=0.559  rec=0.633  pos_rate=0.343
+  val_dir   auc=0.631 acc=0.615 prec=0.593 rec=0.533
+  test_dir  auc=0.74 acc=0.717 prec=0.759 rec=0.688
+  val_rem   {'mae': 24.24, 'corr': 0.059, 'mean_true': 67.3, 'mean_pred': 75.5}
+  test_rem  {'mae': 30.95, 'corr': 0.178, 'mean_true': 71.7, 'mean_pred': 79.7}
+────────────────────────────────────────────────────────────────────────────────
+HOUR 10 UK — N(tr/va/te)=389/132/175 — trend-rate val=0.492, test=0.343
+  val_gbm    auc=0.718  pr_auc=0.747  brier=0.226  acc=0.674  prec=0.72  rec=0.554  pos_rate=0.492
+  val_lr     auc=0.684  pr_auc=0.725  brier=0.228  acc=0.652  prec=0.679  rec=0.554  pos_rate=0.492
+  test_gbm   auc=0.793  pr_auc=0.695  brier=0.196  acc=0.691  prec=0.544  rec=0.617  pos_rate=0.343
+  val_dir   auc=0.69 acc=0.646 prec=0.667 rec=0.467
+  test_dir  auc=0.816 acc=0.733 prec=0.767 rec=0.719
+  val_rem   {'mae': 22.44, 'corr': 0.3, 'mean_true': 66.4, 'mean_pred': 67.5}
+  test_rem  {'mae': 29.75, 'corr': 0.181, 'mean_true': 65.0, 'mean_pred': 70.5}
+────────────────────────────────────────────────────────────────────────────────
+HOUR 11 UK — N(tr/va/te)=389/132/177 — trend-rate val=0.492, test=0.35
+  val_gbm    auc=0.692  pr_auc=0.723  brier=0.248  acc=0.621  prec=0.674  rec=0.446  pos_rate=0.492
+  val_lr     auc=0.706  pr_auc=0.756  brier=0.219  acc=0.659  prec=0.738  rec=0.477  pos_rate=0.492
+  test_gbm   auc=0.766  pr_auc=0.678  brier=0.222  acc=0.706  prec=0.569  rec=0.661  pos_rate=0.35
+  val_dir   auc=0.627 acc=0.631 prec=0.65 rec=0.433
+  test_dir  auc=0.857 acc=0.774 prec=0.88 rec=0.667
+  val_rem   {'mae': 22.68, 'corr': 0.112, 'mean_true': 66.7, 'mean_pred': 68.8}
+  test_rem  {'mae': 35.7, 'corr': 0.198, 'mean_true': 58.4, 'mean_pred': 73.0}
+────────────────────────────────────────────────────────────────────────────────
+HOUR 12 UK — N(tr/va/te)=389/132/179 — trend-rate val=0.492, test=0.346
+  val_gbm    auc=0.741  pr_auc=0.779  brier=0.213  acc=0.697  prec=0.755  rec=0.569  pos_rate=0.492
+  val_lr     auc=0.693  pr_auc=0.751  brier=0.228  acc=0.682  prec=0.745  rec=0.538  pos_rate=0.492
+  test_gbm   auc=0.805  pr_auc=0.743  brier=0.183  acc=0.721  prec=0.588  rec=0.645  pos_rate=0.346
+  val_dir   auc=0.681 acc=0.677 prec=0.655 rec=0.633
+  test_dir  auc=0.837 acc=0.758 prec=0.875 rec=0.636
+  val_rem   {'mae': 25.27, 'corr': 0.307, 'mean_true': 60.4, 'mean_pred': 67.8}
+  test_rem  {'mae': 28.68, 'corr': 0.324, 'mean_true': 55.9, 'mean_pred': 64.5}
+
+Top features at 10:00 UK saved.

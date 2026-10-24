@@ -1,0 +1,10 @@
+Classifiers detected: ['adx20', 'bb_hug', 'displace25', 'ema_stack', 'macd', 'or_breakout', 'structure']
+Days with both census + classifier: 704
+       name tpr_long fpr_long prec_long tpr_short fpr_short prec_short median_fire_hour_long median_fire_hour_short median_remaining_pips_long median_remaining_pips_short
+      adx20   100.0%   100.0%     22.6%    100.0%    100.0%      21.3%                   1.2                    1.2                         83                          78
+     bb_hug   100.0%    99.8%     22.6%    100.0%    100.0%      21.3%                   3.5                    3.2                         79                          76
+ displace25    26.4%     3.3%     70.0%     23.3%      5.8%      52.2%                  12.7                   12.5                         42                          35
+  ema_stack   100.0%   100.0%     22.6%    100.0%    100.0%      21.3%                   2.2                    2.2                         80                          77
+       macd   100.0%   100.0%     22.6%    100.0%    100.0%      21.3%                   0.3                    0.2                         84                          78
+or_breakout    99.4%    69.0%     29.6%     98.7%     67.9%      28.2%                   8.4                    8.2                         62                          57
+  structure   100.0%   100.0%     22.6%    100.0%    100.0%      21.3%                   3.2                    3.0                         81                          76

@@ -1,0 +1,71 @@
+Phase 7 Task 1 — Accuracy Audit
+================================
+
+The Phase 6 report quoted direction AUC/accuracy figures. Below is
+a strict reconstruction of what every number represented.
+
+UNCONDITIONAL direction accuracy on true trend days (not conditioned
+on model firing). This is what AUC-based metrics approximate.
+ hour_uk partition  n_true_trend_days  correct_direction  accuracy_%
+       7       Dev                182                126        69.2
+       7   Holdout                 65                 42        64.6
+       7  Conf2026                 60                 38        63.3
+       8       Dev                182                137        75.3
+       8   Holdout                 65                 41        63.1
+       8  Conf2026                 60                 39        65.0
+       9       Dev                182                147        80.8
+       9   Holdout                 65                 41        63.1
+       9  Conf2026                 60                 46        76.7
+      10       Dev                182                143        78.6
+      10   Holdout                 65                 43        66.2
+      10  Conf2026                 60                 50        83.3
+      11       Dev                182                148        81.3
+      11   Holdout                 65                 44        67.7
+      11  Conf2026                 62                 51        82.3
+      12       Dev                182                158        86.8
+      12   Holdout                 65                 47        72.3
+      12  Conf2026                 62                 47        75.8
+
+Direction accuracy among MODEL FIRES (p_trend >= 0.5), on true trend
+days only. This is the number that matters for trading.
+ hour_uk partition  n_fires_total  n_fires_on_trend_days  correct_dir_on_trend_fires  fires_on_nontrend_days  accuracy_on_trend_fires_%  share_of_fires_on_true_trend_%
+       7       Dev            168                    124                          83                      44                       66.9                            73.8
+       7   Holdout             57                     34                          23                      23                       67.6                            59.6
+       7  Conf2026             76                     39                          24                      37                       61.5                            51.3
+       8       Dev            150                    118                          86                      32                       72.9                            78.7
+       8   Holdout             47                     26                          18                      21                       69.2                            55.3
+       8  Conf2026             66                     39                          26                      27                       66.7                            59.1
+       9       Dev            149                    120                          96                      29                       80.0                            80.5
+       9   Holdout             60                     36                          25                      24                       69.4                            60.0
+       9  Conf2026             56                     32                          29                      24                       90.6                            57.1
+      10       Dev            158                    120                          97                      38                       80.8                            75.9
+      10   Holdout             45                     34                          28                      11                       82.4                            75.6
+      10  Conf2026             69                     39                          34                      30                       87.2                            56.5
+      11       Dev            159                    133                         107                      26                       80.5                            83.6
+      11   Holdout             40                     32                          27                       8                       84.4                            80.0
+      11  Conf2026             71                     42                          39                      29                       92.9                            59.2
+      12       Dev            141                    117                         100                      24                       85.5                            83.0
+      12   Holdout             42                     31                          23                      11                       74.2                            73.8
+      12  Conf2026             63                     38                          34                      25                       89.5                            60.3
+
+Late-fire breakdown — of fires on true trend days, how many happened
+after most of the directional travel had already occurred.
+ hour_uk partition  n_fires_on_trend  fires_after_>50pct_move_already_done  fires_after_>75pct_move_already_done  pct_fires_after_50pct_%
+       7       Dev               124                                    47                                    16                     37.9
+       7   Holdout                34                                     9                                     2                     26.5
+       7  Conf2026                39                                    14                                     2                     35.9
+       8       Dev               118                                    61                                    25                     51.7
+       8   Holdout                26                                    13                                     3                     50.0
+       8  Conf2026                39                                    19                                     4                     48.7
+       9       Dev               120                                    78                                    32                     65.0
+       9   Holdout                36                                    17                                     7                     47.2
+       9  Conf2026                32                                    20                                     7                     62.5
+      10       Dev               120                                    89                                    41                     74.2
+      10   Holdout                34                                    24                                    10                     70.6
+      10  Conf2026                39                                    27                                    11                     69.2
+      11       Dev               133                                   104                                    49                     78.2
+      11   Holdout                32                                    27                                    10                     84.4
+      11  Conf2026                42                                    35                                    17                     83.3
+      12       Dev               117                                   106                                    54                     90.6
+      12   Holdout                31                                    29                                    13                     93.5
+      12  Conf2026                38                                    35                                    24                     92.1

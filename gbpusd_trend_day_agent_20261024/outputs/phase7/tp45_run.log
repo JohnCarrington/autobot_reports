@@ -1,0 +1,11 @@
+First-fire-per-day signals: 453 (partitions: {'Dev': 240, 'Conf2026': 110, 'Holdout': 103})
+
+═══ TP=45 pips, varying SL (first-fire-per-day, cost 0.8 pip) ═══
+          expectancy_net_pips               n_trades              profit_factor               sl_pct_%               total_net_pips                tp_pct_%               win_rate_%              
+partition            Conf2026   Dev Holdout Conf2026  Dev Holdout      Conf2026   Dev Holdout Conf2026   Dev Holdout       Conf2026    Dev Holdout Conf2026   Dev Holdout   Conf2026   Dev Holdout
+sl_pips                                                                                                                                                                                           
+12                       1.16  0.05    0.55      110  240     103          1.13  1.00    1.06     69.1  75.0    74.8          127.7   11.5    57.0     18.2  20.4    20.4       30.0  24.2    25.2
+15                       0.65  1.44    0.74      110  240     103          1.06  1.13    1.07     63.6  68.8    69.9           71.9  345.0    76.3     20.0  25.8    23.3       32.7  30.4    30.1
+20                       1.65  1.21   -0.09      110  240     103          1.14  1.09    0.99     55.5  60.8    63.1          182.0  289.9    -9.0     25.5  29.6    26.2       40.0  35.4    35.0
+25                       2.70  1.87   -0.71      110  240     103          1.21  1.13    0.95     46.4  52.9    58.3          297.2  448.1   -73.5     29.1  33.3    28.2       46.4  42.1    38.8
+30                       2.48  1.54   -0.93      110  240     103          1.19  1.10    0.94     39.1  47.9    51.5          272.6  370.2   -96.2     30.0  35.4    30.1       48.2  45.4    42.7

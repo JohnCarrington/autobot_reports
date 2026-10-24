@@ -1,0 +1,82 @@
+[
+  {
+    "feature": "atr_ratio_so_far",
+    "importance": 0.2099626931049883
+  },
+  {
+    "feature": "pullback_from_lo_pips",
+    "importance": 0.10563345512301814
+  },
+  {
+    "feature": "body_mean_12_pips",
+    "importance": 0.10446013025659892
+  },
+  {
+    "feature": "ret_24bars_pips",
+    "importance": 0.07554861799040101
+  },
+  {
+    "feature": "bb_width_pips",
+    "importance": 0.05960285869259023
+  },
+  {
+    "feature": "asia_range_pips",
+    "importance": 0.0510307610582207
+  },
+  {
+    "feature": "ret_48bars_pips",
+    "importance": 0.03797409592076006
+  },
+  {
+    "feature": "ema13_minus_21_pips",
+    "importance": 0.034971121473494855
+  },
+  {
+    "feature": "atr14_pips",
+    "importance": 0.027478801354032082
+  },
+  {
+    "feature": "adx14",
+    "importance": 0.027446118648626977
+  },
+  {
+    "feature": "ema21_slope_6_pips",
+    "importance": 0.026064508308550366
+  },
+  {
+    "feature": "dist_R1_pips",
+    "importance": 0.025163293804475007
+  },
+  {
+    "feature": "pullback_from_hi_pips",
+    "importance": 0.023790123560620265
+  },
+  {
+    "feature": "bb_mid_pips",
+    "importance": 0.020604330244259707
+  },
+  {
+    "feature": "cal_big_today",
+    "importance": 0.020078211460187234
+  },
+  {
+    "feature": "dist_S1_pips",
+    "importance": 0.017402583848987324
+  },
+  {
+    "feature": "dist_lower_bb_pips",
+    "importance": 0.017271043897497913
+  },
+  {
+    "feature": "body_mean_6_pips",
+    "importance": 0.016001295679803667
+  },
+  {
+    "feature": "body_mean_3_pips",
+    "importance": 0.011837032573156285
+  },
+  {
+    "feature": "dist_PDH_pips",
+    "importance": 0.011007986182034387
+  }
+]

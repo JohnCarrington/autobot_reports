@@ -1,0 +1,37 @@
+Trend-day rate by calendar label (full corpus):
+             n  trend_n  trend_pct  avg_pips
+ext_label                                   
+BIG_NEWS   157       85       54.1      92.3
+MID_NEWS   208      103       49.5      83.0
+NORMAL     223       79       35.4      76.4
+POST_NEWS   23        8       34.8      77.1
+PRE_NEWS    95       34       35.8      77.2
+
+Trend-day rate by (partition, calendar label):
+                 n                                    trend_pct                                   
+ext_label BIG_NEWS MID_NEWS NORMAL POST_NEWS PRE_NEWS  BIG_NEWS MID_NEWS NORMAL POST_NEWS PRE_NEWS
+partition                                                                                         
+Conf2026      40.0     35.0   57.0      19.0     32.0      45.0     40.0   24.6      31.6     31.2
+Dev           87.0    129.0  125.0       4.0     46.0      56.3     53.5   36.8      50.0     34.8
+Holdout       30.0     44.0   41.0       NaN     17.0      60.0     45.5   46.3       NaN     47.1
+
+--- 2026 only (authoritative calendar) — 183 days ---
+            n  trend_pct   avg_pips
+ext_label                          
+BIG_NEWS   40       45.0  86.488750
+MID_NEWS   35       40.0  75.074286
+NORMAL     57       24.6  67.673684
+POST_NEWS  19       31.6  77.460526
+PRE_NEWS   32       31.2  76.485938
+
+Chi-square: chi2=19.18, dof=4, p=0.0007
+trend_day  False  True 
+ext_label              
+BIG_NEWS      72     85
+MID_NEWS     105    103
+NORMAL       144     79
+POST_NEWS     15      8
+PRE_NEWS      61     34
+
+BIG_NEWS trend-day direction split: {'SHORT': 46, 'LONG': 39}
+NORMAL trend-day direction split:  {'LONG': 48, 'SHORT': 31}

@@ -1,0 +1,4 @@
+partition,weekdays,trend_days,avg_trend_pips,trend_pct
+Conf2026 (mid),183,62,111.9,33.9
+Dev (bid),391,182,115.09,46.5
+Holdout (bid),132,65,107.2,49.2

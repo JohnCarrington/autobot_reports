@@ -1,0 +1,26 @@
+
+--- k=3, consecutive BB-hug bars ---
+  signals total: 697
+    Dev      : n=388  wins=158  win%= 40.7  TP%= 29.6  SL%= 54.9  total_net=  +80.5  mean= +0.2
+    Holdout  : n=131  wins= 49  win%= 37.4  TP%= 28.2  SL%= 60.3  total_net= -269.2  mean= -2.1
+    Conf2026 : n=178  wins= 78  win%= 43.8  TP%= 25.8  SL%= 46.1  total_net= +271.8  mean= +1.5
+
+--- k=4, consecutive BB-hug bars ---
+  signals total: 696
+    Dev      : n=388  wins=160  win%= 41.2  TP%= 29.9  SL%= 52.8  total_net= +324.7  mean= +0.8
+    Holdout  : n=131  wins= 48  win%= 36.6  TP%= 25.2  SL%= 60.3  total_net= -398.2  mean= -3.0
+    Conf2026 : n=177  wins= 81  win%= 45.8  TP%= 25.4  SL%= 46.3  total_net= +306.8  mean= +1.7
+
+--- k=6, consecutive BB-hug bars ---
+  signals total: 681
+    Dev      : n=384  wins=161  win%= 41.9  TP%= 29.2  SL%= 51.6  total_net= +365.9  mean= +1.0
+    Holdout  : n=128  wins= 52  win%= 40.6  TP%= 27.3  SL%= 54.7  total_net=  -13.8  mean= -0.1
+    Conf2026 : n=169  wins= 86  win%= 50.9  TP%= 27.8  SL%= 44.4  total_net= +622.8  mean= +3.7
+
+--- k=8, consecutive BB-hug bars ---
+  signals total: 635
+    Dev      : n=358  wins=149  win%= 41.6  TP%= 28.8  SL%= 52.5  total_net= +183.6  mean= +0.5
+    Holdout  : n=120  wins= 47  win%= 39.2  TP%= 28.3  SL%= 55.0  total_net=  +29.8  mean= +0.2
+    Conf2026 : n=157  wins= 72  win%= 45.9  TP%= 26.8  SL%= 47.1  total_net= +312.8  mean= +2.0
+
+Best k (by OOS total net pips): k=6 with +609.0 pips

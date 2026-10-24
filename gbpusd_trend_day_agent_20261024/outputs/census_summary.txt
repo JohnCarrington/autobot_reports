@@ -1,0 +1,70 @@
+======================================================================
+GBPUSD TREND DAY CENSUS — PHASE 1 SUMMARY
+======================================================================
+
+Total weekdays analysed: 706
+Trend days (>= 80 pips one-directional): 309 (43.8%)
+
+Mean weekly rate: 2.19 trend days per 5-weekday week
+
+Average pips on trend days: 112.8
+Max swing: 260.5 on 2025-04-04
+Median swing: 103.6
+
+--- Partition breakdown ---
+                weekdays  trend_days  avg_trend_pips  trend_pct
+partition                                                      
+Conf2026 (mid)       183          62          111.90       33.9
+Dev (bid)            391         182          115.09       46.5
+Holdout (bid)        132          65          107.20       49.2
+
+--- Size buckets ---
+         count  share
+bucket               
+80-99      134   43.4
+100-149    133   43.0
+150-199     35   11.3
+200+         7    2.3
+
+--- Anchor session (where the swing starts) ---
+                count  share
+anchor_session              
+ASIA              164   53.1
+LDN                77   24.9
+PRE_LDN            35   11.3
+NY                 33   10.7
+
+--- Pre-07:00 UK movement on trend days ---
+              count  share
+pre07_bucket              
+<10               2    0.6
+10-25            51   16.5
+25-50           151   48.9
+50-75            76   24.6
+75+              29    9.4
+
+% of trend days that start before 07:00 UK: 53.1%
+% of trend days with >=25 pips completed before 07:00 UK: 82.8%
+Mean pips remaining after 07:00 UK on trend days: 68.3
+
+--- Consolidation after the swing peak ---
+               count
+consolidation       
+True             202
+False             93
+NaN               14
+
+% of trend days ending in consolidation (post-reversal < 30% of trend): 68.5%
+
+--- Bollinger Band hugging ---
+Mean BB-hug minutes on trend days: 259
+% trend days with >=30 min of BB-hug: 99.4%
+
+--- Weekday ---
+         weekdays  trend_days  trend_pct
+weekday                                 
+Mon           141          46       32.6
+Tue           142          56       39.4
+Wed           142          76       53.5
+Thu           141          72       51.1
+Fri           140          59       42.1

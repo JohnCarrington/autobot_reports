@@ -1,0 +1,4 @@
+year,weekdays,trend_days,max_pips_at_45_per_day,n_ai_fires,n_good_fires,n_false_positive,n_wrong_dir,tp45_sl15_trades,tp45_sl15_wins,tp45_sl15_net_pips,tp45_sl25_trades,tp45_sl25_wins,tp45_sl25_net_pips
+2024,262,101,4545,129,42,46,30,129,37,34.19999999999998,129,52,102.59999999999995
+2025,261,146,6570,214,78,82,39,214,67,387.1,214,89,272.0
+2026,183,62,2790,110,29,54,20,110,36,72.0,110,51,297.40000000000003
