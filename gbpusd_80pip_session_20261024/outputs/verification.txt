@@ -1,0 +1,60 @@
+STAGE 1 VERIFICATION
+========================================================================
+
+§1 — Spot-check qualifying / non-qualifying days
+    (independent re-computation vs daily_results.csv)
+
+  2024-04-23  main=[YES       UP    mv=   87.30  open=12343.50  close=12430.80]  | recomputed=[YES       UP    mv=87.30]  →  ✓
+  2024-06-12  main=[YES       UP    mv=   92.10  open=12747.60  close=12839.70]  | recomputed=[YES       UP    mv=92.10]  →  ✓
+  2024-07-03  main=[YES       UP    mv=   82.00  open=12681.40  close=12763.40]  | recomputed=[YES       UP    mv=82.00]  →  ✓
+  2024-08-23  main=[YES       UP    mv=   83.30  open=13110.60  close=13193.90]  | recomputed=[YES       UP    mv=83.30]  →  ✓
+  2024-09-26  main=[YES       UP    mv=   80.60  open=13347.40  close=13428.00]  | recomputed=[YES       UP    mv=80.60]  →  ✓
+  2024-01-02  main=[YES       DOWN  mv= -101.50  open=12730.90  close=12629.40]  | recomputed=[YES       DOWN  mv=-101.50]  →  ✓
+  2024-01-23  main=[YES       DOWN  mv=  -88.40  open=12745.50  close=12657.10]  | recomputed=[YES       DOWN  mv=-88.40]  →  ✓
+  2024-02-02  main=[YES       DOWN  mv= -121.50  open=12745.60  close=12624.10]  | recomputed=[YES       DOWN  mv=-121.50]  →  ✓
+  2024-02-05  main=[YES       DOWN  mv=  -81.90  open=12611.10  close=12529.20]  | recomputed=[YES       DOWN  mv=-81.90]  →  ✓
+  2024-03-21  main=[YES       DOWN  mv= -129.40  open=12784.60  close=12655.20]  | recomputed=[YES       DOWN  mv=-129.40]  →  ✓
+  2024-12-20  main=[YES       UP    mv=   80.10  open=12504.70  close=12584.80]  | recomputed=[YES       UP    mv=80.10]  →  ✓
+  2025-09-05  main=[YES       UP    mv=   80.10  open=13460.90  close=13541.00]  | recomputed=[YES       UP    mv=80.10]  →  ✓
+  2026-02-18  main=[NO              mv=  -79.95  open=13573.65  close=13493.70]  | recomputed=[NO              mv=-79.95]  →  ✓
+  2025-04-10  main=[NO              mv=   79.10  open=12858.80  close=12937.90]  | recomputed=[NO              mv=79.10]  →  ✓
+  2026-02-23  main=[NO              mv=    0.20  open=13490.90  close=13491.10]  | recomputed=[NO              mv=0.20]  →  ✓
+  2025-01-22  main=[NO              mv=    0.30  open=12321.20  close=12321.50]  | recomputed=[NO              mv=0.30]  →  ✓
+  2024-06-03  main=[NO              mv=   55.90  open=12736.80  close=12792.70]  | recomputed=[NO              mv=55.90]  →  ✓
+  2024-06-04  main=[NO              mv=  -18.30  open=12800.90  close=12782.60]  | recomputed=[NO              mv=-18.30]  →  ✓
+  2024-06-05  main=[NO              mv=   -2.40  open=12771.40  close=12769.00]  | recomputed=[NO              mv=-2.40]  →  ✓
+  2024-06-06  main=[NO              mv=   -9.80  open=12793.10  close=12783.30]  | recomputed=[NO              mv=-9.80]  →  ✓
+
+  ✓ All 20 spot-checks agree with main analysis.
+
+§2 — UK clock-change weekend verification
+    Confirming utc_open_time / utc_close_time for dates either side of every DST transition.
+
+  BST_start 2024-03-31 — 2024-03-29 (pre): expect GMT 07:00:00-16:55:00  got GMT 07:00:00-16:55:00  ✓
+  BST_start 2024-03-31 — 2024-04-01 (post): expect BST 06:00:00-15:55:00  got BST 06:00:00-15:55:00  ✓
+  GMT_start 2024-10-27 — 2024-10-25 (pre): expect BST 06:00:00-15:55:00  got BST 06:00:00-15:55:00  ✓
+  GMT_start 2024-10-27 — 2024-10-28 (post): expect GMT 07:00:00-16:55:00  got GMT 07:00:00-16:55:00  ✓
+  BST_start 2025-03-30 — 2025-03-28 (pre): expect GMT 07:00:00-16:55:00  got GMT 07:00:00-16:55:00  ✓
+  BST_start 2025-03-30 — 2025-03-31 (post): expect BST 06:00:00-15:55:00  got BST 06:00:00-15:55:00  ✓
+  GMT_start 2025-10-26 — 2025-10-24 (pre): expect BST 06:00:00-15:55:00  got BST 06:00:00-15:55:00  ✓
+  GMT_start 2025-10-26 — 2025-10-27 (post): expect GMT 07:00:00-16:55:00  got GMT 07:00:00-16:55:00  ✓
+  BST_start 2026-03-29 — 2026-03-27 (pre): expect GMT 07:00:00-16:55:00  got GMT 07:00:00-16:55:00  ✓
+  BST_start 2026-03-29 — 2026-03-30 (post): expect BST 06:00:00-15:55:00  got BST 06:00:00-15:55:00  ✓
+  GMT_start 2026-10-25 — 2026-10-23 (pre): expect BST 06:00:00-15:55:00  got BST 06:00:00-15:55:00  ✓
+  GMT_start  2026-10-26(post): NOT IN DAILY  — abort check
+
+§3 — Mechanical check: main-script qualifying path reads only ts/open/close
+  ✓ No high/low read-expression found in analyse_day() or _price_to_hundredths()
+
+§4 — Aggregate consistency check (weekly / monthly / yearly)
+  ✓ weekly: all 147 periods match the daily totals
+  ✓ monthly: all 34 periods match the daily totals
+  ✓ yearly: all 3 periods match the daily totals
+
+  Grand totals from daily:  {'analysed': 700, 'up': 24, 'down': 26, 'qual': 50, 'excl': 35}
+  Grand totals from yearly: {'analysed': 700, 'up': 24, 'down': 26, 'qual': 50, 'excl': 35}
+  ✓ Grand totals agree.
+  ✓ qualifying_days.csv has 50 rows == daily qualifying count
+
+========================================================================
+VERIFICATION PASS
