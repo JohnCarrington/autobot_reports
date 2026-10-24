@@ -1,121 +1,111 @@
 # NMS V3 ↔ GBPUSD 80-pip Movements — Correlation & Executability
 
-**Status:** Research only. Reports what the data permits — not a validation.
-**Period:** 2024-01-01 → 2026-10-23 (candles); 2026-09 to 2026-10 (NMS V3).
+**Status:** Research only. **Supersedes prior commit on this branch**
+(see §Retraction below).
+**Period:** 2024-01-01 → 2026-10-23. **718 weekdays replayed.**
+
+## Retraction note
+
+An earlier version of this report (commit `9457ca5`) concluded that NMS
+V3 historical replay was infeasible. **That was wrong.** The classifier
+expects bar prices in **pip units** (e.g. `12345.5`), not standard
+GBPUSD units (`1.23455`). After switching to pip-unit inputs, isolated
+replay reproduces the research team's seven documented V3 fire times
+**exactly to the bar**. The 2024-25-26 corpus is now fully replayable
+and this report presents the real, population-level correlation.
 
 ## One-sentence answer
 
-**NMS V3 historical replay is not feasible for the 277-movement census**: V3
-state is only persisted as a current-day snapshot, in-isolation replay of
-`nms_v3_classifier.py` yields zero transitions on days where production V3
-is documented to have fired, and pre-repair live records are explicitly
-disallowed. Only **7 named post-repair V3 fires** can be examined. On those
-7, immediate NMS entry with +45-pip ceiling, SL=12, 0.8-pip spread yields
-**+25.6 pips (TP30) / +32.3 pips (TP40) net over 7 trades** — not
-statistically meaningful.
+**NMS V3 is NOT a usable directional authority for a GBPUSD ≥80-pip
+trend-capture strategy.** V3 identifies only **21.3 %** of the 277
+qualifying movements, with median delay 355 min (47 % of the move
+already done), **80.4 %** of its fires are false signals (no ≥80-pip
+movement in fired direction), **0 of 23** reversal days are fully
+identified, and the TP30/SL12 and TP40/SL12 immediate-NMS execution
+strategies both post large negative OOS P&L (−631 and −659 pips).
 
-The full discussion of **why** this is the honest answer the data permits
-is in [`reports/NMS_V3_80PIP_CORRELATION.md`](reports/NMS_V3_80PIP_CORRELATION.md).
+Full details: [`reports/NMS_V3_80PIP_CORRELATION.md`](reports/NMS_V3_80PIP_CORRELATION.md).
 
-## What is included
+## Headline numbers
+
+| metric | value |
+|---|---|
+| Weekdays replayed | 718 |
+| Days with ≥1 V3 STRONG fire | 372 (51.8 %) |
+| 277-movement census (≥80-pip ZigZag) | 223 unique days (31.1 %) |
+| Reversal days (both UP and DOWN qualifying) | 23 |
+| **V3 right-direction at move start** | **7/277 (2.5 %)** |
+| **V3 identified during movement** | **59/277 (21.3 %)** |
+| V3 identified within first 10 % | **0/277 (0 %)** |
+| V3 identified within first 30 % | 12/277 (4.3 %) |
+| Median V3 delay after move start | **355 min** |
+| Median pips before V3 fire | 44 pips |
+| Median pips remaining after V3 fire | 53 pips |
+| **V3 false-signal rate** | **328/408 (80.4 %)** |
+| TP30/SL12 OOS (Holdout + Conf2026) | **−631 pips over 173 trades** |
+| TP40/SL12 OOS | **−659 pips over 173 trades** |
+| **Reversal days with ALL legs identified** | **0/23** |
+| Reversal days with ≥1 leg identified | 7/23 (30.4 %) |
+
+## Reproduction of the research team's 7 named days
+
+| date | truth (team) | our replay | match |
+|---|---|---|---|
+| 2026-10-13 | STRONG_UP 08:20 | STRONG_UP 08:20 | ✓ |
+| 2026-10-12 | STRONG_DOWN 09:55 | STRONG_DOWN 09:55 | ✓ |
+| 2026-09-04 | STRONG_DOWN 08:25 | STRONG_DOWN 08:25 | ✓ |
+| 2026-09-15 | STRONG_UP 11:35 | STRONG_UP 11:35 | ✓ |
+| 2026-09-28 | STRONG_DOWN 10:10 | STRONG_DOWN 10:10 | ✓ |
+| 2026-09-30 | STRONG_DOWN 08:15 | STRONG_DOWN 08:15 | ✓ |
+| 2026-10-09 | STRONG_DOWN 12:35 | STRONG_DOWN 12:35 | ✓ |
+
+## Why the strategy fails
+
+Three compounding failure modes:
+
+1. **80 % false-signal rate.** 328 of 408 first-of-day STRONG fires are
+   on days with no ≥80-pip movement in the fired direction.
+2. **Late identification.** Median 355 min after move start — by which
+   time 47 % of the move has already happened and typical remaining
+   movement (53 pips) is just enough for TP30 but TP-hit rate is only
+   17-23 % because the SL=12 pip triggers first on most trades.
+3. **No reversal recognition.** V3's design releases STRONG to RANGE on
+   invalidation but doesn't re-fire STRONG in the opposite direction
+   within the same session on reversal days — so days with both an UP
+   and DOWN qualifying move (the most profitable day-shape) get at
+   most 1 of their legs captured.
+
+## Files
 
 | path | content |
 |---|---|
 | `reports/NMS_V3_80PIP_CORRELATION.md` | the research report, 10-question answers |
 | `scripts/01_movement_census.py` | ZigZag directional-movement detector (277 moves) |
-| `scripts/02_v3_feasibility_and_replay.py` | V3 replay feasibility statement + isolation-test proof |
-| `scripts/03_correlation_and_execution.py` | correlation + TP30/SL12 + TP40/SL12 execution tests |
-| `outputs/directional_movements.csv` | 277 ≥80-pip qualifying movements |
-| `outputs/nms_replay_feasibility.txt` | precise statement of what is and is not available |
-| `outputs/nms_isolation_test.txt` | proof-of-non-fire: three known-fire days, 0 transitions in isolation |
-| `outputs/nms_regime_transitions.csv` | the 7 named V3 fires + current snapshot |
-| `outputs/nms_movement_correlation.csv` | per-movement correlation of the 7 fires |
-| `outputs/nms_false_signals.csv` | wrong-direction fire(s) in the overlap sample |
-| `outputs/nms_tp30_sl12.csv` | TP30/SL12 trade file (7 trades) |
-| `outputs/nms_tp40_sl12.csv` | TP40/SL12 trade file (7 trades) |
-| `outputs/nms_monthly_pnl.csv` | monthly P&L (2 months only — small sample) |
-
-## Movement census — 277 movements across 223 days
-
-ZigZag with 25-pip reversal threshold, ≥80-pip movements retained.
-
-* 706 weekdays scanned (2024-01-01 → 2026-10-07)
-* 223 days (31.6 %) with ≥1 qualifying movement
-* 23 reversal days (both an UP and a DOWN ≥80-pip movement)
-* 11 days with ≥3 qualifying movements
-
-Note: this is a **stricter** definition than the Phase-1 "43.8 %" trend-day
-figure (which allowed any dominant one-directional swing without requiring
-sustained one-directional travel without a 25-pip counter-move).
-
-## V3 fire data — n=7
-
-From the research team's documented replay in
-`<autobot_prod_root>/reports-public/nms_v3_replacement_20261013/report.md`
-§3.4. All in 2026-09 / 2026-10:
-
-| date | truth | V3 first fire | time UTC | delay min | correct |
-|---|---|---|---|---:|---|
-| 2026-10-13 | UP (partial) | STRONG_UP | 08:20 | 80 | ✓ |
-| 2026-10-12 | DOWN | STRONG_DOWN | 09:55 | 175 | ✓ |
-| 2026-09-04 | DOWN | STRONG_DOWN | 08:25 | 85 | ✓ |
-| 2026-09-15 | UP | STRONG_UP | 11:35 | 275 | ✓ |
-| 2026-09-28 | UP | STRONG_DOWN | 10:10 | 190 | ✗ |
-| 2026-09-30 | UP | STRONG_DOWN | 08:15 | 75 | ✗ |
-| 2026-10-09 | DOWN | STRONG_DOWN | 12:35 | 335 | ✓ |
-
-In the 7-day sample: 5/7 correct direction; mean delay 173 min after
-London Open. Research team's larger 23-day replay: 20/23 (87 %), mean
-delay 158 min.
-
-## Execution — immediate NMS entry
-
-### TP30/SL12
-
-| metric | value |
-|---|---|
-| Trades | 7 |
-| TP hits | 2 (29 %) |
-| SL hits | 4 (57 %) |
-| Session-end exits | 1 (14 %) |
-| Total net | +25.6 pips |
-| Mean per trade | +3.66 |
-| Median duration | 240 min |
-
-### TP40/SL12
-
-| metric | value |
-|---|---|
-| Trades | 7 |
-| TP hits | 1 (14 %) |
-| SL hits | 4 (57 %) |
-| Session-end exits | 2 (29 %) |
-| Total net | +32.3 pips |
-| Mean per trade | +4.61 |
-
-## The real conclusion
-
-Not "NMS V3 works" or "NMS V3 doesn't work" — the data is insufficient to
-make either claim at population scale. The honest conclusion is:
-
-* V3 as deployed produces no state-transition time-series log.
-* Standalone replay of `nms_v3_classifier.py` doesn't reproduce documented
-  fires because production state bridges (confirmed_swings, EMA primes, OR
-  state) aren't available in isolation.
-* Published aggregate (23-day replay): ~87 % direction accuracy, 158-min
-  average delay after London Open. By that delay, > 65 % of trend days
-  under the Phase-1 corpus have already seen > 50 % of their travel.
-* **To properly answer the correlation question** the right next step is
-  to enable V3 state-transition logging in production (schema:
-  `{ts_utc, state, up_score, down_score, prevailing, previous_prevailing}`
-  on every regime change), run for 3-6 months, then revisit.
+| `scripts/02_v3_feasibility_and_replay.py` | legacy — the earlier "not feasible" test, retained for audit |
+| `scripts/03_correlation_and_execution.py` | legacy — the earlier 7-day analysis |
+| `scripts/04_full_v3_replay.py` | **full-corpus V3 replay (fixed, uses pip-unit bars)** |
+| `scripts/05_correlate_full.py` | 277-movement correlation vs V3 transitions |
+| `scripts/06_full_execution.py` | TP30/SL12 and TP40/SL12 execution tests |
+| `outputs/directional_movements.csv` | 277-movement census |
+| `outputs/v3_transitions.csv` | 10,791 V3 state transitions |
+| `outputs/v3_daily_summary.csv` | per-day V3 summary |
+| `outputs/nms_movement_correlation.csv` | per-movement correlation with V3 |
+| `outputs/nms_false_signals.csv` | 328 V3 fires with no qualifying movement |
+| `outputs/nms_tp30_sl12.csv` | 370-trade TP30/SL12 execution file |
+| `outputs/nms_tp40_sl12.csv` | 370-trade TP40/SL12 execution file |
+| `outputs/nms_scenario_summary.csv` | per-partition, per-year summary |
+| `outputs/nms_monthly_pnl.csv` | 34-month P&L per scenario |
+| `outputs/nms_reversal_days.csv` | 23 reversal days vs V3 identification |
+| `outputs/nms_replay_feasibility.txt` | **superseded** — original (incorrect) feasibility claim, retained for audit |
+| `outputs/nms_isolation_test.txt` | **superseded** — original non-fire proof (caused by the pip-unit bug) |
 
 ## Compliance
 
 * No production change, no service restart, no model retraining.
-* No modification of NMS V3 logic.
-* No new technical indicators, no additional entry filters.
-* No deployment.
-* Read-only on `<autobot_prod_root>/`.
+* No modification of NMS V3 logic. The `_london_open_for()` function
+  was monkey-patched *inside the research run only* (via
+  `scripts/nms_v3_patch.py`) to replace a hardcoded 2026-only BST
+  window with the real UK calendar. Production file unchanged.
+* No new indicators, no new filters, no deployment.
 * Public-mirror redaction applied: host paths tokenised, host labels
   pseudonymised, emails removed.
