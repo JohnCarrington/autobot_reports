@@ -1,0 +1,4 @@
+event_family,year,forecast_available,n_events,note
+ALL,2024,no,-,Finnhub cache absent for 2024; synthetic template has no forecast; historical forecast integrity cannot be guaranteed retroactively
+ALL,2025,no,-,Same as 2024 — no point-in-time forecast cache
+ALL,2026,no,-,Finnhub local cache strips forecast/estimate/actual/prev before persistence
