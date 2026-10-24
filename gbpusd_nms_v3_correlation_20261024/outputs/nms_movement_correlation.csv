@@ -1,0 +1,2 @@
+date,truth,v3_state,v3_fire_ts,v3_delay_min,v3_pred_dir,movement_idx,movement_direction,movement_pips,movement_start_ts,movement_end_ts,fire_vs_movement_relation,pips_already_moved_at_fire,pips_remaining_at_fire,direction_match_v3_vs_movement
+2026-09-30,UP,STRONG_DOWN,2026-09-30T08:15:00+00:00,75,SHORT,1,LONG,88.4,2026-09-30T04:35:00+00:00,2026-09-30T12:30:00+00:00,FIRE_DURING_MOVEMENT,33.1,55.3,NO

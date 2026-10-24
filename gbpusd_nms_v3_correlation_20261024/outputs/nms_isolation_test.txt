@@ -1,0 +1,18 @@
+Isolation replay — proof-of-non-fire
+========================================================================
+
+2026-10-09
+  Research-team replay says: STRONG_DOWN at 12:35 UTC (delay 335 min)
+  Isolation replay: first fire = None
+  Final state: RANGE  up=None  dn=None
+
+2026-09-04
+  Research-team replay says: STRONG_DOWN at 08:25 UTC (delay 85 min)
+  Isolation replay: first fire = None
+  Final state: RANGE  up=None  dn=None
+
+2026-09-15
+  Research-team replay says: STRONG_UP at 11:35 UTC (delay 275 min)
+  Isolation replay: first fire = None
+  Final state: RANGE  up=None  dn=None
+

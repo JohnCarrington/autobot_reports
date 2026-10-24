@@ -1,0 +1,9 @@
+source,report,date,truth_direction,v3_state_first_fire,v3_fire_ts_utc,delay_min_after_london_open,direction_correct,note
+research_team_replay,nms_v3_replacement_20261013/report.md §3.4,2026-10-13,UP,STRONG_UP,2026-10-13T08:20:00+00:00,80,YES,partial-day truth
+research_team_replay,nms_v3_replacement_20261013/report.md §3.4,2026-10-12,DOWN,STRONG_DOWN,2026-10-12T09:55:00+00:00,175,YES,test harness seeds anchor
+research_team_replay,nms_v3_replacement_20261013/report.md §3.4,2026-09-04,DOWN,STRONG_DOWN,2026-09-04T08:25:00+00:00,85,YES,
+research_team_replay,nms_v3_replacement_20261013/report.md §3.4,2026-09-15,UP,STRONG_UP,2026-09-15T11:35:00+00:00,275,YES,
+research_team_replay,nms_v3_replacement_20261013/report.md §3.4,2026-09-28,UP,STRONG_DOWN,2026-09-28T10:10:00+00:00,190,NO,WRONG DIRECTION (truth UP)
+research_team_replay,nms_v3_replacement_20261013/report.md §3.4,2026-09-30,UP,STRONG_DOWN,2026-09-30T08:15:00+00:00,75,NO,WRONG DIRECTION (truth UP)
+research_team_replay,nms_v3_replacement_20261013/report.md §3.4,2026-10-09,DOWN,STRONG_DOWN,2026-10-09T12:35:00+00:00,335,YES,
+live_snapshot,cache/session_trend_GBPUSD.json,2026-10-23,unknown,RANGE,2026-10-23T20:30:00+00:00,,n/a,up=-1 dn=-1 prevailing=RANGE

@@ -1,0 +1,116 @@
+NMS V3 Historical Replay — Feasibility
+========================================================================
+
+This file documents precisely what historical NMS V3 state data is
+and is not available, before any correlation analysis is attempted.
+
+1. CURRENT NMS V3 SNAPSHOT
+------------------------------------------------------------------------
+Live state is persisted ONLY as a single-point-in-time snapshot:
+  path:  <autobot_prod_root>/cache/session_trend_GBPUSD.json
+  session_date:        2026-10-23
+  schema_version:      session_trend.v2
+  v3_state:            RANGE
+  v3_up_score:         -1
+  v3_down_score:       -1
+  v3_state_since_ts:   2026-10-23T20:30:00+00:00
+  prevailing:          RANGE
+  prevailing_reason:   v3=RANGE|up=-1|dn=-1|E2:UP:+1|E6:UP:+1|E8:UP:+1
+  previous_prevailing: UNKNOWN
+  prev_started:        2026-10-23T20:00:00+00:00
+  prev_ended:          2026-10-23T20:30:00+00:00
+
+This snapshot is overwritten at every bar-close. There is no append-
+only time-series record of V3 regime transitions anywhere on this host.
+
+2. HISTORICAL LOG STREAMS INSPECTED
+------------------------------------------------------------------------
+  <autobot_prod_root>/logs/session_hourly_displacement.jsonl
+    GBPUSD rows: 355
+    These are hourly displacement samples (price minus London-open),
+    one row per {symbol, hour_ts}. Starts 2026-10-12. They are
+    an INPUT to V3 but do NOT contain v3_state transitions.
+
+  <autobot_prod_root>/logs/v3_events.jsonl  (and rotated daily)
+    Despite the name, these events are from a different v3 system
+    (BB-pierce + rejection candidate armer, schema `v3-context-1`).
+    They are NOT NMS V3 regime transitions.
+
+  <autobot_prod_root>/logs/trend_v3.jsonl  (and rotated)
+    Also NOT NMS V3 — these are output events from the regime_engine
+    strong-trend gate (writes 'event': 'block', 'reason': 'range_gate_
+    suppress' etc.). The schema is distinct and uses regime_engine
+    labels (STRONG_TREND_UP / TREND_FORMING_DOWN), not NMS V3 states.
+
+3. BACKUP SNAPSHOTS (NOT TIME-SERIES)
+------------------------------------------------------------------------
+  session_trend_state.json.pre-v3-cutover.20261013T130757Z.bak
+    session_date: None
+    v3_state:     None
+    prevailing:   None
+    (one moment in time; not a time series)
+  session_trend_GBPUSD.json.pre-provenance-20261012T231746Z
+    session_date: 2026-10-12
+    v3_state:     None
+    prevailing:   UNKNOWN
+    (one moment in time; not a time series)
+
+4. ISOLATION REPLAY — DOES NOT FIRE
+------------------------------------------------------------------------
+The nms_v3_classifier.py module documents itself as 'pure' and 'zero
+I/O'. In practice, when the state machine is run in isolation from a
+fresh state against the frozen candle corpus, it produces NO
+transitions, even on days where production V3 is documented in
+`reports-public/nms_v3_replacement_20261013/report.md §3.4` to have
+fired STRONG_DOWN or STRONG_UP.
+
+Verified on 2026-10-09 (report says STRONG_DOWN at 12:35 UTC, 335 min
+after London Open): isolated replay yields 0 transitions, final state
+RANGE, scores up/down = None.  (Both pre- and post-BST-patch to the
+hardcoded 2026-only BST window.)
+
+Reason: production V3 relies on pre-London state bridges that supply
+the state machine with:
+  - confirmed_swings seeded from fractal-pivot detection with lookback
+  - EMAs(7/13/21) primed from pre-London bars
+  - persisted session anchors (london_open_price, OR window)
+  - evidence memory (E1 OR breakout, E3 continuation, E4 confirmed HL)
+
+Rebuilding those bridges standalone is a non-trivial engineering task
+(outside the research-only scope). This confirms the research team's
+own test harness note at report.md §3.4: '175 min (test harness seeds
+anchor)'.
+
+5. PRE-REPAIR LIVE RECORDS ARE UNRELIABLE
+------------------------------------------------------------------------
+Per the user brief: 'NMS V3 was repaired on 13 October 2026. Pre-repair
+live execution records must not be treated as reliable evidence of
+correctly functioning NMS.'
+
+Even if we had a time-series log of pre-repair V3 states (we don't),
+those states would be unreliable.
+
+6. CONCLUSION: WHAT WE CAN AND CANNOT DO
+------------------------------------------------------------------------
+CAN:
+ - Catalogue the 7 named days in the research team's §3.4 replay as
+   the only genuine V3 timing data available.
+ - Record one post-repair snapshot (today's state).
+ - Compute the research team's aggregate claim: 20/23 correct
+   direction, 3 wrong, mean delay 158 min — this is the authoritative
+   V3-vs-truth number, as published in the report.
+
+CANNOT:
+ - Correlate V3 against the full 277-movement census of this study.
+ - Reconstruct V3 states for 2024 and 2025 — classifier doesn't fire
+   in isolation; no stored time series.
+ - Produce TP30/SL12 or TP40/SL12 trade results for individual
+   genuine V3 fires beyond the 7 named days in the §3.4 table.
+
+What IS reportable is the research team's own result: V3 fires with
+~87 % direction accuracy on the 23 directional days they tested, with
+a mean delay of 158 min after London Open. 158 min after a 09:00 UK
+open (BST) places the earliest fire time at ~11:30 UK — by which
+point, from our own Phase-1 corpus, 65 % of trend-day fires are
+already > 50 % of the way through the move.
+
