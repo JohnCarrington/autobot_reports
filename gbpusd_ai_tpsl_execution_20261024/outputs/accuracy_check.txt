@@ -1,0 +1,60 @@
+Stage 2 — reproduce the 85% directional-accuracy claim
+========================================================================
+  Dev       h=07  n_true_trend= 182  direction_correct_%= 69.2
+  Dev       h=08  n_true_trend= 182  direction_correct_%= 75.3
+  Dev       h=09  n_true_trend= 182  direction_correct_%= 80.8
+  Dev       h=10  n_true_trend= 182  direction_correct_%= 78.6
+  Dev       h=11  n_true_trend= 182  direction_correct_%= 81.3
+  Dev       h=12  n_true_trend= 182  direction_correct_%= 86.8
+  Holdout   h=07  n_true_trend=  65  direction_correct_%= 64.6
+  Holdout   h=08  n_true_trend=  65  direction_correct_%= 63.1
+  Holdout   h=09  n_true_trend=  65  direction_correct_%= 63.1
+  Holdout   h=10  n_true_trend=  65  direction_correct_%= 66.2
+  Holdout   h=11  n_true_trend=  65  direction_correct_%= 67.7
+  Holdout   h=12  n_true_trend=  65  direction_correct_%= 72.3
+  Conf2026  h=07  n_true_trend=  60  direction_correct_%= 63.3
+  Conf2026  h=08  n_true_trend=  60  direction_correct_%= 65.0
+  Conf2026  h=09  n_true_trend=  60  direction_correct_%= 76.7
+  Conf2026  h=10  n_true_trend=  60  direction_correct_%= 83.3
+  Conf2026  h=11  n_true_trend=  62  direction_correct_%= 82.3
+  Conf2026  h=12  n_true_trend=  62  direction_correct_%= 75.8
+
+Interpretation B: direction accuracy among MODEL FIRES on true trend days
+  Dev       h=07  fires_on_trend= 124  direction_correct_%= 66.9
+  Dev       h=08  fires_on_trend= 118  direction_correct_%= 72.9
+  Dev       h=09  fires_on_trend= 120  direction_correct_%= 80.0
+  Dev       h=10  fires_on_trend= 120  direction_correct_%= 80.8
+  Dev       h=11  fires_on_trend= 133  direction_correct_%= 80.5
+  Dev       h=12  fires_on_trend= 118  direction_correct_%= 85.6
+  Holdout   h=07  fires_on_trend=  34  direction_correct_%= 67.6
+  Holdout   h=08  fires_on_trend=  26  direction_correct_%= 69.2
+  Holdout   h=09  fires_on_trend=  36  direction_correct_%= 69.4
+  Holdout   h=10  fires_on_trend=  34  direction_correct_%= 82.4
+  Holdout   h=11  fires_on_trend=  32  direction_correct_%= 84.4
+  Holdout   h=12  fires_on_trend=  31  direction_correct_%= 74.2
+  Conf2026  h=07  fires_on_trend=  39  direction_correct_%= 61.5
+  Conf2026  h=08  fires_on_trend=  39  direction_correct_%= 66.7
+  Conf2026  h=09  fires_on_trend=  32  direction_correct_%= 90.6
+  Conf2026  h=10  fires_on_trend=  39  direction_correct_%= 87.2
+  Conf2026  h=11  fires_on_trend=  42  direction_correct_%= 92.9
+  Conf2026  h=12  fires_on_trend=  38  direction_correct_%= 89.5
+
+Interpretation C: direction accuracy among ALL FIRES (incl. non-trend-day)
+  Dev       h=07  all_fires= 168  correct_%_(trend+right_dir)= 49.4
+  Dev       h=08  all_fires= 150  correct_%_(trend+right_dir)= 57.3
+  Dev       h=09  all_fires= 149  correct_%_(trend+right_dir)= 64.4
+  Dev       h=10  all_fires= 158  correct_%_(trend+right_dir)= 61.4
+  Dev       h=11  all_fires= 159  correct_%_(trend+right_dir)= 67.3
+  Dev       h=12  all_fires= 142  correct_%_(trend+right_dir)= 71.1
+  Holdout   h=07  all_fires=  57  correct_%_(trend+right_dir)= 40.4
+  Holdout   h=08  all_fires=  47  correct_%_(trend+right_dir)= 38.3
+  Holdout   h=09  all_fires=  60  correct_%_(trend+right_dir)= 41.7
+  Holdout   h=10  all_fires=  45  correct_%_(trend+right_dir)= 62.2
+  Holdout   h=11  all_fires=  40  correct_%_(trend+right_dir)= 67.5
+  Holdout   h=12  all_fires=  42  correct_%_(trend+right_dir)= 54.8
+  Conf2026  h=07  all_fires=  76  correct_%_(trend+right_dir)= 31.6
+  Conf2026  h=08  all_fires=  66  correct_%_(trend+right_dir)= 39.4
+  Conf2026  h=09  all_fires=  56  correct_%_(trend+right_dir)= 51.8
+  Conf2026  h=10  all_fires=  69  correct_%_(trend+right_dir)= 49.3
+  Conf2026  h=11  all_fires=  71  correct_%_(trend+right_dir)= 54.9
+  Conf2026  h=12  all_fires=  63  correct_%_(trend+right_dir)= 54.0

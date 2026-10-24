@@ -1,0 +1,60 @@
+ROBUSTNESS AUDIT
+========================================================================
+
+§1 Chronological partitions
+  Dev        2024-01-02 → 2025-06-30  n=2334
+  Holdout    2025-07-01 → 2025-12-31  n=792
+  Conf2026   2026-01-02 → 2026-10-07  n=1050
+  Dev ∩ Holdout: 0
+  Dev ∩ Conf2026: 0
+  Holdout ∩ Conf2026: 0
+
+§2 Point-in-time check against build_features.py
+  pattern '\\.shift\\(-\\d'            → not found
+  pattern '\\.diff\\(-\\d'             → not found
+  pattern 'center=True'                → not found
+  pattern 'peak_price'                 → FOUND
+  pattern 'anchor_price'               → FOUND
+
+§3 Repeated correlated predictions
+  Decisions per date: min=1, max=6, mean=6.0
+  Expected: 6 (one per hour 07-12 UK). All dates should have 6.
+  Dates with ≠ 6 decisions: 6
+  Suppression (from backtest):
+ scenario  tp_pips  sl_pips  n_trades_executed  n_signals_suppressed_by_open_position
+tp20_sl12       20       12               1159                                    459
+tp20_sl15       20       15               1090                                    528
+tp20_sl20       20       20                994                                    624
+tp25_sl12       25       12               1051                                    567
+tp25_sl15       25       15                984                                    634
+tp25_sl20       25       20                894                                    724
+tp30_sl12       30       12               1003                                    615
+tp30_sl15       30       15                935                                    683
+tp30_sl20       30       20                844                                    774
+tp35_sl12       35       12                942                                    676
+tp35_sl15       35       15                877                                    741
+tp35_sl20       35       20                787                                    831
+tp40_sl12       40       12                897                                    721
+tp40_sl15       40       15                837                                    781
+tp40_sl20       40       20                753                                    865
+tp45_sl12       45       12                867                                    751
+tp45_sl15       45       15                811                                    807
+tp45_sl20       45       20                731                                    887
+
+§4 Threshold-selection sensitivity on TP30/SL15 OOS
+ thr   n  net_pips  avg_per_trade  win_rate_%
+ 0.4 412     348.4           0.85        38.1
+ 0.5 412     348.4           0.85        38.1
+ 0.6 179      19.2           0.11        36.9
+ 0.7  75      60.9           0.81        37.3
+ 0.8  13      -0.9          -0.07        38.5
+
+§5 Train/test leakage check
+  The GBM models (6 × hourly) were fit with X = Dev rows ONLY.
+  Val = Holdout; Test = Conf2026. See scripts/train_models.py.
+  Confirm by checking the model files were produced from Dev features:
+  30 model files present. Train metadata not stored.
+  Partition rate — trend-day base rate per partition:
+    Dev      : 389 dates, 182 trend days (46.8%)
+    Holdout  : 132 dates, 65 trend days (49.2%)
+    Conf2026 : 179 dates, 62 trend days (34.6%)
