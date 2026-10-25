@@ -1,0 +1,83 @@
+{
+  "run_id": "20261025T070353",
+  "archive": "/opt/tradingbot/data/candles/GBPUSD",
+  "window": {
+    "start": "2026-01-01",
+    "end": "2026-10-23"
+  },
+  "m5_bars_loaded": 53603,
+  "skipped_days": [
+    {
+      "day": "2026-04-04",
+      "reason": "non_monotonic_after_parse"
+    },
+    {
+      "day": "2026-04-05",
+      "reason": "non_monotonic_after_parse"
+    },
+    {
+      "day": "2026-04-18",
+      "reason": "non_monotonic_after_parse"
+    },
+    {
+      "day": "2026-04-19",
+      "reason": "OHLC sanity failure at 2026-04-19T20:15:00+00:00: M5Bar(ts=datetime.datetime(2026, 4, 19, 20, 15, tzinfo=datetime.timezone.utc), open=13491.85, high=nan, low=nan, close=13491.75)"
+    }
+  ],
+  "h1_periods_classified_unique": {
+    "BUY": 1273,
+    "SELL": 1404,
+    "NONE": 1512,
+    "insufficient_history": 199
+  },
+  "total_setups": 3651,
+  "buy_setups": 1754,
+  "sell_setups": 1897,
+  "cancellations_by_m5_close": 2342,
+  "cancellations_by_h1_invalidation": 3,
+  "cancelled_total": 2345,
+  "baseline_a": {
+    "name": "Baseline A \u2014 fixed 12 SL / 15 TP full exit",
+    "filled_mid_tp": 514,
+    "filled_mid_sl": 783,
+    "filled_mid_ambiguous": 9,
+    "undetermined": 0,
+    "avg_filled_pips": -1.3736600306278715
+  },
+  "method_b": {
+    "name": "Method B \u2014 12 broker SL + 100 broker TP + structural soft SL + 50% at 1R + BE + 3-candle trail",
+    "outcome_counts": {
+      "software_sl_full": 262,
+      "broker_sl_full": 480,
+      "broker_tp_full": 0,
+      "ambiguous_full": 9,
+      "break_even_exit": 49,
+      "trailing_exit": 506,
+      "broker_sl_remainder": 0,
+      "broker_tp_remainder": 0,
+      "ambiguous_remainder": 0,
+      "still_open": 0,
+      "cancelled": 2345,
+      "invalid_risk": 0,
+      "undetermined": 0
+    },
+    "tp1_reached": 555,
+    "trailed_out": 506,
+    "break_even_out": 49,
+    "broker_sl_full": 480,
+    "broker_sl_remainder": 0,
+    "broker_tp_full": 0,
+    "broker_tp_remainder": 0,
+    "software_sl_full": 262,
+    "ambiguous_full": 9,
+    "ambiguous_remainder": 0,
+    "still_open": 0,
+    "invalid_risk": 0,
+    "avg_effective_pips_full_size": -1.0451952526799448,
+    "avg_mae_pips_full_size": -9.341807044410425,
+    "avg_mfe_pips_full_size": 12.785796324655436,
+    "worst_mae_pips": -58.30000000000109,
+    "best_mfe_pips": 93.0
+  },
+  "note": "MID-price proxy only \u2014 bars are mid OHLC, actual IG fills use bid/ask. Both exit configurations are approximations against the same mid archive. filled_mid_* / software_sl_* / trail / BE classifications are NOT historical IG fills; see build spec \u00a710, \u00a714C. Where OHLC cannot establish ordering (SL and TP touched same bar) the outcome is tagged ambiguous and a pessimistic exit price is used."
+}
