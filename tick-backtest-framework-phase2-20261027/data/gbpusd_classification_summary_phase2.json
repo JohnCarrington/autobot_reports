@@ -1,0 +1,36 @@
+{
+  "2024": {
+    "phase1": {
+      "CERTIFIED": 231,
+      "USABLE_WITH_LIMITATIONS": 79,
+      "PARTIAL": 4
+    },
+    "phase2": {
+      "CERTIFIED": 230,
+      "USABLE_WITH_LIMITATIONS": 80,
+      "UNVERIFIED": 4
+    }
+  },
+  "2025": {
+    "phase1": {
+      "CERTIFIED": 243,
+      "USABLE_WITH_LIMITATIONS": 69,
+      "PARTIAL": 1
+    },
+    "phase2": {
+      "CERTIFIED": 242,
+      "USABLE_WITH_LIMITATIONS": 70,
+      "UNVERIFIED": 1
+    }
+  },
+  "2026": {
+    "phase1": {
+      "CERTIFIED": 64,
+      "USABLE_WITH_LIMITATIONS": 13
+    },
+    "phase2": {
+      "CERTIFIED": 64,
+      "USABLE_WITH_LIMITATIONS": 13
+    }
+  }
+}

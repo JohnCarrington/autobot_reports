@@ -1,0 +1,68 @@
+{
+  "pair": "GBPUSD",
+  "schema": {
+    "ts_utc_ns": "int64 \u2014 true-UTC ns since epoch",
+    "bid": "float64 \u2014 raw CSV bid, preserved FX decimal",
+    "ask": "float64 \u2014 raw CSV ask, preserved FX decimal",
+    "source_row": "int64 \u2014 original row number in annual CSV",
+    "source_year": "int16 \u2014 originating annual CSV year"
+  },
+  "layout": "one parquet per annual CSV, name = {YYYY}.parquet",
+  "sort_order": "stable (ts_utc_ns asc, source_row asc)",
+  "rejected_window": "2026-04-01T00:00:00Z onwards (bid+ask collapsed to 2 decimals in source)",
+  "total_rows": 52991801,
+  "elapsed_s": 166.2,
+  "manifest": [
+    {
+      "year": 2024,
+      "parquet_path": "/mnt/volume_lon1_1778405456698/research/tick_cache_v2_utc_corrected/GBPUSD/2024.parquet",
+      "n_rows": 21953955,
+      "n_rows_input": 21953955,
+      "n_dropped": 0,
+      "utc_lo_ns": 1704146457222000000,
+      "utc_hi_ns": 1735682399120000000,
+      "utc_lo": "2024-01-01T22:00:57.222000+00:00",
+      "utc_hi": "2024-12-31T21:59:59.120000+00:00",
+      "bid_min": 1.22991,
+      "bid_max": 1.34341,
+      "ask_min": 1.22999,
+      "ask_max": 1.34345,
+      "size_mb": 303.8,
+      "sha256": "7a1f8b0631cf2543980cb062ad7772b181ef708a8e96797f7b65b10ccef337cd"
+    },
+    {
+      "year": 2025,
+      "parquet_path": "/mnt/volume_lon1_1778405456698/research/tick_cache_v2_utc_corrected/GBPUSD/2025.parquet",
+      "n_rows": 24408019,
+      "n_rows_input": 24408019,
+      "n_dropped": 0,
+      "utc_lo_ns": 1735768883324000000,
+      "utc_hi_ns": 1767218339170000000,
+      "utc_lo": "2025-01-01T22:01:23.324000+00:00",
+      "utc_hi": "2025-12-31T21:58:59.170000+00:00",
+      "bid_min": 1.20992,
+      "bid_max": 1.37885,
+      "ask_min": 1.21001,
+      "ask_max": 1.37892,
+      "size_mb": 340.3,
+      "sha256": "40bf600404c27c473af5042a5d0ea2f7e2073aa02e8b2a6186fdd605cd9832dd"
+    },
+    {
+      "year": 2026,
+      "parquet_path": "/mnt/volume_lon1_1778405456698/research/tick_cache_v2_utc_corrected/GBPUSD/2026.parquet",
+      "n_rows": 6629827,
+      "n_rows_input": 7549429,
+      "n_dropped": 919602,
+      "utc_lo_ns": 1767286841847000000,
+      "utc_hi_ns": 1775001597634000000,
+      "utc_lo": "2026-01-01T17:00:41.847000+00:00",
+      "utc_hi": "2026-03-31T23:59:57.634000+00:00",
+      "bid_min": 1.31589,
+      "bid_max": 1.3869,
+      "ask_min": 1.31599,
+      "ask_max": 1.38695,
+      "size_mb": 93.1,
+      "sha256": "3b34d70e1e1f38200531f6dbfc4c270a8cda449719e0af4eccb2546b372687be"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+date,year,phase1_grade,phase2_grade,reason
+2024-01-19,2024,PARTIAL,UNVERIFIED,3600s weekday gap unexplained; cross-feed verification required before certification
+2024-10-28,2024,CERTIFIED,USABLE_WITH_LIMITATIONS,duplicate_ts=4978 (likely BST fall-back; benign)
+2024-11-01,2024,PARTIAL,UNVERIFIED,3600s weekday gap unexplained; cross-feed verification required before certification
+2024-11-07,2024,PARTIAL,UNVERIFIED,3600s weekday gap unexplained; cross-feed verification required before certification
+2024-12-25,2024,PARTIAL,UNVERIFIED,3600s weekday gap unexplained; cross-feed verification required before certification
+2025-10-27,2025,CERTIFIED,USABLE_WITH_LIMITATIONS,duplicate_ts=2859 (likely BST fall-back; benign)
+2025-12-25,2025,PARTIAL,UNVERIFIED,3600s weekday gap unexplained; cross-feed verification required before certification

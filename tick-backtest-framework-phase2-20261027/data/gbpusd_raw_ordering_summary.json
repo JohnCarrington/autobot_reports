@@ -1,0 +1,67 @@
+{
+  "2024": {
+    "year": 2024,
+    "total_rows": 21953955,
+    "naive": {
+      "backward_jumps": 0,
+      "max_backward_s": 0.0,
+      "duplicate_ts": 4979,
+      "monotonic_strict": false,
+      "monotonic_non_strict": true
+    },
+    "utc_after_shift": {
+      "backward_jumps": 0,
+      "max_backward_s": 0.0,
+      "duplicate_ts": 4979,
+      "monotonic_strict": false,
+      "monotonic_non_strict": true
+    },
+    "duplicate_cluster_count": 4978,
+    "boundary_report": {}
+  },
+  "2025": {
+    "year": 2025,
+    "total_rows": 24408019,
+    "naive": {
+      "backward_jumps": 0,
+      "max_backward_s": 0.0,
+      "duplicate_ts": 2860,
+      "monotonic_strict": false,
+      "monotonic_non_strict": true
+    },
+    "utc_after_shift": {
+      "backward_jumps": 0,
+      "max_backward_s": 0.0,
+      "duplicate_ts": 2860,
+      "monotonic_strict": false,
+      "monotonic_non_strict": true
+    },
+    "duplicate_cluster_count": 2859,
+    "boundary_report": {}
+  },
+  "2026": {
+    "year": 2026,
+    "total_rows": 7549429,
+    "naive": {
+      "backward_jumps": 0,
+      "max_backward_s": 0.0,
+      "duplicate_ts": 1,
+      "monotonic_strict": false,
+      "monotonic_non_strict": true
+    },
+    "utc_after_shift": {
+      "backward_jumps": 0,
+      "max_backward_s": 0.0,
+      "duplicate_ts": 1,
+      "monotonic_strict": false,
+      "monotonic_non_strict": true
+    },
+    "duplicate_cluster_count": 0,
+    "boundary_report": {
+      "window": "2026-03-07 \u2192 2026-03-09 naive",
+      "rows_in_window": 41428,
+      "last_naive_before_boundary": null,
+      "first_naive_after_boundary": "2026-03-08T16:00:15.801000"
+    }
+  }
+}

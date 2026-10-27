@@ -1,0 +1,257 @@
+{
+  "probe_dates": {
+    "2026-03-30": {
+      "n_ticks": 109871,
+      "bid": {
+        "unique": 1218,
+        "min": 1.31589,
+        "max": 1.32822,
+        "min_step": 9.999999999843467e-06,
+        "classification": "5_decimal_or_better"
+      },
+      "ask": {
+        "unique": 1212,
+        "min": 1.31599,
+        "max": 1.32832,
+        "min_step": 9.999999999843467e-06,
+        "classification": "5_decimal_or_better"
+      },
+      "mid": {
+        "unique": 2977,
+        "min": 1.315945,
+        "max": 1.3282699999999998,
+        "min_step": 2.220446049250313e-16,
+        "classification": "6_decimal_or_finer"
+      },
+      "bid_ask_integrity": {
+        "bid_gt_ask_count": 0,
+        "zero_spread_count": 0,
+        "neg_spread_count": 0
+      },
+      "mid_vs_implied": {
+        "max_abs_delta": 2.220446049250313e-16,
+        "median_abs_delta": 0.0,
+        "frac_mid_equals_implied_within_1e5": 1.0,
+        "frac_mid_within_bid_ask": 1.0
+      },
+      "verdict": {
+        "bid_full_precision": true,
+        "ask_full_precision": true,
+        "recoverable_bid_ask": true,
+        "mid_can_be_reconstructed": true,
+        "recommendation": "USABLE: reconstruct mid from (bid+ask)/2"
+      }
+    },
+    "2026-03-31": {
+      "n_ticks": 152392,
+      "bid": {
+        "unique": 919,
+        "min": 1.31721,
+        "max": 1.3264,
+        "min_step": 9.999999999843467e-06,
+        "classification": "5_decimal_or_better"
+      },
+      "ask": {
+        "unique": 917,
+        "min": 1.31728,
+        "max": 1.32647,
+        "min_step": 9.999999999843467e-06,
+        "classification": "5_decimal_or_better"
+      },
+      "mid": {
+        "unique": 2309,
+        "min": 1.317245,
+        "max": 1.32643,
+        "min_step": 2.220446049250313e-16,
+        "classification": "6_decimal_or_finer"
+      },
+      "bid_ask_integrity": {
+        "bid_gt_ask_count": 0,
+        "zero_spread_count": 0,
+        "neg_spread_count": 0
+      },
+      "mid_vs_implied": {
+        "max_abs_delta": 2.220446049250313e-16,
+        "median_abs_delta": 0.0,
+        "frac_mid_equals_implied_within_1e5": 1.0,
+        "frac_mid_within_bid_ask": 1.0
+      },
+      "verdict": {
+        "bid_full_precision": true,
+        "ask_full_precision": true,
+        "recoverable_bid_ask": true,
+        "mid_can_be_reconstructed": true,
+        "recommendation": "USABLE: reconstruct mid from (bid+ask)/2"
+      }
+    },
+    "2026-04-01": {
+      "n_ticks": 164927,
+      "bid": {
+        "unique": 2,
+        "min": 1.32,
+        "max": 1.33,
+        "min_step": 0.010000000000000009,
+        "classification": "2_decimal_rounded"
+      },
+      "ask": {
+        "unique": 2,
+        "min": 1.32,
+        "max": 1.33,
+        "min_step": 0.010000000000000009,
+        "classification": "2_decimal_rounded"
+      },
+      "mid": {
+        "unique": 3,
+        "min": 1.32,
+        "max": 1.33,
+        "min_step": 0.004999999999999893,
+        "classification": "4_decimal_only"
+      },
+      "bid_ask_integrity": {
+        "bid_gt_ask_count": 0,
+        "zero_spread_count": 164412,
+        "neg_spread_count": 0
+      },
+      "mid_vs_implied": {
+        "max_abs_delta": 0.0,
+        "median_abs_delta": 0.0,
+        "frac_mid_equals_implied_within_1e5": 1.0,
+        "frac_mid_within_bid_ask": 1.0
+      },
+      "verdict": {
+        "bid_full_precision": false,
+        "ask_full_precision": false,
+        "recoverable_bid_ask": false,
+        "mid_can_be_reconstructed": false,
+        "recommendation": "REJECT: bid/ask precision also lost"
+      }
+    },
+    "2026-04-02": {
+      "n_ticks": 111800,
+      "bid": {
+        "unique": 2,
+        "min": 1.32,
+        "max": 1.33,
+        "min_step": 0.010000000000000009,
+        "classification": "2_decimal_rounded"
+      },
+      "ask": {
+        "unique": 2,
+        "min": 1.32,
+        "max": 1.33,
+        "min_step": 0.010000000000000009,
+        "classification": "2_decimal_rounded"
+      },
+      "mid": {
+        "unique": 3,
+        "min": 1.32,
+        "max": 1.33,
+        "min_step": 0.004999999999999893,
+        "classification": "4_decimal_only"
+      },
+      "bid_ask_integrity": {
+        "bid_gt_ask_count": 0,
+        "zero_spread_count": 111699,
+        "neg_spread_count": 0
+      },
+      "mid_vs_implied": {
+        "max_abs_delta": 0.0,
+        "median_abs_delta": 0.0,
+        "frac_mid_equals_implied_within_1e5": 1.0,
+        "frac_mid_within_bid_ask": 1.0
+      },
+      "verdict": {
+        "bid_full_precision": false,
+        "ask_full_precision": false,
+        "recoverable_bid_ask": false,
+        "mid_can_be_reconstructed": false,
+        "recommendation": "REJECT: bid/ask precision also lost"
+      }
+    },
+    "2026-04-06": {
+      "n_ticks": 81316,
+      "bid": {
+        "unique": 2,
+        "min": 1.32,
+        "max": 1.33,
+        "min_step": 0.010000000000000009,
+        "classification": "2_decimal_rounded"
+      },
+      "ask": {
+        "unique": 2,
+        "min": 1.32,
+        "max": 1.33,
+        "min_step": 0.010000000000000009,
+        "classification": "2_decimal_rounded"
+      },
+      "mid": {
+        "unique": 3,
+        "min": 1.32,
+        "max": 1.33,
+        "min_step": 0.004999999999999893,
+        "classification": "4_decimal_only"
+      },
+      "bid_ask_integrity": {
+        "bid_gt_ask_count": 0,
+        "zero_spread_count": 79698,
+        "neg_spread_count": 0
+      },
+      "mid_vs_implied": {
+        "max_abs_delta": 0.0,
+        "median_abs_delta": 0.0,
+        "frac_mid_equals_implied_within_1e5": 1.0,
+        "frac_mid_within_bid_ask": 1.0
+      },
+      "verdict": {
+        "bid_full_precision": false,
+        "ask_full_precision": false,
+        "recoverable_bid_ask": false,
+        "mid_can_be_reconstructed": false,
+        "recommendation": "REJECT: bid/ask precision also lost"
+      }
+    },
+    "2026-04-10": {
+      "n_ticks": 68093,
+      "bid": {
+        "unique": 2,
+        "min": 1.34,
+        "max": 1.35,
+        "min_step": 0.010000000000000009,
+        "classification": "2_decimal_rounded"
+      },
+      "ask": {
+        "unique": 2,
+        "min": 1.34,
+        "max": 1.35,
+        "min_step": 0.010000000000000009,
+        "classification": "2_decimal_rounded"
+      },
+      "mid": {
+        "unique": 3,
+        "min": 1.34,
+        "max": 1.35,
+        "min_step": 0.004999999999999893,
+        "classification": "4_decimal_only"
+      },
+      "bid_ask_integrity": {
+        "bid_gt_ask_count": 0,
+        "zero_spread_count": 67811,
+        "neg_spread_count": 0
+      },
+      "mid_vs_implied": {
+        "max_abs_delta": 0.0,
+        "median_abs_delta": 0.0,
+        "frac_mid_equals_implied_within_1e5": 1.0,
+        "frac_mid_within_bid_ask": 1.0
+      },
+      "verdict": {
+        "bid_full_precision": false,
+        "ask_full_precision": false,
+        "recoverable_bid_ask": false,
+        "mid_can_be_reconstructed": false,
+        "recommendation": "REJECT: bid/ask precision also lost"
+      }
+    }
+  },
+  "fields_summary": {}
+}
