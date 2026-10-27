@@ -1,0 +1,23 @@
+{
+  "day_A": "2026-02-09",
+  "day_B": "2026-02-10",
+  "n_m5_bars_in_window": 576,
+  "n_overlap_with_enriched_day_B": 288,
+  "n_first_hour_day_B": 12,
+  "parity_full_day_B": {
+    "bb_upper_max_abs_pips": 2.000843934979457e-08,
+    "bb_upper_median_abs_pips": 4.702904732312163e-09,
+    "bb_lower_max_abs_pips": 2.0012880241893072e-08,
+    "ema_8_max_abs_pips": 6.661338147750939e-12,
+    "ema_8_median_abs_pips": 2.220446049250313e-12,
+    "ema_13_max_abs_pips": 8.881784197001252e-12,
+    "ema_21_max_abs_pips": 1.1102230246251565e-11,
+    "ema_50_max_abs_pips": 0.0002132080334504849
+  },
+  "parity_first_hour_day_B": {
+    "bb_upper_max_abs_pips": 2.000843934979457e-08,
+    "ema_8_max_abs_pips": 4.440892098500626e-12,
+    "ema_21_max_abs_pips": 1.1102230246251565e-11
+  },
+  "note": "First-hour comparison is the cold-start regression target. With day-A warmup carried through, errors should NOT be the 15-22p cold-start artefacts seen in Phase 3 per-day replay."
+}
