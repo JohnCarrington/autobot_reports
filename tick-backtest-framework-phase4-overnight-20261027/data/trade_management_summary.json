@@ -1,0 +1,2461 @@
+{
+  "n_fully_reconciled": 228,
+  "per_strategy": {
+    "EMA_PULLBACK": {
+      "n_trades": 9,
+      "amendments_distribution": {
+        "0": 9,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 9,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {}
+    },
+    "BOUNCE_TR": {
+      "n_trades": 17,
+      "amendments_distribution": {
+        "0": 8,
+        "1": 9,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 17,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {
+        "BREAKEVEN": 8,
+        "TRAIL_UP": 1
+      }
+    },
+    "GBPUSD_TREND_V3": {
+      "n_trades": 94,
+      "amendments_distribution": {
+        "0": 61,
+        "1": 32,
+        "2-5": 1,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 94,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {
+        "BREAKEVEN": 34,
+        "TRAIL_UP": 1
+      }
+    },
+    "BB_BOUNCE": {
+      "n_trades": 52,
+      "amendments_distribution": {
+        "0": 52,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 52,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {}
+    },
+    "UNKNOWN:GBPUSD_BB_BOUNCE_S": {
+      "n_trades": 4,
+      "amendments_distribution": {
+        "0": 4,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 4,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {}
+    },
+    "UNKNOWN:GBPUSD_TREND_V3_S": {
+      "n_trades": 3,
+      "amendments_distribution": {
+        "0": 3,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 3,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {}
+    },
+    "UNKNOWN:GBPUSD_TREND_V3_L": {
+      "n_trades": 4,
+      "amendments_distribution": {
+        "0": 3,
+        "1": 0,
+        "2-5": 1,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 3,
+        "1": 1,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {
+        "BREAKEVEN": 2
+      }
+    },
+    "BOUNCE_A": {
+      "n_trades": 19,
+      "amendments_distribution": {
+        "0": 15,
+        "1": 4,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 19,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {
+        "BREAKEVEN": 4
+      }
+    },
+    "UNKNOWN:GBPUSD_TREND_V3_UM_L": {
+      "n_trades": 8,
+      "amendments_distribution": {
+        "0": 8,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 8,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {}
+    },
+    "UNKNOWN:GBPUSD_BB_BOUNCE_L": {
+      "n_trades": 6,
+      "amendments_distribution": {
+        "0": 5,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 1
+      },
+      "partial_closes_distribution": {
+        "0": 5,
+        "1": 1,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {
+        "TRAIL_UP": 2,
+        "WIDEN": 11,
+        "BREAKEVEN": 2
+      }
+    },
+    "UNKNOWN:GBPUSD_TREND_V3_UM_S": {
+      "n_trades": 3,
+      "amendments_distribution": {
+        "0": 3,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 3,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {}
+    },
+    "BOUNCE_C": {
+      "n_trades": 3,
+      "amendments_distribution": {
+        "0": 2,
+        "1": 1,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 3,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {
+        "BREAKEVEN": 1
+      }
+    },
+    "UNKNOWN:ONE_STRATEGY": {
+      "n_trades": 2,
+      "amendments_distribution": {
+        "0": 2,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 2,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {}
+    },
+    "GBPUSD_BB_BOUNCE_OR_BOUNCE": {
+      "n_trades": 4,
+      "amendments_distribution": {
+        "0": 4,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "partial_closes_distribution": {
+        "0": 4,
+        "1": 0,
+        "2-5": 0,
+        "6-10": 0,
+        "11+": 0
+      },
+      "amendment_classifications": {}
+    }
+  },
+  "overall_amendments": {
+    "0": 179,
+    "1": 46,
+    "2-5": 2,
+    "6-10": 0,
+    "11+": 1
+  },
+  "overall_partials": {
+    "0": 226,
+    "1": 2,
+    "2-5": 0,
+    "6-10": 0,
+    "11+": 0
+  },
+  "overall_amend_classes": {
+    "BREAKEVEN": 51,
+    "TRAIL_UP": 4,
+    "WIDEN": 11
+  },
+  "trades": [
+    {
+      "deal_id": "DIAAAAYQ6C7Z6BY",
+      "strategy_family": "EMA_PULLBACK",
+      "source_system": "ema_pullback_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQ6CPY2BR",
+      "strategy_family": "EMA_PULLBACK",
+      "source_system": "ema_pullback_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQ5X8QHBJ",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYQ5V7W2B4",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYQ5VVR4B7",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQ5MP7VA2",
+      "strategy_family": "EMA_PULLBACK",
+      "source_system": "ema_pullback_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQ5RKLRBT",
+      "strategy_family": "EMA_PULLBACK",
+      "source_system": "ema_pullback_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQ5JRACBY",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQ5JSVWBR",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQ5E43YB2",
+      "strategy_family": "EMA_PULLBACK",
+      "source_system": "ema_pullback_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQ5DVBKBY",
+      "strategy_family": "EMA_PULLBACK",
+      "source_system": "ema_pullback_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQ48BM7B6",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYQRJWNDBW",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQRD3ZZBH",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQREH33BQ",
+      "strategy_family": "UNKNOWN:GBPUSD_BB_BOUNCE_S",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQRA7DRBS",
+      "strategy_family": "EMA_PULLBACK",
+      "source_system": "ema_pullback_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQRAWBLBW",
+      "strategy_family": "EMA_PULLBACK",
+      "source_system": "ema_pullback_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQRBFZWBX",
+      "strategy_family": "EMA_PULLBACK",
+      "source_system": "ema_pullback_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQRBCDQB7",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQQ743CBM",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_S",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQQ2HTZBX",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYQQY3QMBZ",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYQQVLW2BZ",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQLV89HBC",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYQLSGWLA8",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQK59BDBL",
+      "strategy_family": "UNKNOWN:GBPUSD_BB_BOUNCE_S",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQKRPNKBK",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQKNFQPBL",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQKM33DBT",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYQJE657BD",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQJFCNQBV",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQJFDSJBR",
+      "strategy_family": "UNKNOWN:GBPUSD_BB_BOUNCE_S",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQH5CKRBJ",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQHZC9EB4",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQHUDLZBT",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQEUPPNBX",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQDNG2XBL",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQDF6HMAL",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQDANFCB4",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQC956SBC",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYQCUEWYBR",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYQCQD5QBH",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQCNRFWB6",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYQCHDB8BS",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQB3C8NB6",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQBY6UYBF",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQBTUSPAW",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQA2BNKBZ",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQAT8ZFBT",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQAF4WKBU",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQAGQVEBJ",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQAFN24B4",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYQAD8X6AL",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP929RWBJ",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP9UZXNAS",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP9L2AUBY",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYP9JQ3MBX",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP9FMXNAW",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP89T9UB2",
+      "strategy_family": "UNKNOWN:GBPUSD_BB_BOUNCE_S",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP8787SBG",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYP8Y5FWBM",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP8WXDAAS",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYP8LTEPB4",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP8K6FGA2",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP8JNABBW",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP8H2UWBQ",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP8G7MMA6",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYP7769JB6",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP74NKLA8",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP73VCSA2",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP4P9P5AS",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP3Z5NBBM",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP3QRU7AL",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP3PQARA2",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYP3HDWXB6",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYP3EYXGBL",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYP29QZGAW",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPZKPLCBH",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPXCBGVBX",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPT5LL3BS",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPQWLH4AR",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPQUU27BC",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPQPYQQBD",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPQKKWSBC",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPQCR2ZBM",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPLXYQDBD",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPLNMBDBC",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_UM_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPLDPTSBJ",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "TRAIL_UP"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPLCJTXA7",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPLBU2PAE",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPK7SQXAR",
+      "strategy_family": "UNKNOWN:GBPUSD_BB_BOUNCE_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPK4BRPBG",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPKX5MSBZ",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPKP49ABU",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 2,
+      "n_partial_closes": 1,
+      "amendment_classifications": [
+        "BREAKEVEN",
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPKK8DSBL",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPJ7WR2BS",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPJ7WV7BU",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 4,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN",
+        "TRAIL_UP",
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPJ4NV2BW",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPJ4KRRBU",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_UM_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPJ3UN7BJ",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPJNN5SBM",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPJCEFPBZ",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPJCDBSBS",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPJBN6EAW",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPH9MWPBH",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPE3ATBBK",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPD87EMBF",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_UM_S",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPD49LSBX",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPDG4FABU",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPDAVESA7",
+      "strategy_family": "UNKNOWN:GBPUSD_BB_BOUNCE_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPC6N5UBS",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPB6G7GB7",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPBZAA3BY",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPBYD62BN",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPBNREWBK",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPBNU4YAV",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPBMHW7AW",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPBKRZSAT",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPBF2KUAX",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYPBB4LUBJ",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPBA29TBJ",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPBAY8BAW",
+      "strategy_family": "UNKNOWN:GBPUSD_BB_BOUNCE_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYPA73ULAT",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYN7DWKWBL",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_S",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYN62UENBY",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYN6TJXMBS",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYN6QKJQAV",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYN6PUWKBC",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYN6N233AU",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYN5YKX7B4",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_UM_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYN5UQ8MBN",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYN2K7EEA7",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYN2FTTCBK",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYN2FPBMBJ",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_UM_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYN2FG9AB2",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNZ3W3QBY",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYNZYTKSBC",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNZTBSBAW",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNZN6D5BL",
+      "strategy_family": "BOUNCE_C",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYNZNKBEBJ",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYNZLWRGBY",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNZJKZJBM",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNZFMRTAJ",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYNVT8YBBS",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNUMFFBBY",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNSRJVZAX",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNRN2UABL",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNRH8PCAX",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYNRG6JKAM",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNRG5V2AM",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNRE5LYAU",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYNRC5QFBX",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNRBMKKBN",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYNQ6CXUBU",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNQ4JA3B7",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNQYAJWAN",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYNQYD7NAW",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNQXK8HBS",
+      "strategy_family": "UNKNOWN:GBPUSD_BB_BOUNCE_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 15,
+      "n_partial_closes": 1,
+      "amendment_classifications": [
+        "TRAIL_UP",
+        "WIDEN",
+        "WIDEN",
+        "WIDEN",
+        "WIDEN",
+        "WIDEN",
+        "WIDEN",
+        "WIDEN",
+        "WIDEN",
+        "WIDEN",
+        "WIDEN",
+        "WIDEN",
+        "BREAKEVEN",
+        "TRAIL_UP",
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYNQSKX2A5",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNNAFFLBK",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNL9T2WBJ",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNLZPNXAT",
+      "strategy_family": "BOUNCE_C",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNLLM56B2",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNLKBPDBN",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNLHMFNBE",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNK6CQ9AS",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_S",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNK4UHDAL",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYNK2LVSAW",
+      "strategy_family": "BOUNCE_C",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNKZVYCBL",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNKXCLLAX",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYNHS8GRBM",
+      "strategy_family": "UNKNOWN:GBPUSD_BB_BOUNCE_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNEBYFKB7",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNDY4Z6AJ",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNDYXWVBJ",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNDY62NAS",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNDZJ9XAL",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYNABZS6BS",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM92EQVBL",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_UM_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM9T9WBBJ",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM9CUL6BJ",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM9CPQAB2",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM848M9AW",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_UM_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM845CGBS",
+      "strategy_family": "UNKNOWN:GBPUSD_BB_BOUNCE_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM8YQXLBJ",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM3ABBUAL",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM29VZ6BX",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_UM_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM22EWEBL",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYM2X6WEA8",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM2YH8WBU",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM2UAWTBJ",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM2RU2MBN",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYM2P5BMA8",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM2QCHCAG",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM2LGCCBX",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYM2L3EYBN",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYMXMFZKBN",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMXKTG2AW",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMW5SPHAG",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMW5GSNA5",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMW3NEQA6",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMW3U3CBK",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMWX7KBA3",
+      "strategy_family": "BB_BOUNCE",
+      "source_system": "bb_bounce_standalone",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMWRLHLBC",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMWML2EBT",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_UM_S",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMV8SSUBU",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMVWLRCA4",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYMVMP3UAM",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMUPECZAX",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMUK5XPBM",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMUE72HBH",
+      "strategy_family": "GBPUSD_TREND_V3",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 1,
+      "n_partial_closes": 0,
+      "amendment_classifications": [
+        "BREAKEVEN"
+      ]
+    },
+    {
+      "deal_id": "DIAAAAYMP5UM7AC",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMPY7BRBP",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_UM_L",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMPS9KHBJ",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMPAYRYA8",
+      "strategy_family": "UNKNOWN:GBPUSD_TREND_V3_UM_S",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMNSLZYBK",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMMY978B9",
+      "strategy_family": "BOUNCE_TR",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMFBRRFBK",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMC8B93BK",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMCTUX7AM",
+      "strategy_family": "UNKNOWN:ONE_STRATEGY",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMCL6XAB9",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMCF7MKAS",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMCCFDSAW",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYMB9LZCAQ",
+      "strategy_family": "UNKNOWN:ONE_STRATEGY",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYL78BSVBH",
+      "strategy_family": "BOUNCE_A",
+      "source_system": "autobot",
+      "direction": "SELL",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYL7MJKLAE",
+      "strategy_family": "GBPUSD_BB_BOUNCE_OR_BOUNCE",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYL7JG3TAH",
+      "strategy_family": "GBPUSD_BB_BOUNCE_OR_BOUNCE",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYL6894RAQ",
+      "strategy_family": "GBPUSD_BB_BOUNCE_OR_BOUNCE",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    },
+    {
+      "deal_id": "DIAAAAYL64Q9GAM",
+      "strategy_family": "GBPUSD_BB_BOUNCE_OR_BOUNCE",
+      "source_system": "autobot",
+      "direction": "BUY",
+      "n_amendments": 0,
+      "n_partial_closes": 0,
+      "amendment_classifications": []
+    }
+  ]
+}
