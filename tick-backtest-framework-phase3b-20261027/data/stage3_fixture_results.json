@@ -1,0 +1,145 @@
+[
+  {
+    "fixture": "classic_pierce_long",
+    "status": "ok",
+    "n_bars": 22,
+    "n_fires": 1,
+    "n_state_transitions": 0,
+    "n_lifecycle_events": 0,
+    "expected_fire_idx": 21,
+    "expected_direction": "BUY",
+    "fires": [
+      {
+        "bar_idx": 21,
+        "ts": "2026-02-10T11:45:00+00:00",
+        "signal": "BUY",
+        "mode": "GBPUSD_BB_BOUNCE_L",
+        "entry_price": null,
+        "sl_pips": null,
+        "tp_pips": null
+      }
+    ],
+    "state_transitions": [],
+    "lifecycle_tail": [],
+    "verdict": "PASS"
+  },
+  {
+    "fixture": "classic_pierce_short",
+    "status": "ok",
+    "n_bars": 22,
+    "n_fires": 1,
+    "n_state_transitions": 0,
+    "n_lifecycle_events": 0,
+    "expected_fire_idx": 21,
+    "expected_direction": "SELL",
+    "fires": [
+      {
+        "bar_idx": 21,
+        "ts": "2026-02-10T11:45:00+00:00",
+        "signal": "SELL",
+        "mode": "GBPUSD_BB_BOUNCE_S",
+        "entry_price": null,
+        "sl_pips": null,
+        "tp_pips": null
+      }
+    ],
+    "state_transitions": [],
+    "lifecycle_tail": [],
+    "verdict": "PASS"
+  },
+  {
+    "fixture": "classic_pierce_long_shallow_rejected",
+    "status": "ok",
+    "n_bars": 22,
+    "n_fires": 0,
+    "n_state_transitions": 1,
+    "n_lifecycle_events": 1,
+    "expected_fire_idx": null,
+    "expected_direction": null,
+    "fires": [],
+    "state_transitions": [
+      {
+        "bar_idx": 21,
+        "ts": "2026-02-10T11:45:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1
+      }
+    ],
+    "lifecycle_tail": [
+      {
+        "ts_utc": "2026-02-10T11:45:00+00:00",
+        "event": "no_rejection",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "armed_count": 1,
+        "armed": [
+          {
+            "setup_ts": "2026-02-10T11:40:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 1.0
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-02-10T11:45:00+00:00",
+          "open": 13650.0,
+          "close": 13656.5,
+          "body_pips": 6.5,
+          "bullish": true
+        },
+        "bb_lower_n": 13647.3,
+        "bb_upper_n": 13653.34,
+        "min_body_pips": 1.5,
+        "tolerance_pips": 1.0,
+        "adaptive_body_enabled": false,
+        "min_body_effective": 1.5,
+        "tolerance_effective": 1.0,
+        "median_body_12": null,
+        "body_raw_pips": 6.5,
+        "reason": "bullish_body_only_SHORT_armed"
+      }
+    ],
+    "verdict": "PASS (no fire as expected)"
+  },
+  {
+    "fixture": "classic_pierce_long_outside_window",
+    "status": "ok",
+    "n_bars": 22,
+    "n_fires": 0,
+    "n_state_transitions": 0,
+    "n_lifecycle_events": 0,
+    "expected_fire_idx": null,
+    "expected_direction": null,
+    "fires": [],
+    "state_transitions": [],
+    "lifecycle_tail": [],
+    "verdict": "PASS (no fire as expected)"
+  },
+  {
+    "fixture": "classic_pierce_long_wrong_direction_rejection",
+    "status": "ok",
+    "n_bars": 22,
+    "n_fires": 0,
+    "n_state_transitions": 0,
+    "n_lifecycle_events": 0,
+    "expected_fire_idx": null,
+    "expected_direction": null,
+    "fires": [],
+    "state_transitions": [],
+    "lifecycle_tail": [],
+    "verdict": "PASS (no fire as expected)"
+  },
+  {
+    "fixture": "classic_pierce_both_bands_rejected",
+    "status": "ok",
+    "n_bars": 22,
+    "n_fires": 0,
+    "n_state_transitions": 0,
+    "n_lifecycle_events": 0,
+    "expected_fire_idx": null,
+    "expected_direction": null,
+    "fires": [],
+    "state_transitions": [],
+    "lifecycle_tail": [],
+    "verdict": "PASS (no fire as expected)"
+  }
+]

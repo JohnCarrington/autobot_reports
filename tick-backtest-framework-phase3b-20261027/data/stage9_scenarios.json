@@ -1,0 +1,98 @@
+[
+  {
+    "scenario": "A_buy_bounce",
+    "fixture": "classic_pierce_long",
+    "n_fires": 1,
+    "fires": [
+      {
+        "ts": 1770724140000000000,
+        "direction": "BUY",
+        "entry_ig": 13653.0
+      }
+    ],
+    "n_open_positions_end": 1,
+    "n_closed_positions_end": 0,
+    "open_summary": [
+      {
+        "deal_id": "D-00000001",
+        "dir": "BUY",
+        "entry": 1.36535,
+        "sl": 1.3640999999999999,
+        "tp": 1.3753
+      }
+    ],
+    "closed_summary": [],
+    "events_tail": [
+      {
+        "kind": "ORDER_SUBMITTED",
+        "ts_ns": 1770724140000000000,
+        "payload": {
+          "deal_ref": "DR-001",
+          "direction": "BUY",
+          "type": "MARKET"
+        }
+      },
+      {
+        "kind": "ORDER_FILLED",
+        "ts_ns": 1770724160000000000,
+        "payload": {
+          "deal_ref": "DR-001",
+          "deal_id": "D-00000001",
+          "direction": "BUY",
+          "entry_price": 1.36535,
+          "sl_absolute": 1.3640999999999999,
+          "tp_absolute": 1.3753,
+          "classification": "SIMULATED_FILL"
+        }
+      }
+    ]
+  },
+  {
+    "scenario": "B_sell_bounce",
+    "fixture": "classic_pierce_short",
+    "n_fires": 1,
+    "fires": [
+      {
+        "ts": 1770724140000000000,
+        "direction": "SELL",
+        "entry_ig": 13647.0
+      }
+    ],
+    "n_open_positions_end": 1,
+    "n_closed_positions_end": 0,
+    "open_summary": [
+      {
+        "deal_id": "D-00000001",
+        "dir": "SELL",
+        "entry": 1.36465,
+        "sl": 1.3659000000000001,
+        "tp": 1.3547
+      }
+    ],
+    "closed_summary": [],
+    "events_tail": [
+      {
+        "kind": "ORDER_SUBMITTED",
+        "ts_ns": 1770724140000000000,
+        "payload": {
+          "deal_ref": "DR-001",
+          "direction": "SELL",
+          "type": "MARKET"
+        }
+      },
+      {
+        "kind": "ORDER_FILLED",
+        "ts_ns": 1770724160000000000,
+        "payload": {
+          "deal_ref": "DR-001",
+          "deal_id": "D-00000001",
+          "direction": "SELL",
+          "entry_price": 1.36465,
+          "sl_absolute": 1.3659000000000001,
+          "tp_absolute": 1.3547,
+          "classification": "SIMULATED_FILL"
+        }
+      }
+    ]
+  }
+]
