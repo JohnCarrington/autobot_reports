@@ -1,0 +1,1060 @@
+[
+  {
+    "date": "2026-02-10",
+    "status": "ok",
+    "n_bars_fed": 288,
+    "n_lifecycle_rows": 54,
+    "n_standdown_rows": 0,
+    "n_fires": 0,
+    "n_state_transitions": 33,
+    "lifecycle_event_counts": {
+      "replay_exception": 10,
+      "no_rejection": 31,
+      "expired": 13
+    },
+    "fires": [],
+    "lifecycle_sample_last5": [
+      {
+        "ts_utc": "2026-02-10T16:15:00+00:00",
+        "event": "no_rejection",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "armed_count": 1,
+        "armed": [
+          {
+            "setup_ts": "2026-02-10T16:10:00+00:00",
+            "direction": "LONG",
+            "age_bars": 1.0
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-02-10T16:15:00+00:00",
+          "open": 13640.4,
+          "close": 13641.05,
+          "body_pips": 0.65,
+          "bullish": true
+        },
+        "bb_lower_n": 13639.14,
+        "bb_upper_n": 13660.64,
+        "min_body_pips": 1.5,
+        "tolerance_pips": 1.0,
+        "adaptive_body_enabled": false,
+        "min_body_effective": 1.5,
+        "tolerance_effective": 1.0,
+        "median_body_12": null,
+        "body_raw_pips": 0.65,
+        "reason": "body_too_small"
+      },
+      {
+        "ts_utc": "2026-02-10T16:20:00+00:00",
+        "event": "no_rejection",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "armed_count": 2,
+        "armed": [
+          {
+            "setup_ts": "2026-02-10T16:10:00+00:00",
+            "direction": "LONG",
+            "age_bars": 2.0
+          },
+          {
+            "setup_ts": "2026-02-10T16:15:00+00:00",
+            "direction": "LONG",
+            "age_bars": 1.0
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-02-10T16:20:00+00:00",
+          "open": 13641.0,
+          "close": 13640.1,
+          "body_pips": 0.9,
+          "bullish": false
+        },
+        "bb_lower_n": 13637.79,
+        "bb_upper_n": 13660.72,
+        "min_body_pips": 1.5,
+        "tolerance_pips": 1.0,
+        "adaptive_body_enabled": false,
+        "min_body_effective": 1.5,
+        "tolerance_effective": 1.0,
+        "median_body_12": null,
+        "body_raw_pips": 0.9,
+        "reason": "body_too_small"
+      },
+      {
+        "ts_utc": "2026-02-10T16:30:00+00:00",
+        "event": "expired",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "window_bars": 3,
+        "expired_count": 1,
+        "expired": [
+          {
+            "setup_ts": "2026-02-10T16:10:00+00:00",
+            "direction": "LONG",
+            "age_bars": 4.0,
+            "bbl_setup": 13640.45,
+            "bbu_setup": 13660.41,
+            "near_touch": true
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-02-10T16:30:00+00:00",
+          "open": 13641.55,
+          "high": 13641.55,
+          "low": 13639.4,
+          "close": 13639.85
+        }
+      },
+      {
+        "ts_utc": "2026-02-10T16:30:00+00:00",
+        "event": "no_rejection",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "armed_count": 1,
+        "armed": [
+          {
+            "setup_ts": "2026-02-10T16:15:00+00:00",
+            "direction": "LONG",
+            "age_bars": 3.0
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-02-10T16:30:00+00:00",
+          "open": 13641.55,
+          "close": 13639.85,
+          "body_pips": 1.7,
+          "bullish": false
+        },
+        "bb_lower_n": 13635.77,
+        "bb_upper_n": 13660.74,
+        "min_body_pips": 1.5,
+        "tolerance_pips": 1.0,
+        "adaptive_body_enabled": false,
+        "min_body_effective": 1.5,
+        "tolerance_effective": 1.0,
+        "median_body_12": null,
+        "body_raw_pips": 1.7,
+        "reason": "bearish_body_only_LONG_armed"
+      },
+      {
+        "ts_utc": "2026-02-10T16:35:00+00:00",
+        "event": "expired",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "window_bars": 3,
+        "expired_count": 1,
+        "expired": [
+          {
+            "setup_ts": "2026-02-10T16:15:00+00:00",
+            "direction": "LONG",
+            "age_bars": 4.0,
+            "bbl_setup": 13639.14,
+            "bbu_setup": 13660.64,
+            "near_touch": true
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-02-10T16:35:00+00:00",
+          "open": 13640.05,
+          "high": 13640.05,
+          "low": 13638.95,
+          "close": 13639.85
+        }
+      }
+    ],
+    "state_sample_first10": [
+      {
+        "ts": "2026-02-10T07:05:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-02-10T07:10:00+00:00",
+        "armed_before": 1,
+        "armed_after": 2,
+        "delta": 1
+      },
+      {
+        "ts": "2026-02-10T07:20:00+00:00",
+        "armed_before": 2,
+        "armed_after": 1,
+        "delta": -1
+      },
+      {
+        "ts": "2026-02-10T07:25:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      },
+      {
+        "ts": "2026-02-10T09:10:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-02-10T09:20:00+00:00",
+        "armed_before": 1,
+        "armed_after": 2,
+        "delta": 1
+      },
+      {
+        "ts": "2026-02-10T09:25:00+00:00",
+        "armed_before": 2,
+        "armed_after": 1,
+        "delta": -1
+      },
+      {
+        "ts": "2026-02-10T09:30:00+00:00",
+        "armed_before": 1,
+        "armed_after": 2,
+        "delta": 1
+      },
+      {
+        "ts": "2026-02-10T09:35:00+00:00",
+        "armed_before": 2,
+        "armed_after": 0,
+        "delta": -2
+      },
+      {
+        "ts": "2026-02-10T10:05:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      }
+    ],
+    "elapsed_s": 1.82,
+    "first_bars_sample": [
+      {
+        "ts": "2026-02-10T00:00:00+00:00",
+        "o": 13681.899999999998,
+        "h": 13683.15,
+        "l": 13680.699999999999,
+        "c": 13681.05
+      },
+      {
+        "ts": "2026-02-10T00:05:00+00:00",
+        "o": 13680.949999999999,
+        "h": 13682.300000000001,
+        "l": 13680.2,
+        "c": 13681.35
+      },
+      {
+        "ts": "2026-02-10T00:10:00+00:00",
+        "o": 13681.2,
+        "h": 13683.100000000002,
+        "l": 13680.550000000001,
+        "c": 13682.8
+      }
+    ]
+  },
+  {
+    "date": "2026-02-17",
+    "status": "ok",
+    "n_bars_fed": 288,
+    "n_lifecycle_rows": 166,
+    "n_standdown_rows": 0,
+    "n_fires": 0,
+    "n_state_transitions": 47,
+    "lifecycle_event_counts": {
+      "no_rejection": 50,
+      "expired": 27,
+      "replay_exception": 5,
+      "outside_window_deferred": 84
+    },
+    "fires": [],
+    "lifecycle_sample_last5": [
+      {
+        "ts_utc": "2026-02-17T23:35:00+00:00",
+        "event": "outside_window_deferred",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "win_start_h": 6,
+        "win_end_h": 17,
+        "armed_count": 2,
+        "armed": [
+          {
+            "setup_ts": "2026-02-17T16:45:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 82.0
+          },
+          {
+            "setup_ts": "2026-02-17T16:50:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 81.0
+          }
+        ]
+      },
+      {
+        "ts_utc": "2026-02-17T23:40:00+00:00",
+        "event": "outside_window_deferred",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "win_start_h": 6,
+        "win_end_h": 17,
+        "armed_count": 2,
+        "armed": [
+          {
+            "setup_ts": "2026-02-17T16:45:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 83.0
+          },
+          {
+            "setup_ts": "2026-02-17T16:50:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 82.0
+          }
+        ]
+      },
+      {
+        "ts_utc": "2026-02-17T23:45:00+00:00",
+        "event": "outside_window_deferred",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "win_start_h": 6,
+        "win_end_h": 17,
+        "armed_count": 2,
+        "armed": [
+          {
+            "setup_ts": "2026-02-17T16:45:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 84.0
+          },
+          {
+            "setup_ts": "2026-02-17T16:50:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 83.0
+          }
+        ]
+      },
+      {
+        "ts_utc": "2026-02-17T23:50:00+00:00",
+        "event": "outside_window_deferred",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "win_start_h": 6,
+        "win_end_h": 17,
+        "armed_count": 2,
+        "armed": [
+          {
+            "setup_ts": "2026-02-17T16:45:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 85.0
+          },
+          {
+            "setup_ts": "2026-02-17T16:50:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 84.0
+          }
+        ]
+      },
+      {
+        "ts_utc": "2026-02-17T23:55:00+00:00",
+        "event": "outside_window_deferred",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "win_start_h": 6,
+        "win_end_h": 17,
+        "armed_count": 2,
+        "armed": [
+          {
+            "setup_ts": "2026-02-17T16:45:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 86.0
+          },
+          {
+            "setup_ts": "2026-02-17T16:50:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 85.0
+          }
+        ]
+      }
+    ],
+    "state_sample_first10": [
+      {
+        "ts": "2026-02-17T06:15:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-02-17T06:20:00+00:00",
+        "armed_before": 1,
+        "armed_after": 2,
+        "delta": 1
+      },
+      {
+        "ts": "2026-02-17T06:35:00+00:00",
+        "armed_before": 2,
+        "armed_after": 1,
+        "delta": -1
+      },
+      {
+        "ts": "2026-02-17T06:45:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      },
+      {
+        "ts": "2026-02-17T07:30:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-02-17T07:45:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      },
+      {
+        "ts": "2026-02-17T08:05:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-02-17T08:10:00+00:00",
+        "armed_before": 1,
+        "armed_after": 2,
+        "delta": 1
+      },
+      {
+        "ts": "2026-02-17T08:20:00+00:00",
+        "armed_before": 2,
+        "armed_after": 1,
+        "delta": -1
+      },
+      {
+        "ts": "2026-02-17T08:40:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      }
+    ],
+    "elapsed_s": 1.85,
+    "first_bars_sample": [
+      {
+        "ts": "2026-02-17T00:00:00+00:00",
+        "o": 13611.7,
+        "h": 13612.150000000001,
+        "l": 13610.1,
+        "c": 13610.150000000001
+      },
+      {
+        "ts": "2026-02-17T00:05:00+00:00",
+        "o": 13610.199999999999,
+        "h": 13611.1,
+        "l": 13609.6,
+        "c": 13611.05
+      },
+      {
+        "ts": "2026-02-17T00:10:00+00:00",
+        "o": 13610.950000000003,
+        "h": 13611.0,
+        "l": 13607.800000000001,
+        "c": 13607.9
+      }
+    ]
+  },
+  {
+    "date": "2026-03-02",
+    "status": "ok",
+    "n_bars_fed": 288,
+    "n_lifecycle_rows": 47,
+    "n_standdown_rows": 0,
+    "n_fires": 0,
+    "n_state_transitions": 22,
+    "lifecycle_event_counts": {
+      "no_rejection": 27,
+      "expired": 14,
+      "replay_exception": 6
+    },
+    "fires": [],
+    "lifecycle_sample_last5": [
+      {
+        "ts_utc": "2026-03-02T14:50:00+00:00",
+        "event": "no_rejection",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "armed_count": 3,
+        "armed": [
+          {
+            "setup_ts": "2026-03-02T14:35:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 3.0
+          },
+          {
+            "setup_ts": "2026-03-02T14:40:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 2.0
+          },
+          {
+            "setup_ts": "2026-03-02T14:45:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 1.0
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-03-02T14:50:00+00:00",
+          "open": 13429.5,
+          "close": 13428.8,
+          "body_pips": 0.7,
+          "bullish": false
+        },
+        "bb_lower_n": 13390.8,
+        "bb_upper_n": 13434.4,
+        "min_body_pips": 1.5,
+        "tolerance_pips": 1.0,
+        "adaptive_body_enabled": false,
+        "min_body_effective": 1.5,
+        "tolerance_effective": 1.0,
+        "median_body_12": null,
+        "body_raw_pips": 0.7,
+        "reason": "body_too_small"
+      },
+      {
+        "ts_utc": "2026-03-02T14:55:00+00:00",
+        "event": "expired",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "window_bars": 3,
+        "expired_count": 1,
+        "expired": [
+          {
+            "setup_ts": "2026-03-02T14:35:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 4.0,
+            "bbl_setup": 13392.1,
+            "bbu_setup": 13426.93,
+            "near_touch": true
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-03-02T14:55:00+00:00",
+          "open": 13428.85,
+          "high": 13430.85,
+          "low": 13428.2,
+          "close": 13428.4
+        }
+      },
+      {
+        "ts_utc": "2026-03-02T14:55:00+00:00",
+        "event": "no_rejection",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "armed_count": 2,
+        "armed": [
+          {
+            "setup_ts": "2026-03-02T14:40:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 3.0
+          },
+          {
+            "setup_ts": "2026-03-02T14:45:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 2.0
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-03-02T14:55:00+00:00",
+          "open": 13428.85,
+          "close": 13428.4,
+          "body_pips": 0.45,
+          "bullish": false
+        },
+        "bb_lower_n": 13391.12,
+        "bb_upper_n": 13436.33,
+        "min_body_pips": 1.5,
+        "tolerance_pips": 1.0,
+        "adaptive_body_enabled": false,
+        "min_body_effective": 1.5,
+        "tolerance_effective": 1.0,
+        "median_body_12": null,
+        "body_raw_pips": 0.45,
+        "reason": "body_too_small"
+      },
+      {
+        "ts_utc": "2026-03-02T15:00:00+00:00",
+        "event": "expired",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "window_bars": 3,
+        "expired_count": 1,
+        "expired": [
+          {
+            "setup_ts": "2026-03-02T14:40:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 4.0,
+            "bbl_setup": 13391.62,
+            "bbu_setup": 13429.42,
+            "near_touch": true
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-03-02T15:00:00+00:00",
+          "open": 13428.65,
+          "high": 13429.9,
+          "low": 13423.9,
+          "close": 13424.65
+        }
+      },
+      {
+        "event": "replay_exception",
+        "ts_utc": "2026-03-02T15:00:00+00:00",
+        "err": "TypeError(\"'_StubTpPlan' object is not subscriptable\")"
+      }
+    ],
+    "state_sample_first10": [
+      {
+        "ts": "2026-03-02T08:05:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-02T08:20:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      },
+      {
+        "ts": "2026-03-02T09:00:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-02T09:05:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      },
+      {
+        "ts": "2026-03-02T09:10:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-02T09:25:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      },
+      {
+        "ts": "2026-03-02T09:35:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-02T09:50:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      },
+      {
+        "ts": "2026-03-02T10:50:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-02T11:00:00+00:00",
+        "armed_before": 1,
+        "armed_after": 2,
+        "delta": 1
+      }
+    ],
+    "elapsed_s": 2.07,
+    "first_bars_sample": [
+      {
+        "ts": "2026-03-02T00:00:00+00:00",
+        "o": 13438.550000000001,
+        "h": 13438.550000000001,
+        "l": 13432.05,
+        "c": 13432.15
+      },
+      {
+        "ts": "2026-03-02T00:05:00+00:00",
+        "o": 13432.05,
+        "h": 13432.45,
+        "l": 13429.7,
+        "c": 13429.95
+      },
+      {
+        "ts": "2026-03-02T00:10:00+00:00",
+        "o": 13430.05,
+        "h": 13430.75,
+        "l": 13426.949999999999,
+        "c": 13427.0
+      }
+    ]
+  },
+  {
+    "date": "2026-03-18",
+    "status": "ok",
+    "n_bars_fed": 288,
+    "n_lifecycle_rows": 75,
+    "n_standdown_rows": 0,
+    "n_fires": 0,
+    "n_state_transitions": 48,
+    "lifecycle_event_counts": {
+      "replay_exception": 19,
+      "no_rejection": 42,
+      "expired": 14
+    },
+    "fires": [],
+    "lifecycle_sample_last5": [
+      {
+        "event": "replay_exception",
+        "ts_utc": "2026-03-18T16:25:00+00:00",
+        "err": "TypeError(\"'_StubTpPlan' object is not subscriptable\")"
+      },
+      {
+        "event": "replay_exception",
+        "ts_utc": "2026-03-18T16:30:00+00:00",
+        "err": "TypeError(\"'_StubTpPlan' object is not subscriptable\")"
+      },
+      {
+        "ts_utc": "2026-03-18T16:35:00+00:00",
+        "event": "no_rejection",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "armed_count": 1,
+        "armed": [
+          {
+            "setup_ts": "2026-03-18T16:30:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 1.0
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-03-18T16:35:00+00:00",
+          "open": 13328.3,
+          "close": 13328.15,
+          "body_pips": 0.15,
+          "bullish": false
+        },
+        "bb_lower_n": 13319.32,
+        "bb_upper_n": 13335.56,
+        "min_body_pips": 1.5,
+        "tolerance_pips": 1.0,
+        "adaptive_body_enabled": false,
+        "min_body_effective": 1.5,
+        "tolerance_effective": 1.0,
+        "median_body_12": null,
+        "body_raw_pips": 0.15,
+        "reason": "body_too_small"
+      },
+      {
+        "ts_utc": "2026-03-18T16:40:00+00:00",
+        "event": "no_rejection",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "armed_count": 1,
+        "armed": [
+          {
+            "setup_ts": "2026-03-18T16:30:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 2.0
+          }
+        ],
+        "cur_bar": {
+          "ts": "2026-03-18T16:40:00+00:00",
+          "open": 13328.05,
+          "close": 13328.4,
+          "body_pips": 0.35,
+          "bullish": true
+        },
+        "bb_lower_n": 13319.36,
+        "bb_upper_n": 13335.23,
+        "min_body_pips": 1.5,
+        "tolerance_pips": 1.0,
+        "adaptive_body_enabled": false,
+        "min_body_effective": 1.5,
+        "tolerance_effective": 1.0,
+        "median_body_12": null,
+        "body_raw_pips": 0.35,
+        "reason": "body_too_small"
+      },
+      {
+        "event": "replay_exception",
+        "ts_utc": "2026-03-18T16:45:00+00:00",
+        "err": "TypeError(\"'_StubTpPlan' object is not subscriptable\")"
+      }
+    ],
+    "state_sample_first10": [
+      {
+        "ts": "2026-03-18T06:05:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-18T06:10:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      },
+      {
+        "ts": "2026-03-18T06:15:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-18T06:25:00+00:00",
+        "armed_before": 1,
+        "armed_after": 2,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-18T06:30:00+00:00",
+        "armed_before": 2,
+        "armed_after": 0,
+        "delta": -2
+      },
+      {
+        "ts": "2026-03-18T06:45:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-18T06:50:00+00:00",
+        "armed_before": 1,
+        "armed_after": 2,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-18T06:55:00+00:00",
+        "armed_before": 2,
+        "armed_after": 3,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-18T07:00:00+00:00",
+        "armed_before": 3,
+        "armed_after": 0,
+        "delta": -3
+      },
+      {
+        "ts": "2026-03-18T07:05:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      }
+    ],
+    "elapsed_s": 0.54,
+    "first_bars_sample": [
+      {
+        "ts": "2026-03-18T00:00:00+00:00",
+        "o": 13357.95,
+        "h": 13361.4,
+        "l": 13355.6,
+        "c": 13358.9
+      },
+      {
+        "ts": "2026-03-18T00:05:00+00:00",
+        "o": 13358.8,
+        "h": 13363.199999999999,
+        "l": 13358.55,
+        "c": 13361.199999999999
+      },
+      {
+        "ts": "2026-03-18T00:10:00+00:00",
+        "o": 13361.35,
+        "h": 13363.65,
+        "l": 13360.400000000001,
+        "c": 13361.6
+      }
+    ]
+  },
+  {
+    "date": "2026-03-25",
+    "status": "ok",
+    "n_bars_fed": 288,
+    "n_lifecycle_rows": 131,
+    "n_standdown_rows": 0,
+    "n_fires": 0,
+    "n_state_transitions": 29,
+    "lifecycle_event_counts": {
+      "no_rejection": 29,
+      "expired": 18,
+      "outside_window_deferred": 84
+    },
+    "fires": [],
+    "lifecycle_sample_last5": [
+      {
+        "ts_utc": "2026-03-25T23:35:00+00:00",
+        "event": "outside_window_deferred",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "win_start_h": 6,
+        "win_end_h": 17,
+        "armed_count": 1,
+        "armed": [
+          {
+            "setup_ts": "2026-03-25T16:50:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 81.0
+          }
+        ]
+      },
+      {
+        "ts_utc": "2026-03-25T23:40:00+00:00",
+        "event": "outside_window_deferred",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "win_start_h": 6,
+        "win_end_h": 17,
+        "armed_count": 1,
+        "armed": [
+          {
+            "setup_ts": "2026-03-25T16:50:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 82.0
+          }
+        ]
+      },
+      {
+        "ts_utc": "2026-03-25T23:45:00+00:00",
+        "event": "outside_window_deferred",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "win_start_h": 6,
+        "win_end_h": 17,
+        "armed_count": 1,
+        "armed": [
+          {
+            "setup_ts": "2026-03-25T16:50:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 83.0
+          }
+        ]
+      },
+      {
+        "ts_utc": "2026-03-25T23:50:00+00:00",
+        "event": "outside_window_deferred",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "win_start_h": 6,
+        "win_end_h": 17,
+        "armed_count": 1,
+        "armed": [
+          {
+            "setup_ts": "2026-03-25T16:50:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 84.0
+          }
+        ]
+      },
+      {
+        "ts_utc": "2026-03-25T23:55:00+00:00",
+        "event": "outside_window_deferred",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "symbol": "GBPUSD",
+        "win_start_h": 6,
+        "win_end_h": 17,
+        "armed_count": 1,
+        "armed": [
+          {
+            "setup_ts": "2026-03-25T16:50:00+00:00",
+            "direction": "SHORT",
+            "age_bars": 85.0
+          }
+        ]
+      }
+    ],
+    "state_sample_first10": [
+      {
+        "ts": "2026-03-25T06:05:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-25T06:10:00+00:00",
+        "armed_before": 1,
+        "armed_after": 2,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-25T06:20:00+00:00",
+        "armed_before": 2,
+        "armed_after": 1,
+        "delta": -1
+      },
+      {
+        "ts": "2026-03-25T06:25:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      },
+      {
+        "ts": "2026-03-25T07:20:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-25T07:35:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      },
+      {
+        "ts": "2026-03-25T08:00:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-25T08:15:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      },
+      {
+        "ts": "2026-03-25T08:35:00+00:00",
+        "armed_before": 0,
+        "armed_after": 1,
+        "delta": 1
+      },
+      {
+        "ts": "2026-03-25T08:50:00+00:00",
+        "armed_before": 1,
+        "armed_after": 0,
+        "delta": -1
+      }
+    ],
+    "elapsed_s": 0.47,
+    "first_bars_sample": [
+      {
+        "ts": "2026-03-25T00:00:00+00:00",
+        "o": 13415.4,
+        "h": 13421.199999999999,
+        "l": 13412.55,
+        "c": 13419.2
+      },
+      {
+        "ts": "2026-03-25T00:05:00+00:00",
+        "o": 13419.55,
+        "h": 13426.049999999997,
+        "l": 13416.15,
+        "c": 13424.800000000001
+      },
+      {
+        "ts": "2026-03-25T00:10:00+00:00",
+        "o": 13424.849999999999,
+        "h": 13430.900000000001,
+        "l": 13424.849999999999,
+        "c": 13428.0
+      }
+    ]
+  }
+]
