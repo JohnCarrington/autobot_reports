@@ -1,0 +1,49 @@
+{
+  "2024": {
+    "total_days_in_data": 314,
+    "grades": {
+      "CERTIFIED": 231,
+      "USABLE_WITH_LIMITATIONS": 79,
+      "PARTIAL": 4
+    },
+    "total_ticks": 21953955,
+    "weekdays_in_data": 262,
+    "weekend_days_in_data": 52,
+    "any_bid_gt_ask_days": 0,
+    "any_oor_days": 0,
+    "spread_p50_median_pips": 0.8000000000008001,
+    "spread_p95_median_pips": 1.1999999999989797,
+    "spread_p95_90pct_pips": 6.300000000001305
+  },
+  "2025": {
+    "total_days_in_data": 313,
+    "grades": {
+      "CERTIFIED": 243,
+      "USABLE_WITH_LIMITATIONS": 69,
+      "PARTIAL": 1
+    },
+    "total_ticks": 24408019,
+    "weekdays_in_data": 261,
+    "weekend_days_in_data": 52,
+    "any_bid_gt_ask_days": 0,
+    "any_oor_days": 0,
+    "spread_p50_median_pips": 0.8000000000008001,
+    "spread_p95_median_pips": 1.2000000000012,
+    "spread_p95_90pct_pips": 7.5280000000004605
+  },
+  "2026": {
+    "total_days_in_data": 77,
+    "grades": {
+      "CERTIFIED": 64,
+      "USABLE_WITH_LIMITATIONS": 13
+    },
+    "total_ticks": 6629827,
+    "weekdays_in_data": 64,
+    "weekend_days_in_data": 13,
+    "any_bid_gt_ask_days": 0,
+    "any_oor_days": 0,
+    "spread_p50_median_pips": 0.700000000000145,
+    "spread_p95_median_pips": 1.100000000000545,
+    "spread_p95_90pct_pips": 4.000000000000009
+  }
+}
