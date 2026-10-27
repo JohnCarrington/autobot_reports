@@ -1,0 +1,27 @@
+Loading M5 2024-01-01..2026-10-26 ...
+  M5 bars: 203,504
+Resampling H1 and H4 ...
+  H1: 17,005  H4: 4,402
+Classifying direction per TF ...
+  M5 dirs: {'NEUTRAL': 98399, 'BEARISH': 52878, 'BULLISH': 52227}
+  H1 dirs: {'BULLISH': 6006, 'NEUTRAL': 5588, 'BEARISH': 5411}
+  H4 dirs: {'NEUTRAL': 1526, 'BULLISH': 1487, 'BEARISH': 1389}
+Building HLC cache ...
+  dates: 858
+Extracting hourly features ...
+  processed 100 trading days, rows so far: 792
+  processed 200 trading days, rows so far: 1592
+  processed 300 trading days, rows so far: 2392
+  processed 400 trading days, rows so far: 3192
+  processed 500 trading days, rows so far: 3992
+  processed 600 trading days, rows so far: 4792
+  processed 700 trading days, rows so far: 5592
+  wrote features.csv (5,880 rows)
+Measuring session windows (per day, 06-UK ref) ...
+  wrote window_movements.csv (7,084 rows)
+  wrote whole_day_07_17.csv  (715 rows)
+Done.
+
+real	0m18.147s
+user	0m15.537s
+sys	0m0.528s
