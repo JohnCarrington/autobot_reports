@@ -1,0 +1,31 @@
+Loading M5 2024-01-01..2026-10-26 ...
+  M5 bars: 203,504
+Building daily HLC cache ...
+  cache: 858 dates
+Generating forecasts for every trading day ...
+  processed 100 trading days, forecasts so far: 775
+  processed 200 trading days, forecasts so far: 1564
+  processed 300 trading days, forecasts so far: 2360
+  processed 400 trading days, forecasts so far: 3150
+  processed 500 trading days, forecasts so far: 3943
+  processed 600 trading days, forecasts so far: 4677
+  processed 700 trading days, forecasts so far: 5473
+  total forecasts: 5,757 across 736 trading days
+  wrote forecasts_with_outcomes.csv
+  wrote forecaster_summary.csv
+
+--- summary ---
+      model direction  n_forecasts  approached  approach_rate  mean_dist_from_spot  mean_bounce_pips  mean_through_pips  hits_15  hits_15_rate  hits_20  hits_20_rate  hits_30  hits_30_rate  hits_50  hits_50_rate  hits_15_rate_given_approach  hits_20_rate_given_approach  hits_30_rate_given_approach
+  M1_pivots       BUY          721         400           0.55                36.59             39.24              32.97      322          0.45      292          0.40      213          0.30      109          0.15                         0.81                         0.73                         0.53
+  M1_pivots      SELL          721         406           0.56                36.99             39.74              32.57      310          0.43      272          0.38      199          0.28      116          0.16                         0.76                         0.67                         0.49
+  M2_swings       BUY          709         557           0.79                16.37             42.22              36.59      448          0.63      399          0.56      313          0.44      176          0.25                         0.80                         0.72                         0.56
+  M2_swings      SELL          702         570           0.81                15.75             42.92              33.72      467          0.67      409          0.58      323          0.46      182          0.26                         0.82                         0.72                         0.57
+ M3_prev_hl       BUY          721         406           0.56                38.60             39.18              34.39      328          0.45      281          0.39      218          0.30      110          0.15                         0.81                         0.69                         0.54
+ M3_prev_hl      SELL          721         413           0.57                37.47             40.23              34.54      312          0.43      271          0.38      206          0.29      111          0.15                         0.76                         0.66                         0.50
+M4_baseline       BUY          731         376           0.51                36.19             40.25              32.00      308          0.42      271          0.37      208          0.28      103          0.14                         0.82                         0.72                         0.55
+M4_baseline      SELL          731         379           0.52                36.19             39.54              29.51      304          0.42      261          0.36      189          0.26       98          0.13                         0.80                         0.69                         0.50
+Done.
+
+real	0m55.145s
+user	0m45.745s
+sys	0m1.058s

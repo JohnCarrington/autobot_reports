@@ -1,0 +1,25 @@
+Loading M5 2024-01-01..2026-10-26 ...
+  M5 bars: 203,504
+Replaying BB-bounce core 2-candle pattern ...
+  Signals: 2,885
+Computing daily pivots ...
+  Pivots computed: 857 dates
+Measuring outcomes across SL/TP grid ...
+  sl= 12.0 tp= 20.0: 966 wins, 1627 losses
+  sl= 12.0 tp= 30.0: 590 wins, 1722 losses
+  sl= 20.0 tp= 20.0: 1133 wins, 1112 losses
+  sl= 20.0 tp= 30.0: 684 wins, 1178 losses
+  sl= 20.0 tp= 40.0: 365 wins, 1210 losses
+  wrote signals_with_outcomes.csv  (2,885 rows)
+  wrote config_metrics.csv  (40 rows)
+  wrote direction_position_breakdown.csv
+
+--- summary (sl=20 tp=30, ALL split) ---
+  Config A (baseline): n=2885, win_rate=23.7%, net=+1367.6p, PF=1.05, DD=-998.2
+  Config B (S1/R1):    n=2678, win_rate=23.9%, net=+1600.1p, PF=1.07, DD=-908.7
+  Trades prevented by filter: 207 (45 would-be wins, 90 would-be losses)
+Done.
+
+real	0m16.200s
+user	0m12.979s
+sys	0m0.810s
