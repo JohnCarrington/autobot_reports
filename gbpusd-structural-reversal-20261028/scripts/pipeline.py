@@ -44,16 +44,28 @@ SPREAD_PIPS = (0, 1, 2)
 
 def _simulate_sl_tp(bars, ci: int, entry: float, side: str,
                     sl: float, tp: float, spread: float) -> str:
-    """Return 'TP', 'SL', 'AMB', or 'OUT' within RESPONSE_HORIZON_BARS."""
+    """Return 'TP', 'SL', 'AMB', or 'OUT' within RESPONSE_HORIZON_BARS.
+
+    Entry on bid at ``entry``.  Triggers in bid terms (candles are BID
+    OHLC):
+      UPPER (short)  TP: bar.low <= entry - TP   (bid drops by TP)
+                     SL: bar.high >= entry + SL  (bid rises by SL)
+      LOWER (long)   TP: bar.high >= entry + TP  (bid rises by TP)
+                     SL: bar.low  <= entry - SL  (bid drops by SL)
+
+    Realised P/L (points) is computed in the aggregate step:
+      Trade on TP: +TP − spread
+      Trade on SL: −SL − spread
+    """
     end = min(ci + RESPONSE_HORIZON_BARS, len(bars) - 1)
     for i in range(ci + 1, end + 1):
         b = bars[i]
-        if side == "UPPER":  # short the reversal (price moving down)
-            tp_hit = b.low <= entry - tp - spread
-            sl_hit = b.high >= entry + sl + spread
+        if side == "UPPER":
+            tp_hit = b.low <= entry - tp
+            sl_hit = b.high >= entry + sl
         else:
-            tp_hit = b.high >= entry + tp + spread
-            sl_hit = b.low <= entry - sl - spread
+            tp_hit = b.high >= entry + tp
+            sl_hit = b.low <= entry - sl
         if tp_hit and sl_hit:
             return "AMB"
         if tp_hit:
@@ -169,9 +181,9 @@ def run_year(year: int) -> dict:
         n_out = exec_counter[(key, "OUT")]
         decisive = n_tp + n_sl
         hit = (n_tp / decisive) if decisive else None
-        # Expectancy (decisive only)
-        exp_dec = ((n_tp * tp - n_sl * sl) / decisive) if decisive else None
-        exp_amb = ((n_tp * tp - (n_sl + n_amb) * sl) /
+        # Expectancy with correct realised P/L: TP → +TP - spread; SL → -SL - spread.
+        exp_dec = ((n_tp * (tp - sp) - n_sl * (sl + sp)) / decisive) if decisive else None
+        exp_amb = ((n_tp * (tp - sp) - (n_sl + n_amb) * (sl + sp)) /
                    (n_tp + n_sl + n_amb)) if (n_tp + n_sl + n_amb) else None
         exec_rows.append({
             "year": year, "level_family": family, "cf_event": cf_name,

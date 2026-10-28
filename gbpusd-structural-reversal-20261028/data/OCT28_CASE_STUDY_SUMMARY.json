@@ -1,0 +1,295 @@
+{
+  "events_on_oct28": 22,
+  "levels_near_1_3273_at_eventA": [
+    {
+      "type": "PIVOT_S3",
+      "price": 13258.18,
+      "established_at": "2026-10-26T21:00:00+00:00"
+    },
+    {
+      "type": "PIVOT_S2",
+      "price": 13270.47,
+      "established_at": "2026-10-27T21:00:00+00:00"
+    },
+    {
+      "type": "PDL",
+      "price": 13272.95,
+      "established_at": "2026-10-28T21:00:00+00:00"
+    },
+    {
+      "type": "SESS_L_ASIAN",
+      "price": 13272.95,
+      "established_at": "2026-10-28T08:00:00+00:00"
+    },
+    {
+      "type": "SWING_L",
+      "price": 13272.95,
+      "established_at": "2026-10-28T07:35:00+00:00"
+    },
+    {
+      "type": "SESS_L_LONDON",
+      "price": 13274.349999999999,
+      "established_at": "2026-10-28T13:00:00+00:00"
+    },
+    {
+      "type": "SWING_L",
+      "price": 13280.25,
+      "established_at": "2026-10-28T10:40:00+00:00"
+    },
+    {
+      "type": "DEFENDED_L",
+      "price": 13281.25,
+      "established_at": "2026-10-28T08:15:00+00:00"
+    },
+    {
+      "type": "SWING_L",
+      "price": 13281.349999999999,
+      "established_at": "2026-10-28T08:15:00+00:00"
+    },
+    {
+      "type": "SWING_L",
+      "price": 13284.849999999999,
+      "established_at": "2026-10-28T13:10:00+00:00"
+    },
+    {
+      "type": "SWING_L",
+      "price": 13286.150000000001,
+      "established_at": "2026-10-28T12:20:00+00:00"
+    },
+    {
+      "type": "SWING_L",
+      "price": 13287.099999999999,
+      "established_at": "2026-10-28T12:50:00+00:00"
+    },
+    {
+      "type": "SESS_L_NY",
+      "price": 13287.150000000001,
+      "established_at": "2026-10-28T13:15:00+00:00"
+    },
+    {
+      "type": "PIVOT_S1",
+      "price": 13287.48,
+      "established_at": "2026-10-27T21:00:00+00:00"
+    }
+  ],
+  "levels_near_1_3273_at_eventB": [
+    {
+      "type": "PIVOT_S3",
+      "price": 13258.18,
+      "established_at": "2026-10-26T21:00:00+00:00"
+    },
+    {
+      "type": "PIVOT_S2",
+      "price": 13270.47,
+      "established_at": "2026-10-27T21:00:00+00:00"
+    },
+    {
+      "type": "SESS_L_ASIAN",
+      "price": 13272.95,
+      "established_at": "2026-10-28T08:00:00+00:00"
+    },
+    {
+      "type": "SWING_L",
+      "price": 13272.95,
+      "established_at": "2026-10-28T07:35:00+00:00"
+    },
+    {
+      "type": "SWING_L",
+      "price": 13280.25,
+      "established_at": "2026-10-28T10:40:00+00:00"
+    },
+    {
+      "type": "DEFENDED_L",
+      "price": 13281.25,
+      "established_at": "2026-10-28T08:15:00+00:00"
+    },
+    {
+      "type": "SWING_L",
+      "price": 13281.349999999999,
+      "established_at": "2026-10-28T08:15:00+00:00"
+    },
+    {
+      "type": "PIVOT_S1",
+      "price": 13287.48,
+      "established_at": "2026-10-27T21:00:00+00:00"
+    }
+  ],
+  "pipeline_events_oct28": [
+    {
+      "ts": "2026-10-28T07:15:00+00:00",
+      "level": "PIVOT_S2",
+      "price": 13270.47,
+      "side": "LOWER",
+      "distance": 2.48,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T07:30:00+00:00",
+      "level": "PIVOT_S1",
+      "price": 13287.48,
+      "side": "UPPER",
+      "distance": 2.33,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T07:45:00+00:00",
+      "level": "PIVOT_S1",
+      "price": 13287.48,
+      "side": "LOWER",
+      "distance": 1.47,
+      "penetration": 2.23
+    },
+    {
+      "ts": "2026-10-28T08:00:00+00:00",
+      "level": "SWING_H",
+      "price": 13292.15,
+      "side": "UPPER",
+      "distance": 2.2,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T08:20:00+00:00",
+      "level": "DEFENDED_H",
+      "price": 13294.5,
+      "side": "UPPER",
+      "distance": 1.05,
+      "penetration": 1.05
+    },
+    {
+      "ts": "2026-10-28T08:25:00+00:00",
+      "level": "PIVOT_S2",
+      "price": 13292.87,
+      "side": "LOWER",
+      "distance": 0.18,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T08:40:00+00:00",
+      "level": "PIVOT_S2",
+      "price": 13292.87,
+      "side": "UPPER",
+      "distance": 0.58,
+      "penetration": 0.58
+    },
+    {
+      "ts": "2026-10-28T08:50:00+00:00",
+      "level": "SWING_L",
+      "price": 13289.45,
+      "side": "LOWER",
+      "distance": 0.0,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T09:05:00+00:00",
+      "level": "SWING_H",
+      "price": 13296.05,
+      "side": "UPPER",
+      "distance": 0.5,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T09:10:00+00:00",
+      "level": "SWING_H",
+      "price": 13296.85,
+      "side": "UPPER",
+      "distance": 0.0,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T09:20:00+00:00",
+      "level": "SWING_L",
+      "price": 13294.45,
+      "side": "LOWER",
+      "distance": 0.3,
+      "penetration": 0.9
+    },
+    {
+      "ts": "2026-10-28T10:00:00+00:00",
+      "level": "SWING_L",
+      "price": 13281.35,
+      "side": "LOWER",
+      "distance": 1.2,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T10:05:00+00:00",
+      "level": "DEFENDED_L",
+      "price": 13281.25,
+      "side": "LOWER",
+      "distance": 0.5,
+      "penetration": 0.5
+    },
+    {
+      "ts": "2026-10-28T10:25:00+00:00",
+      "level": "PIVOT_S1",
+      "price": 13287.48,
+      "side": "UPPER",
+      "distance": 1.93,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T10:45:00+00:00",
+      "level": "SWING_L",
+      "price": 13280.25,
+      "side": "LOWER",
+      "distance": 0.7,
+      "penetration": 3.1
+    },
+    {
+      "ts": "2026-10-28T10:50:00+00:00",
+      "level": "SESS_L_ASIAN",
+      "price": 13272.95,
+      "side": "LOWER",
+      "distance": 2.3,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T11:35:00+00:00",
+      "level": "PIVOT_S1",
+      "price": 13287.48,
+      "side": "LOWER",
+      "distance": 0.53,
+      "penetration": 0.53
+    },
+    {
+      "ts": "2026-10-28T11:50:00+00:00",
+      "level": "SWING_H",
+      "price": 13288.65,
+      "side": "UPPER",
+      "distance": 0.0,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T12:00:00+00:00",
+      "level": "SWING_H",
+      "price": 13292.15,
+      "side": "UPPER",
+      "distance": 0.4,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T12:05:00+00:00",
+      "level": "SWING_L",
+      "price": 13289.45,
+      "side": "LOWER",
+      "distance": 0.0,
+      "penetration": 0.0
+    },
+    {
+      "ts": "2026-10-28T12:10:00+00:00",
+      "level": "DEFENDED_H",
+      "price": 13294.5,
+      "side": "UPPER",
+      "distance": 0.05,
+      "penetration": 0.05
+    },
+    {
+      "ts": "2026-10-28T12:55:00+00:00",
+      "level": "SWING_L",
+      "price": 13287.1,
+      "side": "LOWER",
+      "distance": 0.25,
+      "penetration": 0.25
+    }
+  ]
+}
