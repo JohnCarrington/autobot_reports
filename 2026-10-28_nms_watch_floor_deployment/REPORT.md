@@ -235,4 +235,169 @@ If (A), the subsequent §7 post-restart verification steps are already pre-plann
 
 ---
 
-*End of report. Written during an authorised deployment that was halted at the service-restart step pending operator decision. No code, settings, services or trading state have been changed beyond the file overlay documented in §B.*
+*End of initial halt report.*
+
+---
+
+# Final deployment report — SUCCESS
+
+Operator issued OPTION A ("proceed") with explicit reconfirmation conditions 1-10. All conditions satisfied; restart executed by operator (`sudo systemctl restart autobot`); post-restart verification complete.
+
+## Final deployment status
+
+**SUCCESS — correction active, service healthy, position safe, dynamic IG min-stop preserved.**
+
+| Attribute | Value |
+|---|---|
+| Restart timestamp (UTC) | `2026-10-28T13:08:56Z` |
+| Pre-restart MainPID | `2004966` |
+| **Post-restart MainPID** | **`2025467`** |
+| systemctl NRestarts | 0 (clean one-shot restart) |
+| ActiveState | `active (running)` |
+
+Operator-authorised actions executed: `sudo systemctl restart autobot` (one call). No other services touched. No broker orders placed, amended or cancelled.
+
+## Reconfirmed safety conditions (immediately before restart)
+
+| # | Operator-required check | Result |
+|---|---|---|
+| 1 | `nms_watch_state_machine.py` SHA = `44c9fe6c…` (approved) | ✅ matched |
+| 1 | `nms_watch_state_driver.py`  SHA = `76c03e0b…` (approved) | ✅ matched |
+| 2 | `.env` `IG_ACC_TYPE=DEMO`, account `Z3G4CJ` | ✅ confirmed |
+| 3 | Open position `BE-5c70ac68ac8f` / `DIAAAAYQ9XU2UBN` — GBPUSD BOUNCE_TR_S SELL, entry 1.328675, SL 1.330675 (+20p server-side), TP 1.325675 (-30p server-side); current price ~1.329085; 15.9p from SL, 34.1p from TP | ✅ safely protected |
+| 4 | BOUNCE_TR_S exit management owned by `bb-bounce.service` (`[BOUNCE_ENGINE] skipped manager-side exits` log line at open); bb-bounce `active+enabled` and NOT being restarted | ✅ no duplicate-order / interference risk |
+| — | Preservation SHAs (`trade_executor.py`, `ig_dealing_rules.py`, `/opt/bb_bounce/stop_sizing.py`) unchanged | ✅ dynamic IG min-stop intact |
+
+## Post-restart verification (§7-9)
+
+### Service health
+
+- `systemctl is-active autobot` → `active`
+- Zero errors in `journalctl -p err -u autobot --since <restart>`
+- Zero Python `Traceback` / `ImportError` / `SyntaxError` / `AttributeError` / `TypeError` / `ModuleNotFoundError` entries
+- Only expected warnings (LS-CB callback timing, LS-WORKER tick-queue overflow on USDCAD under restart burst — identical pattern to the pre-restart run)
+- `trades-api.service` (PID 500664) and `bb-bounce.service` (PID 2005656) unchanged
+
+### Market data freshness
+
+- 5m close for `2026-10-28T13:05:00+00:00` received at `13:10:00` UTC: GBPUSD O=1.329075 H=1.329085 L=1.328725 C=1.328755 ticks=243
+- `candles_5m_closed_df` payload normalised at 13:10:14; 225 closed rows ready for consumers
+- IG daily-% recordings resumed at 13:09:04 — normal operation
+
+### NMS emissions (first post-restart evaluation cycle, after the 13:05 bar close)
+
+```
+2026-10-28T13:10:08  GBPUSD   WATCH_AND_WAIT  HOLD_WATCH_EXHAUSTION_STILL_PRESENT  extreme=13290.849999999999
+2026-10-28T13:10:09  EURUSD   TREND_TRADING   TREND_TRADING_EXHAUSTION_NOT_INDEPENDENT
+2026-10-28T13:10:11  USDCAD   TREND_TRADING   TREND_TRADING_NO_ESTABLISHED_TREND
+2026-10-28T13:10:11  USDJPY   TREND_TRADING   TREND_TRADING_NO_ESTABLISHED_TREND
+```
+
+All four symbols produced one emission each — normal cadence.
+
+### WATCH persistence hydration + floor-break seed path (§8)
+
+GBPUSD had been in WATCH_AND_WAIT since 13:05:09 (triggered by multi-independent BUYING_EXHAUSTION; UP watch). The sidecar written by the pre-correction process at 13:05 did NOT include `watch_extreme_price` (old schema). On the FIRST post-restart evaluation of GBPUSD at 13:10:08:
+
+- `_load_previous` hydrated the sidecar — `watch_extreme_price` defaulted to `None` via the backward-compatible `from_dict` path (not an exception)
+- `_resolve_watch` ran the structural check: `prior_extreme=None`, `last_bar_close=13287.55` → `structure_broken=False` with the `missing_input` detail
+- Hold code selection: exhaustion state was UNKNOWN (contradictory evidence on the 13:05 bar) → `exhaustion_cleared=False` → emitted `HOLD_WATCH_EXHAUSTION_STILL_PRESENT` (the strongest hold reason, taking precedence over the floor fail-closed)
+- Extreme seeded for the next evaluation: `extreme_new=13290.849999999999` (= 13:05 bar HIGH, correct for an UP watch)
+
+Raw emission (reason_detail excerpt):
+```
+v3_trend=UP ex_state=UNKNOWN ex_dir=UNKNOWN families=['CANDLE_REJECTION', 'MOMENTUM']
+companion=None exhaustion_cleared=False companion_positive=False
+structure=missing_input close=13287.55 prior_extreme=None
+extreme_prior=None extreme_new=13290.849999999999
+```
+
+This is **exactly the fail-closed-then-seed behaviour the correction was designed to produce** on first hydration of a legacy sidecar. No fabricated historical extreme; next bar's close must break 13290.85 to admit continuation.
+
+### M5 timestamp matching
+
+The driver's `_read_last_completed_bar` matched the 13:05 bar from `GBPUSD_candles_rolling.csv` by exact `last_bar_ts`:
+- Rolling cache row: `"2026-10-28 13:05:00+00:00"` (space separator)
+- Session_trend `last_bar_ts`: `"2026-10-28T13:05:00+00:00"` (T separator)
+- `_parse_cache_ts` normalisation handled both; bar's close time `13:10:00 ≤ now=13:10:08` → completed ✅
+
+The returned OHLC was consumed in the emission's reason_detail (`close=13287.55`, `extreme_new=13290.85`). Scale: IG points, same scale as `watch_extreme_price` — unit-consistent.
+
+### New reason codes
+
+- `HOLD_WATCH_FLOOR_NOT_BROKEN` — not yet observed. Will emit when a DOWN watch has a clean exhaustion state + positive companion + close that fails the floor-break. No qualifying event has occurred since restart.
+- `HOLD_WATCH_CEILING_NOT_BROKEN` — not yet observed. Mirror of the above for UP watches.
+
+Both codes are reachable in production as recorded in the deployed `nms_watch_state_machine.py`'s `__all__` export. Their current absence is not a failure — see §7 of the deployment spec.
+
+### Open position safety
+
+Position reconciled cleanly on startup:
+
+```
+13:09:21  [RECONCILE] UNKNOWN — /positions API failed; local records preserved
+          http_status=500 (first attempt — IG transient; standard reconnect behaviour)
+13:09:21  [RECONCILE_RETRY] queued a one-shot retry
+13:09:27  [RECONCILE_RETRY] visibility recovered — retrying
+13:09:27  [RECONCILE] restored mode=BOUNCE_TR_S for deal=DIAAAAYQ9XU2UBN
+13:09:27  [RECONCILE] ✅ Restored CS.D.GBPUSD.TODAY.IP SELL entry=13287.0
+          dealId=DIAAAAYQ9XU2UBN sl_pips=20.0 tp_pips=30.0 mode=BOUNCE_TR_S
+13:09:27  [RECONCILE] local_active 1→1 broker_open=1 (clean match)
+```
+
+Position state: `sl_pips=20.0 tp_pips=30.0` reconciled identical to pre-restart; `mode=BOUNCE_TR_S` preserved (so bb-bounce.service continues to own exit management); no orphaned deals, no stale entries.
+
+### No new broker orders
+
+- Signal_log scan: zero new `timestamp_open` rows after 13:00 UTC (confirmed by `grep -c '"timestamp_open": "2026-10-28T13:'` → 0)
+- `execution_rejections.jsonl` since restart: 0 rows (correctly filtered — the initial scan showed 242 due to a lexical-sort bug in my awk pattern; corrected scan with `startswith('2026-10-28T13:')` prefix returns 0)
+- No `POST /positions/otc` in journal since restart
+
+### Preservation SHAs post-restart
+
+```
+e0703d10396cc90486b2885ac7f1f2269dd9239ff1a14454e2ad220e65dfc81d  /opt/tradingbot/trade_executor.py
+e70d800cf2c27292f03ccd59e40b62c7a24607eab94def0cf65d93ca874f3a75  /opt/tradingbot/ig_dealing_rules.py
+897011a750525defe372eb1401dfa95335fdb326a0ec683baaebb466695d4c2f  /opt/bb_bounce/stop_sizing.py
+```
+
+All identical to pre-overlay values (see §G of the initial halt report). The dynamic IG minimum-stop correction is intact and the `trade_executor.py:4410` import path to `ig_dealing_rules.is_known_too_tight` is operational.
+
+## Final file-level ground truth
+
+| File | SHA256 |
+|---|---|
+| `/opt/tradingbot/nms_watch_state_machine.py` | `44c9fe6c1881182168b7f445a5bd1fd6f5357abc023a649df180008fdb8a8280` |
+| `/opt/tradingbot/nms_watch_state_driver.py` | `76c03e0b3300574aff80906b8d663fd793eec2a96084d17a06cab725a5ba074a` |
+| `/opt/tradingbot/trade_executor.py` (preserved) | `e0703d10396cc90486b2885ac7f1f2269dd9239ff1a14454e2ad220e65dfc81d` |
+| `/opt/tradingbot/ig_dealing_rules.py` (preserved) | `e70d800cf2c27292f03ccd59e40b62c7a24607eab94def0cf65d93ca874f3a75` |
+| `/opt/bb_bounce/stop_sizing.py` (preserved) | `897011a750525defe372eb1401dfa95335fdb326a0ec683baaebb466695d4c2f` |
+
+In-memory process now loading the SAME SHAs for the two NMS modules.
+
+## Outstanding issues
+
+1. **Pre-existing pytest-CLI test-count discrepancy in `/opt/tradingbot`** — unchanged. Not caused by this deployment; proven in the initial halt report §D.5 to reproduce byte-identically on backup pre-overlay files. Separate test-env hygiene investigation.
+2. **Pre-existing 20 broader-NMS failures from production `.env` flag leakage into tests** — unchanged. Not caused by this deployment.
+3. **Short-lived `/positions` HTTP 500 on startup** — IG transient on streaming reconnect; auto-retried at 13:09:27 with full reconcile success. Standard behaviour for autobot restarts. No action required.
+
+No new issues introduced by this deployment.
+
+## Deployment-report conclusions mapped to the spec's A-H criteria
+
+- **A. Deployment status** — SUCCESS.
+- **B. Deployed commit** — `7275ca5cb24f0a91ce449643ea6262c1e75db6ac`. File hashes above.
+- **C. Service status** — pre-restart active since 2026-10-28 11:48:58 UTC (PID 2004966); post-restart active since 2026-10-28 13:08:56 UTC (PID 2025467).
+- **D. Test results** — compile OK; new tests 19/19 PASS (CLI); approved watch suite 71 PASS (programmatic); worktree broader NMS 320 PASS. Pre-existing /opt/tradingbot CLI-only discrepancies documented and proven unrelated.
+- **E. NMS verification** — first post-restart evaluation cycle at 13:10:08-13:10:11 produced correct emissions for all four symbols. GBPUSD hydrated the legacy sidecar via the backward-compatible fail-closed-then-seed path (extreme seeded to 13290.85 for the UP watch). Candle timestamp matcher binds OHLC to the exact `last_bar_ts`.
+- **F. Broker safety** — position reconciled cleanly (sl=20p, tp=30p, mode=BOUNCE_TR_S preserved; local_active 1→1 broker_open=1). No new orders. SL/TP server-side on IG.
+- **G. Existing functionality** — dynamic IG min-stop correction preservation SHAs byte-identical before and after; bb-bounce + trades-api services untouched.
+- **H. Outstanding issues** — three pre-existing items documented; none caused by this deployment; no rollback triggered.
+
+## Rollback — not required and not performed
+
+The §B.3 backup remains available at `/home/autobot/deploy_backups/nms_watch_floor_20261028T124248Z` indefinitely. If the operator ever wants to revert this specific correction without affecting the dynamic IG min-stop or any other production change, the two `install -m 0644` commands in §B.3 restore the pre-overlay SHAs. A subsequent service restart would then re-load the pre-correction code.
+
+---
+
+*End of final deployment report. Service healthy; NMS WATCH floor-break correction active in production (DEMO account) as of 2026-10-28T13:08:56Z under PID 2025467.*
