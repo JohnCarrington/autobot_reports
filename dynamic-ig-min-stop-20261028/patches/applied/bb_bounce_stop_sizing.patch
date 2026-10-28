@@ -5,52 +5,35 @@
      BB_STOP_MODE, STRUCTURAL_BUFFER_PIPS, IG_MIN_STOP_PIPS,
      IG_MIN_STAKE, IG_STAKE_INCREMENT, REFERENCE_RISK_POUNDS,
 -    SL_PIPS, TP_PIPS, TRADE_SIZE,
-+    SL_PIPS, TP_PIPS, TRADE_SIZE, EPIC, SYMBOL,
++    SL_PIPS, TP_PIPS, TRADE_SIZE, EPIC,
  )
  from strategy import Dir
  
-@@ -139,15 +139,52 @@
+@@ -139,15 +139,35 @@
  
      stop_distance = round(stop_distance, 2)
  
 -    # Reject if below IG min stop
 -    if stop_distance < IG_MIN_STOP_PIPS:
-+    # 2026-10-28 — Consult live IG dealing-rules.  Falls back to the
-+    # import-time env constant when the live lookup is unavailable.
-+    # STRICT mode fail-closes if no live rule — see ig_dealing_rules.
-+    _effective_min = IG_MIN_STOP_PIPS  # static fallback
++    # 2026-10-28 event-driven redesign: no pre-submit API call.
++    # Consult only the last-known observation of IG's current minimum
++    # (populated after a confirmed broker rejection).  When no
++    # observation exists, we still reject sub-static-minimum stops via
++    # the import-time IG_MIN_STOP_PIPS (preserves today's behaviour).
++    _effective_min = float(IG_MIN_STOP_PIPS)
 +    _rule_source = "static"
++    _obs = None
 +    try:
-+        import logging as _lg
-+        _logger = _lg.getLogger("BBBounce.stop_sizing")
-+        from ig_dealing_rules import validate_stop as _ig_validate_stop
-+        _v = _ig_validate_stop(
-+            epic=EPIC, pair=SYMBOL,
-+            requested_pips=float(stop_distance),
-+            strict=False,  # standalone BBB already rejects at IG_MIN_STOP_PIPS;
-+                           # we use validate for OBSERVABILITY and dynamic min.
-+            require_fresh=True,
-+        )
-+        if _v.broker_min_pips is not None:
-+            _effective_min = float(_v.broker_min_pips)
-+            _rule_source = _v.rule_source
-+            if _v.reason_code == "PASS":
-+                _logger.info(
-+                    "[IG_STOP_VALIDATION_PASS] %s requested=%.2fp min=%.2fp source=%s",
-+                    SYMBOL, _v.requested_pips, _v.broker_min_pips, _v.rule_source,
-+                )
-+            elif _v.reason_code == "TOO_TIGHT":
-+                _logger.warning(
-+                    "[IG_STOP_VALIDATION_BLOCK] %s requested=%.2fp min=%.2fp "
-+                    "short_by=%.2fp source=%s",
-+                    SYMBOL, _v.requested_pips, _v.broker_min_pips,
-+                    abs(_v.difference_pips or 0.0), _v.rule_source,
-+                )
-+    except Exception as _exc:
++        from ig_dealing_rules import last_known_min as _dr_last_known
++        _obs = _dr_last_known(EPIC)
++        if _obs is not None:
++            _effective_min = max(_effective_min, float(_obs.value_pips))
++            _rule_source = "observed"
++    except Exception:
 +        pass
 +
-+    # Reject if below effective IG min stop
-+    if stop_distance < _effective_min:
++    # Reject if below the effective floor.  Never silently widen.
++    if stop_distance < _effective_min - 1e-6:
          return StopPlan(
              mode=mode, direction=dir_str, fill=fill,
              tp_level=round(tp_level, 2), sl_level=round(sl_level, 2),

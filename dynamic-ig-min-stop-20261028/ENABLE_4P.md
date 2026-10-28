@@ -1,12 +1,22 @@
-# Enabling a 4-pip stop for a specific strategy
+# Enabling a 4-pip stop for a specific strategy (event-driven design)
 
-**Audience:** operator.  **Pre-condition:** Patch 0001b + Patch 0002b
-applied; `module/ig_dealing_rules.py` deployed at
-`/opt/tradingbot/ig_dealing_rules.py` and `/opt/bb_bounce/ig_dealing_rules.py`;
-tests passing in deployment worktree.
+**Design:** 2026-10-28 operator ruling — event-driven, no pre-trade API.
+**Pre-condition:** Patches applied + module deployed per
+`DEPLOYMENT_MANIFEST.md`.
 
-Each section below shows the minimal `.env` changes required.  No code
-changes are needed by the operator.
+## How this works (short version)
+
+* The operator sets the strategy's requested stop in `.env`.  No other
+  change is needed.
+* AutoBot submits every trade with that stop attached to the initial IG
+  order.
+* If IG accepts, you trade with the exact stop you asked for.
+* If IG rejects for an insufficient stop distance, the module records
+  what IG currently requires and the NEXT submission with a too-tight
+  stop is blocked locally.  The rejected trade is NOT auto-widened and
+  NOT retried.
+* After the TTL (default 15 min) or an operator `invalidate`, the
+  local block is cleared and the strategy is free to try again.
 
 ---
 
@@ -14,48 +24,41 @@ changes are needed by the operator.
 
 ### 1.1 Pre-condition
 
-**Patch 0004** must be applied first.  Verified 2026-10-28:
-`/opt/bb_bounce/config.py:21` has `SL_PIPS = 12` hardcoded (NOT read
-from env).  Patch 0004 wires it to `BB_SL_PIPS` env.  Without Patch
-0004, setting any env variable has no effect on this strategy.
+Patch 0004 to `/opt/bb_bounce/config.py` applied (TP_PIPS and SL_PIPS
+now read from env).  Without this patch, `SL_PIPS=12` is hardcoded.
 
-### 1.2 Changes required (post Patch 0004)
+### 1.2 Changes required
 
 ```bash
 # /opt/bb_bounce/.env — append (or edit):
 BB_SL_PIPS=4
-# BB_IG_MIN_STOP_PIPS=4.0 is already the default; no change needed.
-# BB_STOP_MODE=FIXED_12 (default) OR BB_STOP_MODE=STRUCTURAL_3:
-#   FIXED_12   → literally use the BB_SL_PIPS value above (= 4 pips)
-#   STRUCTURAL_3 → use structural stop (ignores SL_PIPS); 4 pips does
-#                  nothing here.
+# No other env needed. The strategy will submit with sl_distance=4.
 ```
 
-### 1.2 Restart
+### 1.3 Restart
 
 ```bash
 sudo systemctl restart bb-bounce.service
 ```
 
-### 1.3 Observability
-
-Watch for the first fire:
+### 1.4 Observability
 
 ```bash
-journalctl -u bb-bounce.service -n 100 --no-pager | grep -E \
-  "IG_STOP_VALIDATION_PASS|IG_STOP_VALIDATION_BLOCK|STOP_TOO_TIGHT"
+# Successful 4-pip trades carry sl_distance=4 to IG; no module log needed.
+journalctl -u bb-bounce.service -n 100 --no-pager | grep -E "stop_distance|STOP_TOO_TIGHT"
+
+# If IG currently requires more than 4p for this epic, you will see:
+# 1. ATTACHED_ORDER_LEVEL_ERROR from IG (first rejected submission)
+# 2. [IG_MIN_STOP_OBSERVED] value=Xp (one log line) — the module records
+#    what IG requires.
+# 3. Subsequent 4-pip submissions → STOP_TOO_TIGHT from stop_sizing.py
+#    (local block, no IG call).
 ```
 
-Expected lines on a successful 4-pip fire:
-
-```
-[IG_STOP_VALIDATION_PASS] GBPUSD requested=4.00p min=4.00p source=live
-```
-
-### 1.4 Rollback
+### 1.5 Rollback
 
 ```bash
-# /opt/bb_bounce/.env — revert
+# /opt/bb_bounce/.env — revert:
 BB_SL_PIPS=12
 ```
 
@@ -68,121 +71,101 @@ Restart.
 ### 2.1 Changes required
 
 ```bash
-# /opt/tradingbot/.env — append or edit the following lines:
-AUTOBOT_IG_MIN_STOP_STRICT=1              # strict reject (post Patch 0001b default)
-GBPUSD_BB_BOUNCE_SL_PIPS=4                # strategy's requested SL
+# /opt/tradingbot/.env — append or edit:
+GBPUSD_BB_BOUNCE_SL_PIPS=4
 ```
 
-That is **all** you need post Patch 0001b, because:
+### 2.2 Behavioural note
 
-* Step 2 (per-pair IG min) now consults IG's live dealing-rules → 4.0p.
-* Step 3 (global SL floor) is REMOVED.
-* Step 4 (`pair_config.MIN_SL_PIPS[GBPUSD]=12`) is SKIPPED in strict mode.
-
-### 2.2 Restart (operator decides when)
-
-```bash
-sudo systemctl restart autobot.service   # or whatever service unit AutoBot uses
-```
-
-### 2.3 Observability
-
-```bash
-journalctl -u autobot.service -n 100 --no-pager | grep -E \
-  "IG_STOP_VALIDATION_PASS|IG_STOP_VALIDATION_BLOCK|IG_MIN_STOP_CHANGE|IG_MIN_STOP_FETCH"
-```
-
-Expected on a 4-pip fire:
-```
-[IG_STOP_VALIDATION_PASS] GBPUSD requested=4.00p min=4.00p source=live rule_ts=1763...
-[executor] GBPUSD SL=4.00p accepted below user default MIN_SL_PIPS=12.00p (strict mode)
-```
-
-### 2.4 Rollback
-
-```bash
-# /opt/tradingbot/.env — revert:
-AUTOBOT_IG_MIN_STOP_STRICT=0
-```
-
-Restart.  Strategy's 4-pip request is now re-widened by Step 4 to 12p
-(legacy behaviour), but all logging remains intact for diagnostics.
-
-To fully revert to pre-patch behaviour, remove `GBPUSD_BB_BOUNCE_SL_PIPS=4`
-or set it back to 20.
-
----
-
-## 3. AutoBot EMA Pullback — enable 4-pip stop
-
-EMA Pullback computes its stop from `(entry − EMA_21) + 3p buffer`
-and floors at `_PAIR_MIN_SL_PIPS[GBPUSD]=12` INSIDE the strategy
-(ema_pullback.py:632).  So you also need to lower the strategy's own
-per-pair floor via env:
-
-### 3.1 Changes required
+AutoBot still has three legacy widening floors in `execute_trade`:
+Step 2 (`_IG_MIN_STOP_PTS`), Step 3 (global `MIN_STOP_DISTANCE_PIPS`),
+and Step 4 (`pair_config.MIN_SL_PIPS`).  The event-driven redesign
+leaves these in place as **safety nets for unknown pairs or module
+failure**.  To let a 4-pip request actually reach IG, you must also
+lower them:
 
 ```bash
 # /opt/tradingbot/.env — append or edit:
-AUTOBOT_IG_MIN_STOP_STRICT=1
-GBPUSD_MIN_SL_PIPS=4                 # overrides pair_config.MIN_SL_PIPS[GBPUSD]
-GBPUSD_EMA_PULLBACK_SL_PIPS=4        # strategy's env-level ceiling / default
+GBPUSD_IG_MIN_STOP_PTS=4        # Step 2 — per-pair IG proxy
+MIN_STOP_DISTANCE_PIPS=4        # Step 3 — global fallback
+GBPUSD_MIN_SL_PIPS=4            # Step 4 — pair_config user default
+GBPUSD_BB_BOUNCE_SL_PIPS=4      # strategy's requested SL
 ```
 
-### 3.2 Behavioural note
+Alternative — leave the floors at their defaults and raise the
+strategy's requested stop:
+```bash
+GBPUSD_BB_BOUNCE_SL_PIPS=12     # safe within all floors
+```
 
-The strategy's output will still be the structural distance from EMA_21
-if that is ≥ 4p.  Only when the structural distance is below 4p (very
-close to EMA_21) does the strategy's own `max(4, structural)` become
-the floor.
-
-### 3.3 Rollback
+### 2.3 Restart
 
 ```bash
-AUTOBOT_IG_MIN_STOP_STRICT=0
+sudo systemctl restart autobot.service
+```
+
+### 2.4 Observability
+
+```bash
+# After an ATTACHED_ORDER_LEVEL_ERROR rejection (first attempt), expect:
+journalctl -u autobot.service -n 100 --no-pager | grep -E \
+  "ATTACHED_ORDER_LEVEL_ERROR|IG_MIN_STOP_OBSERVED|IG_STOP_PRE_SUBMIT_BLOCK"
+
+# Successful submissions (requested stop accepted by IG) carry sl_distance
+# and no block from the dealing_rules module.
+```
+
+### 2.5 Rollback
+
+```bash
+# /opt/tradingbot/.env — revert the overrides:
+# GBPUSD_IG_MIN_STOP_PTS=12
+# MIN_STOP_DISTANCE_PIPS=12
+# GBPUSD_MIN_SL_PIPS=12
+# GBPUSD_BB_BOUNCE_SL_PIPS=20  (original)
 ```
 
 Restart.
 
 ---
 
-## 4. ALL AutoBot strategies — enable 4-pip for every GBPUSD strategy
+## 3. Clearing a stale local block
+
+If a legitimate submission is being blocked locally because of a stale
+observation (e.g. IG tightened momentarily and has since relaxed), the
+operator can clear it without a restart:
 
 ```bash
-# /opt/tradingbot/.env — append or edit:
-AUTOBOT_IG_MIN_STOP_STRICT=1
-GBPUSD_MIN_SL_PIPS=4
-GBPUSD_BB_BOUNCE_SL_PIPS=4
-GBPUSD_EMA_PULLBACK_SL_PIPS=4
-QM_V2_LIVE_SL_PIPS=4
-ONE_STRATEGY_SL_PIPS=4
-TREND_V3_SL_FALLBACK_PIPS=4
-NEWS_SL_PIPS=4
-NEWS_TICK_SL_PIPS=4
-NEWS_FADE_MAX_SL_PIPS=4   # ceiling, keeps NEWS_FADE's SL cap at 4
+# From a python shell on the production host:
+python3 -c "import sys; sys.path.insert(0, '/opt/tradingbot'); \
+            from ig_dealing_rules import invalidate; \
+            invalidate('CS.D.GBPUSD.TODAY.IP')"
 ```
 
-Note: `gbpusd_trend_v3.UM_SL_PIPS=12.0` is **hardcoded** (no env
-override).  If the UM mode of Trend V3 is active and a 4-pip stop is
-required there, a code change is needed — propose Patch 0004 to add
-`TREND_V3_UM_SL_PIPS` env override.  This is deferred until the
-operator confirms the need.
+The next submission goes to IG unguarded; if IG still rejects, the
+observation re-records.
+
+The observation also expires automatically after
+`IG_DEALING_RULES_TTL_SECS` seconds (default 900 = 15 min).  Set
+`IG_DEALING_RULES_TTL_SECS=60` in `.env` for a faster auto-clear if the
+operator wants more aggressive retry.
 
 ---
 
-## 5. Verification checklist (post-deploy)
+## 4. Verification checklist (post-deploy)
 
-- [ ] `journalctl` shows at least one `IG_STOP_VALIDATION_PASS` or
-      `IG_STOP_VALIDATION_BLOCK` line within the first minute.
-- [ ] First GBPUSD trade after deploy shows the requested SL at the
-      live broker (visible in IG platform).
-- [ ] No `IG_MIN_STOP_FETCH_FAILED` lines (indicates live fetch works).
-- [ ] `logs/signal_log.jsonl` continues to receive rows (no silent
-      block storm).
-- [ ] After 24 h, zero `IG_STOP_VALIDATION_BLOCK` lines that are not
-      traced back to a deliberate sub-min request.
-- [ ] After 24 h, 0 broker `ATTACHED_ORDER_LEVEL_ERROR` rejections
-      (the pre-submit validation should have caught them).
+- [ ] `journalctl` shows strategy-submitted stops reaching IG with the
+      requested distance.
+- [ ] First trade after deploy carries the SL on the initial order
+      (no post-submission amend to set it).
+- [ ] No `IG_MIN_STOP_OBSERVED` logs during normal operation (only
+      after a confirmed ATTACHED_ORDER_LEVEL_ERROR).
+- [ ] After an operator triggers a sub-min test, exactly one
+      `fetch_market_by_epic` call fires per rejection; subsequent
+      sub-min submissions block locally.
+- [ ] 24 h after deploy: zero regressions in strategy fire counts,
+      zero regressions in NMS admission counts, zero changes to
+      `pair_config.MIN_SL_PIPS` behaviour.
 
-If any of these fail, set `AUTOBOT_IG_MIN_STOP_STRICT=0` and restart.
-Behaviour returns to pre-patch baseline.
+If any check fails, follow the soft or hard rollback in
+`DEPLOYMENT_MANIFEST.md` §4.
