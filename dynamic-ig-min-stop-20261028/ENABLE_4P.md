@@ -12,14 +12,21 @@ changes are needed by the operator.
 
 ## 1. Standalone BB Bounce — enable 4-pip stop
 
-### 1.1 Changes required
+### 1.1 Pre-condition
+
+**Patch 0004** must be applied first.  Verified 2026-10-28:
+`/opt/bb_bounce/config.py:21` has `SL_PIPS = 12` hardcoded (NOT read
+from env).  Patch 0004 wires it to `BB_SL_PIPS` env.  Without Patch
+0004, setting any env variable has no effect on this strategy.
+
+### 1.2 Changes required (post Patch 0004)
 
 ```bash
 # /opt/bb_bounce/.env — append (or edit):
-SL_PIPS=4
+BB_SL_PIPS=4
 # BB_IG_MIN_STOP_PIPS=4.0 is already the default; no change needed.
 # BB_STOP_MODE=FIXED_12 (default) OR BB_STOP_MODE=STRUCTURAL_3:
-#   FIXED_12   → literally use the SL_PIPS value above (= 4 pips)
+#   FIXED_12   → literally use the BB_SL_PIPS value above (= 4 pips)
 #   STRUCTURAL_3 → use structural stop (ignores SL_PIPS); 4 pips does
 #                  nothing here.
 ```
@@ -49,7 +56,7 @@ Expected lines on a successful 4-pip fire:
 
 ```bash
 # /opt/bb_bounce/.env — revert
-SL_PIPS=12
+BB_SL_PIPS=12
 ```
 
 Restart.

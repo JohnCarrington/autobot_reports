@@ -349,6 +349,25 @@ def validate_stop(
                 f"fallback resolved — fail-closed per operator ruling."
             ),
         )
+    # Fail-closed guard (2026-10-28 operator ruling): in STRICT mode, only
+    # a LIVE broker rule may authorise a new order.  A stale cache or
+    # static fallback is explicitly NOT sufficient: the operator confirmed
+    # 'no stale cache or static 4-pip fallback may authorise a new order
+    # when current IG rules cannot be verified'.
+    if strict and r.source != "live":
+        return StopValidation(
+            allowed=False,
+            requested_pips=float(requested_pips),
+            broker_min_pips=float(r.value_pips),
+            difference_pips=None,
+            rule_source=r.source,
+            rule_ts=r.retrieved_at,
+            reason_code="NO_LIVE_RULE",
+            reason_detail=(
+                f"strict mode requires live IG dealingRules; source={r.source} "
+                f"(age={r.age_secs or 0:.0f}s) — fail-closed."
+            ),
+        )
     diff = float(requested_pips) - float(r.value_pips)
     passed = diff >= -1e-6  # requested >= min with FP tolerance
     if passed:

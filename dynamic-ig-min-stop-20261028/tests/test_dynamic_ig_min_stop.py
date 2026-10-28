@@ -312,12 +312,18 @@ def test_amend_block_signals_but_does_not_mutate(mod):
 def test_direction_agnostic_distance(mod):
     """Validator is distance-only; BUY/SELL conversion happens in the
     caller.  Verify same input produces same verdict regardless of
-    'direction' being passed via a side-channel."""
+    'direction' being passed via a side-channel.
+
+    Reset the module between calls to force each call to re-fetch
+    live (so strict mode's new 2026-10-28 fail-closed rule doesn't
+    reject the second call for hitting the warm cache)."""
     mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = _rule(4.0)
     v1 = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
-                           requested_pips=5.0)
+                           requested_pips=5.0, strict=True, require_fresh=True)
+    mod._reset_for_tests()
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = _rule(4.0)
     v2 = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
-                           requested_pips=5.0)
+                           requested_pips=5.0, strict=True, require_fresh=True)
     assert v1.allowed == v2.allowed
 
 
@@ -329,12 +335,21 @@ def test_direction_agnostic_distance(mod):
 # in both call paths.
 # ─────────────────────────────────────────────────────────────────────
 def test_api_is_identical_for_both_callers(mod):
+    """Both callers see the same verdict shape on identical inputs.
+
+    Using force_refresh (not just require_fresh) so each call bypasses
+    the cache and keeps source='live' — necessary now that strict mode
+    fail-closes on non-live sources."""
     mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = _rule(4.0)
     # AutoBot-style call
     v_a = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
                             requested_pips=12.0, strict=True,
                             require_fresh=True)
-    # BB Bounce-style call
+    assert v_a.allowed is True
+    assert v_a.rule_source == "live"
+    # BB Bounce-style call — forced refresh to re-hit live
+    mod._reset_for_tests()
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = _rule(4.0)
     v_b = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
                             requested_pips=12.0, strict=True,
                             require_fresh=True)
@@ -415,3 +430,63 @@ def test_no_writes_outside_module(tmp_path):
     source = MOD_PATH.read_text()
     assert ".write(" not in source.replace("logger.write", "")
     assert "open(" not in source
+
+
+# ─────────────────────────────────────────────────────────────────────
+# 2026-10-28 — strict-mode fail-closed on non-live source
+# ─────────────────────────────────────────────────────────────────────
+def test_strict_fails_closed_on_static_fallback(mod):
+    """Strict + no cache + fetch fails → source='static_fallback' → REJECT.
+    A stale 4-pip fallback must NEVER authorise a new order under strict."""
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = RuntimeError("api down")
+    v = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+                          requested_pips=4.0, strict=True, require_fresh=True)
+    assert v.allowed is False
+    assert v.reason_code == "NO_LIVE_RULE"
+    assert v.rule_source == "static_fallback"
+
+
+def test_strict_fails_closed_on_cached(mod):
+    """Strict + cache hit (not forced refresh) → source='cached' → REJECT.
+    Even an acceptable requested distance is rejected under strict when
+    the rule was not re-verified for THIS submission."""
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = _rule(4.0)
+    _ = mod.get_min_normal_stop_pips("CS.D.GBPUSD.TODAY.IP", "GBPUSD")  # seed
+    # Second call without force_refresh — hits cache
+    v = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+                          requested_pips=5.0, strict=True, require_fresh=False)
+    assert v.allowed is False
+    assert v.reason_code == "NO_LIVE_RULE"
+    assert v.rule_source == "cached"
+
+
+def test_strict_fails_closed_during_backoff(mod):
+    """Strict + fetch in back-off → cache empty + static fallback →
+    REJECT with NO_LIVE_RULE even if requested distance >= fallback."""
+    mod._inject_failure("CS.D.GBPUSD.TODAY.IP", count=5,
+                        next_retry_ts=time.time() + 300)
+    v = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+                          requested_pips=10.0, strict=True, require_fresh=True)
+    assert v.allowed is False
+    assert v.reason_code == "NO_LIVE_RULE"
+    assert v.rule_source == "static_fallback"
+
+
+def test_compat_allows_cached_or_fallback(mod):
+    """Compat mode (strict=False) still accepts a non-live source so
+    the roll-out rollback remains functional."""
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = RuntimeError("api down")
+    v = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+                          requested_pips=10.0, strict=False, require_fresh=True)
+    assert v.allowed is True
+    assert v.rule_source == "static_fallback"
+
+
+def test_strict_live_passes_fresh(mod):
+    """Strict + live rule + requested >= min → PASS (sanity)."""
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = _rule(4.0)
+    v = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+                          requested_pips=5.0, strict=True, require_fresh=True)
+    assert v.allowed is True
+    assert v.rule_source == "live"
+    assert v.reason_code == "PASS"
