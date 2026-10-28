@@ -1,0 +1,61 @@
+{
+  "date_range": {
+    "first_decision_utc": "2026-10-24T16:58:03.639700+00:00",
+    "last_decision_utc": "2026-10-28T17:56:06.219585+00:00"
+  },
+  "n_decisions": 506,
+  "n_snapshots": 1966,
+  "n_executions": 416,
+  "actions_histogram": {
+    "WAIT": 373,
+    "BUY": 3,
+    "NULL": 90,
+    "HOLD": 37,
+    "SELL": 1,
+    "CLOSE": 2
+  },
+  "nms_veto_count": 0,
+  "snapshots_per_day": {
+    "2026-10-24": 3,
+    "2026-10-26": 699,
+    "2026-10-27": 627,
+    "2026-10-28": 637
+  },
+  "decisions_per_day": {
+    "2026-10-24": 3,
+    "2026-10-26": 195,
+    "2026-10-27": 173,
+    "2026-10-28": 135
+  },
+  "trades": {
+    "count": 3,
+    "wins": 0,
+    "losses": 3,
+    "breakevens": 0,
+    "win_rate": 0.0,
+    "profit_factor": 0.0,
+    "total_pips": -29.1,
+    "total_gbp": -29.1,
+    "max_drawdown_pips": 29.1,
+    "close_reasons": {
+      "broker_stop": 1,
+      "ai_close": 2
+    },
+    "hold_time_sec_mean": 4495,
+    "hold_time_sec_min": 2065,
+    "hold_time_sec_max": 6929
+  },
+  "api_cost_usd": 13.1848,
+  "api_input_tokens": 2796404,
+  "api_output_tokens": 320152,
+  "api_cost_per_decision": 0.026057,
+  "api_cost_per_trade": 4.3949,
+  "mean_decision_latency_ms": 16233.5,
+  "nms_state_distribution_snapshots": {
+    "ABSENT": 919,
+    "RANGE": 446,
+    "EMERGING_DOWN": 422,
+    "EMERGING_UP": 168,
+    "NORMAL": 11
+  }
+}

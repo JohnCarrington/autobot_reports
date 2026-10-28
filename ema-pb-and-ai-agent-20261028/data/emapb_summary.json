@@ -1,0 +1,43 @@
+{
+  "window": {
+    "from": "2026-10-20",
+    "to": "2026-10-29"
+  },
+  "n_rows_total": 101,
+  "n_submissions": 94,
+  "n_rejected": 41,
+  "n_rejected_broker": 37,
+  "n_rejected_local": 4,
+  "n_pre_submission_blocked": 7,
+  "n_filled": 33,
+  "n_filled_closed": 33,
+  "n_filled_open": 0,
+  "n_cancelled_working_order": 20,
+  "n_broker_vanished": 0,
+  "median_pending_sec": 4791,
+  "max_pending_sec": 11504,
+  "total_pnl_pips": 272.25,
+  "total_pnl_gbp": 544.5,
+  "win_rate": 0.6667,
+  "n_wins": 22,
+  "n_losses": 11,
+  "profit_factor": 3.195,
+  "max_drawdown_pips": 62.4,
+  "broker_stop_count": 10,
+  "broker_tp_count": 0,
+  "other_close_count": 23,
+  "ai_close_count": 0,
+  "n_ledger_misclassifications": 33,
+  "per_date": {
+    "2026-10-27": {
+      "n": 9,
+      "pnl_pips": -86.4,
+      "pnl_gbp": -172.8
+    },
+    "2026-10-28": {
+      "n": 24,
+      "pnl_pips": 358.65,
+      "pnl_gbp": 717.3
+    }
+  }
+}
