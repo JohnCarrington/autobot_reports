@@ -1,0 +1,18 @@
+P3 6-day historical replay (2026-10-23 → 2026-10-28)
+Loaded 1092 M5 bars
+Augmented 152 of 235 scenario revisions with trigger_spec
+Publication after re-classify (P1+P2): {'VALID': 27, 'INVALID': 135, 'CAUTION': 73}
+  FIRE  bar=2026-10-23T16:05  eval=16:10:15  sid=ab10a935  rev=5  dir=SELL  entry=13372.45
+
+== Totals ==
+sweeps run: 1008
+total fires: 1
+
+Invariant checks:
+  no-lookahead (eval_ts ≥ bar_close): PASS
+  no-duplicate (unique opportunity ids): 1 unique / 1 fires (PASS)
+  no publication-after-target: PASS (enforced by invariant 12)
+  no publication-after-invalidation: PASS (enforced by invariant 1)
+  no broker interaction: PASS (trigger_evaluator imports no broker modules)
+
+2026-10-28 fires: 0

@@ -1,0 +1,57 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.0.2, pluggy-1.6.0
+rootdir: /home/autobot/tradingbot-wt/scenario-v2-reasoner-fix-20261028/scripts/research/live_obs
+plugins: anyio-4.12.1
+collected 228 items
+
+tests/notifier/test_classifier.py ...........                            [  4%]
+tests/notifier/test_env_loader.py ......                                 [  7%]
+tests/notifier/test_formatter.py ..........                              [ 11%]
+tests/notifier/test_integration.py .............                         [ 17%]
+tests/notifier/test_sender.py .......                                    [ 20%]
+tests/notifier/test_state.py ........                                    [ 24%]
+tests/test_ai_shadow_observer.py ..............                          [ 30%]
+tests/test_cross_process_dedup_20261028.py .........                     [ 34%]
+tests/test_dashboard_indicators.py ...........                           [ 39%]
+tests/test_event_precondition_fix_20261028.py ..............             [ 45%]
+tests/test_fetch_finnhub_calendar.py ......................              [ 54%]
+tests/test_llm_reliability.py .......                                    [ 57%]
+tests/test_market_observer_macro_host.py ...F.........                   [ 63%]
+tests/test_opportunity_category_20261028.py ...........                  [ 68%]
+tests/test_quality_and_publication_gate.py ................              [ 75%]
+tests/test_scenario_reasoning.py .....................                   [ 84%]
+tests/test_trigger_evaluator_20261028.py .........................       [ 95%]
+tests/test_trigger_spec_consistency_20261028.py ..........               [100%]
+
+=================================== FAILURES ===================================
+__________ HostFinnhubTests.test_classifier_row_after_asof_invisible ___________
+
+self = <tests.test_market_observer_macro_host.HostFinnhubTests testMethod=test_classifier_row_after_asof_invisible>
+
+    def test_classifier_row_after_asof_invisible(self):
+        self.write_cache(T.date(), [
+            {"ts": "2026-10-22T08:00:00+00:00", "currency": "GBP", "impact": "HIGH",
+             "event": "UK CPI"},
+        ])
+        self.write_classifier([{
+            "ts_utc": "2026-10-22T09:05:00+00:00",  # AFTER asof T=09:00
+            "release_currency": "GBP",
+            "event_name": "UK CPI",
+            "event_time": "08:00",
+            "mapped_tier": "BIG",
+            "actual": 3.2,
+            "forecast": 2.9,
+            "previous": 3.1,
+        }])
+        out = mom.asof_events_from_host(T, cache_dir=self.cache_dir,
+                                        classifier_log=self.classifier_log)
+        ev = out["events"][0]
+>       self.assertEqual(ev["status"], "RELEASED")
+E       AssertionError: 'EXPIRED' != 'RELEASED'
+E       - EXPIRED
+E       + RELEASED
+
+tests/test_market_observer_macro_host.py:122: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_market_observer_macro_host.py::HostFinnhubTests::test_classifier_row_after_asof_invisible
+======================== 1 failed, 227 passed in 1.04s =========================

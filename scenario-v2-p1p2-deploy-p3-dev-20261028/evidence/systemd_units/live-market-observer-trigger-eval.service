@@ -1,0 +1,56 @@
+# live-market-observer-trigger-eval.service — Scenario V2 deterministic
+# per-bar trigger evaluator.
+#
+# Reads scenarios_shadow.jsonl + observer snapshot + verified_events.jsonl.
+# Writes shadow_proposals.jsonl rows ONLY when all 15 safety invariants
+# in trigger_evaluator._evaluate_one pass.
+#
+# NOT INSTALLED BY DEFAULT.  P3 is development-only until operator
+# approval.  Install procedure (operator action):
+#
+#   sudo install -o root -g root -m 0644 \
+#       /mnt/volume_lon1_1778405456698/research/live_obs/trigger_evaluator/deploy/live-market-observer-trigger-eval.service \
+#       /etc/systemd/system/live-market-observer-trigger-eval.service
+#   sudo install -o root -g root -m 0644 \
+#       /mnt/volume_lon1_1778405456698/research/live_obs/trigger_evaluator/deploy/live-market-observer-trigger-eval.timer \
+#       /etc/systemd/system/live-market-observer-trigger-eval.timer
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now live-market-observer-trigger-eval.timer
+#
+# This service NEVER places broker orders.  It writes to the same
+# shadow_proposals.jsonl journal as live-market-observer-shadow-exec,
+# with cross-process opportunity-identity deduplication built in.
+
+[Unit]
+Description=Scenario V2 deterministic trigger evaluator (shadow-only)
+Documentation=file:///mnt/volume_lon1_1778405456698/research/live_obs/trigger_evaluator/cli_sweep.py
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=autobot
+Group=autobot
+WorkingDirectory=/mnt/volume_lon1_1778405456698/research/live_obs
+ExecStart=/opt/tradingbot/venv/bin/python -m trigger_evaluator.cli_sweep
+TimeoutStartSec=120
+# Fail-closed on exceptions; next timer tick will retry.
+Restart=no
+# Harden against accidental write to anything beyond the shadow-exec
+# proposals + the trigger_evaluator state file.
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+NoNewPrivileges=yes
+ReadWritePaths=/mnt/volume_lon1_1778405456698/research/live_obs/journal_shadow \
+               /mnt/volume_lon1_1778405456698/research/live_obs/shadow_exec \
+               /tmp
+# Explicit env override: UK trading window gate (so misfire outside
+# the window is a cheap no-op).  Also pin PYTHONPATH so the module
+# can be imported without further plumbing.
+Environment=LIVE_OBS_ROOT=/mnt/volume_lon1_1778405456698/research/live_obs
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

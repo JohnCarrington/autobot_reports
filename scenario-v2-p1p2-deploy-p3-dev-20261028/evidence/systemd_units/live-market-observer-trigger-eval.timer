@@ -1,0 +1,30 @@
+# live-market-observer-trigger-eval.timer — fires 15s after each M5
+# bar close during the UK trading window.
+#
+# M5 bars close at :00, :05, :10, ..., :55 past every hour.  To fire
+# the evaluator ~15 s after each close, OnCalendar triggers at :00:15,
+# :05:15, :10:15, ..., :55:15 past hours 07..16 UK local.
+#
+# Europe/London automatically applies BST (UTC+1) March-end → October-end
+# and GMT (UTC) October-end → March-end.  No manual DST handling needed.
+#
+# Persistent=true replays missed ticks across reboots — but the
+# evaluator's per-bar age check (invariant 11, entry_tolerance_pts)
+# will reject stale fires.
+#
+# NOT INSTALLED BY DEFAULT.  P3 is development-only.
+
+[Unit]
+Description=Trigger scenario V2 deterministic trigger evaluator every 5 min + 15 s during UK window
+Documentation=file:///mnt/volume_lon1_1778405456698/research/live_obs/trigger_evaluator/cli_sweep.py
+
+[Timer]
+# UK Mon-Fri 07:00:15 → 16:55:15, every 5 min (10 ticks per hour).
+OnCalendar=Mon..Fri *-*-* 07..16:00/5:15 Europe/London
+RandomizedDelaySec=0
+AccuracySec=5s
+Persistent=true
+Unit=live-market-observer-trigger-eval.service
+
+[Install]
+WantedBy=timers.target
