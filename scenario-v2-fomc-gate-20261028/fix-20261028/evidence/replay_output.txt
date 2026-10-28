@@ -1,0 +1,46 @@
+=== HISTORICAL REPLAY 2026-10-28 14:05 UTC — scenario rev 4 ===
+
+loaded scenario_id=f5e11547c4ce2097 rev=4 state=DEVELOPING bar_ts=2026-10-28T13:50:00+00:00
+
+Economic context @ 14:05 UTC:
+  scheduled  (17): ['EIA Crude Oil Stocks Change', 'EIA Gasoline Stocks Change', 'Fed Interest Rate Decision', 'FOMC Statement', 'Fed Press Conference', 'BoE Consumer Credit']
+  released   (4): ['MBA 30-Year Mortgage Rate', 'Goods Trade Balance Adv', 'Retail Inventories Ex Autos MoM Adv', 'Wholesale Inventories MoM Adv']
+  expired    (3): ['Autumn Budget 2026', 'Autumn Budget', 'Autumn Forecast Statement']
+  unverified (1): ['Atlanta Fed GDPNow']
+
+=== AS-WRITTEN (production rev 4) ===
+  flags: 0
+  publication_decision: VALID
+
+=== CORRECTED (prompt + validator fixes) ===
+  flags: 0
+  publication_decision: VALID
+
+=== Trigger-text diff (opportunity[0]) ===
+as-written note      : Dovish Fed surprise is sole catalyst for upside. Consolidation must break upward post-announcement with follow-through confirmation bar (2+ bars, 4+ pips distance). Entry only after Fed decision + 1 c
+corrected note       : Consolidation must break upward post-announcement with follow-through confirmation bar (2+ bars, 4+ pips distance). Entry only after Fed decision + 1 confirmation bar with NMS alignment to BULLISH. Pr
+
+as-written req_price : Post-Fed (18:30Z+) dovish FOMC surprise confirmed (forward rate-cut path signaled, accommodative language); GBP close above 13296 (session high, BB_U threshold) on announcement bar or next bar with di
+corrected req_price  : GBP close above 13296 (session high, BB_U threshold) with distance_from_level_pips expanding 4+ pips above level; consecutive_closes_beyond 2+ sustained; NMS flips to BULLISH (HH+HL confirmed, LL reve
+
+=== Publishability outcome ===
+  as-written    publishable: True
+  corrected     publishable: True
+
+=== Timing sweep: every revision 4-19 (14:05 → 16:55 UTC) ===
+  rev 4 @ 14:05 UTC                   as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 5 @ 14:25 UTC                   as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 6 @ 14:35 UTC                   as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 7 @ 14:45 UTC                   as-written: INVALID  (1 flags)  corrected: INVALID  (1 flags)
+  rev 8 @ 14:55 UTC                   as-written: INVALID  (1 flags)  corrected: INVALID  (1 flags)
+  rev 9 @ 15:15 UTC                   as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 10 @ 15:25 UTC                  as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 11 @ 15:35 UTC                  as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 12 @ 15:45 UTC                  as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 13 @ 15:55 UTC                  as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 14 @ 16:05 UTC                  as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 15 @ 16:15 UTC                  as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 16 @ 16:25 UTC                  as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 17 @ 16:35 UTC                  as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 18 @ 16:45 UTC                  as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)
+  rev 19 @ 16:55 UTC                  as-written:   VALID  (0 flags)  corrected:   VALID  (0 flags)

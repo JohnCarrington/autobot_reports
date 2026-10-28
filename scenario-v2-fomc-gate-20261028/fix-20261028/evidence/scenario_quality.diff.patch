@@ -1,0 +1,90 @@
+diff --git a/scripts/research/live_obs/agent/scenario_quality.py b/scripts/research/live_obs/agent/scenario_quality.py
+index 37fb48a..c15e378 100644
+--- a/scripts/research/live_obs/agent/scenario_quality.py
++++ b/scripts/research/live_obs/agent/scenario_quality.py
+@@ -92,7 +92,17 @@ _PACKET_COUNT_FIELDS = (
+ )
+ 
+ _UNVERIFIED_REFERENCE_PATTERN = re.compile(
+-    r"\b(if released|awaits|awaiting|anticipate|catalyst)\b",
++    # Explicit anticipatory wording only.  'Catalyst' alone was in the
++    # original pattern but it also matches retrospective sentences
++    # like 'Budget EXPIRED, catalyst removed', producing false
++    # positives on legitimate acknowledgements that a release has
++    # passed without data.  Anticipatory sentences will carry one of
++    # the explicit phrases below.
++    r"\b(if released|awaits|awaiting|anticipate|pending (?:release|data))\b"
++    # Compound 'upcoming catalyst' / 'anticipated catalyst' still fire
++    # because the leading 'awaits'/'anticipate' / 'pending' matches.
++    r"|\bupcoming\s+catalyst\b"
++    r"|\banticipated\s+catalyst\b",
+     flags=re.IGNORECASE,
+ )
+ 
+@@ -339,6 +349,25 @@ def _validate_unverified_event_references(assessment, economic_context, flags):
+     EXPIRED events (release time passed but no actual recorded) are
+     legitimate to discuss retrospectively but MUST NOT be treated as
+     upcoming announcements.
++
++    Token-overlap disambiguation (2026-10-28 incident fix):
++    When a quarantined event's token also identifies a DIFFERENT
++    (non-quarantined) event in the same context, that token is too
++    weak to attribute a flag to the quarantined event.  Example:
++    'Atlanta Fed GDPNow' (UNVERIFIED) and 'Fed Interest Rate
++    Decision' (SCHEDULED) share the token 'fed'.  The bare word
++    'fed' in the scenario text identifies the scheduled event's
++    name; firing a flag on it over-attributes the reference to the
++    quarantined event.  Only tokens UNIQUE to the quarantined event
++    (atlanta, gdpnow) remain.
++
++    Preserved: if the quarantined event has a SAME-NAME non-
++    quarantined sibling (the classic UNVERIFIED stale-duplicate case
++    — e.g., 'CBI Business Optimism Index' RELEASED yesterday AND
++    'CBI Business Optimism Index' UNVERIFIED today), the common
++    tokens remain in the quarantined set.  Mentioning the same name
++    IS ambiguous between retrospective and anticipatory, and the
++    'if released'/'anticipate' pattern already discriminates intent.
+     """
+     econ = economic_context or {}
+     quarantined = {
+@@ -347,12 +376,39 @@ def _validate_unverified_event_references(assessment, economic_context, flags):
+     }
+     if not quarantined:
+         return
++    # Build per-non-quarantined event token sets.  A quarantined-event
++    # token is "weak" if it is contained in some other-NAME event's
++    # token set; it is "strong" if either (a) it is unique to the
++    # quarantined event, OR (b) it is shared only with a same-NAME
++    # non-quarantined sibling (the stale-duplicate preserve case).
++    non_quarantined_by_name: dict[str, set[str]] = {}
++    for bucket in ("scheduled", "released"):
++        for name, toks in _event_bucket_token_map(econ, bucket).items():
++            non_quarantined_by_name[name] = toks
++    quarantined_disambiguated: dict[str, set[str]] = {}
++    for q_name, q_toks in quarantined.items():
++        kept: set[str] = set()
++        for tok in q_toks:
++            weak = False
++            for other_name, other_toks in non_quarantined_by_name.items():
++                if other_name == q_name:
++                    # Same-name sibling: preserve this token.
++                    continue
++                if tok in other_toks:
++                    weak = True
++                    break
++            if not weak:
++                kept.add(tok)
++        if kept:
++            quarantined_disambiguated[q_name] = kept
++    if not quarantined_disambiguated:
++        return
+     # Pre-compute per-name positive token lookup for fast containment.
+     for path, text in _iter_strings(assessment):
+         text_l = text.lower()
+         if not _UNVERIFIED_REFERENCE_PATTERN.search(text_l):
+             continue
+-        for name, tokens in quarantined.items():
++        for name, tokens in quarantined_disambiguated.items():
+             if any(t in text_l for t in tokens):
+                 flags.append(QualityFlag(
+                     code="UNVERIFIED_EVENT_AS_CATALYST",

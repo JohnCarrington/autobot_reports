@@ -1,0 +1,10 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.0.2, pluggy-1.6.0
+rootdir: /home/autobot/tradingbot-wt/scenario-v2-reasoner-fix-20261028/scripts/research/live_obs
+plugins: anyio-4.12.1
+collected 29 items
+
+tests/test_quality_and_publication_gate.py ...............               [ 51%]
+tests/test_event_precondition_fix_20261028.py ..............             [100%]
+
+============================== 29 passed in 0.14s ==============================
