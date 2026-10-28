@@ -1,0 +1,1345 @@
+{
+  "n_dev": 7122,
+  "n_unseen": 810,
+  "D": {
+    "s4_t30": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 7,
+        "losers": 66,
+        "net_pips": -54.0,
+        "expectancy_per_opp_pips": -0.007,
+        "profit_factor": 0.795
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 5,
+        "losers": 56,
+        "net_pips": -74.0,
+        "expectancy_per_opp_pips": -0.01,
+        "profit_factor": 0.67
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 2,
+        "losers": 10,
+        "net_pips": 20.0,
+        "expectancy_per_opp_pips": 0.025,
+        "profit_factor": 1.5
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 66,
+        "TARGET": 7
+      }
+    },
+    "s4_t40": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 6,
+        "losers": 67,
+        "net_pips": -75.4,
+        "expectancy_per_opp_pips": -0.01,
+        "profit_factor": 0.719
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 4,
+        "losers": 57,
+        "net_pips": -115.4,
+        "expectancy_per_opp_pips": -0.016,
+        "profit_factor": 0.494
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 2,
+        "losers": 10,
+        "net_pips": 40.0,
+        "expectancy_per_opp_pips": 0.049,
+        "profit_factor": 2.0
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 67,
+        "TARGET": 4,
+        "TIMEOUT": 2
+      }
+    },
+    "s4_t50": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 3,
+        "losers": 70,
+        "net_pips": -197.4,
+        "expectancy_per_opp_pips": -0.025,
+        "profit_factor": 0.295
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 2,
+        "losers": 59,
+        "net_pips": -203.4,
+        "expectancy_per_opp_pips": -0.029,
+        "profit_factor": 0.138
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 1,
+        "losers": 11,
+        "net_pips": 6.0,
+        "expectancy_per_opp_pips": 0.007,
+        "profit_factor": 1.136
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 70,
+        "TIMEOUT": 2,
+        "TARGET": 1
+      }
+    },
+    "s4_t60": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 3,
+        "losers": 70,
+        "net_pips": -187.4,
+        "expectancy_per_opp_pips": -0.024,
+        "profit_factor": 0.331
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 2,
+        "losers": 59,
+        "net_pips": -203.4,
+        "expectancy_per_opp_pips": -0.029,
+        "profit_factor": 0.138
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 1,
+        "losers": 11,
+        "net_pips": 16.0,
+        "expectancy_per_opp_pips": 0.02,
+        "profit_factor": 1.364
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 70,
+        "TIMEOUT": 2,
+        "TARGET": 1
+      }
+    },
+    "s6_t30": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 9,
+        "losers": 64,
+        "net_pips": -114.0,
+        "expectancy_per_opp_pips": -0.014,
+        "profit_factor": 0.703
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 6,
+        "losers": 55,
+        "net_pips": -150.0,
+        "expectancy_per_opp_pips": -0.021,
+        "profit_factor": 0.545
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 3,
+        "losers": 9,
+        "net_pips": 36.0,
+        "expectancy_per_opp_pips": 0.044,
+        "profit_factor": 1.667
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 64,
+        "TARGET": 9
+      }
+    },
+    "s6_t40": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 7,
+        "losers": 66,
+        "net_pips": -163.4,
+        "expectancy_per_opp_pips": -0.021,
+        "profit_factor": 0.587
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 4,
+        "losers": 57,
+        "net_pips": -229.4,
+        "expectancy_per_opp_pips": -0.032,
+        "profit_factor": 0.329
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 3,
+        "losers": 9,
+        "net_pips": 66.0,
+        "expectancy_per_opp_pips": 0.081,
+        "profit_factor": 2.222
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 66,
+        "TARGET": 5,
+        "TIMEOUT": 2
+      }
+    },
+    "s6_t50": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 4,
+        "losers": 69,
+        "net_pips": -278.1,
+        "expectancy_per_opp_pips": -0.035,
+        "profit_factor": 0.323
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 2,
+        "losers": 59,
+        "net_pips": -318.1,
+        "expectancy_per_opp_pips": -0.045,
+        "profit_factor": 0.093
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 2,
+        "losers": 10,
+        "net_pips": 40.0,
+        "expectancy_per_opp_pips": 0.049,
+        "profit_factor": 1.667
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 68,
+        "TIMEOUT": 3,
+        "TARGET": 2
+      }
+    },
+    "s6_t60": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 4,
+        "losers": 69,
+        "net_pips": -258.1,
+        "expectancy_per_opp_pips": -0.033,
+        "profit_factor": 0.372
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 2,
+        "losers": 59,
+        "net_pips": -318.1,
+        "expectancy_per_opp_pips": -0.045,
+        "profit_factor": 0.093
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 2,
+        "losers": 10,
+        "net_pips": 60.0,
+        "expectancy_per_opp_pips": 0.074,
+        "profit_factor": 2.0
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 68,
+        "TIMEOUT": 3,
+        "TARGET": 2
+      }
+    },
+    "s8_t30": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 15,
+        "losers": 58,
+        "net_pips": -14.0,
+        "expectancy_per_opp_pips": -0.002,
+        "profit_factor": 0.97
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 10,
+        "losers": 51,
+        "net_pips": -108.0,
+        "expectancy_per_opp_pips": -0.015,
+        "profit_factor": 0.735
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 5,
+        "losers": 7,
+        "net_pips": 94.0,
+        "expectancy_per_opp_pips": 0.116,
+        "profit_factor": 2.679
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 58,
+        "TARGET": 15
+      }
+    },
+    "s8_t40": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 11,
+        "losers": 62,
+        "net_pips": -103.4,
+        "expectancy_per_opp_pips": -0.013,
+        "profit_factor": 0.792
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 6,
+        "losers": 55,
+        "net_pips": -247.4,
+        "expectancy_per_opp_pips": -0.035,
+        "profit_factor": 0.438
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 5,
+        "losers": 7,
+        "net_pips": 144.0,
+        "expectancy_per_opp_pips": 0.178,
+        "profit_factor": 3.571
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 62,
+        "TARGET": 9,
+        "TIMEOUT": 2
+      }
+    },
+    "s8_t50": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 8,
+        "losers": 65,
+        "net_pips": -182.1,
+        "expectancy_per_opp_pips": -0.023,
+        "profit_factor": 0.646
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 4,
+        "losers": 57,
+        "net_pips": -318.1,
+        "expectancy_per_opp_pips": -0.045,
+        "profit_factor": 0.294
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 4,
+        "losers": 8,
+        "net_pips": 136.0,
+        "expectancy_per_opp_pips": 0.168,
+        "profit_factor": 3.125
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 64,
+        "TARGET": 6,
+        "TIMEOUT": 3
+      }
+    },
+    "s8_t60": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 8,
+        "losers": 65,
+        "net_pips": -122.1,
+        "expectancy_per_opp_pips": -0.015,
+        "profit_factor": 0.763
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 4,
+        "losers": 57,
+        "net_pips": -298.1,
+        "expectancy_per_opp_pips": -0.042,
+        "profit_factor": 0.339
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 4,
+        "losers": 8,
+        "net_pips": 176.0,
+        "expectancy_per_opp_pips": 0.217,
+        "profit_factor": 3.75
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 64,
+        "TARGET": 6,
+        "TIMEOUT": 3
+      }
+    },
+    "s12_t30": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 20,
+        "losers": 53,
+        "net_pips": -26.1,
+        "expectancy_per_opp_pips": -0.003,
+        "profit_factor": 0.958
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 13,
+        "losers": 48,
+        "net_pips": -176.1,
+        "expectancy_per_opp_pips": -0.025,
+        "profit_factor": 0.689
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 7,
+        "losers": 5,
+        "net_pips": 150.0,
+        "expectancy_per_opp_pips": 0.185,
+        "profit_factor": 3.5
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 52,
+        "TARGET": 20,
+        "TIMEOUT": 1
+      }
+    },
+    "s12_t40": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 16,
+        "losers": 57,
+        "net_pips": -92.7,
+        "expectancy_per_opp_pips": -0.012,
+        "profit_factor": 0.862
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 10,
+        "losers": 51,
+        "net_pips": -260.7,
+        "expectancy_per_opp_pips": -0.037,
+        "profit_factor": 0.567
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 6,
+        "losers": 6,
+        "net_pips": 168.0,
+        "expectancy_per_opp_pips": 0.207,
+        "profit_factor": 3.333
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 56,
+        "TARGET": 13,
+        "TIMEOUT": 4
+      }
+    },
+    "s12_t50": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 13,
+        "losers": 60,
+        "net_pips": -184.8,
+        "expectancy_per_opp_pips": -0.023,
+        "profit_factor": 0.736
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 8,
+        "losers": 53,
+        "net_pips": -350.8,
+        "expectancy_per_opp_pips": -0.049,
+        "profit_factor": 0.431
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 5,
+        "losers": 7,
+        "net_pips": 166.0,
+        "expectancy_per_opp_pips": 0.205,
+        "profit_factor": 2.976
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 58,
+        "TARGET": 9,
+        "TIMEOUT": 6
+      }
+    },
+    "s12_t60": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 73,
+        "winners": 13,
+        "losers": 60,
+        "net_pips": -94.8,
+        "expectancy_per_opp_pips": -0.012,
+        "profit_factor": 0.865
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 61,
+        "winners": 8,
+        "losers": 53,
+        "net_pips": -310.8,
+        "expectancy_per_opp_pips": -0.044,
+        "profit_factor": 0.496
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 12,
+        "winners": 5,
+        "losers": 7,
+        "net_pips": 216.0,
+        "expectancy_per_opp_pips": 0.267,
+        "profit_factor": 3.571
+      },
+      "categories": {
+        "NO_3RD_TEST": 7859,
+        "STOP": 58,
+        "TARGET": 9,
+        "TIMEOUT": 6
+      }
+    }
+  },
+  "E": {
+    "s4_4_4_t30": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 786,
+        "losers": 7146,
+        "net_pips": -9364.0,
+        "expectancy_per_opp_pips": -1.181,
+        "profit_factor": 0.699
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 704,
+        "losers": 6418,
+        "net_pips": -8415.9,
+        "expectancy_per_opp_pips": -1.182,
+        "profit_factor": 0.698
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 82,
+        "losers": 728,
+        "net_pips": -948.1,
+        "expectancy_per_opp_pips": -1.17,
+        "profit_factor": 0.71
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6539,
+        "A_LEG1_WIN": 641,
+        "D_LEG2_STOP_NO_LEG3": 521,
+        "A_LEG1_TIMEOUT": 81,
+        "B_LEG2_WIN": 73,
+        "C_LEG3_LOSS": 66,
+        "C_LEG3_WIN": 7,
+        "B_LEG2_TIMEOUT": 4
+      }
+    },
+    "s4_4_4_t40": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 643,
+        "losers": 7289,
+        "net_pips": -8936.6,
+        "expectancy_per_opp_pips": -1.127,
+        "profit_factor": 0.719
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 587,
+        "losers": 6535,
+        "net_pips": -7554.5,
+        "expectancy_per_opp_pips": -1.061,
+        "profit_factor": 0.734
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 56,
+        "losers": 754,
+        "net_pips": -1382.1,
+        "expectancy_per_opp_pips": -1.706,
+        "profit_factor": 0.593
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6667,
+        "D_LEG2_STOP_NO_LEG3": 535,
+        "A_LEG1_WIN": 494,
+        "A_LEG1_TIMEOUT": 100,
+        "C_LEG3_LOSS": 67,
+        "B_LEG2_WIN": 55,
+        "B_LEG2_TIMEOUT": 8,
+        "C_LEG3_WIN": 6
+      }
+    },
+    "s4_4_4_t50": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 550,
+        "losers": 7382,
+        "net_pips": -9522.8,
+        "expectancy_per_opp_pips": -1.201,
+        "profit_factor": 0.704
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 504,
+        "losers": 6618,
+        "net_pips": -8062.4,
+        "expectancy_per_opp_pips": -1.132,
+        "profit_factor": 0.72
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 46,
+        "losers": 764,
+        "net_pips": -1460.4,
+        "expectancy_per_opp_pips": -1.803,
+        "profit_factor": 0.575
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6746,
+        "D_LEG2_STOP_NO_LEG3": 543,
+        "A_LEG1_WIN": 371,
+        "A_LEG1_TIMEOUT": 143,
+        "C_LEG3_LOSS": 70,
+        "B_LEG2_WIN": 42,
+        "B_LEG2_TIMEOUT": 14,
+        "C_LEG3_WIN": 3
+      }
+    },
+    "s4_4_4_t60": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 510,
+        "losers": 7422,
+        "net_pips": -8826.4,
+        "expectancy_per_opp_pips": -1.113,
+        "profit_factor": 0.728
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 467,
+        "losers": 6655,
+        "net_pips": -7499.3,
+        "expectancy_per_opp_pips": -1.053,
+        "profit_factor": 0.741
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 43,
+        "losers": 767,
+        "net_pips": -1327.1,
+        "expectancy_per_opp_pips": -1.638,
+        "profit_factor": 0.616
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6778,
+        "D_LEG2_STOP_NO_LEG3": 549,
+        "A_LEG1_WIN": 302,
+        "A_LEG1_TIMEOUT": 180,
+        "C_LEG3_LOSS": 70,
+        "B_LEG2_WIN": 34,
+        "B_LEG2_TIMEOUT": 16,
+        "C_LEG3_WIN": 3
+      }
+    },
+    "s4_6_6_t30": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 823,
+        "losers": 7109,
+        "net_pips": -9288.6,
+        "expectancy_per_opp_pips": -1.171,
+        "profit_factor": 0.71
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 730,
+        "losers": 6392,
+        "net_pips": -8569.3,
+        "expectancy_per_opp_pips": -1.203,
+        "profit_factor": 0.701
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 93,
+        "losers": 717,
+        "net_pips": -719.3,
+        "expectancy_per_opp_pips": -0.888,
+        "profit_factor": 0.782
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6539,
+        "A_LEG1_WIN": 641,
+        "D_LEG2_STOP_NO_LEG3": 497,
+        "B_LEG2_WIN": 107,
+        "A_LEG1_TIMEOUT": 81,
+        "C_LEG3_LOSS": 52,
+        "C_LEG3_WIN": 9,
+        "B_LEG2_TIMEOUT": 6
+      }
+    },
+    "s4_6_6_t40": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 671,
+        "losers": 7261,
+        "net_pips": -9007.0,
+        "expectancy_per_opp_pips": -1.136,
+        "profit_factor": 0.725
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 605,
+        "losers": 6517,
+        "net_pips": -7899.7,
+        "expectancy_per_opp_pips": -1.109,
+        "profit_factor": 0.731
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 66,
+        "losers": 744,
+        "net_pips": -1107.3,
+        "expectancy_per_opp_pips": -1.367,
+        "profit_factor": 0.678
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6667,
+        "D_LEG2_STOP_NO_LEG3": 519,
+        "A_LEG1_WIN": 494,
+        "A_LEG1_TIMEOUT": 100,
+        "B_LEG2_WIN": 78,
+        "C_LEG3_LOSS": 54,
+        "B_LEG2_TIMEOUT": 13,
+        "C_LEG3_WIN": 7
+      }
+    },
+    "s4_6_6_t50": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 576,
+        "losers": 7356,
+        "net_pips": -9483.9,
+        "expectancy_per_opp_pips": -1.196,
+        "profit_factor": 0.715
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 520,
+        "losers": 6602,
+        "net_pips": -8386.3,
+        "expectancy_per_opp_pips": -1.178,
+        "profit_factor": 0.718
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 56,
+        "losers": 754,
+        "net_pips": -1097.6,
+        "expectancy_per_opp_pips": -1.355,
+        "profit_factor": 0.686
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6746,
+        "D_LEG2_STOP_NO_LEG3": 529,
+        "A_LEG1_WIN": 371,
+        "A_LEG1_TIMEOUT": 143,
+        "B_LEG2_WIN": 63,
+        "C_LEG3_LOSS": 57,
+        "B_LEG2_TIMEOUT": 19,
+        "C_LEG3_WIN": 4
+      }
+    },
+    "s4_6_6_t60": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 535,
+        "losers": 7397,
+        "net_pips": -8645.5,
+        "expectancy_per_opp_pips": -1.09,
+        "profit_factor": 0.741
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 483,
+        "losers": 6639,
+        "net_pips": -7705.2,
+        "expectancy_per_opp_pips": -1.082,
+        "profit_factor": 0.742
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 52,
+        "losers": 758,
+        "net_pips": -940.3,
+        "expectancy_per_opp_pips": -1.161,
+        "profit_factor": 0.733
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6778,
+        "D_LEG2_STOP_NO_LEG3": 536,
+        "A_LEG1_WIN": 302,
+        "A_LEG1_TIMEOUT": 180,
+        "C_LEG3_LOSS": 57,
+        "B_LEG2_WIN": 54,
+        "B_LEG2_TIMEOUT": 21,
+        "C_LEG3_WIN": 4
+      }
+    },
+    "s6_6_6_t30": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 1212,
+        "losers": 6720,
+        "net_pips": -10316.3,
+        "expectancy_per_opp_pips": -1.301,
+        "profit_factor": 0.764
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 1083,
+        "losers": 6039,
+        "net_pips": -9346.2,
+        "expectancy_per_opp_pips": -1.312,
+        "profit_factor": 0.762
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 129,
+        "losers": 681,
+        "net_pips": -970.1,
+        "expectancy_per_opp_pips": -1.198,
+        "profit_factor": 0.785
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6138,
+        "A_LEG1_WIN": 1001,
+        "D_LEG2_STOP_NO_LEG3": 490,
+        "A_LEG1_TIMEOUT": 133,
+        "B_LEG2_WIN": 104,
+        "C_LEG3_LOSS": 51,
+        "C_LEG3_WIN": 9,
+        "B_LEG2_TIMEOUT": 6
+      }
+    },
+    "s6_6_6_t40": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 1013,
+        "losers": 6919,
+        "net_pips": -9197.4,
+        "expectancy_per_opp_pips": -1.16,
+        "profit_factor": 0.796
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 914,
+        "losers": 6208,
+        "net_pips": -7959.8,
+        "expectancy_per_opp_pips": -1.118,
+        "profit_factor": 0.803
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 99,
+        "losers": 711,
+        "net_pips": -1237.6,
+        "expectancy_per_opp_pips": -1.528,
+        "profit_factor": 0.738
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6315,
+        "A_LEG1_WIN": 790,
+        "D_LEG2_STOP_NO_LEG3": 510,
+        "A_LEG1_TIMEOUT": 166,
+        "B_LEG2_WIN": 78,
+        "C_LEG3_LOSS": 53,
+        "B_LEG2_TIMEOUT": 13,
+        "C_LEG3_WIN": 7
+      }
+    },
+    "s6_6_6_t50": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 874,
+        "losers": 7058,
+        "net_pips": -9868.9,
+        "expectancy_per_opp_pips": -1.244,
+        "profit_factor": 0.785
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 789,
+        "losers": 6333,
+        "net_pips": -8618.7,
+        "expectancy_per_opp_pips": -1.21,
+        "profit_factor": 0.791
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 85,
+        "losers": 725,
+        "net_pips": -1250.2,
+        "expectancy_per_opp_pips": -1.543,
+        "profit_factor": 0.741
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6437,
+        "A_LEG1_WIN": 600,
+        "D_LEG2_STOP_NO_LEG3": 520,
+        "A_LEG1_TIMEOUT": 232,
+        "B_LEG2_WIN": 63,
+        "C_LEG3_LOSS": 57,
+        "B_LEG2_TIMEOUT": 19,
+        "C_LEG3_WIN": 4
+      }
+    },
+    "s6_6_6_t60": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 813,
+        "losers": 7119,
+        "net_pips": -8544.6,
+        "expectancy_per_opp_pips": -1.077,
+        "profit_factor": 0.816
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 734,
+        "losers": 6388,
+        "net_pips": -7543.7,
+        "expectancy_per_opp_pips": -1.059,
+        "profit_factor": 0.818
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 79,
+        "losers": 731,
+        "net_pips": -1000.9,
+        "expectancy_per_opp_pips": -1.236,
+        "profit_factor": 0.794
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6489,
+        "D_LEG2_STOP_NO_LEG3": 527,
+        "A_LEG1_WIN": 490,
+        "A_LEG1_TIMEOUT": 290,
+        "C_LEG3_LOSS": 57,
+        "B_LEG2_WIN": 54,
+        "B_LEG2_TIMEOUT": 21,
+        "C_LEG3_WIN": 4
+      }
+    },
+    "s12_12_12_t30": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 2238,
+        "losers": 5694,
+        "net_pips": -9921.6,
+        "expectancy_per_opp_pips": -1.251,
+        "profit_factor": 0.861
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 2010,
+        "losers": 5112,
+        "net_pips": -8741.9,
+        "expectancy_per_opp_pips": -1.227,
+        "profit_factor": 0.864
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 228,
+        "losers": 582,
+        "net_pips": -1179.7,
+        "expectancy_per_opp_pips": -1.456,
+        "profit_factor": 0.842
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 5226,
+        "A_LEG1_WIN": 1930,
+        "D_LEG2_STOP_NO_LEG3": 321,
+        "A_LEG1_TIMEOUT": 300,
+        "B_LEG2_WIN": 122,
+        "C_LEG3_LOSS": 17,
+        "B_LEG2_TIMEOUT": 11,
+        "C_LEG3_WIN": 5
+      }
+    },
+    "s12_12_12_t40": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 1898,
+        "losers": 6034,
+        "net_pips": -9866.7,
+        "expectancy_per_opp_pips": -1.244,
+        "profit_factor": 0.87
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 1721,
+        "losers": 5401,
+        "net_pips": -8009.2,
+        "expectancy_per_opp_pips": -1.125,
+        "profit_factor": 0.882
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 177,
+        "losers": 633,
+        "net_pips": -1857.5,
+        "expectancy_per_opp_pips": -2.293,
+        "profit_factor": 0.772
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 5535,
+        "A_LEG1_WIN": 1483,
+        "A_LEG1_TIMEOUT": 438,
+        "D_LEG2_STOP_NO_LEG3": 339,
+        "B_LEG2_WIN": 98,
+        "C_LEG3_LOSS": 17,
+        "B_LEG2_TIMEOUT": 17,
+        "C_LEG3_WIN": 5
+      }
+    },
+    "s12_12_12_t50": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 1688,
+        "losers": 6244,
+        "net_pips": -10723.9,
+        "expectancy_per_opp_pips": -1.352,
+        "profit_factor": 0.863
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 1531,
+        "losers": 5591,
+        "net_pips": -8878.8,
+        "expectancy_per_opp_pips": -1.247,
+        "profit_factor": 0.873
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 157,
+        "losers": 653,
+        "net_pips": -1845.1,
+        "expectancy_per_opp_pips": -2.278,
+        "profit_factor": 0.781
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 5722,
+        "A_LEG1_WIN": 1141,
+        "A_LEG1_TIMEOUT": 591,
+        "D_LEG2_STOP_NO_LEG3": 352,
+        "B_LEG2_WIN": 76,
+        "B_LEG2_TIMEOUT": 27,
+        "C_LEG3_LOSS": 19,
+        "C_LEG3_WIN": 4
+      }
+    },
+    "s12_12_12_t60": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7931,
+        "winners": 1612,
+        "losers": 6319,
+        "net_pips": -8275.4,
+        "expectancy_per_opp_pips": -1.043,
+        "profit_factor": 0.896
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7121,
+        "winners": 1464,
+        "losers": 5657,
+        "net_pips": -6687.9,
+        "expectancy_per_opp_pips": -0.939,
+        "profit_factor": 0.906
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 148,
+        "losers": 662,
+        "net_pips": -1587.5,
+        "expectancy_per_opp_pips": -1.96,
+        "profit_factor": 0.814
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 5788,
+        "A_LEG1_WIN": 907,
+        "A_LEG1_TIMEOUT": 759,
+        "D_LEG2_STOP_NO_LEG3": 355,
+        "B_LEG2_WIN": 69,
+        "B_LEG2_TIMEOUT": 31,
+        "C_LEG3_LOSS": 19,
+        "C_LEG3_WIN": 4
+      }
+    },
+    "s4_4_12_t30": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 799,
+        "losers": 7133,
+        "net_pips": -9336.1,
+        "expectancy_per_opp_pips": -1.177,
+        "profit_factor": 0.703
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 712,
+        "losers": 6410,
+        "net_pips": -8518.0,
+        "expectancy_per_opp_pips": -1.196,
+        "profit_factor": 0.698
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 87,
+        "losers": 723,
+        "net_pips": -818.1,
+        "expectancy_per_opp_pips": -1.01,
+        "profit_factor": 0.748
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6539,
+        "A_LEG1_WIN": 641,
+        "D_LEG2_STOP_NO_LEG3": 521,
+        "A_LEG1_TIMEOUT": 81,
+        "B_LEG2_WIN": 73,
+        "C_LEG3_LOSS": 53,
+        "C_LEG3_WIN": 20,
+        "B_LEG2_TIMEOUT": 4
+      }
+    },
+    "s4_4_12_t40": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 653,
+        "losers": 7279,
+        "net_pips": -8953.9,
+        "expectancy_per_opp_pips": -1.129,
+        "profit_factor": 0.721
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 593,
+        "losers": 6529,
+        "net_pips": -7699.8,
+        "expectancy_per_opp_pips": -1.081,
+        "profit_factor": 0.732
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 60,
+        "losers": 750,
+        "net_pips": -1254.1,
+        "expectancy_per_opp_pips": -1.548,
+        "profit_factor": 0.63
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6667,
+        "D_LEG2_STOP_NO_LEG3": 535,
+        "A_LEG1_WIN": 494,
+        "A_LEG1_TIMEOUT": 100,
+        "C_LEG3_LOSS": 57,
+        "B_LEG2_WIN": 55,
+        "C_LEG3_WIN": 16,
+        "B_LEG2_TIMEOUT": 8
+      }
+    },
+    "s4_4_12_t50": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 559,
+        "losers": 7373,
+        "net_pips": -9510.2,
+        "expectancy_per_opp_pips": -1.199,
+        "profit_factor": 0.708
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 509,
+        "losers": 6613,
+        "net_pips": -8209.8,
+        "expectancy_per_opp_pips": -1.153,
+        "profit_factor": 0.718
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 50,
+        "losers": 760,
+        "net_pips": -1300.4,
+        "expectancy_per_opp_pips": -1.605,
+        "profit_factor": 0.623
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6746,
+        "D_LEG2_STOP_NO_LEG3": 543,
+        "A_LEG1_WIN": 371,
+        "A_LEG1_TIMEOUT": 143,
+        "C_LEG3_LOSS": 60,
+        "B_LEG2_WIN": 42,
+        "B_LEG2_TIMEOUT": 14,
+        "C_LEG3_WIN": 13
+      }
+    },
+    "s4_4_12_t60": {
+      "ALL": {
+        "opportunities": 7932,
+        "trades_taken": 7932,
+        "winners": 519,
+        "losers": 7413,
+        "net_pips": -8733.8,
+        "expectancy_per_opp_pips": -1.101,
+        "profit_factor": 0.733
+      },
+      "DEV": {
+        "opportunities": 7122,
+        "trades_taken": 7122,
+        "winners": 472,
+        "losers": 6650,
+        "net_pips": -7606.7,
+        "expectancy_per_opp_pips": -1.068,
+        "profit_factor": 0.74
+      },
+      "UNSEEN": {
+        "opportunities": 810,
+        "trades_taken": 810,
+        "winners": 47,
+        "losers": 763,
+        "net_pips": -1127.1,
+        "expectancy_per_opp_pips": -1.391,
+        "profit_factor": 0.674
+      },
+      "categories": {
+        "D_LEG1_STOP_NO_LEG2": 6778,
+        "D_LEG2_STOP_NO_LEG3": 549,
+        "A_LEG1_WIN": 302,
+        "A_LEG1_TIMEOUT": 180,
+        "C_LEG3_LOSS": 60,
+        "B_LEG2_WIN": 34,
+        "B_LEG2_TIMEOUT": 16,
+        "C_LEG3_WIN": 13
+      }
+    }
+  }
+}

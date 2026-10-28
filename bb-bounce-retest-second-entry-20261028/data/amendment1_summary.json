@@ -1,0 +1,119 @@
+{
+  "n_opportunities": 7932,
+  "n_test_rows_total": 8674,
+  "n_tests_distribution": {
+    "1": 7273,
+    "2": 589,
+    "3": 60,
+    "4": 7,
+    "5": 3
+  },
+  "reversal_probability_by_test": {
+    "test1": {
+      "n": 7932,
+      "pct_reach_20p": 43.32,
+      "pct_reach_30p": 28.14,
+      "pct_reach_40p": 18.39,
+      "pct_reach_50p": 11.96,
+      "pct_reach_60p": 7.64,
+      "mae_clip_40_median_p": 18.3,
+      "mae_clip_40_p90": 54.4
+    },
+    "test2": {
+      "n": 659,
+      "pct_reach_20p": 51.44,
+      "pct_reach_30p": 34.75,
+      "pct_reach_40p": 21.09,
+      "pct_reach_50p": 14.26,
+      "pct_reach_60p": 10.02,
+      "mae_clip_40_median_p": 19.9,
+      "mae_clip_40_p90": 56.24
+    },
+    "test3": {
+      "n": 70,
+      "pct_reach_20p": 42.86,
+      "pct_reach_30p": 30.0,
+      "pct_reach_40p": 20.0,
+      "pct_reach_50p": 14.29,
+      "pct_reach_60p": 11.43,
+      "mae_clip_40_median_p": 19.85,
+      "mae_clip_40_p90": 50.81
+    },
+    "test4": {
+      "n": 10,
+      "pct_reach_20p": 50.0,
+      "pct_reach_30p": 40.0,
+      "pct_reach_40p": 30.0,
+      "pct_reach_50p": 20.0,
+      "pct_reach_60p": 10.0,
+      "mae_clip_40_median_p": 22.45,
+      "mae_clip_40_p90": 49.18
+    },
+    "test5": {
+      "n": 3,
+      "pct_reach_20p": 66.67,
+      "pct_reach_30p": 66.67,
+      "pct_reach_40p": 33.33,
+      "pct_reach_50p": 0.0,
+      "pct_reach_60p": 0.0,
+      "mae_clip_40_median_p": 37.8,
+      "mae_clip_40_p90": 90.04
+    }
+  },
+  "by_direction": {
+    "BUY": {
+      "test1": {
+        "n": 4056,
+        "pct_reach_40p": 18.52,
+        "pct_reach_60p": 7.5
+      },
+      "test2": {
+        "n": 325,
+        "pct_reach_40p": 19.38,
+        "pct_reach_60p": 11.38
+      },
+      "test3": {
+        "n": 37,
+        "pct_reach_40p": 21.62,
+        "pct_reach_60p": 18.92
+      },
+      "test4": {
+        "n": 7,
+        "pct_reach_40p": 28.57,
+        "pct_reach_60p": 14.29
+      },
+      "test5": {
+        "n": 1,
+        "pct_reach_40p": 100.0,
+        "pct_reach_60p": 0.0
+      }
+    },
+    "SELL": {
+      "test1": {
+        "n": 3876,
+        "pct_reach_40p": 18.27,
+        "pct_reach_60p": 7.79
+      },
+      "test2": {
+        "n": 334,
+        "pct_reach_40p": 22.75,
+        "pct_reach_60p": 8.68
+      },
+      "test3": {
+        "n": 33,
+        "pct_reach_40p": 18.18,
+        "pct_reach_60p": 3.03
+      },
+      "test4": {
+        "n": 3,
+        "pct_reach_40p": 33.33,
+        "pct_reach_60p": 0.0
+      },
+      "test5": {
+        "n": 2,
+        "pct_reach_40p": 0.0,
+        "pct_reach_60p": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,804 @@
+{
+  "grid": {
+    "slip0.0_s4_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -1446.9,
+        "expectancy_per_opp": -0.174,
+        "profit_factor": 0.843
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -1348.9,
+        "expectancy_per_opp": -0.181,
+        "profit_factor": 0.838
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -98.0,
+        "expectancy_per_opp": -0.115,
+        "profit_factor": 0.892
+      }
+    },
+    "slip0.0_s4_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -616.8,
+        "expectancy_per_opp": -0.074,
+        "profit_factor": 0.935
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -554.7,
+        "expectancy_per_opp": -0.074,
+        "profit_factor": 0.936
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -62.1,
+        "expectancy_per_opp": -0.073,
+        "profit_factor": 0.934
+      }
+    },
+    "slip0.0_s6_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -1406.1,
+        "expectancy_per_opp": -0.169,
+        "profit_factor": 0.892
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -1345.4,
+        "expectancy_per_opp": -0.18,
+        "profit_factor": 0.885
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -60.7,
+        "expectancy_per_opp": -0.071,
+        "profit_factor": 0.952
+      }
+    },
+    "slip0.0_s6_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -353.7,
+        "expectancy_per_opp": -0.043,
+        "profit_factor": 0.974
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -370.9,
+        "expectancy_per_opp": -0.05,
+        "profit_factor": 0.97
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": 17.2,
+        "expectancy_per_opp": 0.02,
+        "profit_factor": 1.013
+      }
+    },
+    "slip0.0_s8_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -530.7,
+        "expectancy_per_opp": -0.064,
+        "profit_factor": 0.967
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -502.0,
+        "expectancy_per_opp": -0.067,
+        "profit_factor": 0.966
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -28.7,
+        "expectancy_per_opp": -0.034,
+        "profit_factor": 0.982
+      }
+    },
+    "slip0.0_s8_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": 608.5,
+        "expectancy_per_opp": 0.073,
+        "profit_factor": 1.035
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": 658.3,
+        "expectancy_per_opp": 0.088,
+        "profit_factor": 1.042
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -49.8,
+        "expectancy_per_opp": -0.059,
+        "profit_factor": 0.972
+      }
+    },
+    "slip0.0_s12_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -833.2,
+        "expectancy_per_opp": -0.1,
+        "profit_factor": 0.962
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -888.6,
+        "expectancy_per_opp": -0.119,
+        "profit_factor": 0.955
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": 55.4,
+        "expectancy_per_opp": 0.065,
+        "profit_factor": 1.026
+      }
+    },
+    "slip0.0_s12_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": 229.5,
+        "expectancy_per_opp": 0.028,
+        "profit_factor": 1.01
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": 294.3,
+        "expectancy_per_opp": 0.039,
+        "profit_factor": 1.014
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -64.8,
+        "expectancy_per_opp": -0.076,
+        "profit_factor": 0.974
+      }
+    },
+    "slip0.5_s4_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -2946.7,
+        "expectancy_per_opp": -0.354,
+        "profit_factor": 0.687
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -2780.7,
+        "expectancy_per_opp": -0.372,
+        "profit_factor": 0.672
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -166.0,
+        "expectancy_per_opp": -0.195,
+        "profit_factor": 0.819
+      }
+    },
+    "slip0.5_s4_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -2120.5,
+        "expectancy_per_opp": -0.255,
+        "profit_factor": 0.781
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -1957.9,
+        "expectancy_per_opp": -0.262,
+        "profit_factor": 0.775
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -162.6,
+        "expectancy_per_opp": -0.191,
+        "profit_factor": 0.829
+      }
+    },
+    "slip0.5_s6_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -2584.7,
+        "expectancy_per_opp": -0.311,
+        "profit_factor": 0.804
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -2464.7,
+        "expectancy_per_opp": -0.33,
+        "profit_factor": 0.793
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -120.0,
+        "expectancy_per_opp": -0.141,
+        "profit_factor": 0.907
+      }
+    },
+    "slip0.5_s6_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -1358.0,
+        "expectancy_per_opp": -0.163,
+        "profit_factor": 0.902
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -1283.4,
+        "expectancy_per_opp": -0.172,
+        "profit_factor": 0.897
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -74.6,
+        "expectancy_per_opp": -0.088,
+        "profit_factor": 0.946
+      }
+    },
+    "slip0.5_s8_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -1808.7,
+        "expectancy_per_opp": -0.217,
+        "profit_factor": 0.89
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -1665.0,
+        "expectancy_per_opp": -0.223,
+        "profit_factor": 0.888
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -143.7,
+        "expectancy_per_opp": -0.169,
+        "profit_factor": 0.912
+      }
+    },
+    "slip0.5_s8_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -696.7,
+        "expectancy_per_opp": -0.084,
+        "profit_factor": 0.96
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -506.9,
+        "expectancy_per_opp": -0.068,
+        "profit_factor": 0.968
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -189.8,
+        "expectancy_per_opp": -0.223,
+        "profit_factor": 0.893
+      }
+    },
+    "slip0.5_s12_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -1907.6,
+        "expectancy_per_opp": -0.229,
+        "profit_factor": 0.914
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -1961.5,
+        "expectancy_per_opp": -0.263,
+        "profit_factor": 0.902
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": 53.9,
+        "expectancy_per_opp": 0.063,
+        "profit_factor": 1.025
+      }
+    },
+    "slip0.5_s12_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -645.7,
+        "expectancy_per_opp": -0.078,
+        "profit_factor": 0.974
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -572.9,
+        "expectancy_per_opp": -0.077,
+        "profit_factor": 0.974
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -72.8,
+        "expectancy_per_opp": -0.086,
+        "profit_factor": 0.971
+      }
+    },
+    "slip1.0_s4_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -4043.7,
+        "expectancy_per_opp": -0.486,
+        "profit_factor": 0.576
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -3809.7,
+        "expectancy_per_opp": -0.51,
+        "profit_factor": 0.557
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -234.0,
+        "expectancy_per_opp": -0.275,
+        "profit_factor": 0.747
+      }
+    },
+    "slip1.0_s4_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -3271.9,
+        "expectancy_per_opp": -0.393,
+        "profit_factor": 0.664
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -3043.3,
+        "expectancy_per_opp": -0.408,
+        "profit_factor": 0.654
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -228.6,
+        "expectancy_per_opp": -0.269,
+        "profit_factor": 0.761
+      }
+    },
+    "slip1.0_s6_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -3845.9,
+        "expectancy_per_opp": -0.462,
+        "profit_factor": 0.713
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -3653.9,
+        "expectancy_per_opp": -0.489,
+        "profit_factor": 0.698
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -192.0,
+        "expectancy_per_opp": -0.226,
+        "profit_factor": 0.853
+      }
+    },
+    "slip1.0_s6_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -2727.1,
+        "expectancy_per_opp": -0.328,
+        "profit_factor": 0.805
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -2511.7,
+        "expectancy_per_opp": -0.336,
+        "profit_factor": 0.8
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -215.4,
+        "expectancy_per_opp": -0.253,
+        "profit_factor": 0.845
+      }
+    },
+    "slip1.0_s8_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -3346.3,
+        "expectancy_per_opp": -0.402,
+        "profit_factor": 0.801
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -3125.6,
+        "expectancy_per_opp": -0.419,
+        "profit_factor": 0.794
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -220.7,
+        "expectancy_per_opp": -0.26,
+        "profit_factor": 0.866
+      }
+    },
+    "slip1.0_s8_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -2577.2,
+        "expectancy_per_opp": -0.31,
+        "profit_factor": 0.856
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -2256.8,
+        "expectancy_per_opp": -0.302,
+        "profit_factor": 0.86
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -320.4,
+        "expectancy_per_opp": -0.377,
+        "profit_factor": 0.821
+      }
+    },
+    "slip1.0_s12_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -3207.2,
+        "expectancy_per_opp": -0.386,
+        "profit_factor": 0.858
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -3091.6,
+        "expectancy_per_opp": -0.414,
+        "profit_factor": 0.848
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -115.6,
+        "expectancy_per_opp": -0.136,
+        "profit_factor": 0.947
+      }
+    },
+    "slip1.0_s12_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -2205.2,
+        "expectancy_per_opp": -0.265,
+        "profit_factor": 0.911
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -1993.8,
+        "expectancy_per_opp": -0.267,
+        "profit_factor": 0.91
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -211.4,
+        "expectancy_per_opp": -0.249,
+        "profit_factor": 0.915
+      }
+    },
+    "slip2.0_s4_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -7144.4,
+        "expectancy_per_opp": -0.859,
+        "profit_factor": 0.28
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -6536.4,
+        "expectancy_per_opp": -0.875,
+        "profit_factor": 0.27
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -608.0,
+        "expectancy_per_opp": -0.715,
+        "profit_factor": 0.372
+      }
+    },
+    "slip2.0_s4_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -6893.2,
+        "expectancy_per_opp": -0.829,
+        "profit_factor": 0.313
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -6223.3,
+        "expectancy_per_opp": -0.834,
+        "profit_factor": 0.312
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -669.9,
+        "expectancy_per_opp": -0.788,
+        "profit_factor": 0.322
+      }
+    },
+    "slip2.0_s6_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -6590.2,
+        "expectancy_per_opp": -0.792,
+        "profit_factor": 0.526
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -5966.2,
+        "expectancy_per_opp": -0.799,
+        "profit_factor": 0.524
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -624.0,
+        "expectancy_per_opp": -0.734,
+        "profit_factor": 0.546
+      }
+    },
+    "slip2.0_s6_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -5823.9,
+        "expectancy_per_opp": -0.7,
+        "profit_factor": 0.595
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -5213.8,
+        "expectancy_per_opp": -0.698,
+        "profit_factor": 0.597
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -610.1,
+        "expectancy_per_opp": -0.718,
+        "profit_factor": 0.571
+      }
+    },
+    "slip2.0_s8_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -6648.0,
+        "expectancy_per_opp": -0.799,
+        "profit_factor": 0.62
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -6083.3,
+        "expectancy_per_opp": -0.815,
+        "profit_factor": 0.614
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -564.7,
+        "expectancy_per_opp": -0.664,
+        "profit_factor": 0.672
+      }
+    },
+    "slip2.0_s8_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -5700.8,
+        "expectancy_per_opp": -0.686,
+        "profit_factor": 0.689
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -5055.4,
+        "expectancy_per_opp": -0.677,
+        "profit_factor": 0.694
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -645.4,
+        "expectancy_per_opp": -0.759,
+        "profit_factor": 0.648
+      }
+    },
+    "slip2.0_s12_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -5254.9,
+        "expectancy_per_opp": -0.632,
+        "profit_factor": 0.773
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -5010.3,
+        "expectancy_per_opp": -0.671,
+        "profit_factor": 0.761
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -244.6,
+        "expectancy_per_opp": -0.288,
+        "profit_factor": 0.891
+      }
+    },
+    "slip2.0_s12_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -4229.2,
+        "expectancy_per_opp": -0.509,
+        "profit_factor": 0.832
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -3855.8,
+        "expectancy_per_opp": -0.516,
+        "profit_factor": 0.83
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -373.4,
+        "expectancy_per_opp": -0.439,
+        "profit_factor": 0.852
+      }
+    },
+    "slip3.5_s4_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -10214.0,
+        "expectancy_per_opp": -1.228,
+        "profit_factor": 0.009
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -9232.0,
+        "expectancy_per_opp": -1.237,
+        "profit_factor": 0.006
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -982.0,
+        "expectancy_per_opp": -1.155,
+        "profit_factor": 0.03
+      }
+    },
+    "slip3.5_s4_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -10146.7,
+        "expectancy_per_opp": -1.22,
+        "profit_factor": 0.015
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -9194.7,
+        "expectancy_per_opp": -1.232,
+        "profit_factor": 0.01
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -952.0,
+        "expectancy_per_opp": -1.12,
+        "profit_factor": 0.059
+      }
+    },
+    "slip3.5_s6_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -10960.4,
+        "expectancy_per_opp": -1.318,
+        "profit_factor": 0.254
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -10048.4,
+        "expectancy_per_opp": -1.346,
+        "profit_factor": 0.242
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -912.0,
+        "expectancy_per_opp": -1.073,
+        "profit_factor": 0.359
+      }
+    },
+    "slip3.5_s6_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -10449.2,
+        "expectancy_per_opp": -1.257,
+        "profit_factor": 0.298
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -9599.4,
+        "expectancy_per_opp": -1.286,
+        "profit_factor": 0.286
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -849.8,
+        "expectancy_per_opp": -1.0,
+        "profit_factor": 0.415
+      }
+    },
+    "slip3.5_s8_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -10665.0,
+        "expectancy_per_opp": -1.282,
+        "profit_factor": 0.421
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -9697.0,
+        "expectancy_per_opp": -1.299,
+        "profit_factor": 0.416
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -968.0,
+        "expectancy_per_opp": -1.139,
+        "profit_factor": 0.465
+      }
+    },
+    "slip3.5_s8_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -9592.9,
+        "expectancy_per_opp": -1.154,
+        "profit_factor": 0.494
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -8624.4,
+        "expectancy_per_opp": -1.155,
+        "profit_factor": 0.496
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -968.5,
+        "expectancy_per_opp": -1.139,
+        "profit_factor": 0.485
+      }
+    },
+    "slip3.5_s12_t30": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -9904.0,
+        "expectancy_per_opp": -1.191,
+        "profit_factor": 0.597
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -8732.3,
+        "expectancy_per_opp": -1.17,
+        "profit_factor": 0.605
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -1171.7,
+        "expectancy_per_opp": -1.378,
+        "profit_factor": 0.532
+      }
+    },
+    "slip3.5_s12_t60": {
+      "ALL": {
+        "trades_taken": 2579,
+        "net_pips": -8900.6,
+        "expectancy_per_opp": -1.07,
+        "profit_factor": 0.659
+      },
+      "DEV": {
+        "trades_taken": 2325,
+        "net_pips": -7722.3,
+        "expectancy_per_opp": -1.034,
+        "profit_factor": 0.67
+      },
+      "UNSEEN": {
+        "trades_taken": 254,
+        "net_pips": -1178.3,
+        "expectancy_per_opp": -1.386,
+        "profit_factor": 0.559
+      }
+    }
+  }
+}

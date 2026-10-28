@@ -1,0 +1,17 @@
+{
+  "n_opportunities": 7932,
+  "outcome_counts": {
+    "NO_RETEST": 3548,
+    "NO_CONFIRM": 1813,
+    "VALID": 2431,
+    "NO_CONFIRM_CANDLES_IN_WINDOW": 130,
+    "EXECUTION_GAP": 10
+  },
+  "pct_valid": 30.65,
+  "pct_no_retest": 44.73,
+  "pct_no_confirm": 22.86,
+  "retest_delay_s_median": 807.129000064,
+  "retest_delay_s_p90": 2198.194999936,
+  "confirm_delay_s_median": 1799.937999872,
+  "confirm_delay_s_p90": 3299.576999936
+}

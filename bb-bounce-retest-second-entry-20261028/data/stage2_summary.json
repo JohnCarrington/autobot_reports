@@ -1,0 +1,2904 @@
+{
+  "A": {
+    "s4_t30": {
+      "opportunities": 8316,
+      "winners": 724,
+      "losers": 7592,
+      "net_pips": -9983.6,
+      "expectancy_per_opp_pips": -1.201,
+      "profit_factor": 0.671
+    },
+    "s4_t40": {
+      "opportunities": 8316,
+      "winners": 594,
+      "losers": 7722,
+      "net_pips": -9476.3,
+      "expectancy_per_opp_pips": -1.14,
+      "profit_factor": 0.693
+    },
+    "s4_t50": {
+      "opportunities": 8316,
+      "winners": 510,
+      "losers": 7806,
+      "net_pips": -9871.1,
+      "expectancy_per_opp_pips": -1.187,
+      "profit_factor": 0.683
+    },
+    "s4_t60": {
+      "opportunities": 8316,
+      "winners": 476,
+      "losers": 7840,
+      "net_pips": -9061.5,
+      "expectancy_per_opp_pips": -1.09,
+      "profit_factor": 0.711
+    },
+    "s6_t30": {
+      "opportunities": 8316,
+      "winners": 1134,
+      "losers": 7182,
+      "net_pips": -11105.9,
+      "expectancy_per_opp_pips": -1.335,
+      "profit_factor": 0.741
+    },
+    "s6_t40": {
+      "opportunities": 8316,
+      "winners": 956,
+      "losers": 7360,
+      "net_pips": -9671.3,
+      "expectancy_per_opp_pips": -1.163,
+      "profit_factor": 0.78
+    },
+    "s6_t50": {
+      "opportunities": 8316,
+      "winners": 826,
+      "losers": 7490,
+      "net_pips": -10204.7,
+      "expectancy_per_opp_pips": -1.227,
+      "profit_factor": 0.772
+    },
+    "s6_t60": {
+      "opportunities": 8316,
+      "winners": 770,
+      "losers": 7546,
+      "net_pips": -8901.2,
+      "expectancy_per_opp_pips": -1.07,
+      "profit_factor": 0.803
+    },
+    "s8_t30": {
+      "opportunities": 8316,
+      "winners": 1517,
+      "losers": 6799,
+      "net_pips": -11476.4,
+      "expectancy_per_opp_pips": -1.38,
+      "profit_factor": 0.788
+    },
+    "s8_t40": {
+      "opportunities": 8316,
+      "winners": 1276,
+      "losers": 7040,
+      "net_pips": -10681.9,
+      "expectancy_per_opp_pips": -1.285,
+      "profit_factor": 0.809
+    },
+    "s8_t50": {
+      "opportunities": 8316,
+      "winners": 1110,
+      "losers": 7206,
+      "net_pips": -11552.9,
+      "expectancy_per_opp_pips": -1.389,
+      "profit_factor": 0.798
+    },
+    "s8_t60": {
+      "opportunities": 8316,
+      "winners": 1048,
+      "losers": 7268,
+      "net_pips": -10033.4,
+      "expectancy_per_opp_pips": -1.207,
+      "profit_factor": 0.826
+    },
+    "s12_t30": {
+      "opportunities": 8316,
+      "winners": 2184,
+      "losers": 6132,
+      "net_pips": -10968.3,
+      "expectancy_per_opp_pips": -1.319,
+      "profit_factor": 0.849
+    },
+    "s12_t40": {
+      "opportunities": 8316,
+      "winners": 1861,
+      "losers": 6455,
+      "net_pips": -10713.8,
+      "expectancy_per_opp_pips": -1.288,
+      "profit_factor": 0.86
+    },
+    "s12_t50": {
+      "opportunities": 8316,
+      "winners": 1662,
+      "losers": 6654,
+      "net_pips": -11296.8,
+      "expectancy_per_opp_pips": -1.358,
+      "profit_factor": 0.856
+    },
+    "s12_t60": {
+      "opportunities": 8316,
+      "winners": 1587,
+      "losers": 6728,
+      "net_pips": -9119.6,
+      "expectancy_per_opp_pips": -1.097,
+      "profit_factor": 0.885
+    }
+  },
+  "B": {
+    "s4_t30_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s4_t30_w10": {
+      "opportunities": 8316,
+      "winners": 11,
+      "losers": 160,
+      "net_pips": -310.0,
+      "expectancy_per_opp_pips": -0.037,
+      "profit_factor": 0.516,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s4_t30_w15": {
+      "opportunities": 8316,
+      "winners": 35,
+      "losers": 375,
+      "net_pips": -476.1,
+      "expectancy_per_opp_pips": -0.057,
+      "profit_factor": 0.682,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s4_t30_w30": {
+      "opportunities": 8316,
+      "winners": 132,
+      "losers": 1178,
+      "net_pips": -1025.7,
+      "expectancy_per_opp_pips": -0.123,
+      "profit_factor": 0.782,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s4_t30_w60": {
+      "opportunities": 8316,
+      "winners": 272,
+      "losers": 2307,
+      "net_pips": -1446.9,
+      "expectancy_per_opp_pips": -0.174,
+      "profit_factor": 0.843,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s4_t40_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s4_t40_w10": {
+      "opportunities": 8316,
+      "winners": 8,
+      "losers": 163,
+      "net_pips": -332.0,
+      "expectancy_per_opp_pips": -0.04,
+      "profit_factor": 0.491,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s4_t40_w15": {
+      "opportunities": 8316,
+      "winners": 31,
+      "losers": 379,
+      "net_pips": -312.1,
+      "expectancy_per_opp_pips": -0.038,
+      "profit_factor": 0.794,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s4_t40_w30": {
+      "opportunities": 8316,
+      "winners": 109,
+      "losers": 1201,
+      "net_pips": -891.1,
+      "expectancy_per_opp_pips": -0.107,
+      "profit_factor": 0.814,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s4_t40_w60": {
+      "opportunities": 8316,
+      "winners": 226,
+      "losers": 2353,
+      "net_pips": -1052.7,
+      "expectancy_per_opp_pips": -0.127,
+      "profit_factor": 0.888,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s4_t50_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s4_t50_w10": {
+      "opportunities": 8316,
+      "winners": 8,
+      "losers": 163,
+      "net_pips": -252.0,
+      "expectancy_per_opp_pips": -0.03,
+      "profit_factor": 0.613,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s4_t50_w15": {
+      "opportunities": 8316,
+      "winners": 29,
+      "losers": 381,
+      "net_pips": -205.2,
+      "expectancy_per_opp_pips": -0.025,
+      "profit_factor": 0.865,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s4_t50_w30": {
+      "opportunities": 8316,
+      "winners": 103,
+      "losers": 1207,
+      "net_pips": -481.3,
+      "expectancy_per_opp_pips": -0.058,
+      "profit_factor": 0.9,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s4_t50_w60": {
+      "opportunities": 8316,
+      "winners": 205,
+      "losers": 2374,
+      "net_pips": -752.4,
+      "expectancy_per_opp_pips": -0.09,
+      "profit_factor": 0.921,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s4_t60_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s4_t60_w10": {
+      "opportunities": 8316,
+      "winners": 8,
+      "losers": 163,
+      "net_pips": -207.1,
+      "expectancy_per_opp_pips": -0.025,
+      "profit_factor": 0.682,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s4_t60_w15": {
+      "opportunities": 8316,
+      "winners": 27,
+      "losers": 383,
+      "net_pips": -161.0,
+      "expectancy_per_opp_pips": -0.019,
+      "profit_factor": 0.895,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s4_t60_w30": {
+      "opportunities": 8316,
+      "winners": 98,
+      "losers": 1212,
+      "net_pips": -195.5,
+      "expectancy_per_opp_pips": -0.024,
+      "profit_factor": 0.96,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s4_t60_w60": {
+      "opportunities": 8316,
+      "winners": 187,
+      "losers": 2392,
+      "net_pips": -616.8,
+      "expectancy_per_opp_pips": -0.074,
+      "profit_factor": 0.935,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s6_t30_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s6_t30_w10": {
+      "opportunities": 8316,
+      "winners": 23,
+      "losers": 148,
+      "net_pips": -198.0,
+      "expectancy_per_opp_pips": -0.024,
+      "profit_factor": 0.777,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s6_t30_w15": {
+      "opportunities": 8316,
+      "winners": 58,
+      "losers": 352,
+      "net_pips": -393.3,
+      "expectancy_per_opp_pips": -0.047,
+      "profit_factor": 0.813,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s6_t30_w30": {
+      "opportunities": 8316,
+      "winners": 211,
+      "losers": 1099,
+      "net_pips": -775.3,
+      "expectancy_per_opp_pips": -0.093,
+      "profit_factor": 0.882,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s6_t30_w60": {
+      "opportunities": 8316,
+      "winners": 409,
+      "losers": 2170,
+      "net_pips": -1406.1,
+      "expectancy_per_opp_pips": -0.169,
+      "profit_factor": 0.892,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s6_t40_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s6_t40_w10": {
+      "opportunities": 8316,
+      "winners": 20,
+      "losers": 151,
+      "net_pips": -111.0,
+      "expectancy_per_opp_pips": -0.013,
+      "profit_factor": 0.877,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s6_t40_w15": {
+      "opportunities": 8316,
+      "winners": 51,
+      "losers": 359,
+      "net_pips": -184.6,
+      "expectancy_per_opp_pips": -0.022,
+      "profit_factor": 0.914,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s6_t40_w30": {
+      "opportunities": 8316,
+      "winners": 177,
+      "losers": 1133,
+      "net_pips": -602.7,
+      "expectancy_per_opp_pips": -0.072,
+      "profit_factor": 0.911,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s6_t40_w60": {
+      "opportunities": 8316,
+      "winners": 341,
+      "losers": 2238,
+      "net_pips": -1018.5,
+      "expectancy_per_opp_pips": -0.122,
+      "profit_factor": 0.924,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s6_t50_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s6_t50_w10": {
+      "opportunities": 8316,
+      "winners": 17,
+      "losers": 154,
+      "net_pips": -89.0,
+      "expectancy_per_opp_pips": -0.011,
+      "profit_factor": 0.904,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s6_t50_w15": {
+      "opportunities": 8316,
+      "winners": 44,
+      "losers": 366,
+      "net_pips": -211.7,
+      "expectancy_per_opp_pips": -0.025,
+      "profit_factor": 0.903,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s6_t50_w30": {
+      "opportunities": 8316,
+      "winners": 164,
+      "losers": 1146,
+      "net_pips": -116.9,
+      "expectancy_per_opp_pips": -0.014,
+      "profit_factor": 0.983,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s6_t50_w60": {
+      "opportunities": 8316,
+      "winners": 307,
+      "losers": 2272,
+      "net_pips": -640.3,
+      "expectancy_per_opp_pips": -0.077,
+      "profit_factor": 0.953,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s6_t60_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s6_t60_w10": {
+      "opportunities": 8316,
+      "winners": 16,
+      "losers": 155,
+      "net_pips": -61.0,
+      "expectancy_per_opp_pips": -0.007,
+      "profit_factor": 0.934,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s6_t60_w15": {
+      "opportunities": 8316,
+      "winners": 41,
+      "losers": 369,
+      "net_pips": -148.4,
+      "expectancy_per_opp_pips": -0.018,
+      "profit_factor": 0.933,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s6_t60_w30": {
+      "opportunities": 8316,
+      "winners": 157,
+      "losers": 1153,
+      "net_pips": 158.2,
+      "expectancy_per_opp_pips": 0.019,
+      "profit_factor": 1.023,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s6_t60_w60": {
+      "opportunities": 8316,
+      "winners": 285,
+      "losers": 2294,
+      "net_pips": -353.7,
+      "expectancy_per_opp_pips": -0.043,
+      "profit_factor": 0.974,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s8_t30_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s8_t30_w10": {
+      "opportunities": 8316,
+      "winners": 32,
+      "losers": 139,
+      "net_pips": -173.9,
+      "expectancy_per_opp_pips": -0.021,
+      "profit_factor": 0.844,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s8_t30_w15": {
+      "opportunities": 8316,
+      "winners": 80,
+      "losers": 330,
+      "net_pips": -279.2,
+      "expectancy_per_opp_pips": -0.034,
+      "profit_factor": 0.894,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s8_t30_w30": {
+      "opportunities": 8316,
+      "winners": 279,
+      "losers": 1031,
+      "net_pips": -426.3,
+      "expectancy_per_opp_pips": -0.051,
+      "profit_factor": 0.948,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s8_t30_w60": {
+      "opportunities": 8316,
+      "winners": 548,
+      "losers": 2031,
+      "net_pips": -530.7,
+      "expectancy_per_opp_pips": -0.064,
+      "profit_factor": 0.967,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s8_t40_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s8_t40_w10": {
+      "opportunities": 8316,
+      "winners": 26,
+      "losers": 145,
+      "net_pips": -188.5,
+      "expectancy_per_opp_pips": -0.023,
+      "profit_factor": 0.837,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s8_t40_w15": {
+      "opportunities": 8316,
+      "winners": 67,
+      "losers": 343,
+      "net_pips": -278.5,
+      "expectancy_per_opp_pips": -0.033,
+      "profit_factor": 0.898,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s8_t40_w30": {
+      "opportunities": 8316,
+      "winners": 232,
+      "losers": 1078,
+      "net_pips": -403.7,
+      "expectancy_per_opp_pips": -0.049,
+      "profit_factor": 0.953,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s8_t40_w60": {
+      "opportunities": 8316,
+      "winners": 459,
+      "losers": 2120,
+      "net_pips": -110.1,
+      "expectancy_per_opp_pips": -0.013,
+      "profit_factor": 0.993,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s8_t50_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s8_t50_w10": {
+      "opportunities": 8316,
+      "winners": 23,
+      "losers": 148,
+      "net_pips": -132.5,
+      "expectancy_per_opp_pips": -0.016,
+      "profit_factor": 0.888,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s8_t50_w15": {
+      "opportunities": 8316,
+      "winners": 59,
+      "losers": 351,
+      "net_pips": -315.0,
+      "expectancy_per_opp_pips": -0.038,
+      "profit_factor": 0.887,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s8_t50_w30": {
+      "opportunities": 8316,
+      "winners": 213,
+      "losers": 1097,
+      "net_pips": 60.5,
+      "expectancy_per_opp_pips": 0.007,
+      "profit_factor": 1.007,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s8_t50_w60": {
+      "opportunities": 8316,
+      "winners": 410,
+      "losers": 2169,
+      "net_pips": 169.7,
+      "expectancy_per_opp_pips": 0.02,
+      "profit_factor": 1.01,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s8_t60_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s8_t60_w10": {
+      "opportunities": 8316,
+      "winners": 22,
+      "losers": 149,
+      "net_pips": -76.7,
+      "expectancy_per_opp_pips": -0.009,
+      "profit_factor": 0.936,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s8_t60_w15": {
+      "opportunities": 8316,
+      "winners": 56,
+      "losers": 354,
+      "net_pips": -249.3,
+      "expectancy_per_opp_pips": -0.03,
+      "profit_factor": 0.912,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s8_t60_w30": {
+      "opportunities": 8316,
+      "winners": 205,
+      "losers": 1105,
+      "net_pips": 355.9,
+      "expectancy_per_opp_pips": 0.043,
+      "profit_factor": 1.041,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s8_t60_w60": {
+      "opportunities": 8316,
+      "winners": 386,
+      "losers": 2193,
+      "net_pips": 608.5,
+      "expectancy_per_opp_pips": 0.073,
+      "profit_factor": 1.035,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s12_t30_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s12_t30_w10": {
+      "opportunities": 8316,
+      "winners": 52,
+      "losers": 119,
+      "net_pips": 120.0,
+      "expectancy_per_opp_pips": 0.014,
+      "profit_factor": 1.085,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s12_t30_w15": {
+      "opportunities": 8316,
+      "winners": 114,
+      "losers": 296,
+      "net_pips": -162.7,
+      "expectancy_per_opp_pips": -0.02,
+      "profit_factor": 0.954,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s12_t30_w30": {
+      "opportunities": 8316,
+      "winners": 372,
+      "losers": 938,
+      "net_pips": -574.6,
+      "expectancy_per_opp_pips": -0.069,
+      "profit_factor": 0.948,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s12_t30_w60": {
+      "opportunities": 8316,
+      "winners": 734,
+      "losers": 1845,
+      "net_pips": -833.2,
+      "expectancy_per_opp_pips": -0.1,
+      "profit_factor": 0.962,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s12_t40_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s12_t40_w10": {
+      "opportunities": 8316,
+      "winners": 42,
+      "losers": 129,
+      "net_pips": -5.7,
+      "expectancy_per_opp_pips": -0.001,
+      "profit_factor": 0.996,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s12_t40_w15": {
+      "opportunities": 8316,
+      "winners": 93,
+      "losers": 317,
+      "net_pips": -379.1,
+      "expectancy_per_opp_pips": -0.046,
+      "profit_factor": 0.899,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s12_t40_w30": {
+      "opportunities": 8316,
+      "winners": 310,
+      "losers": 1000,
+      "net_pips": -814.6,
+      "expectancy_per_opp_pips": -0.098,
+      "profit_factor": 0.931,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s12_t40_w60": {
+      "opportunities": 8316,
+      "winners": 620,
+      "losers": 1959,
+      "net_pips": -668.8,
+      "expectancy_per_opp_pips": -0.08,
+      "profit_factor": 0.971,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s12_t50_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s12_t50_w10": {
+      "opportunities": 8316,
+      "winners": 39,
+      "losers": 132,
+      "net_pips": 55.5,
+      "expectancy_per_opp_pips": 0.007,
+      "profit_factor": 1.035,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s12_t50_w15": {
+      "opportunities": 8316,
+      "winners": 84,
+      "losers": 326,
+      "net_pips": -402.4,
+      "expectancy_per_opp_pips": -0.048,
+      "profit_factor": 0.896,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s12_t50_w30": {
+      "opportunities": 8316,
+      "winners": 287,
+      "losers": 1023,
+      "net_pips": -238.1,
+      "expectancy_per_opp_pips": -0.029,
+      "profit_factor": 0.98,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s12_t50_w60": {
+      "opportunities": 8316,
+      "winners": 565,
+      "losers": 2014,
+      "net_pips": -114.4,
+      "expectancy_per_opp_pips": -0.014,
+      "profit_factor": 0.995,
+      "trades_taken": 2579,
+      "skipped": 5737
+    },
+    "s12_t60_w5": {
+      "opportunities": 8316,
+      "winners": 0,
+      "losers": 0,
+      "net_pips": 0.0,
+      "expectancy_per_opp_pips": 0.0,
+      "profit_factor": null,
+      "trades_taken": 0,
+      "skipped": 8316
+    },
+    "s12_t60_w10": {
+      "opportunities": 8316,
+      "winners": 36,
+      "losers": 135,
+      "net_pips": 52.9,
+      "expectancy_per_opp_pips": 0.006,
+      "profit_factor": 1.033,
+      "trades_taken": 171,
+      "skipped": 8145
+    },
+    "s12_t60_w15": {
+      "opportunities": 8316,
+      "winners": 78,
+      "losers": 332,
+      "net_pips": -385.5,
+      "expectancy_per_opp_pips": -0.046,
+      "profit_factor": 0.902,
+      "trades_taken": 410,
+      "skipped": 7906
+    },
+    "s12_t60_w30": {
+      "opportunities": 8316,
+      "winners": 272,
+      "losers": 1038,
+      "net_pips": -68.6,
+      "expectancy_per_opp_pips": -0.008,
+      "profit_factor": 0.994,
+      "trades_taken": 1310,
+      "skipped": 7006
+    },
+    "s12_t60_w60": {
+      "opportunities": 8316,
+      "winners": 534,
+      "losers": 2045,
+      "net_pips": 229.5,
+      "expectancy_per_opp_pips": 0.028,
+      "profit_factor": 1.01,
+      "trades_taken": 2579,
+      "skipped": 5737
+    }
+  },
+  "C": {
+    "s4_4_t30_w5": {
+      "opportunities": 8316,
+      "winners": 724,
+      "losers": 7592,
+      "net_pips": -9983.6,
+      "expectancy_per_opp_pips": -1.201,
+      "profit_factor": 0.671,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7572,
+        "A_FIRST_WIN": 661,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_4_t30_w10": {
+      "opportunities": 8316,
+      "winners": 732,
+      "losers": 7584,
+      "net_pips": -10227.6,
+      "expectancy_per_opp_pips": -1.23,
+      "profit_factor": 0.668,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7405,
+        "A_FIRST_WIN": 661,
+        "C_SECOND_LOSS": 121,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 20,
+        "B_SECOND_WIN": 8
+      }
+    },
+    "s4_4_t30_w15": {
+      "opportunities": 8316,
+      "winners": 753,
+      "losers": 7563,
+      "net_pips": -10337.7,
+      "expectancy_per_opp_pips": -1.243,
+      "profit_factor": 0.671,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7167,
+        "A_FIRST_WIN": 661,
+        "C_SECOND_LOSS": 307,
+        "D_SECOND_BEFORE_STOP": 68,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "B_SECOND_WIN": 30,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_4_t30_w30": {
+      "opportunities": 8316,
+      "winners": 838,
+      "losers": 7478,
+      "net_pips": -10855.3,
+      "expectancy_per_opp_pips": -1.305,
+      "profit_factor": 0.682,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6274,
+        "C_SECOND_LOSS": 1063,
+        "A_FIRST_WIN": 661,
+        "B_SECOND_WIN": 121,
+        "D_SECOND_BEFORE_STOP": 114,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_4_t30_w60": {
+      "opportunities": 8316,
+      "winners": 968,
+      "losers": 7348,
+      "net_pips": -11362.5,
+      "expectancy_per_opp_pips": -1.366,
+      "profit_factor": 0.701,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5011,
+        "C_SECOND_LOSS": 2161,
+        "A_FIRST_WIN": 661,
+        "B_SECOND_WIN": 254,
+        "D_SECOND_BEFORE_STOP": 146,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_4_t40_w5": {
+      "opportunities": 8316,
+      "winners": 594,
+      "losers": 7722,
+      "net_pips": -9476.3,
+      "expectancy_per_opp_pips": -1.14,
+      "profit_factor": 0.693,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7702,
+        "A_FIRST_WIN": 510,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_4_t40_w10": {
+      "opportunities": 8316,
+      "winners": 599,
+      "losers": 7717,
+      "net_pips": -9772.3,
+      "expectancy_per_opp_pips": -1.175,
+      "profit_factor": 0.688,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7535,
+        "A_FIRST_WIN": 510,
+        "C_SECOND_LOSS": 124,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 20,
+        "B_SECOND_WIN": 5
+      }
+    },
+    "s4_4_t40_w15": {
+      "opportunities": 8316,
+      "winners": 619,
+      "losers": 7697,
+      "net_pips": -9716.4,
+      "expectancy_per_opp_pips": -1.168,
+      "profit_factor": 0.696,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7297,
+        "A_FIRST_WIN": 510,
+        "C_SECOND_LOSS": 311,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "D_SECOND_BEFORE_STOP": 68,
+        "B_SECOND_WIN": 26,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_4_t40_w30": {
+      "opportunities": 8316,
+      "winners": 686,
+      "losers": 7630,
+      "net_pips": -10269.4,
+      "expectancy_per_opp_pips": -1.235,
+      "profit_factor": 0.705,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6402,
+        "C_SECOND_LOSS": 1085,
+        "A_FIRST_WIN": 510,
+        "D_SECOND_BEFORE_STOP": 116,
+        "B_SECOND_WIN": 99,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_4_t40_w60": {
+      "opportunities": 8316,
+      "winners": 796,
+      "losers": 7520,
+      "net_pips": -10445.5,
+      "expectancy_per_opp_pips": -1.256,
+      "profit_factor": 0.731,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5137,
+        "C_SECOND_LOSS": 2203,
+        "A_FIRST_WIN": 510,
+        "B_SECOND_WIN": 212,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_4_t50_w5": {
+      "opportunities": 8316,
+      "winners": 510,
+      "losers": 7806,
+      "net_pips": -9871.1,
+      "expectancy_per_opp_pips": -1.187,
+      "profit_factor": 0.683,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7784,
+        "A_FIRST_WIN": 385,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_4_t50_w10": {
+      "opportunities": 8316,
+      "winners": 515,
+      "losers": 7801,
+      "net_pips": -10117.1,
+      "expectancy_per_opp_pips": -1.217,
+      "profit_factor": 0.68,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7617,
+        "A_FIRST_WIN": 385,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "C_SECOND_LOSS": 124,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 22,
+        "B_SECOND_WIN": 5
+      }
+    },
+    "s4_4_t50_w15": {
+      "opportunities": 8316,
+      "winners": 533,
+      "losers": 7783,
+      "net_pips": -10054.3,
+      "expectancy_per_opp_pips": -1.209,
+      "profit_factor": 0.689,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7379,
+        "A_FIRST_WIN": 385,
+        "C_SECOND_LOSS": 313,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "D_SECOND_BEFORE_STOP": 68,
+        "B_SECOND_WIN": 24,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_4_t50_w30": {
+      "opportunities": 8316,
+      "winners": 596,
+      "losers": 7720,
+      "net_pips": -10344.4,
+      "expectancy_per_opp_pips": -1.244,
+      "profit_factor": 0.706,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6484,
+        "C_SECOND_LOSS": 1091,
+        "A_FIRST_WIN": 385,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "D_SECOND_BEFORE_STOP": 116,
+        "B_SECOND_WIN": 93,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_4_t50_w60": {
+      "opportunities": 8316,
+      "winners": 691,
+      "losers": 7625,
+      "net_pips": -10623.3,
+      "expectancy_per_opp_pips": -1.277,
+      "profit_factor": 0.73,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5218,
+        "C_SECOND_LOSS": 2225,
+        "A_FIRST_WIN": 385,
+        "B_SECOND_WIN": 191,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_4_t60_w5": {
+      "opportunities": 8316,
+      "winners": 476,
+      "losers": 7840,
+      "net_pips": -9061.5,
+      "expectancy_per_opp_pips": -1.09,
+      "profit_factor": 0.711,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7816,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_4_t60_w10": {
+      "opportunities": 8316,
+      "winners": 481,
+      "losers": 7835,
+      "net_pips": -9292.6,
+      "expectancy_per_opp_pips": -1.117,
+      "profit_factor": 0.708,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7649,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "C_SECOND_LOSS": 124,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 24,
+        "B_SECOND_WIN": 5
+      }
+    },
+    "s4_4_t60_w15": {
+      "opportunities": 8316,
+      "winners": 497,
+      "losers": 7819,
+      "net_pips": -9250.5,
+      "expectancy_per_opp_pips": -1.112,
+      "profit_factor": 0.715,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7411,
+        "C_SECOND_LOSS": 315,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "D_SECOND_BEFORE_STOP": 68,
+        "A_FIRST_TIMEOUT_LOSS": 24,
+        "B_SECOND_WIN": 22
+      }
+    },
+    "s4_4_t60_w30": {
+      "opportunities": 8316,
+      "winners": 558,
+      "losers": 7758,
+      "net_pips": -9277.9,
+      "expectancy_per_opp_pips": -1.116,
+      "profit_factor": 0.737,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6516,
+        "C_SECOND_LOSS": 1095,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "D_SECOND_BEFORE_STOP": 116,
+        "B_SECOND_WIN": 89,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_4_t60_w60": {
+      "opportunities": 8316,
+      "winners": 640,
+      "losers": 7676,
+      "net_pips": -9727.0,
+      "expectancy_per_opp_pips": -1.17,
+      "profit_factor": 0.754,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5250,
+        "C_SECOND_LOSS": 2242,
+        "A_FIRST_WIN": 314,
+        "B_SECOND_WIN": 174,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_6_t30_w5": {
+      "opportunities": 8316,
+      "winners": 724,
+      "losers": 7592,
+      "net_pips": -9983.6,
+      "expectancy_per_opp_pips": -1.201,
+      "profit_factor": 0.671,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7572,
+        "A_FIRST_WIN": 661,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_6_t30_w10": {
+      "opportunities": 8316,
+      "winners": 740,
+      "losers": 7576,
+      "net_pips": -10181.6,
+      "expectancy_per_opp_pips": -1.224,
+      "profit_factor": 0.671,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7405,
+        "A_FIRST_WIN": 661,
+        "C_SECOND_LOSS": 113,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 20,
+        "B_SECOND_WIN": 16
+      }
+    },
+    "s4_6_t30_w15": {
+      "opportunities": 8316,
+      "winners": 771,
+      "losers": 7545,
+      "net_pips": -10298.9,
+      "expectancy_per_opp_pips": -1.238,
+      "profit_factor": 0.677,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7167,
+        "A_FIRST_WIN": 661,
+        "C_SECOND_LOSS": 289,
+        "D_SECOND_BEFORE_STOP": 68,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "B_SECOND_WIN": 48,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_6_t30_w30": {
+      "opportunities": 8316,
+      "winners": 908,
+      "losers": 7408,
+      "net_pips": -10590.9,
+      "expectancy_per_opp_pips": -1.274,
+      "profit_factor": 0.702,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6274,
+        "C_SECOND_LOSS": 990,
+        "A_FIRST_WIN": 661,
+        "B_SECOND_WIN": 194,
+        "D_SECOND_BEFORE_STOP": 114,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_6_t30_w60": {
+      "opportunities": 8316,
+      "winners": 1093,
+      "losers": 7223,
+      "net_pips": -11353.7,
+      "expectancy_per_opp_pips": -1.365,
+      "profit_factor": 0.723,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5011,
+        "C_SECOND_LOSS": 2033,
+        "A_FIRST_WIN": 661,
+        "B_SECOND_WIN": 382,
+        "D_SECOND_BEFORE_STOP": 146,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_6_t40_w5": {
+      "opportunities": 8316,
+      "winners": 594,
+      "losers": 7722,
+      "net_pips": -9476.3,
+      "expectancy_per_opp_pips": -1.14,
+      "profit_factor": 0.693,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7702,
+        "A_FIRST_WIN": 510,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_6_t40_w10": {
+      "opportunities": 8316,
+      "winners": 607,
+      "losers": 7709,
+      "net_pips": -9652.3,
+      "expectancy_per_opp_pips": -1.161,
+      "profit_factor": 0.693,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7535,
+        "A_FIRST_WIN": 510,
+        "C_SECOND_LOSS": 116,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 20,
+        "B_SECOND_WIN": 13
+      }
+    },
+    "s4_6_t40_w15": {
+      "opportunities": 8316,
+      "winners": 635,
+      "losers": 7681,
+      "net_pips": -9631.9,
+      "expectancy_per_opp_pips": -1.158,
+      "profit_factor": 0.703,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7297,
+        "A_FIRST_WIN": 510,
+        "C_SECOND_LOSS": 295,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "D_SECOND_BEFORE_STOP": 68,
+        "B_SECOND_WIN": 42,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_6_t40_w30": {
+      "opportunities": 8316,
+      "winners": 746,
+      "losers": 7570,
+      "net_pips": -9950.9,
+      "expectancy_per_opp_pips": -1.197,
+      "profit_factor": 0.726,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6402,
+        "C_SECOND_LOSS": 1022,
+        "A_FIRST_WIN": 510,
+        "B_SECOND_WIN": 162,
+        "D_SECOND_BEFORE_STOP": 116,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_6_t40_w60": {
+      "opportunities": 8316,
+      "winners": 900,
+      "losers": 7416,
+      "net_pips": -10451.2,
+      "expectancy_per_opp_pips": -1.257,
+      "profit_factor": 0.752,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5137,
+        "C_SECOND_LOSS": 2096,
+        "A_FIRST_WIN": 510,
+        "B_SECOND_WIN": 319,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_6_t50_w5": {
+      "opportunities": 8316,
+      "winners": 510,
+      "losers": 7806,
+      "net_pips": -9871.1,
+      "expectancy_per_opp_pips": -1.187,
+      "profit_factor": 0.683,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7784,
+        "A_FIRST_WIN": 385,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_6_t50_w10": {
+      "opportunities": 8316,
+      "winners": 523,
+      "losers": 7793,
+      "net_pips": -9917.1,
+      "expectancy_per_opp_pips": -1.193,
+      "profit_factor": 0.688,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7617,
+        "A_FIRST_WIN": 385,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "C_SECOND_LOSS": 116,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 22,
+        "B_SECOND_WIN": 13
+      }
+    },
+    "s4_6_t50_w15": {
+      "opportunities": 8316,
+      "winners": 547,
+      "losers": 7769,
+      "net_pips": -9965.8,
+      "expectancy_per_opp_pips": -1.198,
+      "profit_factor": 0.696,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7379,
+        "A_FIRST_WIN": 385,
+        "C_SECOND_LOSS": 299,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "D_SECOND_BEFORE_STOP": 68,
+        "B_SECOND_WIN": 38,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_6_t50_w30": {
+      "opportunities": 8316,
+      "winners": 652,
+      "losers": 7664,
+      "net_pips": -9811.9,
+      "expectancy_per_opp_pips": -1.18,
+      "profit_factor": 0.733,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6484,
+        "C_SECOND_LOSS": 1032,
+        "A_FIRST_WIN": 385,
+        "B_SECOND_WIN": 152,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "D_SECOND_BEFORE_STOP": 116,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_6_t50_w60": {
+      "opportunities": 8316,
+      "winners": 786,
+      "losers": 7530,
+      "net_pips": -10354.3,
+      "expectancy_per_opp_pips": -1.245,
+      "profit_factor": 0.758,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5218,
+        "C_SECOND_LOSS": 2127,
+        "A_FIRST_WIN": 385,
+        "B_SECOND_WIN": 289,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_6_t60_w5": {
+      "opportunities": 8316,
+      "winners": 476,
+      "losers": 7840,
+      "net_pips": -9061.5,
+      "expectancy_per_opp_pips": -1.09,
+      "profit_factor": 0.711,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7816,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_6_t60_w10": {
+      "opportunities": 8316,
+      "winners": 488,
+      "losers": 7828,
+      "net_pips": -9109.5,
+      "expectancy_per_opp_pips": -1.095,
+      "profit_factor": 0.715,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7649,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "C_SECOND_LOSS": 117,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 24,
+        "B_SECOND_WIN": 12
+      }
+    },
+    "s4_6_t60_w15": {
+      "opportunities": 8316,
+      "winners": 510,
+      "losers": 7806,
+      "net_pips": -9142.9,
+      "expectancy_per_opp_pips": -1.099,
+      "profit_factor": 0.723,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7411,
+        "A_FIRST_WIN": 314,
+        "C_SECOND_LOSS": 302,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "D_SECOND_BEFORE_STOP": 68,
+        "B_SECOND_WIN": 35,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_6_t60_w30": {
+      "opportunities": 8316,
+      "winners": 612,
+      "losers": 7704,
+      "net_pips": -8756.1,
+      "expectancy_per_opp_pips": -1.053,
+      "profit_factor": 0.763,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6516,
+        "C_SECOND_LOSS": 1038,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "B_SECOND_WIN": 146,
+        "D_SECOND_BEFORE_STOP": 116,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_6_t60_w60": {
+      "opportunities": 8316,
+      "winners": 731,
+      "losers": 7585,
+      "net_pips": -9317.0,
+      "expectancy_per_opp_pips": -1.12,
+      "profit_factor": 0.784,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5250,
+        "C_SECOND_LOSS": 2148,
+        "A_FIRST_WIN": 314,
+        "B_SECOND_WIN": 268,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_8_t30_w5": {
+      "opportunities": 8316,
+      "winners": 724,
+      "losers": 7592,
+      "net_pips": -9983.6,
+      "expectancy_per_opp_pips": -1.201,
+      "profit_factor": 0.671,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7572,
+        "A_FIRST_WIN": 661,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_8_t30_w10": {
+      "opportunities": 8316,
+      "winners": 748,
+      "losers": 7568,
+      "net_pips": -10125.5,
+      "expectancy_per_opp_pips": -1.218,
+      "profit_factor": 0.674,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7405,
+        "A_FIRST_WIN": 661,
+        "C_SECOND_LOSS": 105,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "D_SECOND_BEFORE_STOP": 38,
+        "B_SECOND_WIN": 24,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_8_t30_w15": {
+      "opportunities": 8316,
+      "winners": 790,
+      "losers": 7526,
+      "net_pips": -10172.8,
+      "expectancy_per_opp_pips": -1.223,
+      "profit_factor": 0.684,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7167,
+        "A_FIRST_WIN": 661,
+        "C_SECOND_LOSS": 270,
+        "D_SECOND_BEFORE_STOP": 68,
+        "B_SECOND_WIN": 67,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_8_t30_w30": {
+      "opportunities": 8316,
+      "winners": 972,
+      "losers": 7344,
+      "net_pips": -10137.9,
+      "expectancy_per_opp_pips": -1.219,
+      "profit_factor": 0.723,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6274,
+        "C_SECOND_LOSS": 925,
+        "A_FIRST_WIN": 661,
+        "B_SECOND_WIN": 259,
+        "D_SECOND_BEFORE_STOP": 114,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_8_t30_w60": {
+      "opportunities": 8316,
+      "winners": 1226,
+      "losers": 7090,
+      "net_pips": -10394.3,
+      "expectancy_per_opp_pips": -1.25,
+      "profit_factor": 0.76,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5011,
+        "C_SECOND_LOSS": 1899,
+        "A_FIRST_WIN": 661,
+        "B_SECOND_WIN": 516,
+        "D_SECOND_BEFORE_STOP": 146,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_8_t40_w5": {
+      "opportunities": 8316,
+      "winners": 594,
+      "losers": 7722,
+      "net_pips": -9476.3,
+      "expectancy_per_opp_pips": -1.14,
+      "profit_factor": 0.693,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7702,
+        "A_FIRST_WIN": 510,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_8_t40_w10": {
+      "opportunities": 8316,
+      "winners": 612,
+      "losers": 7704,
+      "net_pips": -9707.8,
+      "expectancy_per_opp_pips": -1.167,
+      "profit_factor": 0.693,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7535,
+        "A_FIRST_WIN": 510,
+        "C_SECOND_LOSS": 111,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 20,
+        "B_SECOND_WIN": 18
+      }
+    },
+    "s4_8_t40_w15": {
+      "opportunities": 8316,
+      "winners": 650,
+      "losers": 7666,
+      "net_pips": -9645.8,
+      "expectancy_per_opp_pips": -1.16,
+      "profit_factor": 0.706,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7297,
+        "A_FIRST_WIN": 510,
+        "C_SECOND_LOSS": 280,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "D_SECOND_BEFORE_STOP": 68,
+        "B_SECOND_WIN": 57,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_8_t40_w30": {
+      "opportunities": 8316,
+      "winners": 799,
+      "losers": 7517,
+      "net_pips": -9577.9,
+      "expectancy_per_opp_pips": -1.152,
+      "profit_factor": 0.746,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6402,
+        "C_SECOND_LOSS": 968,
+        "A_FIRST_WIN": 510,
+        "B_SECOND_WIN": 216,
+        "D_SECOND_BEFORE_STOP": 116,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_8_t40_w60": {
+      "opportunities": 8316,
+      "winners": 1015,
+      "losers": 7301,
+      "net_pips": -9354.8,
+      "expectancy_per_opp_pips": -1.125,
+      "profit_factor": 0.791,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5137,
+        "C_SECOND_LOSS": 1980,
+        "A_FIRST_WIN": 510,
+        "B_SECOND_WIN": 435,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_8_t50_w5": {
+      "opportunities": 8316,
+      "winners": 510,
+      "losers": 7806,
+      "net_pips": -9871.1,
+      "expectancy_per_opp_pips": -1.187,
+      "profit_factor": 0.683,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7784,
+        "A_FIRST_WIN": 385,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_8_t50_w10": {
+      "opportunities": 8316,
+      "winners": 528,
+      "losers": 7788,
+      "net_pips": -9942.6,
+      "expectancy_per_opp_pips": -1.196,
+      "profit_factor": 0.689,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7617,
+        "A_FIRST_WIN": 385,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "C_SECOND_LOSS": 111,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 22,
+        "B_SECOND_WIN": 18
+      }
+    },
+    "s4_8_t50_w15": {
+      "opportunities": 8316,
+      "winners": 561,
+      "losers": 7755,
+      "net_pips": -9993.1,
+      "expectancy_per_opp_pips": -1.202,
+      "profit_factor": 0.699,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7379,
+        "A_FIRST_WIN": 385,
+        "C_SECOND_LOSS": 285,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "D_SECOND_BEFORE_STOP": 68,
+        "B_SECOND_WIN": 52,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_8_t50_w30": {
+      "opportunities": 8316,
+      "winners": 699,
+      "losers": 7617,
+      "net_pips": -9464.5,
+      "expectancy_per_opp_pips": -1.138,
+      "profit_factor": 0.752,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6484,
+        "C_SECOND_LOSS": 984,
+        "A_FIRST_WIN": 385,
+        "B_SECOND_WIN": 200,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "D_SECOND_BEFORE_STOP": 116,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_8_t50_w60": {
+      "opportunities": 8316,
+      "winners": 887,
+      "losers": 7429,
+      "net_pips": -9312.3,
+      "expectancy_per_opp_pips": -1.12,
+      "profit_factor": 0.796,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5218,
+        "C_SECOND_LOSS": 2025,
+        "B_SECOND_WIN": 391,
+        "A_FIRST_WIN": 385,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_8_t60_w5": {
+      "opportunities": 8316,
+      "winners": 476,
+      "losers": 7840,
+      "net_pips": -9061.5,
+      "expectancy_per_opp_pips": -1.09,
+      "profit_factor": 0.711,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7816,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_8_t60_w10": {
+      "opportunities": 8316,
+      "winners": 493,
+      "losers": 7823,
+      "net_pips": -9117.2,
+      "expectancy_per_opp_pips": -1.096,
+      "profit_factor": 0.716,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7649,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "C_SECOND_LOSS": 112,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 24,
+        "B_SECOND_WIN": 17
+      }
+    },
+    "s4_8_t60_w15": {
+      "opportunities": 8316,
+      "winners": 524,
+      "losers": 7792,
+      "net_pips": -9177.8,
+      "expectancy_per_opp_pips": -1.104,
+      "profit_factor": 0.725,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7411,
+        "A_FIRST_WIN": 314,
+        "C_SECOND_LOSS": 288,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "D_SECOND_BEFORE_STOP": 68,
+        "B_SECOND_WIN": 49,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_8_t60_w30": {
+      "opportunities": 8316,
+      "winners": 658,
+      "losers": 7658,
+      "net_pips": -8398.4,
+      "expectancy_per_opp_pips": -1.01,
+      "profit_factor": 0.781,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6516,
+        "C_SECOND_LOSS": 991,
+        "A_FIRST_WIN": 314,
+        "B_SECOND_WIN": 193,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "D_SECOND_BEFORE_STOP": 116,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_8_t60_w60": {
+      "opportunities": 8316,
+      "winners": 830,
+      "losers": 7486,
+      "net_pips": -8132.8,
+      "expectancy_per_opp_pips": -0.978,
+      "profit_factor": 0.824,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5250,
+        "C_SECOND_LOSS": 2048,
+        "B_SECOND_WIN": 368,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_12_t30_w5": {
+      "opportunities": 8316,
+      "winners": 724,
+      "losers": 7592,
+      "net_pips": -9983.6,
+      "expectancy_per_opp_pips": -1.201,
+      "profit_factor": 0.671,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7572,
+        "A_FIRST_WIN": 661,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_12_t30_w10": {
+      "opportunities": 8316,
+      "winners": 764,
+      "losers": 7552,
+      "net_pips": -9863.6,
+      "expectancy_per_opp_pips": -1.186,
+      "profit_factor": 0.684,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7405,
+        "A_FIRST_WIN": 661,
+        "C_SECOND_LOSS": 89,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "B_SECOND_WIN": 40,
+        "D_SECOND_BEFORE_STOP": 38,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_12_t30_w15": {
+      "opportunities": 8316,
+      "winners": 819,
+      "losers": 7497,
+      "net_pips": -10026.3,
+      "expectancy_per_opp_pips": -1.206,
+      "profit_factor": 0.694,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7167,
+        "A_FIRST_WIN": 661,
+        "C_SECOND_LOSS": 241,
+        "B_SECOND_WIN": 96,
+        "D_SECOND_BEFORE_STOP": 68,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_12_t30_w30": {
+      "opportunities": 8316,
+      "winners": 1056,
+      "losers": 7260,
+      "net_pips": -10240.2,
+      "expectancy_per_opp_pips": -1.231,
+      "profit_factor": 0.737,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6274,
+        "C_SECOND_LOSS": 841,
+        "A_FIRST_WIN": 661,
+        "B_SECOND_WIN": 343,
+        "D_SECOND_BEFORE_STOP": 114,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_12_t30_w60": {
+      "opportunities": 8316,
+      "winners": 1402,
+      "losers": 6914,
+      "net_pips": -10567.1,
+      "expectancy_per_opp_pips": -1.271,
+      "profit_factor": 0.78,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5011,
+        "C_SECOND_LOSS": 1723,
+        "B_SECOND_WIN": 692,
+        "A_FIRST_WIN": 661,
+        "D_SECOND_BEFORE_STOP": 146,
+        "A_FIRST_TIMEOUT_PROFIT": 63,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_12_t40_w5": {
+      "opportunities": 8316,
+      "winners": 594,
+      "losers": 7722,
+      "net_pips": -9476.3,
+      "expectancy_per_opp_pips": -1.14,
+      "profit_factor": 0.693,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7702,
+        "A_FIRST_WIN": 510,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_12_t40_w10": {
+      "opportunities": 8316,
+      "winners": 624,
+      "losers": 7692,
+      "net_pips": -9597.0,
+      "expectancy_per_opp_pips": -1.154,
+      "profit_factor": 0.699,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7535,
+        "A_FIRST_WIN": 510,
+        "C_SECOND_LOSS": 99,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "D_SECOND_BEFORE_STOP": 38,
+        "B_SECOND_WIN": 30,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_12_t40_w15": {
+      "opportunities": 8316,
+      "winners": 671,
+      "losers": 7645,
+      "net_pips": -9754.4,
+      "expectancy_per_opp_pips": -1.173,
+      "profit_factor": 0.71,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7297,
+        "A_FIRST_WIN": 510,
+        "C_SECOND_LOSS": 259,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "B_SECOND_WIN": 78,
+        "D_SECOND_BEFORE_STOP": 68,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_12_t40_w30": {
+      "opportunities": 8316,
+      "winners": 867,
+      "losers": 7449,
+      "net_pips": -10016.8,
+      "expectancy_per_opp_pips": -1.205,
+      "profit_factor": 0.752,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6402,
+        "C_SECOND_LOSS": 899,
+        "A_FIRST_WIN": 510,
+        "B_SECOND_WIN": 285,
+        "D_SECOND_BEFORE_STOP": 116,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_12_t40_w60": {
+      "opportunities": 8316,
+      "winners": 1164,
+      "losers": 7152,
+      "net_pips": -9841.8,
+      "expectancy_per_opp_pips": -1.183,
+      "profit_factor": 0.804,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5137,
+        "C_SECOND_LOSS": 1829,
+        "B_SECOND_WIN": 586,
+        "A_FIRST_WIN": 510,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_PROFIT": 84,
+        "A_FIRST_TIMEOUT_LOSS": 20
+      }
+    },
+    "s4_12_t50_w5": {
+      "opportunities": 8316,
+      "winners": 510,
+      "losers": 7806,
+      "net_pips": -9871.1,
+      "expectancy_per_opp_pips": -1.187,
+      "profit_factor": 0.683,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7784,
+        "A_FIRST_WIN": 385,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_12_t50_w10": {
+      "opportunities": 8316,
+      "winners": 539,
+      "losers": 7777,
+      "net_pips": -9895.6,
+      "expectancy_per_opp_pips": -1.19,
+      "profit_factor": 0.693,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7617,
+        "A_FIRST_WIN": 385,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "C_SECOND_LOSS": 100,
+        "D_SECOND_BEFORE_STOP": 38,
+        "B_SECOND_WIN": 29,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_12_t50_w15": {
+      "opportunities": 8316,
+      "winners": 580,
+      "losers": 7736,
+      "net_pips": -10167.5,
+      "expectancy_per_opp_pips": -1.223,
+      "profit_factor": 0.701,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7379,
+        "A_FIRST_WIN": 385,
+        "C_SECOND_LOSS": 266,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "B_SECOND_WIN": 71,
+        "D_SECOND_BEFORE_STOP": 68,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_12_t50_w30": {
+      "opportunities": 8316,
+      "winners": 762,
+      "losers": 7554,
+      "net_pips": -9889.8,
+      "expectancy_per_opp_pips": -1.189,
+      "profit_factor": 0.759,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6484,
+        "C_SECOND_LOSS": 920,
+        "A_FIRST_WIN": 385,
+        "B_SECOND_WIN": 264,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "D_SECOND_BEFORE_STOP": 116,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_12_t50_w60": {
+      "opportunities": 8316,
+      "winners": 1029,
+      "losers": 7287,
+      "net_pips": -9619.4,
+      "expectancy_per_opp_pips": -1.157,
+      "profit_factor": 0.812,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5218,
+        "C_SECOND_LOSS": 1881,
+        "B_SECOND_WIN": 535,
+        "A_FIRST_WIN": 385,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_PROFIT": 125,
+        "A_FIRST_TIMEOUT_LOSS": 22
+      }
+    },
+    "s4_12_t60_w5": {
+      "opportunities": 8316,
+      "winners": 476,
+      "losers": 7840,
+      "net_pips": -9061.5,
+      "expectancy_per_opp_pips": -1.09,
+      "profit_factor": 0.711,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7816,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_12_t60_w10": {
+      "opportunities": 8316,
+      "winners": 504,
+      "losers": 7812,
+      "net_pips": -9034.2,
+      "expectancy_per_opp_pips": -1.086,
+      "profit_factor": 0.721,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7649,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "C_SECOND_LOSS": 101,
+        "D_SECOND_BEFORE_STOP": 38,
+        "B_SECOND_WIN": 28,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_12_t60_w15": {
+      "opportunities": 8316,
+      "winners": 543,
+      "losers": 7773,
+      "net_pips": -9254.2,
+      "expectancy_per_opp_pips": -1.113,
+      "profit_factor": 0.73,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7411,
+        "A_FIRST_WIN": 314,
+        "C_SECOND_LOSS": 269,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "D_SECOND_BEFORE_STOP": 68,
+        "B_SECOND_WIN": 68,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_12_t60_w30": {
+      "opportunities": 8316,
+      "winners": 717,
+      "losers": 7599,
+      "net_pips": -8822.8,
+      "expectancy_per_opp_pips": -1.061,
+      "profit_factor": 0.786,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6516,
+        "C_SECOND_LOSS": 931,
+        "A_FIRST_WIN": 314,
+        "B_SECOND_WIN": 253,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "D_SECOND_BEFORE_STOP": 116,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s4_12_t60_w60": {
+      "opportunities": 8316,
+      "winners": 967,
+      "losers": 7349,
+      "net_pips": -8408.0,
+      "expectancy_per_opp_pips": -1.011,
+      "profit_factor": 0.838,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5250,
+        "C_SECOND_LOSS": 1908,
+        "B_SECOND_WIN": 508,
+        "A_FIRST_WIN": 314,
+        "A_FIRST_TIMEOUT_PROFIT": 162,
+        "D_SECOND_BEFORE_STOP": 150,
+        "A_FIRST_TIMEOUT_LOSS": 24
+      }
+    },
+    "s6_6_t30_w5": {
+      "opportunities": 8316,
+      "winners": 1134,
+      "losers": 7182,
+      "net_pips": -11105.9,
+      "expectancy_per_opp_pips": -1.335,
+      "profit_factor": 0.741,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7142,
+        "A_FIRST_WIN": 1037,
+        "A_FIRST_TIMEOUT_PROFIT": 97,
+        "A_FIRST_TIMEOUT_LOSS": 40
+      }
+    },
+    "s6_6_t30_w10": {
+      "opportunities": 8316,
+      "winners": 1143,
+      "losers": 7173,
+      "net_pips": -11225.9,
+      "expectancy_per_opp_pips": -1.35,
+      "profit_factor": 0.741,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6980,
+        "A_FIRST_WIN": 1037,
+        "A_FIRST_TIMEOUT_PROFIT": 97,
+        "D_SECOND_BEFORE_STOP": 88,
+        "C_SECOND_LOSS": 65,
+        "A_FIRST_TIMEOUT_LOSS": 40,
+        "B_SECOND_WIN": 9
+      }
+    },
+    "s6_6_t30_w15": {
+      "opportunities": 8316,
+      "winners": 1165,
+      "losers": 7151,
+      "net_pips": -11364.6,
+      "expectancy_per_opp_pips": -1.367,
+      "profit_factor": 0.741,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6757,
+        "A_FIRST_WIN": 1037,
+        "C_SECOND_LOSS": 199,
+        "D_SECOND_BEFORE_STOP": 154,
+        "A_FIRST_TIMEOUT_PROFIT": 97,
+        "A_FIRST_TIMEOUT_LOSS": 40,
+        "B_SECOND_WIN": 32
+      }
+    },
+    "s6_6_t30_w30": {
+      "opportunities": 8316,
+      "winners": 1275,
+      "losers": 7041,
+      "net_pips": -11580.3,
+      "expectancy_per_opp_pips": -1.393,
+      "profit_factor": 0.752,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5888,
+        "A_FIRST_WIN": 1037,
+        "C_SECOND_LOSS": 763,
+        "D_SECOND_BEFORE_STOP": 341,
+        "B_SECOND_WIN": 150,
+        "A_FIRST_TIMEOUT_PROFIT": 97,
+        "A_FIRST_TIMEOUT_LOSS": 40
+      }
+    },
+    "s6_6_t30_w60": {
+      "opportunities": 8316,
+      "winners": 1430,
+      "losers": 6886,
+      "net_pips": -12362.7,
+      "expectancy_per_opp_pips": -1.487,
+      "profit_factor": 0.758,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 4654,
+        "C_SECOND_LOSS": 1666,
+        "A_FIRST_WIN": 1037,
+        "D_SECOND_BEFORE_STOP": 515,
+        "B_SECOND_WIN": 307,
+        "A_FIRST_TIMEOUT_PROFIT": 97,
+        "A_FIRST_TIMEOUT_LOSS": 40
+      }
+    },
+    "s6_6_t40_w5": {
+      "opportunities": 8316,
+      "winners": 956,
+      "losers": 7360,
+      "net_pips": -9671.3,
+      "expectancy_per_opp_pips": -1.163,
+      "profit_factor": 0.78,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7320,
+        "A_FIRST_WIN": 822,
+        "A_FIRST_TIMEOUT_PROFIT": 134,
+        "A_FIRST_TIMEOUT_LOSS": 40
+      }
+    },
+    "s6_6_t40_w10": {
+      "opportunities": 8316,
+      "winners": 962,
+      "losers": 7354,
+      "net_pips": -9839.3,
+      "expectancy_per_opp_pips": -1.183,
+      "profit_factor": 0.778,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7158,
+        "A_FIRST_WIN": 822,
+        "A_FIRST_TIMEOUT_PROFIT": 134,
+        "D_SECOND_BEFORE_STOP": 88,
+        "C_SECOND_LOSS": 68,
+        "A_FIRST_TIMEOUT_LOSS": 40,
+        "B_SECOND_WIN": 6
+      }
+    },
+    "s6_6_t40_w15": {
+      "opportunities": 8316,
+      "winners": 981,
+      "losers": 7335,
+      "net_pips": -9884.3,
+      "expectancy_per_opp_pips": -1.189,
+      "profit_factor": 0.781,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6932,
+        "A_FIRST_WIN": 822,
+        "C_SECOND_LOSS": 204,
+        "D_SECOND_BEFORE_STOP": 157,
+        "A_FIRST_TIMEOUT_PROFIT": 134,
+        "A_FIRST_TIMEOUT_LOSS": 40,
+        "B_SECOND_WIN": 27
+      }
+    },
+    "s6_6_t40_w30": {
+      "opportunities": 8316,
+      "winners": 1069,
+      "losers": 7247,
+      "net_pips": -10171.2,
+      "expectancy_per_opp_pips": -1.223,
+      "profit_factor": 0.788,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6060,
+        "A_FIRST_WIN": 822,
+        "C_SECOND_LOSS": 790,
+        "D_SECOND_BEFORE_STOP": 347,
+        "A_FIRST_TIMEOUT_PROFIT": 134,
+        "B_SECOND_WIN": 123,
+        "A_FIRST_TIMEOUT_LOSS": 40
+      }
+    },
+    "s6_6_t40_w60": {
+      "opportunities": 8316,
+      "winners": 1196,
+      "losers": 7120,
+      "net_pips": -10821.4,
+      "expectancy_per_opp_pips": -1.301,
+      "profit_factor": 0.795,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 4822,
+        "C_SECOND_LOSS": 1722,
+        "A_FIRST_WIN": 822,
+        "D_SECOND_BEFORE_STOP": 524,
+        "B_SECOND_WIN": 252,
+        "A_FIRST_TIMEOUT_PROFIT": 134,
+        "A_FIRST_TIMEOUT_LOSS": 40
+      }
+    },
+    "s6_6_t50_w5": {
+      "opportunities": 8316,
+      "winners": 826,
+      "losers": 7490,
+      "net_pips": -10204.7,
+      "expectancy_per_opp_pips": -1.227,
+      "profit_factor": 0.772,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7448,
+        "A_FIRST_WIN": 628,
+        "A_FIRST_TIMEOUT_PROFIT": 198,
+        "A_FIRST_TIMEOUT_LOSS": 42
+      }
+    },
+    "s6_6_t50_w10": {
+      "opportunities": 8316,
+      "winners": 832,
+      "losers": 7484,
+      "net_pips": -10312.7,
+      "expectancy_per_opp_pips": -1.24,
+      "profit_factor": 0.772,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7286,
+        "A_FIRST_WIN": 628,
+        "A_FIRST_TIMEOUT_PROFIT": 198,
+        "D_SECOND_BEFORE_STOP": 88,
+        "C_SECOND_LOSS": 68,
+        "A_FIRST_TIMEOUT_LOSS": 42,
+        "B_SECOND_WIN": 6
+      }
+    },
+    "s6_6_t50_w15": {
+      "opportunities": 8316,
+      "winners": 848,
+      "losers": 7468,
+      "net_pips": -10407.0,
+      "expectancy_per_opp_pips": -1.251,
+      "profit_factor": 0.773,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7059,
+        "A_FIRST_WIN": 628,
+        "C_SECOND_LOSS": 207,
+        "A_FIRST_TIMEOUT_PROFIT": 198,
+        "D_SECOND_BEFORE_STOP": 158,
+        "A_FIRST_TIMEOUT_LOSS": 42,
+        "B_SECOND_WIN": 24
+      }
+    },
+    "s6_6_t50_w30": {
+      "opportunities": 8316,
+      "winners": 930,
+      "losers": 7386,
+      "net_pips": -10404.6,
+      "expectancy_per_opp_pips": -1.251,
+      "profit_factor": 0.787,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6187,
+        "C_SECOND_LOSS": 799,
+        "A_FIRST_WIN": 628,
+        "D_SECOND_BEFORE_STOP": 348,
+        "A_FIRST_TIMEOUT_PROFIT": 198,
+        "B_SECOND_WIN": 114,
+        "A_FIRST_TIMEOUT_LOSS": 42
+      }
+    },
+    "s6_6_t50_w60": {
+      "opportunities": 8316,
+      "winners": 1041,
+      "losers": 7275,
+      "net_pips": -10991.5,
+      "expectancy_per_opp_pips": -1.322,
+      "profit_factor": 0.796,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 4941,
+        "C_SECOND_LOSS": 1749,
+        "A_FIRST_WIN": 628,
+        "D_SECOND_BEFORE_STOP": 531,
+        "B_SECOND_WIN": 227,
+        "A_FIRST_TIMEOUT_PROFIT": 198,
+        "A_FIRST_TIMEOUT_LOSS": 42
+      }
+    },
+    "s6_6_t60_w5": {
+      "opportunities": 8316,
+      "winners": 770,
+      "losers": 7546,
+      "net_pips": -8901.2,
+      "expectancy_per_opp_pips": -1.07,
+      "profit_factor": 0.803,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7502,
+        "A_FIRST_WIN": 514,
+        "A_FIRST_TIMEOUT_PROFIT": 256,
+        "A_FIRST_TIMEOUT_LOSS": 44
+      }
+    },
+    "s6_6_t60_w10": {
+      "opportunities": 8316,
+      "winners": 776,
+      "losers": 7540,
+      "net_pips": -9015.2,
+      "expectancy_per_opp_pips": -1.084,
+      "profit_factor": 0.802,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7340,
+        "A_FIRST_WIN": 514,
+        "A_FIRST_TIMEOUT_PROFIT": 256,
+        "D_SECOND_BEFORE_STOP": 88,
+        "C_SECOND_LOSS": 68,
+        "A_FIRST_TIMEOUT_LOSS": 44,
+        "B_SECOND_WIN": 6
+      }
+    },
+    "s6_6_t60_w15": {
+      "opportunities": 8316,
+      "winners": 791,
+      "losers": 7525,
+      "net_pips": -9088.2,
+      "expectancy_per_opp_pips": -1.093,
+      "profit_factor": 0.803,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 7112,
+        "A_FIRST_WIN": 514,
+        "A_FIRST_TIMEOUT_PROFIT": 256,
+        "C_SECOND_LOSS": 208,
+        "D_SECOND_BEFORE_STOP": 159,
+        "A_FIRST_TIMEOUT_LOSS": 44,
+        "B_SECOND_WIN": 23
+      }
+    },
+    "s6_6_t60_w30": {
+      "opportunities": 8316,
+      "winners": 870,
+      "losers": 7446,
+      "net_pips": -9017.0,
+      "expectancy_per_opp_pips": -1.084,
+      "profit_factor": 0.817,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6240,
+        "C_SECOND_LOSS": 803,
+        "A_FIRST_WIN": 514,
+        "D_SECOND_BEFORE_STOP": 349,
+        "A_FIRST_TIMEOUT_PROFIT": 256,
+        "B_SECOND_WIN": 110,
+        "A_FIRST_TIMEOUT_LOSS": 44
+      }
+    },
+    "s6_6_t60_w60": {
+      "opportunities": 8316,
+      "winners": 971,
+      "losers": 7345,
+      "net_pips": -9420.7,
+      "expectancy_per_opp_pips": -1.133,
+      "profit_factor": 0.827,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 4991,
+        "C_SECOND_LOSS": 1763,
+        "D_SECOND_BEFORE_STOP": 535,
+        "A_FIRST_WIN": 514,
+        "A_FIRST_TIMEOUT_PROFIT": 256,
+        "B_SECOND_WIN": 213,
+        "A_FIRST_TIMEOUT_LOSS": 44
+      }
+    },
+    "s12_12_t30_w5": {
+      "opportunities": 8316,
+      "winners": 2184,
+      "losers": 6132,
+      "net_pips": -10968.3,
+      "expectancy_per_opp_pips": -1.319,
+      "profit_factor": 0.849,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6002,
+        "A_FIRST_WIN": 1998,
+        "A_FIRST_TIMEOUT_PROFIT": 186,
+        "A_FIRST_TIMEOUT_LOSS": 130
+      }
+    },
+    "s12_12_t30_w10": {
+      "opportunities": 8316,
+      "winners": 2188,
+      "losers": 6128,
+      "net_pips": -10932.3,
+      "expectancy_per_opp_pips": -1.315,
+      "profit_factor": 0.849,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5871,
+        "A_FIRST_WIN": 1998,
+        "A_FIRST_TIMEOUT_PROFIT": 186,
+        "A_FIRST_TIMEOUT_LOSS": 130,
+        "D_SECOND_BEFORE_STOP": 120,
+        "C_SECOND_LOSS": 7,
+        "B_SECOND_WIN": 4
+      }
+    },
+    "s12_12_t30_w15": {
+      "opportunities": 8316,
+      "winners": 2197,
+      "losers": 6119,
+      "net_pips": -11094.3,
+      "expectancy_per_opp_pips": -1.334,
+      "profit_factor": 0.848,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5686,
+        "A_FIRST_WIN": 1998,
+        "D_SECOND_BEFORE_STOP": 260,
+        "A_FIRST_TIMEOUT_PROFIT": 186,
+        "A_FIRST_TIMEOUT_LOSS": 130,
+        "C_SECOND_LOSS": 43,
+        "B_SECOND_WIN": 13
+      }
+    },
+    "s12_12_t30_w30": {
+      "opportunities": 8316,
+      "winners": 2263,
+      "losers": 6053,
+      "net_pips": -10969.7,
+      "expectancy_per_opp_pips": -1.319,
+      "profit_factor": 0.852,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 4938,
+        "A_FIRST_WIN": 1998,
+        "D_SECOND_BEFORE_STOP": 785,
+        "C_SECOND_LOSS": 196,
+        "A_FIRST_TIMEOUT_PROFIT": 186,
+        "A_FIRST_TIMEOUT_LOSS": 130,
+        "B_SECOND_WIN": 83
+      }
+    },
+    "s12_12_t30_w60": {
+      "opportunities": 8316,
+      "winners": 2379,
+      "losers": 5937,
+      "net_pips": -11619.4,
+      "expectancy_per_opp_pips": -1.397,
+      "profit_factor": 0.848,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 3873,
+        "A_FIRST_WIN": 1998,
+        "D_SECOND_BEFORE_STOP": 1384,
+        "C_SECOND_LOSS": 541,
+        "B_SECOND_WIN": 204,
+        "A_FIRST_TIMEOUT_PROFIT": 186,
+        "A_FIRST_TIMEOUT_LOSS": 130
+      }
+    },
+    "s12_12_t40_w5": {
+      "opportunities": 8316,
+      "winners": 1861,
+      "losers": 6455,
+      "net_pips": -10713.8,
+      "expectancy_per_opp_pips": -1.288,
+      "profit_factor": 0.86,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6311,
+        "A_FIRST_WIN": 1541,
+        "A_FIRST_TIMEOUT_PROFIT": 320,
+        "A_FIRST_TIMEOUT_LOSS": 144
+      }
+    },
+    "s12_12_t40_w10": {
+      "opportunities": 8316,
+      "winners": 1864,
+      "losers": 6452,
+      "net_pips": -10689.8,
+      "expectancy_per_opp_pips": -1.285,
+      "profit_factor": 0.86,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6173,
+        "A_FIRST_WIN": 1541,
+        "A_FIRST_TIMEOUT_PROFIT": 320,
+        "A_FIRST_TIMEOUT_LOSS": 144,
+        "D_SECOND_BEFORE_STOP": 127,
+        "C_SECOND_LOSS": 8,
+        "B_SECOND_WIN": 3
+      }
+    },
+    "s12_12_t40_w15": {
+      "opportunities": 8316,
+      "winners": 1870,
+      "losers": 6446,
+      "net_pips": -10917.8,
+      "expectancy_per_opp_pips": -1.313,
+      "profit_factor": 0.858,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5981,
+        "A_FIRST_WIN": 1541,
+        "A_FIRST_TIMEOUT_PROFIT": 320,
+        "D_SECOND_BEFORE_STOP": 274,
+        "A_FIRST_TIMEOUT_LOSS": 144,
+        "C_SECOND_LOSS": 47,
+        "B_SECOND_WIN": 9
+      }
+    },
+    "s12_12_t40_w30": {
+      "opportunities": 8316,
+      "winners": 1928,
+      "losers": 6388,
+      "net_pips": -10649.7,
+      "expectancy_per_opp_pips": -1.281,
+      "profit_factor": 0.863,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5213,
+        "A_FIRST_WIN": 1541,
+        "D_SECOND_BEFORE_STOP": 819,
+        "A_FIRST_TIMEOUT_PROFIT": 320,
+        "C_SECOND_LOSS": 208,
+        "A_FIRST_TIMEOUT_LOSS": 144,
+        "B_SECOND_WIN": 71
+      }
+    },
+    "s12_12_t40_w60": {
+      "opportunities": 8316,
+      "winners": 2026,
+      "losers": 6290,
+      "net_pips": -11119.1,
+      "expectancy_per_opp_pips": -1.337,
+      "profit_factor": 0.863,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 4124,
+        "A_FIRST_WIN": 1541,
+        "D_SECOND_BEFORE_STOP": 1442,
+        "C_SECOND_LOSS": 570,
+        "A_FIRST_TIMEOUT_PROFIT": 320,
+        "B_SECOND_WIN": 175,
+        "A_FIRST_TIMEOUT_LOSS": 144
+      }
+    },
+    "s12_12_t50_w5": {
+      "opportunities": 8316,
+      "winners": 1662,
+      "losers": 6654,
+      "net_pips": -11296.8,
+      "expectancy_per_opp_pips": -1.358,
+      "profit_factor": 0.856,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6506,
+        "A_FIRST_WIN": 1189,
+        "A_FIRST_TIMEOUT_PROFIT": 473,
+        "A_FIRST_TIMEOUT_LOSS": 148
+      }
+    },
+    "s12_12_t50_w10": {
+      "opportunities": 8316,
+      "winners": 1665,
+      "losers": 6651,
+      "net_pips": -11242.8,
+      "expectancy_per_opp_pips": -1.352,
+      "profit_factor": 0.857,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6363,
+        "A_FIRST_WIN": 1189,
+        "A_FIRST_TIMEOUT_PROFIT": 473,
+        "A_FIRST_TIMEOUT_LOSS": 148,
+        "D_SECOND_BEFORE_STOP": 132,
+        "C_SECOND_LOSS": 8,
+        "B_SECOND_WIN": 3
+      }
+    },
+    "s12_12_t50_w15": {
+      "opportunities": 8316,
+      "winners": 1671,
+      "losers": 6645,
+      "net_pips": -11440.8,
+      "expectancy_per_opp_pips": -1.376,
+      "profit_factor": 0.855,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6166,
+        "A_FIRST_WIN": 1189,
+        "A_FIRST_TIMEOUT_PROFIT": 473,
+        "D_SECOND_BEFORE_STOP": 284,
+        "A_FIRST_TIMEOUT_LOSS": 148,
+        "C_SECOND_LOSS": 47,
+        "B_SECOND_WIN": 9
+      }
+    },
+    "s12_12_t50_w30": {
+      "opportunities": 8316,
+      "winners": 1722,
+      "losers": 6594,
+      "net_pips": -11239.3,
+      "expectancy_per_opp_pips": -1.352,
+      "profit_factor": 0.86,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5391,
+        "A_FIRST_WIN": 1189,
+        "D_SECOND_BEFORE_STOP": 836,
+        "A_FIRST_TIMEOUT_PROFIT": 473,
+        "C_SECOND_LOSS": 215,
+        "A_FIRST_TIMEOUT_LOSS": 148,
+        "B_SECOND_WIN": 64
+      }
+    },
+    "s12_12_t50_w60": {
+      "opportunities": 8316,
+      "winners": 1807,
+      "losers": 6509,
+      "net_pips": -11745.7,
+      "expectancy_per_opp_pips": -1.412,
+      "profit_factor": 0.86,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 4279,
+        "D_SECOND_BEFORE_STOP": 1480,
+        "A_FIRST_WIN": 1189,
+        "C_SECOND_LOSS": 590,
+        "A_FIRST_TIMEOUT_PROFIT": 473,
+        "B_SECOND_WIN": 157,
+        "A_FIRST_TIMEOUT_LOSS": 148
+      }
+    },
+    "s12_12_t60_w5": {
+      "opportunities": 8316,
+      "winners": 1587,
+      "losers": 6728,
+      "net_pips": -9119.6,
+      "expectancy_per_opp_pips": -1.097,
+      "profit_factor": 0.885,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6574,
+        "A_FIRST_WIN": 945,
+        "A_FIRST_TIMEOUT_PROFIT": 643,
+        "A_FIRST_TIMEOUT_LOSS": 154
+      }
+    },
+    "s12_12_t60_w10": {
+      "opportunities": 8316,
+      "winners": 1590,
+      "losers": 6725,
+      "net_pips": -9035.6,
+      "expectancy_per_opp_pips": -1.087,
+      "profit_factor": 0.886,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6430,
+        "A_FIRST_WIN": 945,
+        "A_FIRST_TIMEOUT_PROFIT": 643,
+        "A_FIRST_TIMEOUT_LOSS": 154,
+        "D_SECOND_BEFORE_STOP": 133,
+        "C_SECOND_LOSS": 8,
+        "B_SECOND_WIN": 3
+      }
+    },
+    "s12_12_t60_w15": {
+      "opportunities": 8316,
+      "winners": 1595,
+      "losers": 6720,
+      "net_pips": -9265.6,
+      "expectancy_per_opp_pips": -1.114,
+      "profit_factor": 0.884,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 6232,
+        "A_FIRST_WIN": 945,
+        "A_FIRST_TIMEOUT_PROFIT": 643,
+        "D_SECOND_BEFORE_STOP": 286,
+        "A_FIRST_TIMEOUT_LOSS": 154,
+        "C_SECOND_LOSS": 48,
+        "B_SECOND_WIN": 8
+      }
+    },
+    "s12_12_t60_w30": {
+      "opportunities": 8316,
+      "winners": 1644,
+      "losers": 6671,
+      "net_pips": -8881.7,
+      "expectancy_per_opp_pips": -1.068,
+      "profit_factor": 0.891,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 5456,
+        "A_FIRST_WIN": 945,
+        "D_SECOND_BEFORE_STOP": 839,
+        "A_FIRST_TIMEOUT_PROFIT": 643,
+        "C_SECOND_LOSS": 217,
+        "A_FIRST_TIMEOUT_LOSS": 154,
+        "B_SECOND_WIN": 62
+      }
+    },
+    "s12_12_t60_w60": {
+      "opportunities": 8316,
+      "winners": 1723,
+      "losers": 6592,
+      "net_pips": -9215.6,
+      "expectancy_per_opp_pips": -1.108,
+      "profit_factor": 0.891,
+      "categories": {
+        "D_FIRST_STOP_NO_SECOND": 4338,
+        "D_SECOND_BEFORE_STOP": 1489,
+        "A_FIRST_WIN": 945,
+        "A_FIRST_TIMEOUT_PROFIT": 643,
+        "C_SECOND_LOSS": 597,
+        "A_FIRST_TIMEOUT_LOSS": 154,
+        "B_SECOND_WIN": 150
+      }
+    }
+  }
+}
