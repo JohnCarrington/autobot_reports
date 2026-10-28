@@ -1,0 +1,23 @@
+=== Historical 6-day replay (2026-10-23 → 2026-10-28) ===
+
+ORIGINAL (as stored in production shadow_proposals.jsonl):
+  Total rows: 221
+   WAIT: 201
+   SELL: 20
+
+AFTER P1/P2 (re-classify only; recommendation builder unchanged):
+  Pub decisions: {'CAUTION': 201, 'INVALID': 25, 'VALID': 9}
+  Recommendations: {'WAIT': 235}
+  Readiness: {'CONDITIONAL': 201, 'SUPPRESSED': 30, 'INCOMPLETE': 4}
+
+AFTER P1/P2 + CORRECTION 1 (CAUTION propagates):
+  Pub decisions: {'CAUTION': 201, 'INVALID': 25, 'VALID': 9}
+  Recommendations: {'WAIT': 182, 'SELL': 43, 'BUY': 10}
+  Readiness: {'INCOMPLETE': 140, 'SUPPRESSED': 34, 'CONDITIONAL': 53, 'EXPIRED_ENTRY': 8}
+
+BLOCKS REMAINING AFTER CORRECTION 1:
+  WAIT/  INCOMPLETE: 140
+  WAIT/  SUPPRESSED: 34
+  WAIT/EXPIRED_ENTRY: 8
+
+✓ Wrote /tmp/CORRECTION1_6DAY_REPLAY.csv (235 rows)

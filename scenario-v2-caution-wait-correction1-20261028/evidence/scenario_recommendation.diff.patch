@@ -1,0 +1,55 @@
+diff --git a/scripts/research/live_obs/agent/scenario_recommendation.py b/scripts/research/live_obs/agent/scenario_recommendation.py
+index e207197..339673d 100644
+--- a/scripts/research/live_obs/agent/scenario_recommendation.py
++++ b/scripts/research/live_obs/agent/scenario_recommendation.py
+@@ -803,13 +803,46 @@ def build_trade_recommendation(*,
+         base_payload["subsequent_reversal"]["provenance"] = (
+             "cleared_duplicate_of_primary_target")
+ 
+-    if pub_decision == "CAUTION":
++    # Correction 1 (2026-10-28) — scenario_v2 CAUTION → WAIT trap fix.
++    #
++    # The previous code at this point returned WAIT/CONDITIONAL
++    # unconditionally for every pub_decision == "CAUTION".  P2's
++    # field-weight asymmetry demotes narrative-only
++    # UNVERIFIED_EVENT_AS_CATALYST (and similar informational flags)
++    # to WARN → CAUTION, with the explicit design intent that the
++    # scenario remain *publishable with a disclaimer*.  The previous
++    # WAIT path nullified that intent.
++    #
++    # Correction 1 lets CAUTION fall through to the terminal
++    # recommendation emit — the direction is published with
++    # ``readiness = CONDITIONAL`` and the attached disclaimer /
++    # flag codes, so the operator sees "BUY (CAUTION — ...)"
++    # instead of a bare WAIT.
++    #
++    # CAUTION DOES NOT BYPASS ANY HARD SAFETY GATE: every
++    # pre-existing check above (scenario INVALIDATED/COMPLETED,
++    # publication_decision == INVALID, missing entry/stop/target,
++    # geometry violation, stale market data, EXPIRED entry,
++    # pre-entry invalidation) already returned WAIT with the
++    # appropriate ``readiness`` before this block.  Correction 1
++    # only unblocks the FINAL step for a CAUTION scenario that
++    # has already satisfied all earlier gates.
++    is_caution = pub_decision == "CAUTION"
++    if is_caution:
++        caution_flag_codes = list(pub.get("flag_codes") or [])
++        caution_disclaimer = (
++            pub.get("reason")
++            or "scenario is CAUTION — publishable with disclaimer")
+         base_payload.update({
+-            "recommendation": "WAIT",
++            "recommendation": direction,
+             "readiness": CONDITIONAL,
++            "caution_flag_codes": caution_flag_codes,
++            "caution_disclaimer": caution_disclaimer,
+             "reason": (
+-                "scenario is CAUTION — publishable as information only; "
+-                "no shadow entry until the next revision clears to VALID"),
++                f"CAUTION {direction} — fully specified entry/stop/target "
++                f"and freshness/geometry/invalidation checks all passed; "
++                f"disclaimer flags: "
++                f"{', '.join(caution_flag_codes) or 'unspecified'}"),
+         })
+         return base_payload
+ 
