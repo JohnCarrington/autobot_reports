@@ -1,0 +1,2 @@
+scenario_id,revision_idx,bar_ts_utc,direction,category,tp_entry,tp_stop,tp_target,rpb,B_fires_HIGH,C_fires_HIGH,C_fires_WARN,classification
+# No STRUCTURED_VS_NARRATIVE_CONTRADICTION fires in config B across the 235-row 6-day cohort (zero fires in both B and C; validator is forward-looking).
