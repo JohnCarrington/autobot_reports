@@ -1,0 +1,816 @@
+{
+  "cutoff_pre_registered": "2026-01-01",
+  "n_dev": 7122,
+  "n_unseen": 810,
+  "cells": {
+    "s4_t20": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 870,
+        "losers": 6252,
+        "win_rate_pct": 12.22,
+        "avg_win_pips": 19.29,
+        "avg_loss_pips": -3.99,
+        "net_pips": -8186.0,
+        "expectancy_pips": -1.149,
+        "profit_factor": 0.672
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 96,
+        "losers": 714,
+        "win_rate_pct": 11.85,
+        "avg_win_pips": 19.52,
+        "avg_loss_pips": -4.0,
+        "net_pips": -982.1,
+        "expectancy_pips": -1.212,
+        "profit_factor": 0.656
+      }
+    },
+    "s4_t30": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 633,
+        "losers": 6489,
+        "win_rate_pct": 8.89,
+        "avg_win_pips": 27.96,
+        "avg_loss_pips": -3.99,
+        "net_pips": -8215.1,
+        "expectancy_pips": -1.153,
+        "profit_factor": 0.683
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 69,
+        "losers": 741,
+        "win_rate_pct": 8.52,
+        "avg_win_pips": 28.9,
+        "avg_loss_pips": -4.0,
+        "net_pips": -970.1,
+        "expectancy_pips": -1.198,
+        "profit_factor": 0.673
+      }
+    },
+    "s4_t40": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 527,
+        "losers": 6595,
+        "win_rate_pct": 7.4,
+        "avg_win_pips": 35.89,
+        "avg_loss_pips": -3.99,
+        "net_pips": -7424.1,
+        "expectancy_pips": -1.042,
+        "profit_factor": 0.718
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 47,
+        "losers": 763,
+        "win_rate_pct": 5.8,
+        "avg_win_pips": 36.55,
+        "avg_loss_pips": -4.0,
+        "net_pips": -1334.0,
+        "expectancy_pips": -1.647,
+        "profit_factor": 0.563
+      }
+    },
+    "s4_t50": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 454,
+        "losers": 6668,
+        "win_rate_pct": 6.37,
+        "avg_win_pips": 41.54,
+        "avg_loss_pips": -3.99,
+        "net_pips": -7766.6,
+        "expectancy_pips": -1.091,
+        "profit_factor": 0.708
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 38,
+        "losers": 772,
+        "win_rate_pct": 4.69,
+        "avg_win_pips": 43.41,
+        "avg_loss_pips": -4.0,
+        "net_pips": -1438.3,
+        "expectancy_pips": -1.776,
+        "profit_factor": 0.534
+      }
+    },
+    "s4_t60": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 423,
+        "losers": 6699,
+        "win_rate_pct": 5.94,
+        "avg_win_pips": 46.27,
+        "avg_loss_pips": -3.99,
+        "net_pips": -7170.0,
+        "expectancy_pips": -1.007,
+        "profit_factor": 0.732
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 35,
+        "losers": 775,
+        "win_rate_pct": 4.32,
+        "avg_win_pips": 49.96,
+        "avg_loss_pips": -4.0,
+        "net_pips": -1351.3,
+        "expectancy_pips": -1.668,
+        "profit_factor": 0.564
+      }
+    },
+    "s5_t20": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1093,
+        "losers": 6029,
+        "win_rate_pct": 15.35,
+        "avg_win_pips": 19.31,
+        "avg_loss_pips": -4.99,
+        "net_pips": -8960.8,
+        "expectancy_pips": -1.258,
+        "profit_factor": 0.702
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 125,
+        "losers": 685,
+        "win_rate_pct": 15.43,
+        "avg_win_pips": 19.49,
+        "avg_loss_pips": -5.0,
+        "net_pips": -988.5,
+        "expectancy_pips": -1.22,
+        "profit_factor": 0.711
+      }
+    },
+    "s5_t30": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 802,
+        "losers": 6320,
+        "win_rate_pct": 11.26,
+        "avg_win_pips": 28.02,
+        "avg_loss_pips": -4.99,
+        "net_pips": -9042.8,
+        "expectancy_pips": -1.27,
+        "profit_factor": 0.713
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 87,
+        "losers": 723,
+        "win_rate_pct": 10.74,
+        "avg_win_pips": 28.81,
+        "avg_loss_pips": -5.0,
+        "net_pips": -1108.5,
+        "expectancy_pips": -1.369,
+        "profit_factor": 0.693
+      }
+    },
+    "s5_t40": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 678,
+        "losers": 6444,
+        "win_rate_pct": 9.52,
+        "avg_win_pips": 35.98,
+        "avg_loss_pips": -4.99,
+        "net_pips": -7744.2,
+        "expectancy_pips": -1.087,
+        "profit_factor": 0.759
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 63,
+        "losers": 747,
+        "win_rate_pct": 7.78,
+        "avg_win_pips": 36.83,
+        "avg_loss_pips": -5.0,
+        "net_pips": -1414.4,
+        "expectancy_pips": -1.746,
+        "profit_factor": 0.621
+      }
+    },
+    "s5_t50": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 586,
+        "losers": 6536,
+        "win_rate_pct": 8.23,
+        "avg_win_pips": 41.76,
+        "avg_loss_pips": -4.99,
+        "net_pips": -8117.7,
+        "expectancy_pips": -1.14,
+        "profit_factor": 0.751
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 52,
+        "losers": 758,
+        "win_rate_pct": 6.42,
+        "avg_win_pips": 42.92,
+        "avg_loss_pips": -5.0,
+        "net_pips": -1558.0,
+        "expectancy_pips": -1.923,
+        "profit_factor": 0.589
+      }
+    },
+    "s5_t60": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 546,
+        "losers": 6576,
+        "win_rate_pct": 7.67,
+        "avg_win_pips": 46.61,
+        "avg_loss_pips": -4.99,
+        "net_pips": -7334.8,
+        "expectancy_pips": -1.03,
+        "profit_factor": 0.776
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 48,
+        "losers": 762,
+        "win_rate_pct": 5.93,
+        "avg_win_pips": 49.6,
+        "avg_loss_pips": -5.0,
+        "net_pips": -1429.0,
+        "expectancy_pips": -1.764,
+        "profit_factor": 0.625
+      }
+    },
+    "s6_t20": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1334,
+        "losers": 5788,
+        "win_rate_pct": 18.73,
+        "avg_win_pips": 19.32,
+        "avg_loss_pips": -5.98,
+        "net_pips": -8815.5,
+        "expectancy_pips": -1.238,
+        "profit_factor": 0.745
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 151,
+        "losers": 659,
+        "win_rate_pct": 18.64,
+        "avg_win_pips": 19.42,
+        "avg_loss_pips": -6.0,
+        "net_pips": -1020.9,
+        "expectancy_pips": -1.26,
+        "profit_factor": 0.742
+      }
+    },
+    "s6_t30": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 989,
+        "losers": 6133,
+        "win_rate_pct": 13.89,
+        "avg_win_pips": 28.02,
+        "avg_loss_pips": -5.98,
+        "net_pips": -8950.0,
+        "expectancy_pips": -1.257,
+        "profit_factor": 0.756
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 105,
+        "losers": 705,
+        "win_rate_pct": 12.96,
+        "avg_win_pips": 28.6,
+        "avg_loss_pips": -6.0,
+        "net_pips": -1226.9,
+        "expectancy_pips": -1.515,
+        "profit_factor": 0.71
+      }
+    },
+    "s6_t40": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 836,
+        "losers": 6286,
+        "win_rate_pct": 11.74,
+        "avg_win_pips": 35.93,
+        "avg_loss_pips": -5.98,
+        "net_pips": -7544.2,
+        "expectancy_pips": -1.059,
+        "profit_factor": 0.799
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 80,
+        "losers": 730,
+        "win_rate_pct": 9.88,
+        "avg_win_pips": 36.37,
+        "avg_loss_pips": -6.0,
+        "net_pips": -1470.3,
+        "expectancy_pips": -1.815,
+        "profit_factor": 0.664
+      }
+    },
+    "s6_t50": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 723,
+        "losers": 6399,
+        "win_rate_pct": 10.15,
+        "avg_win_pips": 41.77,
+        "avg_loss_pips": -5.98,
+        "net_pips": -8047.0,
+        "expectancy_pips": -1.13,
+        "profit_factor": 0.79
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 67,
+        "losers": 743,
+        "win_rate_pct": 8.27,
+        "avg_win_pips": 42.7,
+        "avg_loss_pips": -6.0,
+        "net_pips": -1596.9,
+        "expectancy_pips": -1.971,
+        "profit_factor": 0.642
+      }
+    },
+    "s6_t60": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 674,
+        "losers": 6448,
+        "win_rate_pct": 9.46,
+        "avg_win_pips": 46.7,
+        "avg_loss_pips": -5.98,
+        "net_pips": -7056.5,
+        "expectancy_pips": -0.991,
+        "profit_factor": 0.817
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 62,
+        "losers": 748,
+        "win_rate_pct": 7.65,
+        "avg_win_pips": 49.51,
+        "avg_loss_pips": -6.0,
+        "net_pips": -1417.9,
+        "expectancy_pips": -1.75,
+        "profit_factor": 0.684
+      }
+    },
+    "s8_t20": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1751,
+        "losers": 5371,
+        "win_rate_pct": 24.59,
+        "avg_win_pips": 19.33,
+        "avg_loss_pips": -7.95,
+        "net_pips": -8827.5,
+        "expectancy_pips": -1.239,
+        "profit_factor": 0.793
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 187,
+        "losers": 623,
+        "win_rate_pct": 23.09,
+        "avg_win_pips": 19.53,
+        "avg_loss_pips": -7.97,
+        "net_pips": -1313.1,
+        "expectancy_pips": -1.621,
+        "profit_factor": 0.736
+      }
+    },
+    "s8_t30": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1328,
+        "losers": 5794,
+        "win_rate_pct": 18.65,
+        "avg_win_pips": 27.98,
+        "avg_loss_pips": -7.95,
+        "net_pips": -8897.7,
+        "expectancy_pips": -1.249,
+        "profit_factor": 0.807
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 139,
+        "losers": 671,
+        "win_rate_pct": 17.16,
+        "avg_win_pips": 28.94,
+        "avg_loss_pips": -7.96,
+        "net_pips": -1319.9,
+        "expectancy_pips": -1.63,
+        "profit_factor": 0.753
+      }
+    },
+    "s8_t40": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1120,
+        "losers": 6002,
+        "win_rate_pct": 15.73,
+        "avg_win_pips": 35.36,
+        "avg_loss_pips": -7.95,
+        "net_pips": -8100.3,
+        "expectancy_pips": -1.137,
+        "profit_factor": 0.83
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 106,
+        "losers": 704,
+        "win_rate_pct": 13.09,
+        "avg_win_pips": 37.09,
+        "avg_loss_pips": -7.96,
+        "net_pips": -1675.0,
+        "expectancy_pips": -2.068,
+        "profit_factor": 0.701
+      }
+    },
+    "s8_t50": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 975,
+        "losers": 6147,
+        "win_rate_pct": 13.69,
+        "avg_win_pips": 40.91,
+        "avg_loss_pips": -7.95,
+        "net_pips": -8971.2,
+        "expectancy_pips": -1.26,
+        "profit_factor": 0.816
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 91,
+        "losers": 719,
+        "win_rate_pct": 11.23,
+        "avg_win_pips": 43.95,
+        "avg_loss_pips": -7.96,
+        "net_pips": -1727.1,
+        "expectancy_pips": -2.132,
+        "profit_factor": 0.698
+      }
+    },
+    "s8_t60": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 921,
+        "losers": 6201,
+        "win_rate_pct": 12.93,
+        "avg_win_pips": 45.16,
+        "avg_loss_pips": -7.95,
+        "net_pips": -7676.2,
+        "expectancy_pips": -1.078,
+        "profit_factor": 0.844
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 85,
+        "losers": 725,
+        "win_rate_pct": 10.49,
+        "avg_win_pips": 49.06,
+        "avg_loss_pips": -7.96,
+        "net_pips": -1604.8,
+        "expectancy_pips": -1.981,
+        "profit_factor": 0.722
+      }
+    },
+    "s10_t20": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 2144,
+        "losers": 4978,
+        "win_rate_pct": 30.1,
+        "avg_win_pips": 19.42,
+        "avg_loss_pips": -9.9,
+        "net_pips": -7652.6,
+        "expectancy_pips": -1.075,
+        "profit_factor": 0.845
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 221,
+        "losers": 589,
+        "win_rate_pct": 27.28,
+        "avg_win_pips": 19.6,
+        "avg_loss_pips": -9.93,
+        "net_pips": -1516.7,
+        "expectancy_pips": -1.872,
+        "profit_factor": 0.741
+      }
+    },
+    "s10_t30": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1643,
+        "losers": 5479,
+        "win_rate_pct": 23.07,
+        "avg_win_pips": 28.13,
+        "avg_loss_pips": -9.91,
+        "net_pips": -8046.6,
+        "expectancy_pips": -1.13,
+        "profit_factor": 0.852
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 165,
+        "losers": 645,
+        "win_rate_pct": 20.37,
+        "avg_win_pips": 29.11,
+        "avg_loss_pips": -9.92,
+        "net_pips": -1597.5,
+        "expectancy_pips": -1.972,
+        "profit_factor": 0.75
+      }
+    },
+    "s10_t40": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1390,
+        "losers": 5732,
+        "win_rate_pct": 19.52,
+        "avg_win_pips": 35.34,
+        "avg_loss_pips": -9.9,
+        "net_pips": -7643.9,
+        "expectancy_pips": -1.073,
+        "profit_factor": 0.865
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 124,
+        "losers": 686,
+        "win_rate_pct": 15.31,
+        "avg_win_pips": 37.29,
+        "avg_loss_pips": -9.93,
+        "net_pips": -2185.9,
+        "expectancy_pips": -2.699,
+        "profit_factor": 0.679
+      }
+    },
+    "s10_t50": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1223,
+        "losers": 5899,
+        "win_rate_pct": 17.17,
+        "avg_win_pips": 40.69,
+        "avg_loss_pips": -9.9,
+        "net_pips": -8654.2,
+        "expectancy_pips": -1.215,
+        "profit_factor": 0.852
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 108,
+        "losers": 702,
+        "win_rate_pct": 13.33,
+        "avg_win_pips": 44.1,
+        "avg_loss_pips": -9.93,
+        "net_pips": -2206.9,
+        "expectancy_pips": -2.725,
+        "profit_factor": 0.683
+      }
+    },
+    "s10_t60": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1167,
+        "losers": 5954,
+        "win_rate_pct": 16.39,
+        "avg_win_pips": 44.74,
+        "avg_loss_pips": -9.9,
+        "net_pips": -6708.9,
+        "expectancy_pips": -0.942,
+        "profit_factor": 0.886
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 102,
+        "losers": 708,
+        "win_rate_pct": 12.59,
+        "avg_win_pips": 49.49,
+        "avg_loss_pips": -9.93,
+        "net_pips": -1982.1,
+        "expectancy_pips": -2.447,
+        "profit_factor": 0.718
+      }
+    },
+    "s12_t20": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 2445,
+        "losers": 4677,
+        "win_rate_pct": 34.33,
+        "avg_win_pips": 19.45,
+        "avg_loss_pips": -11.83,
+        "net_pips": -7781.3,
+        "expectancy_pips": -1.093,
+        "profit_factor": 0.859
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 267,
+        "losers": 543,
+        "win_rate_pct": 32.96,
+        "avg_win_pips": 19.6,
+        "avg_loss_pips": -11.88,
+        "net_pips": -1219.7,
+        "expectancy_pips": -1.506,
+        "profit_factor": 0.811
+      }
+    },
+    "s12_t30": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1907,
+        "losers": 5215,
+        "win_rate_pct": 26.78,
+        "avg_win_pips": 28.12,
+        "avg_loss_pips": -11.83,
+        "net_pips": -8088.0,
+        "expectancy_pips": -1.136,
+        "profit_factor": 0.869
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 201,
+        "losers": 609,
+        "win_rate_pct": 24.81,
+        "avg_win_pips": 29.02,
+        "avg_loss_pips": -11.88,
+        "net_pips": -1400.5,
+        "expectancy_pips": -1.729,
+        "profit_factor": 0.806
+      }
+    },
+    "s12_t40": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1631,
+        "losers": 5491,
+        "win_rate_pct": 22.9,
+        "avg_win_pips": 35.15,
+        "avg_loss_pips": -11.83,
+        "net_pips": -7622.3,
+        "expectancy_pips": -1.07,
+        "profit_factor": 0.883
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 156,
+        "losers": 654,
+        "win_rate_pct": 19.26,
+        "avg_win_pips": 36.84,
+        "avg_loss_pips": -11.89,
+        "net_pips": -2026.3,
+        "expectancy_pips": -2.502,
+        "profit_factor": 0.739
+      }
+    },
+    "s12_t50": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1456,
+        "losers": 5666,
+        "win_rate_pct": 20.44,
+        "avg_win_pips": 40.36,
+        "avg_loss_pips": -11.83,
+        "net_pips": -8251.9,
+        "expectancy_pips": -1.159,
+        "profit_factor": 0.877
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 138,
+        "losers": 672,
+        "win_rate_pct": 17.04,
+        "avg_win_pips": 42.75,
+        "avg_loss_pips": -11.89,
+        "net_pips": -2089.9,
+        "expectancy_pips": -2.58,
+        "profit_factor": 0.738
+      }
+    },
+    "s12_t60": {
+      "DEV": {
+        "trades": 7122,
+        "winners": 1392,
+        "losers": 5729,
+        "win_rate_pct": 19.55,
+        "avg_win_pips": 44.06,
+        "avg_loss_pips": -11.82,
+        "net_pips": -6369.1,
+        "expectancy_pips": -0.894,
+        "profit_factor": 0.906
+      },
+      "UNSEEN": {
+        "trades": 810,
+        "winners": 129,
+        "losers": 681,
+        "win_rate_pct": 15.93,
+        "avg_win_pips": 47.17,
+        "avg_loss_pips": -11.89,
+        "net_pips": -2012.3,
+        "expectancy_pips": -2.484,
+        "profit_factor": 0.751
+      }
+    }
+  },
+  "dev_top3": [
+    [
+      "s12_t60",
+      -0.894
+    ],
+    [
+      "s10_t60",
+      -0.942
+    ],
+    [
+      "s6_t60",
+      -0.991
+    ]
+  ],
+  "unseen_top3": [
+    [
+      "s4_t30",
+      -1.198
+    ],
+    [
+      "s4_t20",
+      -1.212
+    ],
+    [
+      "s5_t20",
+      -1.22
+    ]
+  ],
+  "spearman_rho_dev_vs_unseen": -0.362,
+  "monthly_net_pips": {
+    "s12_t30": {
+      "2024-01": -483.1000061035156,
+      "2024-02": -684.2999877929688,
+      "2024-03": -350.79998779296875,
+      "2024-04": -41.900001525878906,
+      "2024-05": 152.5,
+      "2024-06": -547.9000244140625,
+      "2024-07": -252.5,
+      "2024-08": -359.79998779296875,
+      "2024-09": -132.89999389648438,
+      "2024-10": -839.4000244140625,
+      "2024-11": -142.89999389648438,
+      "2024-12": -249.3000030517578,
+      "2025-01": -71.30000305175781,
+      "2025-02": -451.79998779296875,
+      "2025-03": -306.79998779296875,
+      "2025-04": -328.5,
+      "2025-05": -195.5,
+      "2025-06": -282.5,
+      "2025-07": -350.20001220703125,
+      "2025-08": -542.7000122070312,
+      "2025-09": -538.4000244140625,
+      "2025-10": -137.39999389648438,
+      "2025-11": -150.0,
+      "2025-12": -800.5999755859375,
+      "2026-01": -693.5,
+      "2026-02": -412.29998779296875,
+      "2026-03": -294.70001220703125
+    },
+    "s12_t60": {
+      "2024-01": -589.9000244140625,
+      "2024-02": -487.79998779296875,
+      "2024-03": -74.4000015258789,
+      "2024-04": 86.9000015258789,
+      "2024-05": 417.29998779296875,
+      "2024-06": -725.4000244140625,
+      "2024-07": 124.5999984741211,
+      "2024-08": -404.20001220703125,
+      "2024-09": 444.5,
+      "2024-10": -948.2000122070312,
+      "2024-11": 615.7000122070312,
+      "2024-12": -408.79998779296875,
+      "2025-01": 34.900001525878906,
+      "2025-02": -313.20001220703125,
+      "2025-03": -560.7999877929688,
+      "2025-04": 53.900001525878906,
+      "2025-05": -959.0,
+      "2025-06": -286.29998779296875,
+      "2025-07": 117.69999694824219,
+      "2025-08": -23.0,
+      "2025-09": -267.29998779296875,
+      "2025-10": -248.5,
+      "2025-11": -435.79998779296875,
+      "2025-12": -1532.0,
+      "2026-01": -783.5999755859375,
+      "2026-02": -574.7999877929688,
+      "2026-03": -653.9000244140625
+    }
+  }
+}

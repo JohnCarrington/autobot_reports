@@ -1,0 +1,254 @@
+{
+  "grid": {
+    "slip0.0": {
+      "s4_t30": {
+        "net_pips": -9185.2,
+        "expectancy_pips": -1.158,
+        "profit_factor": 0.682,
+        "win_rate_pct": 8.85
+      },
+      "s4_t60": {
+        "net_pips": -8521.3,
+        "expectancy_pips": -1.074,
+        "profit_factor": 0.714,
+        "win_rate_pct": 5.77
+      },
+      "s6_t30": {
+        "net_pips": -10176.9,
+        "expectancy_pips": -1.283,
+        "profit_factor": 0.751,
+        "win_rate_pct": 13.79
+      },
+      "s6_t60": {
+        "net_pips": -8474.4,
+        "expectancy_pips": -1.068,
+        "profit_factor": 0.803,
+        "win_rate_pct": 9.28
+      },
+      "s8_t30": {
+        "net_pips": -10217.6,
+        "expectancy_pips": -1.288,
+        "profit_factor": 0.801,
+        "win_rate_pct": 18.49
+      },
+      "s8_t60": {
+        "net_pips": -9281.0,
+        "expectancy_pips": -1.17,
+        "profit_factor": 0.831,
+        "win_rate_pct": 12.68
+      },
+      "s12_t30": {
+        "net_pips": -9488.5,
+        "expectancy_pips": -1.196,
+        "profit_factor": 0.862,
+        "win_rate_pct": 26.58
+      },
+      "s12_t60": {
+        "net_pips": -8381.4,
+        "expectancy_pips": -1.057,
+        "profit_factor": 0.889,
+        "win_rate_pct": 19.18
+      }
+    },
+    "slip0.5": {
+      "s4_t30": {
+        "net_pips": -12812.6,
+        "expectancy_pips": -1.615,
+        "profit_factor": 0.563,
+        "win_rate_pct": 7.43
+      },
+      "s4_t60": {
+        "net_pips": -12357.7,
+        "expectancy_pips": -1.558,
+        "profit_factor": 0.59,
+        "win_rate_pct": 4.82
+      },
+      "s6_t30": {
+        "net_pips": -14168.1,
+        "expectancy_pips": -1.786,
+        "profit_factor": 0.659,
+        "win_rate_pct": 12.32
+      },
+      "s6_t60": {
+        "net_pips": -12607.7,
+        "expectancy_pips": -1.589,
+        "profit_factor": 0.71,
+        "win_rate_pct": 8.31
+      },
+      "s8_t30": {
+        "net_pips": -13589.1,
+        "expectancy_pips": -1.713,
+        "profit_factor": 0.74,
+        "win_rate_pct": 17.3
+      },
+      "s8_t60": {
+        "net_pips": -12748.9,
+        "expectancy_pips": -1.607,
+        "profit_factor": 0.771,
+        "win_rate_pct": 11.85
+      },
+      "s12_t30": {
+        "net_pips": -12456.6,
+        "expectancy_pips": -1.57,
+        "profit_factor": 0.822,
+        "win_rate_pct": 25.67
+      },
+      "s12_t60": {
+        "net_pips": -11894.9,
+        "expectancy_pips": -1.5,
+        "profit_factor": 0.845,
+        "win_rate_pct": 18.42
+      }
+    },
+    "slip1.0": {
+      "s4_t30": {
+        "net_pips": -15428.8,
+        "expectancy_pips": -1.945,
+        "profit_factor": 0.48,
+        "win_rate_pct": 6.38
+      },
+      "s4_t60": {
+        "net_pips": -14819.1,
+        "expectancy_pips": -1.868,
+        "profit_factor": 0.512,
+        "win_rate_pct": 4.2
+      },
+      "s6_t30": {
+        "net_pips": -17846.3,
+        "expectancy_pips": -2.25,
+        "profit_factor": 0.578,
+        "win_rate_pct": 10.91
+      },
+      "s6_t60": {
+        "net_pips": -16755.8,
+        "expectancy_pips": -2.112,
+        "profit_factor": 0.619,
+        "win_rate_pct": 7.31
+      },
+      "s8_t30": {
+        "net_pips": -17798.3,
+        "expectancy_pips": -2.244,
+        "profit_factor": 0.665,
+        "win_rate_pct": 15.77
+      },
+      "s8_t60": {
+        "net_pips": -16914.5,
+        "expectancy_pips": -2.132,
+        "profit_factor": 0.7,
+        "win_rate_pct": 10.75
+      },
+      "s12_t30": {
+        "net_pips": -17042.3,
+        "expectancy_pips": -2.149,
+        "profit_factor": 0.761,
+        "win_rate_pct": 24.17
+      },
+      "s12_t60": {
+        "net_pips": -16432.9,
+        "expectancy_pips": -2.072,
+        "profit_factor": 0.788,
+        "win_rate_pct": 17.33
+      }
+    },
+    "slip2.0": {
+      "s4_t30": {
+        "net_pips": -22690.3,
+        "expectancy_pips": -2.861,
+        "profit_factor": 0.258,
+        "win_rate_pct": 3.53
+      },
+      "s4_t60": {
+        "net_pips": -21922.0,
+        "expectancy_pips": -2.764,
+        "profit_factor": 0.292,
+        "win_rate_pct": 2.42
+      },
+      "s6_t30": {
+        "net_pips": -25181.2,
+        "expectancy_pips": -3.175,
+        "profit_factor": 0.422,
+        "win_rate_pct": 8.19
+      },
+      "s6_t60": {
+        "net_pips": -24591.8,
+        "expectancy_pips": -3.1,
+        "profit_factor": 0.452,
+        "win_rate_pct": 5.5
+      },
+      "s8_t30": {
+        "net_pips": -26083.4,
+        "expectancy_pips": -3.288,
+        "profit_factor": 0.526,
+        "win_rate_pct": 12.88
+      },
+      "s8_t60": {
+        "net_pips": -24531.7,
+        "expectancy_pips": -3.093,
+        "profit_factor": 0.574,
+        "win_rate_pct": 8.86
+      },
+      "s12_t30": {
+        "net_pips": -25923.0,
+        "expectancy_pips": -3.268,
+        "profit_factor": 0.649,
+        "win_rate_pct": 21.39
+      },
+      "s12_t60": {
+        "net_pips": -24735.4,
+        "expectancy_pips": -3.118,
+        "profit_factor": 0.689,
+        "win_rate_pct": 15.43
+      }
+    },
+    "slip3.5": {
+      "s4_t30": {
+        "net_pips": -31558.0,
+        "expectancy_pips": -3.979,
+        "profit_factor": 0.005,
+        "win_rate_pct": 0.06
+      },
+      "s4_t60": {
+        "net_pips": -31520.7,
+        "expectancy_pips": -3.974,
+        "profit_factor": 0.006,
+        "win_rate_pct": 0.05
+      },
+      "s6_t30": {
+        "net_pips": -35762.8,
+        "expectancy_pips": -4.509,
+        "profit_factor": 0.213,
+        "win_rate_pct": 4.3
+      },
+      "s6_t60": {
+        "net_pips": -35276.1,
+        "expectancy_pips": -4.447,
+        "profit_factor": 0.235,
+        "win_rate_pct": 2.94
+      },
+      "s8_t30": {
+        "net_pips": -37649.3,
+        "expectancy_pips": -4.747,
+        "profit_factor": 0.347,
+        "win_rate_pct": 8.75
+      },
+      "s8_t60": {
+        "net_pips": -36922.6,
+        "expectancy_pips": -4.655,
+        "profit_factor": 0.378,
+        "win_rate_pct": 6.05
+      },
+      "s12_t30": {
+        "net_pips": -37729.1,
+        "expectancy_pips": -4.757,
+        "profit_factor": 0.513,
+        "win_rate_pct": 17.62
+      },
+      "s12_t60": {
+        "net_pips": -36428.8,
+        "expectancy_pips": -4.593,
+        "profit_factor": 0.556,
+        "win_rate_pct": 12.73
+      }
+    }
+  }
+}

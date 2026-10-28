@@ -1,0 +1,297 @@
+{
+  "thresholds": {
+    "20p": {
+      "n_reached": 5005,
+      "pct_mae_lt_2p": 4.4,
+      "pct_mae_lt_3p": 7.85,
+      "pct_mae_lt_4p": 10.71,
+      "pct_mae_lt_5p": 13.89,
+      "pct_mae_lt_6p": 17.28,
+      "pct_mae_lt_8p": 22.9,
+      "pct_mae_lt_10p": 28.63,
+      "pct_mae_lt_12p": 34.39,
+      "mae_median": 18.7,
+      "mae_p90": 57.86
+    },
+    "30p": {
+      "n_reached": 3964,
+      "pct_mae_lt_2p": 5.47,
+      "pct_mae_lt_3p": 9.59,
+      "pct_mae_lt_4p": 13.09,
+      "pct_mae_lt_5p": 17.03,
+      "pct_mae_lt_6p": 21.09,
+      "pct_mae_lt_8p": 27.7,
+      "pct_mae_lt_10p": 34.56,
+      "pct_mae_lt_12p": 41.17,
+      "mae_median": 15.4,
+      "mae_p90": 46.7
+    },
+    "40p": {
+      "n_reached": 3097,
+      "pct_mae_lt_2p": 6.81,
+      "pct_mae_lt_3p": 11.88,
+      "pct_mae_lt_4p": 16.14,
+      "pct_mae_lt_5p": 20.96,
+      "pct_mae_lt_6p": 25.86,
+      "pct_mae_lt_8p": 33.29,
+      "pct_mae_lt_10p": 40.91,
+      "pct_mae_lt_12p": 48.18,
+      "mae_median": 12.7,
+      "mae_p90": 36.1
+    },
+    "50p": {
+      "n_reached": 2363,
+      "pct_mae_lt_2p": 7.36,
+      "pct_mae_lt_3p": 12.53,
+      "pct_mae_lt_4p": 16.55,
+      "pct_mae_lt_5p": 21.54,
+      "pct_mae_lt_6p": 26.62,
+      "pct_mae_lt_8p": 34.36,
+      "pct_mae_lt_10p": 42.11,
+      "pct_mae_lt_12p": 49.64,
+      "mae_median": 12.2,
+      "mae_p90": 35.8
+    },
+    "60p": {
+      "n_reached": 1796,
+      "pct_mae_lt_2p": 7.8,
+      "pct_mae_lt_3p": 13.08,
+      "pct_mae_lt_4p": 17.76,
+      "pct_mae_lt_5p": 23.16,
+      "pct_mae_lt_6p": 28.67,
+      "pct_mae_lt_8p": 36.19,
+      "pct_mae_lt_10p": 44.54,
+      "pct_mae_lt_12p": 51.67,
+      "mae_median": 11.4,
+      "mae_p90": 33.6
+    }
+  },
+  "by_direction": {
+    "BUY": {
+      "n_entries": 4056,
+      "pct_reach_40p": 39.25,
+      "40p": {
+        "n_reached": 1592,
+        "pct_mae_lt_2p": 7.73,
+        "pct_mae_lt_3p": 12.94,
+        "pct_mae_lt_4p": 17.46,
+        "pct_mae_lt_5p": 22.11,
+        "pct_mae_lt_6p": 27.01,
+        "pct_mae_lt_8p": 35.36,
+        "pct_mae_lt_10p": 42.59,
+        "pct_mae_lt_12p": 49.5,
+        "mae_median": 12.15,
+        "mae_p90": 36.67
+      },
+      "60p": {
+        "n_reached": 916,
+        "pct_mae_lt_2p": 8.19,
+        "pct_mae_lt_3p": 13.76,
+        "pct_mae_lt_4p": 18.45,
+        "pct_mae_lt_5p": 23.58,
+        "pct_mae_lt_6p": 29.04,
+        "pct_mae_lt_8p": 38.1,
+        "pct_mae_lt_10p": 46.18,
+        "pct_mae_lt_12p": 52.62,
+        "mae_median": 11.2,
+        "mae_p90": 35.85
+      }
+    },
+    "SELL": {
+      "n_entries": 3876,
+      "pct_reach_40p": 38.83,
+      "40p": {
+        "n_reached": 1505,
+        "pct_mae_lt_2p": 5.85,
+        "pct_mae_lt_3p": 10.76,
+        "pct_mae_lt_4p": 14.75,
+        "pct_mae_lt_5p": 19.73,
+        "pct_mae_lt_6p": 24.65,
+        "pct_mae_lt_8p": 31.1,
+        "pct_mae_lt_10p": 39.14,
+        "pct_mae_lt_12p": 46.78,
+        "mae_median": 13.2,
+        "mae_p90": 35.62
+      },
+      "60p": {
+        "n_reached": 880,
+        "pct_mae_lt_2p": 7.39,
+        "pct_mae_lt_3p": 12.39,
+        "pct_mae_lt_4p": 17.05,
+        "pct_mae_lt_5p": 22.73,
+        "pct_mae_lt_6p": 28.3,
+        "pct_mae_lt_8p": 34.2,
+        "pct_mae_lt_10p": 42.84,
+        "pct_mae_lt_12p": 50.68,
+        "mae_median": 11.8,
+        "mae_p90": 31.7
+      }
+    }
+  },
+  "by_session": {
+    "asia_00_06": {
+      "n_entries": 2065,
+      "pct_reach_40p": 41.36,
+      "40p": {
+        "n_reached": 854,
+        "pct_mae_lt_2p": 7.61,
+        "pct_mae_lt_3p": 13.11,
+        "pct_mae_lt_4p": 16.63,
+        "pct_mae_lt_5p": 21.78,
+        "pct_mae_lt_6p": 26.81,
+        "pct_mae_lt_8p": 33.72,
+        "pct_mae_lt_10p": 41.33,
+        "pct_mae_lt_12p": 47.31,
+        "mae_median": 13.45,
+        "mae_p90": 36.44
+      }
+    },
+    "london_am_06_12": {
+      "n_entries": 2269,
+      "pct_reach_40p": 40.99,
+      "40p": {
+        "n_reached": 930,
+        "pct_mae_lt_2p": 7.53,
+        "pct_mae_lt_3p": 13.76,
+        "pct_mae_lt_4p": 19.14,
+        "pct_mae_lt_5p": 23.33,
+        "pct_mae_lt_6p": 28.92,
+        "pct_mae_lt_8p": 36.24,
+        "pct_mae_lt_10p": 44.3,
+        "pct_mae_lt_12p": 51.29,
+        "mae_median": 11.6,
+        "mae_p90": 32.81
+      }
+    },
+    "ny_overlap_12_16": {
+      "n_entries": 1478,
+      "pct_reach_40p": 36.6,
+      "40p": {
+        "n_reached": 541,
+        "pct_mae_lt_2p": 7.02,
+        "pct_mae_lt_3p": 11.83,
+        "pct_mae_lt_4p": 16.82,
+        "pct_mae_lt_5p": 22.74,
+        "pct_mae_lt_6p": 26.99,
+        "pct_mae_lt_8p": 34.94,
+        "pct_mae_lt_10p": 42.7,
+        "pct_mae_lt_12p": 50.65,
+        "mae_median": 12.0,
+        "mae_p90": 33.1
+      }
+    },
+    "ny_pm_16_21": {
+      "n_entries": 1326,
+      "pct_reach_40p": 35.6,
+      "40p": {
+        "n_reached": 472,
+        "pct_mae_lt_2p": 6.36,
+        "pct_mae_lt_3p": 10.38,
+        "pct_mae_lt_4p": 13.35,
+        "pct_mae_lt_5p": 18.22,
+        "pct_mae_lt_6p": 21.19,
+        "pct_mae_lt_8p": 28.6,
+        "pct_mae_lt_10p": 35.59,
+        "pct_mae_lt_12p": 42.8,
+        "mae_median": 14.45,
+        "mae_p90": 42.54
+      }
+    },
+    "late_21_24": {
+      "n_entries": 794,
+      "pct_reach_40p": 37.78,
+      "40p": {
+        "n_reached": 300,
+        "pct_mae_lt_2p": 2.67,
+        "pct_mae_lt_3p": 5.0,
+        "pct_mae_lt_4p": 8.67,
+        "pct_mae_lt_5p": 12.33,
+        "pct_mae_lt_6p": 19.0,
+        "pct_mae_lt_8p": 27.33,
+        "pct_mae_lt_10p": 34.33,
+        "pct_mae_lt_12p": 45.0,
+        "mae_median": 12.9,
+        "mae_p90": 37.19
+      }
+    }
+  },
+  "by_spread": {
+    "0_1": {
+      "n_entries": 5932,
+      "pct_reach_40p": 38.81,
+      "40p": {
+        "n_reached": 2302,
+        "pct_mae_lt_2p": 7.69,
+        "pct_mae_lt_3p": 12.99,
+        "pct_mae_lt_4p": 17.42,
+        "pct_mae_lt_5p": 22.37,
+        "pct_mae_lt_6p": 27.54,
+        "pct_mae_lt_8p": 34.71,
+        "pct_mae_lt_10p": 42.44,
+        "pct_mae_lt_12p": 49.87,
+        "mae_median": 12.1,
+        "mae_p90": 34.0
+      }
+    },
+    "1_2": {
+      "n_entries": 1697,
+      "pct_reach_40p": 40.84,
+      "40p": {
+        "n_reached": 693,
+        "pct_mae_lt_2p": 4.91,
+        "pct_mae_lt_3p": 9.81,
+        "pct_mae_lt_4p": 14.14,
+        "pct_mae_lt_5p": 18.61,
+        "pct_mae_lt_6p": 22.51,
+        "pct_mae_lt_8p": 30.45,
+        "pct_mae_lt_10p": 37.37,
+        "pct_mae_lt_12p": 43.58,
+        "mae_median": 14.5,
+        "mae_p90": 40.62
+      }
+    },
+    "2_3": {
+      "n_entries": 68,
+      "pct_reach_40p": 35.29,
+      "40p": {
+        "n_reached": 24,
+        "pct_mae_lt_2p": 0.0,
+        "pct_mae_lt_3p": 4.17,
+        "pct_mae_lt_4p": 4.17,
+        "pct_mae_lt_5p": 8.33,
+        "pct_mae_lt_6p": 8.33,
+        "pct_mae_lt_8p": 20.83,
+        "pct_mae_lt_10p": 29.17,
+        "pct_mae_lt_12p": 45.83,
+        "mae_median": 13.95,
+        "mae_p90": 36.98
+      }
+    },
+    "3_inf": {
+      "n_entries": 235,
+      "pct_reach_40p": 33.19,
+      "40p": {
+        "n_reached": 78,
+        "pct_mae_lt_2p": 0.0,
+        "pct_mae_lt_3p": 0.0,
+        "pct_mae_lt_4p": 0.0,
+        "pct_mae_lt_5p": 3.85,
+        "pct_mae_lt_6p": 11.54,
+        "pct_mae_lt_8p": 20.51,
+        "pct_mae_lt_10p": 30.77,
+        "pct_mae_lt_12p": 39.74,
+        "mae_median": 12.9,
+        "mae_p90": 41.38
+      }
+    }
+  },
+  "immediacy_at_40p": {
+    "n": 3097,
+    "pct_first_fav_within_60s": 44.75,
+    "pct_first_fav_within_300s": 68.2,
+    "pct_mae_lt_4p_before_40p": 16.14,
+    "pct_mae_lt_6p_before_40p": 25.86,
+    "pct_mae_lt_8p_before_40p": 33.29,
+    "pct_revisit_rejection_extreme_before_40p": 77.98
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "experiment_1_fixed_entry": {
+    "status": "DONE",
+    "description": "Frozen entry population from Stage 4 held constant. Stops 4/5/6/8/10/12 compared with identical entries. See stage7_fixed_stop_summary.json. Isolates stop-distance effect from occupancy effects.",
+    "n_entries": 7932
+  },
+  "experiment_2_full_strategy_occupancy": {
+    "status": "NOT_EVALUATED",
+    "reason": "Full strategy drive with real production re-entry rules requires the orchestrator → central gate → trade_manager monitor loop integration (Phase 5 Stage K2 follow-on). The Phase 5 brief explicitly deferred that integration and the Phase 6 brief forbids substituting an unrestricted retry model.",
+    "production_rule_summary": "Standalone BB Bounce (/opt/bb_bounce/strategy.py A10) enforces one open trade per direction; a confirm-while-same-direction-open is CANCELLED. Opposite-direction may arm/wait freely; opening opposite closes the previous trade.",
+    "implication_for_stop_study": "A tighter stop closes losers sooner, freeing the direction slot for another arm earlier. In a *production* run that could materially change the subsequent-trade pool. We cannot quantify that effect in Phase 6 without the full loop; we therefore report Experiment 2 as NOT_EVALUATED and never claim equivalence between Experiment-1 pips and realistic live pips.",
+    "next_step_authorised_by_operator": "If operator wants Experiment 2, request the Phase 5 Stage K2 package: wire trade_manager_adapter + decision event bus into a tick-driven drive loop with real occupancy tracking. Estimated multi-session scope."
+  }
+}

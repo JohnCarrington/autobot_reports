@@ -1,0 +1,67 @@
+{
+  "target_pips": 30.0,
+  "ig_min_pips": 4.0,
+  "n_entries": 7932,
+  "by_buffer": {
+    "b0.5": {
+      "ineligible_lt_ig_min": 957,
+      "eligible": 6975,
+      "mean_stop_distance_pips": 9.31,
+      "median_stop_distance_pips": 7.85,
+      "max_stop_distance_pips": 120.05,
+      "winners": 1424,
+      "losers": 5551,
+      "win_rate_pct": 20.42,
+      "avg_win_pips": 28.02,
+      "avg_loss_pips": -8.62,
+      "net_pips": -7956.3,
+      "expectancy_pips": -1.141,
+      "profit_factor": 0.834
+    },
+    "b1.0": {
+      "ineligible_lt_ig_min": 577,
+      "eligible": 7355,
+      "mean_stop_distance_pips": 9.52,
+      "median_stop_distance_pips": 8.1,
+      "max_stop_distance_pips": 120.55,
+      "winners": 1533,
+      "losers": 5822,
+      "win_rate_pct": 20.84,
+      "avg_win_pips": 28.07,
+      "avg_loss_pips": -8.82,
+      "net_pips": -8347.4,
+      "expectancy_pips": -1.135,
+      "profit_factor": 0.838
+    },
+    "b2.0": {
+      "ineligible_lt_ig_min": 114,
+      "eligible": 7818,
+      "mean_stop_distance_pips": 10.17,
+      "median_stop_distance_pips": 8.85,
+      "max_stop_distance_pips": 121.55,
+      "winners": 1737,
+      "losers": 6081,
+      "win_rate_pct": 22.22,
+      "avg_win_pips": 28.05,
+      "avg_loss_pips": -9.46,
+      "net_pips": -8774.4,
+      "expectancy_pips": -1.122,
+      "profit_factor": 0.847
+    },
+    "b3.0": {
+      "ineligible_lt_ig_min": 7,
+      "eligible": 7925,
+      "mean_stop_distance_pips": 11.08,
+      "median_stop_distance_pips": 9.75,
+      "max_stop_distance_pips": 122.55,
+      "winners": 1896,
+      "losers": 6029,
+      "win_rate_pct": 23.92,
+      "avg_win_pips": 28.17,
+      "avg_loss_pips": -10.35,
+      "net_pips": -8986.5,
+      "expectancy_pips": -1.134,
+      "profit_factor": 0.856
+    }
+  }
+}

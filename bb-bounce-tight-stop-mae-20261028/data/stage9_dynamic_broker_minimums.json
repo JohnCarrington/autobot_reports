@@ -1,0 +1,178 @@
+{
+  "scenarios": {
+    "A_historical_accepted": {
+      "min_pips": 4.5,
+      "note": "Phase 4 ledger lowest accepted = 4.5p (standalone BBB)."
+    },
+    "B_hypothetical_4p": {
+      "min_pips": 4.0,
+      "note": "Deployed BB_IG_MIN_STOP_PIPS = 4.0 (2026-09-27 dealing_rules.json)."
+    },
+    "C_hypothetical_6p": {
+      "min_pips": 6.0,
+      "note": "Conservative wider floor to capture mild-stress regime."
+    },
+    "D_12p_baseline": {
+      "min_pips": 12.0,
+      "note": "AutoBot central-execution internal floor pre-Phase 4."
+    },
+    "E_observed_dynamic_substituted": {
+      "min_pips": 4.0,
+      "note": "No multi-sample observer run yet. Substituted = Scenario B."
+    }
+  },
+  "fixed_stop_admissibility": {
+    "s4": {
+      "A_historical_accepted": "INELIGIBLE",
+      "B_hypothetical_4p": "ADMISSIBLE",
+      "C_hypothetical_6p": "INELIGIBLE",
+      "D_12p_baseline": "INELIGIBLE",
+      "E_observed_dynamic_substituted": "ADMISSIBLE"
+    },
+    "s5": {
+      "A_historical_accepted": "ADMISSIBLE",
+      "B_hypothetical_4p": "ADMISSIBLE",
+      "C_hypothetical_6p": "INELIGIBLE",
+      "D_12p_baseline": "INELIGIBLE",
+      "E_observed_dynamic_substituted": "ADMISSIBLE"
+    },
+    "s6": {
+      "A_historical_accepted": "ADMISSIBLE",
+      "B_hypothetical_4p": "ADMISSIBLE",
+      "C_hypothetical_6p": "ADMISSIBLE",
+      "D_12p_baseline": "INELIGIBLE",
+      "E_observed_dynamic_substituted": "ADMISSIBLE"
+    },
+    "s8": {
+      "A_historical_accepted": "ADMISSIBLE",
+      "B_hypothetical_4p": "ADMISSIBLE",
+      "C_hypothetical_6p": "ADMISSIBLE",
+      "D_12p_baseline": "INELIGIBLE",
+      "E_observed_dynamic_substituted": "ADMISSIBLE"
+    },
+    "s10": {
+      "A_historical_accepted": "ADMISSIBLE",
+      "B_hypothetical_4p": "ADMISSIBLE",
+      "C_hypothetical_6p": "ADMISSIBLE",
+      "D_12p_baseline": "INELIGIBLE",
+      "E_observed_dynamic_substituted": "ADMISSIBLE"
+    },
+    "s12": {
+      "A_historical_accepted": "ADMISSIBLE",
+      "B_hypothetical_4p": "ADMISSIBLE",
+      "C_hypothetical_6p": "ADMISSIBLE",
+      "D_12p_baseline": "ADMISSIBLE",
+      "E_observed_dynamic_substituted": "ADMISSIBLE"
+    }
+  },
+  "structural_buffer_admissibility": {
+    "b0.5": {
+      "A_historical_accepted": {
+        "n_eligible": 6535,
+        "n_ineligible": 1397,
+        "pct_eligible": 82.39
+      },
+      "B_hypothetical_4p": {
+        "n_eligible": 6995,
+        "n_ineligible": 937,
+        "pct_eligible": 88.19
+      },
+      "C_hypothetical_6p": {
+        "n_eligible": 5114,
+        "n_ineligible": 2818,
+        "pct_eligible": 64.47
+      },
+      "D_12p_baseline": {
+        "n_eligible": 1386,
+        "n_ineligible": 6546,
+        "pct_eligible": 17.47
+      },
+      "E_observed_dynamic_substituted": {
+        "n_eligible": 6995,
+        "n_ineligible": 937,
+        "pct_eligible": 88.19
+      }
+    },
+    "b1.0": {
+      "A_historical_accepted": {
+        "n_eligible": 6995,
+        "n_ineligible": 937,
+        "pct_eligible": 88.19
+      },
+      "B_hypothetical_4p": {
+        "n_eligible": 7375,
+        "n_ineligible": 557,
+        "pct_eligible": 92.98
+      },
+      "C_hypothetical_6p": {
+        "n_eligible": 5572,
+        "n_ineligible": 2360,
+        "pct_eligible": 70.25
+      },
+      "D_12p_baseline": {
+        "n_eligible": 1556,
+        "n_ineligible": 6376,
+        "pct_eligible": 19.62
+      },
+      "E_observed_dynamic_substituted": {
+        "n_eligible": 7375,
+        "n_ineligible": 557,
+        "pct_eligible": 92.98
+      }
+    },
+    "b2.0": {
+      "A_historical_accepted": {
+        "n_eligible": 7655,
+        "n_ineligible": 277,
+        "pct_eligible": 96.51
+      },
+      "B_hypothetical_4p": {
+        "n_eligible": 7822,
+        "n_ineligible": 110,
+        "pct_eligible": 98.61
+      },
+      "C_hypothetical_6p": {
+        "n_eligible": 6535,
+        "n_ineligible": 1397,
+        "pct_eligible": 82.39
+      },
+      "D_12p_baseline": {
+        "n_eligible": 1943,
+        "n_ineligible": 5989,
+        "pct_eligible": 24.5
+      },
+      "E_observed_dynamic_substituted": {
+        "n_eligible": 7822,
+        "n_ineligible": 110,
+        "pct_eligible": 98.61
+      }
+    },
+    "b3.0": {
+      "A_historical_accepted": {
+        "n_eligible": 7899,
+        "n_ineligible": 33,
+        "pct_eligible": 99.58
+      },
+      "B_hypothetical_4p": {
+        "n_eligible": 7925,
+        "n_ineligible": 7,
+        "pct_eligible": 99.91
+      },
+      "C_hypothetical_6p": {
+        "n_eligible": 7375,
+        "n_ineligible": 557,
+        "pct_eligible": 92.98
+      },
+      "D_12p_baseline": {
+        "n_eligible": 2436,
+        "n_ineligible": 5496,
+        "pct_eligible": 30.71
+      },
+      "E_observed_dynamic_substituted": {
+        "n_eligible": 7925,
+        "n_ineligible": 7,
+        "pct_eligible": 99.91
+      }
+    }
+  }
+}

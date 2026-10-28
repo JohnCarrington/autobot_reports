@@ -1,0 +1,21 @@
+{
+  "n_candles_5m": 167682,
+  "events": {
+    "ARM": 28312,
+    "C2_PASS": 13065,
+    "OPEN_TRADE": 7962,
+    "EXPIRED": 618,
+    "CANCEL_INVALIDATED": 4485,
+    "CANCEL_SAME_DIR_OPEN": 0,
+    "C2_FAIL": 15201,
+    "C2_MISSING": 46
+  },
+  "n_entries_with_fill": 7932,
+  "n_execution_gaps_dropped": 30,
+  "n_buy": 4056,
+  "n_sell": 3876,
+  "window": {
+    "first_entry": "2024-01-02T03:05:00+00:00",
+    "last_entry": "2026-03-31T23:15:00+00:00"
+  }
+}
