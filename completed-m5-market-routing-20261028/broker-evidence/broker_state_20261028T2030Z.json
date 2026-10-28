@@ -1,0 +1,48 @@
+{
+  "captured_utc": "2026-10-28T20:33:30.770236+00:00",
+  "account_id": "Z3G4CJ",
+  "working_orders": [
+    {
+      "dealId": "DIAAAAYRNEAPCBW",
+      "dealReference": null,
+      "direction": "BUY",
+      "orderLevel": 13341.0,
+      "level": null,
+      "orderSize": 2,
+      "size": null,
+      "stopDistance": 12.0,
+      "limitDistance": 100.0,
+      "timeInForce": "GOOD_TILL_CANCELLED",
+      "createdDate": "2026/10/28 20:10:07:000",
+      "createdDateUTC": "2026-10-28T20:10:07"
+    },
+    {
+      "dealId": "DIAAAAYRNFEB8BJ",
+      "dealReference": null,
+      "direction": "BUY",
+      "orderLevel": 13341.0,
+      "level": null,
+      "orderSize": 2,
+      "size": null,
+      "stopDistance": 12.0,
+      "limitDistance": 100.0,
+      "timeInForce": "GOOD_TILL_CANCELLED",
+      "createdDate": "2026/10/28 20:11:59:000",
+      "createdDateUTC": "2026-10-28T20:11:59"
+    }
+  ],
+  "positions": [
+    {
+      "dealId": "DIAAAAYRNAKGGBZ",
+      "dealReference": "HBB-BBB-3214005565",
+      "direction": "SELL",
+      "openLevel": null,
+      "level": 13318.0,
+      "size": 1.0,
+      "stopLevel": 13341.9,
+      "limitLevel": 13288.0,
+      "createdDate": "2026/10/28 19:00:06:000",
+      "createdDateUTC": "2026-10-28T19:00:06"
+    }
+  ]
+}

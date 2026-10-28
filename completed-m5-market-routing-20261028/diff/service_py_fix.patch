@@ -1,0 +1,211 @@
+diff --git a/ema_pullback/ig_client.py b/ema_pullback/ig_client.py
+index 147a3ea..1e700c2 100644
+--- a/ema_pullback/ig_client.py
++++ b/ema_pullback/ig_client.py
+@@ -177,6 +177,20 @@ class LiveIGExecutionBlocked(RuntimeError):
+     """Raised when a safety precondition for live execution is not met."""
+ 
+ 
++class LegacyExecutionBypassBlocked(RuntimeError):
++    """Raised when a code path tries to submit a legacy STOP working order
++    while ``cfg.mechanical_entry_mode == "market_on_trigger"``.
++
++    The 2026-10-28 incident at 20:11:59 UTC proved this is a real
++    failure mode: the completed-M5 code path reached
++    ``place_working_order`` because that function had no awareness of
++    the configured entry mode. This exception is raised BEFORE any
++    HTTP request, so a misrouted call cannot reach IG. The service
++    catches it on the normal exception path and marks the setup
++    REJECTED with the explicit reason.
++    """
++
++
+ class LiveIGClient(IGClientBase):
+     """Real IG DEMO execution client.
+ 
+@@ -284,6 +298,29 @@ class LiveIGClient(IGClientBase):
+         if lock is not None:
+             lock.release()
+ 
++    def _require_working_order_mode_or_fail_closed(self) -> None:
++        """Defensive guard — refuse legacy ``place_working_order`` under
++        MARKET-on-trigger mode. Raises :class:`LegacyExecutionBypassBlocked`
++        BEFORE any HTTP request so a misrouted call cannot reach IG.
++
++        Introduced after the 2026-10-28 20:11:59 UTC incident where the
++        completed-M5 code path in ``service._open_setup`` reached
++        ``place_working_order`` because that function had no awareness
++        of the configured entry mode. The service.py routing has been
++        corrected; this guard is defence-in-depth so a future
++        regression cannot silently submit a STOP working order under
++        MARKET semantics.
++        """
++        mode = str(getattr(self._cfg, "mechanical_entry_mode", "working_order")).lower()
++        if mode == "market_on_trigger":
++            raise LegacyExecutionBypassBlocked(
++                "LiveIGClient.place_working_order called while "
++                "mechanical_entry_mode='market_on_trigger'. This is an "
++                "execution-routing defect — the service must not submit "
++                "a STOP working order under MARKET-on-trigger semantics. "
++                "No broker request was made. Investigate the caller."
++            )
++
+     # ----- Approval + credentials ------------------------------------
+ 
+     def _require_live_approved(self) -> None:
+@@ -419,9 +456,20 @@ class LiveIGClient(IGClientBase):
+         (currencyCode, dealReference, expiry="DFB", forceOpen=True,
+         guaranteedStop=False) adapted for working orders (orderType="STOP",
+         level=entry, timeInForce="GOOD_TILL_CANCELLED").
++
++        **Defensive guard (2026-10-28 incident fix).** When
++        ``cfg.mechanical_entry_mode == "market_on_trigger"`` any call
++        into this method is an execution-routing defect — the service
++        must never submit a STOP working order under MARKET-on-trigger
++        semantics. We fail CLOSED with a loud ``LegacyExecutionBypassBlocked``
++        BEFORE any HTTP request so the misrouted call cannot reach IG.
++        The caller receives the error on the normal exception path;
++        the service converts that to a REJECTED setup with the explicit
++        reason.
+         """
+         self._require_live_approved()
+         self._check_execution_owner()
++        self._require_working_order_mode_or_fail_closed()
+         direction_u = str(direction).upper()
+         if direction_u not in ("BUY", "SELL"):
+             return OrderResult(status="REJECTED", deal_id=None,
+diff --git a/ema_pullback/service.py b/ema_pullback/service.py
+index c35823b..7662b7e 100644
+--- a/ema_pullback/service.py
++++ b/ema_pullback/service.py
+@@ -8,7 +8,7 @@ split keeps the loop testable without any sleep/time-dependent code.
+ from __future__ import annotations
+ 
+ import logging
+-from dataclasses import asdict, replace
++from dataclasses import asdict, dataclass, replace
+ from datetime import datetime, timedelta, timezone
+ from pathlib import Path
+ from typing import List, Optional, Sequence
+@@ -90,6 +90,26 @@ from .trend import (
+ logger = logging.getLogger(__name__)
+ 
+ 
++@dataclass(frozen=True)
++class _SyntheticEntryEvent:
++    """Minimal structural duck-type of an intrabar EntryCrossing event
++    used by the completed-M5 → MARKET route in
++    ``service._open_setup`` to invoke the shared ``_apply_intrabar_fill``
++    MARKET-execution path without a live tick feed.
++
++    ``direction``, ``ts``, ``price``, ``entry_level`` are the fields
++    the helper actually reads. ``forming_ts`` and ``live_ema_fast``
++    are included for compatibility with the real ``EntryCrossing``
++    shape but are only consulted by audit telemetry.
++    """
++    direction: str
++    ts: datetime
++    price: float
++    entry_level: float
++    forming_ts: Optional[datetime] = None
++    live_ema_fast: Optional[float] = None
++
++
+ def _safe_float(v):
+     """Parse a value to float, returning None on failure (used by the
+     LIVE broker-state reconciler to robustly consume IG payloads).
+@@ -1585,12 +1605,21 @@ class EmaPullbackService:
+         now_utc: datetime,
+         diag: dict,
+     ) -> None:
+-        """Completed-bar arming path (used when intrabar is disabled).
+-
+-        Entry level is computed from the five COMPLETED M5 bars
+-        IMMEDIATELY PRECEDING the trigger bar — the trigger bar itself is
+-        EXCLUDED — ± `entry_buffer_pips`. The setup transitions directly
+-        to ORDER_WAITING; the working order is placed at the same moment.
++        """Completed-bar arming path.
++
++        Under ``mechanical_entry_mode="working_order"`` (legacy): entry
++        level is frozen at ± ``entry_buffer_pips`` of the five-candle
++        extreme, the setup transitions to ORDER_WAITING, and a STOP
++        working order is placed on IG at the same moment.
++
++        Under ``mechanical_entry_mode="market_on_trigger"`` (default
++        from 2026-10-28 onward): the completed-M5 trigger has already
++        crossed the EMA8-touch arm condition (via ``evaluate_trigger``),
++        so we transition to ARMED and submit an IMMEDIATE MARKET order
++        via ``_execute_market_entry_from_completed_bar``. **We MUST
++        NOT call ``place_working_order`` in this mode** — the
++        defensive guard in ``LiveIGClient.place_working_order`` fails
++        CLOSED if we do.
+         """
+         trigger_index = len(m5s) - 1
+         calc = calc_entry(
+@@ -1714,6 +1743,66 @@ class EmaPullbackService:
+         # Execution path.
+         deal_ref = build_deal_reference(self.cfg.ownership_prefix, trig.direction, setup_id)
+         setup.deal_reference = deal_ref
++
++        entry_mode = str(getattr(self.cfg, "mechanical_entry_mode", "working_order")).lower()
++
++        # ----- MARKET-on-trigger route (2026-10-28 incident fix) -----
++        # Under ``mechanical_entry_mode="market_on_trigger"`` the
++        # completed-M5 arm condition fired (``evaluate_trigger``
++        # returned is_trigger=True), meaning THIS completed bar
++        # touched EMA8 in the H1 trade direction without closing
++        # beyond EMA21. The MARKET-on-trigger semantics are:
++        #   1. ARM the setup locally (no broker footprint yet).
++        #   2. The next tick that crosses the frozen 5-bar extreme
++        #      ± entry_buffer_pips → MARKET entry.
++        # When intrabar is not wired, the trigger-bar close is the
++        # best available tick proxy — we route through the shared
++        # MARKET-execution helper with a synthetic event representing
++        # the trigger-bar close. The helper enforces slippage +
++        # freshness pre-flight and emits SUBMITTING → UNCERTAIN /
++        # REJECTED / FILLED outcomes.
++        if entry_mode == "market_on_trigger":
++            # Arm locally.
++            setup.state = ARMED
++            setup.audit["entry_mode"] = entry_mode
++            setup.audit["armed_source"] = "completed_m5_trigger"
++            setup.audit["forming_m5_ts"] = trig.ctx.bar.ts.isoformat()
++            self.ledger.record("ARMED", setup)
++            self.ledger.save_active(setup)
++            self.active = setup
++            diag["events"].append({
++                "kind": "completed_m5_armed",
++                "setup_id": setup_id,
++                "direction": trig.direction,
++                "entry_level": setup.entry_level,
++                "entry_mode": entry_mode,
++                "forming_m5_ts": trig.ctx.bar.ts.isoformat(),
++            })
++            # Fire the MARKET entry immediately from the completed-
++            # bar close. This path is only used when the service
++            # does NOT have a live intrabar feed; with intrabar
++            # enabled the real-tick path in ``_apply_intrabar_fill``
++            # would already have handled the entry crossing.
++            #
++            # Synthetic-event ts: the completed M5 bar's CLOSE time
++            # (bar.ts + 5min = time the close price was published).
++            # ``_apply_intrabar_fill`` uses this to check quote
++            # freshness against ``cfg.quote_max_age_seconds``. In
++            # observation / replay mode now_utc may be minutes after
++            # bar close (OK for replay; real-time production will
++            # typically be seconds behind).
++            from datetime import timedelta as _td
++            synthetic_ts = trig.ctx.bar.ts + _td(minutes=5)
++            synthetic_evt = _SyntheticEntryEvent(
++                direction=trig.direction,
++                ts=synthetic_ts,
++                price=float(trig.ctx.bar.close),
++                entry_level=setup.entry_level,
++            )
++            self._apply_intrabar_fill(synthetic_evt, now_utc=now_utc, diag=diag)
++            return
++
++        # ----- Legacy working-order route (unchanged) -----
+         if self.cfg.exit_mode == "method_b":
+             stop_distance = self.cfg.broker_sl_pips * self.cfg.pip_size
+             limit_distance = self.cfg.broker_tp_pips * self.cfg.pip_size
