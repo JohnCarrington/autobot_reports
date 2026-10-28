@@ -129,26 +129,38 @@ Restart.
 
 ---
 
-## 3. Clearing a stale local block
+## 3. Clearing a stale local block (operator sentinel)
 
 If a legitimate submission is being blocked locally because of a stale
 observation (e.g. IG tightened momentarily and has since relaxed), the
-operator can clear it without a restart:
+operator clears it by writing a sentinel file.  The running service
+consumes the file on its next lookup — no service restart required.
 
 ```bash
-# From a python shell on the production host:
-python3 -c "import sys; sys.path.insert(0, '/opt/tradingbot'); \
-            from ig_dealing_rules import invalidate; \
-            invalidate('CS.D.GBPUSD.TODAY.IP')"
+# Clear ONE epic
+echo "CS.D.GBPUSD.TODAY.IP" | sudo tee /opt/tradingbot/cache/ig_dealing_rules.invalidate
+
+# Clear ALL observations in the process
+echo "ALL" | sudo tee /opt/tradingbot/cache/ig_dealing_rules.invalidate
 ```
 
-The next submission goes to IG unguarded; if IG still rejects, the
-observation re-records.
+The next trade submission (within a few seconds) consumes the file,
+clears the observation, and logs
+`IG_MIN_STOP_SENTINEL_INVALIDATE cleared=<epic>`.
+
+**Important:** running `python3 -c "import ig_dealing_rules; ig_dealing_rules.invalidate(...)"`
+in a FRESH shell creates a new interpreter whose module state is empty.
+It does NOT clear the running autobot/bb-bounce service's cache.
+Use the sentinel-file protocol above instead.
 
 The observation also expires automatically after
 `IG_DEALING_RULES_TTL_SECS` seconds (default 900 = 15 min).  Set
 `IG_DEALING_RULES_TTL_SECS=60` in `.env` for a faster auto-clear if the
 operator wants more aggressive retry.
+
+The sentinel path is env-overridable via
+`IG_DEALING_RULES_INVALIDATE_SENTINEL` for operators who want to park
+the sentinel outside `/opt/tradingbot/cache/`.
 
 ---
 

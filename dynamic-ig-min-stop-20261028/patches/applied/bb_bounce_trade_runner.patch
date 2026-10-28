@@ -1,0 +1,26 @@
+--- a/trade_runner.py
++++ b/trade_runner.py
+@@ -529,6 +529,23 @@
+             self._write_rejection_row(
+                 event, note=f"IG rejected: {displayed}",
+             )
++            # 2026-10-28 — event-driven refresh of IG dealing-rules.
++            # Only ATTACHED_ORDER_LEVEL_ERROR (= stop-distance invalid)
++            # triggers a single read-only fetch_market_by_epic call.
++            # No retry.  Other rejection codes do NOT poll IG.
++            if "ATTACHED_ORDER_LEVEL_ERROR" in (
++                reject_reason or status or ""
++            ).upper():
++                try:
++                    from ig_dealing_rules import record_rejection as _dr_rec
++                    from config import EPIC as _EPIC, SYMBOL as _SYMBOL
++                    _dr_rec(_EPIC, _SYMBOL)
++                except Exception as _dr_exc:
++                    logger.warning(
++                        "[open] record_rejection failed after "
++                        "ATTACHED_ORDER_LEVEL_ERROR: %s",
++                        type(_dr_exc).__name__,
++                    )
+             return None
+         if status != "ACCEPTED":
+             # Any OTHER status (empty, PENDING, truly unknown) is

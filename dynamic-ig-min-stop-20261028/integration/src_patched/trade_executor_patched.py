@@ -4431,32 +4431,33 @@ def execute_trade(decision: Any, epic: str,
         )
         return None
 
-    # Step 3 (preserved as safety net for unknown pairs / module failure):
-    # The static per-pair IG floor and global SL floor are kept.  For
-    # every current GBPUSD strategy the stop exceeds these, so the
-    # branches are no-ops.  Operator can lower these via env to permit
-    # tighter stops once the live-observation path is proven in production.
-    ig_min = _IG_MIN_STOP_PTS.get(pair, MIN_STOP_DISTANCE_PIPS)
-    sl_pts = max(sl_pts, ig_min)
-    if tp_pts is not None:
-        tp_pts = max(tp_pts, ig_min)
-    if tp_pts is not None and raw_tp_pts is not None and tp_pts > raw_tp_pts + 1e-6:
-        logger.info(
-            f"[executor] {pair} TP clamped up by broker min: "
-            f"raw={raw_tp_pts / ppp:.1f}p → ig_min={ig_min / ppp:.1f}p "
-            f"(strategy intent was {tp_pips:.1f}p)"
-        )
-    sl_pts = max(sl_pts, MIN_STOP_DISTANCE_PIPS)
+    # Steps 2/3/4 auto-widening REMOVED 2026-10-28 per operator ruling:
+    # the legacy per-pair _IG_MIN_STOP_PTS, global MIN_STOP_DISTANCE_PIPS
+    # and pair_config.MIN_SL_PIPS floors are user-configurable DEFAULTS
+    # or stale broker-min PROXIES — not mandatory broker minimums.
+    # Treating them as mandatory silently widens a configured 4-pip stop
+    # to 12 pips before it reaches IG, which the brief explicitly
+    # forbids.  The genuine SL sanity bounds (MIN_SL_PIPS=2 and
+    # MAX_REASONABLE_SL_PIPS=500) are enforced earlier in this function
+    # via `_sanitize_distance(min_pips=MIN_SL_PIPS, ...)` (see
+    # ``trade_executor.py:4318-4324``) and are UNCHANGED.
+    #
+    # The strategy's requested stop reaches IG EXACTLY unless the
+    # pre-submit guard above has evidence it is below the broker's
+    # current minimum (one prior ATTACHED_ORDER_LEVEL_ERROR per epic
+    # within the observation TTL).
+    #
+    # TP minima are preserved — TP never had the 4-pip problem and the
+    # 12-pip global floor doubles as a sanity check against degenerate
+    # TP values (0.0, negative).
     if tp_pts is not None:
         tp_pts = max(tp_pts, MIN_LIMIT_DISTANCE_PIPS)
-
-    # Step 4 (preserved — user-configurable risk floor): per-pair SL
-    # default, env-overridable via <PAIR>_MIN_SL_PIPS.  Not a broker
-    # rule; a user choice.  Kept unchanged.
-    pair_min_pips = _PAIR_MIN_SL_PIPS.get(pair)
-    if pair_min_pips is not None:
-        pair_min_pts = pair_min_pips * ppp
-        sl_pts = max(sl_pts, pair_min_pts)
+    if tp_pts is not None and raw_tp_pts is not None and tp_pts > raw_tp_pts + 1e-6:
+        logger.info(
+            f"[executor] {pair} TP clamped up by sanity floor: "
+            f"raw={raw_tp_pts / ppp:.1f}p → floor={MIN_LIMIT_DISTANCE_PIPS / ppp:.1f}p "
+            f"(strategy intent was {tp_pips:.1f}p)"
+        )
 
     stop_distance = sl_pts
     limit_distance = tp_pts  # may be None — open_sb_now passes through
@@ -4468,11 +4469,13 @@ def execute_trade(decision: Any, epic: str,
             and limit_distance != raw_tp_pts)
     )
     if stop_distance != raw_sl_pts or _tp_changed:
+        # Post-2026-10-28 — the only paths that can change sl_pts in
+        # the executor are (a) _sanitize_distance earlier (2p/500p
+        # sanity bounds) and (b) a strategy-level adjustment prior to
+        # execute_trade.  Steps 2/3/4 no longer auto-widen.
         logger.info(
-            f"[executor] {pair} SL: raw={sl_pips:.1f}pips → {raw_sl_pts:.0f}pts → "
-            f"IG min={ig_min:.0f}pts → volatility floor="
-            f"{pair_min_pips * ppp:.0f}pts → final={stop_distance:.0f}pts "
-            f"({stop_distance / ppp:.1f}pips)"
+            f"[executor] {pair} SL: raw={sl_pips:.1f}pips → "
+            f"final={stop_distance:.0f}pts ({stop_distance / ppp:.1f}pips)"
         )
 
     logger.info(

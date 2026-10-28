@@ -194,11 +194,17 @@ def test_patched_executor_has_no_pre_submit_fetch_call():
 
 
 def test_patched_executor_preserves_strategy_sl_math():
-    """sl_pips → sl_pts conversion still exists; pair_min_pips (Step 4)
-    retained as user-configurable risk floor."""
+    """sl_pips → sl_pts conversion still exists; the SL sanity bound
+    (via _sanitize_distance earlier in execute_trade) is preserved.
+
+    The Step 4 _PAIR_MIN_SL_PIPS widening is REMOVED per operator
+    ruling 2026-10-28 (that was a user default, not a mandatory
+    floor).  The genuine sanity bound is enforced via
+    `min_pips=float(MIN_SL_PIPS)=2` at trade_executor.py:4321.
+    """
     src = (SRC / "trade_executor_patched.py").read_text()
     assert "sl_pts = sl_pips * ppp" in src
-    assert "_PAIR_MIN_SL_PIPS.get(pair)" in src
+    assert "min_pips=float(MIN_SL_PIPS)" in src
 
 
 def test_patched_executor_rejection_handler_unconditional():
@@ -321,3 +327,227 @@ def test_prod_source_untouched():
     assert marker.exists()
     # (If any of the tests above had written, mtime would differ.)
     assert marker.stat().st_mtime == before
+
+
+# ─────────────────────────────────────────────────────────────────────
+# BLOCKER 1 — no silent widening
+# ─────────────────────────────────────────────────────────────────────
+def test_patched_executor_removes_step2_sl_widen():
+    """Step 2's auto-widen must be gone: no
+    `sl_pts = max(sl_pts, ig_min)` or `_IG_MIN_STOP_PTS` max."""
+    src = (SRC / "trade_executor_patched.py").read_text()
+    # The removed lines must not reappear
+    assert "sl_pts = max(sl_pts, ig_min)" not in src
+    # Allow comment/docstring mentions of the removal, but the live
+    # expression must be gone
+    assert "ig_min = _IG_MIN_STOP_PTS.get(pair" not in src
+
+
+def test_patched_executor_removes_step3_sl_widen():
+    """Step 3's global SL floor must be gone."""
+    src = (SRC / "trade_executor_patched.py").read_text()
+    assert "sl_pts = max(sl_pts, MIN_STOP_DISTANCE_PIPS)" not in src
+
+
+def test_patched_executor_removes_step4_sl_widen():
+    """Step 4's per-pair MIN_SL_PIPS widen must be gone."""
+    src = (SRC / "trade_executor_patched.py").read_text()
+    assert "sl_pts = max(sl_pts, pair_min_pts)" not in src
+    # The _PAIR_MIN_SL_PIPS import may remain for other uses but the
+    # `.get(pair)` → max() wiring must be deleted from execute_trade.
+    import re
+    bad = re.search(
+        r"pair_min_pips\s*=\s*_PAIR_MIN_SL_PIPS\.get\(pair\).*?"
+        r"sl_pts\s*=\s*max\(sl_pts,\s*pair_min_pts\)",
+        src, re.DOTALL,
+    )
+    assert bad is None, "Step 4 widen still present in execute_trade"
+
+
+def test_patched_executor_sl_passthrough(ig_dealing_rules):
+    """End-to-end: a 4-pip SL request produces stop_distance = 4 after
+    the patched SL pipeline (no observation blocking, no widening).
+
+    We can't actually RUN execute_trade without the full session
+    stack, but we can verify the pipeline logic by inspecting the
+    patched source and simulating the hot path arithmetic in
+    isolation.
+    """
+    src = (SRC / "trade_executor_patched.py").read_text()
+    # The only line that sets sl_pts BEFORE the "stop_distance = sl_pts"
+    # assignment is Step 1 (pips → points).  Verify Step 1 is still
+    # present and no subsequent widening max()s refer to sl_pts.
+    assert "sl_pts = sl_pips * ppp" in src
+    # Count remaining `sl_pts = max(sl_pts,` expressions — must be
+    # exactly ZERO (TP floor uses tp_pts, not sl_pts).
+    import re
+    sl_widens = re.findall(r"sl_pts\s*=\s*max\(sl_pts\s*,", src)
+    assert len(sl_widens) == 0, (
+        f"patched executor still has {len(sl_widens)} sl_pts widening "
+        "expressions: {sl_widens}"
+    )
+
+    # And the pre-submit guard: with no observation, is_known_too_tight
+    # returns False → execute_trade does NOT block a 4-pip request.
+    mod = ig_dealing_rules
+    blocked, obs = mod.is_known_too_tight("CS.D.GBPUSD.TODAY.IP", 4.0)
+    assert blocked is False
+    assert obs is None
+
+
+def test_patched_executor_preserves_sanitize_sl_sanity():
+    """The 2-pip/500-pip SL sanity bounds (via _sanitize_distance at
+    trade_executor.py:4318-4324) are UNCHANGED.  These are genuine
+    bounding sanity checks, not auto-widening."""
+    src = (SRC / "trade_executor_patched.py").read_text()
+    assert "min_pips=float(MIN_SL_PIPS)" in src
+    assert "max_pips=float(MAX_REASONABLE_SL_PIPS)" in src
+
+
+# ─────────────────────────────────────────────────────────────────────
+# BLOCKER 2a — standalone BB Bounce calls record_rejection
+# ─────────────────────────────────────────────────────────────────────
+def test_bb_trade_runner_wires_record_rejection():
+    """Static check: the patched trade_runner calls record_rejection
+    exactly in the ATTACHED_ORDER_LEVEL_ERROR branch."""
+    src = (SRC / "bb_bounce_trade_runner_patched.py").read_text()
+    assert "from ig_dealing_rules import record_rejection as _dr_rec" in src
+    assert "ATTACHED_ORDER_LEVEL_ERROR" in src
+    # The call must happen inside the is_definitive_rejection branch
+    # and only when the reason matches.
+    import re
+    pat = re.compile(
+        r'if is_definitive_rejection:.*?'
+        r'"ATTACHED_ORDER_LEVEL_ERROR" in \(.*?\).*?'
+        r'_dr_rec\(_EPIC',
+        re.DOTALL,
+    )
+    assert pat.search(src), (
+        "patched trade_runner must call record_rejection(EPIC) inside the "
+        "ATTACHED_ORDER_LEVEL_ERROR branch"
+    )
+
+
+def test_bb_trade_runner_rejection_runtime(ig_dealing_rules, tmp_path):
+    """Load the patched trade_runner module in isolation and simulate
+    the rejection branch: an ATTACHED_ORDER_LEVEL_ERROR response
+    produces exactly one fetch_market_by_epic call and an observation
+    the next trade can read.
+
+    We don't instantiate the full TradeRunner class; we exercise the
+    rejection semantics directly by invoking record_rejection the
+    same way the patched branch does."""
+    mod = ig_dealing_rules
+    # Configure IG to return a 6-pip minimum
+    mod._stub_ig.market_responses["CS.D.GBPUSD.TODAY.IP"] = _rule(6.0)
+
+    # Simulate the exact import + call sequence the patched source does.
+    from ig_dealing_rules import record_rejection as _dr_rec
+    obs = _dr_rec("CS.D.GBPUSD.TODAY.IP", "GBPUSD")
+    assert obs is not None
+    assert obs.value_pips == 6.0
+    # Exactly ONE REST call
+    assert mod._stub_ig.fetch_market_calls == ["CS.D.GBPUSD.TODAY.IP"]
+    # The next trade (standalone stop_sizing.py path) sees the
+    # observation via last_known_min.
+    from ig_dealing_rules import last_known_min as _dr_lkm
+    seen = _dr_lkm("CS.D.GBPUSD.TODAY.IP")
+    assert seen is not None
+    assert seen.value_pips == 6.0
+
+
+def test_bb_trade_runner_only_level_error_triggers_fetch(ig_dealing_rules):
+    """Other rejection reasons must NOT call record_rejection."""
+    src = (SRC / "bb_bounce_trade_runner_patched.py").read_text()
+    import re
+    # Find the ATTACHED_ORDER_LEVEL_ERROR gate; outside this block,
+    # there must be no other record_rejection call site.
+    all_calls = re.findall(r"_dr_rec\(", src)
+    assert len(all_calls) == 1, (
+        f"expected exactly one _dr_rec call site in patched trade_runner, "
+        f"found {len(all_calls)}"
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────
+# BLOCKER 2b — working in-process invalidation via sentinel file
+# ─────────────────────────────────────────────────────────────────────
+def test_sentinel_file_invalidates_specific_epic(ig_dealing_rules,
+                                                  monkeypatch, tmp_path):
+    """Writing an epic to the sentinel file clears that epic's
+    observation on the next lookup."""
+    mod = ig_dealing_rules
+    sentinel = tmp_path / "ig_dealing_rules.invalidate"
+    monkeypatch.setattr(mod, "_INVALIDATE_SENTINEL_PATH", sentinel)
+
+    # Seed an observation
+    mod._inject_observation("CS.D.GBPUSD.TODAY.IP", 6.0,
+                            retrieved_at=time.time())
+    assert mod.last_known_min("CS.D.GBPUSD.TODAY.IP") is not None
+
+    # Operator writes the sentinel
+    sentinel.write_text("CS.D.GBPUSD.TODAY.IP\n")
+    # Next lookup consumes it and clears
+    assert mod.last_known_min("CS.D.GBPUSD.TODAY.IP") is None
+    # Sentinel file is removed
+    assert not sentinel.exists()
+
+
+def test_sentinel_file_all_clears_everything(ig_dealing_rules, monkeypatch,
+                                              tmp_path):
+    """Writing 'ALL' clears every observation in the process."""
+    mod = ig_dealing_rules
+    sentinel = tmp_path / "ig_dealing_rules.invalidate"
+    monkeypatch.setattr(mod, "_INVALIDATE_SENTINEL_PATH", sentinel)
+
+    mod._inject_observation("CS.D.GBPUSD.TODAY.IP", 6.0)
+    mod._inject_observation("CS.D.EURUSD.TODAY.IP", 2.0)
+    sentinel.write_text("ALL\n")
+
+    # Any lookup consumes it
+    assert mod.last_known_min("CS.D.GBPUSD.TODAY.IP") is None
+    assert mod.last_known_min("CS.D.EURUSD.TODAY.IP") is None
+    assert not sentinel.exists()
+
+
+def test_sentinel_missing_is_safe(ig_dealing_rules, monkeypatch, tmp_path):
+    """No sentinel file → normal operation (no exception, no clearing)."""
+    mod = ig_dealing_rules
+    sentinel = tmp_path / "ig_dealing_rules.invalidate"
+    monkeypatch.setattr(mod, "_INVALIDATE_SENTINEL_PATH", sentinel)
+
+    mod._inject_observation("CS.D.GBPUSD.TODAY.IP", 6.0)
+    assert mod.last_known_min("CS.D.GBPUSD.TODAY.IP") is not None  # untouched
+    assert not sentinel.exists()
+
+
+def test_sentinel_corrupt_cleaned_up(ig_dealing_rules, monkeypatch, tmp_path):
+    """A corrupt/binary sentinel is removed and does not stall the module."""
+    mod = ig_dealing_rules
+    sentinel = tmp_path / "ig_dealing_rules.invalidate"
+    monkeypatch.setattr(mod, "_INVALIDATE_SENTINEL_PATH", sentinel)
+    # Write binary garbage
+    sentinel.write_bytes(b"\x00\x01\x02\xff")
+
+    mod._inject_observation("CS.D.GBPUSD.TODAY.IP", 6.0)
+    # The lookup consumes the sentinel safely (empty-token / no-match)
+    # and removes the file.
+    obs = mod.last_known_min("CS.D.GBPUSD.TODAY.IP")
+    assert obs is not None  # observation untouched; sentinel didn't match
+    assert not sentinel.exists()  # cleaned up
+
+
+def test_sentinel_is_consumed_by_is_known_too_tight(ig_dealing_rules,
+                                                    monkeypatch, tmp_path):
+    """The pre-submit guard also consumes the sentinel — operator can
+    drop the file right before a fire, and the fire is unblocked."""
+    mod = ig_dealing_rules
+    sentinel = tmp_path / "ig_dealing_rules.invalidate"
+    monkeypatch.setattr(mod, "_INVALIDATE_SENTINEL_PATH", sentinel)
+
+    mod._inject_observation("CS.D.GBPUSD.TODAY.IP", 6.0)
+    assert mod.is_known_too_tight("CS.D.GBPUSD.TODAY.IP", 4.0)[0] is True
+
+    sentinel.write_text("CS.D.GBPUSD.TODAY.IP\n")
+    # Fire-time guard check sees the sentinel, invalidates, allows.
+    assert mod.is_known_too_tight("CS.D.GBPUSD.TODAY.IP", 4.0)[0] is False

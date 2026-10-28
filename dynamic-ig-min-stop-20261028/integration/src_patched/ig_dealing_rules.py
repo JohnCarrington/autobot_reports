@@ -42,6 +42,7 @@ import os
 import threading
 import time
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Dict, Optional
 
 
@@ -61,6 +62,19 @@ _TTL_SECS = float(os.getenv("IG_DEALING_RULES_TTL_SECS", "900"))
 # another rejection fires.  Protects IG's rate limit against a burst of
 # rejected submissions.  Default 10 seconds.
 _FETCH_COALESCE_SECS = float(os.getenv("IG_DEALING_RULES_COALESCE_SECS", "10"))
+
+# Operator-driven invalidation sentinel file.  Writing an epic name to
+# this file (one per line) clears the matching in-process observations
+# on the next lookup from the running process; the file is then
+# removed.  Writing the literal string "ALL" (uppercase) clears every
+# observation in this process.  This gives the operator a working way
+# to drop a stale observation WITHOUT a service restart — the module
+# polls the file inline on every public-API call, so no background
+# thread is needed.
+_INVALIDATE_SENTINEL_PATH = Path(os.getenv(
+    "IG_DEALING_RULES_INVALIDATE_SENTINEL",
+    "/opt/tradingbot/cache/ig_dealing_rules.invalidate",
+))
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -224,13 +238,77 @@ def record_rejection(epic: str, pair: str = "") -> Optional[MinStopObservation]:
             _INFLIGHT.discard(epic_s)
 
 
+def _consume_invalidate_sentinel() -> None:
+    """If the sentinel file exists, invalidate the listed epics (or ALL)
+    and remove the file.
+
+    Called inline on every public-API read.  Fail-silent — a corrupt
+    or unreadable sentinel never blocks a trade.  The file-based
+    protocol works across processes: the operator (or an admin script)
+    writes to the file; the running process consumes it on the next
+    observation query.
+    """
+    try:
+        if not _INVALIDATE_SENTINEL_PATH.exists():
+            return
+        try:
+            content = _INVALIDATE_SENTINEL_PATH.read_text(encoding="utf-8")
+        except Exception:
+            # Unreadable sentinel — remove and move on so a corrupt
+            # file does not permanently stall the module.
+            try:
+                _INVALIDATE_SENTINEL_PATH.unlink()
+            except Exception:
+                pass
+            return
+        tokens = [ln.strip() for ln in content.splitlines() if ln.strip()]
+        if not tokens:
+            try:
+                _INVALIDATE_SENTINEL_PATH.unlink()
+            except Exception:
+                pass
+            return
+        with _LOCK:
+            if "ALL" in tokens:
+                cleared = len(_OBSERVATIONS)
+                _OBSERVATIONS.clear()
+                _LAST_FETCH_TS.clear()
+                logger.warning(
+                    "[IG_MIN_STOP_SENTINEL_INVALIDATE] cleared=%d (ALL)",
+                    cleared,
+                )
+            else:
+                cleared_epics = []
+                for epic_s in tokens:
+                    if _OBSERVATIONS.pop(epic_s, None) is not None:
+                        cleared_epics.append(epic_s)
+                    _LAST_FETCH_TS.pop(epic_s, None)
+                if cleared_epics:
+                    logger.warning(
+                        "[IG_MIN_STOP_SENTINEL_INVALIDATE] cleared=%s",
+                        ",".join(cleared_epics),
+                    )
+        try:
+            _INVALIDATE_SENTINEL_PATH.unlink()
+        except Exception:
+            pass
+    except Exception:
+        # Defensive: no exception from the sentinel path may ever
+        # propagate into the trade pipeline.
+        pass
+
+
 def last_known_min(epic: str) -> Optional[MinStopObservation]:
     """Return the current observation for ``epic`` (or None).
 
     An expired observation is removed and None is returned — a reader
     sees "no evidence" rather than a stale value.  The next broker
     rejection re-records a current observation.
+
+    Consumes any operator-written sentinel file before returning
+    (so a sentinel drop is visible to the next trade submission).
     """
+    _consume_invalidate_sentinel()
     if not epic:
         return None
     epic_s = str(epic).strip()
