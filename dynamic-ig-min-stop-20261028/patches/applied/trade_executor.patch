@@ -1,0 +1,141 @@
+--- a/trade_executor.py
++++ b/trade_executor.py
+@@ -4398,15 +4398,73 @@
+     raw_sl_pts = sl_pts
+     raw_tp_pts = tp_pts
+ 
+-    # Step 2: Apply per-pair IG API minimum (hard floor from IG)
+-    ig_min = _IG_MIN_STOP_PTS.get(pair, MIN_STOP_DISTANCE_PIPS)
+-    sl_pts = max(sl_pts, ig_min)
++    # Step 2: Dynamic broker-min validation (2026-10-28).
++    # Replaces static _IG_MIN_STOP_PTS lookup + max() auto-widen with
++    # live validation via ig_dealing_rules.validate_stop.  Strict mode
++    # (default) FAIL-CLOSES when source != "live": no stale cache or
++    # static fallback may authorise a new order.
++    _dyn_strict = os.getenv("AUTOBOT_IG_MIN_STOP_STRICT", "1").strip() != "0"
++    try:
++        from ig_dealing_rules import validate_stop as _ig_validate_stop
++        _ig_validation = _ig_validate_stop(
++            epic=epic, pair=pair, requested_pips=float(sl_pips),
++            strict=_dyn_strict, require_fresh=True,
++        )
++    except Exception as _val_exc:
++        _ig_validation = None
++        logger.warning(
++            "[executor] IG dealing-rules validation unavailable (%s: %s) — "
++            "strict mode will fail-close; compat mode falls back to static",
++            type(_val_exc).__name__, _val_exc,
++        )
++
++    if _ig_validation is not None and _ig_validation.reason_code == "PASS":
++        logger.info(
++            "[IG_STOP_VALIDATION_PASS] %s requested=%.2fp min=%.2fp "
++            "source=%s rule_ts=%s",
++            pair, _ig_validation.requested_pips,
++            _ig_validation.broker_min_pips or -1.0,
++            _ig_validation.rule_source,
++            f"{int(_ig_validation.rule_ts)}" if _ig_validation.rule_ts else "none",
++        )
++        ig_min = (_ig_validation.broker_min_pips or 0.0) * ppp
++    elif _ig_validation is not None and _ig_validation.reason_code in (
++        "TOO_TIGHT", "NO_LIVE_RULE", "NO_RULE_AVAILABLE",
++    ):
++        _min_pips = _ig_validation.broker_min_pips or 0.0
++        logger.warning(
++            "[IG_STOP_VALIDATION_BLOCK] %s requested=%.2fp min=%.2fp "
++            "reason=%s strategy=%s source=%s rule_ts=%s",
++            pair, _ig_validation.requested_pips, _min_pips,
++            _ig_validation.reason_code,
++            str(decision.mode or "") if decision is not None else "unknown",
++            _ig_validation.rule_source,
++            f"{int(_ig_validation.rule_ts)}" if _ig_validation.rule_ts else "none",
++        )
++        if _dyn_strict:
++            _set_block_info(
++                epic, f"IG_MIN_STOP_{_ig_validation.reason_code}",
++                f"stop={sl_pips:.2f}p vs min={_min_pips:.2f}p "
++                f"(source={_ig_validation.rule_source})",
++            )
++            return None
++        # Compat mode (strict=0): preserve legacy auto-widen for rollback.
++        ig_min = _min_pips * ppp
++        sl_pts = max(sl_pts, ig_min)
++    else:
++        if _dyn_strict:
++            logger.error(
++                "[IG_STOP_VALIDATION_BLOCK] %s validation module unavailable; "
++                "fail-closed per strict mode.", pair,
++            )
++            _set_block_info(epic, "IG_MIN_STOP_VALIDATOR_UNAVAILABLE",
++                            "ig_dealing_rules module unavailable")
++            return None
++        ig_min = _IG_MIN_STOP_PTS.get(pair, MIN_STOP_DISTANCE_PIPS)
++        sl_pts = max(sl_pts, ig_min)
++
+     if tp_pts is not None:
+         tp_pts = max(tp_pts, ig_min)
+-
+-    # Observability: flag when IG-min inflates TP above strategy intent. The TP
+-    # announced to Telegram still uses the strategy's requested price, so this
+-    # log is the authoritative record of what actually sits at the broker.
+     if tp_pts is not None and raw_tp_pts is not None and tp_pts > raw_tp_pts + 1e-6:
+         logger.info(
+             f"[executor] {pair} TP clamped up by broker min: "
+@@ -4414,16 +4472,23 @@
+             f"(strategy intent was {tp_pips:.1f}p)"
+         )
+ 
+-    # Step 3: Apply global broker floor (covers unknown pairs)
+-    sl_pts = max(sl_pts, MIN_STOP_DISTANCE_PIPS)
++    # Step 3: Global SL floor REMOVED (2026-10-28) — superseded by Step 2.
+     if tp_pts is not None:
+         tp_pts = max(tp_pts, MIN_LIMIT_DISTANCE_PIPS)
+ 
+-    # Step 4: Apply per-pair volatility floor (our minimum, in pips → points)
++    # Step 4: Per-pair USER DEFAULT SL floor (pair_config.MIN_SL_PIPS).
++    # AUDIT.md §3: user-configurable per-pair default, not an immutable
++    # risk policy.  In strict mode this step does NOT widen.
+     pair_min_pips = _PAIR_MIN_SL_PIPS.get(pair)
+-    if pair_min_pips is not None:
++    if pair_min_pips is not None and not _dyn_strict:
+         pair_min_pts = pair_min_pips * ppp
+         sl_pts = max(sl_pts, pair_min_pts)
++    elif pair_min_pips is not None and sl_pts < pair_min_pips * ppp:
++        logger.info(
++            "[executor] %s SL=%.2fp accepted below user default "
++            "MIN_SL_PIPS=%.2fp (strict mode)",
++            pair, sl_pts / ppp, pair_min_pips,
++        )
+ 
+     stop_distance = sl_pts
+     limit_distance = tp_pts  # may be None — open_sb_now passes through
+@@ -5120,6 +5185,29 @@
+                 st["close_reason"] = "trade_rejected"
+                 _sync_legacy_trade_state_from(st)
+                 detail = _extract_rejection_detail(conf)
++                # 2026-10-28 — Patch 0003: ATTACHED_ORDER_LEVEL_ERROR recovery.
++                # IG rejects a submission whose stop (or limit) distance is
++                # below the current minNormalStopOrLimitDistance.  If this
++                # fires despite Step 2 pre-submit validation, IG tightened
++                # the minimum between validation and submission OR the
++                # cached rule was stale.  Invalidate dealing-rules cache so
++                # the next validation fetches fresh.  Do NOT auto-widen or
++                # retry — the strategy sees the explicit outcome below.
++                if "ATTACHED_ORDER_LEVEL_ERROR" in str(detail or "").upper():
++                    try:
++                        from ig_dealing_rules import invalidate as _dr_invalidate
++                        _dr_invalidate(epic)
++                        logger.warning(
++                            "[IG_MIN_STOP_RECOVERY] %s ATTACHED_ORDER_LEVEL_ERROR "
++                            "detected — cache invalidated; next validation will "
++                            "fetch fresh.  No retry.",
++                            epic,
++                        )
++                    except Exception as _dr_exc:
++                        logger.warning(
++                            "[IG_MIN_STOP_RECOVERY] %s cache invalidate failed: %s",
++                            epic, _dr_exc,
++                        )
+                 # Pending-confirmation ledger: terminal REJECTED (2026-09-30).
+                 try:
+                     import pending_deal_ledger as _pdl_rej

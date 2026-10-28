@@ -162,12 +162,19 @@ def _fetch_from_ig(epic: str) -> tuple[Optional[float], str, str]:
         else:
             return (None, "", "EMPTY_RESPONSE")
 
+        # 2026-10-28 — unit discipline tightened per brief §2.
+        # The ONLY accepted unit is "POINTS" (which for FX spread-bet
+        # equals 1 pip = 1 point).  A missing / empty / "PERCENTAGE" /
+        # unknown unit MUST fail-closed; it must not be silently
+        # treated as POINTS.  Any future unit that AutoBot can convert
+        # safely (e.g. a possible explicit "PIPS") would need an
+        # explicit entry here with the conversion.
         unit_s = str(unit).upper() if unit is not None else ""
-        if unit_s not in ("POINTS", ""):
-            return (None, unit_s, "UNSUPPORTED_UNIT")
+        if unit_s != "POINTS":
+            return (None, unit_s or "MISSING_UNIT", "UNSUPPORTED_UNIT")
         if val is None:
-            return (None, unit_s or "POINTS", "EMPTY_VALUE")
-        return (float(val), unit_s or "POINTS", "")
+            return (None, unit_s, "EMPTY_VALUE")
+        return (float(val), unit_s, "")
     except Exception as exc:
         return (None, "", f"PARSE_EXCEPTION:{type(exc).__name__}")
 
@@ -325,16 +332,33 @@ def validate_stop(
 
     ``strict=True``  — the brief's required behaviour: a stop below the
                        live minimum is REJECTED (allowed=False).  No
-                       auto-widening.
+                       auto-widening.  Also forces a fresh REST fetch
+                       (bypassing the positive cache) so every strict
+                       submission validates against a current IG
+                       response.  Rate-limit protection comes from the
+                       inflight-dedup + back-off state in
+                       ``get_min_normal_stop_pips`` — not from reusing
+                       stale observations.
     ``strict=False`` — compatibility mode for the roll-out window: a
                        stop below the minimum is still ALLOWED but the
                        verdict reports the shortfall so the caller can
                        audit before enforcement.
 
-    ``require_fresh=True`` — force a refresh unless the cache is < 5 min
-    old.  Use at initial order submission.
+    ``require_fresh=True`` — force a refresh when the cache is older
+    than ``_FRESH_SECS``.  Independent of ``strict``; strict always
+    forces a refresh regardless.
     """
-    r = get_min_normal_stop_pips(epic=epic, pair=pair, require_fresh=require_fresh)
+    # 2026-10-28 — strict mode must consult IG for every submission.
+    # Fail-closed is based on "did the current validation obtain a
+    # live response"; a positive cache hit from a prior submission
+    # is NOT sufficient.  Rate-limit protection remains intact via
+    # the inflight-dedup + failure-backoff state inside
+    # get_min_normal_stop_pips.
+    r = get_min_normal_stop_pips(
+        epic=epic, pair=pair,
+        force_refresh=strict,  # strict always re-fetches
+        require_fresh=require_fresh,
+    )
     if r.value_pips is None:
         return StopValidation(
             allowed=False,

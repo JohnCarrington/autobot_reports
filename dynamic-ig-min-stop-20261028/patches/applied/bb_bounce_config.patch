@@ -1,0 +1,17 @@
+--- a/config.py
++++ b/config.py
+@@ -17,8 +17,12 @@
+ # evidence 2026-09-24 BB_BOUNCE_L entry/sl arithmetic). Distances sent
+ # to IG are PLAIN pip counts.
+ PIP = 0.0001  # one pip in quote-level terms (for human diagnostics only)
+-TP_PIPS = 30
+-SL_PIPS = 12
++# 2026-10-28 — env-overridable so the operator can reconfigure the
++# strategy's requested TP/SL without a code deploy.  Defaults match
++# the historical production values; no behavioural change until the
++# operator explicitly sets BB_SL_PIPS / BB_TP_PIPS in /opt/bb_bounce/.env.
++TP_PIPS = int(float(os.getenv("BB_TP_PIPS", "30")))
++SL_PIPS = int(float(os.getenv("BB_SL_PIPS", "12")))
+ TRADE_SIZE = 2.0  # £2 per pip
+ 
+ # --- Stop-loss mode (NEW; default preserves historical production) --

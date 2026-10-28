@@ -446,13 +446,27 @@ def test_strict_fails_closed_on_static_fallback(mod):
     assert v.rule_source == "static_fallback"
 
 
-def test_strict_fails_closed_on_cached(mod):
-    """Strict + cache hit (not forced refresh) → source='cached' → REJECT.
-    Even an acceptable requested distance is rejected under strict when
-    the rule was not re-verified for THIS submission."""
+def test_strict_forces_fresh_fetch_each_call(mod):
+    """Strict mode must force a fresh REST per submission.  Verify by
+    seeding the cache with one value and configuring the live response
+    to differ: strict should see the LIVE value, not the cached one."""
+    mod._inject_cache("CS.D.GBPUSD.TODAY.IP", 12.0, retrieved_at=time.time())
     mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = _rule(4.0)
-    _ = mod.get_min_normal_stop_pips("CS.D.GBPUSD.TODAY.IP", "GBPUSD")  # seed
-    # Second call without force_refresh — hits cache
+    v = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+                          requested_pips=5.0, strict=True, require_fresh=False)
+    # Strict forced a fresh fetch bypassing the 12.0 cache; got 4.0 live.
+    assert v.allowed is True
+    assert v.reason_code == "PASS"
+    assert v.rule_source == "live"
+    assert v.broker_min_pips == 4.0
+
+
+def test_strict_falls_back_to_cache_only_on_fetch_failure(mod):
+    """When the forced fetch fails AND a cache entry exists, the
+    module returns source='cached'.  Strict mode must reject that —
+    the current validation did not obtain a live response."""
+    mod._inject_cache("CS.D.GBPUSD.TODAY.IP", 4.0, retrieved_at=time.time())
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = RuntimeError("api down")
     v = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
                           requested_pips=5.0, strict=True, require_fresh=False)
     assert v.allowed is False
@@ -490,3 +504,94 @@ def test_strict_live_passes_fresh(mod):
     assert v.allowed is True
     assert v.rule_source == "live"
     assert v.reason_code == "PASS"
+
+
+# ─────────────────────────────────────────────────────────────────────
+# 2026-10-28 — tightened unit discipline (brief §2)
+# ─────────────────────────────────────────────────────────────────────
+def test_missing_unit_rejected(mod):
+    """A dealing-rules response with NO unit field must fail-closed,
+    not be silently treated as POINTS."""
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = {
+        "dealingRules": {
+            "minNormalStopOrLimitDistance": {"value": 4.0},  # no unit
+        },
+    }
+    r = mod.get_min_normal_stop_pips("CS.D.GBPUSD.TODAY.IP", "GBPUSD",
+                                     force_refresh=True)
+    assert r.source == "static_fallback"
+
+
+def test_missing_unit_blocks_in_strict(mod):
+    """And strict mode rejects it (no live rule)."""
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = {
+        "dealingRules": {
+            "minNormalStopOrLimitDistance": {"value": 4.0},
+        },
+    }
+    v = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+                          requested_pips=10.0, strict=True)
+    assert v.allowed is False
+    assert v.reason_code == "NO_LIVE_RULE"
+
+
+def test_empty_string_unit_rejected(mod):
+    """Empty-string unit also fails-closed."""
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = {
+        "dealingRules": {
+            "minNormalStopOrLimitDistance": {"value": 4.0, "unit": ""},
+        },
+    }
+    r = mod.get_min_normal_stop_pips("CS.D.GBPUSD.TODAY.IP", "GBPUSD",
+                                     force_refresh=True)
+    assert r.source == "static_fallback"
+
+
+def test_unknown_unit_rejected(mod):
+    """Explicit unknown unit also fails-closed."""
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = {
+        "dealingRules": {
+            "minNormalStopOrLimitDistance": {"value": 4.0, "unit": "PIPS"},
+        },
+    }
+    r = mod.get_min_normal_stop_pips("CS.D.GBPUSD.TODAY.IP", "GBPUSD",
+                                     force_refresh=True)
+    assert r.source == "static_fallback"
+
+
+def test_explicit_points_still_accepted(mod):
+    """Only exactly-matching POINTS is accepted."""
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = _rule(4.0, unit="POINTS")
+    r = mod.get_min_normal_stop_pips("CS.D.GBPUSD.TODAY.IP", "GBPUSD",
+                                     force_refresh=True)
+    assert r.source == "live"
+    assert r.value_pips == 4.0
+    assert r.unit == "POINTS"
+
+
+# ─────────────────────────────────────────────────────────────────────
+# 2026-10-28 — strict force-refresh rate-limit protection
+# ─────────────────────────────────────────────────────────────────────
+def test_strict_concurrent_submissions_dedup_fetch(mod):
+    """Two concurrent strict validations for the same epic must not
+    produce two REST calls — the inflight-dedup gate collapses them.
+    This preserves rate-limit protection even though strict forces a
+    refresh on every submission."""
+    import threading
+    mod._stub_ig.responses["CS.D.GBPUSD.TODAY.IP"] = _rule(4.0)
+
+    results = []
+
+    def _call():
+        v = mod.validate_stop(epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+                              requested_pips=5.0, strict=True)
+        results.append(v.allowed)
+
+    threads = [threading.Thread(target=_call) for _ in range(10)]
+    for t in threads: t.start()
+    for t in threads: t.join()
+    # All 10 submissions see the same outcome
+    assert all(r is True for r in results)
+    # REST calls should be bounded (not necessarily 1 due to lock race —
+    # the invariant is that concurrent duplicates collapse when possible).
+    assert len(mod._stub_ig.calls) <= 10

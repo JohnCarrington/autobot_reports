@@ -1,163 +1,249 @@
-# Deployment manifest — dynamic IG min-stop management
+# Deployment manifest — dynamic IG min-stop management (FINAL)
 
 **Branch:** `feat/dynamic-ig-min-stop-20261028`
+**Baseline:** AutoBot `83d1f88`
+**Status:** **READY FOR DEMO DEPLOYMENT**
 **Date:** 2026-10-28
-**Status:** patches prepared, integration-tested against production file copies; **not deployed**.
+**Target:** `/opt/tradingbot/` + `/opt/bb_bounce/` on AutoBotV1 (DEMO).
 
 ---
 
-## 1. Patch dependency order
+## Executive status
 
-Apply in this exact order:
-
-| # | Patch | Target file | Depends on | Rollback |
-|---|---|---|---|---|
-| 1 | — | `/opt/tradingbot/ig_dealing_rules.py` (NEW) | — | delete file |
-| 2 | `0001b-trade_executor-dynamic-ig-min-stop-corrected.md` | `/opt/tradingbot/trade_executor.py` | #1 | `AUTOBOT_IG_MIN_STOP_STRICT=0` env + restart |
-| 3 | `0003-trade_executor-attached-order-level-error-recovery.md` | `/opt/tradingbot/trade_executor.py` | #2 | `git revert` of #3 |
-| 4 | — | `/opt/bb_bounce/ig_dealing_rules.py` (NEW, byte-identical to #1) | — | delete file |
-| 5 | `0004-bb_bounce-config-env-sl_pips.md` | `/opt/bb_bounce/config.py` | #4 | `git revert` of #5 (or remove `BB_SL_PIPS` env) |
-| 6 | `0002-bb_bounce-dynamic-ig-min-stop.md` | `/opt/bb_bounce/stop_sizing.py` | #4, #5 | `git revert` of #6 |
-
-**Note:** `0001-trade_executor-dynamic-ig-min-stop.md` is SUPERSEDED
-by `0001b` and should not be applied.
+| Correction (brief items 1-5) | Status | Evidence |
+|---|---|---|
+| 1. Strict force-refresh per submission | ✓ | `validate_stop(strict=True)` now internally calls `get_min_normal_stop_pips(force_refresh=True)`.  Rate-limit protection via inflight dedup + back-off intact. |
+| 2. Reject missing / unsupported units | ✓ | `_fetch_from_ig` requires `unit == "POINTS"` exactly.  Missing, empty, `PERCENTAGE`, or unknown → fail-closed with `UNSUPPORTED_UNIT`. |
+| 3. Verify complete execution paths | ✓ | 63 tests passing (40 unit + 23 integration against patched prod file copies).  No strategy / NMS / amend-path code modified. |
+| 4. Patch application against current prod | ✓ | All three patches dry-run clean against `/opt/tradingbot/trade_executor.py` + `/opt/bb_bounce/{config.py, stop_sizing.py}` at today's HEAD.  Hashes recorded below. |
+| 5. Deployment boundary respected | ✓ | No service restarted, no production file modified, no IG orders placed.  Patches staged for operator-driven deployment. |
 
 ---
 
-## 2. File inventory
+## 1. Files to deploy
 
-### 2.1 New files (identical content for both installs)
-
-```
-/opt/tradingbot/ig_dealing_rules.py       <- source: module/ig_dealing_rules.py (429 LOC)
-/opt/bb_bounce/ig_dealing_rules.py        <- source: module/ig_dealing_rules.py (same file)
-```
-
-### 2.2 Patched files
+### 1.1 New files (byte-identical content for both installs)
 
 ```
-/opt/tradingbot/trade_executor.py         patches: 0001b + 0003
-/opt/bb_bounce/config.py                  patch:   0004
-/opt/bb_bounce/stop_sizing.py             patch:   0002
+/opt/tradingbot/ig_dealing_rules.py       (source: module/ig_dealing_rules.py)
+/opt/bb_bounce/ig_dealing_rules.py        (source: module/ig_dealing_rules.py — same file)
 ```
 
-### 2.3 Patched copies for review (in this repo)
+Module SHA256 (same for both): see `module/ig_dealing_rules.py`.
+
+### 1.2 Patched files
 
 ```
-integration/src_patched/trade_executor_patched.py          — 0001b + 0003 applied
-integration/src_patched/bb_bounce_config_patched.py        — 0004 applied
-integration/src_patched/bb_bounce_stop_sizing_patched.py   — 0002 applied
-integration/src_patched/ig_dealing_rules.py                — new shared module
+/opt/tradingbot/trade_executor.py        <- patches/applied/trade_executor.patch
+/opt/bb_bounce/config.py                 <- patches/applied/bb_bounce_config.patch
+/opt/bb_bounce/stop_sizing.py            <- patches/applied/bb_bounce_stop_sizing.patch
 ```
+
+### 1.3 Unchanged files (verified)
+
+```
+pair_config.py                — MIN_SL_PIPS still works via <PAIR>_MIN_SL_PIPS env (user default)
+trade_manager.py              — amend-path dynamic lookup unchanged (already live-rule aware)
+central_execution_gate.py     — unchanged
+nms_directional_authority.py  — unchanged
+nms_watch_state_*.py          — unchanged
+gbpusd_bb_bounce.py           — unchanged (strategy logic preserved)
+ema_pullback.py               — unchanged
+gbpusd_trend_v3.py            — unchanged
+qm_v2_executor.py             — unchanged
+one_strategy_emitter.py       — unchanged
+briefing_execution.py         — unchanged
+/opt/bb_bounce/strategy.py    — unchanged
+/opt/bb_bounce/trade_runner.py — unchanged
+/opt/bb_bounce/open_sb_now.py — unchanged
+```
+
+### 1.4 Pre-deployment hashes (verify unchanged at deploy time)
+
+```
+sha256sum /opt/tradingbot/trade_executor.py
+  9094cd7da033f4b59c471ce8deeb30d75ec5023a7b6f7c7eca5100560441acee
+
+sha256sum /opt/bb_bounce/config.py
+  9a9ac893663dd97c98227493eb09e74eb883ce050a65f4f9bbe0bbb0c6f130d9
+
+sha256sum /opt/bb_bounce/stop_sizing.py
+  224239d54468727b5a94e789915998e94cd9150a7810863936427afdff8b41bf
+```
+
+If any hash has changed between this manifest and the deployment moment,
+STOP and re-run the dry-run before applying.
 
 ---
 
-## 3. Four completeness items — status
+## 2. Patch dependency order
 
-| Item | Required | Delivered | Evidence |
-|---|---|---|---|
-| 1 | Strict fail-closed on no-live-rule | ✓ | `module/ig_dealing_rules.py:validate_stop` now rejects when `source != "live"` under strict mode.  Reason code `NO_LIVE_RULE`.  3 new tests: `test_strict_fails_closed_on_static_fallback`, `test_strict_fails_closed_on_cached`, `test_strict_fails_closed_during_backoff`.  Integration test `test_patched_executor_strict_fails_closed_on_stale` exercises the same against the patched trade_executor copy. |
-| 2 | Initial-order `ATTACHED_ORDER_LEVEL_ERROR` handler | ✓ | Patch 0003 adds the recovery seam at `trade_executor.py:5118` REJECTED branch.  Imports `ig_dealing_rules.invalidate` and calls `invalidate(epic)` + logs `IG_MIN_STOP_RECOVERY`.  Static and runtime tests: `test_patched_executor_contains_rejection_handler`, `test_patched_executor_rejection_handler_invalidates_cache`, `test_rejection_handler_runs_regardless_of_strict_mode`. |
-| 3 | BB Bounce config env wiring | ✓ | Patch 0004 wires `TP_PIPS` + `SL_PIPS` to `BB_TP_PIPS` + `BB_SL_PIPS` envs.  `ENABLE_4P.md` §1 corrected to say `BB_SL_PIPS=4` (not `SL_PIPS=4`).  Tests: `test_patched_bb_config_reads_env`, `test_patched_bb_config_defaults_unchanged`. |
-| 4 | Apply full set to prod copies + integration tests | ✓ | All four patches applied to copies under `integration/src_patched/`.  19 integration tests pass against the modified code.  Combined suite 52 passing (33 module + 19 integration), 0 failing. |
+```
+Step 1 (AutoBot):
+  install /opt/tradingbot/ig_dealing_rules.py
+  apply trade_executor.patch  (combines dynamic-min-stop + rejection recovery)
 
----
+Step 2 (standalone BB Bounce):
+  install /opt/bb_bounce/ig_dealing_rules.py
+  apply bb_bounce_config.patch
+  apply bb_bounce_stop_sizing.patch
+```
 
-## 4. Pre-deployment checklist
-
-- [ ] Review `AUDIT.md` end-to-end.
-- [ ] Review `MATRIX.md` end-to-end.
-- [ ] Review `patches/0001b-*.md`, `patches/0003-*.md`, `patches/0004-*.md`, `patches/0002-*.md`.
-- [ ] Review `ENABLE_4P.md` deployment recipe.
-- [ ] Confirm `IG_ACC_TYPE=DEMO` on target host.
-- [ ] Create a deployment worktree under `/home/autobot/tradingbot-wt/` from `nms/v3-prod-upgrade-20261013`.
-- [ ] Copy `module/ig_dealing_rules.py` into the worktree root as `ig_dealing_rules.py`.
-- [ ] Apply the trade_executor patches (0001b + 0003) to the worktree.
-- [ ] For `/opt/bb_bounce/`: copy `module/ig_dealing_rules.py` into that directory, apply patches 0004 and 0002.
-- [ ] Re-run `tests/test_dynamic_ig_min_stop.py` and `integration/tests/test_patched_sl_pipeline.py` in the deployment worktree.
-- [ ] Decide roll-out mode:
-    - **Compat first (recommended):** `AUTOBOT_IG_MIN_STOP_STRICT=0` for 1 trading day of observation.  Behaviour matches today (all current strategies request ≥12p so none hit the Step-4 compat-widen path) but logs now show `IG_STOP_VALIDATION_PASS` with the live min.
-    - **Strict (direct):** `AUTOBOT_IG_MIN_STOP_STRICT=1` from the start.  Same observable behaviour today; immediately enables operator to configure a tighter stop per strategy.
-- [ ] Rollback commit = AutoBot `83d1f88`.
-- [ ] Services NOT auto-restarted; operator times the restart.
+Steps 1 and 2 are independent processes — standalone BB Bounce need not
+restart when AutoBot deploys, and vice versa.
 
 ---
 
-## 5. Rollback procedure
-
-### 5.1 Soft rollback (preferred)
+## 3. Deployment commands (operator reference)
 
 ```bash
-# /opt/tradingbot/.env — add:
-AUTOBOT_IG_MIN_STOP_STRICT=0
+# From a fresh deployment worktree:
+cd /path/to/worktree
+
+# 1. Verify unchanged source hashes
+sha256sum /opt/tradingbot/trade_executor.py /opt/bb_bounce/config.py \
+          /opt/bb_bounce/stop_sizing.py
+# compare against the hashes in §1.4; abort if different
+
+# 2. Dry-run patch apply
+cp /opt/tradingbot/trade_executor.py .
+cp /opt/bb_bounce/config.py bb_config.py
+cp /opt/bb_bounce/stop_sizing.py bb_stop_sizing.py
+
+patch --dry-run -p1 trade_executor.py < patches/applied/trade_executor.patch
+patch --dry-run -p1 bb_config.py      < patches/applied/bb_bounce_config.patch
+patch --dry-run -p1 bb_stop_sizing.py < patches/applied/bb_bounce_stop_sizing.patch
+
+# 3. Install new modules
+cp module/ig_dealing_rules.py /opt/tradingbot/ig_dealing_rules.py
+cp module/ig_dealing_rules.py /opt/bb_bounce/ig_dealing_rules.py
+
+# 4. Apply patches to real files
+patch -p1 /opt/tradingbot/trade_executor.py < patches/applied/trade_executor.patch
+patch -p1 /opt/bb_bounce/config.py          < patches/applied/bb_bounce_config.patch
+patch -p1 /opt/bb_bounce/stop_sizing.py     < patches/applied/bb_bounce_stop_sizing.patch
+
+# 5. Validate imports and run tests in-tree
+cd /opt/tradingbot && python3 -c "import ig_dealing_rules; print(ig_dealing_rules.get_min_normal_stop_pips.__doc__[:40])"
+cd /opt/bb_bounce  && python3 -c "import ig_dealing_rules; print(ig_dealing_rules.validate_stop.__doc__[:40])"
+
+# 6. Decide rollout mode via env (optional — defaults are safe)
+# Compat observation day:   echo 'AUTOBOT_IG_MIN_STOP_STRICT=0' >> /opt/tradingbot/.env
+# Strict (final behaviour):  echo 'AUTOBOT_IG_MIN_STOP_STRICT=1' >> /opt/tradingbot/.env
+
+# 7. Restart services (operator-timed)
+# sudo systemctl restart autobot.service
+# sudo systemctl restart bb-bounce.service
 ```
 
-Restart service.  Behaviour reverts to legacy max()-widen for Step 2
-(stale cache or static fallback) and Step 4 (`pair_config.MIN_SL_PIPS`
-widening).  Dynamic lookup + logging remains intact.
+---
 
-### 5.2 Hard rollback
+## 4. Rollback
+
+### 4.1 Soft rollback (default strict → compat)
 
 ```bash
-cd /path/to/deployment/worktree
-git revert <patch commit>   # reverts trade_executor + config changes
+echo 'AUTOBOT_IG_MIN_STOP_STRICT=0' >> /opt/tradingbot/.env
+# restart autobot.service — restores legacy max()-widen semantics for
+# Step 4 (pair_config.MIN_SL_PIPS) + static fallback.
+```
+
+Dynamic lookup + logging remain active for observability.
+
+### 4.2 Hard rollback
+
+```bash
+patch -R -p1 /opt/tradingbot/trade_executor.py < patches/applied/trade_executor.patch
+patch -R -p1 /opt/bb_bounce/config.py          < patches/applied/bb_bounce_config.patch
+patch -R -p1 /opt/bb_bounce/stop_sizing.py     < patches/applied/bb_bounce_stop_sizing.patch
 rm /opt/tradingbot/ig_dealing_rules.py
 rm /opt/bb_bounce/ig_dealing_rules.py
+# restart services
 ```
 
-Restart services.  Full return to pre-patch behaviour.
+Full return to pre-deployment behaviour.
+
+### 4.3 Rollback commit reference
+
+AutoBot pre-deployment HEAD: **`83d1f88`**.
 
 ---
 
-## 6. Smoke checks after deploy
-
-Within 10 minutes of restart:
+## 5. Smoke checks (within 10 minutes of restart)
 
 ```bash
-# Expect at least one line from each category
+# Expect at least one PASS line per first strategy fire
 journalctl -u autobot.service -n 2000 --no-pager | grep -E \
   "IG_STOP_VALIDATION_PASS|IG_STOP_VALIDATION_BLOCK|IG_MIN_STOP_FETCH|IG_MIN_STOP_RECOVERY"
 
-# Expect zero of these (unless the operator deliberately configured a sub-min stop)
-journalctl -u autobot.service -n 2000 --no-pager | grep -E "IG_MIN_STOP_VALIDATOR_UNAVAILABLE"
+# Expect ZERO of these (the validator must be reachable)
+journalctl -u autobot.service -n 2000 --no-pager | grep -E \
+  "IG_MIN_STOP_VALIDATOR_UNAVAILABLE|IG_STOP_VALIDATION_BLOCK.*reason=NO_LIVE_RULE"
 
-# Expect zero (patch should prevent ATTACHED_ORDER_LEVEL_ERROR going forward)
+# Expect ZERO (the pre-submit validator should have caught these)
 journalctl -u autobot.service -n 2000 --no-pager | grep "ATTACHED_ORDER_LEVEL_ERROR"
 ```
 
-If `IG_MIN_STOP_VALIDATOR_UNAVAILABLE` is seen, the `ig_dealing_rules.py`
-module failed to import — check path.  Soft-rollback via env.
+If `NO_LIVE_RULE` appears on legitimate fires, IG REST is down or
+rate-limited; apply soft rollback via env until the issue clears.
+
+If `VALIDATOR_UNAVAILABLE` appears, the new module failed to import —
+check path.  Apply soft rollback via env.
 
 ---
 
-## 7. Test totals
+## 6. Test totals
 
 | Suite | File | Count | Status |
 |---|---|---|---|
-| Module unit tests | `tests/test_dynamic_ig_min_stop.py` | 33 | passing |
-| Integration tests (patched copies) | `integration/tests/test_patched_sl_pipeline.py` | 19 | passing |
-| **Combined** | — | **52** | **passing, 0 failing** |
-
-All tests runnable via:
+| Module unit tests | `tests/test_dynamic_ig_min_stop.py` | **40** | passing |
+| Integration tests (patched prod copies) | `integration/tests/test_patched_sl_pipeline.py` | **23** | passing |
+| **Combined** | — | **63** | **passing, 0 failing** |
 
 ```bash
 cd dynamic-ig-min-stop-20261028
 python3 -m pytest tests/ integration/tests/ -q
+# 63 passed in 0.4s
 ```
 
 ---
 
-## 8. What is NOT changed
+## 7. Scope guarantees (brief §6)
 
-Per brief §6 (preserve unrelated trading logic):
+* ✓ No strategy signal-generation code modified.
+* ✓ No NMS directional authority or WATCH_AND_WAIT modified.
+* ✓ No risk-management configuration modified
+  (`pair_config.MIN_SL_PIPS` static defaults preserved; env override
+  continues to work).
+* ✓ No amend-path logic modified (`trade_manager.py:1312` keeps its
+  own live-rule integration).
+* ✓ No module-level static constants deleted (kept as fallbacks).
+* ✓ No existing env variables renamed.
+* ✓ No live IG orders placed, amended, or cancelled.
+* ✓ No service restarted automatically.
+* ✓ All strategy stop settings preserved.
+* ✓ Target broker account confirmed `IG_ACC_TYPE=DEMO`.
 
-* ❌ No strategy signal-generation code modified.
-* ❌ No NMS directional authority code modified.
-* ❌ No WATCH_AND_WAIT state machine modified.
-* ❌ No amend-path logic modified (`trade_manager.py:1312` unchanged; it already has its own live-rule integration).
-* ❌ No module-level static constants deleted (kept as fallbacks).
-* ❌ No existing env variables renamed.
-* ❌ No live IG orders placed, amended, or cancelled.
-* ❌ No service restarted automatically.
+---
 
-**Deployment is NOT authorised by Claude.  Operator approves and executes.**
+## 8. READY FOR DEMO DEPLOYMENT
+
+All five brief items complete:
+
+1. **Strict force-refresh:** every strict submission issues a fresh REST;
+   non-live sources (stale cache, static fallback, back-off) fail-closed
+   under strict.  Rate limits respected via inflight dedup + exponential
+   back-off.
+2. **Unit discipline:** only exactly-matching `POINTS` passes; missing /
+   empty / unknown units fail-closed.
+3. **Execution paths verified:** 63 tests cover AutoBot BUY/SELL, standalone
+   BB Bounce, exact 4-pip acceptance when IG allows, rejection when IG
+   requires more, failure when rules unobtainable, zero silent widening,
+   rejection recovery, strategy-setting preservation, amend-path isolation,
+   NMS/WATCH_AND_WAIT invariant.
+4. **Deployment prepared:** all three patches apply cleanly via dry-run
+   against today's production source hashes.
+5. **No production modification during preparation.**
+
+**Operator action required to deploy.  Do not restart services without
+operator instruction.**

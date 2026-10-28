@@ -303,6 +303,82 @@ def test_live_grid(ig_dealing_rules, live_min, requested, strict,
 # ─────────────────────────────────────────────────────────────────────
 # Item 4c — no production side effects
 # ─────────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────
+# 2026-10-28 — brief corrections 1 (strict force-refresh) and 2
+# (unit discipline) — regression against the patched prod copies.
+# ─────────────────────────────────────────────────────────────────────
+def test_strict_forces_live_each_call(ig_dealing_rules):
+    """Strict validation forces a fresh REST per call even when the
+    cache is warm.  Verifies brief correction 1."""
+    mod = ig_dealing_rules
+    # Seed cache with 12.0; configure live to 4.0
+    mod._inject_cache("CS.D.GBPUSD.TODAY.IP", 12.0,
+                      retrieved_at=mod._LAST_PUBLISHED.get("x", 0.0))
+    mod._stub_ig.market_responses["CS.D.GBPUSD.TODAY.IP"] = _rule(4.0)
+    v = mod.validate_stop(
+        epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+        requested_pips=5.0, strict=True,
+    )
+    # Strict re-fetched; live says 4.0; 5.0 >= 4.0 → PASS
+    assert v.allowed is True
+    assert v.rule_source == "live"
+    assert v.broker_min_pips == 4.0
+
+
+def test_strict_fails_when_fetch_down_even_with_cache(ig_dealing_rules):
+    """Strict must reject a submission when the current REST fails,
+    regardless of whether a stale cache exists."""
+    mod = ig_dealing_rules
+    import time
+    mod._inject_cache("CS.D.GBPUSD.TODAY.IP", 4.0, retrieved_at=time.time())
+    mod._stub_ig.market_responses["CS.D.GBPUSD.TODAY.IP"] = RuntimeError("api down")
+    v = mod.validate_stop(
+        epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+        requested_pips=5.0, strict=True,
+    )
+    assert v.allowed is False
+    assert v.reason_code == "NO_LIVE_RULE"
+    # Source is 'cached' (fetch failed, fell back to stored cache value)
+    # — but still fail-closed in strict.
+    assert v.rule_source in ("cached", "static_fallback")
+
+
+def test_missing_unit_rejected_in_patched_module(ig_dealing_rules):
+    """Brief correction 2: a dealing-rules response with no unit field
+    must NOT be silently treated as POINTS."""
+    mod = ig_dealing_rules
+    mod._stub_ig.market_responses["CS.D.GBPUSD.TODAY.IP"] = {
+        "dealingRules": {
+            "minNormalStopOrLimitDistance": {"value": 4.0},  # no unit
+        },
+    }
+    v = mod.validate_stop(
+        epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+        requested_pips=10.0, strict=True,
+    )
+    assert v.allowed is False
+    assert v.reason_code == "NO_LIVE_RULE"
+    assert v.rule_source == "static_fallback"
+
+
+def test_pips_unit_label_rejected(ig_dealing_rules):
+    """IG using 'PIPS' instead of 'POINTS' (hypothetical change) must
+    fail-closed — the module can only guarantee the conversion for the
+    exact POINTS unit."""
+    mod = ig_dealing_rules
+    mod._stub_ig.market_responses["CS.D.GBPUSD.TODAY.IP"] = {
+        "dealingRules": {
+            "minNormalStopOrLimitDistance": {"value": 4.0, "unit": "PIPS"},
+        },
+    }
+    v = mod.validate_stop(
+        epic="CS.D.GBPUSD.TODAY.IP", pair="GBPUSD",
+        requested_pips=10.0, strict=True,
+    )
+    assert v.allowed is False
+    assert v.reason_code == "NO_LIVE_RULE"
+
+
 def test_no_prod_writes_during_tests(tmp_path):
     """Verify the patched files do not have NEW write paths into /opt.
 
