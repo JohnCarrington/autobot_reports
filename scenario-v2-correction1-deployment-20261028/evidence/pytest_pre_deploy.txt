@@ -1,0 +1,16 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.0.2, pluggy-1.6.0
+rootdir: /home/autobot/tradingbot-wt/scenario-v2-reasoner-fix-20261028/scripts/research/live_obs
+plugins: anyio-4.12.1
+collected 120 items
+
+tests/test_caution_wait_correction1_20261028.py ...............          [ 12%]
+tests/test_recommendation_and_shadow.py ....................             [ 29%]
+tests/test_quality_and_publication_gate.py ................              [ 42%]
+tests/test_event_precondition_fix_20261028.py ..............             [ 54%]
+tests/test_opportunity_category_20261028.py ...........                  [ 63%]
+tests/test_trigger_evaluator_20261028.py .........................       [ 84%]
+tests/test_trigger_spec_consistency_20261028.py ..........               [ 92%]
+tests/test_cross_process_dedup_20261028.py .........                     [100%]
+
+============================= 120 passed in 0.35s ==============================

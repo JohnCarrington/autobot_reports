@@ -1,0 +1,18 @@
+Correction 1 deployment — SHA256 before and after
+=================================================
+Deployment timestamp: 2026-10-28T21:55:13Z
+
+BEFORE:
+  c8597ca0d124f82c31dc461f128f0220262cb4ea9195abf42636cf4a62755cbb  scenario_recommendation.py (baseline, matches 46f6185)
+  584c5ff02eacbd94ad3a39c0f4e0d873dc4e36afcc51bf54fb4ff3107aa123b8  scenario_reasoner.py (deployed P1+P2 aa6501e)
+  617f469113cadb8c998c3dcc047596b5ac457694d89589828f71f92d2836bbb0  scenario_quality.py (deployed P1+P2 aa6501e)
+
+AFTER:
+  fd00780ee602945bc22fccdd49d3551882a2101f0f943add1566d99abe10b1ee  scenario_recommendation.py (Correction 1, matches 6ec1987)
+  584c5ff02eacbd94ad3a39c0f4e0d873dc4e36afcc51bf54fb4ff3107aa123b8  scenario_reasoner.py (unchanged)
+  617f469113cadb8c998c3dcc047596b5ac457694d89589828f71f92d2836bbb0  scenario_quality.py (unchanged)
+
+BACKUP:
+  c8597ca0d124f82c31dc461f128f0220262cb4ea9195abf42636cf4a62755cbb  .backups/scenario_recommendation.py.pre-correction1-20261028T215513Z
+
+NOTE: Backup SHA256 is bit-identical to the pre-deploy production file.
