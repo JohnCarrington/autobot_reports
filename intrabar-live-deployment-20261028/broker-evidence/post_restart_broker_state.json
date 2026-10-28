@@ -1,0 +1,54 @@
+2026-10-28 21:00:18,945 [INFO] 🔑 IGService.create_session() attempt 1 (DEMO) …
+2026-10-28 21:00:18,945 [INFO] Creating new v2 session for user 'mrjohnnyb' at 'https://demo-api.ig.com/gateway/deal'
+2026-10-28 21:00:19,111 [INFO] POST '/session', resp 200
+2026-10-28 21:00:19,111 [INFO] ✅ IG login OK (IGService session established).
+2026-10-28 21:00:19,207 [INFO] GET '/accounts', resp 200
+2026-10-28 21:00:19,215 [INFO] 👤 Selected account: id=Z3G4CJ type=SPREADBET name='Spread bet' preferred=True (why=forced_by_env_IG_ACCOUNT_ID IG_ACCOUNT_ID=set IG_PRODUCT_TYPE=unset)
+2026-10-28 21:00:19,273 [INFO] PUT '/session', resp 412
+2026-10-28 21:00:19,273 [INFO] ℹ️ switch_account says account must be different (already active) — ignoring.
+2026-10-28 21:00:19,275 [INFO] ✅ Using account Z3G4CJ; CST/XST ready.
+{
+  "captured_utc": "2026-10-28T21:00:19.596709+00:00",
+  "account_id": "Z3G4CJ",
+  "working_orders": [],
+  "positions": [
+    {
+      "position": {
+        "contractSize": 1.0,
+        "createdDate": "2026/10/28 19:00:06:000",
+        "createdDateUTC": "2026-10-28T19:00:06",
+        "dealId": "DIAAAAYRNAKGGBZ",
+        "dealReference": "HBB-BBB-3214005565",
+        "size": 1.0,
+        "direction": "SELL",
+        "limitLevel": 13288.0,
+        "level": 13318.0,
+        "currency": "GBP",
+        "controlledRisk": false,
+        "stopLevel": 13341.9,
+        "trailingStep": null,
+        "trailingStopDistance": null,
+        "limitedRiskPremium": null
+      },
+      "market": {
+        "instrumentName": "GBP/USD",
+        "expiry": "DFB",
+        "epic": "CS.D.GBPUSD.TODAY.IP",
+        "instrumentType": "CURRENCIES",
+        "lotSize": 1.0,
+        "high": 13335.8,
+        "low": 13319.8,
+        "percentageChange": 0.01,
+        "netChange": 0.8,
+        "bid": 13321.3,
+        "offer": 13337.3,
+        "updateTime": "21:00:00",
+        "updateTimeUTC": "21:00:00",
+        "delayTime": 0,
+        "streamingPricesAvailable": true,
+        "marketStatus": "TRADEABLE",
+        "scalingFactor": 1
+      }
+    }
+  ]
+}
