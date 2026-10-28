@@ -1,0 +1,30 @@
+Loaded 223 M5 bars on 2026-10-28
+
+Per-bar evaluation (14:05 → 15:30 UTC):
+  2026-10-28T14:05  bar_close=13292.349999999999  SKIP: trigger not satisfied by bar OHLC
+  2026-10-28T14:10  bar_close=13288.05  SKIP: trigger not satisfied by bar OHLC
+  2026-10-28T14:15  bar_close=13291.25  SKIP: trigger not satisfied by bar OHLC
+  2026-10-28T14:20  bar_close=13291.55  SKIP: trigger not satisfied by bar OHLC
+  2026-10-28T14:25  bar_close=13290.150000000001  SKIP: trigger not satisfied by bar OHLC
+  2026-10-28T14:30  bar_close=13290.55  SKIP: trigger not satisfied by bar OHLC
+  2026-10-28T14:35  bar_close=13291.45  SKIP: trigger not satisfied by bar OHLC
+  2026-10-28T14:40  bar_close=13291.45  SKIP: trigger not satisfied by bar OHLC
+  2026-10-28T14:45  bar_close=13292.75  SKIP: trigger not satisfied by bar OHLC
+  2026-10-28T14:50  bar_close=13300.349999999999  FIRE at eval_ts=14:55:15  reason=trigger price_break_above level=13296.0 fired
+  2026-10-28T14:55  bar_close=13299.55  SKIP: already fired (dedup key hit)
+  2026-10-28T15:00  bar_close=13303.45  SKIP: already fired (dedup key hit)
+  2026-10-28T15:05  bar_close=13304.150000000001  SKIP: bar close too far past level_price 13296.0 (close=13304.150000000001)
+  2026-10-28T15:10  bar_close=13303.45  SKIP: already fired (dedup key hit)
+  2026-10-28T15:15  bar_close=13301.05  SKIP: already fired (dedup key hit)
+  2026-10-28T15:20  bar_close=13301.55  SKIP: already fired (dedup key hit)
+  2026-10-28T15:25  bar_close=13300.650000000001  SKIP: already fired (dedup key hit)
+  2026-10-28T15:30  bar_close=13304.45  SKIP: bar close too far past level_price 13296.0 (close=13304.45)
+
+Total fires: 1
+
+First fire: 2026-10-28T14:55:15+00:00
+Trigger-met time (bar close): 2026-10-28T14:55:00+00:00
+P3 publish latency: 15 s (0.2 min)
+Production publishable (observed): 2026-10-28T15:15:15+00:00
+Production publish latency: 1215 s (20.2 min)
+P3 improvement: 1200 s (20.0 min faster)

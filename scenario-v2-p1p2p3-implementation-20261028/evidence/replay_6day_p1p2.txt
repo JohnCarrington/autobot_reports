@@ -1,0 +1,20 @@
+Catalogue rows: 122; scenario revs loaded: 235
+Matched to scenario rows: 122
+wrote /tmp/replay_p1_outcome.csv
+
+=== Before/After publication_decision for 122 suppressed rows ===
+After decision distribution:
+  CAUTION               112
+  INVALID                 6
+  VALID                   4
+
+Transition by original outcome:
+  INSUFFICIENT_DATA            {'CAUTION': 4, 'VALID': 4}
+  UNRESOLVED_IN_HORIZON        {'CAUTION': 30, 'INVALID': 3}
+  SL_HIT                       {'CAUTION': 27, 'INVALID': 1}
+  TRIGGER_NEVER_MET            {'CAUTION': 24}
+  TP_HIT                       {'CAUTION': 27, 'INVALID': 2}
+
+Fed-only rows (n=52): {'VALID': 4, 'CAUTION': 44, 'INVALID': 4}
+CBI-only rows (n=61): {'CAUTION': 60, 'INVALID': 1}
+Mixed rows (n=5): {'CAUTION': 5}

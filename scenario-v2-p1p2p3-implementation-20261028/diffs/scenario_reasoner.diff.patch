@@ -1,0 +1,161 @@
+diff --git a/scripts/research/live_obs/agent/scenario_reasoner.py b/scripts/research/live_obs/agent/scenario_reasoner.py
+index b8d1fcf..161f562 100644
+--- a/scripts/research/live_obs/agent/scenario_reasoner.py
++++ b/scripts/research/live_obs/agent/scenario_reasoner.py
+@@ -182,6 +182,74 @@ SCENARIO_SYSTEM = (
+     "`release_at_utc` and `date_time_utc` on every event carry the "
+     "authoritative release timestamp; use them literally, do not "
+     "re-derive dates from weekday or hour.\n"
++    "  5b. OPPORTUNITY CATEGORIES (A / B / C). Every opportunity you "
++    "describe falls into exactly ONE category. State the category "
++    "implicitly by what you put into `required_price_behaviour` and "
++    "`opportunities[].trade_proposal.entry_trigger`:\n"
++    "    A. TECHNICAL — the entry trigger is a pure price-structure "
++    "condition (close above / below a named level, break of a swing, "
++    "retest of a pivot, acceptance beyond a BB, holding of a session "
++    "high) and depends on NO economic event. For category A, "
++    "`required_price_behaviour` and `trade_proposal.entry_trigger` "
++    "MUST describe ONLY the price-structure condition. Any upcoming "
++    "SCHEDULED event is background risk, not a precondition — mention "
++    "it in `narrative` or `current_interpretation` as context, never "
++    "inside the trigger. Phrase the context neutrally (e.g. 'Fed "
++    "decision 18:00Z adds volatility risk after target') NOT as a "
++    "catalyst requirement (NEVER 'post-Fed dovish surprise confirmed, "
++    "THEN break above …').\n"
++    "    B. SCHEDULED-CONTEXT — a SCHEDULED (UPCOMING) economic event "
++    "is relevant background: it influences position size, stop width, "
++    "or the operator's willingness to hold through the release. "
++    "Narrate the event in `narrative` or `current_interpretation` as "
++    "'SCHEDULED at HH:MMZ, may add volatility'. Do NOT describe the "
++    "event's hypothetical outcome inside `required_price_behaviour`.\n"
++    "    C. EVENT-DEPENDENT — the opportunity GENUINELY REQUIRES a "
++    "VERIFIED release before it can arm. Category C is only "
++    "appropriate when `economic_context.released` contains the event "
++    "with a RELEASED status AND an actual value present, OR when the "
++    "setup is intrinsically post-announcement (fade of a confirmed "
++    "surprise, mean-reversion after a verified miss, etc.).  For "
++    "category C, you MAY cite the verified event in the trigger text, "
++    "and the opportunity's `kind` should typically be "
++    "`SUBSEQUENT_REVERSAL` or the trigger should mention 'post-release' "
++    "with the RELEASED event name.  **You MUST NOT write a category-C "
++    "trigger that references an event in `economic_context.scheduled` "
++    "(not yet released) as if it were released.** If you want to say "
++    "'IF the Fed is dovish THEN BUY above 1.3300', that is a "
++    "conditional category-C narrative that belongs in `narrative`, not "
++    "in `required_price_behaviour` — the operator must not act on it "
++    "until the event is in `.released` with an actual value.\n"
++    "  Default assumption: if the price-structure justifies the trade "
++    "on its own merits, treat it as category A. Only use category C "
++    "when the thesis OBJECTIVELY requires a verified release.\n"
++    "  5c. OPPORTUNITY CATEGORY FIELD. Every opportunity you emit "
++    "MUST carry `opportunities[*].category` with value \"A\", \"B\", "
++    "or \"C\" matching the semantics in rule 5b. Omitting the field "
++    "will be flagged WARN (`UNDECLARED_OPPORTUNITY_CATEGORY`) and the "
++    "opportunity will be degraded to CAUTION. For category A, "
++    "`required_price_behaviour` MUST NOT contain the name of any "
++    "SCHEDULED/UNVERIFIED/EXPIRED event (narrating the event in "
++    "`narrative` is fine). For category C, you MUST additionally "
++    "cite the RELEASED event you depend on by name AND the direction "
++    "of the required outcome; the validator will reject category C "
++    "opportunities whose referenced event is not in "
++    "`economic_context.released` with an actual value.\n"
++    "  5d. TRIGGER_SPEC — MACHINE-READABLE ENTRY CONDITION. Every "
++    "opportunity SHOULD carry `opportunities[*].trigger_spec` with a "
++    "structured description of the entry condition the per-bar "
++    "deterministic evaluator can check. Supported `type` values: "
++    "`price_break_above` (bar close >= `level_price`), "
++    "`price_break_below` (bar close <= `level_price`), "
++    "`price_touch` (bar.high >= level or bar.low <= level — intent-"
++    "neutral). Also optional: `require_confirmed_close` (default "
++    "true for break_*), `entry_tolerance_pts` (default 8), "
++    "`valid_until_utc` and `max_bars_from_proposal`. If the entry "
++    "condition cannot be expressed as a pure price level (e.g. NMS-"
++    "state-dependent, pattern-dependent, multi-condition composite), "
++    "set `allow_discretion: true` INSTEAD of emitting an incomplete "
++    "`trigger_spec`. Do NOT invent machine-readable conditions from "
++    "subjective trading judgement — the brief is explicit on this.\n"
+     "  6. FORWARD-LOOKING FRAMING. anticipated_sequence describes what "
+     "price MAY traverse NEXT, conditional on specified behaviour. Phrase "
+     "each destination note in the conditional ('would require...', "
+@@ -239,6 +307,51 @@ TRADE_PROPOSAL_SCHEMA = {
+     },
+ }
+ 
++# P3 — machine-readable trigger specification.
++# Written by the reasoner for every opportunity whose entry trigger
++# can be expressed as a deterministic price condition.  Read by the
++# per-bar trigger evaluator (`trigger_evaluator.py`).  See brief P3.
++#
++# All fields are optional at the schema level; the validator cross-
++# checks presence against `allow_discretion`.
++TRIGGER_SPEC_SCHEMA = {
++    "type": "object",
++    "additionalProperties": False,
++    "properties": {
++        "type": {"oneOf": [
++            {"type": "string",
++             "enum": ["price_break_above", "price_break_below", "price_touch"]},
++            {"type": "null"}]},
++        # Price level in GBPUSD points (1.2727 → 12727.0).  Required
++        # when `type` is set.  Operator may use a different pair in
++        # the future.
++        "level_price": {"oneOf": [{"type": "number"}, {"type": "null"}]},
++        # Optional confirmation: when true, the trigger does not fire
++        # until a bar CLOSES beyond the level; a wick-only touch does
++        # not fire.  Default: true for price_break_*, false for
++        # price_touch.
++        "require_confirmed_close": {"oneOf": [{"type": "boolean"},
++                                                {"type": "null"}]},
++        # Entry-price tolerance in points.  The trigger evaluator
++        # publishes only if the bar close is within this many pips
++        # of ``level_price``.  Protects against publishing an entry
++        # that is already stale (e.g. price gapped 20 p past level).
++        # Default: 8.
++        "entry_tolerance_pts": {"oneOf": [{"type": "number"},
++                                           {"type": "null"}]},
++        # Absolute UTC time after which the trigger is no longer
++        # eligible to fire.  Default: scenario revision + 24 h.
++        "valid_until_utc": {"oneOf": [{"type": "string", "maxLength": 32},
++                                        {"type": "null"}]},
++        # Maximum number of M5 bars after the scenario revision in
++        # which the trigger may fire.  Zero or null → no limit beyond
++        # ``valid_until_utc``.  Default: 60.
++        "max_bars_from_proposal": {"oneOf": [{"type": "integer"},
++                                               {"type": "null"}]},
++    },
++}
++
++
+ OPPORTUNITY_SCHEMA = {
+     "type": "object",
+     "additionalProperties": False,
+@@ -254,8 +367,29 @@ OPPORTUNITY_SCHEMA = {
+         "structural_target": {"oneOf": [{"type": "string", "maxLength": 32},
+                                         {"type": "null"}]},
+         "note": {"type": "string", "maxLength": 180},
++        # P2 — explicit opportunity category.  Optional in schema
++        # (backward-compat for scenarios that haven't been upgraded),
++        # but the validator fires `UNDECLARED_OPPORTUNITY_CATEGORY`
++        # WARN when missing.
++        #   A — TECHNICAL: independent price trigger, no event prereq.
++        #   B — SCHEDULED-CONTEXT: event is relevant context but
++        #       entry is still a technical condition.
++        #   C — EVENT-DEPENDENT: trigger requires a VERIFIED release.
++        "category": {"oneOf": [
++            {"type": "string", "enum": ["A", "B", "C"]},
++            {"type": "null"}]},
+         # NEW — structured, machine-readable proposal values. Optional.
+         "trade_proposal": TRADE_PROPOSAL_SCHEMA,
++        # P3 — machine-readable trigger for deterministic evaluation.
++        # Optional; required to be filled unless `allow_discretion`
++        # is explicitly True.
++        "trigger_spec": TRIGGER_SPEC_SCHEMA,
++        # P3 — explicit opt-out of deterministic trigger evaluation.
++        # When True, the per-bar trigger evaluator will NOT publish
++        # on this opportunity; the opportunity remains AI-evaluated
++        # via the existing periodic shadow-exec sweep.
++        "allow_discretion": {"oneOf": [{"type": "boolean"},
++                                         {"type": "null"}]},
+     },
+ }
+ 

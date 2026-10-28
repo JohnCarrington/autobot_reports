@@ -1,0 +1,260 @@
+diff --git a/scripts/research/live_obs/agent/scenario_quality.py b/scripts/research/live_obs/agent/scenario_quality.py
+index 37fb48a..ba461ae 100644
+--- a/scripts/research/live_obs/agent/scenario_quality.py
++++ b/scripts/research/live_obs/agent/scenario_quality.py
+@@ -92,7 +92,17 @@ _PACKET_COUNT_FIELDS = (
+ )
+ 
+ _UNVERIFIED_REFERENCE_PATTERN = re.compile(
+-    r"\b(if released|awaits|awaiting|anticipate|catalyst)\b",
++    # Explicit anticipatory wording only.  'Catalyst' alone was in the
++    # original pattern but it also matches retrospective sentences
++    # like 'Budget EXPIRED, catalyst removed', producing false
++    # positives on legitimate acknowledgements that a release has
++    # passed without data.  Anticipatory sentences will carry one of
++    # the explicit phrases below.
++    r"\b(if released|awaits|awaiting|anticipate|pending (?:release|data))\b"
++    # Compound 'upcoming catalyst' / 'anticipated catalyst' still fire
++    # because the leading 'awaits'/'anticipate' / 'pending' matches.
++    r"|\bupcoming\s+catalyst\b"
++    r"|\banticipated\s+catalyst\b",
+     flags=re.IGNORECASE,
+ )
+ 
+@@ -339,6 +349,25 @@ def _validate_unverified_event_references(assessment, economic_context, flags):
+     EXPIRED events (release time passed but no actual recorded) are
+     legitimate to discuss retrospectively but MUST NOT be treated as
+     upcoming announcements.
++
++    Token-overlap disambiguation (2026-10-28 incident fix):
++    When a quarantined event's token also identifies a DIFFERENT
++    (non-quarantined) event in the same context, that token is too
++    weak to attribute a flag to the quarantined event.  Example:
++    'Atlanta Fed GDPNow' (UNVERIFIED) and 'Fed Interest Rate
++    Decision' (SCHEDULED) share the token 'fed'.  The bare word
++    'fed' in the scenario text identifies the scheduled event's
++    name; firing a flag on it over-attributes the reference to the
++    quarantined event.  Only tokens UNIQUE to the quarantined event
++    (atlanta, gdpnow) remain.
++
++    Preserved: if the quarantined event has a SAME-NAME non-
++    quarantined sibling (the classic UNVERIFIED stale-duplicate case
++    — e.g., 'CBI Business Optimism Index' RELEASED yesterday AND
++    'CBI Business Optimism Index' UNVERIFIED today), the common
++    tokens remain in the quarantined set.  Mentioning the same name
++    IS ambiguous between retrospective and anticipatory, and the
++    'if released'/'anticipate' pattern already discriminates intent.
+     """
+     econ = economic_context or {}
+     quarantined = {
+@@ -347,12 +376,39 @@ def _validate_unverified_event_references(assessment, economic_context, flags):
+     }
+     if not quarantined:
+         return
++    # Build per-non-quarantined event token sets.  A quarantined-event
++    # token is "weak" if it is contained in some other-NAME event's
++    # token set; it is "strong" if either (a) it is unique to the
++    # quarantined event, OR (b) it is shared only with a same-NAME
++    # non-quarantined sibling (the stale-duplicate preserve case).
++    non_quarantined_by_name: dict[str, set[str]] = {}
++    for bucket in ("scheduled", "released"):
++        for name, toks in _event_bucket_token_map(econ, bucket).items():
++            non_quarantined_by_name[name] = toks
++    quarantined_disambiguated: dict[str, set[str]] = {}
++    for q_name, q_toks in quarantined.items():
++        kept: set[str] = set()
++        for tok in q_toks:
++            weak = False
++            for other_name, other_toks in non_quarantined_by_name.items():
++                if other_name == q_name:
++                    # Same-name sibling: preserve this token.
++                    continue
++                if tok in other_toks:
++                    weak = True
++                    break
++            if not weak:
++                kept.add(tok)
++        if kept:
++            quarantined_disambiguated[q_name] = kept
++    if not quarantined_disambiguated:
++        return
+     # Pre-compute per-name positive token lookup for fast containment.
+     for path, text in _iter_strings(assessment):
+         text_l = text.lower()
+         if not _UNVERIFIED_REFERENCE_PATTERN.search(text_l):
+             continue
+-        for name, tokens in quarantined.items():
++        for name, tokens in quarantined_disambiguated.items():
+             if any(t in text_l for t in tokens):
+                 flags.append(QualityFlag(
+                     code="UNVERIFIED_EVENT_AS_CATALYST",
+@@ -422,6 +478,158 @@ def _validate_directional_reconciliation(assessment, primary, flags):
+     ))
+ 
+ 
++# ---------------------------------------------------------------------
++# P2 — Opportunity category (A/B/C) validators + field-weight asymmetry
++# ---------------------------------------------------------------------
++
++# Trigger-side fields.  A reference to an UNVERIFIED/EXPIRED event in
++# one of these fields is HIGH; in any other field it is WARN (and the
++# downstream publication gate collapses WARN → CAUTION).
++_TRIGGER_SIDE_FIELD_MARKERS = (
++    "required_price_behaviour",
++    "trade_proposal.entry_trigger",
++    "trigger_spec",
++)
++
++
++def _is_trigger_side(where: str) -> bool:
++    return any(m in (where or "") for m in _TRIGGER_SIDE_FIELD_MARKERS)
++
++
++def _apply_field_weight_asymmetry(flags: list) -> list:
++    """Downgrade `UNVERIFIED_EVENT_AS_CATALYST` HIGH fires on
++    narrative-only fields to WARN.  Trigger-side fires stay HIGH.
++
++    See P2 brief: narrative-only references should not block an
++    otherwise independent technical opportunity.
++    """
++    out = []
++    for f in flags:
++        if f.code != "UNVERIFIED_EVENT_AS_CATALYST":
++            out.append(f)
++            continue
++        if _is_trigger_side(f.where):
++            out.append(f)  # keep HIGH
++            continue
++        # Narrative-side citation → WARN.  Detail prefix annotates
++        # the downgrade for auditability.
++        out.append(QualityFlag(
++            code=f.code,
++            severity="WARN",
++            where=f.where,
++            detail=f"[FIELD_WEIGHT_ASYMMETRY: narrative-only → WARN] "
++                    f"{f.detail}",
++        ))
++    return out
++
++
++def _collect_opportunities(assessment: dict) -> list[tuple[str, dict]]:
++    """Return list of (path, opp_dict) for every opportunity."""
++    out = []
++    for a_idx, act in enumerate(assessment.get("actions") or []):
++        if not isinstance(act, dict):
++            continue
++        for o_idx, opp in enumerate(act.get("opportunities") or []):
++            if isinstance(opp, dict):
++                out.append((f"actions[{a_idx}].opportunities[{o_idx}]", opp))
++    return out
++
++
++def _event_name_tokens_in(text: str, event_name: str) -> bool:
++    """Return True if the TEXT contains at least one UNIQUE-token
++    (post-stopword) of the event_name."""
++    tokens = _event_name_tokens(event_name)
++    if not tokens:
++        return False
++    tl = text.lower()
++    return any(t in tl for t in tokens)
++
++
++def _validate_opportunity_category(assessment, economic_context, flags):
++    """Three families of checks over the explicit `category` field.
++
++    (1) UNDECLARED_OPPORTUNITY_CATEGORY — WARN when category missing.
++    (2) CATEGORY_A_TRIGGER_WITH_EVENT_NAME — HIGH when category=A and
++        a trigger field cites any event name (regardless of status).
++    (3) CATEGORY_C_WITHOUT_VERIFIED_RELEASE — HIGH when category=C but
++        the opportunity's narrative/text does not reference an event
++        in `economic_context.released`.
++    """
++    econ = economic_context or {}
++    released_names = {(e.get("name") or "").strip().lower()
++                       for e in econ.get("released") or []
++                       if (e.get("name") or "").strip()}
++    # Union of ALL event names (any status) — used by category-A check.
++    all_event_names = set()
++    for bucket in ("scheduled", "released", "expired", "unverified"):
++        for e in econ.get(bucket) or []:
++            n = (e.get("name") or "").strip()
++            if n:
++                all_event_names.add(n)
++
++    for path, opp in _collect_opportunities(assessment):
++        category = (opp.get("category") or "").upper() if isinstance(
++            opp.get("category"), str) else None
++        direction = (opp.get("direction") or "").upper()
++        if direction not in ("BUY", "SELL"):
++            # WAIT / null — no category requirement.
++            continue
++        if not category:
++            flags.append(QualityFlag(
++                code="UNDECLARED_OPPORTUNITY_CATEGORY",
++                severity="WARN",
++                where=f"{path}.category",
++                detail=(f"opportunity direction={direction} but "
++                         f"category field missing/null; defaulting "
++                         f"to CAUTION publication"),
++            ))
++            continue
++        # Collect trigger-side text for this opportunity
++        trigger_text_parts = [opp.get("required_price_behaviour") or ""]
++        tp = opp.get("trade_proposal") or {}
++        if isinstance(tp, dict):
++            trigger_text_parts.append(tp.get("entry_trigger") or "")
++        trigger_text = " ".join(trigger_text_parts).strip()
++
++        if category == "A":
++            # Any event name token in the trigger text → HIGH.
++            for name in all_event_names:
++                if _event_name_tokens_in(trigger_text, name):
++                    flags.append(QualityFlag(
++                        code="CATEGORY_A_TRIGGER_WITH_EVENT_NAME",
++                        severity="HIGH",
++                        where=f"{path}.required_price_behaviour",
++                        detail=(f"category=A trigger text references "
++                                 f"event '{name}'; A triggers must be "
++                                 f"pure price conditions.  "
++                                 f"Excerpt: {trigger_text[:160]}"),
++                    ))
++                    break
++        elif category == "C":
++            # Must cite a RELEASED event by name in trigger OR note.
++            full_text = " ".join([
++                trigger_text,
++                opp.get("note") or "",
++            ])
++            cites_released = False
++            for name in released_names:
++                if _event_name_tokens_in(full_text, name):
++                    cites_released = True
++                    break
++            if not cites_released:
++                flags.append(QualityFlag(
++                    code="CATEGORY_C_WITHOUT_VERIFIED_RELEASE",
++                    severity="HIGH",
++                    where=f"{path}.category",
++                    detail=(f"category=C declared but opportunity "
++                             f"text does not cite any event in "
++                             f"economic_context.released. Category C "
++                             f"requires a VERIFIED release before "
++                             f"authorisation.  Excerpt: "
++                             f"{full_text[:160]}"),
++                ))
++
++
+ # ---------------------------------------------------------------------
+ # Entry point
+ # ---------------------------------------------------------------------
+@@ -446,6 +654,10 @@ def validate_assessment(*,
+             assessment, economic_context, flags)
+         _validate_directional_reconciliation(
+             assessment, primary_decision, flags)
++        # P2 — category validation + field-weight asymmetry.
++        _validate_opportunity_category(
++            assessment, economic_context, flags)
++        flags = _apply_field_weight_asymmetry(flags)
+     except Exception as exc:  # defensive
+         flags.append(QualityFlag(
+             code="VALIDATOR_ERROR", severity="WARN", where=".",

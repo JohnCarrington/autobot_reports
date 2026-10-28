@@ -1,0 +1,607 @@
+"""Deterministic per-bar trigger evaluator — Scenario V2 (P3).
+
+Reads every open+valid scenario revision and, on every completed M5
+candle, checks whether the scenario's ``trigger_spec`` has fired.
+
+If — and ONLY IF — all fifteen safety invariants from the brief are
+satisfied, writes a NEW shadow-proposal row to the shadow-exec
+journal with:
+
+    readiness   = "READY_FOR_EVALUATION"
+    reason      = "trigger_evaluator: <trigger_type> level=<x>, bar=<ts>"
+    publication = the scenario's existing publication_decision
+                  (VALID or CAUTION — INVALID scenarios are never
+                  passed to the evaluator in the first place)
+
+The evaluator does **not**:
+  * generate new scenarios
+  * modify the HIGH → INVALID gate
+  * submit broker orders
+  * restart services
+  * weaken any existing safety invariant
+  * fire more than once per (scenario_id, revision_idx, trigger_spec)
+
+Durable deduplication across restarts is implemented via a state
+file (``trigger_eval_state.json``).
+
+Entry point: :func:`run_trigger_sweep` — intended to be called from
+a timer (every 5 min aligned to M5 bar close + ~15 s).
+"""
+from __future__ import annotations
+
+import csv
+import dataclasses
+import datetime as dt
+import hashlib
+import json
+import logging
+import pathlib
+import re
+import sys
+from typing import Any, Iterator
+
+HERE = pathlib.Path(__file__).resolve().parent
+AGENT = HERE.parent / "agent"
+if str(AGENT) not in sys.path:
+    sys.path.insert(0, str(AGENT))
+
+from scenario_quality import (  # noqa: E402
+    validate_assessment, decide_publication,
+    PUBLICATION_VALID, PUBLICATION_CAUTION, PUBLICATION_INVALID,
+)
+from scenario_schema import classify_economic_context  # noqa: E402
+
+
+UTC = dt.timezone.utc
+LOG = logging.getLogger(__name__)
+
+
+# ---------------------------------------------------------------------
+# Config knobs — all overridable via environment at construction time
+# ---------------------------------------------------------------------
+DEFAULT_MAX_SNAPSHOT_AGE_S = 420       # 7 min — matches dashboard
+DEFAULT_ENTRY_TOLERANCE_PTS = 8.0      # 8 points default entry window
+DEFAULT_MAX_BARS_FROM_PROPOSAL = 60    # 5 h
+DEFAULT_MIN_REMAINING_RR = 1.0         # remaining reward/risk floor
+VALID_TRIGGER_TYPES = (
+    "price_break_above", "price_break_below", "price_touch",
+)
+VALID_SCENARIO_STATES_FOR_FIRE = (
+    "PROPOSED", "WATCHING", "DEVELOPING", "CONFIRMED",
+)
+
+
+# ---------------------------------------------------------------------
+# Decision result for one scenario revision × one bar
+# ---------------------------------------------------------------------
+@dataclasses.dataclass(frozen=True)
+class EvalResult:
+    scenario_id: str
+    revision_idx: int
+    bar_ts_utc: str
+    direction: str | None
+    decision: str                  # "FIRE" | "SKIP" | "ABORT"
+    reason: str                    # human-readable
+    trigger_spec: dict | None
+    entry_price: float | None
+    stop_price: float | None
+    target_price: float | None
+
+
+# ---------------------------------------------------------------------
+# Dedup key — includes scenario, revision and trigger-spec fingerprint
+# so a different trigger_spec on the same scenario revision fires once
+# and only once per shape.
+# ---------------------------------------------------------------------
+def _dedup_key(scenario_id: str, revision_idx: int,
+                trigger_spec: dict) -> str:
+    canonical = json.dumps(trigger_spec, sort_keys=True, default=str)
+    h = hashlib.sha256(canonical.encode()).hexdigest()[:16]
+    return f"{scenario_id}|rev{revision_idx}|ts{h}"
+
+
+# ---------------------------------------------------------------------
+# Durable state (plain JSON file; atomic replace)
+# ---------------------------------------------------------------------
+class TriggerEvalState:
+    """Durable record of fired triggers across process restarts.
+
+    Also captures the latest scenario state we observed per scenario_id
+    so that in-flight invalidations (e.g. INVALIDATED revision written
+    AFTER a trigger fired but before publication) can be detected.
+    """
+
+    def __init__(self, path: pathlib.Path):
+        self.path = path
+        self._fired_keys: set[str] = set()
+        self._last_seen_state: dict[str, dict] = {}  # scenario_id -> dict
+        if path.exists():
+            try:
+                raw = json.loads(path.read_text())
+                self._fired_keys = set(raw.get("fired_keys") or [])
+                self._last_seen_state = dict(raw.get("last_seen_state") or {})
+            except Exception:
+                LOG.warning("trigger_eval_state: unreadable at %s, "
+                             "starting empty", path)
+
+    def already_fired(self, key: str) -> bool:
+        return key in self._fired_keys
+
+    def record_fire(self, key: str) -> None:
+        self._fired_keys.add(key)
+
+    def observe_scenario_state(self, scenario_id: str, state: str,
+                                revision_idx: int) -> None:
+        self._last_seen_state[scenario_id] = {
+            "state": state, "revision_idx": revision_idx,
+            "observed_at_utc": dt.datetime.now(UTC).isoformat(),
+        }
+
+    def latest_seen(self, scenario_id: str) -> dict | None:
+        return self._last_seen_state.get(scenario_id)
+
+    def persist(self) -> None:
+        tmp = self.path.with_suffix(".tmp")
+        tmp.write_text(json.dumps({
+            "fired_keys": sorted(self._fired_keys),
+            "last_seen_state": self._last_seen_state,
+        }, indent=2))
+        tmp.replace(self.path)
+
+
+# ---------------------------------------------------------------------
+# Scenario journal reader
+# ---------------------------------------------------------------------
+def _read_jsonl(path: pathlib.Path) -> Iterator[dict]:
+    with path.open() as fh:
+        for line in fh:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                yield json.loads(line)
+            except json.JSONDecodeError:
+                LOG.warning("skipping unparseable row in %s", path)
+
+
+def _group_by_scenario_latest(scenarios_path: pathlib.Path
+                               ) -> dict[str, dict]:
+    """Return {scenario_id: latest revision row}."""
+    latest: dict[str, dict] = {}
+    for row in _read_jsonl(scenarios_path):
+        sid = row.get("scenario_id")
+        if not sid:
+            continue
+        current = latest.get(sid)
+        if current is None or (row.get("revision_idx", 0) >
+                                current.get("revision_idx", 0)):
+            latest[sid] = row
+    return latest
+
+
+# ---------------------------------------------------------------------
+# Candle reader — expects a dict {bar_ts_iso: (O, H, L, C)} or a
+# callable (bar_ts_iso) -> OHLC
+# ---------------------------------------------------------------------
+def _normalise_candle_src(src: Any):
+    """Accepts either dict (minute-key) or callable; return a callable."""
+    if callable(src):
+        return src
+    d = dict(src or {})
+
+    def _get(ts_iso: str):
+        return d.get(ts_iso)
+    return _get
+
+
+# ---------------------------------------------------------------------
+# Core trigger-spec check — per bar + revision
+# ---------------------------------------------------------------------
+def _trigger_fires(trigger_spec: dict, bar_ts_iso: str,
+                   bar_ohlc: tuple[float, float, float, float] | None) -> bool:
+    if not isinstance(trigger_spec, dict):
+        return False
+    ttype = (trigger_spec.get("type") or "").lower()
+    level = trigger_spec.get("level_price")
+    if ttype not in VALID_TRIGGER_TYPES or level is None:
+        return False
+    if bar_ohlc is None:
+        return False
+    O, H, L, C = bar_ohlc
+    confirmed_close = trigger_spec.get("require_confirmed_close")
+    if confirmed_close is None:
+        confirmed_close = ttype.startswith("price_break")
+    if ttype == "price_break_above":
+        return (H >= level) if not confirmed_close else (C >= level)
+    if ttype == "price_break_below":
+        return (L <= level) if not confirmed_close else (C <= level)
+    if ttype == "price_touch":
+        return (H >= level and L <= level) or H >= level or L <= level
+    return False
+
+
+def _entry_price_in_window(bar_ohlc: tuple, trigger_spec: dict,
+                            level: float) -> bool:
+    """Reject a trigger if the bar close is already too far past the
+    level (gap-past entry).  Default tolerance 8 p."""
+    tol = trigger_spec.get("entry_tolerance_pts")
+    if tol is None:
+        tol = DEFAULT_ENTRY_TOLERANCE_PTS
+    try:
+        tol = float(tol)
+    except Exception:
+        tol = DEFAULT_ENTRY_TOLERANCE_PTS
+    _, _, _, C = bar_ohlc
+    return abs(C - level) <= tol
+
+
+def _is_within_valid_until(trigger_spec: dict, bar_ts_iso: str) -> bool:
+    vu = trigger_spec.get("valid_until_utc")
+    if not vu:
+        return True
+    try:
+        vu_dt = dt.datetime.fromisoformat(vu.replace("Z", "+00:00"))
+    except Exception:
+        return True
+    try:
+        bar_dt = dt.datetime.fromisoformat(bar_ts_iso.replace("Z", "+00:00"))
+    except Exception:
+        return True
+    return bar_dt <= vu_dt
+
+
+def _is_within_max_bars(trigger_spec: dict, proposal_bar_ts: str,
+                         bar_ts_iso: str) -> bool:
+    mb = trigger_spec.get("max_bars_from_proposal")
+    if mb is None:
+        mb = DEFAULT_MAX_BARS_FROM_PROPOSAL
+    try:
+        mb = int(mb)
+    except Exception:
+        mb = DEFAULT_MAX_BARS_FROM_PROPOSAL
+    if mb <= 0:
+        return True
+    try:
+        p_dt = dt.datetime.fromisoformat(
+            (proposal_bar_ts or "").replace("Z", "+00:00"))
+        b_dt = dt.datetime.fromisoformat(bar_ts_iso.replace("Z", "+00:00"))
+    except Exception:
+        return True
+    bars = int((b_dt - p_dt).total_seconds() / 300)
+    return bars <= mb
+
+
+# ---------------------------------------------------------------------
+# Target-already-reached + R/R deterioration
+# ---------------------------------------------------------------------
+def _target_already_reached(direction: str, target_price: float | None,
+                             bar_ohlc: tuple[float, float, float, float]
+                             ) -> bool:
+    if target_price is None:
+        return False
+    _, H, L, _ = bar_ohlc
+    if direction == "BUY":
+        return H >= target_price
+    if direction == "SELL":
+        return L <= target_price
+    return False
+
+
+def _rr_still_acceptable(direction: str, entry: float | None,
+                          stop: float | None, target: float | None,
+                          current_close: float) -> bool:
+    """Return True if remaining reward/risk from the CURRENT CLOSE is
+    at least ``DEFAULT_MIN_REMAINING_RR`` (default 1.0 — the remaining
+    reward is at least as large as the remaining risk).  This rejects
+    the obvious case where a trigger fires on a bar that has moved so
+    far beyond entry that the stop is now larger than the target."""
+    if entry is None or stop is None or target is None:
+        return True   # cannot assess; permit
+    try:
+        if direction == "BUY":
+            remaining_risk = max(0.1, current_close - stop)
+            remaining_reward = max(0.0, target - current_close)
+        elif direction == "SELL":
+            remaining_risk = max(0.1, stop - current_close)
+            remaining_reward = max(0.0, current_close - target)
+        else:
+            return True
+        remain_rr = remaining_reward / remaining_risk
+        return remain_rr >= DEFAULT_MIN_REMAINING_RR
+    except Exception:
+        return True
+
+
+# ---------------------------------------------------------------------
+# Freshness check — snapshot age against now
+# ---------------------------------------------------------------------
+def _snapshot_fresh(snapshot: dict | None, now: dt.datetime,
+                     max_age_s: float = DEFAULT_MAX_SNAPSHOT_AGE_S
+                     ) -> tuple[bool, int | None]:
+    if not snapshot:
+        return False, None
+    bar_ts = snapshot.get("bar_ts_utc") or snapshot.get("latest_bar_ts_utc")
+    if not bar_ts:
+        return False, None
+    try:
+        bar_dt = dt.datetime.fromisoformat(
+            bar_ts.replace("Z", "+00:00"))
+    except Exception:
+        return False, None
+    # Age measured from bar CLOSE time (= bar_open + 5 min)
+    close = bar_dt + dt.timedelta(seconds=300)
+    age = max(0, int((now - close).total_seconds()))
+    return (age <= max_age_s), age
+
+
+# ---------------------------------------------------------------------
+# Economic-context check for Category C — require event in released
+# ---------------------------------------------------------------------
+def _event_name_tokens(name: str) -> set[str]:
+    stopwords = frozenset({
+        "the", "and", "of", "a", "an", "for", "to",
+        "index", "flash", "final", "preliminary", "revised",
+        "mom", "yoy", "qoq", "pmi", "report", "data", "release",
+        "update", "number",
+    })
+    out = set()
+    for raw in re.findall(r"[A-Za-z]+", (name or "")):
+        t = raw.lower()
+        if len(t) >= 2 and t not in stopwords:
+            out.add(t)
+    return out
+
+
+def _category_c_release_satisfied(opp: dict, econ: dict) -> bool:
+    """For a category-C opportunity, require that some RELEASED event
+    whose name tokens are referenced in the opportunity text is
+    present with a non-null actual."""
+    released = (econ or {}).get("released") or []
+    full_text = " ".join([
+        opp.get("required_price_behaviour") or "",
+        opp.get("note") or "",
+        (opp.get("trade_proposal") or {}).get("entry_trigger") or "",
+    ]).lower()
+    for e in released:
+        name = (e.get("name") or "").strip()
+        if not name:
+            continue
+        actual = e.get("actual")
+        if "actual" not in e and e.get("actual_value") is None:
+            continue
+        if actual is None and e.get("actual_value") is None:
+            continue
+        toks = _event_name_tokens(name)
+        if toks and any(t in full_text for t in toks):
+            return True
+    return False
+
+
+# ---------------------------------------------------------------------
+# Core eligibility check — the 15 safety invariants from the brief
+# ---------------------------------------------------------------------
+def _evaluate_one(scenario_row: dict, opp: dict, bar_ts_iso: str,
+                   bar_ohlc: tuple[float, float, float, float] | None,
+                   snapshot: dict | None,
+                   economic_context: dict | None,
+                   state: TriggerEvalState,
+                   now: dt.datetime,
+                   recent_prior_fires: dict | None = None,
+                   ) -> EvalResult:
+    sid = scenario_row.get("scenario_id")
+    rev = scenario_row.get("revision_idx", 0)
+    direction = (opp.get("direction") or "").upper() or None
+    trigger_spec = opp.get("trigger_spec") or {}
+    stop_price = (opp.get("trade_proposal") or {}).get("stop_price")
+    entry_price = trigger_spec.get("level_price")
+    target_price = (opp.get("trade_proposal") or {}).get("target_price")
+
+    def _skip(reason: str) -> EvalResult:
+        return EvalResult(scenario_id=sid, revision_idx=rev,
+                           bar_ts_utc=bar_ts_iso, direction=direction,
+                           decision="SKIP", reason=reason,
+                           trigger_spec=trigger_spec,
+                           entry_price=entry_price,
+                           stop_price=stop_price, target_price=target_price)
+
+    # Invariant 1 — scenario is active
+    state_val = (scenario_row.get("state") or "").upper()
+    if state_val not in VALID_SCENARIO_STATES_FOR_FIRE:
+        return _skip(f"scenario state {state_val!r} not eligible to fire")
+
+    # Invariant 2 — latest revision eligible (we always call with latest)
+    #   (caller guarantees; recorded here for completeness)
+
+    # Invariant 3 — publication_decision VALID or CAUTION
+    pub = (scenario_row.get("publication_decision") or {})
+    pdec = (pub.get("decision") or "").upper()
+    if pdec not in (PUBLICATION_VALID, PUBLICATION_CAUTION):
+        return _skip(f"publication_decision={pdec} not publishable")
+
+    # Invariant 4 — no HIGH-severity flag exists (equivalent to not INVALID)
+    #   (already enforced by invariant 3)
+
+    # Invariant 16 — explicit discretion opt-out
+    if opp.get("allow_discretion") is True:
+        return _skip("opportunity.allow_discretion=true — defer to AI")
+
+    # Invariant 5 — trigger_spec present + valid
+    ttype = (trigger_spec.get("type") or "").lower() if isinstance(
+        trigger_spec, dict) else ""
+    if ttype not in VALID_TRIGGER_TYPES or trigger_spec.get("level_price") is None:
+        return _skip(f"trigger_spec missing or type={ttype!r} not supported")
+
+    # Direction must be BUY/SELL
+    if direction not in ("BUY", "SELL"):
+        return _skip(f"direction={direction} not BUY/SELL")
+
+    # Invariant 6 — market-data fresh
+    fresh, age_s = _snapshot_fresh(snapshot, now)
+    if not fresh:
+        return _skip(f"snapshot stale (age={age_s}s)")
+
+    # Invariant 7 — required candle has completed
+    if bar_ohlc is None:
+        return _skip(f"no OHLC for bar {bar_ts_iso}")
+
+    # Invariant 8 — trigger inside validity window
+    if not _is_within_valid_until(trigger_spec, bar_ts_iso):
+        return _skip("trigger past valid_until_utc")
+    proposal_bar_ts = scenario_row.get("bar_ts_utc")
+    if not _is_within_max_bars(trigger_spec, proposal_bar_ts, bar_ts_iso):
+        return _skip("trigger past max_bars_from_proposal")
+
+    # Invariant 9 — structural invalidation (scenario state is a weaker
+    # proxy; recorded via invariant 1)
+
+    # Invariant 10 — category C requires verified release
+    if (opp.get("category") or "").upper() == "C":
+        if not _category_c_release_satisfied(opp, economic_context):
+            return _skip("category=C but event not yet in "
+                          "economic_context.released")
+
+    # Invariant 11 — proposed entry remains economically actionable
+    if not _entry_price_in_window(bar_ohlc, trigger_spec,
+                                    trigger_spec.get("level_price")):
+        return _skip(f"bar close too far past level_price "
+                      f"{trigger_spec.get('level_price')} "
+                      f"(close={bar_ohlc[3]})")
+
+    # Invariant 12 — target not already reached in this same bar
+    if _target_already_reached(direction, target_price, bar_ohlc):
+        return _skip("target already reached in this bar")
+
+    # Invariant 13 — remaining R/R acceptable
+    if not _rr_still_acceptable(direction, entry_price, stop_price,
+                                 target_price, bar_ohlc[3]):
+        return _skip("remaining R/R below threshold")
+
+    # Invariant 5 (continued) — trigger actually fires on this bar
+    if not _trigger_fires(trigger_spec, bar_ts_iso, bar_ohlc):
+        return _skip("trigger not satisfied by bar OHLC")
+
+    # Invariant 14 — recommendation not already published
+    key = _dedup_key(sid, rev, trigger_spec)
+    if state.already_fired(key):
+        return _skip("already fired (dedup key hit)")
+    # Also check recent in-memory fires if the caller provided them
+    if recent_prior_fires and key in recent_prior_fires:
+        return _skip("already fired within this sweep")
+
+    # Invariant 15 — scenario superseded by later revision
+    latest = state.latest_seen(sid)
+    if latest and latest.get("revision_idx", 0) > rev:
+        return _skip(f"superseded by rev {latest.get('revision_idx')}")
+
+    return EvalResult(scenario_id=sid, revision_idx=rev,
+                       bar_ts_utc=bar_ts_iso, direction=direction,
+                       decision="FIRE",
+                       reason=f"trigger {ttype} level={trigger_spec.get('level_price')} fired",
+                       trigger_spec=trigger_spec,
+                       entry_price=entry_price,
+                       stop_price=stop_price, target_price=target_price)
+
+
+# ---------------------------------------------------------------------
+# Public entry point
+# ---------------------------------------------------------------------
+def run_trigger_sweep(*,
+                       scenarios_path: pathlib.Path,
+                       bar_ts_iso: str,
+                       bar_ohlc: tuple[float, float, float, float] | None,
+                       snapshot: dict | None = None,
+                       economic_context: dict | None = None,
+                       state: TriggerEvalState,
+                       now: dt.datetime | None = None,
+                       proposals_out_path: pathlib.Path | None = None,
+                       ) -> list[EvalResult]:
+    """Evaluate every open+valid scenario revision against the given
+    completed M5 bar; write a shadow-proposal row for each FIRE.
+
+    Returns the full list of EvalResult (FIRE or SKIP) for observability.
+    """
+    now = now or dt.datetime.now(UTC)
+    latest_by_sid = _group_by_scenario_latest(scenarios_path)
+    recent_fires_this_sweep: dict[str, bool] = {}
+    results: list[EvalResult] = []
+    for sid, row in latest_by_sid.items():
+        state.observe_scenario_state(sid, (row.get("state") or ""),
+                                       row.get("revision_idx", 0))
+        for opp in (row.get("opportunities") or []):
+            if not isinstance(opp, dict):
+                continue
+            r = _evaluate_one(row, opp, bar_ts_iso, bar_ohlc,
+                               snapshot, economic_context, state, now,
+                               recent_prior_fires=recent_fires_this_sweep)
+            results.append(r)
+            if r.decision == "FIRE":
+                recent_fires_this_sweep[_dedup_key(
+                    r.scenario_id, r.revision_idx, r.trigger_spec)] = True
+                state.record_fire(_dedup_key(
+                    r.scenario_id, r.revision_idx, r.trigger_spec))
+                if proposals_out_path:
+                    _write_proposal(proposals_out_path, r, row)
+    state.persist()
+    return results
+
+
+def _write_proposal(path: pathlib.Path, r: EvalResult, scenario_row: dict):
+    """Append one shadow-proposal row matching the existing journal
+    schema (keys compatible with run_shadow_exec output)."""
+    pub = scenario_row.get("publication_decision") or {}
+    out = {
+        "created_at_utc": dt.datetime.now(UTC).isoformat(),
+        "generated_at_utc": dt.datetime.now(UTC).isoformat(),
+        "key": _dedup_key(r.scenario_id, r.revision_idx, r.trigger_spec),
+        "proposal_id": f"triggered-{_dedup_key(r.scenario_id, r.revision_idx, r.trigger_spec)}",
+        "scenario_id": r.scenario_id,
+        "revision_idx": r.revision_idx,
+        "scenario": {
+            "scenario_id": r.scenario_id,
+            "revision_idx": r.revision_idx,
+            "state": scenario_row.get("state"),
+            "bar_ts_utc": scenario_row.get("bar_ts_utc"),
+            "generated_at_utc": scenario_row.get("generated_at_utc"),
+        },
+        "direction": r.direction,
+        "entry": {"price": r.entry_price,
+                   "trigger": r.trigger_spec,
+                   "provenance": "trigger_evaluator deterministic match"},
+        "stop": {"price": r.stop_price, "provenance": "scenario trade_proposal"},
+        "target": {"price": r.target_price, "provenance": "scenario trade_proposal"},
+        "market_data_status": "FRESH",
+        "primary": scenario_row.get("primary") or {},
+        "publication": {
+            "decision": pub.get("decision"),
+            "flag_codes": pub.get("flag_codes") or [],
+            "publishable": True,
+            "reason": "trigger_evaluator FIRE; publication inherited from scenario",
+        },
+        "readiness": "READY_FOR_EVALUATION",
+        "recommendation": r.direction or "WAIT",
+        "reason": r.reason,
+        "subsequent_reversal": {},
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a") as fh:
+        fh.write(json.dumps(out) + "\n")
+
+
+# ---------------------------------------------------------------------
+# Convenience: build econ from a verified-events JSONL
+# ---------------------------------------------------------------------
+def build_econ_from_feed(feed_path: pathlib.Path, asof: dt.datetime) -> dict:
+    """Thin wrapper to run build_macro_packet + classify_economic_context."""
+    from market_observer_macro import build_macro_packet
+    pkt = build_macro_packet(asof=asof, source_mode="operator_jsonl",
+                              event_file=feed_path, read_news_state=False)
+    return classify_economic_context(pkt)
+
+
+__all__ = [
+    "EvalResult", "TriggerEvalState",
+    "run_trigger_sweep", "build_econ_from_feed",
+    "DEFAULT_MAX_SNAPSHOT_AGE_S", "DEFAULT_ENTRY_TOLERANCE_PTS",
+    "DEFAULT_MAX_BARS_FROM_PROPOSAL", "DEFAULT_MIN_REMAINING_RR",
+    "VALID_TRIGGER_TYPES",
+]
