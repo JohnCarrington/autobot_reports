@@ -1,18 +1,35 @@
-# Dynamic IG minimum-stop management — proposed changes + tests
+# Dynamic IG minimum-stop management — audit, patches + tests
 
 **Branch:** `feat/dynamic-ig-min-stop-20261028`
 **Baseline:** Phase 7 `5311340`
 **Date:** 2026-10-28
 **Status:** **PATCHES PROPOSED — NOT APPLIED TO `/opt/tradingbot` OR `/opt/bb_bounce`**
 
+**UPDATED 2026-10-28 pm** — after the operator clarification, performed a
+complete read-only audit of SL configuration (`AUDIT.md`) and produced
+corrected patches:
+
+* **`AUDIT.md`** — SL configuration inventory, strategy-by-strategy call
+  paths, 12-pip conflict map, finding that `pair_config.MIN_SL_PIPS`
+  is a user default (not a risk policy).
+* **`MATRIX.md`** — strategy-by-strategy runtime matrix with current
+  silent-widening diagnostic.
+* **`ENABLE_4P.md`** — exact `.env` changes to enable 4-pip stops per
+  strategy, with per-case restart + rollback steps.
+* **`patches/0001b-trade_executor-dynamic-ig-min-stop-corrected.md`**
+  — supersedes `0001-*.md`; now also skips Step 4 (`MIN_SL_PIPS`
+  widening) under strict mode.
+
 This package implements the dynamic IG minimum-stop management requested
 in the operator brief.  It ships:
 
 * A shared module `module/ig_dealing_rules.py` (identical copy for both
   `/opt/tradingbot/` and `/opt/bb_bounce/`).
-* Two unified-diff proposal patches:
-  * `patches/0001-trade_executor-dynamic-ig-min-stop.md` — AutoBot
-    initial submission path.
+* Three unified-diff proposal patches:
+  * `patches/0001-trade_executor-dynamic-ig-min-stop.md` — original
+    (superseded by 0001b).
+  * `patches/0001b-trade_executor-dynamic-ig-min-stop-corrected.md` —
+    AutoBot initial submission path (recommended; replaces 0001).
   * `patches/0002-bb_bounce-dynamic-ig-min-stop.md` — standalone BB
     Bounce stop-sizing path.
 * A regression test suite covering all 24 scenarios from the brief
