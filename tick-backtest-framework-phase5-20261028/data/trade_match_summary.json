@@ -1,0 +1,72 @@
+{
+  "summary": {
+    "window": [
+      "2026-09-17",
+      "2026-10-27"
+    ],
+    "ig_total_gbpusd_deal_rows": 338,
+    "ig_total_opens": 322,
+    "ig_total_activity_rows": 817,
+    "autobot_unified_opens_in_window": 176,
+    "autobot_unified_closes_in_window": 172,
+    "bbb_csv_rows_in_window": 533,
+    "bbb_fill_rows_with_dealId": 55,
+    "ledger_size": 322,
+    "by_source_system": {
+      "ema_pullback_standalone": 10,
+      "autobot": 175,
+      "bb_bounce_standalone": 54,
+      "unknown_or_manual": 83
+    },
+    "by_strategy_family": {
+      "EMA_PULLBACK": 10,
+      "BOUNCE_TR": 18,
+      "BB_BOUNCE": 54,
+      "GBPUSD_TREND_V3": 100,
+      "UNKNOWN:GBPUSD_BB_BOUNCE_S": 4,
+      "UNKNOWN:GBPUSD_TREND_V3_S": 3,
+      "NO_REF": 83,
+      "UNKNOWN:GBPUSD_TREND_V3_L": 4,
+      "BOUNCE_A": 19,
+      "UNKNOWN:GBPUSD_TREND_V3_UM_L": 8,
+      "UNKNOWN:GBPUSD_BB_BOUNCE_L": 7,
+      "UNKNOWN:GBPUSD_TREND_V3_UM_S": 3,
+      "BOUNCE_C": 3,
+      "UNKNOWN:ONE_STRATEGY": 2,
+      "GBPUSD_BB_BOUNCE_OR_BOUNCE": 4
+    },
+    "unified_coverage": {
+      "neither": 147,
+      "both": 171,
+      "open_only": 4
+    },
+    "match_grades": {
+      "FULLY_RECONCILED": 228,
+      "OPEN_POSITION_IG_PENDING": 2,
+      "UNATTRIBUTED_SIBLING_LIKELY": 21,
+      "MATCHED_NO_IG_PNL": 5,
+      "MANUAL_UI_INTERVENTION": 1,
+      "MATCHED_NO_INTERNAL_CLOSE": 4,
+      "PRE_LOG_COVERAGE": 61
+    },
+    "unmatched_internal_count": 1,
+    "unmatched_bbb_count": 1
+  },
+  "unmatched_internal": [
+    {
+      "deal_id": "DIAAAAYL7Q6RUBC",
+      "deal_reference": "7KB4K2XB478TYRZ",
+      "strategy": "BRIEFING_EXECUTION",
+      "entry_price": 11178.7,
+      "ts_utc": "2026-10-07T13:06:03.463890+00:00"
+    }
+  ],
+  "unmatched_bbb": [
+    {
+      "deal_id": "DIAAAAYQ6CQAKBR",
+      "deal_reference": "HBB-BBB-3137802410",
+      "setup_time_utc": "2026-10-27T21:30:00+00:00",
+      "outcome": "TAKEN"
+    }
+  ]
+}

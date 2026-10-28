@@ -1,0 +1,1498 @@
+{
+  "summary": {
+    "n_fires": 229,
+    "n_ig_opens": 228,
+    "n_matched": 15,
+    "n_unmatched": 214,
+    "slippage_overall_pips": {
+      "n": 15,
+      "min": -1.65,
+      "max": 3.35,
+      "mean": 0.65,
+      "median": 0.45,
+      "p90": 2.15
+    },
+    "slippage_buy_pips": {
+      "n": 9,
+      "min": -1.65,
+      "max": 3.35,
+      "mean": 0.54,
+      "median": -0.05,
+      "p90": 2.15
+    },
+    "slippage_sell_pips": {
+      "n": 6,
+      "min": -0.45,
+      "max": 2.35,
+      "mean": 0.82,
+      "median": 0.85,
+      "p90": 1.55
+    },
+    "slippage_bb_bounce_pips": {
+      "n": 15,
+      "min": -1.65,
+      "max": 3.35,
+      "mean": 0.65,
+      "median": 0.45,
+      "p90": 2.15
+    },
+    "worst_adverse": 3.35,
+    "best_favourable": -1.65,
+    "unmatched_reasons": {
+      "NO_IG_WITHIN_TOL": 214
+    }
+  },
+  "matched": [
+    {
+      "fire_ts": "2026-10-20T09:20:17.705810+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "direction": "BUY",
+      "requested_level": 13345.05,
+      "ig_fill_level": 13345.0,
+      "slippage_pips": -0.05,
+      "submission_to_fill_secs": 8.29,
+      "ig_deal_id": "DIAAAAYPJ7WV7BU",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-20T09:20:18.070274+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "direction": "BUY",
+      "requested_level": 13345.05,
+      "ig_fill_level": 13345.0,
+      "slippage_pips": -0.05,
+      "submission_to_fill_secs": 7.93,
+      "ig_deal_id": "DIAAAAYPJ7WV7BU",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-20T15:20:18.916263+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "direction": "BUY",
+      "requested_level": 13383.05,
+      "ig_fill_level": 13385.2,
+      "slippage_pips": 2.15,
+      "submission_to_fill_secs": 0.08,
+      "ig_deal_id": "DIAAAAYPK7SQXAR",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-23T15:05:16.737321+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "direction": "SELL",
+      "requested_level": 13382.55,
+      "ig_fill_level": 13381.0,
+      "slippage_pips": 1.55,
+      "submission_to_fill_secs": 9.26,
+      "ig_deal_id": "DIAAAAYQC956SBC",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-26T11:10:12.079048+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "direction": "SELL",
+      "requested_level": 13348.55,
+      "ig_fill_level": 13346.2,
+      "slippage_pips": 2.35,
+      "submission_to_fill_secs": 0.92,
+      "ig_deal_id": "DIAAAAYQJFDSJBR",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-26T13:00:26.074043+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "direction": "SELL",
+      "requested_level": 13354.95,
+      "ig_fill_level": 13354.1,
+      "slippage_pips": 0.85,
+      "submission_to_fill_secs": 29.93,
+      "ig_deal_id": "DIAAAAYQKM33DBT",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-26T13:00:26.917973+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "direction": "SELL",
+      "requested_level": 13354.95,
+      "ig_fill_level": 13354.1,
+      "slippage_pips": 0.85,
+      "submission_to_fill_secs": 29.08,
+      "ig_deal_id": "DIAAAAYQKM33DBT",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-27T10:55:20.796948+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "direction": "SELL",
+      "requested_level": 13315.05,
+      "ig_fill_level": 13315.3,
+      "slippage_pips": -0.25,
+      "submission_to_fill_secs": 0.2,
+      "ig_deal_id": "DIAAAAYQREH33BQ",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-27T17:20:19.242013+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "direction": "SELL",
+      "requested_level": 13316.25,
+      "ig_fill_level": 13316.7,
+      "slippage_pips": -0.45,
+      "submission_to_fill_secs": 16.76,
+      "ig_deal_id": "DIAAAAYQ5V7W2B4",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-13T13:20:14.574857+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "direction": "BUY",
+      "requested_level": 13249.650000000001,
+      "ig_fill_level": 13253.0,
+      "slippage_pips": 3.35,
+      "submission_to_fill_secs": 5.43,
+      "ig_deal_id": "DIAAAAYM845CGBS",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-14T11:45:18.925616+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "direction": "BUY",
+      "requested_level": 13263.75,
+      "ig_fill_level": 13264.2,
+      "slippage_pips": 0.45,
+      "submission_to_fill_secs": 0.07,
+      "ig_deal_id": "DIAAAAYNHS8GRBM",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-15T06:45:18.912572+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "direction": "BUY",
+      "requested_level": 13238.05,
+      "ig_fill_level": 13237.9,
+      "slippage_pips": -0.15,
+      "submission_to_fill_secs": 0.09,
+      "ig_deal_id": "DIAAAAYNQXK8HBS",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-19T06:20:12.655280+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "direction": "BUY",
+      "requested_level": 13326.05,
+      "ig_fill_level": 13325.6,
+      "slippage_pips": -0.45,
+      "submission_to_fill_secs": 2.34,
+      "ig_deal_id": "DIAAAAYPBAY8BAW",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-19T07:45:16.988769+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "direction": "BUY",
+      "requested_level": 13320.55,
+      "ig_fill_level": 13321.8,
+      "slippage_pips": 1.25,
+      "submission_to_fill_secs": 3.01,
+      "ig_deal_id": "DIAAAAYPBKRZSAT",
+      "ig_source_system": "autobot"
+    },
+    {
+      "fire_ts": "2026-10-19T12:25:24.973662+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "direction": "BUY",
+      "requested_level": 13327.05,
+      "ig_fill_level": 13325.4,
+      "slippage_pips": -1.65,
+      "submission_to_fill_secs": 2.03,
+      "ig_deal_id": "DIAAAAYPDAVESA7",
+      "ig_source_system": "autobot"
+    }
+  ],
+  "unmatched": [
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-21T13:45:20.277246+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-21T15:35:20.485568+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-21T15:35:21.516257+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-22T13:35:14.150472+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-23T13:05:15.109485+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-23T13:05:16.301990+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-23T15:10:22.567259+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-26T04:35:08.669407+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-26T04:45:11.165494+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-26T15:00:21.005454+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:54:43.388547+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:54:43.441927+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:54:50.535072+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:54:50.606779+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:56:36.589577+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:56:51.433830+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:57:27.429717+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:57:27.505653+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:58:26.430374+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:58:26.496752+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:58:26.656666+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:58:32.275040+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:58:32.360290+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:58:32.542197+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:59:35.211160+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:59:45.581906+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:59:45.644439+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:59:45.746679+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T17:59:45.802494+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T21:19:04.130653+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T21:19:04.210866+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T21:19:04.302046+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T21:19:04.358369+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T21:26:03.736038+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T21:26:03.801786+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T21:26:03.909097+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-27T21:26:04.008564+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-17T08:20:03.190990+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-17T18:25:01.472622+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T07:00:04.427637+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T07:40:01.191365+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T07:45:03.948244+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T09:58:25.410189+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T09:58:25.487452+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:00:07.935022+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:00:08.098481+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:02:50.834525+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:02:50.929041+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:02:52.943408+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:02:53.033582+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:03:14.500431+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:03:14.606732+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:03:16.891590+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:03:16.976940+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:03:34.617655+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:03:34.706306+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:03:36.561563+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:03:36.635737+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:41:28.662573+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:41:28.788321+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:41:30.607550+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:41:30.687867+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:55:08.527105+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:56:04.567044+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:56:04.672197+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:56:07.105070+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T10:56:07.186905+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T11:05:06.807317+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T13:47:59.834717+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T13:47:59.919721+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T13:48:02.739572+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T13:48:02.918741+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T15:00:04.762016+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-18T15:40:02.480286+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-21T11:35:02.046015+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-21T14:30:01.958385+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-21T16:30:09.867032+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-21T17:45:13.580156+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-21T18:50:01.157708+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-22T11:45:01.056642+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-22T12:40:01.588592+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-22T14:25:03.101112+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-22T18:00:14.618343+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-23T06:55:01.296488+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-23T11:20:01.790049+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-23T13:35:10.143971+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-23T17:20:00.791271+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-24T05:15:01.204244+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-24T06:05:02.700239+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-24T06:20:07.736607+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-24T08:00:01.055903+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-24T09:00:01.120367+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-24T10:35:01.346866+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-24T12:10:01.842031+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-24T14:40:04.322019+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-24T18:10:01.592209+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-25T05:20:11.674778+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-25T05:40:03.792604+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-25T14:10:05.462475+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-25T14:35:06.095900+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-25T15:15:07.508181+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-25T15:25:01.520753+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-25T16:15:06.686845+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-25T18:40:02.518597+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-25T18:55:08.001241+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T06:00:08.048181+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T06:10:10.957825+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T06:10:15.420175+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T06:45:01.244973+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T06:45:05.647298+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T07:45:07.755128+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T07:45:12.435884+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T09:55:02.215677+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T09:55:06.717797+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T10:10:04.941591+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T10:25:05.913260+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T11:40:05.808926+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T12:55:03.160673+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T13:15:04.492585+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T13:55:03.315354+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T14:20:01.049641+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T16:35:04.040711+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T16:35:08.555533+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-28T18:45:03.770986+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T06:20:02.119498+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T07:40:03.264069+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T09:35:04.992499+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T10:55:06.166163+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T11:05:04.178209+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T11:05:09.829999+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T12:45:07.793298+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T18:10:09.434425+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T18:10:15.584834+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T18:35:03.305105+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T18:35:08.510488+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-29T18:50:07.276058+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-09-30T14:35:01.590276+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-01T04:10:01.267154+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-01T06:20:02.708754+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-01T07:05:01.508991+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-01T07:15:01.663076+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-01T07:55:01.357491+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-01T17:45:02.661688+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T05:45:03.392615+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T06:05:04.839919+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T06:20:03.335695+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T06:40:01.869387+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T08:25:04.508135+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T08:40:03.302192+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T08:55:05.399825+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T09:10:01.876111+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T10:30:02.856606+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T11:10:02.108279+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T15:30:03.513265+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-02T17:40:01.522887+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T05:20:01.235602+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T06:25:02.717245+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T07:05:10.483425+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T08:30:09.253439+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T08:30:13.468987+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T10:00:10.352321+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T10:00:18.086245+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T11:50:10.807459+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T12:10:09.595387+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T12:30:09.566367+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T12:55:06.307614+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T13:05:08.268497+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T15:10:10.119746+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T16:25:08.029147+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-05T18:15:07.390540+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-06T04:10:05.391532+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-06T07:25:08.352652+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-06T13:45:09.046326+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-06T14:00:08.607970+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T06:05:06.831593+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T06:40:08.757316+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T14:10:14.736888+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T14:35:14.232561+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T15:09:57.428554+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T15:20:14.219446+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T16:25:13.509578+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T19:06:39.044532+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T19:06:39.100664+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T19:06:39.157929+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T19:06:39.213562+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T19:06:39.272833+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T19:06:39.327659+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T19:06:39.386791+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T19:06:39.443176+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-07T19:06:39.503827+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-08T07:30:26.814880+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-08T08:25:17.392831+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-08T09:59:35.576903+00:00",
+      "fire_strategy": "BRIEFING_V5",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-08T10:55:14.774147+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-08T11:05:11.271201+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-08T12:35:11.520750+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-08T12:45:17.890998+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-09T06:15:18.895836+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-09T06:30:17.569960+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-09T09:20:14.138559+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-09T10:30:17.542500+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-09T15:45:14.949203+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-09T17:25:19.598543+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-09T17:25:20.044622+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-09T17:30:14.982877+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-13T05:05:09.316460+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-14T05:45:25.622046+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-14T06:25:10.769081+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-14T06:25:11.133743+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-14T17:35:23.337294+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-14T17:50:12.587019+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_S",
+      "fire_direction": "SELL"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-15T10:25:25.318175+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-16T06:00:15.772193+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    },
+    {
+      "reason": "NO_IG_WITHIN_TOL",
+      "fire_ts": "2026-10-19T07:35:18.414578+00:00",
+      "fire_strategy": "GBPUSD_BB_BOUNCE_L",
+      "fire_direction": "BUY"
+    }
+  ]
+}

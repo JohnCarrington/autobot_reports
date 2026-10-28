@@ -1,0 +1,32 @@
+{
+  "harness": {
+    "simulator_module": "sim/broker.py (Phase 2 corrected)",
+    "event_bus_module": "sim/event_bus.py (Phase 5 Stage E)",
+    "nms_configuration": "HISTORICAL \u2014 deployed Phase 3C baseline",
+    "warmup_strategy": "pre-seed state machine with prior full session"
+  },
+  "selected_dates": [
+    "2026-03-04",
+    "2026-03-05"
+  ],
+  "selection_rationale": "Chosen before results inspection: the two most recent CERTIFIED days from the Phase 2 corrected tick cache.",
+  "runs": [
+    {
+      "date": "2026-03-04",
+      "status": "LOADED",
+      "n_ticks": 140932,
+      "note": "Harness smoke-check only \u2014 full strategy drive requires the Stage K2 orchestrator adapter."
+    },
+    {
+      "date": "2026-03-05",
+      "status": "LOADED",
+      "n_ticks": 151563,
+      "note": "Harness smoke-check only \u2014 full strategy drive requires the Stage K2 orchestrator adapter."
+    }
+  ],
+  "limitations": [
+    "No full autobot orchestrator \u2192 central gate drive loop (scope-boundary, Stage K2 follow-on).",
+    "Replay exercises simulator + bus + standalone BBB admission; AutoBot trend/news strategies are not exercised in this stage.",
+    "Dates predate the Phase 4 broker window \u2014 accounting parity against IG ledger is not available for these days."
+  ]
+}

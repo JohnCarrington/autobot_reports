@@ -1,0 +1,97 @@
+{
+  "generated_utc": "2026-10-27T21:50:00Z",
+  "host": "AutoBotV1",
+  "autobot": {
+    "path": "/opt/tradingbot",
+    "branch": "nms/v3-prod-upgrade-20261013",
+    "commit": "83d1f88177d566ab25f7aa02237a2f888ebee59a",
+    "modules_sha1_12": {
+      "autobot.py": "4ac71945a567",
+      "central_execution_gate.py": "960d4a83c7fa",
+      "gbpusd_bb_bounce.py": "9fdd47f4e9f8",
+      "trade_executor.py": "0188204e7b88",
+      "trade_manager.py": "b2d5255bf906",
+      "ema_pullback.py": "6755a43f0612",
+      "nms_directional_authority.py": "4047b4ca9dcb",
+      "nms_exhaustion_detector.py": "d973220d8807",
+      "nms_reversal_oracles.py": "28eb480a880c",
+      "nms_second_gate.py": "9e83eba7047b",
+      "nms_session_trend_direction.py": "89c35cd5b2c2",
+      "nms_v3_classifier.py": "9911c833ede5",
+      "nms_v3_direction_gate.py": "838ec3d0673b",
+      "nms_watch_state_driver.py": "f25ea2be7d37",
+      "nms_watch_state_machine.py": "40cc84db215a"
+    }
+  },
+  "bb_bounce_standalone": {
+    "path": "/opt/bb_bounce",
+    "branch": "main",
+    "commit": "fb9d3f5a3409ea237f6aee358729932d23942c1d",
+    "modules_sha1_12": {
+      "main.py": "4ca9dad68006",
+      "trade_runner.py": "84ab43319c0e",
+      "strategy.py": "16528a7629ef",
+      "bands.py": "b002d8cdc0f1",
+      "stop_sizing.py": "23b9dd0ae5ea",
+      "session_trend_guard.py": "3ac5b1254e9f",
+      "open_sb_now.py": "f81caad74b8a",
+      "close_sb_now.py": "bfca71a16517",
+      "ig_auth.py": "69d77704969a",
+      "ownership_identity.py": "87f52b358643",
+      "wick_metrics.py": "3412af47bcc8",
+      "atr.py": "795980d0c0c5",
+      "candle_reader.py": "acf4338d91fc",
+      "config.py": "96a6b6eb6b25",
+      "london_clock.py": "f7d42518676f",
+      "shadow_mode.py": "0d4b1307aab2",
+      "daily_file.py": "8eca1d9f4935",
+      "telegram_alerts.py": "c1280c40bc78"
+    }
+  },
+  "services": {
+    "autobot.service": {"state": "active", "since_utc": "2026-10-27T21:02:53Z"},
+    "bb-bounce.service": {"state": "active", "since_utc": "2026-10-27T21:02:54Z"},
+    "ema-pullback.service": {"state": "active", "since_utc": "2026-10-27T10:05:27Z", "note": "EMA_PULLBACK_ENABLED=0 — gated OFF"},
+    "trades-api.service": {"state": "active", "since_utc": "2026-10-22T05:40:38Z"}
+  },
+  "env_summary": {
+    "CENTRAL_EXECUTION_GATE": "1",
+    "CENTRAL_STRATEGY_ORCHESTRATOR": "1",
+    "ONE_STRATEGY_ENABLED": "1",
+    "BB_BOUNCE_ADMIT": "1",
+    "TREND_V3_ADMIT": "1",
+    "BRIEFING_EXEC_ADMIT": "1",
+    "NMS_V3_DIRECTIONAL_GATE_ENABLED": "1",
+    "NMS_V3_H1_ADMISSION_ENABLED": "1",
+    "NMS_V3_H1_ADMISSION_FAIL_POLICY": "closed",
+    "DIRECTION_FROM_NMS_SESSION_TREND": "1",
+    "NMS_EXHAUSTION_DETECTOR_ENABLED": "1",
+    "NMS_UNIFIED_DIRECTIONAL_AUTHORITY_ENABLED": "1",
+    "NMS_WATCH_AND_WAIT_ENABLED": "1",
+    "GBPUSD_BB_BOUNCE_ENABLED": "1",
+    "EMA_PULLBACK_ENABLED": "0",
+    "BRIEFING_EXECUTION_ENABLED": "0",
+    "BOUNCE_ENGINE_ENABLED": "1",
+    "HYPOTHESIS_TRADE_ENABLED": "0",
+    "SYSTEM_REVERSAL_ENABLED": "0",
+    "STRETCH_REVERSAL_ENABLED": "0"
+  },
+  "ig_account": {
+    "account_id": "Z3G4CJ",
+    "account_type": "DEMO",
+    "note": "Credentials in /opt/bb_bounce/.env and /opt/tradingbot/.env — read-only, never written to this repository."
+  },
+  "internal_evidence_inventory": {
+    "unified_trades.jsonl": {"rows": 358, "date_min": "2026-10-07", "date_max": "2026-10-27"},
+    "bb_bounce_reports_csv": {"files": 13, "rows_total": 544, "date_min": "2026-10-12", "date_max": "2026-10-27"},
+    "forensic_fires.jsonl": {"rows": 46, "rotated": ["20260926.gz", "20261020"]},
+    "bb_pierce_trades.jsonl": {"rotated": ["20260917.gz", "20260919.gz", "20260920.gz", "20260921.gz", "20260922.gz", "20261005.gz", "20261015"]},
+    "systemd_journal": {"retention": "one boot", "last_boot_utc": "2026-10-27T18:58:32Z"}
+  },
+  "phase3c_comparison": {
+    "autobot_commit_match": true,
+    "autobot_modules_match": true,
+    "bb_bounce_standalone_recorded": false,
+    "note": "Phase 3C did not record standalone BB Bounce hashes; Phase 4 adds them."
+  }
+}

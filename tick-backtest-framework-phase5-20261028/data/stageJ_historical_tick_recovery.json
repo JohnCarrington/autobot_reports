@@ -1,0 +1,29 @@
+{
+  "scope": "Investigate recovery of GBPUSD BID/ASK ticks for 2026-04-11 → 2026-10-27 to close the Phase 4 broker-window overlap gap.",
+  "findings": {
+    "existing_tick_cache": {
+      "path": "/opt/tradingbot/data/tick_cache_daily/GBPUSD/",
+      "range": "2024-01-01 → 2026-04-10 (.npy daily cache)",
+      "overlap_with_phase4_window": "0 days (Phase 4 window 2026-09-17 → 2026-10-27)",
+      "known_quality_notes": "Per 2026-10-27 Phase 2 memo: April 2026 files are mid-only, 2-dp rounded. tz.py codifies the mixed-UTC/EST calibration. The .npy cache is not TZ-corrected; the corrected 52.99 M-row parquet is on the Phase 2 branch."
+    },
+    "authorised_additional_sources_scanned": [
+      "/opt/tradingbot/data/* — no newer raw-tick archive",
+      "/home/autobot/* — no tick archive outside the Phase 2 corrected cache",
+      "/opt/bb_bounce/ — no tick archive"
+    ],
+    "ig_rest": "The authoritative broker ledger is already extracted via /history/transactions and /history/activity (Phase 4 df8bf63).  IG does not expose historical quote-stream BID/ASK data via REST."
+  },
+  "verdict": {
+    "additional_ticks_recoverable_from_existing_authorised_storage": false,
+    "two_validation_modes_retained": [
+      "HISTORICAL_TICK_REPLAY — supported for 2024-01-01 → 2026-04-10 with the Phase 2 corrected cache + tz.py.",
+      "BROKER_EVENT_RECONCILIATION — supported for 2026-09-17 → 2026-10-27 using the Phase 4 ledger; does NOT independently reproduce missing historical price paths."
+    ],
+    "no_fabrication_from_m5_ohlc": true
+  },
+  "recommendations": [
+    "Preserve the two-mode design in the research harness — do not conflate 'simulator replayed a stop' with 'the strategy itself fired against a tick stream'.",
+    "If a tick-level comparison on Phase 4's window is required, acquire BID/ASK ticks for 2026-04 → 2026-10 from an authorised third-party source and run them through tz_verify.py before using.  Out of Phase 5 scope."
+  ]
+}

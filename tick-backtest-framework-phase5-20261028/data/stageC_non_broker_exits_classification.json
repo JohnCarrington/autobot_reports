@@ -1,0 +1,1586 @@
+{
+  "summary": {
+    "n_non_broker_exits": 119,
+    "by_classification": {
+      "BROKER_CLOSE_RECLASSIFIED_BY_AMEND": 31,
+      "MANUAL_UI_CLOSE": 42,
+      "STRATEGY_DIRECTED_CLOSE": 43,
+      "EXTERNAL_PROCESS_CLOSE": 3
+    },
+    "by_sub_class": {
+      "BROKER_CLOSE_RECLASSIFIED_BY_AMEND/SL_AMENDED_HIT": 31,
+      "MANUAL_UI_CLOSE/WEB": 20,
+      "STRATEGY_DIRECTED_CLOSE/STRUCTURE_EXIT": 4,
+      "EXTERNAL_PROCESS_CLOSE/SYSTEM_NON_SLTP": 3,
+      "STRATEGY_DIRECTED_CLOSE/IG_RECONCILE_FALLBACK": 6,
+      "STRATEGY_DIRECTED_CLOSE/QM_INSIDE_BAND": 4,
+      "STRATEGY_DIRECTED_CLOSE/WEEKEND_FLATTEN": 4,
+      "STRATEGY_DIRECTED_CLOSE/NO_UNIFIED_PROVENANCE": 10,
+      "MANUAL_UI_CLOSE/MOBILE": 22,
+      "STRATEGY_DIRECTED_CLOSE/V3_WARNING_BREAK": 4,
+      "STRATEGY_DIRECTED_CLOSE/GRIND_SMA_CROSS": 5,
+      "STRATEGY_DIRECTED_CLOSE/V3_STOP": 1,
+      "STRATEGY_DIRECTED_CLOSE/SCALEOUT_FLOOR": 1,
+      "STRATEGY_DIRECTED_CLOSE/SWING_BROKEN": 2,
+      "STRATEGY_DIRECTED_CLOSE/BOUNCE_ENGINE": 2
+    },
+    "reproducible_count": 64,
+    "not_reproducible_count": 55
+  },
+  "trades": [
+    {
+      "deal_id": "DIAAAAYQ5X8QHBJ",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13313.7,
+      "ig_final_sl": 13313.7,
+      "ig_initial_sl": 13334.8,
+      "ig_initial_tp": 13284.8,
+      "n_amendments": 1,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYQ5V7W2B4",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13315.6,
+      "ig_final_sl": 13315.6,
+      "ig_initial_sl": 13328.7,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYQ5VVR4B7",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13317.6,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYQ5JRACBY",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13318.4,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYQ5JSVWBR",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13318.4,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYQ5E43YB2",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13318.4,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYQ5DVBKBY",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13318.4,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYQ48BM7B6",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13319.7,
+      "ig_final_sl": 13319.7,
+      "ig_initial_sl": 13306.7,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYQQ743CBM",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "STRUCTURE_EXIT",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13318.4,
+      "unified_close_reason": "STRUCTURE_EXIT:structure_flip_up: last_close=13319.05000 > prior_5_high=13318.85000, pnl=-10.2p",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYQQ2HTZBX",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13319.7,
+      "ig_final_sl": 13319.7,
+      "ig_initial_sl": 13332.7,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYQQY3QMBZ",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13319.5,
+      "ig_final_sl": 13319.5,
+      "ig_initial_sl": 13340.5,
+      "ig_initial_tp": 13290.5,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYQQVLW2BZ",
+      "classification": "EXTERNAL_PROCESS_CLOSE",
+      "sub_class": "SYSTEM_NON_SLTP",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13315.6,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "IG system-side close that is not a plain SL/TP hit.  Candidate causes: margin close-out, FX cutover, corporate-action close."
+    },
+    {
+      "deal_id": "DIAAAAYQLV89HBC",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13318.4,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYQK59BDBL",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "IG_RECONCILE_FALLBACK",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13352.8,
+      "unified_close_reason": "IG_RECONCILE_CLEAR",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYQKM33DBT",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13353.1,
+      "ig_final_sl": 13353.1,
+      "ig_initial_sl": 13366.1,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYQJFDSJBR",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "QM_INSIDE_BAND",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13350.3,
+      "unified_close_reason": "QM_BAND_CLOSE_INSIDE",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYQDNG2XBL",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "WEEKEND_FLATTEN",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13372.1,
+      "unified_close_reason": "EXECUTION_RISK_WEEKEND_FLATTEN",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYQDF6HMAL",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "WEEKEND_FLATTEN",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13370.4,
+      "unified_close_reason": "EXECUTION_RISK_WEEKEND_FLATTEN",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYQC956SBC",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "WEEKEND_FLATTEN",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13372.0,
+      "unified_close_reason": "EXECUTION_RISK_WEEKEND_FLATTEN",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYQCUEWYBR",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13379.7,
+      "ig_final_sl": 13379.7,
+      "ig_initial_sl": 13392.7,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYQCQD5QBH",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "NO_UNIFIED_PROVENANCE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13377.3,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "PUBLIC_WEB_API close but no unified-log row.  Likely a sibling host or pre-unified-log coverage."
+    },
+    {
+      "deal_id": "DIAAAAYQCNRFWB6",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13370.7,
+      "ig_final_sl": 13370.7,
+      "ig_initial_sl": 13357.7,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYQCHDB8BS",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "NO_UNIFIED_PROVENANCE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13370.0,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "PUBLIC_WEB_API close but no unified-log row.  Likely a sibling host or pre-unified-log coverage."
+    },
+    {
+      "deal_id": "DIAAAAYQB3C8NB6",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "NO_UNIFIED_PROVENANCE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13375.4,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "PUBLIC_WEB_API close but no unified-log row.  Likely a sibling host or pre-unified-log coverage."
+    },
+    {
+      "deal_id": "DIAAAAYQAT8ZFBT",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "NO_UNIFIED_PROVENANCE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13396.2,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "PUBLIC_WEB_API close but no unified-log row.  Likely a sibling host or pre-unified-log coverage."
+    },
+    {
+      "deal_id": "DIAAAAYQAF4WKBU",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "NO_UNIFIED_PROVENANCE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13404.5,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "PUBLIC_WEB_API close but no unified-log row.  Likely a sibling host or pre-unified-log coverage."
+    },
+    {
+      "deal_id": "DIAAAAYP929RWBJ",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13402.7,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYP9L2AUBY",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13403.1,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYP89T9UB2",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "QM_INSIDE_BAND",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13373.9,
+      "unified_close_reason": "QM_BAND_CLOSE_INSIDE",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYP8787SBG",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13373.2,
+      "ig_final_sl": 13373.2,
+      "ig_initial_sl": 13386.2,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYP8WXDAAS",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13368.1,
+      "ig_final_sl": 13368.1,
+      "ig_initial_sl": 13355.1,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYP8JNABBW",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "V3_WARNING_BREAK",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13406.5,
+      "unified_close_reason": "V3_WARNING_BREAK",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYP8H2UWBQ",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13415.7,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYP8G7MMA6",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13415.7,
+      "unified_close_reason": "IG_RECONCILE_CLEAR",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYP7769JB6",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13403.8,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYP74NKLA8",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13403.0,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYP73VCSA2",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "NO_UNIFIED_PROVENANCE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13403.3,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "PUBLIC_WEB_API close but no unified-log row.  Likely a sibling host or pre-unified-log coverage."
+    },
+    {
+      "deal_id": "DIAAAAYP3Z5NBBM",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13396.5,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYP3QRU7AL",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13396.5,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYP3PQARA2",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13396.5,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYP3EYXGBL",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13392.6,
+      "ig_final_sl": 13392.6,
+      "ig_initial_sl": 13405.6,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYPZKPLCBH",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "V3_WARNING_BREAK",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13398.4,
+      "unified_close_reason": "V3_WARNING_BREAK",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYPXCBGVBX",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13396.5,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYPQWLH4AR",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13396.5,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYPQPYQQBD",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13392.3,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYPQKKWSBC",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13392.3,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYPQCR2ZBM",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13392.3,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYPLNMBDBC",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "GRIND_SMA_CROSS",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13380.0,
+      "unified_close_reason": "GRIND_SMA_CROSS",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYPLDPTSBJ",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13385.6,
+      "ig_final_sl": 13385.6,
+      "ig_initial_sl": 13352.9,
+      "ig_initial_tp": 13402.9,
+      "n_amendments": 1,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYPKP49ABU",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "PUBLIC_WEB_API",
+        "SYSTEM"
+      ],
+      "ig_close_level": 13381.2,
+      "ig_final_sl": 13381.1,
+      "ig_initial_sl": 13369.1,
+      "ig_initial_tp": 13481.1,
+      "n_amendments": 2,
+      "unified_close_reason": "BE_STOP_POST_SCALEOUT",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYPJ7WV7BU",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13392.3,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYPJ4NV2BW",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13350.5,
+      "ig_final_sl": 13350.5,
+      "ig_initial_sl": 13363.5,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYPJ4KRRBU",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "GRIND_SMA_CROSS",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13347.6,
+      "unified_close_reason": "GRIND_SMA_CROSS",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYPJNN5SBM",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13348.6,
+      "ig_final_sl": 13348.6,
+      "ig_initial_sl": 13361.6,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYPJBN6EAW",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13347.0,
+      "ig_final_sl": 13347.0,
+      "ig_initial_sl": 13334.0,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYPE3ATBBK",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13333.5,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYPD87EMBF",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "IG_RECONCILE_FALLBACK",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13305.9,
+      "unified_close_reason": "IG_RECONCILE_CLEAR",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYPDG4FABU",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13322.4,
+      "ig_final_sl": 13322.4,
+      "ig_initial_sl": 13335.4,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYPC6N5UBS",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13338.0,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYPB6G7GB7",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13337.9,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYPBYD62BN",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "V3_WARNING_BREAK",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13328.4,
+      "unified_close_reason": "V3_WARNING_BREAK",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYPBNREWBK",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13316.0,
+      "ig_final_sl": 13316.0,
+      "ig_initial_sl": 13295.0,
+      "ig_initial_tp": 13345.0,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYPBMHW7AW",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13313.1,
+      "ig_final_sl": 13313.1,
+      "ig_initial_sl": 13300.1,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYPBF2KUAX",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13321.5,
+      "ig_final_sl": 13321.5,
+      "ig_initial_sl": 13334.5,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYPBAY8BAW",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "QM_INSIDE_BAND",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13324.8,
+      "unified_close_reason": "QM_BAND_CLOSE_INSIDE",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYPA73ULAT",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13327.5,
+      "ig_final_sl": 13327.5,
+      "ig_initial_sl": 13340.5,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYN62UENBY",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "STRUCTURE_EXIT",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13357.2,
+      "unified_close_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13357.65000 < prior_5_low=13358.35000, pnl=-11.1p",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYN6TJXMBS",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13343.0,
+      "ig_final_sl": 13343.0,
+      "ig_initial_sl": 13322.0,
+      "ig_initial_tp": 13372.0,
+      "n_amendments": 1,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYN5YKX7B4",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "GRIND_SMA_CROSS",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13333.2,
+      "unified_close_reason": "GRIND_SMA_CROSS",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYNZ3W3QBY",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13259.7,
+      "ig_final_sl": 13259.7,
+      "ig_initial_sl": 13238.7,
+      "ig_initial_tp": 13288.7,
+      "n_amendments": 1,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYNZTBSBAW",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "V3_WARNING_BREAK",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13249.3,
+      "unified_close_reason": "V3_WARNING_BREAK",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYNZN6D5BL",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13255.9,
+      "ig_final_sl": 13255.9,
+      "ig_initial_sl": 13276.9,
+      "ig_initial_tp": 13226.9,
+      "n_amendments": 1,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYNZNKBEBJ",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13259.8,
+      "ig_final_sl": 13259.8,
+      "ig_initial_sl": 13272.8,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYNZLWRGBY",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "IG_RECONCILE_FALLBACK",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13269.8,
+      "unified_close_reason": "IG_RECONCILE_CLEAR",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYNZFMRTAJ",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13256.2,
+      "ig_final_sl": 13256.2,
+      "ig_initial_sl": 13235.2,
+      "ig_initial_tp": 13285.2,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYNRH8PCAX",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13251.6,
+      "ig_final_sl": 13251.6,
+      "ig_initial_sl": 13265.4,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYNRE5LYAU",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13257.4,
+      "ig_final_sl": 13257.4,
+      "ig_initial_sl": 13270.4,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYNRBMKKBN",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13262.3,
+      "ig_final_sl": 13262.3,
+      "ig_initial_sl": 13249.3,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYNQ6CXUBU",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "V3_STOP",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13256.6,
+      "unified_close_reason": "V3_STOP",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYNQYAJWAN",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13240.6,
+      "ig_final_sl": 13240.6,
+      "ig_initial_sl": 13227.6,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYNQXK8HBS",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "SCALEOUT_FLOOR",
+      "channel": [
+        "PUBLIC_WEB_API",
+        "SYSTEM"
+      ],
+      "ig_close_level": 13247.0,
+      "unified_close_reason": "FLOOR_STOP_POST_SCALEOUT",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYNLHMFNBE",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13146.3,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYNK4UHDAL",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13155.3,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYNKXCLLAX",
+      "classification": "BROKER_CLOSE_RECLASSIFIED_BY_AMEND",
+      "sub_class": "SL_AMENDED_HIT",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13199.6,
+      "ig_final_sl": 13199.6,
+      "ig_initial_sl": 13212.7,
+      "ig_initial_tp": null,
+      "n_amendments": 1,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade manager amended SL; broker fired against the amended level.  Independently reproducible once the decision-event bus can replay the amendment chain."
+    },
+    {
+      "deal_id": "DIAAAAYNHS8GRBM",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13268.4,
+      "unified_close_reason": "QM_BAND_CLOSE_INSIDE",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYNDY4Z6AJ",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13268.5,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYNDYXWVBJ",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13268.8,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYNDY62NAS",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13269.1,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYNDZJ9XAL",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13268.9,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYM9T9WBBJ",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13245.1,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYM9CUL6BJ",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13245.1,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYM848M9AW",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "GRIND_SMA_CROSS",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13247.0,
+      "unified_close_reason": "GRIND_SMA_CROSS",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYM845CGBS",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "QM_INSIDE_BAND",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13252.9,
+      "unified_close_reason": "QM_BAND_CLOSE_INSIDE",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYM8YQXLBJ",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13245.9,
+      "unified_close_reason": "IG_RECONCILE",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYM29VZ6BX",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13245.2,
+      "unified_close_reason": "IG_RECONCILE",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYM22EWEBL",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13245.0,
+      "unified_close_reason": "IG_RECONCILE",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYM2RU2MBN",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13244.7,
+      "unified_close_reason": "IG_RECONCILE",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYM2L3EYBN",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13244.9,
+      "unified_close_reason": "IG_RECONCILE",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYMXKTG2AW",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "NO_UNIFIED_PROVENANCE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13213.8,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "PUBLIC_WEB_API close but no unified-log row.  Likely a sibling host or pre-unified-log coverage."
+    },
+    {
+      "deal_id": "DIAAAAYMW5SPHAG",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "NO_UNIFIED_PROVENANCE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13208.5,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "PUBLIC_WEB_API close but no unified-log row.  Likely a sibling host or pre-unified-log coverage."
+    },
+    {
+      "deal_id": "DIAAAAYMW3U3CBK",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "NO_UNIFIED_PROVENANCE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13206.0,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "PUBLIC_WEB_API close but no unified-log row.  Likely a sibling host or pre-unified-log coverage."
+    },
+    {
+      "deal_id": "DIAAAAYMWX7KBA3",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "NO_UNIFIED_PROVENANCE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13203.0,
+      "unified_close_reason": null,
+      "reproducible_with_decision_bus": false,
+      "notes": "PUBLIC_WEB_API close but no unified-log row.  Likely a sibling host or pre-unified-log coverage."
+    },
+    {
+      "deal_id": "DIAAAAYMWRLHLBC",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13201.8,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYMWML2EBT",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "IG_RECONCILE_FALLBACK",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13208.6,
+      "unified_close_reason": "IG_RECONCILE_CLEAR",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYMVWLRCA4",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13208.2,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYMUE72HBH",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "MOBILE",
+      "channel": [
+        "MOBILE"
+      ],
+      "ig_close_level": 13208.5,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG mobile app.  Not reproducible."
+    },
+    {
+      "deal_id": "DIAAAAYMP5UM7AC",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "WEEKEND_FLATTEN",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13235.2,
+      "unified_close_reason": "EXECUTION_RISK_WEEKEND_FLATTEN",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYMPY7BRBP",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "IG_RECONCILE_FALLBACK",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13235.5,
+      "unified_close_reason": "IG_RECONCILE_CLEAR",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYMPS9KHBJ",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "IG_RECONCILE_FALLBACK",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13237.2,
+      "unified_close_reason": "IG_RECONCILE_CLEAR",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYMPAYRYA8",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "GRIND_SMA_CROSS",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13219.2,
+      "unified_close_reason": "GRIND_SMA_CROSS",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYMCTUX7AM",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "SWING_BROKEN",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13195.4,
+      "unified_close_reason": "EXIT_GOVERNING_SWING_BROKEN:GOVERNING_LH_BROKEN",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYMCL6XAB9",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "BOUNCE_ENGINE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13188.3,
+      "unified_close_reason": "BOUNCE_ENGINE/Exhaustion at h1_swing_low",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYMCCFDSAW",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "BOUNCE_ENGINE",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13199.4,
+      "unified_close_reason": "BOUNCE_ENGINE/Reversal signal at h1_swing_low",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYMB9LZCAQ",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "SWING_BROKEN",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13207.3,
+      "unified_close_reason": "EXIT_GOVERNING_SWING_BROKEN:GOVERNING_LH_BROKEN",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYL78BSVBH",
+      "classification": "MANUAL_UI_CLOSE",
+      "sub_class": "WEB",
+      "channel": [
+        "WEB"
+      ],
+      "ig_close_level": 13216.3,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "Human closed the position via the IG web UI.  Not reproducible from recorded state."
+    },
+    {
+      "deal_id": "DIAAAAYL7MJKLAE",
+      "classification": "EXTERNAL_PROCESS_CLOSE",
+      "sub_class": "SYSTEM_NON_SLTP",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13201.4,
+      "unified_close_reason": "Breakeven stop hit (IG server-side)",
+      "reproducible_with_decision_bus": false,
+      "notes": "IG system-side close that is not a plain SL/TP hit.  Candidate causes: margin close-out, FX cutover, corporate-action close."
+    },
+    {
+      "deal_id": "DIAAAAYL7JG3TAH",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "STRUCTURE_EXIT",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13200.5,
+      "unified_close_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13201.25000 < prior_5_low=13201.45000, pnl=-10.7p",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    },
+    {
+      "deal_id": "DIAAAAYL6894RAQ",
+      "classification": "EXTERNAL_PROCESS_CLOSE",
+      "sub_class": "SYSTEM_NON_SLTP",
+      "channel": [
+        "SYSTEM"
+      ],
+      "ig_close_level": 13224.5,
+      "unified_close_reason": "External close (not initiated by this host)",
+      "reproducible_with_decision_bus": false,
+      "notes": "IG system-side close that is not a plain SL/TP hit.  Candidate causes: margin close-out, FX cutover, corporate-action close."
+    },
+    {
+      "deal_id": "DIAAAAYL64Q9GAM",
+      "classification": "STRATEGY_DIRECTED_CLOSE",
+      "sub_class": "STRUCTURE_EXIT",
+      "channel": [
+        "PUBLIC_WEB_API"
+      ],
+      "ig_close_level": 13233.5,
+      "unified_close_reason": "STRUCTURE_EXIT:structure_flip_down: last_close=13236.95000 < prior_5_low=13237.45000, pnl=-10.0p",
+      "reproducible_with_decision_bus": true,
+      "notes": "Trade-manager / strategy-driven close via /positions/otc.  The decision rule is in trade_manager.py or the owning strategy."
+    }
+  ]
+}

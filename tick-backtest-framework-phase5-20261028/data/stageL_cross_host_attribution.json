@@ -1,0 +1,27 @@
+{
+  "scope": "Attribute the 21 UNATTRIBUTED_SIBLING_LIKELY opens identified in Phase 4 to sibling host H144 (shared DEMO account).",
+  "access_check": {
+    "authorised_read_only_access_to_H144": "NOT AVAILABLE from this host (AutoBotV1).",
+    "search_paths_scanned": [
+      "/opt/tradingbot/* — this is the AutoBotV1 production tree",
+      "/home/autobot/* — this user's home is on AutoBotV1 only",
+      "/mnt/* — no sibling-host mount",
+      "/srv/* — no sibling-host mount"
+    ],
+    "no_credential_bypass_attempted": true,
+    "no_private_key_disclosure": true
+  },
+  "preservation": {
+    "classification_retained": "UNATTRIBUTED_SIBLING_LIKELY (unchanged from Phase 4).",
+    "attribution_source_of_truth": "Phase 4 ledger (df8bf63) — 21 PUBLIC_WEB_API opens whose SL/TP signature matches a sibling host H144 ownership prefix (H161 / HBB / EMAPB on this host; H144 on a sibling).",
+    "rule_followed": "Shared-account trades are NOT attributed to AutoBotV1 merely because they appear on the same IG account. Evidence-first dedup (see feedback_dedup_evidence_not_host memory)."
+  },
+  "recommendations": [
+    "Operator should expose read-only access to H144's unified_trades.jsonl (via rsync into /opt/tradingbot/.read-only/ or similar authorised path).",
+    "On that access, re-run `scripts/phase4_reconcile_trades.py` with the sibling's log to attribute the 21 opens.",
+    "Phase 5 does not attempt to bypass authorisation."
+  ],
+  "quality_gate_contribution": {
+    "cross_host_reconciliation": "PASS_WITH_LIMITATIONS — the 21 trades remain correctly classified; access to attribute them is an operational request, not a research task."
+  }
+}
