@@ -1,0 +1,85 @@
+{
+  "body": {
+    "positions": [
+      {
+        "market": {
+          "bid": 13305.8,
+          "delayTime": 0,
+          "epic": "CS.D.GBPUSD.TODAY.IP",
+          "expiry": "DFB",
+          "high": 13321.6,
+          "instrumentName": "GBP/USD",
+          "instrumentType": "CURRENCIES",
+          "lotSize": 1.0,
+          "low": 13272.1,
+          "marketStatus": "TRADEABLE",
+          "netChange": 1.7,
+          "offer": 13306.7,
+          "percentageChange": 0.01,
+          "scalingFactor": 1,
+          "streamingPricesAvailable": true,
+          "updateTime": "17:49:44",
+          "updateTimeUTC": "17:49:44"
+        },
+        "position": {
+          "contractSize": 1.0,
+          "controlledRisk": false,
+          "createdDate": "2026/10/28 17:01:39:000",
+          "createdDateUTC": "2026-10-28T17:01:39",
+          "currency": "GBP",
+          "dealId": "DIAAAAYRM2S3VBY",
+          "dealReference": "H161-V3BB_S-3206899680",
+          "direction": "SELL",
+          "level": 13315.0,
+          "limitLevel": null,
+          "limitedRiskPremium": null,
+          "size": 2.0,
+          "stopLevel": 13327.0,
+          "trailingStep": null,
+          "trailingStopDistance": null
+        }
+      },
+      {
+        "market": {
+          "bid": 13305.8,
+          "delayTime": 0,
+          "epic": "CS.D.GBPUSD.TODAY.IP",
+          "expiry": "DFB",
+          "high": 13321.6,
+          "instrumentName": "GBP/USD",
+          "instrumentType": "CURRENCIES",
+          "lotSize": 1.0,
+          "low": 13272.1,
+          "marketStatus": "TRADEABLE",
+          "netChange": 1.7,
+          "offer": 13306.7,
+          "percentageChange": 0.01,
+          "scalingFactor": 1,
+          "streamingPricesAvailable": true,
+          "updateTime": "17:49:44",
+          "updateTimeUTC": "17:49:44"
+        },
+        "position": {
+          "contractSize": 1.0,
+          "controlledRisk": false,
+          "createdDate": "2026/10/28 17:05:05:000",
+          "createdDateUTC": "2026-10-28T17:05:05",
+          "currency": "GBP",
+          "dealId": "DIAAAAYRM3BBQB3",
+          "dealReference": "HBB-BBB-3207105544",
+          "direction": "SELL",
+          "level": 13313.6,
+          "limitLevel": 13283.6,
+          "limitedRiskPremium": null,
+          "size": 2.0,
+          "stopLevel": 13324.2,
+          "trailingStep": null,
+          "trailingStopDistance": null
+        }
+      }
+    ]
+  },
+  "headers_sent_version": "2",
+  "status": 200,
+  "url": "https://demo-api.ig.com/gateway/deal/positions"
+}
