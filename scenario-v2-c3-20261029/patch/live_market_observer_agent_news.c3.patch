@@ -1,0 +1,405 @@
+--- /mnt/volume_lon1_1778405456698/research/live_obs/agent/live_market_observer_agent_news.py	2026-10-22 10:54:01.024255213 +0000
++++ staging/agent/live_market_observer_agent_news.py	2026-10-29 13:43:58.029276037 +0000
+@@ -76,6 +76,39 @@
+     "feed does NOT carry speaker identity, speech subject, or revised previous\n"
+     "values; those appear as absent_fields and must not be fabricated.\n"
+     "Abstain when ambiguous. Repeated testing can lead to breakout OR rejection.\n"
++    "HYPOTHESIS LIFECYCLE DISCIPLINE (C3, 2026-10-29).\n"
++    " 7. RECONSIDER WHEN TRIGGERED. The packet includes "
++    "`reassessment_triggers[level_id]` with:\n"
++    "    * `trigger_fired` — boolean, true when deterministic rules detect "
++    "material contradictory evidence against the prior hypothesis on this "
++    "level;\n"
++    "    * `reasons` — short list describing which rules fired;\n"
++    "    * `age_bars` — number of prior consecutive bars with the same "
++    "(hypothesis, direction) on this level;\n"
++    "    * `prior_invalidation_delta` — your previous invalidation conditions "
++    "that are now FIRED or PARTIAL per deterministic matching.\n"
++    "  When trigger_fired=true for the level you are observing, you MUST "
++    "explicitly address each reason in `change_since_previous` AND state "
++    "the lifecycle status of your prior hypothesis using the new optional "
++    "field `hypothesis_status` with one of: ACTIVE (reasons do not apply), "
++    "CHALLENGED (reasons apply, direction remains unresolved), INVALIDATED "
++    "(prior invalidation conditions have fired), RESOLVED (anticipated "
++    "market event has occurred), EXPIRED (observation objective lapsed).\n"
++    "  Do NOT continue a hypothesis solely because the previous label was "
++    "the same. Repeating `WATCH_REJECTION` while narrating contradictory "
++    "evidence is label-anchoring and is prohibited.\n"
++    " 8. UNRESOLVED DIRECTION IS A VALID OUTCOME. If the prior hypothesis "
++    "is challenged or invalidated but no new direction is yet confirmed, "
++    "emit `hypothesis=NO_OPPORTUNITY` and `direction=null`. This signals "
++    "that the previous expectation is no longer supported. Do NOT flip to "
++    "the opposite direction without independent confirming evidence (NMS "
++    "flip in the new direction + consecutive_closes_beyond + distance). "
++    "Invalidating a SELL hypothesis does NOT authorise a BUY hypothesis.\n"
++    " 9. PREVIOUS HYPOTHESIS IS CONTEXT, NOT EVIDENCE. Never cite "
++    "`previous_assessments[level].hypothesis` as independent supporting "
++    "evidence. The prior conclusion is a historical interpretation of "
++    "earlier evidence, not a fact. New supporting evidence must come from "
++    "the current packet (interactions, nms, macro_context, level_map).\n"
+     "OUTPUT STRICT BUDGET: narrative <= 400 chars; each evidence/invalidation "
+     "list item <= 120 chars; cap each list at 6 items; change_since_previous "
+     "<= 220 chars; uncertainty <= 180 chars; macro_scenarios items <= 180 chars "
+@@ -174,7 +207,8 @@
+     return log_dir / ("level_interaction_observer_v6.jsonl-" + now.strftime("%Y%m%d"))
+ 
+ 
+-def packet(root: pathlib.Path, now: dt.datetime, prior: dict) -> dict:
++def packet(root: pathlib.Path, now: dt.datetime, prior: dict,
++            history: list[dict] | None = None) -> dict:
+     log = root / "logs"
+     loi_path = resolve_loi_path(log, now)
+     loi = last_rows(loi_path, 1200)
+@@ -228,6 +262,14 @@
+     uk = latest.astimezone(ZoneInfo("Europe/London"))
+     prev = {key_for(x): compact_prior(prior.get(key_for(x))) for x in matching}
+ 
++    # Correction 3 — deterministic reassessment trigger per level.
++    reassessment: dict[str, dict] = {}
++    for x in matching:
++        k = key_for(x)
++        reassessment[k] = compute_reassessment_trigger(
++            interactions_row=x, nms_row=nms_row,
++            prior=prev.get(k), history=history)
++
+     missing = []
+     if level_map is None:
+         missing.append("level_map")
+@@ -244,6 +286,8 @@
+         "level_map": level_map,
+         "nms": nms_row,
+         "previous_assessments": prev,
++        # C3 — deterministic reassessment-trigger evaluation per level.
++        "reassessment_triggers": reassessment,
+         "missing_streams": missing,
+         "price_scale":
+             "GBPUSD prices are IG-index x 10000 (1 unit = 1 pip); do not rescale",
+@@ -253,19 +297,25 @@
+ 
+ 
+ def compact_prior(decision: dict | None) -> dict | None:
+-    """Rolling-memory compaction.
++    """Rolling-memory compaction (Correction 3, 2026-10-29).
+ 
+-    The LLM only needs enough signal from a prior assessment to detect a
+-    CHANGE SINCE PREVIOUS — it does not need the full narrative, raw
+-    evidence lists, token counters, or macro usage flags. Passing those
+-    back verbatim is what caused the growing-memory output explosion.
++    Prior-memory contract (C3):
++      * The AI must see the TEXT CONTENT of its previous invalidation
++        conditions so it can check whether they have fired. Count alone
++        is insufficient (root cause: WATCH_REJECTION_ROOT_CAUSE.md).
++      * The AI must see its previous counter_evidence so it can judge
++        whether the contradictory evidence has materially grown.
++      * Remaining prior fields preserved from pre-C3 shape so existing
++        readers do not break.
+ 
+-    We keep: hypothesis, direction, bar_ts_utc, 1-line narrative tail,
+-    and a token-level fingerprint of the three evidence lists (counts).
++    Budget: adds ~400-800 chars per level. Up to 30 open levels per
++    packet → max input growth ~24 KB. Within Haiku 4.5's 200K context.
+     """
+     if not isinstance(decision, dict):
+         return None
+     narr = (decision.get("narrative") or "")
++    inv_conds = decision.get("invalidation_conditions") or []
++    counter_ev = decision.get("counter_evidence") or []
+     return {
+         "hypothesis": decision.get("hypothesis"),
+         "direction": decision.get("direction"),
+@@ -273,10 +323,255 @@
+         "bar_ts_utc": decision.get("bar_ts_utc"),
+         "evaluated_at_utc": decision.get("evaluated_at_utc"),
+         "narrative_tail_200": narr[-200:],
++        # C3 (new) — pass CONTENT of prior conditions / counter-evidence
++        "prior_invalidation_conditions": list(inv_conds)[:6],
++        "prior_counter_evidence": list(counter_ev)[:6],
++        # Diagnostics preserved
+         "supporting_evidence_count": len(decision.get("supporting_evidence") or []),
+-        "counter_evidence_count": len(decision.get("counter_evidence") or []),
+-        "invalidation_conditions_count": len(decision.get("invalidation_conditions") or []),
++        "counter_evidence_count": len(counter_ev),
++        "invalidation_conditions_count": len(inv_conds),
+         "uncertainty_tail_120": (decision.get("uncertainty") or "")[-120:],
++        # C3 (new) — carry prior hypothesis_status when present
++        "prior_hypothesis_status": decision.get("hypothesis_status"),
++    }
++
++
++# ---------------------------------------------------------------------
++# Correction 3 — deterministic reassessment-trigger evaluator
++# ---------------------------------------------------------------------
++
++_INV_COND_KEYWORDS = {
++    "closes_above": re.compile(r"\bcloses?\s+above\b|\bacceptance.*above\b", re.IGNORECASE),
++    "closes_below": re.compile(r"\bcloses?\s+below\b|\bacceptance.*below\b", re.IGNORECASE),
++    "high_penetrates": re.compile(r"\bhigh\s+penetrat(?:ion|es?)\b|\bbreak(?:s|out)?\s+above\b", re.IGNORECASE),
++    "low_penetrates": re.compile(r"\blow\s+penetrat(?:ion|es?)\b|\bbreak(?:s|out)?\s+below\b", re.IGNORECASE),
++    "nms_bullish": re.compile(r"\bnms.*bullish\b|\bHH\+HL\b|\bhigher[- ]high\b", re.IGNORECASE),
++    "nms_bearish": re.compile(r"\bnms.*bearish\b|\bLH\+LL\b|\blower[- ]low\b", re.IGNORECASE),
++    "acceptance_latch": re.compile(r"\bacceptance[\s_]latch\b|\bacceptance[\s_]latched\b", re.IGNORECASE),
++    "sustain_above": re.compile(r"\bsustain(?:s|ed)?\s+above\b|\bhold(?:s|ing)?\s+above\b", re.IGNORECASE),
++    "sustain_below": re.compile(r"\bsustain(?:s|ed)?\s+below\b|\bhold(?:s|ing)?\s+below\b", re.IGNORECASE),
++}
++_INV_COND_PIPS_RX = re.compile(r"(\d+(?:\.\d+)?)\s*(?:pips?|p\b)", re.IGNORECASE)
++_INV_COND_BARS_RX = re.compile(r"(\d+)\s*(?:\+\s*)?(?:bars?|closes?|m5)", re.IGNORECASE)
++
++
++def _evaluate_invalidation_condition(cond: str,
++                                       raw: dict,
++                                       nms_row: dict | None) -> str:
++    """FIRED | PARTIAL | NOT_FIRED for one invalidation-condition string.
++
++    Deliberately conservative: ambiguous wording returns NOT_FIRED.
++    """
++    text = cond or ""
++    if not text:
++        return "NOT_FIRED"
++    closes_above = raw.get("closes_above") or 0
++    closes_below = raw.get("closes_below") or 0
++    consec_beyond = raw.get("consecutive_closes_beyond") or 0
++    max_above = raw.get("max_excursion_above_pips") or 0
++    max_below = raw.get("max_excursion_below_pips") or 0
++    close_side = (raw.get("close_side") or "").lower()
++    high_pen = raw.get("high_penetration_pips") or 0
++    low_pen = raw.get("low_penetration_pips") or 0
++
++    bar_counts = [int(m.group(1)) for m in _INV_COND_BARS_RX.finditer(text)]
++    pip_counts = [float(m.group(1)) for m in _INV_COND_PIPS_RX.finditer(text)]
++
++    if (_INV_COND_KEYWORDS["closes_above"].search(text)
++            or _INV_COND_KEYWORDS["sustain_above"].search(text)
++            or _INV_COND_KEYWORDS["acceptance_latch"].search(text)):
++        req_bars = bar_counts[0] if bar_counts else 2
++        if closes_above >= req_bars and (
++                close_side == "above" or consec_beyond >= req_bars):
++            return "FIRED"
++        if closes_above >= max(1, req_bars - 1):
++            return "PARTIAL"
++    if (_INV_COND_KEYWORDS["closes_below"].search(text)
++            or _INV_COND_KEYWORDS["sustain_below"].search(text)):
++        req_bars = bar_counts[0] if bar_counts else 2
++        if closes_below >= req_bars and (
++                close_side == "below" or consec_beyond >= req_bars):
++            return "FIRED"
++        if closes_below >= max(1, req_bars - 1):
++            return "PARTIAL"
++
++    if _INV_COND_KEYWORDS["high_penetrates"].search(text) and pip_counts:
++        req_pips = pip_counts[0]
++        if abs(max_above) >= req_pips or abs(high_pen) >= req_pips:
++            return "FIRED"
++    if _INV_COND_KEYWORDS["low_penetrates"].search(text) and pip_counts:
++        req_pips = pip_counts[0]
++        if abs(max_below) >= req_pips or abs(low_pen) >= req_pips:
++            return "FIRED"
++
++    if nms_row:
++        hh = bool(nms_row.get("hh"))
++        hl = bool(nms_row.get("hl"))
++        lh = bool(nms_row.get("lh"))
++        ll = bool(nms_row.get("ll"))
++        if _INV_COND_KEYWORDS["nms_bullish"].search(text):
++            if hh and hl:
++                return "FIRED"
++            if hh or hl:
++                return "PARTIAL"
++        if _INV_COND_KEYWORDS["nms_bearish"].search(text):
++            if lh and ll:
++                return "FIRED"
++            if lh or ll:
++                return "PARTIAL"
++
++    return "NOT_FIRED"
++
++
++def _compute_hypothesis_age_bars(level_id: str,
++                                   current_hypothesis: str,
++                                   current_direction,
++                                   history: list[dict]) -> int:
++    """Prior consecutive bars on `level_id` with same (hypothesis, direction).
++    0 if first bar.
++    """
++    streak = 0
++    for row in reversed(history or []):
++        if row.get("level_id") != level_id:
++            continue
++        if (row.get("hypothesis") == current_hypothesis
++                and (row.get("direction") or None) == (current_direction or None)):
++            streak += 1
++        else:
++            break
++    return streak
++
++
++def compute_reassessment_trigger(interactions_row: dict,
++                                   nms_row: dict | None,
++                                   prior: dict | None,
++                                   history: list[dict] | None = None) -> dict:
++    """Deterministic reassessment-trigger evaluation (C3, 2026-10-29).
++
++    Reads structured packet fields and returns which deterministic
++    conditions suggest the prior hypothesis should be reconsidered on
++    this level. Does NOT choose a new hypothesis — AI remains the sole
++    emitter.
++
++    Threshold rationale: CORRECTION3_DESIGN.md §5. Conservative;
++    backed by 27-Oct / 29-Oct replay; quiet-range sessions do NOT fire.
++    """
++    reasons: list[str] = []
++    inv_delta: dict[str, str] = {}
++
++    if prior is None:
++        return {"trigger_fired": False, "reasons": [], "age_bars": 0,
++                "prior_invalidation_delta": {}}
++
++    raw = (interactions_row or {}).get("raw") or {}
++    closes_above = raw.get("closes_above") or 0
++    closes_below = raw.get("closes_below") or 0
++    consec_beyond = raw.get("consecutive_closes_beyond") or 0
++    distance_pips = abs(raw.get("distance_from_level_pips") or 0)
++    max_above = abs(raw.get("max_excursion_above_pips") or 0)
++    max_below = abs(raw.get("max_excursion_below_pips") or 0)
++    close_side = (raw.get("close_side") or "").lower()
++
++    prior_hyp = (prior.get("hypothesis") or "")
++    prior_dir = (prior.get("direction") or "").upper()
++    level_id = prior.get("level_id") or ""
++
++    # Rule A — WATCH_REJECTION/SELL contradicted by sustained acceptance above.
++    #   The AI expected price to reject OFF a resistance (= bounce down).
++    #   Sustained acceptance ABOVE invalidates the rejection framing.
++    if prior_hyp == "WATCH_REJECTION" and prior_dir == "SELL":
++        if closes_above >= 3 and distance_pips >= 5 and close_side == "above":
++            reasons.append(
++                "prior WATCH_REJECTION/SELL but closes_above="
++                f"{closes_above} >= 3, distance=+{distance_pips:.1f}p, "
++                "close_side=above (sustained acceptance above level)")
++        if max_above >= 10 and consec_beyond >= 2:
++            reasons.append(
++                f"max_excursion_above={max_above:.1f}p >= 10 and "
++                f"consecutive_closes_beyond={consec_beyond} >= 2 "
++                "(breakaway signature)")
++
++    # Rule B — WATCH_REJECTION/BUY contradicted by sustained acceptance below.
++    #   The AI expected price to reject OFF a support (= bounce up).
++    #   Sustained acceptance BELOW invalidates the rejection framing.
++    if prior_hyp == "WATCH_REJECTION" and prior_dir == "BUY":
++        if closes_below >= 3 and distance_pips >= 5 and close_side == "below":
++            reasons.append(
++                "prior WATCH_REJECTION/BUY but closes_below="
++                f"{closes_below} >= 3, distance=-{distance_pips:.1f}p, "
++                "close_side=below (sustained acceptance below level)")
++        if max_below >= 10 and consec_beyond >= 2:
++            reasons.append(
++                f"max_excursion_below={max_below:.1f}p >= 10 and "
++                f"consecutive_closes_beyond={consec_beyond} >= 2 "
++                "(breakaway signature)")
++
++    # Rule A2 — WATCH_BREAKOUT/BUY contradicted by sustained retreat below.
++    #   The AI expected an upside breakout to continue. If price has
++    #   retreated BELOW the level with sustained closes, the breakout
++    #   has failed and the hypothesis needs reassessment.
++    if prior_hyp == "WATCH_BREAKOUT" and prior_dir == "BUY":
++        if closes_below >= 3 and distance_pips >= 5 and close_side == "below":
++            reasons.append(
++                "prior WATCH_BREAKOUT/BUY but closes_below="
++                f"{closes_below} >= 3, distance=-{distance_pips:.1f}p, "
++                "close_side=below (breakout failed; price retreated)")
++
++    # Rule B2 — WATCH_BREAKOUT/SELL contradicted by sustained recovery above.
++    if prior_hyp == "WATCH_BREAKOUT" and prior_dir == "SELL":
++        if closes_above >= 3 and distance_pips >= 5 and close_side == "above":
++            reasons.append(
++                "prior WATCH_BREAKOUT/SELL but closes_above="
++                f"{closes_above} >= 3, distance=+{distance_pips:.1f}p, "
++                "close_side=above (breakdown failed; price recovered)")
++
++    # Rule C — NMS structure opposes prior direction (HH+HL / LH+LL both).
++    if nms_row:
++        demo_dir = (nms_row.get("demonstrated_direction") or "").upper()
++        hh = bool(nms_row.get("hh"))
++        hl = bool(nms_row.get("hl"))
++        lh = bool(nms_row.get("lh"))
++        ll = bool(nms_row.get("ll"))
++        if (prior_dir == "SELL" and demo_dir == "UP" and hh and hl
++                and prior_hyp in ("WATCH_REJECTION", "WATCH_BREAKOUT")):
++            reasons.append(
++                "NMS demonstrated_direction=UP with HH+HL opposes prior "
++                f"SELL on {prior_hyp}")
++        if (prior_dir == "BUY" and demo_dir == "DOWN" and lh and ll
++                and prior_hyp in ("WATCH_REJECTION", "WATCH_BREAKOUT")):
++            reasons.append(
++                "NMS demonstrated_direction=DOWN with LH+LL opposes prior "
++                f"BUY on {prior_hyp}")
++
++    # Rule D — explicit invalidation-condition deltas.
++    # Only fire for priors that represent a DIRECTIONAL anchor
++    # (WATCH_REJECTION, WATCH_BREAKOUT, OPPORTUNITY_TO_REVIEW).
++    # A NO_OPPORTUNITY prior is already uncommitted — the AI
++    # transitioning to WATCH_* when a condition fires is normal
++    # evolution, not anchor-breaking. False-positive mitigation per
++    # extended-replay findings 2026-10-29.
++    if prior_hyp in ("WATCH_REJECTION", "WATCH_BREAKOUT",
++                       "OPPORTUNITY_TO_REVIEW"):
++        prior_conds = prior.get("prior_invalidation_conditions") or []
++        for cond in prior_conds:
++            if not isinstance(cond, str) or not cond.strip():
++                continue
++            delta = _evaluate_invalidation_condition(cond, raw, nms_row)
++            if delta != "NOT_FIRED":
++                inv_delta[cond] = delta
++                if delta == "FIRED":
++                    reasons.append(
++                        "prior invalidation condition fired: "
++                        f"\"{cond[:120]}\"")
++
++    age_bars = _compute_hypothesis_age_bars(
++        level_id, prior_hyp, prior.get("direction"), history or [])
++
++    return {
++        "trigger_fired": len(reasons) > 0,
++        "reasons": reasons,
++        "age_bars": age_bars,
++        "prior_invalidation_delta": inv_delta,
+     }
+ 
+ 
+@@ -353,6 +648,17 @@
+                 "type": "array", "maxItems": 4,
+                 "items": {"type": "string", "maxLength": 180},
+             },
++            # Correction 3 — optional lifecycle status of the prior
++            # hypothesis relative to the current bar's evidence.
++            "hypothesis_status": {
++                "oneOf": [
++                    {"type": "string", "enum": [
++                        "ACTIVE", "CHALLENGED", "INVALIDATED",
++                        "RESOLVED", "EXPIRED",
++                    ]},
++                    {"type": "null"},
++                ],
++            },
+         },
+     },
+ }
+@@ -558,7 +864,7 @@
+         if deadline and now >= deadline:
+             break
+         try:
+-            p = packet(root, now, prev)
++            p = packet(root, now, prev, history=history)
+             attach_macro(p, args)
+             bar_ts = p["bar_ts_utc"]
+             if bar_ts in seen:
+@@ -597,6 +903,10 @@
+                     append(out / "decisions.jsonl", result)
+                     seen.add(bar_ts)
+                     prev[result["level_id"]] = result
++                    # C3 — maintain history for age-tracking across bars.
++                    history.append(result)
++                    if len(history) > 1000:
++                        history[:] = history[-1000:]
+                     append(statefile, result)
+                     print(json.dumps({
+                         "bar_ts_utc": result["bar_ts_utc"],
