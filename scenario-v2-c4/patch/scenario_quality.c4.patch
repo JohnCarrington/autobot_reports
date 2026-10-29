@@ -1,0 +1,182 @@
+--- /mnt/volume_lon1_1778405456698/research/live_obs/agent/scenario_quality.py	2026-10-28 22:31:08.539840858 +0000
++++ /home/autobot/reports-wt/scenario-v2-c4-20261029/scenario-v2-c4/staging/agent/scenario_quality.py	2026-10-29 10:38:56.693354586 +0000
+@@ -150,11 +150,38 @@
+     "data", "release", "update", "number",
+ })
+ 
++# Correction 4 (2026-10-29) — vocabulary that overlaps event names AND
++# everyday technical-trigger prose. These words alone cannot
++# establish an economic-event dependency.
++_EVENT_GENERIC_STOPWORDS = frozenset({
++    "price", "prices", "rate", "rates", "growth", "change",
++    "activity", "balance", "confidence", "sentiment", "claims",
++    "spending", "income", "approvals", "lending", "credit",
++    "sales", "orders", "production", "inventories",
++    "manufacturing", "services", "consumer", "business",
++    "personal", "government", "value", "level", "measure",
++    "actual", "forecast", "consensus", "previous",
++})
++
++# Correction 4 — identifiers that are unambiguous event references:
++# all-caps acronyms (PCE/GDP/CPI/NFP/FOMC...) and known central-bank
++# or major-release names. One of these in the trigger text is
++# sufficient to establish event reference by itself.
++_EVENT_KNOWN_IDENTIFIERS = frozenset({
++    "boe", "fomc", "fed", "ecb", "rba", "boj", "snb",
++    "boc", "rbnz", "pboc", "nfp", "ism", "adp",
++    "pce", "gdp", "cpi", "ppi",
++    "nonfarm", "payrolls", "unemployment", "retail", "mortgage",
++    "jolts", "jobless", "redbook", "chicago", "philly",
++})
++
+ 
+ def _event_name_tokens(name: str) -> set[str]:
+-    """Significant-word tokens from an event name, stripped of
+-    stopwords so a narrative using a short-form ('CBI (if released)')
+-    still matches the full ('CBI Business Optimism Index').
++    """Significant-word tokens from an event name, with format
++    stopwords AND generic market vocabulary stripped (C4).
++
++    This produces the token set used for FULL-PHRASE matching
++    when no distinctive identifier is present.
+     """
+     out: set[str] = set()
+     for raw in re.findall(r"[A-Za-z]+", (name or "")):
+@@ -163,10 +190,52 @@
+             continue
+         if t in _EVENT_NAME_STOPWORDS:
+             continue
++        if t in _EVENT_GENERIC_STOPWORDS:
++            continue
+         out.add(t)
+     return out
+ 
+ 
++def _event_distinctive_identifiers(name: str) -> set[str]:
++    """Return tokens that unambiguously name an event (C4).
++
++    Two sources of distinctiveness:
++      * ALL-CAPS acronyms (2-5 letters) in the ORIGINAL event name —
++        these are unlikely to appear incidentally in a technical
++        trigger (PCE, GDP, CPI, NFP, FOMC, ADP, ISM, BoE's acronym
++        form, ...).
++      * Known-identifier words — curated set of central-bank names
++        and major macro release labels.
++
++    An identifier in `text` is sufficient on its own to establish
++    event reference, UNLESS the surrounding text explicitly
++    disclaims dependency (see `_EVENT_INDEPENDENCE_MARKERS`).
++    """
++    distinctive: set[str] = set()
++    for raw in re.findall(r"[A-Za-z]+", (name or "")):
++        if 2 <= len(raw) <= 5 and raw.isupper():
++            distinctive.add(raw.lower())
++        if raw.lower() in _EVENT_KNOWN_IDENTIFIERS:
++            distinctive.add(raw.lower())
++    return distinctive
++
++
++# Correction 4 — phrases that explicitly DISCLAIM an event-dependency
++# relationship. If an event identifier appears in text within a short
++# window of one of these markers, the match is suppressed.
++#
++# Example: "downside continuation activates independent of BoE outcome
++# (now EXPIRED, no catalyst)" — the author is explicitly denying the
++# event is a prerequisite. The validator must respect that.
++_EVENT_INDEPENDENCE_MARKERS = re.compile(
++    r"\b(independent of|regardless of|irrespective of|"
++    r"without regard to|without reference to|not dependent on|"
++    r"does not depend on|no catalyst|no dependence on|"
++    r"ignoring|setting aside)\b",
++    flags=re.IGNORECASE,
++)
++
++
+ def _event_bucket_token_map(econ: dict, bucket: str) -> dict[str, set[str]]:
+     """``{event_name_lower: {tokens}}`` for a bucket."""
+     out: dict[str, set[str]] = {}
+@@ -536,13 +605,77 @@
+ 
+ 
+ def _event_name_tokens_in(text: str, event_name: str) -> bool:
+-    """Return True if the TEXT contains at least one UNIQUE-token
+-    (post-stopword) of the event_name."""
+-    tokens = _event_name_tokens(event_name)
+-    if not tokens:
+-        return False
+-    tl = text.lower()
+-    return any(t in tl for t in tokens)
++    """Return True if the TEXT contains an EXPLICIT REFERENCE to the
++    named economic event — not merely a generic-vocabulary overlap,
++    and not a reference the author explicitly disclaims.
++
++    Correction 4 (2026-10-29). The previous rule required only one
++    non-stopword token overlap, which caused false positives when
++    technical triggers used generic nouns ("Price breaks below ...")
++    that also appear in event names ("PCE Price Index MoM" →
++    tokens {pce, price}; token `price` would match the generic
++    noun). All 30 CATEGORY_A_TRIGGER_WITH_EVENT_NAME flags on
++    2026-10-29 shared this mechanism.
++
++    New rule distinguishes GENERIC vocabulary overlap from EXPLICIT
++    event reference and from DISCLAIMED mention:
++
++      (1) If the event name has distinctive identifiers (acronyms
++          like PCE/GDP/CPI/NFP, or known central-bank/release names
++          like BoE / FOMC / Nonfarm / Mortgage), ANY of those
++          appearing as a whole word in the text establishes a
++          candidate reference.
++      (2) Otherwise, the FULL set of significant non-stopword tokens
++          from the event name must appear (whole-word, order-
++          independent). A single generic overlap is no longer
++          sufficient.
++      (3) Any candidate reference is SUPPRESSED when the surrounding
++          text (±60 chars) contains an independence marker like
++          'independent of', 'regardless of', 'no catalyst'. The
++          author has explicitly stated the trigger does not depend
++          on the event; the validator respects that.
++
++    Whole-word matching uses `\b` boundaries so a token like `pce`
++    cannot match a substring inside an unrelated word.
++    """
++    tl = (text or "").lower()
++
++    distinctive = _event_distinctive_identifiers(event_name)
++    match_spans: list[tuple[int, int]] = []
++
++    if distinctive:
++        for d in distinctive:
++            for m in re.finditer(rf"\b{re.escape(d)}\b", tl):
++                match_spans.append((m.start(), m.end()))
++        if not match_spans:
++            # Event has distinctive identifiers but none appear in
++            # the text. Do not fall through to token-set matching
++            # for identifier-bearing events — require the explicit
++            # acronym/known-identifier.
++            return False
++    else:
++        tokens = _event_name_tokens(event_name)
++        if not tokens:
++            return False
++        positions = {t: [(m.start(), m.end())
++                         for m in re.finditer(rf"\b{re.escape(t)}\b", tl)]
++                     for t in tokens}
++        if not all(positions.values()):
++            return False
++        # Represent the full-phrase match by the span of the first
++        # occurrence of each token (used only for independence-marker
++        # suppression context).
++        for p in positions.values():
++            match_spans.append(p[0])
++
++    # Suppress matches that fall within an independence-marker window.
++    for start, end in match_spans:
++        wnd_start = max(0, start - 60)
++        wnd_end = min(len(tl), end + 30)
++        if _EVENT_INDEPENDENCE_MARKERS.search(tl[wnd_start:wnd_end]):
++            continue
++        return True
++    return False
+ 
+ 
+ def _validate_opportunity_category(assessment, economic_context, flags):
