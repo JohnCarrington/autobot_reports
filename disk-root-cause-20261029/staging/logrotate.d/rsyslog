@@ -1,0 +1,69 @@
+#
+# Replacement for /etc/logrotate.d/rsyslog — 2026-10-29 (Phase 3 remediation).
+#
+# Changes vs Ubuntu default (which rotates weekly / rotate 4):
+#   - daily rotation
+#   - size 100M threshold — rotate if the file reaches 100 MB before daily
+#   - rotate 7 generations (≈ 1 week of history)
+#   - compress + delaycompress preserved (.1 stays uncompressed for tail/grep)
+#   - **ADDED `su root syslog`** — logrotate 3.19.0 refuses to rotate
+#     files whose parent directory is group-writable unless the config
+#     explicitly declares the privileged user. /var/log is 0775
+#     root:syslog on this box, which triggers the check. `su root syslog`
+#     tells logrotate to run file operations as uid=root gid=syslog so
+#     ownership is preserved AND the parent-dir check is satisfied.
+#     Reference: logrotate commit 54e6f8c (parent-dir mode check,
+#     security tightening).
+#
+# Rotation stays IN-PLACE on root fs. Decision rationale: rsyslog's postrotate
+# hook sends SIGHUP, which reopens the renamed syslog file. Using `olddir`
+# across filesystems (to /mnt/volume_lon1_1778405456698/) would require
+# `copytruncate` instead of rename, which has a brief duplicate-write window
+# that is acceptable but unnecessary when the in-place footprint is bounded.
+# With rotate 7 and ~15 MB compressed-generation size, root-fs ceiling is
+# ~ (100 MB active) + (90 MB × 6 compressed) ≈ 200 MB, vs the previous
+# weekly worst case of ~700 MB.
+#
+# File ownership context (verified 2026-10-29):
+#   /var             drwxr-xr-x root   root     0755
+#   /var/log         drwxrwxr-x root   syslog   0775   ← group-writable, triggers check
+#   /var/log/syslog  -rw-r----- syslog adm      0640   ← will be preserved by `create` default
+#
+# `su root syslog` is the standard Ubuntu pattern for this directory
+# — matches the directory's owner:group pair exactly.
+#
+# If the operator later wants compressed .gz generations to live on the
+# attached volume, add a weekly archive sweep (systemd timer) that moves
+# /var/log/syslog.*.gz → /mnt/.../syslog_archive/ once each file is ≥ 7
+# days old.
+#
+# Dry-run before deploying:
+#   sudo logrotate -d /etc/logrotate.d/rsyslog
+#
+/var/log/syslog
+/var/log/mail.info
+/var/log/mail.warn
+/var/log/mail.err
+/var/log/mail.log
+/var/log/daemon.log
+/var/log/kern.log
+/var/log/auth.log
+/var/log/user.log
+/var/log/lpr.log
+/var/log/cron.log
+/var/log/debug
+/var/log/messages
+{
+	rotate 7
+	daily
+	maxsize 100M
+	su root syslog
+	missingok
+	notifempty
+	compress
+	delaycompress
+	sharedscripts
+	postrotate
+		/usr/lib/rsyslog/rsyslog-rotate
+	endscript
+}

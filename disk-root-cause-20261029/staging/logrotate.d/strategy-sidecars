@@ -1,0 +1,51 @@
+# /etc/logrotate.d/strategy-sidecars — 2026-10-29 (Phase 3 remediation).
+#
+# Covers application .log files for the sidecar strategies that do not
+# have their own rotation today:
+#   * /opt/ema_pullback/logs/ema_pullback.log            (service writer)
+#   * /opt/london_liquidity_sweep/logs/service.log       (service writer)
+#   * /home/autobot/ema_pullback/logs/ema_pullback.log   (second copy writer
+#     also observed on 2026-10-29; see audit §3)
+#   * /home/autobot/ema_pullback/logs/service.stdout.log (stdout mirror)
+#   * /home/autobot/ema_pullback/logs/service.stderr.log (stderr mirror)
+#
+# Mirrors the policy of /etc/logrotate.d/autobot-logs:
+#   - daily rotation (also size-capped at 50 MB)
+#   - rotate 8 generations
+#   - copytruncate (writers hold the files open via FileHandler — no restart)
+#   - compress + delaycompress
+#   - olddir to /mnt/.../logs_rotated so rotated .gz lives on the attached
+#     volume, same as autobot-logs
+#   - createolddir in case the destination directory is wiped
+#   - su autobot autobot so rotation runs as the owning user
+#
+# Dry-run before deploying:
+#   sudo logrotate -d /etc/logrotate.d/strategy-sidecars
+#
+# Verify after first rotation:
+#   ls -la /mnt/volume_lon1_1778405456698/logs_rotated/
+#   # expect ema_pullback.log-YYYYMMDD + service.log-YYYYMMDD
+#
+# All five paths exist today; the glob keeps rotation inert for whichever
+# are absent (missingok). The three "service.*.log" entries guard against
+# the /home/autobot/ema_pullback instance that currently has no rotator.
+
+/opt/ema_pullback/logs/*.log
+/opt/london_liquidity_sweep/logs/*.log
+/home/autobot/ema_pullback/logs/*.log
+{
+    daily
+    rotate 8
+    maxsize 50M
+    minsize 1M
+    copytruncate
+    compress
+    delaycompress
+    notifempty
+    missingok
+    dateext
+    dateformat -%Y%m%d
+    olddir /mnt/volume_lon1_1778405456698/logs_rotated
+    createolddir 0755 autobot autobot
+    su autobot autobot
+}
