@@ -77,6 +77,15 @@ SYSTEM = (
     "values; those appear as absent_fields and must not be fabricated.\n"
     "Abstain when ambiguous. Repeated testing can lead to breakout OR rejection.\n"
     "HYPOTHESIS LIFECYCLE DISCIPLINE (C3, 2026-10-29).\n"
+    "  TWO SEPARATE FIELDS. `hypothesis` is CONSTRAINED to the 5-string "
+    "enum {NO_OPPORTUNITY, WATCH_REJECTION, WATCH_BREAKOUT, "
+    "OPPORTUNITY_TO_REVIEW, INVALIDATED} — nothing else is valid. "
+    "`hypothesis_status` is a SEPARATE optional field describing the "
+    "lifecycle of your PRIOR hypothesis relative to current evidence, "
+    "and takes one of {ACTIVE, CHALLENGED, INVALIDATED, RESOLVED, "
+    "EXPIRED}. These two fields have DIFFERENT value spaces. Never "
+    "emit a hypothesis_status value (CHALLENGED, RESOLVED, EXPIRED) "
+    "as a hypothesis — the schema will reject it.\n"
     " 7. RECONSIDER WHEN TRIGGERED. The packet includes "
     "`reassessment_triggers[level_id]` with:\n"
     "    * `trigger_fired` — boolean, true when deterministic rules detect "
@@ -88,22 +97,44 @@ SYSTEM = (
     "    * `prior_invalidation_delta` — your previous invalidation conditions "
     "that are now FIRED or PARTIAL per deterministic matching.\n"
     "  When trigger_fired=true for the level you are observing, you MUST "
-    "explicitly address each reason in `change_since_previous` AND state "
-    "the lifecycle status of your prior hypothesis using the new optional "
-    "field `hypothesis_status` with one of: ACTIVE (reasons do not apply), "
-    "CHALLENGED (reasons apply, direction remains unresolved), INVALIDATED "
-    "(prior invalidation conditions have fired), RESOLVED (anticipated "
-    "market event has occurred), EXPIRED (observation objective lapsed).\n"
+    "explicitly address each reason in `change_since_previous` AND set "
+    "the OPTIONAL `hypothesis_status` field per the lifecycle meanings:\n"
+    "    * ACTIVE — reasons apply but you judge them non-material; "
+    "the hypothesis is still supported by evidence.\n"
+    "    * CHALLENGED — reasons apply AND represent material "
+    "contradictory evidence, but the original hypothesis remains "
+    "defensible pending further confirmation. See rule 8.\n"
+    "    * INVALIDATED — one or more of your previously-stated "
+    "invalidation conditions has FIRED (per the prior_invalidation_delta). "
+    "The original hypothesis cannot continue without a new independent "
+    "basis. See rule 8.\n"
+    "    * RESOLVED — the market event the hypothesis anticipated has "
+    "occurred (the trade would now be past the entry point).\n"
+    "    * EXPIRED — the observation window has lapsed (e.g. end of "
+    "session, level no longer structurally relevant).\n"
     "  Do NOT continue a hypothesis solely because the previous label was "
     "the same. Repeating `WATCH_REJECTION` while narrating contradictory "
     "evidence is label-anchoring and is prohibited.\n"
-    " 8. UNRESOLVED DIRECTION IS A VALID OUTCOME. If the prior hypothesis "
-    "is challenged or invalidated but no new direction is yet confirmed, "
-    "emit `hypothesis=NO_OPPORTUNITY` and `direction=null`. This signals "
-    "that the previous expectation is no longer supported. Do NOT flip to "
-    "the opposite direction without independent confirming evidence (NMS "
-    "flip in the new direction + consecutive_closes_beyond + distance). "
-    "Invalidating a SELL hypothesis does NOT authorise a BUY hypothesis.\n"
+    " 8. CHALLENGED vs INVALIDATED — DIFFERENT RULES.\n"
+    "    * CHALLENGED allows CONTINUATION of the original hypothesis. "
+    "The AI MAY emit `hypothesis` = the same string as the prior "
+    "(e.g. still WATCH_REJECTION) AND `hypothesis_status=CHALLENGED`, "
+    "provided `change_since_previous` explicitly acknowledges the "
+    "contradictory evidence and `narrative` explains why the original "
+    "interpretation remains defensible. CHALLENGED is the right choice "
+    "when evidence is contradictory but not yet material enough to "
+    "invalidate the hypothesis — e.g. ranging around a level with "
+    "mixed signals.\n"
+    "    * INVALIDATED REQUIRES a hypothesis change. If one or more "
+    "of your previously-stated invalidation conditions has FIRED (per "
+    "the prior_invalidation_delta), the original hypothesis cannot "
+    "simply continue. Emit `hypothesis_status=INVALIDATED` AND either "
+    "(a) `hypothesis=NO_OPPORTUNITY, direction=null` when no new "
+    "direction is confirmed, OR (b) a new WATCH_* hypothesis with the "
+    "opposite or neutral direction only when independent confirming "
+    "evidence exists (NMS flip in the new direction + "
+    "consecutive_closes_beyond + distance). Invalidating a SELL does "
+    "NOT authorise a BUY without independent confirmation.\n"
     " 9. PREVIOUS HYPOTHESIS IS CONTEXT, NOT EVIDENCE. Never cite "
     "`previous_assessments[level].hypothesis` as independent supporting "
     "evidence. The prior conclusion is a historical interpretation of "
@@ -333,6 +364,11 @@ def compact_prior(decision: dict | None) -> dict | None:
         "uncertainty_tail_120": (decision.get("uncertainty") or "")[-120:],
         # C3 (new) — carry prior hypothesis_status when present
         "prior_hypothesis_status": decision.get("hypothesis_status"),
+        # C3-refinement (new) — carry prior rule_tags so the trigger
+        # can distinguish repeated firings of the same rule from
+        # genuinely new rule-type firings. Persisted into each
+        # decision row by run() (see below).
+        "prior_c3_rule_tags": decision.get("c3_rule_tags") or [],
     }
 
 
@@ -442,6 +478,30 @@ def _compute_hypothesis_age_bars(level_id: str,
     return streak
 
 
+_REASON_TAGS = {
+    "sustained acceptance above": "A_above",
+    "sustained acceptance below": "B_below",
+    "breakaway signature": "AB_breakaway",
+    "breakout failed; price retreated": "A2_fail",
+    "breakdown failed; price recovered": "B2_fail",
+    "NMS demonstrated_direction=UP": "C_nms_up",
+    "NMS demonstrated_direction=DOWN": "C_nms_down",
+    "prior invalidation condition fired": "D_invcond",
+}
+
+
+def _tag_reasons(reasons: list[str]) -> set:
+    """Reduce free-form reason strings to a stable tag set for episode
+    comparison. Repeated firings of the same rule produce the same tag
+    even if the reason wording changes slightly."""
+    tags = set()
+    for r in reasons or []:
+        for key, tag in _REASON_TAGS.items():
+            if key in r:
+                tags.add(tag)
+    return tags
+
+
 def compute_reassessment_trigger(interactions_row: dict,
                                    nms_row: dict | None,
                                    prior: dict | None,
@@ -453,6 +513,25 @@ def compute_reassessment_trigger(interactions_row: dict,
     this level. Does NOT choose a new hypothesis — AI remains the sole
     emitter.
 
+    Episode-awareness (C3-refinement 2026-10-29): once the AI has
+    acknowledged the trigger by emitting hypothesis_status=CHALLENGED
+    or INVALIDATED on an earlier bar in the same episode, subsequent
+    repeat_unchanged triggers are SUPPRESSED. The trigger re-fires
+    only when:
+      * a NEW rule type fires (reasons tag set grows), OR
+      * the prior hypothesis_status is not an acknowledged state (i.e.
+        AI hasn't yet reassessed), OR
+      * this is the first firing in a new (level, hypothesis, direction)
+        episode.
+
+    This prevents the "fires every bar for the rest of the day on the
+    same old contradiction" pattern (extended-replay §3 showed 93% of
+    326 historical triggers were repeat_unchanged).
+
+    The suppressed field `episode_already_acknowledged=True` is a
+    diagnostic hint; the AI sees it as "trigger was previously
+    acknowledged on this episode".
+
     Threshold rationale: CORRECTION3_DESIGN.md §5. Conservative;
     backed by 27-Oct / 29-Oct replay; quiet-range sessions do NOT fire.
     """
@@ -461,7 +540,8 @@ def compute_reassessment_trigger(interactions_row: dict,
 
     if prior is None:
         return {"trigger_fired": False, "reasons": [], "age_bars": 0,
-                "prior_invalidation_delta": {}}
+                "prior_invalidation_delta": {},
+                "episode_already_acknowledged": False}
 
     raw = (interactions_row or {}).get("raw") or {}
     closes_above = raw.get("closes_above") or 0
@@ -567,11 +647,41 @@ def compute_reassessment_trigger(interactions_row: dict,
     age_bars = _compute_hypothesis_age_bars(
         level_id, prior_hyp, prior.get("direction"), history or [])
 
+    # Episode-aware suppression (C3-refinement 2026-10-29).
+    #
+    # Historical replay showed 93% of 340 triggers were "repeat_unchanged"
+    # — same reasons as the previous fired bar in the same episode. Once
+    # the AI acknowledges the trigger (hypothesis_status in CHALLENGED or
+    # INVALIDATED), repeated firings of the same evidence add no new
+    # information.
+    #
+    # Suppression rule: trigger_fired is False on bars where
+    #   (a) prior_hypothesis_status in {CHALLENGED, INVALIDATED} AND
+    #   (b) no NEW rule tag has fired relative to the prior bar's tags
+    #       (persisted via decision row's `c3_rule_tags` field).
+    #
+    # Genuinely new evidence (new rule type firing, e.g. NMS flip after
+    # pure acceptance-above firing earlier) BYPASSES the suppression.
+    # Prior tags are read from the prior decision via compact_prior's
+    # new `prior_c3_rule_tags` field; empty on the first bar of C3.
+    prior_status = (prior.get("prior_hypothesis_status") or "").upper()
+    episode_acknowledged = prior_status in ("CHALLENGED", "INVALIDATED")
+
+    current_tags = _tag_reasons(reasons)
+    prior_tags = set(prior.get("prior_c3_rule_tags") or [])
+
+    new_rule_fired = bool(current_tags - prior_tags) if prior_tags else bool(current_tags)
+    suppress = (episode_acknowledged and reasons and not new_rule_fired
+                and bool(prior_tags))
+
     return {
-        "trigger_fired": len(reasons) > 0,
-        "reasons": reasons,
+        "trigger_fired": (len(reasons) > 0) and not suppress,
+        "reasons": [] if suppress else reasons,
+        "rule_tags": sorted(current_tags),
         "age_bars": age_bars,
-        "prior_invalidation_delta": inv_delta,
+        "prior_invalidation_delta": {} if suppress else inv_delta,
+        "episode_already_acknowledged": suppress,
+        "suppressed_reasons": reasons if suppress else [],
     }
 
 
@@ -900,6 +1010,12 @@ def run(args) -> int:
                     if args.once:
                         raise
                 else:
+                    # C3-refinement — persist the rule tags that fired
+                    # for this bar so the next bar's compact_prior can
+                    # pass them back as prior_c3_rule_tags.
+                    pkt_triggers = p.get("reassessment_triggers") or {}
+                    this_level_trig = pkt_triggers.get(result["level_id"]) or {}
+                    result["c3_rule_tags"] = this_level_trig.get("rule_tags") or []
                     append(out / "decisions.jsonl", result)
                     seen.add(bar_ts)
                     prev[result["level_id"]] = result
