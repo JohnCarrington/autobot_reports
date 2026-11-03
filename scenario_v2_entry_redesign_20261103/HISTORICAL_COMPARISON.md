@@ -12,6 +12,27 @@ structured proposal).
 **Raw rows:** `data/BACKTEST_RESULTS.csv` (104 rows =
 13 scenarios × 4 mechanisms × 2 extra samples (DEV / VAL)).
 
+> ## ⚠ Corrected 2026-11-03 after final review
+>
+> The headline numbers below were previously MISREPORTED because
+> the summary function filtered EXPIRED trades out of the P&L
+> tally. The corrected numbers are below. See `FINAL_REVIEW.md` §1
+> for the per-trade reconciliation and the exact bug.
+>
+> * A momentum **net was −17.4** (wrong) → **+59.9** (corrected)
+> * A win% was reported as 16.7 % (target vs stop only) →
+>   **53.8 %** when EXPIRED-profitable trades are counted at the
+>   24-bar close.
+> * MFE/MAE columns were inflated for closed/expired trades
+>   because they extended past exit; corrected to be bounded by
+>   the holding period.
+>
+> The honest claim that Mechanism A has **better trade geometry**
+> than M1 remains valid; the honest claim that A is **net-positive
+> on this sample** is now also supported, but n = 13 is still too
+> small to establish profitability. DEMO deployment remains a
+> data-accumulation exercise, not a profit prediction.
+
 **Dev/validation split:** chronological. First 7 scenarios =
 DEV; last 6 = VAL. Both samples are small; neither alone
 supports a profitability claim.
@@ -23,9 +44,9 @@ supports a profitability claim.
 | Mechanism | Fills | Win % | Gross | **Net** | AvgWin | AvgLoss | MDD | PF | Delay (med min) | Cons (med) | Cap % (med) | R:R at entry (med) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | M1 baseline (deployed) | 10 | 40.0 | −44.5 | **−55.0** | +20.3 | −21.0 | **−105.3** | 0.65 | 43.9 | 13.4 | −46.6 | 0.62 |
-| **A momentum** | **13** | 16.7 | −10.5 | **−17.4** | +35.0 | **−9.1** | **−40** | 0.77 | 44.0 | **2.9** | −34.6 | **3.53** |
-| B pullback | 7 | 0.0 | −41.1 | −44.8 | — | −13.7 | −41 | 0.00 | 19.0 | 3.8 | −56.4 | 1.88 |
-| C structural | 4 | 0.0 | −23.2 | −25.0 | — | −11.6 | −23 | 0.00 | 64.1 | 5.5 | −37.2 | 2.4 |
+| **A momentum** (corrected) | **13** | **53.8** | **+76.9** | **+59.9** | +17.6 | **−7.7** | **−39.7** | **2.66** | 44.0 | **2.9** | +6.2 | **3.53** |
+| B pullback (corrected) | 7 | 57.1 | −1.8 | −9.6 | +9.8 | −13.7 | −41.1 | 0.96 | 19.0 | 3.8 | +1.7 | 1.88 |
+| C structural (corrected) | 4 | 50.0 | +6.6 | +3.0 | +14.9 | −11.6 | −13.2 | 1.28 | 64.1 | 5.5 | +14.3 | 2.4 |
 
 - **Fills:** A fires on every scenario (13 / 13); M1 misses 3 of
   13 (no breakout crossing). A is the only mechanism that

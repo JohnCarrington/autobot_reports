@@ -265,7 +265,9 @@ class DemoExecutorInvariants(unittest.TestCase):
 
     def test_disabled_by_default(self):
         self.assertFalse(self.mod.V2_SV2_DEMO_ENABLED)
-        self.assertTrue(self.mod.V2_SV2_DEMO_DRY_RUN)
+        self.assertFalse(hasattr(self.mod, "V2_SV2_DEMO_DRY_RUN"),
+                            "DRY_RUN flag must not exist — operator rejected "
+                            "any dry-run / simulation phase")
 
     def test_evaluate_scenario_disabled_returns_disabled_status(self):
         # Build a minimal scenario + candles that would otherwise fire.
@@ -281,8 +283,54 @@ class DemoExecutorInvariants(unittest.TestCase):
             _dispatcher=lambda *a, **k: self.fail("broker should not be called"),
             _nms=lambda **k: self._simple_nms(True),
             _rules=lambda e, p: (False, None))
-        # Default flags: ENABLED=0, DRY_RUN=1 — expect DISABLED status
-        self.assertIn(res["status"], ("DISABLED", "DRY_RUN", "SKIPPED"))
+        # Default: ENABLED=0 — expect DISABLED. No DRY_RUN path exists.
+        self.assertEqual(res["status"], "DISABLED")
+        self.assertEqual(res["reason"], "V2_SV2_DEMO_ENABLED=0")
+
+    def test_enabled_dispatches_to_broker(self):
+        """When ENABLED=1, a passing setup DOES call the dispatcher."""
+        import os, importlib, importlib.util
+        from importlib.machinery import SourceFileLoader
+        os.environ["V2_SV2_DEMO_SKIP_IMPORT_GUARD"] = "1"
+        os.environ["V2_SV2_DEMO_ENABLED"] = "1"
+        try:
+            tmpl = IMPL / "v2_demo_executor.py.template"
+            loader = SourceFileLoader("v2_demo_enabled", str(tmpl))
+            spec = importlib.util.spec_from_loader("v2_demo_enabled", loader)
+            mod = importlib.util.module_from_spec(spec)
+            loader.exec_module(mod)
+            self.assertTrue(mod.V2_SV2_DEMO_ENABLED)
+            gen = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
+            now = dt.datetime(2026, 11, 3, 10, 30, tzinfo=UTC)
+            pre = _bars(gen - dt.timedelta(minutes=50), [13410.0] * 10, span=1.0)
+            post = [{"ts_open": gen, "ts_close": gen + dt.timedelta(minutes=5),
+                      "o": 13410.0, "h": 13420.0, "l": 13409.5, "c": 13418.0,
+                      "arrival_at_utc": None, "source": "test"}]
+            scen = _scen("DX2", "BUY", 13425.0, 13405.0, 13440.0, gen)
+            calls = []
+            def _dispatcher(dec, epic, **kw):
+                calls.append({"dec": dec, "epic": epic, **kw})
+                return {"status": "OK", "dealReference": "H0-SV2_L-1234567890"}
+            res = mod.evaluate_scenario(
+                scenario_row=scen, candles=pre + post, now_utc=now,
+                _dispatcher=_dispatcher,
+                _nms=lambda **k: self._simple_nms(True),
+                _rules=lambda e, p: (False, None))
+            self.assertEqual(len(calls), 1)
+            self.assertEqual(res["status"], "DISPATCHED")
+            call = calls[0]
+            # Phase 1 provenance kwargs
+            self.assertEqual(call["_p1_source_path"], "SCENARIO_V2")
+            self.assertEqual(call["_p1_strategy_family"], "BOUNCE_MEAN_REVERSION")
+            self.assertTrue(call["_p1_opportunity_type"].startswith("SCENARIO_V2_"))
+            # Decision object has mechanical stop (not V2's breakout stop)
+            self.assertEqual(call["dec"].direction, "BUY")
+            self.assertEqual(call["dec"].strategy, "SCENARIO_V2_L")
+            self.assertNotEqual(call["dec"].stop, 13405.0)  # V2 stop replaced
+            self.assertLess(call["dec"].stop, call["dec"].entry)  # BUY geometry
+            self.assertEqual(call["dec"].target, 13440.0)   # V2's target preserved
+        finally:
+            del os.environ["V2_SV2_DEMO_ENABLED"]
 
     def test_rejected_scenarios_never_hit_broker(self):
         gen = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
@@ -315,6 +363,82 @@ class DemoExecutorInvariants(unittest.TestCase):
         self.assertEqual(len(broker_called), 0)
         self.assertEqual(res["status"], "SKIPPED")
         self.assertIn("NMS_BLOCKED", res["reason"])
+
+    def test_ig_min_stop_block_prevents_broker(self):
+        """A stop tighter than IG's known minimum must skip the submit."""
+        gen = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
+        now = dt.datetime(2026, 11, 3, 10, 30, tzinfo=UTC)
+        pre = _bars(gen - dt.timedelta(minutes=50), [13410.0] * 10, span=1.0)
+        post = [{"ts_open": gen, "ts_close": gen + dt.timedelta(minutes=5),
+                  "o": 13410.0, "h": 13420.0, "l": 13409.5, "c": 13418.0,
+                  "arrival_at_utc": None, "source": "test"}]
+        scen = _scen("MS", "BUY", 13425.0, 13405.0, 13440.0, gen)
+        broker_called = []
+        class _Obs:
+            min_pips = 20.0
+        res = self.mod.evaluate_scenario(
+            scenario_row=scen, candles=pre + post, now_utc=now,
+            _dispatcher=lambda *a, **k: broker_called.append(1),
+            _nms=lambda **k: self._simple_nms(True),
+            _rules=lambda e, p: (True, _Obs()))   # min-stop blocked
+        self.assertEqual(len(broker_called), 0)
+        self.assertEqual(res["status"], "SKIPPED")
+        self.assertEqual(res["reason"], "IG_MIN_STOP_TOO_TIGHT")
+
+    def test_dispatcher_exception_recorded_not_raised(self):
+        """A broker exception is recorded; evaluate_scenario never raises."""
+        import os, importlib, importlib.util
+        from importlib.machinery import SourceFileLoader
+        os.environ["V2_SV2_DEMO_SKIP_IMPORT_GUARD"] = "1"
+        os.environ["V2_SV2_DEMO_ENABLED"] = "1"
+        try:
+            tmpl = IMPL / "v2_demo_executor.py.template"
+            loader = SourceFileLoader("v2_demo_exc", str(tmpl))
+            spec = importlib.util.spec_from_loader("v2_demo_exc", loader)
+            mod = importlib.util.module_from_spec(spec)
+            loader.exec_module(mod)
+            gen = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
+            now = dt.datetime(2026, 11, 3, 10, 30, tzinfo=UTC)
+            pre = _bars(gen - dt.timedelta(minutes=50), [13410.0] * 10, span=1.0)
+            post = [{"ts_open": gen, "ts_close": gen + dt.timedelta(minutes=5),
+                      "o": 13410.0, "h": 13420.0, "l": 13409.5, "c": 13418.0,
+                      "arrival_at_utc": None, "source": "test"}]
+            scen = _scen("EX", "BUY", 13425.0, 13405.0, 13440.0, gen)
+            def _raiser(dec, epic, **kw):
+                raise RuntimeError("IG session dropped")
+            res = mod.evaluate_scenario(
+                scenario_row=scen, candles=pre + post, now_utc=now,
+                _dispatcher=_raiser,
+                _nms=lambda **k: self._simple_nms(True),
+                _rules=lambda e, p: (False, None))
+            self.assertEqual(res["status"], "DISPATCH_EXCEPTION")
+            self.assertIn("IG session dropped", res["broker_result"]["error"])
+        finally:
+            del os.environ["V2_SV2_DEMO_ENABLED"]
+
+    def test_live_env_refused_at_import(self):
+        """Module cannot be imported if IG_ACC_TYPE != DEMO.
+
+        We re-import the template under a LIVE env to confirm the guard.
+        """
+        import os, importlib, importlib.util
+        from importlib.machinery import SourceFileLoader
+        prev_skip = os.environ.pop("V2_SV2_DEMO_SKIP_IMPORT_GUARD", None)
+        prev_acc = os.environ.get("IG_ACC_TYPE")
+        os.environ["IG_ACC_TYPE"] = "LIVE"
+        try:
+            tmpl = IMPL / "v2_demo_executor.py.template"
+            loader = SourceFileLoader("v2_demo_live", str(tmpl))
+            spec = importlib.util.spec_from_loader("v2_demo_live", loader)
+            mod = importlib.util.module_from_spec(spec)
+            with self.assertRaises(EnvironmentError) as ctx:
+                loader.exec_module(mod)
+            self.assertIn("DEMO", str(ctx.exception))
+        finally:
+            if prev_acc is None: os.environ.pop("IG_ACC_TYPE", None)
+            else: os.environ["IG_ACC_TYPE"] = prev_acc
+            if prev_skip is not None:
+                os.environ["V2_SV2_DEMO_SKIP_IMPORT_GUARD"] = prev_skip
 
     def _simple_nms(self, allowed, reason_code=""):
         class D: pass

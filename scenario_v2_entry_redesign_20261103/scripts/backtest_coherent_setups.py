@@ -320,11 +320,21 @@ def _finalise(exit_reason, entry_bar, sim_entry, direction, stop, target,
     gross = None
     if exit_price is not None and exit_reason != "AMBIGUOUS":
         gross = round((exit_price - sim_entry) * (1 if direction == "BUY" else -1), 1)
-    all_bars = [entry_bar] + [c for c in candles if c["ts_open"] > entry_bar["ts_open"]
-                                  and c["ts_close"] <= now]
-    if all_bars:
-        hi = max(c["h"] for c in all_bars)
-        lo = min(c["l"] for c in all_bars)
+    # MFE/MAE computed STRICTLY over the holding period: entry bar through
+    # exit bar inclusive (or last monitored bar if OPEN). Previously this
+    # extended past the exit, inflating MFE/MAE for closed/expired trades.
+    if exit_bar is not None:
+        bars_in_trade = [c for c in candles
+                           if c["ts_open"] >= entry_bar["ts_open"]
+                           and c["ts_open"] <= exit_bar["ts_open"]]
+    else:
+        # Open / OPEN case — all bars from entry forward up to now.
+        bars_in_trade = [c for c in candles
+                           if c["ts_open"] >= entry_bar["ts_open"]
+                           and c["ts_close"] <= now]
+    if bars_in_trade:
+        hi = max(c["h"] for c in bars_in_trade)
+        lo = min(c["l"] for c in bars_in_trade)
         if direction == "BUY":
             mfe = round(hi - sim_entry, 1); mae = round(sim_entry - lo, 1)
         else:
@@ -513,22 +523,31 @@ def _print_summary(rows_out, sample_label):
         if not rows: continue
         n = len(rows)
         fills = [r for r in rows if r["status"] == "fill"]
-        closed = [r for r in fills if r.get("exit_reason") in ("TARGET_HIT", "STOP_HIT")]
-        targets = [r for r in closed if r["exit_reason"] == "TARGET_HIT"]
-        stops = [r for r in closed if r["exit_reason"] == "STOP_HIT"]
-        expired = [r for r in fills if r.get("exit_reason") == "EXPIRED"]
+        # ALL fills with a resolved outcome contribute to totals. EXPIRED
+        # trades exit at the 24-bar close and carry a real pip P&L — they
+        # MUST be included in gross/net sums. The previous summary bucketed
+        # only TARGET/STOP, which omitted ~55% of A's trades on this sample.
+        closed_all = [r for r in fills if r.get("exit_reason") in
+                       ("TARGET_HIT", "STOP_HIT", "EXPIRED")]
+        targets = [r for r in closed_all if r["exit_reason"] == "TARGET_HIT"]
+        stops = [r for r in closed_all if r["exit_reason"] == "STOP_HIT"]
+        expired = [r for r in closed_all if r["exit_reason"] == "EXPIRED"]
         rejected = [r for r in rows if r["status"] == "reject"]
         waiting = [r for r in rows if r["status"] in ("wait", "skip", "error")]
-        if targets or stops:
-            win = round(100 * len(targets) / len(closed), 1)
-            gross = sum((r.get("gross_pips_mid") or 0) for r in closed)
-            net = sum((r.get("net_pips") or 0) for r in closed)
-            avgW = round(st.mean(r["gross_pips_mid"] for r in targets), 1) if targets else 0
-            avgL = round(st.mean(r["gross_pips_mid"] for r in stops), 1) if stops else 0
-            closed_sorted = sorted(closed, key=lambda r: r.get("exit_bar_ts") or "")
+        if closed_all:
+            gross = sum((r.get("gross_pips_mid") or 0) for r in closed_all)
+            net = sum((r.get("net_pips") or 0) for r in closed_all)
+            # Win rate — "profitable trade": gross > 0 at exit (includes
+            # expired-positive). "T/S" win rate kept as a reference stat.
+            profitable = [r for r in closed_all if (r.get("gross_pips_mid") or 0) > 0]
+            win = round(100 * len(profitable) / len(closed_all), 1)
+            avgW = round(st.mean(r["gross_pips_mid"] for r in profitable), 1) if profitable else 0
+            unprofitable = [r for r in closed_all if (r.get("gross_pips_mid") or 0) < 0]
+            avgL = round(st.mean(r["gross_pips_mid"] for r in unprofitable), 1) if unprofitable else 0
+            closed_sorted = sorted(closed_all, key=lambda r: r.get("exit_bar_ts") or "")
             mdd = _max_drawdown(closed_sorted)
-            tot_wins = sum((r.get("gross_pips_mid") or 0) for r in targets)
-            tot_losses = sum(abs(r.get("gross_pips_mid") or 0) for r in stops)
+            tot_wins = sum((r.get("gross_pips_mid") or 0) for r in profitable)
+            tot_losses = sum(abs(r.get("gross_pips_mid") or 0) for r in unprofitable)
             pf = round(tot_wins / tot_losses, 2) if tot_losses else float("inf")
         else:
             win = gross = net = avgW = avgL = mdd = pf = 0
@@ -536,7 +555,7 @@ def _print_summary(rows_out, sample_label):
         delay_med = round(st.median(delays), 1) if delays else 0
         cons = [r["pips_consumed_at_entry"] for r in fills if r.get("pips_consumed_at_entry") is not None]
         cons_med = round(st.median(cons), 1) if cons else 0
-        caps = [r["pct_captured"] for r in closed if r.get("pct_captured") is not None]
+        caps = [r["pct_captured"] for r in closed_all if r.get("pct_captured") is not None]
         cap_med = round(st.median(caps), 1) if caps else 0
         rrs = [r["rr_at_entry"] for r in fills if r.get("rr_at_entry") is not None]
         rr_med = round(st.median(rrs), 2) if rrs else 0

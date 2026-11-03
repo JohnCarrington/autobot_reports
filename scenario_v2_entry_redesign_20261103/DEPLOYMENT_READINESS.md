@@ -3,8 +3,20 @@
 **Status:** DESIGN + IMPLEMENTATION STAGED + REGRESSION TESTS GREEN.
 **NOT DEPLOYED.** No production file modified. No broker call made.
 
+> ## ⚠ Updated 2026-11-03 after final review
+>
+> * No DRY_RUN / shadow / simulation phase. The ENABLED flag is
+>   the only master switch. See `FINAL_REVIEW.md` §4.
+> * Earlier A P&L stats were MISREPORTED (−17.4 net); the
+>   corrected number is **+59.9 net** on n=13. The claim that
+>   this establishes profitability is NOT supported — sample is
+>   still too small.
+> * Preflight connectivity script added
+>   (`scripts/preflight_demo_connectivity.py`): operator runs
+>   once post-install, pre-activation.
+
 **Branch:** `correction/scenario-v2-entry-redesign-20261103` on
-`JohnCarrington/autobot_reports` (will push on commit).
+`JohnCarrington/autobot_reports` (push on commit).
 
 ## 1. What this correction installs on operator approval
 
@@ -67,21 +79,29 @@ patch -p1 < /home/autobot/.../patches/0003-ownership-mode-codes.patch
 python3 -c "import ownership_identity as o; assert 'SCENARIO_V2_L' in o._MODE_CODES"
 python3 -c "import sys; sys.path.insert(0,'/mnt/.../live_obs/agent'); import v2_early_setup; print(v2_early_setup.VALID_MODES)"
 
-# 5. Enable DRY_RUN first (write wrapper script + unit; export env)
+# 5. Pre-flight connectivity (READ-ONLY — no order placed)
+cd /home/autobot/reports-wt/.../scenario_v2_entry_redesign_20261103/scripts
+python3 preflight_demo_connectivity.py
+# Must print "PREFLIGHT ALL GREEN".
+
+# 6. Write wrapper + unit with ENABLED=0 FIRST (safe boot)
 # Operator writes:
 #   /mnt/volume_lon1_1778405456698/research/live_obs/shadow_exec/v2_demo_sweeper.sh
 #   /etc/systemd/system/live-scenario-v2-demo-exec.service
 #   /etc/systemd/system/live-scenario-v2-demo-exec.timer
-# with Environment=V2_SV2_DEMO_ENABLED=1 V2_SV2_DEMO_DRY_RUN=1
+# with Environment=V2_SV2_DEMO_ENABLED=0 (safe default)
 # sudo systemctl daemon-reload && sudo systemctl enable --now live-scenario-v2-demo-exec.timer
 
-# 6. Observe 3-6 sweeps of DRY_RUN output in /mnt/.../live_obs/v2_demo_decisions.jsonl
-#    Confirm every row shows status=DRY_RUN with full setup detail.
+# 7. Observe one sweep in /mnt/.../live_obs/v2_demo_decisions.jsonl
+#    Every row should show status=DISABLED with full setup detail.
+#    This confirms the full pipeline runs correctly without any
+#    broker call.
 
-# 7. Operator approval checkpoint before flipping to real orders.
+# 8. Operator approval checkpoint — confirm IG_ACC_TYPE=DEMO,
+#    no LIVE account present, EMA_PB / BB_BOUNCE unaffected.
 
-# 8. Flip V2_SV2_DEMO_DRY_RUN=0 in the unit file; sudo systemctl daemon-reload.
-#    Next sweep that passes all gates submits a real DEMO order.
+# 9. Flip V2_SV2_DEMO_ENABLED=1 in the unit file; sudo systemctl daemon-reload.
+#    Next sweep that passes all gates submits a REAL IG DEMO order.
 ```
 
 ## 4. Rollback
