@@ -1,0 +1,652 @@
+"""Scenario V2 shadow-execution lifecycle (research-only).
+
+HARD CONTRACTS:
+  * No IG client, no broker call, no trades-api endpoint, no AutoBot
+    execution hook. The module imports NOTHING from /opt/tradingbot
+    outside the research tree.
+  * Append-only JSONL journals under
+    ``research/live_obs/shadow_exec/``:
+      - shadow_proposals.jsonl   one row per (scenario_id, revision_idx)
+      - shadow_positions.jsonl   lifecycle events (OPEN, CLOSE)
+      - shadow_closed.jsonl      flat closed-trade records
+    plus ``shadow_dedup.json`` for key-level idempotency.
+  * Lookahead-safe: a candle whose close is at or before the
+    proposal's wall-clock generation time MUST NOT be used to confirm
+    entry, stop or target. Only strictly-later bar closes contribute.
+  * When stop and target are both touched inside the same M5 bar the
+    outcome is AMBIGUOUS unless we have independent evidence of the
+    intrabar order (we do not here).
+  * Idempotent against service restarts: a proposal with the same
+    (scenario_id, revision_idx) is NOT re-created; an open position
+    whose scenario_id is already OPEN is NOT re-opened; a closed
+    scenario cannot be re-closed.
+
+The sweeper is invoked by a oneshot script (``shadow_exec/run_shadow_exec.sh``)
+on a systemd timer or by the operator manually.
+"""
+from __future__ import annotations
+
+import csv
+import datetime as dt
+import fcntl
+import json
+import pathlib
+from typing import Any, Iterable
+
+from scenario_recommendation import build_trade_recommendation, READY
+
+UTC = dt.timezone.utc
+
+SHADOW_DIR_DEFAULT = pathlib.Path(
+    "/mnt/volume_lon1_1778405456698/research/live_obs/shadow_exec")
+# 2026-11-03 retrospective-fill guard. On a sweep, candles whose
+# ``ts_close`` is strictly older than ``now - MAX_FILL_LOOKBACK_SECONDS``
+# are not eligible to confirm an entry. This caps how far back the
+# post-scenario-gen lookahead window can reach, so that a late-landing
+# anchor correction cannot retroactively open positions on bars that
+# are hours or days behind the current sweep. For any scenario whose
+# gen time is already within the cap, the gen time wins (the cap is a
+# no-op) — fresh scenarios are unaffected. Override per-call via
+# ``max_fill_lookback_seconds`` kwarg on ``process_proposal``.
+MAX_FILL_LOOKBACK_SECONDS = 2 * 60 * 60  # 2 hours
+# Authoritative source — the primary observer's own OHLC stream.
+# Each line is a snapshot for a completed M5 bar, with interactions[0].raw
+# carrying open/high/low/close. Using this stream (instead of the rolling
+# CSV at /opt/tradingbot/cache/) means the shadow executor and the AI
+# agree on exactly which candles are completed.
+SNAPSHOTS_PATH_DEFAULT = pathlib.Path(
+    "/mnt/volume_lon1_1778405456698/research/live_obs/journal/snapshots.jsonl")
+# Legacy fallback — kept so a host without the primary journal still has
+# a path to candles. Lagging-by-one-bar risk is documented.
+CANDLES_PATH_DEFAULT = pathlib.Path(
+    "/opt/tradingbot/cache/GBPUSD_candles_rolling.csv")
+
+
+# ---------------------------------------------------------------------
+# Journals
+# ---------------------------------------------------------------------
+
+def _append_jsonl(path: pathlib.Path, row: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(row, default=str, sort_keys=True) + "\n")
+
+
+def _read_jsonl(path: pathlib.Path) -> list[dict]:
+    if not path.is_file():
+        return []
+    out: list[dict] = []
+    with path.open("r", encoding="utf-8") as f:
+        for ln in f:
+            ln = ln.strip()
+            if not ln:
+                continue
+            try:
+                out.append(json.loads(ln))
+            except json.JSONDecodeError:
+                continue
+    return out
+
+
+def _load_dedup(path: pathlib.Path) -> dict:
+    if not path.is_file():
+        return {"proposals": [], "open_positions": {}, "closed_scenarios": {}}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"proposals": [], "open_positions": {}, "closed_scenarios": {}}
+
+
+def _save_dedup(path: pathlib.Path, state: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(state, sort_keys=True, indent=2),
+                      encoding="utf-8")
+
+
+# ---------------------------------------------------------------------
+# Candle feed
+# ---------------------------------------------------------------------
+
+def load_candles(path: pathlib.Path = SNAPSHOTS_PATH_DEFAULT) -> list[dict]:
+    """Return M5 OHLC rows sorted ascending by timestamp. Each row:
+    ``{"ts_open": datetime, "ts_close": datetime, "o","h","l","c":float,
+       "arrival_at_utc": datetime | None}``.
+
+    Reads the primary observer's snapshots.jsonl by default — this is
+    the SAME completed-bar stream the AI consumed when it generated
+    each scenario, so no "waiting an extra candle" is required: once
+    the observer appends a snapshot, the shadow executor sees it on
+    the next sweep.
+
+    A partially formed bar (i.e. one whose close time has not yet
+    passed real wall-clock time) is EXCLUDED — snapshots are only
+    written AFTER the bar closes, so this is a natural consequence
+    of consuming the snapshot stream; the legacy CSV fallback below
+    enforces it defensively via a now-check in the caller.
+    """
+    if not path.is_file():
+        # Fallback to the legacy rolling CSV when running on a host
+        # that lacks the primary journal. The CSV may lag by up to one
+        # M5 interval; callers must still gate on now_utc.
+        return _load_candles_csv(CANDLES_PATH_DEFAULT)
+    out: list[dict] = []
+    if path.suffix in (".jsonl", ".ndjson") or path.name.endswith("snapshots.jsonl"):
+        with path.open("r", encoding="utf-8") as f:
+            for ln in f:
+                ln = ln.strip()
+                if not ln:
+                    continue
+                try:
+                    d = json.loads(ln)
+                except json.JSONDecodeError:
+                    continue
+                bar_ts = d.get("bar_ts_utc")
+                inter = d.get("interactions") or []
+                if not bar_ts or not inter:
+                    continue
+                raw = inter[0].get("raw") or {}
+                try:
+                    ts_open = dt.datetime.fromisoformat(
+                        bar_ts.replace("Z", "+00:00"))
+                    if ts_open.tzinfo is None:
+                        ts_open = ts_open.replace(tzinfo=UTC)
+                    arrival_s = d.get("received_at_utc")
+                    arrival = None
+                    if arrival_s:
+                        try:
+                            arrival = dt.datetime.fromisoformat(
+                                arrival_s.replace("Z", "+00:00"))
+                            if arrival.tzinfo is None:
+                                arrival = arrival.replace(tzinfo=UTC)
+                        except ValueError:
+                            arrival = None
+                    out.append({
+                        "ts_open": ts_open,
+                        "ts_close": ts_open + dt.timedelta(minutes=5),
+                        "o": float(raw["open"]),
+                        "h": float(raw["high"]),
+                        "l": float(raw["low"]),
+                        "c": float(raw["close"]),
+                        "arrival_at_utc": arrival,
+                        "source": "primary_snapshots",
+                    })
+                except (ValueError, KeyError, TypeError):
+                    continue
+    else:
+        out.extend(_load_candles_csv(path))
+    # Dedup by ts_open (snapshots.jsonl may contain multiple writes per
+    # bar when the primary observer restarted mid-session; keep the
+    # last-seen row).
+    uniq: dict[dt.datetime, dict] = {}
+    for c in out:
+        uniq[c["ts_open"]] = c
+    return sorted(uniq.values(), key=lambda c: c["ts_open"])
+
+
+def _load_candles_csv(path: pathlib.Path) -> list[dict]:
+    """Legacy loader for the rolling CSV. Returns the same shape."""
+    if not path.is_file():
+        return []
+    out: list[dict] = []
+    with path.open("r", encoding="utf-8") as f:
+        r = csv.DictReader(f)
+        for row in r:
+            ts_s = row.get("timestamp")
+            if not ts_s:
+                continue
+            try:
+                ts_open = dt.datetime.fromisoformat(ts_s)
+                if ts_open.tzinfo is None:
+                    ts_open = ts_open.replace(tzinfo=UTC)
+                out.append({
+                    "ts_open": ts_open,
+                    "ts_close": ts_open + dt.timedelta(minutes=5),
+                    "o": float(row["open"]),
+                    "h": float(row["high"]),
+                    "l": float(row["low"]),
+                    "c": float(row["close"]),
+                    "arrival_at_utc": None,
+                    "source": "rolling_csv",
+                })
+            except (ValueError, KeyError):
+                continue
+    return sorted(out, key=lambda c: c["ts_open"])
+
+
+def _candles_after(candles: list[dict], not_before: dt.datetime,
+                     now: dt.datetime | None = None) -> list[dict]:
+    """Lookahead-safe filter.
+
+    Rules:
+      1. The candle's close time must be strictly LATER than
+         ``not_before`` (the proposal's generation timestamp or an
+         entry bar's open).
+      2. The candle's close time must be at or before NOW — a bar
+         whose close is in the future hasn't completed; even if a
+         downstream row contains hypothetical OHLC, we never treat it
+         as decided. Snapshots.jsonl never contains open bars, but
+         the CSV fallback can — this check is defensive.
+    """
+    now = now or dt.datetime.now(UTC)
+    return [c for c in candles
+            if c["ts_close"] > not_before and c["ts_close"] <= now]
+
+
+# ---------------------------------------------------------------------
+# Lifecycle logic
+# ---------------------------------------------------------------------
+
+def _dedup_key(scenario_id: str, revision_idx: int) -> str:
+    return f"{scenario_id}|rev{revision_idx}"
+
+
+def _is_direction_bar_cross(c: dict, direction: str, level: float) -> bool:
+    """Did this bar's HIGH-to-LOW envelope touch ``level`` in the
+    correct direction?
+
+    SELL entry trigger: bar closes BELOW level.
+    BUY  entry trigger: bar closes ABOVE level.
+    """
+    d = (direction or "").upper()
+    if d == "SELL":
+        return c["c"] < level
+    if d == "BUY":
+        return c["c"] > level
+    return False
+
+
+def _bar_hits_stop(c: dict, direction: str, stop: float) -> bool:
+    d = (direction or "").upper()
+    if d == "SELL":
+        return c["h"] >= stop  # SELL stop ABOVE
+    if d == "BUY":
+        return c["l"] <= stop  # BUY stop BELOW
+    return False
+
+
+def _bar_hits_target(c: dict, direction: str, target: float) -> bool:
+    d = (direction or "").upper()
+    if d == "SELL":
+        return c["l"] <= target  # SELL target BELOW
+    if d == "BUY":
+        return c["h"] >= target  # BUY target ABOVE
+    return False
+
+
+def _mfe_mae(candles: list[dict], entry_price: float, direction: str) -> tuple[float, float]:
+    """MFE / MAE in pips given a list of post-entry bars."""
+    if not candles:
+        return (0.0, 0.0)
+    d = (direction or "").upper()
+    highs = max(c["h"] for c in candles)
+    lows  = min(c["l"] for c in candles)
+    if d == "SELL":
+        mfe = round(entry_price - lows, 1)
+        mae = round(highs - entry_price, 1)
+    else:
+        mfe = round(highs - entry_price, 1)
+        mae = round(entry_price - lows, 1)
+    return (mfe, mae)
+
+
+# ---------------------------------------------------------------------
+# Public entry points
+# ---------------------------------------------------------------------
+
+def process_proposal(*,
+                       recommendation: dict,
+                       shadow_dir: pathlib.Path = SHADOW_DIR_DEFAULT,
+                       candles: list[dict] | None = None,
+                       now_utc: dt.datetime | None = None,
+                       max_fill_lookback_seconds: int | None = None,
+                       ) -> dict:
+    """Idempotently register a proposal + run its lifecycle to the
+    current clock. Returns an audit dict naming what happened.
+
+    No position opens unless the recommendation is READY. Candle
+    data defaults to the live rolling CSV; pass a candles list to
+    override (used by tests + fixtures).
+
+    ``max_fill_lookback_seconds`` caps how far back the lookahead
+    window may reach from ``now`` (default
+    :data:`MAX_FILL_LOOKBACK_SECONDS`). Candles whose ``ts_close`` is
+    older than that floor are excluded even if the scenario's gen
+    time is older. Pass ``0`` to disable the cap entirely (used by
+    tests only).
+    """
+    now = now_utc or dt.datetime.now(UTC)
+    shadow_dir.mkdir(parents=True, exist_ok=True)
+    dedup_path = shadow_dir / "shadow_dedup.json"
+    proposals_path = shadow_dir / "shadow_proposals.jsonl"
+    positions_path = shadow_dir / "shadow_positions.jsonl"
+    closed_path    = shadow_dir / "shadow_closed.jsonl"
+    lock_path = shadow_dir / "shadow_exec.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    lock_fd = open(lock_path, "a+")
+    try:
+        fcntl.flock(lock_fd.fileno(), fcntl.LOCK_EX)
+    except OSError:
+        pass
+
+    try:
+        state = _load_dedup(dedup_path)
+        scenario = recommendation.get("scenario") or {}
+        scenario_id = scenario.get("scenario_id") or ""
+        revision_idx = int(scenario.get("revision_idx") or 0)
+        key = _dedup_key(scenario_id, revision_idx)
+
+        # 2026-11-03 anchor-correction: the recommendation top-level
+        # ``generated_at_utc`` reflects when the recommendation was BUILT
+        # (sweep wall-clock); the scenario revision's own
+        # ``generated_at_utc`` is the correct lookahead anchor — it is
+        # the SAME instant the AI consumed its last completed bar. Prefer
+        # the scenario-row value and fall back explicitly so the shape of
+        # the recommendation contract is unchanged.
+        scen_gen_at = (
+            scenario.get("generated_at_utc")
+            or scenario.get("revised_at_utc")
+            or recommendation.get("generated_at_utc")
+            or ""
+        )
+        rec_built_at = recommendation.get("generated_at_utc")
+
+        # ---- 1) Idempotently create proposal row ---------------------
+        if key not in state.get("proposals", []):
+            prop_row = {
+                "proposal_id": f"shadow-{key}",
+                "key": key,
+                "scenario_id": scenario_id,
+                "revision_idx": revision_idx,
+                # ``generated_at_utc`` on the proposal row = scenario
+                # revision gen time (the lookahead anchor). The sweep
+                # wall-clock remains available via
+                # ``recommendation_built_at_utc`` for audit.
+                "generated_at_utc": scen_gen_at,
+                "recommendation_built_at_utc": rec_built_at,
+                "recommendation": recommendation.get("recommendation"),
+                "readiness": recommendation.get("readiness"),
+                "reason": recommendation.get("reason"),
+                "direction": recommendation.get("direction"),
+                "entry": recommendation.get("entry"),
+                "stop": recommendation.get("stop"),
+                "target": recommendation.get("target"),
+                "subsequent_reversal": recommendation.get("subsequent_reversal"),
+                "publication": recommendation.get("publication"),
+                "market_data_status": recommendation.get("market_data_status"),
+                "scenario": scenario,
+                "primary": recommendation.get("primary"),
+                "created_at_utc": now.isoformat(),
+            }
+            _append_jsonl(proposals_path, prop_row)
+            state.setdefault("proposals", []).append(key)
+            action = "PROPOSAL_CREATED"
+        else:
+            action = "PROPOSAL_ALREADY_EXISTS"
+
+        # Only READY proposals can open positions. Everything else is
+        # recorded as a proposal and we stop here.
+        if recommendation.get("readiness") != READY:
+            _save_dedup(dedup_path, state)
+            return {"action": action, "position": None,
+                    "readiness": recommendation.get("readiness"),
+                    "reason": recommendation.get("reason")}
+
+        # Only one open position per scenario_id at any time.
+        if scenario_id in state.get("open_positions", {}):
+            open_rec = state["open_positions"][scenario_id]
+            _save_dedup(dedup_path, state)
+            return {"action": action, "position": "ALREADY_OPEN",
+                    "open_rev": open_rec.get("revision_idx"),
+                    "opened_at_utc": open_rec.get("opened_at_utc")}
+        if scenario_id in state.get("closed_scenarios", {}):
+            close_rec = state["closed_scenarios"][scenario_id]
+            _save_dedup(dedup_path, state)
+            return {"action": action, "position": "ALREADY_CLOSED",
+                    "exit_reason": close_rec.get("exit_reason"),
+                    "closed_at_utc": close_rec.get("closed_at_utc")}
+
+        # ---- 2) Monitor entry ----------------------------------------
+        entry_price = (recommendation.get("entry") or {}).get("price")
+        stop_price = (recommendation.get("stop") or {}).get("price")
+        target_price = (recommendation.get("target") or {}).get("price")
+        direction = (recommendation.get("direction") or "").upper()
+        if entry_price is None or stop_price is None or target_price is None:
+            # Should have been filtered by readiness but defensively guard.
+            _save_dedup(dedup_path, state)
+            return {"action": action, "position": None,
+                    "reason": "INCOMPLETE on second-pass check"}
+
+        # Use the scenario revision's gen time as the lookahead anchor
+        # (NOT the recommendation-build sweep wall-clock, which was the
+        # 2026-11-03 defect). ``scen_gen_at`` was resolved above with
+        # explicit fallbacks preserving the recommendation contract.
+        gen_at = scen_gen_at or ""
+        try:
+            gen_dt = dt.datetime.fromisoformat(gen_at.replace("Z", "+00:00"))
+        except ValueError:
+            _save_dedup(dedup_path, state)
+            return {"action": action, "position": None,
+                    "reason": "unparsable generated_at_utc"}
+
+        if candles is None:
+            candles = load_candles()
+        # Retrospective-fill guard: candles older than
+        # ``now - max_fill_lookback_seconds`` are not eligible for a
+        # fresh entry simulation. For a brand-new proposal
+        # (``gen_dt`` close to ``now``) this is a no-op; for a stale
+        # proposal observed on the first sweep after a fix deploy, it
+        # prevents backfilling into bars that pre-date the fix.
+        if max_fill_lookback_seconds is None:
+            lookback_s = MAX_FILL_LOOKBACK_SECONDS
+        else:
+            lookback_s = int(max_fill_lookback_seconds)
+        if lookback_s > 0:
+            lookback_floor = now - dt.timedelta(seconds=lookback_s)
+            effective_not_before = (gen_dt if gen_dt > lookback_floor
+                                       else lookback_floor)
+        else:
+            effective_not_before = gen_dt
+        post_bars = _candles_after(candles, effective_not_before, now=now)
+
+        entry_bar = None
+        for c in post_bars:
+            if _is_direction_bar_cross(c, direction, entry_price):
+                entry_bar = c
+                break
+
+        if entry_bar is None:
+            _save_dedup(dedup_path, state)
+            return {"action": action, "position": "WAITING_FOR_ENTRY",
+                    "reason": "no post-proposal bar met the entry trigger yet"}
+
+        # ---- 3) OPEN position ----------------------------------------
+        # Simulated entry at the bar's close (the simplest honest fill
+        # on an M5 bar — this is a shadow trade, not a limit order).
+        simulated_entry = entry_bar["c"]
+        open_row = {
+            "proposal_id": f"shadow-{key}",
+            "scenario_id": scenario_id,
+            "revision_idx": revision_idx,
+            "direction": direction,
+            "simulated_entry_price": simulated_entry,
+            "stop_price": stop_price,
+            "target_price": target_price,
+            "entry_bar_ts_utc": entry_bar["ts_open"].isoformat(),
+            "entry_confirmed_at_utc": entry_bar["ts_close"].isoformat(),
+            "proposed_at_utc": gen_at,  # scenario-row gen (lookahead anchor)
+            "recommendation_built_at_utc": rec_built_at,
+            "opened_at_utc": now.isoformat(),
+            "event": "OPEN",
+            "execution_mode": "SHADOW_ONLY",
+        }
+        _append_jsonl(positions_path, open_row)
+        state.setdefault("open_positions", {})[scenario_id] = {
+            "revision_idx": revision_idx,
+            "opened_at_utc": now.isoformat(),
+            "entry_bar_ts_utc": entry_bar["ts_open"].isoformat(),
+            "entry": simulated_entry,
+            "stop": stop_price,
+            "target": target_price,
+            "direction": direction,
+            "proposal_id": f"shadow-{key}",
+        }
+
+        # ---- 4) Monitor exit on bars strictly AFTER the entry bar ----
+        monitor_bars = [c for c in candles
+                         if c["ts_open"] > entry_bar["ts_open"]]
+        exit_reason = None
+        exit_bar = None
+        for c in monitor_bars:
+            hit_stop   = _bar_hits_stop(c, direction, stop_price)
+            hit_target = _bar_hits_target(c, direction, target_price)
+            if hit_stop and hit_target:
+                exit_reason = "AMBIGUOUS_INTRABAR"
+                exit_bar = c
+                break
+            if hit_stop:
+                exit_reason = "STOP_HIT"
+                exit_bar = c
+                break
+            if hit_target:
+                exit_reason = "TARGET_HIT"
+                exit_bar = c
+                break
+        # Compute MFE/MAE over the bars inclusive of entry bar + monitor.
+        mfe, mae = _mfe_mae([entry_bar] + monitor_bars, simulated_entry, direction)
+
+        if exit_bar is None:
+            _save_dedup(dedup_path, state)
+            return {"action": action,
+                    "position": "OPENED_AWAITING_EXIT",
+                    "entry_price": simulated_entry,
+                    "entry_bar_ts_utc": entry_bar["ts_open"].isoformat(),
+                    "mfe_pips_so_far": mfe,
+                    "mae_pips_so_far": mae}
+
+        # ---- 5) CLOSE position ---------------------------------------
+        if exit_reason == "STOP_HIT":
+            sim_exit = stop_price
+        elif exit_reason == "TARGET_HIT":
+            sim_exit = target_price
+        else:  # AMBIGUOUS
+            sim_exit = exit_bar["c"]  # neutral mid; result flagged AMBIGUOUS
+
+        if direction == "SELL":
+            gross_pips = round(simulated_entry - sim_exit, 1)
+        else:
+            gross_pips = round(sim_exit - simulated_entry, 1)
+        if exit_reason == "AMBIGUOUS_INTRABAR":
+            gross_pips_note = "AMBIGUOUS — stop AND target touched in same M5 bar; result cannot be assigned"
+        else:
+            gross_pips_note = None
+
+        close_row = {
+            "proposal_id": f"shadow-{key}",
+            "scenario_id": scenario_id,
+            "revision_idx": revision_idx,
+            "direction": direction,
+            "simulated_entry_price": simulated_entry,
+            "simulated_exit_price": sim_exit,
+            "stop_price": stop_price,
+            "target_price": target_price,
+            "exit_reason": exit_reason,
+            "exit_bar_ts_utc": exit_bar["ts_open"].isoformat(),
+            "closed_at_utc": now.isoformat(),
+            "gross_pips": gross_pips,
+            "gross_pips_note": gross_pips_note,
+            "estimated_cost_pips": None,       # not available on this host
+            "net_pips": None,                  # computed only if cost data exists
+            "mfe_pips": mfe,
+            "mae_pips": mae,
+            "publication_decision_at_proposal":
+                (recommendation.get("publication") or {}).get("decision"),
+            "event": "CLOSE",
+            "execution_mode": "SHADOW_ONLY",
+        }
+        _append_jsonl(positions_path, close_row)
+        _append_jsonl(closed_path, close_row)
+
+        # Remove from open map, record in closed map.
+        state.setdefault("open_positions", {}).pop(scenario_id, None)
+        state.setdefault("closed_scenarios", {})[scenario_id] = {
+            "revision_idx": revision_idx,
+            "exit_reason": exit_reason,
+            "closed_at_utc": now.isoformat(),
+            "proposal_id": f"shadow-{key}",
+        }
+
+        _save_dedup(dedup_path, state)
+        return {"action": action,
+                "position": "CLOSED",
+                "exit_reason": exit_reason,
+                "gross_pips": gross_pips,
+                "mfe_pips": mfe,
+                "mae_pips": mae}
+    finally:
+        try:
+            fcntl.flock(lock_fd.fileno(), fcntl.LOCK_UN)
+        except OSError:
+            pass
+        lock_fd.close()
+
+
+def summary(shadow_dir: pathlib.Path = SHADOW_DIR_DEFAULT) -> dict:
+    """Dashboard-ready summary: pending / open / closed counts + rows."""
+    proposals = _read_jsonl(shadow_dir / "shadow_proposals.jsonl")
+    positions = _read_jsonl(shadow_dir / "shadow_positions.jsonl")
+    closed    = _read_jsonl(shadow_dir / "shadow_closed.jsonl")
+    state = _load_dedup(shadow_dir / "shadow_dedup.json")
+
+    open_by_sid = state.get("open_positions") or {}
+    closed_by_sid = state.get("closed_scenarios") or {}
+
+    pending = []
+    for p in proposals:
+        sid = p.get("scenario_id")
+        if sid in open_by_sid or sid in closed_by_sid:
+            continue
+        pending.append(p)
+
+    open_positions = []
+    for sid, info in open_by_sid.items():
+        proposal = next((p for p in proposals if p.get("scenario_id") == sid),
+                         None)
+        open_positions.append({**(proposal or {}), "lifecycle": info})
+
+    recent_closed = sorted(closed,
+                             key=lambda r: r.get("closed_at_utc") or "",
+                             reverse=True)[:10]
+
+    gross_total = sum((r.get("gross_pips") or 0.0) for r in closed
+                       if r.get("exit_reason") not in (None, "AMBIGUOUS_INTRABAR"))
+    outcomes = {
+        "target_hit": sum(1 for r in closed if r.get("exit_reason") == "TARGET_HIT"),
+        "stop_hit":   sum(1 for r in closed if r.get("exit_reason") == "STOP_HIT"),
+        "ambiguous":  sum(1 for r in closed if r.get("exit_reason") == "AMBIGUOUS_INTRABAR"),
+    }
+
+    return {
+        "schema": "shadow_exec.panel.v1",
+        "pending_proposals": pending,
+        "open_positions": open_positions,
+        "recent_closed": recent_closed,
+        "totals": {
+            "proposals":   len(proposals),
+            "open":        len(open_positions),
+            "closed":      len(closed),
+            "pending":     len(pending),
+            "gross_pips":  round(gross_total, 1),
+            "outcomes":    outcomes,
+        },
+        "execution_mode": "SHADOW_ONLY",
+    }
+
+
+__all__ = [
+    "process_proposal",
+    "summary",
+    "load_candles",
+    "SHADOW_DIR_DEFAULT",
+    "CANDLES_PATH_DEFAULT",
+    "MAX_FILL_LOOKBACK_SECONDS",
+]

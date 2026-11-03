@@ -1,0 +1,131 @@
+--- /home/autobot/reports-wt/scenario-v2-shadow-exec-correction-20261103/scenario_v2_shadow_exec_anchor_20261103/patches/shadow_execution.py.deployed-baseline	2026-11-03 13:59:40.773511103 +0000
++++ /home/autobot/reports-wt/scenario-v2-shadow-exec-correction-20261103/scenario_v2_shadow_exec_anchor_20261103/patches/shadow_execution.py.patched	2026-11-03 14:02:04.026170129 +0000
+@@ -39,6 +39,16 @@
+ 
+ SHADOW_DIR_DEFAULT = pathlib.Path(
+     "/mnt/volume_lon1_1778405456698/research/live_obs/shadow_exec")
++# 2026-11-03 retrospective-fill guard. On a sweep, candles whose
++# ``ts_close`` is strictly older than ``now - MAX_FILL_LOOKBACK_SECONDS``
++# are not eligible to confirm an entry. This caps how far back the
++# post-scenario-gen lookahead window can reach, so that a late-landing
++# anchor correction cannot retroactively open positions on bars that
++# are hours or days behind the current sweep. For any scenario whose
++# gen time is already within the cap, the gen time wins (the cap is a
++# no-op) — fresh scenarios are unaffected. Override per-call via
++# ``max_fill_lookback_seconds`` kwarg on ``process_proposal``.
++MAX_FILL_LOOKBACK_SECONDS = 2 * 60 * 60  # 2 hours
+ # Authoritative source — the primary observer's own OHLC stream.
+ # Each line is a snapshot for a completed M5 bar, with interactions[0].raw
+ # carrying open/high/low/close. Using this stream (instead of the rolling
+@@ -288,6 +298,7 @@
+                        shadow_dir: pathlib.Path = SHADOW_DIR_DEFAULT,
+                        candles: list[dict] | None = None,
+                        now_utc: dt.datetime | None = None,
++                       max_fill_lookback_seconds: int | None = None,
+                        ) -> dict:
+     """Idempotently register a proposal + run its lifecycle to the
+     current clock. Returns an audit dict naming what happened.
+@@ -295,6 +306,13 @@
+     No position opens unless the recommendation is READY. Candle
+     data defaults to the live rolling CSV; pass a candles list to
+     override (used by tests + fixtures).
++
++    ``max_fill_lookback_seconds`` caps how far back the lookahead
++    window may reach from ``now`` (default
++    :data:`MAX_FILL_LOOKBACK_SECONDS`). Candles whose ``ts_close`` is
++    older than that floor are excluded even if the scenario's gen
++    time is older. Pass ``0`` to disable the cap entirely (used by
++    tests only).
+     """
+     now = now_utc or dt.datetime.now(UTC)
+     shadow_dir.mkdir(parents=True, exist_ok=True)
+@@ -317,6 +335,21 @@
+         revision_idx = int(scenario.get("revision_idx") or 0)
+         key = _dedup_key(scenario_id, revision_idx)
+ 
++        # 2026-11-03 anchor-correction: the recommendation top-level
++        # ``generated_at_utc`` reflects when the recommendation was BUILT
++        # (sweep wall-clock); the scenario revision's own
++        # ``generated_at_utc`` is the correct lookahead anchor — it is
++        # the SAME instant the AI consumed its last completed bar. Prefer
++        # the scenario-row value and fall back explicitly so the shape of
++        # the recommendation contract is unchanged.
++        scen_gen_at = (
++            scenario.get("generated_at_utc")
++            or scenario.get("revised_at_utc")
++            or recommendation.get("generated_at_utc")
++            or ""
++        )
++        rec_built_at = recommendation.get("generated_at_utc")
++
+         # ---- 1) Idempotently create proposal row ---------------------
+         if key not in state.get("proposals", []):
+             prop_row = {
+@@ -324,7 +357,12 @@
+                 "key": key,
+                 "scenario_id": scenario_id,
+                 "revision_idx": revision_idx,
+-                "generated_at_utc": recommendation.get("generated_at_utc"),
++                # ``generated_at_utc`` on the proposal row = scenario
++                # revision gen time (the lookahead anchor). The sweep
++                # wall-clock remains available via
++                # ``recommendation_built_at_utc`` for audit.
++                "generated_at_utc": scen_gen_at,
++                "recommendation_built_at_utc": rec_built_at,
+                 "recommendation": recommendation.get("recommendation"),
+                 "readiness": recommendation.get("readiness"),
+                 "reason": recommendation.get("reason"),
+@@ -378,7 +416,11 @@
+             return {"action": action, "position": None,
+                     "reason": "INCOMPLETE on second-pass check"}
+ 
+-        gen_at = recommendation.get("generated_at_utc") or ""
++        # Use the scenario revision's gen time as the lookahead anchor
++        # (NOT the recommendation-build sweep wall-clock, which was the
++        # 2026-11-03 defect). ``scen_gen_at`` was resolved above with
++        # explicit fallbacks preserving the recommendation contract.
++        gen_at = scen_gen_at or ""
+         try:
+             gen_dt = dt.datetime.fromisoformat(gen_at.replace("Z", "+00:00"))
+         except ValueError:
+@@ -388,7 +430,23 @@
+ 
+         if candles is None:
+             candles = load_candles()
+-        post_bars = _candles_after(candles, gen_dt, now=now)
++        # Retrospective-fill guard: candles older than
++        # ``now - max_fill_lookback_seconds`` are not eligible for a
++        # fresh entry simulation. For a brand-new proposal
++        # (``gen_dt`` close to ``now``) this is a no-op; for a stale
++        # proposal observed on the first sweep after a fix deploy, it
++        # prevents backfilling into bars that pre-date the fix.
++        if max_fill_lookback_seconds is None:
++            lookback_s = MAX_FILL_LOOKBACK_SECONDS
++        else:
++            lookback_s = int(max_fill_lookback_seconds)
++        if lookback_s > 0:
++            lookback_floor = now - dt.timedelta(seconds=lookback_s)
++            effective_not_before = (gen_dt if gen_dt > lookback_floor
++                                       else lookback_floor)
++        else:
++            effective_not_before = gen_dt
++        post_bars = _candles_after(candles, effective_not_before, now=now)
+ 
+         entry_bar = None
+         for c in post_bars:
+@@ -415,7 +473,8 @@
+             "target_price": target_price,
+             "entry_bar_ts_utc": entry_bar["ts_open"].isoformat(),
+             "entry_confirmed_at_utc": entry_bar["ts_close"].isoformat(),
+-            "proposed_at_utc": gen_at,
++            "proposed_at_utc": gen_at,  # scenario-row gen (lookahead anchor)
++            "recommendation_built_at_utc": rec_built_at,
+             "opened_at_utc": now.isoformat(),
+             "event": "OPEN",
+             "execution_mode": "SHADOW_ONLY",
+@@ -589,4 +648,5 @@
+     "load_candles",
+     "SHADOW_DIR_DEFAULT",
+     "CANDLES_PATH_DEFAULT",
++    "MAX_FILL_LOOKBACK_SECONDS",
+ ]
