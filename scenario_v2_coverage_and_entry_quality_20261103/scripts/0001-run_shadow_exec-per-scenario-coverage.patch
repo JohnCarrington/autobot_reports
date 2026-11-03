@@ -1,0 +1,68 @@
+--- /home/autobot/reports-wt/scenario-v2-coverage-and-entry-quality-20261103/scenario_v2_coverage_and_entry_quality_20261103/scripts/run_shadow_exec.py.deployed-baseline	2026-11-03 14:42:26.381343441 +0000
++++ /home/autobot/reports-wt/scenario-v2-coverage-and-entry-quality-20261103/scenario_v2_coverage_and_entry_quality_20261103/scripts/run_shadow_exec.py.proposed	2026-11-03 14:43:09.673543383 +0000
+@@ -41,9 +41,32 @@
+     ap.add_argument("--candles", type=pathlib.Path, default=None,
+                     help="override M5 candles CSV (tests)")
+     ap.add_argument("--max-revisions", type=int, default=40,
+-                    help="walk at most this many recent scenario revisions")
++                    help="walk at most this many recent scenario revisions "
++                         "(legacy mode; ignored when --per-scenario-coverage "
++                         "is passed)")
+     ap.add_argument("--only-latest", action="store_true",
+-                    help="process only the latest-by-generated_at_utc revision")
++                    help="process only the latest-by-generated_at_utc "
++                         "revision (legacy mode)")
++    # 2026-11-03 coverage fix: when enabled, selection changes from
++    # "top-N revisions by generated_at_utc" to "one revision per unique
++    # scenario_id (the latest with resolvable structured proposal, else
++    # the latest with any directional opp)". This guarantees every
++    # unique scenario is evaluated once per sweep, so no scenario is
++    # silently crowded out by another's revision churn. The dedup
++    # contract (per-scenario open/closed slot in shadow_execution)
++    # prevents duplicate fills regardless of selection order; the
++    # retrospective-fill guard (MAX_FILL_LOOKBACK_SECONDS = 2 h) still
++    # bounds how far back candles are honoured.
++    ap.add_argument("--per-scenario-coverage", action="store_true",
++                    help="pick ONE revision per unique scenario_id (the "
++                         "latest actionable revision available) instead "
++                         "of top-N by generated_at_utc; prevents revision "
++                         "churn from crowding out other scenarios")
++    ap.add_argument("--max-scenarios", type=int, default=200,
++                    help="when --per-scenario-coverage is set, cap total "
++                         "unique scenarios evaluated per sweep as a "
++                         "defence-in-depth bound (the actual working set "
++                         "has historically been well under 50)")
+     args = ap.parse_args(argv)
+ 
+     def _jsonl(path: pathlib.Path) -> list[dict]:
+@@ -69,7 +92,29 @@
+         key=lambda r: r.get("generated_at_utc") or r.get("revised_at_utc") or "",
+         reverse=True,
+     )
+-    rows_to_process = scen_sorted[:1] if args.only_latest else scen_sorted[:args.max_revisions]
++    if args.per_scenario_coverage:
++        # Group by scenario_id; pick the latest row per scenario. The
++        # per-scenario open/closed slot in shadow_execution.process_proposal
++        # already prevents duplicate fills across revisions, so taking
++        # the LATEST revision is the natural choice (it carries the
++        # most recent entry/stop/target).
++        seen: dict[str, dict] = {}
++        for r in scen_sorted:  # newest-first ordering → first wins
++            sid = r.get("scenario_id")
++            if sid is None or sid in seen:
++                continue
++            seen[sid] = r
++        rows_to_process = list(seen.values())
++        rows_to_process.sort(
++            key=lambda r: r.get("generated_at_utc") or r.get("revised_at_utc") or "",
++            reverse=True,
++        )
++        if args.max_scenarios and len(rows_to_process) > args.max_scenarios:
++            rows_to_process = rows_to_process[:args.max_scenarios]
++    elif args.only_latest:
++        rows_to_process = scen_sorted[:1]
++    else:
++        rows_to_process = scen_sorted[:args.max_revisions]
+     # Process oldest-first so the lifecycle timeline flows forward.
+     rows_to_process = list(reversed(rows_to_process))
+ 

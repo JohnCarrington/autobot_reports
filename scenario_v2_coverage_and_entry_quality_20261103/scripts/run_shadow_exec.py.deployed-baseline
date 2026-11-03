@@ -1,0 +1,192 @@
+"""Shadow-execution sweeper (oneshot).
+
+Walks the newest VALID scenario revisions, builds a trade
+recommendation per revision, and asks ``shadow_execution.process_proposal``
+to advance the lifecycle. Idempotent across restarts, concurrent fires,
+and timer-replay via the dedup set.
+"""
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import json
+import os
+import pathlib
+import sys
+import uuid
+
+HERE = pathlib.Path(__file__).resolve().parent
+AGENT = HERE.parent / "agent"
+if str(AGENT) not in sys.path:
+    sys.path.insert(0, str(AGENT))
+
+from scenario_recommendation import build_trade_recommendation  # noqa: E402
+from shadow_execution import (  # noqa: E402
+    SHADOW_DIR_DEFAULT, load_candles, process_proposal, summary,
+)
+
+UTC = dt.timezone.utc
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--primary-journal", type=pathlib.Path,
+                    default=pathlib.Path(
+                        "/mnt/volume_lon1_1778405456698/research/live_obs/journal"))
+    ap.add_argument("--shadow-journal", type=pathlib.Path,
+                    default=pathlib.Path(
+                        "/mnt/volume_lon1_1778405456698/research/live_obs/journal_shadow"))
+    ap.add_argument("--shadow-exec-dir", type=pathlib.Path,
+                    default=SHADOW_DIR_DEFAULT)
+    ap.add_argument("--candles", type=pathlib.Path, default=None,
+                    help="override M5 candles CSV (tests)")
+    ap.add_argument("--max-revisions", type=int, default=40,
+                    help="walk at most this many recent scenario revisions")
+    ap.add_argument("--only-latest", action="store_true",
+                    help="process only the latest-by-generated_at_utc revision")
+    args = ap.parse_args(argv)
+
+    def _jsonl(path: pathlib.Path) -> list[dict]:
+        if not path.is_file():
+            return []
+        out: list[dict] = []
+        with path.open("r", encoding="utf-8") as f:
+            for ln in f:
+                ln = ln.strip()
+                if not ln:
+                    continue
+                try:
+                    out.append(json.loads(ln))
+                except json.JSONDecodeError:
+                    continue
+        return out
+
+    decisions = _jsonl(args.primary_journal / "decisions.jsonl")
+    snapshots = _jsonl(args.primary_journal / "snapshots.jsonl")
+    scen_rows = _jsonl(args.shadow_journal / "scenarios_shadow.jsonl")
+    scen_sorted = sorted(
+        scen_rows,
+        key=lambda r: r.get("generated_at_utc") or r.get("revised_at_utc") or "",
+        reverse=True,
+    )
+    rows_to_process = scen_sorted[:1] if args.only_latest else scen_sorted[:args.max_revisions]
+    # Process oldest-first so the lifecycle timeline flows forward.
+    rows_to_process = list(reversed(rows_to_process))
+
+    primary = decisions[-1] if decisions else {}
+    latest_snapshot = snapshots[-1] if snapshots else {}
+
+    candles = None
+    if args.candles is not None:
+        from shadow_execution import load_candles as _load
+        candles = _load(args.candles)
+
+    actions: list[dict] = []
+    for row in rows_to_process:
+        # Freshness, current price and level_map all read from the
+        # LATEST completed snapshot — scenario-specific context is
+        # already carried on the row itself (anticipated_sequence +
+        # publication_decision + narrative).
+        rec = build_trade_recommendation(
+            scenario_row=row, snapshot=latest_snapshot,
+            primary_decision=primary,
+        )
+        result = process_proposal(
+            recommendation=rec, shadow_dir=args.shadow_exec_dir,
+            candles=candles,
+        )
+        actions.append({
+            "scenario_id": row.get("scenario_id"),
+            "revision_idx": row.get("revision_idx"),
+            "generated_at_utc": row.get("generated_at_utc"),
+            "recommendation": rec.get("recommendation"),
+            "readiness": rec.get("readiness"),
+            "result": result,
+        })
+
+    report = {
+        "schema": "shadow_exec_sweep.v1",
+        "ran_at_utc": dt.datetime.now(UTC).isoformat(),
+        "rows_processed": len(actions),
+        "actions": actions,
+        "summary": summary(args.shadow_exec_dir),
+    }
+
+    # 2026-11-03 Task A: write full diagnostic report to a dated file on the
+    # attached volume; emit a concise single-line JSON summary to stdout
+    # (which journald captures) that fits comfortably under the 48 KB
+    # LineMax. The full report, with all actions and full reason strings,
+    # is preserved in a durable file. Written atomically via tmp + rename
+    # so no incomplete file is presented as complete. If persistence fails,
+    # emit a concise ERROR to stderr with status=DIAGNOSTIC_PERSIST_FAILED
+    # — no misleading success summary.
+    sweep_dir = args.shadow_exec_dir / "sweep_reports"
+    utc_ts = dt.datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
+    unique = uuid.uuid4().hex[:8]
+    final_name = f"sweep_{utc_ts}_{unique}.json"
+    final_path = sweep_dir / final_name
+    tmp_path = sweep_dir / f".tmp-{os.getpid()}-{unique}-{final_name}"
+    report_bytes = (json.dumps(report, default=str, indent=2) + "\n").encode("utf-8")
+    persist_ok = False
+    persist_error: str | None = None
+    try:
+        sweep_dir.mkdir(parents=True, exist_ok=True)
+        with open(tmp_path, "wb") as tmp_f:
+            tmp_f.write(report_bytes)
+            tmp_f.flush()
+            os.fsync(tmp_f.fileno())
+        os.rename(tmp_path, final_path)
+        # fsync the directory so the rename is durable across power loss
+        dir_fd = os.open(str(sweep_dir), os.O_RDONLY)
+        try:
+            os.fsync(dir_fd)
+        finally:
+            os.close(dir_fd)
+        persist_ok = True
+    except OSError as exc:
+        persist_error = f"{type(exc).__name__}: {exc}"
+        try:
+            if tmp_path.exists():
+                tmp_path.unlink()
+        except OSError:
+            pass
+
+    if not persist_ok:
+        err = {
+            "schema": "shadow_exec_sweep_summary.v1",
+            "ran_at_utc": report["ran_at_utc"],
+            "status": "DIAGNOSTIC_PERSIST_FAILED",
+            "error": persist_error,
+            "rows_processed": report["rows_processed"],
+            "report_file": None,
+        }
+        print(json.dumps(err, default=str), file=sys.stderr)
+        # Shadow-execution outcomes + authoritative trade records are
+        # already persisted by process_proposal above (shadow_proposals.jsonl
+        # etc). The sweep is complete; only the diagnostic report failed.
+        return 1
+
+    by_action: dict[str, int] = {}
+    by_readiness: dict[str, int] = {}
+    for a in actions:
+        res = a.get("result") or {}
+        k_action = str(res.get("action") or "UNKNOWN")
+        k_readiness = str(res.get("readiness") or a.get("readiness") or "UNKNOWN")
+        by_action[k_action] = by_action.get(k_action, 0) + 1
+        by_readiness[k_readiness] = by_readiness.get(k_readiness, 0) + 1
+
+    summary_line = {
+        "schema": "shadow_exec_sweep_summary.v1",
+        "ran_at_utc": report["ran_at_utc"],
+        "rows_processed": report["rows_processed"],
+        "by_action": by_action,
+        "by_readiness": by_readiness,
+        "report_file": str(final_path),
+        "status": "OK",
+    }
+    print(json.dumps(summary_line, default=str))
+    return 0
+
+
+if __name__ == "__main__":  # pragma: no cover
+    sys.exit(main())
