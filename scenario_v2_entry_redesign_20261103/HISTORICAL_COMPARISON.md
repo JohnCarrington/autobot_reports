@@ -12,26 +12,17 @@ structured proposal).
 **Raw rows:** `data/BACKTEST_RESULTS.csv` (104 rows =
 13 scenarios × 4 mechanisms × 2 extra samples (DEV / VAL)).
 
-> ## ⚠ Corrected 2026-11-03 after final review
+> ## ⚠ Superseded 2026-11-03 — 2 h expiry removed
 >
-> The headline numbers below were previously MISREPORTED because
-> the summary function filtered EXPIRED trades out of the P&L
-> tally. The corrected numbers are below. See `FINAL_REVIEW.md` §1
-> for the per-trade reconciliation and the exact bug.
+> Per operator directive, the backtest no longer forces a close at
+> 24 bars. Trades run until stop OR target, matching the real
+> broker lifecycle. Headline Mechanism A result on n=13 is now:
+> **4 targets + 9 stops, 30.8 % win, net +95.7 pips, PF 2.46,
+> MDD −54.6**. See `FINAL_REVIEW_V2.md` §3 for the full table;
+> the figures below (with their embedded 2 h expiry) are SUPERSEDED.
 >
-> * A momentum **net was −17.4** (wrong) → **+59.9** (corrected)
-> * A win% was reported as 16.7 % (target vs stop only) →
->   **53.8 %** when EXPIRED-profitable trades are counted at the
->   24-bar close.
-> * MFE/MAE columns were inflated for closed/expired trades
->   because they extended past exit; corrected to be bounded by
->   the holding period.
->
-> The honest claim that Mechanism A has **better trade geometry**
-> than M1 remains valid; the honest claim that A is **net-positive
-> on this sample** is now also supported, but n = 13 is still too
-> small to establish profitability. DEMO deployment remains a
-> data-accumulation exercise, not a profit prediction.
+> n = 13 remains too small to establish profitability. DEMO
+> deployment remains a data-accumulation exercise.
 
 **Dev/validation split:** chronological. First 7 scenarios =
 DEV; last 6 = VAL. Both samples are small; neither alone

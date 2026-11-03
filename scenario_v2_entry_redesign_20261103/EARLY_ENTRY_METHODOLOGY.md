@@ -2,6 +2,23 @@
 
 **Status:** DESIGN + IMPLEMENTATION STAGED. **Not deployed.**
 
+> ## ⚠ Updated 2026-11-03 — 2-hour expiry REMOVED
+>
+> Earlier sections of this document mentioned a 24-M5-bar (2 h)
+> expiry for A/B/C setups. Per operator directive 2026-11-03, there
+> is **no post-entry time-based close**. Once an order opens the
+> broker's attached stop/target governs the exit entirely. The
+> `DEFAULT_EXPIRY_BARS` constant and `expiry_bars` field have been
+> removed from the derivation module.
+>
+> The `DEFAULT_LOOKBACK_SECONDS = 7200` (2 h) **PRE-ENTRY** cap
+> remains — it bounds how far back the derivation looks for a
+> trigger bar BEFORE any order is placed, and never closes a live
+> position.
+>
+> Backtest numbers in this doc are superseded by the no-expiry
+> re-run in `FINAL_REVIEW_V2.md` §3.
+
 ## 1. Scope reminder
 
 - V2's directional reasoning: UNCHANGED.

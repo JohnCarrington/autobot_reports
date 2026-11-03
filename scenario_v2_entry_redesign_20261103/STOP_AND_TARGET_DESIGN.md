@@ -1,5 +1,17 @@
 # Scenario V2 — stop and target design
 
+> ## ⚠ Updated 2026-11-03 — §6 Expiry rule REMOVED
+>
+> Operator directive: no post-entry time-based close. Once an order
+> opens, the broker's attached stop + target distance owns the exit
+> entirely. Section 6 ("Expiry") is DELETED — treat the mechanism
+> as having NO expiry. Pre-entry setup timeout (via
+> `DEFAULT_LOOKBACK_SECONDS`) remains, as it never closes a live
+> position.
+>
+> Backtest numbers mentioned in §3 and elsewhere are superseded by
+> `FINAL_REVIEW_V2.md` §3.
+
 ## 1. Stops: derived from the setup, not inherited from the breakout
 
 The deployed executor fires on a close beyond V2's `entry_price`

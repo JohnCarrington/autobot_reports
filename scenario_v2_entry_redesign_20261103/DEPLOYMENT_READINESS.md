@@ -3,15 +3,19 @@
 **Status:** DESIGN + IMPLEMENTATION STAGED + REGRESSION TESTS GREEN.
 **NOT DEPLOYED.** No production file modified. No broker call made.
 
-> ## ⚠ Updated 2026-11-03 after final review
+> ## ⚠ Updated 2026-11-03 — expiry removed, lifecycle is broker-owned
 >
+> * No post-entry time-based close. The 24-bar expiry is REMOVED
+>   from the derivation module and backtest. Once a position
+>   opens, the broker's attached stop/target distance governs the
+>   exit. See `FINAL_REVIEW_V2.md` §1.
 > * No DRY_RUN / shadow / simulation phase. The ENABLED flag is
->   the only master switch. See `FINAL_REVIEW.md` §4.
-> * Earlier A P&L stats were MISREPORTED (−17.4 net); the
->   corrected number is **+59.9 net** on n=13. The claim that
->   this establishes profitability is NOT supported — sample is
->   still too small.
-> * Preflight connectivity script added
+>   the only master switch.
+> * Honest P&L on n=13 with real broker lifecycle (TARGET or STOP
+>   only; no forced close): A net **+95.7**, PF **2.46**, win
+>   30.8 % (classical). Earlier +59.9 figure used the removed 2 h
+>   cap. Still n=13; still too small to claim profitability.
+> * Preflight connectivity script
 >   (`scripts/preflight_demo_connectivity.py`): operator runs
 >   once post-install, pre-activation.
 

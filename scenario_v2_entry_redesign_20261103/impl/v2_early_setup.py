@@ -1,9 +1,19 @@
 """Scenario V2 — mechanical early-setup derivation.
 
 Takes a V2 scenario row + M5 candles + current clock and returns a
-coherent (entry, stop, target, expiry) tuple derived mechanically
-from the setup's own invalidation structure — NOT inherited from
-V2's breakout stop.
+coherent (entry, stop, target) tuple derived mechanically from the
+setup's own invalidation structure — NOT inherited from V2's
+breakout stop.
+
+**NO POST-ENTRY TIME-BASED CLOSE.** This module does not and MUST
+not emit any time-based expiry for an open position. Once an order
+is placed, the broker's attached stop/limit distance governs the
+exit entirely. Operator directive 2026-11-03: "a pre-entry setup
+may expire or be invalidated before any order is placed, but this
+must never close an already-open position". A pre-entry setup
+timeout is implemented via the `lookback_seconds` cap on how far
+back the derivation looks for a trigger bar — it never closes a
+live position.
 
 Hard contracts:
   * Pure logic — no file I/O, no network, no broker import.
@@ -20,7 +30,7 @@ Hard contracts:
 Public API:
     SetupOutcome = {"status": ..., "setup_type": ..., "entry_bar_ts": ...,
                      "sim_entry": ..., "stop": ..., "target": ...,
-                     "expiry_bars": ..., "reason": ...}
+                     "reason": ...}
 
     derive(scenario_row, candles, now_utc=None, mode="A", **kwargs)
         → SetupOutcome
@@ -49,8 +59,12 @@ PULLBACK_STOP_BUFFER_PIPS = 2.0
 STRUCTURAL_MIN_WINDOW_BARS = 4         # need ≥ 4 post-gen bars to look for 3-bar pivot
 STRUCTURAL_STOP_BUFFER_PIPS = 2.0
 
-DEFAULT_EXPIRY_BARS = 24               # 2 h in M5 bars
-DEFAULT_LOOKBACK_SECONDS = 2 * 60 * 60 # 2 h — mirrors deployed executor
+# PRE-ENTRY lookback cap. Bounds how far back the derivation looks for
+# a trigger bar. This is a PRE-ENTRY setup timeout: before any order
+# is placed. Mirrors the deployed shadow_execution.MAX_FILL_LOOKBACK_SECONDS
+# default. NO POST-ENTRY equivalent exists — once a position opens,
+# the broker's attached stop/limit distance owns the exit.
+DEFAULT_LOOKBACK_SECONDS = 2 * 60 * 60
 
 VALID_MODES = ("A", "B", "C")
 
@@ -127,7 +141,6 @@ class SetupOutcome:
     sim_entry: float | None            # bar close price (fill)
     stop: float | None                 # mechanical stop
     target: float | None               # V2's target (preserved)
-    expiry_bars: int | None            # setup lifetime cap in M5 bars
     direction: str | None              # BUY/SELL
     extras: dict | None = None         # mechanism-specific audit data
 
@@ -141,21 +154,20 @@ class SetupOutcome:
 
 def _derive_momentum(gen_dt: dt.datetime, now: dt.datetime,
                        direction: str, v2_stop: float, target: float,
-                       candles: list[dict], lookback_s: int,
-                       expiry_bars: int) -> SetupOutcome:
+                       candles: list[dict], lookback_s: int) -> SetupOutcome:
     pre = _pre_bars(candles, gen_dt, 10)
     if len(pre) < 10:
         return SetupOutcome("wait", "MOMENTUM_IMPULSE", "insufficient_pre_history",
-                             None, None, None, target, expiry_bars, direction)
+                             None, None, None, target, direction)
     med_range = st.median((c["h"] - c["l"]) for c in pre)
     if med_range <= 0:
         return SetupOutcome("wait", "MOMENTUM_IMPULSE", "zero_median_range",
-                             None, None, None, target, expiry_bars, direction)
+                             None, None, None, target, direction)
     for bar in _post_bars(candles, gen_dt, now, lookback_s):
         if _stop_breach(bar, direction, v2_stop):
             return SetupOutcome("reject", "MOMENTUM_IMPULSE",
                                  "SETUP_INVALIDATED_PRE_ENTRY",
-                                 None, None, None, target, expiry_bars, direction,
+                                 None, None, None, target, direction,
                                  extras={"abort_bar_ts": bar["ts_open"].isoformat()})
         rng = bar["h"] - bar["l"]
         if rng <= 0:
@@ -168,7 +180,7 @@ def _derive_momentum(gen_dt: dt.datetime, now: dt.datetime,
                 stop = bar["l"] - MOMENTUM_STOP_BUFFER_PIPS
                 return SetupOutcome("fill", "MOMENTUM_IMPULSE", None,
                                      bar["ts_open"].isoformat(), bar["c"],
-                                     stop, target, expiry_bars, direction,
+                                     stop, target, direction,
                                      extras={"impulse_range": round(rng, 2),
                                              "median_range_10": round(med_range, 2)})
         else:  # SELL
@@ -179,12 +191,12 @@ def _derive_momentum(gen_dt: dt.datetime, now: dt.datetime,
                 stop = bar["h"] + MOMENTUM_STOP_BUFFER_PIPS
                 return SetupOutcome("fill", "MOMENTUM_IMPULSE", None,
                                      bar["ts_open"].isoformat(), bar["c"],
-                                     stop, target, expiry_bars, direction,
+                                     stop, target, direction,
                                      extras={"impulse_range": round(rng, 2),
                                              "median_range_10": round(med_range, 2)})
     return SetupOutcome("wait", "MOMENTUM_IMPULSE",
                          "no_momentum_impulse_within_window",
-                         None, None, None, target, expiry_bars, direction)
+                         None, None, None, target, direction)
 
 
 # ---------------------------------------------------------------------
@@ -193,20 +205,19 @@ def _derive_momentum(gen_dt: dt.datetime, now: dt.datetime,
 
 def _derive_pullback(gen_dt: dt.datetime, now: dt.datetime,
                        direction: str, v2_stop: float, target: float,
-                       candles: list[dict], lookback_s: int,
-                       expiry_bars: int) -> SetupOutcome:
+                       candles: list[dict], lookback_s: int) -> SetupOutcome:
     # Decision price = close of last pre-gen bar.
     pre = [c for c in candles if c["ts_close"] <= gen_dt]
     if not pre:
         return SetupOutcome("wait", "PULLBACK_REJECTION", "no_decision_bar",
-                             None, None, None, target, expiry_bars, direction)
+                             None, None, None, target, direction)
     decision_price = pre[-1]["c"]
     pullback: list[dict] = []
     for bar in _post_bars(candles, gen_dt, now, lookback_s):
         if _stop_breach(bar, direction, v2_stop):
             return SetupOutcome("reject", "PULLBACK_REJECTION",
                                  "SETUP_INVALIDATED_PRE_ENTRY",
-                                 None, None, None, target, expiry_bars, direction,
+                                 None, None, None, target, direction,
                                  extras={"abort_bar_ts": bar["ts_open"].isoformat()})
         counter = (direction == "BUY" and bar["c"] < decision_price) \
                or (direction == "SELL" and bar["c"] > decision_price)
@@ -216,8 +227,8 @@ def _derive_pullback(gen_dt: dt.datetime, now: dt.datetime,
             pullback.append(bar)
             if len(pullback) > PULLBACK_MAX_BARS:
                 return SetupOutcome("reject", "PULLBACK_REJECTION",
-                                     "pullback_too_long", None, None, None,
-                                     target, expiry_bars, direction)
+                                     "pullback_too_long",
+                                     None, None, None, target, direction)
             continue
         if indir and pullback:
             higher_low = direction == "BUY" and bar["l"] > min(pb["l"] for pb in pullback)
@@ -229,11 +240,11 @@ def _derive_pullback(gen_dt: dt.datetime, now: dt.datetime,
                     stop = max(pb["h"] for pb in pullback) + PULLBACK_STOP_BUFFER_PIPS
                 return SetupOutcome("fill", "PULLBACK_REJECTION", None,
                                      bar["ts_open"].isoformat(), bar["c"],
-                                     stop, target, expiry_bars, direction,
+                                     stop, target, direction,
                                      extras={"pullback_bars": len(pullback)})
     return SetupOutcome("wait", "PULLBACK_REJECTION",
                          "no_pullback_rejection_sequence",
-                         None, None, None, target, expiry_bars, direction)
+                         None, None, None, target, direction)
 
 
 # ---------------------------------------------------------------------
@@ -242,18 +253,17 @@ def _derive_pullback(gen_dt: dt.datetime, now: dt.datetime,
 
 def _derive_structural(gen_dt: dt.datetime, now: dt.datetime,
                          direction: str, v2_stop: float, target: float,
-                         candles: list[dict], lookback_s: int,
-                         expiry_bars: int) -> SetupOutcome:
+                         candles: list[dict], lookback_s: int) -> SetupOutcome:
     post = _post_bars(candles, gen_dt, now, lookback_s)
     if len(post) < STRUCTURAL_MIN_WINDOW_BARS:
         return SetupOutcome("wait", "EARLY_STRUCTURAL", "insufficient_post_bars",
-                             None, None, None, target, expiry_bars, direction)
+                             None, None, None, target, direction)
     for i in range(len(post) - 2):
         a, b, c_ = post[i], post[i + 1], post[i + 2]
         if _stop_breach(a, direction, v2_stop):
             return SetupOutcome("reject", "EARLY_STRUCTURAL",
                                  "SETUP_INVALIDATED_PRE_ENTRY",
-                                 None, None, None, target, expiry_bars, direction,
+                                 None, None, None, target, direction,
                                  extras={"abort_bar_ts": a["ts_open"].isoformat()})
         if direction == "BUY":
             local_peak = a["h"] >= b["h"]
@@ -263,7 +273,7 @@ def _derive_structural(gen_dt: dt.datetime, now: dt.datetime,
                 stop = b["l"] - STRUCTURAL_STOP_BUFFER_PIPS
                 return SetupOutcome("fill", "EARLY_STRUCTURAL", None,
                                      c_["ts_open"].isoformat(), c_["c"],
-                                     stop, target, expiry_bars, direction,
+                                     stop, target, direction,
                                      extras={"trough_low": b["l"]})
         else:
             local_trough = a["l"] <= b["l"]
@@ -273,11 +283,11 @@ def _derive_structural(gen_dt: dt.datetime, now: dt.datetime,
                 stop = b["h"] + STRUCTURAL_STOP_BUFFER_PIPS
                 return SetupOutcome("fill", "EARLY_STRUCTURAL", None,
                                      c_["ts_open"].isoformat(), c_["c"],
-                                     stop, target, expiry_bars, direction,
+                                     stop, target, direction,
                                      extras={"trough_high": b["h"]})
     return SetupOutcome("wait", "EARLY_STRUCTURAL",
                          "no_structural_pivot_pattern",
-                         None, None, None, target, expiry_bars, direction)
+                         None, None, None, target, direction)
 
 
 # ---------------------------------------------------------------------
@@ -286,13 +296,14 @@ def _derive_structural(gen_dt: dt.datetime, now: dt.datetime,
 
 def derive(scenario_row: dict, candles: list[dict],
              mode: str = "A", now_utc: dt.datetime | None = None,
-             lookback_seconds: int = DEFAULT_LOOKBACK_SECONDS,
-             expiry_bars: int = DEFAULT_EXPIRY_BARS) -> SetupOutcome:
-    """Derive a coherent (entry, stop, target, expiry) setup from the
-    scenario row and the M5 bar stream.
+             lookback_seconds: int = DEFAULT_LOOKBACK_SECONDS) -> SetupOutcome:
+    """Derive a coherent (entry, stop, target) setup from the scenario
+    row and the M5 bar stream.
 
     Preserves V2's direction + target. Derives the stop mechanically
-    from the setup type.
+    from the setup type. Returns a SetupOutcome; emits no post-entry
+    expiry — once an order is placed the broker's attached stop/limit
+    distance governs the exit entirely.
     """
     if mode not in VALID_MODES:
         raise ValueError(f"mode must be one of {VALID_MODES}; got {mode!r}")
@@ -306,22 +317,22 @@ def derive(scenario_row: dict, candles: list[dict],
     gen_dt = _parse(scen_gen_at)
     if direction not in ("BUY", "SELL"):
         return SetupOutcome("error", None, "no_direction",
-                             None, None, None, target, expiry_bars, direction)
+                             None, None, None, target, direction)
     if target is None or v2_stop is None or gen_dt is None:
         return SetupOutcome("error", None, "missing_proposal_or_gen_ts",
-                             None, None, None, target, expiry_bars, direction)
+                             None, None, None, target, direction)
     if mode == "A":
         return _derive_momentum(gen_dt, now, direction, v2_stop, target,
-                                   candles, lookback_seconds, expiry_bars)
+                                   candles, lookback_seconds)
     if mode == "B":
         return _derive_pullback(gen_dt, now, direction, v2_stop, target,
-                                   candles, lookback_seconds, expiry_bars)
+                                   candles, lookback_seconds)
     if mode == "C":
         return _derive_structural(gen_dt, now, direction, v2_stop, target,
-                                     candles, lookback_seconds, expiry_bars)
+                                     candles, lookback_seconds)
     # unreachable
     return SetupOutcome("error", None, f"unknown_mode:{mode}",
-                         None, None, None, target, expiry_bars, direction)
+                         None, None, None, target, direction)
 
 
 __all__ = [
@@ -334,6 +345,5 @@ __all__ = [
     "PULLBACK_MAX_BARS",
     "PULLBACK_STOP_BUFFER_PIPS",
     "STRUCTURAL_STOP_BUFFER_PIPS",
-    "DEFAULT_EXPIRY_BARS",
     "DEFAULT_LOOKBACK_SECONDS",
 ]

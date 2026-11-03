@@ -158,7 +158,7 @@ def mech_A(gen_dt, direction, entry_ref, stop_v2, target, candles, now):
                 stop = bar["l"] - buffer_pips
                 return _simulate_lifecycle(bar, entry, d, stop, target,
                                                candles, now,
-                                               expiry_bars=24,  # 2h = 24 M5 bars
+                                               expiry_bars=None,
                                                extra={"mechanical_stop": stop,
                                                       "momentum_range": round(rng, 2),
                                                       "median_range_10": round(med_range, 2)})
@@ -171,7 +171,7 @@ def mech_A(gen_dt, direction, entry_ref, stop_v2, target, candles, now):
                 stop = bar["h"] + buffer_pips
                 return _simulate_lifecycle(bar, entry, d, stop, target,
                                                candles, now,
-                                               expiry_bars=24,
+                                               expiry_bars=None,
                                                extra={"mechanical_stop": stop,
                                                       "momentum_range": round(rng, 2),
                                                       "median_range_10": round(med_range, 2)})
@@ -225,7 +225,7 @@ def mech_B(gen_dt, direction, entry_ref, stop_v2, target, candles, now):
                     stop = trough_high + buffer_pips
                 return _simulate_lifecycle(bar, entry, d, stop, target,
                                                candles, now,
-                                               expiry_bars=24,
+                                               expiry_bars=None,
                                                extra={"mechanical_stop": stop,
                                                       "pullback_bars": len(pullback_bars)})
     return {"status": "wait", "reason": "no_pullback_rejection_sequence"}
@@ -265,7 +265,7 @@ def mech_C(gen_dt, direction, entry_ref, stop_v2, target, candles, now):
                 stop = b["l"] - buffer_pips
                 return _simulate_lifecycle(c_, entry, d, stop, target,
                                                candles, now,
-                                               expiry_bars=24,
+                                               expiry_bars=None,
                                                extra={"mechanical_stop": stop,
                                                       "trough_low": b["l"]})
         elif d == "SELL":
@@ -277,7 +277,7 @@ def mech_C(gen_dt, direction, entry_ref, stop_v2, target, candles, now):
                 stop = b["h"] + buffer_pips
                 return _simulate_lifecycle(c_, entry, d, stop, target,
                                                candles, now,
-                                               expiry_bars=24,
+                                               expiry_bars=None,
                                                extra={"mechanical_stop": stop,
                                                       "trough_high": b["h"]})
     return {"status": "wait", "reason": "no_structural_pivot_pattern"}
@@ -289,6 +289,20 @@ def mech_C(gen_dt, direction, entry_ref, stop_v2, target, candles, now):
 
 def _simulate_lifecycle(entry_bar, sim_entry, direction, stop, target,
                            candles, now, expiry_bars=None, extra=None):
+    """Simulate the broker's attached stop/target lifecycle.
+
+    2026-11-03 (operator directive): NO POST-ENTRY TIME-BASED CLOSE.
+    The old `expiry_bars=24` default forced a close at bar 24; this
+    is removed. The simulation monitors bars indefinitely until stop
+    OR target is hit by a bar's high/low. If neither is hit by the
+    end of the available candle sample, the trade is reported as
+    UNRESOLVED (would still be live under real broker rules).
+
+    The `expiry_bars` parameter is retained with a default of None
+    (= no post-entry cap) for signature compatibility; passing a
+    positive integer re-enables the old simulation mode only. The
+    production path never passes it.
+    """
     d = direction
     monitor = [c for c in candles
                  if c["ts_open"] > entry_bar["ts_open"] and c["ts_close"] <= now]
@@ -306,13 +320,16 @@ def _simulate_lifecycle(entry_bar, sim_entry, direction, stop, target,
         if ht:
             return _finalise("TARGET_HIT", entry_bar, sim_entry, d, stop,
                               target, target, c, candles, now, extra)
-    # Expiry without hit — close at last bar's close
-    if monitor and expiry_bars is not None:
+    # No stop/target hit within the available candle sample.
+    # Operator directive: do NOT force-close the position. Report as
+    # UNRESOLVED and let the operator see it separately.
+    if expiry_bars is not None and monitor:
+        # Legacy / debug path only — explicitly requested by caller.
         last = monitor[-1]
         return _finalise("EXPIRED", entry_bar, sim_entry, d, stop, target,
                           last["c"], last, candles, now, extra)
-    return _finalise("OPEN", entry_bar, sim_entry, d, stop, target, None,
-                      None, candles, now, extra)
+    return _finalise("UNRESOLVED", entry_bar, sim_entry, d, stop, target,
+                      None, None, candles, now, extra)
 
 
 def _finalise(exit_reason, entry_bar, sim_entry, direction, stop, target,
@@ -511,9 +528,9 @@ def main():
 
 
 def _print_summary(rows_out, sample_label):
-    print(f"=== {sample_label} ===")
+    print(f"=== {sample_label} ===  (resolved = TARGET_HIT or STOP_HIT; unresolved = still live under real broker)")
     print(f"{'Mech':<16} {'n':>3} {'fill':>4} {'tgt':>4} {'stop':>4} "
-          f"{'exp':>3} {'rej':>3} {'wait':>4} {'win%':>5} "
+          f"{'unres':>5} {'rej':>3} {'wait':>4} {'win%':>5} "
           f"{'gross':>7} {'net':>7} {'avgW':>5} {'avgL':>5} "
           f"{'MDD':>6} {'PF':>5} {'delay':>5} {'cons':>5} {'cap%':>5} {'R:R':>5}")
     print("-" * 170)
@@ -523,31 +540,29 @@ def _print_summary(rows_out, sample_label):
         if not rows: continue
         n = len(rows)
         fills = [r for r in rows if r["status"] == "fill"]
-        # ALL fills with a resolved outcome contribute to totals. EXPIRED
-        # trades exit at the 24-bar close and carry a real pip P&L — they
-        # MUST be included in gross/net sums. The previous summary bucketed
-        # only TARGET/STOP, which omitted ~55% of A's trades on this sample.
-        closed_all = [r for r in fills if r.get("exit_reason") in
-                       ("TARGET_HIT", "STOP_HIT", "EXPIRED")]
-        targets = [r for r in closed_all if r["exit_reason"] == "TARGET_HIT"]
-        stops = [r for r in closed_all if r["exit_reason"] == "STOP_HIT"]
-        expired = [r for r in closed_all if r["exit_reason"] == "EXPIRED"]
+        # Operator directive 2026-11-03: no post-entry time-based close.
+        # Only broker-stop (STOP_HIT) and broker-target (TARGET_HIT)
+        # outcomes contribute to the P&L sum. UNRESOLVED trades (would
+        # still be live under real broker rules) are counted separately
+        # and reported as the audit column `unresolved`.
+        resolved = [r for r in fills if r.get("exit_reason") in
+                     ("TARGET_HIT", "STOP_HIT")]
+        targets = [r for r in resolved if r["exit_reason"] == "TARGET_HIT"]
+        stops = [r for r in resolved if r["exit_reason"] == "STOP_HIT"]
+        unresolved = [r for r in fills if r.get("exit_reason") == "UNRESOLVED"]
         rejected = [r for r in rows if r["status"] == "reject"]
         waiting = [r for r in rows if r["status"] in ("wait", "skip", "error")]
-        if closed_all:
-            gross = sum((r.get("gross_pips_mid") or 0) for r in closed_all)
-            net = sum((r.get("net_pips") or 0) for r in closed_all)
-            # Win rate — "profitable trade": gross > 0 at exit (includes
-            # expired-positive). "T/S" win rate kept as a reference stat.
-            profitable = [r for r in closed_all if (r.get("gross_pips_mid") or 0) > 0]
-            win = round(100 * len(profitable) / len(closed_all), 1)
-            avgW = round(st.mean(r["gross_pips_mid"] for r in profitable), 1) if profitable else 0
-            unprofitable = [r for r in closed_all if (r.get("gross_pips_mid") or 0) < 0]
-            avgL = round(st.mean(r["gross_pips_mid"] for r in unprofitable), 1) if unprofitable else 0
-            closed_sorted = sorted(closed_all, key=lambda r: r.get("exit_bar_ts") or "")
+        if resolved:
+            gross = sum((r.get("gross_pips_mid") or 0) for r in resolved)
+            net = sum((r.get("net_pips") or 0) for r in resolved)
+            # Classical win rate: targets / (targets + stops).
+            win = round(100 * len(targets) / len(resolved), 1)
+            avgW = round(st.mean(r["gross_pips_mid"] for r in targets), 1) if targets else 0
+            avgL = round(st.mean(r["gross_pips_mid"] for r in stops), 1) if stops else 0
+            closed_sorted = sorted(resolved, key=lambda r: r.get("exit_bar_ts") or "")
             mdd = _max_drawdown(closed_sorted)
-            tot_wins = sum((r.get("gross_pips_mid") or 0) for r in profitable)
-            tot_losses = sum(abs(r.get("gross_pips_mid") or 0) for r in unprofitable)
+            tot_wins = sum((r.get("gross_pips_mid") or 0) for r in targets)
+            tot_losses = sum(abs(r.get("gross_pips_mid") or 0) for r in stops)
             pf = round(tot_wins / tot_losses, 2) if tot_losses else float("inf")
         else:
             win = gross = net = avgW = avgL = mdd = pf = 0
@@ -555,12 +570,12 @@ def _print_summary(rows_out, sample_label):
         delay_med = round(st.median(delays), 1) if delays else 0
         cons = [r["pips_consumed_at_entry"] for r in fills if r.get("pips_consumed_at_entry") is not None]
         cons_med = round(st.median(cons), 1) if cons else 0
-        caps = [r["pct_captured"] for r in closed_all if r.get("pct_captured") is not None]
+        caps = [r["pct_captured"] for r in resolved if r.get("pct_captured") is not None]
         cap_med = round(st.median(caps), 1) if caps else 0
         rrs = [r["rr_at_entry"] for r in fills if r.get("rr_at_entry") is not None]
         rr_med = round(st.median(rrs), 2) if rrs else 0
         print(f"{mech:<16} {n:>3} {len(fills):>4} {len(targets):>4} {len(stops):>4} "
-              f"{len(expired):>3} {len(rejected):>3} {len(waiting):>4} {win:>5.1f} "
+              f"{len(unresolved):>5} {len(rejected):>3} {len(waiting):>4} {win:>5.1f} "
               f"{gross:>7.1f} {net:>7.1f} {avgW:>5.1f} {avgL:>5.1f} "
               f"{mdd:>6.1f} {pf:>5} {delay_med:>5.1f} {cons_med:>5.1f} {cap_med:>5.1f} {rr_med:>5}")
 
