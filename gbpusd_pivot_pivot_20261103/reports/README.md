@@ -2,7 +2,7 @@
 
 **Branch:** `research/gbpusd-pivot-pivot-20261103` (`JohnCarrington/autobot_reports`)
 **Started:** 2026-11-03
-**Status:** Phase 1 (data audit) + Phase 5 (PIA reconstruction) complete; Phases 2–4 + 6–8 pending.
+**Status:** Phases 1, 2, 4, 5 complete; Phases 3, 6, 7, 8 pending.
 
 ## Objective
 
@@ -14,7 +14,7 @@ Read-only historical investigation of GBP/USD price movement between daily pivot
 |---|---|---|
 | 1 | `reports/PHASE1_DATA_AUDIT.md` | ✓ |
 | 1b | (combined with Phase 1) textbook ≡ IG convention | ✓ |
-| 2 | Pivot interaction event table | pending |
+| 2 | `reports/PHASE2_PIVOT_INTERACTIONS.md` | ✓ (1,561 events) |
 | 3 | Exhaustion / continuation features | pending |
 | 4 | `reports/PHASE4_SESSION_SPLIT.md` | ✓ (session only; news regime deferred) |
 | 5 | `reports/PHASE5_PIA_RECONSTRUCTION.md` | ✓ (small-sample, 4 forecasts) |
