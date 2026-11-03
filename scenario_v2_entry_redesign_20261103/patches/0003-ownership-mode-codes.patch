@@ -1,0 +1,27 @@
+## Register SCENARIO_V2_L / SCENARIO_V2_S mode codes.
+##
+## PATCH TARGET: /opt/tradingbot/ownership_identity.py
+## PATCH STATUS: STAGED — NOT APPLIED. Operator reviews and applies at
+## activation time.
+##
+## Change: two one-line insertions into _MODE_CODES and _SYSTEM_GROUP
+## so V2's DEMO positions carry a distinct dealReference prefix and
+## can be identified at reconcile time.
+
+--- a/ownership_identity.py
++++ b/ownership_identity.py
+@@ -111,6 +111,8 @@ _MODE_CODES = {
+     "GBPUSD_EMA_PULLBACK_L":         "GBPEP_L",
+     "GBPUSD_EMA_PULLBACK_S":         "GBPEP_S",
++    "SCENARIO_V2_L":                 "SV2_L",
++    "SCENARIO_V2_S":                 "SV2_S",
+     "GBPUSD_BB_BOUNCE_L":            "GBPBB_L",
+     "GBPUSD_BB_BOUNCE_S":            "GBPBB_S",
+
+@@ -241,6 +243,8 @@ _SYSTEM_GROUP = {
+     "GBPUSD_EMA_PULLBACK_L":         _GROUP_AUTOBOT_LEGACY,
+     "GBPUSD_EMA_PULLBACK_S":         _GROUP_AUTOBOT_LEGACY,
++    "SCENARIO_V2_L":                 _GROUP_AUTOBOT_LEGACY,
++    "SCENARIO_V2_S":                 _GROUP_AUTOBOT_LEGACY,
+     "GBPUSD_BB_BOUNCE_L":            _GROUP_AUTOBOT_LEGACY,
+     "GBPUSD_BB_BOUNCE_S":            _GROUP_AUTOBOT_LEGACY,

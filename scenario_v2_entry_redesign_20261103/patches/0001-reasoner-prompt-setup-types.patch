@@ -1,0 +1,147 @@
+## Reasoner prompt extension — add non-breakout setup types.
+##
+## PATCH TARGET: /mnt/volume_lon1_1778405456698/research/live_obs/agent/scenario_reasoner.py
+## PATCH STATUS: STAGED — NOT APPLIED. Operator reviews and applies at activation time.
+##
+## Changes (editable sections only; directional reasoning blocks UNTOUCHED):
+##
+##  1. Extend SCENARIO_SYSTEM rule 5b (OPPORTUNITY CATEGORIES) to describe
+##     THREE actionable setup types rather than only breakout.
+##
+##  2. Extend SCENARIO_SYSTEM rule 5d (TRIGGER_SPEC) to include
+##     price_momentum_impulse, price_rejection_retest and
+##     price_structural_continuation enum values. Breakout triggers remain.
+##
+##  3. Extend SCENARIO_SYSTEM rule 5e (STRUCTURED TRADE PROPOSAL) to add
+##     setup_type field + per-setup rationale fields (stop_rationale,
+##     invalidation_reference).
+##
+##  4. Extend TRIGGER_SPEC_SCHEMA and TRADE_PROPOSAL_SCHEMA to accept
+##     the new enum + fields. BREAKOUT remains valid.
+##
+## Changes NOT in this patch (directional reasoning MUST remain intact):
+##   * SCENARIO_SYSTEM preamble (L57-103)
+##   * GROUNDING RULES 1-4a (L104-176)
+##   * EVENT STATUS AUTHORITY (L177-206)
+##   * FORWARD-LOOKING FRAMING (L314-323)
+##   * build_scenario_prompt (L575-641)
+
+--- a/scenario_reasoner.py
++++ b/scenario_reasoner.py
+@@ -208,10 +208,15 @@
+ "    OPPORTUNITY CATEGORIES & TRIGGER_SPEC OBLIGATION"
+ "\n\n"
+ "    Every opportunity you emit MUST be classified as one of:\n"
+ "    A. TECHNICAL — the entry trigger is a pure price-structure "
+-"condition (close above / below a named level, break of a swing, "
+-"retest of a pivot, acceptance beyond a BB, holding of a session "
+-"high) and depends on NO economic event."
++"condition (close above / below a named level, break of a swing, "
++"retest of a pivot, acceptance beyond a BB, holding of a session "
++"high, momentum-impulse continuation, pullback-rejection higher-low "
++"/ lower-high formation, early-structural continuation break) and "
++"depends on NO economic event. The chosen trigger may be a classic "
++"BREAKOUT (far from current price) OR an EARLY SETUP (near current "
++"price, with its own tighter invalidation level). The structural "
++"TARGET is the same in both cases."
+ "    "
+ "    B. NEWS — the entry trigger is defined relative to an announced "
+ "release (break & hold of a specific level after `RELEASED` status, "
+@@ -258,13 +263,22 @@
+ "       \"require_confirmed_close\": true|false,\n"
+ "       \"entry_tolerance_pts\": 8\n"
+ "     }\n"
+ "    "
+ "    Valid trigger_spec.type values:\n"
+ "       * price_break_above  — bar close ≥ level_price (BUY)\n"
+ "       * price_break_below  — bar close ≤ level_price (SELL)\n"
++"       * price_momentum_impulse — fire at close of a bar that is a\n"
++"         clear momentum impulse in the predicted direction. Requires\n"
++"         `invalidation_reference` on trade_proposal.\n"
++"       * price_rejection_retest — fire after a 1-6-bar pullback\n"
++"         produces a higher-low (BUY) / lower-high (SELL). Requires\n"
++"         `invalidation_reference` on trade_proposal.\n"
++"       * price_structural_continuation — fire on a 3-bar higher-\n"
++"         high / lower-low pivot continuation. Requires\n"
++"         `invalidation_reference` on trade_proposal.\n"
+ "       * event_release        — triggered by a scheduled release\n"
+ "       * event_absence        — triggered by non-event (expired)\n"
+ "       * composite            — several of the above conjunctively\n"
+@@ -300,13 +314,33 @@
+ "    STRUCTURED TRADE PROPOSAL"
+ "\n\n"
+ "    When an opportunity is actionable (direction BUY/SELL, "
+ "category A or B, trigger_spec present), include a `trade_proposal` "
+ "block of:\n"
+-"       entry_price   — the breakout level price (same scale as the\n"
+-"                       market pair's index scale, e.g. 13425.18 for\n"
+-"                       GBP/USD)\n"
+-"       stop_price    — the structural invalidation level\n"
+-"       target_price  — the structural destination\n"
++"       setup_type    — one of:\n"
++"           \"BREAKOUT\"           (classic late-breakout; entry_price\n"
++"                                 is the breakout level above/below\n"
++"                                 market)\n"
++"           \"MOMENTUM_IMPULSE\"    (entry at close of a strong\n"
++"                                 directional bar; stop below its own\n"
++"                                 low; see rule 5f.A)\n"
++"           \"PULLBACK_REJECTION\"  (entry on higher-low / lower-high\n"
++"                                 after 1-6 pullback bars; stop below\n"
++"                                 the pullback trough; see rule 5f.B)\n"
++"           \"EARLY_STRUCTURAL\"    (entry on 3-bar continuation break\n"
++"                                 after a local pivot; stop below the\n"
++"                                 local trough; see rule 5f.C)\n"
++"       entry_price   — the trigger level (breakout for setup=BREAKOUT;\n"
++"                       the AI's expected fill price for other setups).\n"
++"       stop_price    — for BREAKOUT: the structural invalidation level.\n"
++"                       For non-BREAKOUT setups: the mechanical stop\n"
++"                       below/above the invalidation_reference bar.\n"
++"       target_price  — the structural destination (unchanged).\n"
++"       invalidation_reference — REQUIRED for non-BREAKOUT setups.\n"
++"                       A short string naming the specific bar whose\n"
++"                       low/high the stop sits below/above (e.g.\n"
++"                       \"impulse bar @ 10:35Z\", \"pullback trough\n"
++"                       @ 10:40Z\", \"local trough @ 10:40Z\").\n"
++"       stop_rationale — short free-text explaining the stop choice.\n"
+ "    "
+ "    Direction-correct geometry (BUY: stop < entry < target;\n"
+ "    SELL: stop > entry > target) is still required.\n"
+@@ -355,16 +389,28 @@
+ TRIGGER_SPEC_SCHEMA = {
+     "type": "object",
+     "properties": {
+-        "type": {"type": "string", "enum": [
+-            "price_break_above", "price_break_below",
+-            "event_release", "event_absence", "composite"]},
++        "type": {"type": "string", "enum": [
++            "price_break_above", "price_break_below",
++            "price_momentum_impulse", "price_rejection_retest",
++            "price_structural_continuation",
++            "event_release", "event_absence", "composite"]},
+         "level_price": {"type": ["number", "null"]},
+         "require_confirmed_close": {"type": ["boolean", "null"]},
+         "entry_tolerance_pts": {"type": ["integer", "null"]},
+     },
+     "additionalProperties": True,
+ }
+
+ TRADE_PROPOSAL_SCHEMA = {
+     "type": "object",
+     "properties": {
+         "direction": {"type": "string", "enum": ["BUY", "SELL"]},
++        "setup_type": {"type": "string", "enum": [
++            "BREAKOUT",
++            "MOMENTUM_IMPULSE",
++            "PULLBACK_REJECTION",
++            "EARLY_STRUCTURAL",
++        ]},
+         "entry_price": {"type": "number"},
+         "stop_price": {"type": "number"},
+         "target_price": {"type": "number"},
++        "invalidation_reference": {"type": ["string", "null"]},
++        "stop_rationale": {"type": ["string", "null"]},
+         "entry_trigger": {"type": ["string", "null"]},
+         "target_rationale": {"type": ["string", "null"]},
+     },
+     "additionalProperties": True,
+ }

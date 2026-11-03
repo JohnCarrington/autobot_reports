@@ -1,0 +1,74 @@
+## Parser + validator updates — accept non-breakout setup_type values.
+##
+## PATCH TARGETS:
+##   /mnt/.../live_obs/agent/scenario_recommendation.py (parser)
+##   /mnt/.../live_obs/agent/scenario_quality.py        (validator)
+##
+## PATCH STATUS: STAGED — NOT APPLIED. Operator reviews and applies at
+## activation time. Changes are strictly additive — BREAKOUT setup
+## continues to work exactly as today.
+
+--- a/scenario_recommendation.py
++++ b/scenario_recommendation.py
+@@ -387,6 +387,15 @@ def _extract_entry_price_from_text(text: str | None,
+
+ def _extract_entry_price_from_text(text: str | None,
+                                      direction: str) -> tuple[float | None, str]:
+     """Return the FIRST numeric price that appears within 60 characters
+     of a direction-correct trigger phrase.
++
++    Setup-type note (2026-11-03 extension): this function remains the
++    narrative fallback for setup_type=BREAKOUT. Non-breakout setups
++    (MOMENTUM_IMPULSE / PULLBACK_REJECTION / EARLY_STRUCTURAL) MUST
++    supply a structured `trade_proposal` with entry_price / stop_price
++    / target_price AND setup_type; the regex path is not expected to
++    find a numeric price in the free-text invalidation_reference. The
++    build_trade_recommendation path takes the structured values
++    verbatim for non-breakout setups.
+     """
+     ...
+
+@@ -570,6 +579,15 @@ def build_trade_recommendation(*,
+
++    # 2026-11-03: setup-type extraction. The AI may now emit a
++    # setup_type ∈ {BREAKOUT, MOMENTUM_IMPULSE, PULLBACK_REJECTION,
++    # EARLY_STRUCTURAL} on the structured trade_proposal. For every
++    # non-BREAKOUT value the structured proposal is AUTHORITATIVE —
++    # the narrative parser is bypassed since the AI's natural-language
++    # trigger text will not match the breakout regex.
++    structured = (scenario_row.get("trade_proposal") or
++                   (primary_opp or {}).get("trade_proposal") or {})
++    setup_type = (structured.get("setup_type") or "BREAKOUT").upper()
++    non_breakout = setup_type != "BREAKOUT"
+
+     use_structured = (
+         structured_dir == direction and
+         structured.get("entry_price") is not None and
+         structured.get("stop_price") is not None and
+         structured.get("target_price") is not None
++        and (setup_type == "BREAKOUT"
++             or structured.get("invalidation_reference") is not None)
+     )
+     ...
+
+--- a/scenario_quality.py
++++ b/scenario_quality.py
+@@ -960,6 +960,20 @@ def _validate_structured_trade_proposal(...):
+     # ... existing geometry checks ...
+
++    # 2026-11-03: setup-type-aware validation.
++    # Non-breakout setups REQUIRE an invalidation_reference string so
++    # the mechanical stop derivation can audit which bar's extreme
++    # the stop sits at.
++    setup_type = (tp.get("setup_type") or "BREAKOUT").upper()
++    if setup_type != "BREAKOUT":
++        if setup_type not in {"MOMENTUM_IMPULSE",
++                                "PULLBACK_REJECTION", "EARLY_STRUCTURAL"}:
++            flags.append(_flag("UNKNOWN_SETUP_TYPE", "HIGH",
++                                f"setup_type={setup_type!r} not recognised"))
++        inv = (tp.get("invalidation_reference") or "").strip()
++        if not inv:
++            flags.append(_flag("MISSING_INVALIDATION_REFERENCE", "HIGH",
++                                f"setup_type={setup_type!r} requires "
++                                "invalidation_reference"))
+     return flags

@@ -1,0 +1,296 @@
+# ─────────────────────────────────────────────────────────────────────
+# TEMPLATE — DO NOT IMPORT AS-IS INTO PRODUCTION.
+#
+# This is a non-executable template of the proposed IG DEMO executor.
+# The operator renames to `v2_demo_executor.py` and installs under
+# /mnt/volume_lon1_1778405456698/research/live_obs/agent/ at
+# activation time, together with the regression tests.
+#
+# Nothing in this file runs until:
+#   1. File is renamed + chmod + installed.
+#   2. V2_SV2_DEMO_ENABLED=1 is set.
+#   3. V2_SV2_DEMO_DRY_RUN=0 is set.
+#   4. IG_ACC_TYPE=DEMO is confirmed in /opt/tradingbot/.env.
+# ─────────────────────────────────────────────────────────────────────
+"""Scenario V2 — IG DEMO executor (early-setup variant).
+
+HARD CONTRACTS:
+  * IG_ACC_TYPE MUST equal "DEMO" at module import time; any other
+    value raises EnvironmentError. The guard is at module scope so
+    this file cannot be imported into a LIVE process by mistake.
+  * V2_SV2_DEMO_ENABLED must equal "1" for any broker call; default
+    is "0" (fully inert).
+  * V2_SV2_DEMO_DRY_RUN=1 (default) logs the decision but makes no
+    broker call. Operator sets to "0" only after a dry-run review.
+  * Reuses the central autobot.execute_trade path — no new broker
+    code lives here.
+  * Mechanical setup derivation lives in v2_early_setup.derive; this
+    file only calls that function and translates the result into an
+    execute_trade call. The derivation module is pure logic with no
+    broker dependency and can be unit-tested standalone.
+"""
+from __future__ import annotations
+
+import dataclasses
+import datetime as dt
+import json
+import os
+import pathlib
+import sys
+from typing import Any
+
+import v2_early_setup as es  # pure-logic sibling
+
+UTC = dt.timezone.utc
+
+# ---------------------------------------------------------------------
+# Env-driven, fail-safe defaults
+# ---------------------------------------------------------------------
+
+V2_SV2_DEMO_ENABLED = os.environ.get("V2_SV2_DEMO_ENABLED", "0") == "1"
+V2_SV2_DEMO_DRY_RUN = os.environ.get("V2_SV2_DEMO_DRY_RUN", "1") == "1"
+V2_SV2_DEMO_MODE = os.environ.get("V2_SV2_DEMO_MODE", "A").upper()  # A|B|C
+V2_SV2_DEMO_POSITION_SIZE = float(os.environ.get("V2_SV2_DEMO_POSITION_SIZE", "0.5"))
+V2_SV2_DEMO_MAX_SIZE = float(os.environ.get("V2_SV2_DEMO_MAX_SIZE", "2.0"))
+V2_SV2_DEMO_PAIR = os.environ.get("V2_SV2_DEMO_PAIR", "GBPUSD")
+V2_SV2_DEMO_EPIC = os.environ.get("V2_SV2_DEMO_EPIC", "CS.D.GBPUSD.TODAY.IP")
+
+DECISION_JOURNAL = pathlib.Path(os.environ.get(
+    "V2_SV2_DEMO_DECISIONS_PATH",
+    "/mnt/volume_lon1_1778405456698/research/live_obs/v2_demo_decisions.jsonl"))
+
+
+# ---------------------------------------------------------------------
+# Import-time DEMO guard
+# ---------------------------------------------------------------------
+
+def _assert_demo_at_import() -> None:
+    acc = os.environ.get("IG_ACC_TYPE", "").upper().strip()
+    if acc != "DEMO":
+        raise EnvironmentError(
+            f"v2_demo_executor refuses to load with IG_ACC_TYPE={acc!r}. "
+            f"Set IG_ACC_TYPE=DEMO in /opt/tradingbot/.env before importing."
+        )
+
+
+if os.environ.get("V2_SV2_DEMO_SKIP_IMPORT_GUARD") != "1":
+    _assert_demo_at_import()
+
+if V2_SV2_DEMO_POSITION_SIZE > V2_SV2_DEMO_MAX_SIZE:
+    V2_SV2_DEMO_POSITION_SIZE = V2_SV2_DEMO_MAX_SIZE
+if V2_SV2_DEMO_MODE not in es.VALID_MODES:
+    V2_SV2_DEMO_MODE = "A"
+
+
+# ---------------------------------------------------------------------
+# Decision journal
+# ---------------------------------------------------------------------
+
+def _append_journal(row: dict) -> None:
+    DECISION_JOURNAL.parent.mkdir(parents=True, exist_ok=True)
+    with DECISION_JOURNAL.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(row, default=str, sort_keys=True) + "\n")
+
+
+# ---------------------------------------------------------------------
+# Broker call — lazy import; test injects _dispatcher
+# ---------------------------------------------------------------------
+
+class _SimpleNS:
+    def __init__(self, **kw): self.__dict__.update(kw)
+
+
+def _submit_demo_order(*, setup: es.SetupOutcome, scenario_id: str,
+                          revision_idx: int, size: float, pair: str, epic: str,
+                          _dispatcher=None) -> dict:
+    """Submit a market order via the central autobot.execute_trade
+    shim. The shim already handles dealReference tagging, EPIC_STATE
+    dedup, min-stop rejection, Phase 1 provenance, and position
+    reconciliation. No new broker code here."""
+    if _dispatcher is None:
+        sys.path.insert(0, "/opt/tradingbot")
+        try:
+            from autobot import execute_trade as _execute_trade  # type: ignore
+        except Exception as exc:  # pragma: no cover
+            return {"status": "DISPATCH_IMPORT_FAILED", "error": str(exc)}
+        _dispatcher = _execute_trade
+    dec = _SimpleNS(
+        direction=setup.direction,
+        pair=pair,
+        epic=epic,
+        entry=setup.sim_entry,
+        stop=setup.stop,
+        target=setup.target,
+        strategy="SCENARIO_V2_L" if setup.direction == "BUY" else "SCENARIO_V2_S",
+        size=size,
+        setup_type=setup.setup_type,
+    )
+    try:
+        result = _dispatcher(
+            dec, epic,
+            _p1_source_path="SCENARIO_V2",
+            _p1_strategy_family="BOUNCE_MEAN_REVERSION",
+            _p1_opportunity_type=f"SCENARIO_V2_{setup.setup_type}",
+        )
+    except Exception as exc:
+        return {"status": "DISPATCH_EXCEPTION", "error": str(exc)}
+    return {"status": "DISPATCHED", "result": result}
+
+
+def _nms_evaluate(symbol: str, side: str, *, _nms=None) -> dict:
+    if _nms is None:
+        sys.path.insert(0, "/opt/tradingbot")
+        try:
+            from nms_directional_authority import evaluate as _ev  # type: ignore
+        except Exception as exc:  # pragma: no cover
+            return {"applicable": False, "allowed": True,
+                     "reason_code": f"NMS_IMPORT_FAILED:{type(exc).__name__}"}
+        _nms = _ev
+    try:
+        d = _nms(symbol=symbol, strategy_id="scenario_v2_early",
+                   strategy_family="BOUNCE_MEAN_REVERSION", side=side)
+        return {"applicable": getattr(d, "applicable", True),
+                "allowed": getattr(d, "allowed", True),
+                "reason_code": getattr(d, "reason_code", "")}
+    except Exception as exc:
+        return {"applicable": False, "allowed": False,
+                "reason_code": f"NMS_EVAL_EXCEPTION:{type(exc).__name__}"}
+
+
+def _ig_min_stop_blocked(epic: str, stop_pips: float, *, _rules=None) -> dict:
+    if _rules is None:
+        sys.path.insert(0, "/opt/tradingbot")
+        try:
+            from ig_dealing_rules import is_known_too_tight as _k  # type: ignore
+        except Exception as exc:  # pragma: no cover
+            return {"blocked": False, "reason": f"RULES_IMPORT_FAILED:{type(exc).__name__}"}
+        _rules = _k
+    try:
+        blocked, obs = _rules(epic, stop_pips)
+        return {"blocked": blocked,
+                "min_pips_observed": getattr(obs, "min_pips", None) if obs else None}
+    except Exception as exc:
+        return {"blocked": False, "reason": f"RULES_EVAL_EXCEPTION:{type(exc).__name__}"}
+
+
+# ---------------------------------------------------------------------
+# Core evaluation
+# ---------------------------------------------------------------------
+
+def evaluate_scenario(*,
+                        scenario_row: dict,
+                        candles: list[dict],
+                        now_utc: dt.datetime | None = None,
+                        mode: str | None = None,
+                        _dispatcher=None,
+                        _nms=None,
+                        _rules=None,
+                        ) -> dict:
+    """Evaluate a scenario end-to-end and (if all gates pass + flags
+    allow) submit a DEMO order. Never raises."""
+    now = now_utc or dt.datetime.now(UTC)
+    scenario_id = scenario_row.get("scenario_id") or ""
+    revision_idx = int(scenario_row.get("revision_idx") or 0)
+    scen_gen_at = scenario_row.get("generated_at_utc") or ""
+    pub = (scenario_row.get("publication_decision") or {}).get("decision", "").upper()
+    scen_state = (scenario_row.get("state") or "").upper()
+    base = {"schema": "sv2_demo_decision.v2",
+            "evaluated_at_utc": now.isoformat(),
+            "scenario_id": scenario_id,
+            "revision_idx": revision_idx,
+            "scen_gen_at": scen_gen_at,
+            "pair": V2_SV2_DEMO_PAIR, "epic": V2_SV2_DEMO_EPIC,
+            "mode": (mode or V2_SV2_DEMO_MODE),
+            "flags": {"enabled": V2_SV2_DEMO_ENABLED,
+                      "dry_run": V2_SV2_DEMO_DRY_RUN},
+    }
+
+    def _skip(reason: str, **extra) -> dict:
+        return {**base, "status": "SKIPPED", "reason": reason, **extra}
+
+    # Lifecycle hard gates
+    if pub != "VALID":
+        return _skip(f"publication_decision={pub or 'UNVALIDATED'}")
+    if scen_state in ("INVALIDATED", "COMPLETED"):
+        return _skip(f"scenario_state={scen_state}")
+
+    # Mechanical setup derivation
+    try:
+        setup = es.derive(scenario_row, candles,
+                            mode=(mode or V2_SV2_DEMO_MODE),
+                            now_utc=now)
+    except Exception as exc:
+        return _skip(f"derive_exception:{type(exc).__name__}:{exc}")
+    if setup.status != "fill":
+        return {**base, "status": setup.status.upper(),
+                "reason": setup.reason,
+                "setup_type": setup.setup_type,
+                "direction": setup.direction}
+
+    # NMS compatibility gate
+    nms = _nms_evaluate(V2_SV2_DEMO_PAIR, setup.direction, _nms=_nms)
+    if nms.get("applicable") and not nms.get("allowed"):
+        return _skip(f"NMS_BLOCKED:{nms.get('reason_code', '')}",
+                       setup={"type": setup.setup_type,
+                              "entry": setup.sim_entry,
+                              "stop": setup.stop, "target": setup.target},
+                       nms=nms)
+
+    # IG min-stop pre-check
+    stop_dist = abs(setup.sim_entry - setup.stop)
+    min_stop = _ig_min_stop_blocked(V2_SV2_DEMO_EPIC, stop_dist, _rules=_rules)
+    if min_stop.get("blocked"):
+        return _skip("IG_MIN_STOP_TOO_TIGHT", min_stop=min_stop,
+                       setup={"type": setup.setup_type,
+                              "entry": setup.sim_entry,
+                              "stop": setup.stop, "target": setup.target})
+
+    size = min(V2_SV2_DEMO_POSITION_SIZE, V2_SV2_DEMO_MAX_SIZE)
+    full_decision = {**base, "setup": setup.as_dict(),
+                      "nms": nms, "min_stop": min_stop,
+                      "size": size,
+                      "strategy": "SCENARIO_V2_L" if setup.direction == "BUY" else "SCENARIO_V2_S"}
+
+    if not V2_SV2_DEMO_ENABLED:
+        return {**full_decision, "status": "DISABLED",
+                "reason": "V2_SV2_DEMO_ENABLED=0"}
+    if V2_SV2_DEMO_DRY_RUN:
+        return {**full_decision, "status": "DRY_RUN",
+                "reason": "V2_SV2_DEMO_DRY_RUN=1"}
+
+    submit = _submit_demo_order(
+        setup=setup, scenario_id=scenario_id, revision_idx=revision_idx,
+        size=size, pair=V2_SV2_DEMO_PAIR, epic=V2_SV2_DEMO_EPIC,
+        _dispatcher=_dispatcher)
+    return {**full_decision, "status": submit["status"],
+            "broker_result": submit}
+
+
+def sweep(*, scenarios: list[dict], candles: list[dict],
+            now_utc: dt.datetime | None = None,
+            mode: str | None = None,
+            journal: bool = True,
+            _dispatcher=None, _nms=None, _rules=None) -> list[dict]:
+    out: list[dict] = []
+    now = now_utc or dt.datetime.now(UTC)
+    for scen in scenarios:
+        res = evaluate_scenario(
+            scenario_row=scen, candles=candles, now_utc=now, mode=mode,
+            _dispatcher=_dispatcher, _nms=_nms, _rules=_rules)
+        out.append(res)
+        if journal:
+            _append_journal(res)
+    return out
+
+
+__all__ = [
+    "evaluate_scenario",
+    "sweep",
+    "V2_SV2_DEMO_ENABLED",
+    "V2_SV2_DEMO_DRY_RUN",
+    "V2_SV2_DEMO_MODE",
+    "V2_SV2_DEMO_POSITION_SIZE",
+    "V2_SV2_DEMO_PAIR",
+    "V2_SV2_DEMO_EPIC",
+    "DECISION_JOURNAL",
+]
