@@ -1,0 +1,26 @@
+{
+  "symbol": "GBPUSD",
+  "date": "2026-11-03",
+  "bars_total": 101,
+  "bars_london": 5,
+  "day_range_pips": 30.3,
+  "day_net_pips": 11.3,
+  "state_dist": {
+    "RANGE": 5
+  },
+  "regime_dist": {
+    "RANGE": 5
+  },
+  "transitions_count": 0,
+  "transitions": [],
+  "first_emerging_bar": null,
+  "peak_up_score": 2,
+  "peak_down_score": 1,
+  "bb_signals_total": 0,
+  "bb_admits_baseline": 0,
+  "bb_admits_c5": 0,
+  "bb_admits_baseline_detail": [],
+  "bb_admits_c5_detail": [],
+  "label": "Tue: continued RANGE, partial day",
+  "config": "baseline"
+}

@@ -1,0 +1,137 @@
+{
+  "symbol": "GBPUSD",
+  "date": "2026-10-30",
+  "bars_total": 252,
+  "bars_london": 156,
+  "day_range_pips": 59.85,
+  "day_net_pips": 11.8,
+  "state_dist": {
+    "RANGE": 76,
+    "STRONG_UP": 40,
+    "STRONG_DOWN": 37,
+    "EMERGING_DOWN": 3
+  },
+  "regime_dist": {
+    "RANGE": 76,
+    "STRONG_UP": 40,
+    "STRONG_DOWN": 37,
+    "EMERGING_DOWN": 3
+  },
+  "transitions_count": 6,
+  "transitions": [
+    [
+      "2026-10-30T09:20:00+00:00",
+      "RANGE",
+      "STRONG_UP"
+    ],
+    [
+      "2026-10-30T12:40:00+00:00",
+      "STRONG_UP",
+      "RANGE"
+    ],
+    [
+      "2026-10-30T13:00:00+00:00",
+      "RANGE",
+      "STRONG_DOWN"
+    ],
+    [
+      "2026-10-30T16:05:00+00:00",
+      "STRONG_DOWN",
+      "RANGE"
+    ],
+    [
+      "2026-10-30T19:55:00+00:00",
+      "RANGE",
+      "EMERGING_DOWN"
+    ],
+    [
+      "2026-10-30T20:10:00+00:00",
+      "EMERGING_DOWN",
+      "RANGE"
+    ]
+  ],
+  "first_emerging_bar": 16,
+  "peak_up_score": 22,
+  "peak_down_score": 8,
+  "bb_signals_total": 4,
+  "bb_admits_baseline": 4,
+  "bb_admits_c5": 4,
+  "bb_admits_baseline_detail": [
+    {
+      "ts": "2026-10-30T11:30:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:with_trend:STRONG_UP",
+      "state": "STRONG_UP",
+      "m5_regime": "STRONG_UP",
+      "h1_dir": "UNKNOWN"
+    },
+    {
+      "ts": "2026-10-30T12:00:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:with_trend:STRONG_UP",
+      "state": "STRONG_UP",
+      "m5_regime": "STRONG_UP",
+      "h1_dir": "UNKNOWN"
+    },
+    {
+      "ts": "2026-10-30T20:40:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:range_or_normal:RANGE",
+      "state": "RANGE",
+      "m5_regime": "RANGE",
+      "h1_dir": "UNKNOWN"
+    },
+    {
+      "ts": "2026-10-30T20:55:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:range_or_normal:RANGE",
+      "state": "RANGE",
+      "m5_regime": "RANGE",
+      "h1_dir": "UNKNOWN"
+    }
+  ],
+  "bb_admits_c5_detail": [
+    {
+      "ts": "2026-10-30T11:30:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:with_trend:STRONG_UP",
+      "state": "STRONG_UP",
+      "m5_regime": "STRONG_UP",
+      "h1_dir": "UNKNOWN"
+    },
+    {
+      "ts": "2026-10-30T12:00:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:with_trend:STRONG_UP",
+      "state": "STRONG_UP",
+      "m5_regime": "STRONG_UP",
+      "h1_dir": "UNKNOWN"
+    },
+    {
+      "ts": "2026-10-30T20:40:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:range_or_normal:RANGE",
+      "state": "RANGE",
+      "m5_regime": "RANGE",
+      "h1_dir": "UNKNOWN"
+    },
+    {
+      "ts": "2026-10-30T20:55:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:range_or_normal:RANGE",
+      "state": "RANGE",
+      "m5_regime": "RANGE",
+      "h1_dir": "UNKNOWN"
+    }
+  ],
+  "label": "Fri: profitable baseline (+\u00a3129 autobot, 5 autobot fires)",
+  "config": "c1c2c3"
+}

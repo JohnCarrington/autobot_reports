@@ -1,0 +1,2032 @@
+{
+  "configs": [
+    "baseline",
+    "c1",
+    "c1c2",
+    "c1c2c3",
+    "c1c2c3c4"
+  ],
+  "sessions": {
+    "2026-10-30": {
+      "label": "Fri: profitable baseline (+\u00a3129 autobot, 5 autobot fires)",
+      "day_range_pips": 59.85,
+      "day_net_pips": 11.8,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 76,
+            "STRONG_UP": 40,
+            "EMERGING_DOWN": 5,
+            "STRONG_DOWN": 35
+          },
+          "transitions_count": 7,
+          "first_emerging_bar": 16,
+          "peak_up_score": 22,
+          "peak_down_score": 15,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 4
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 76,
+            "STRONG_UP": 40,
+            "EMERGING_DOWN": 5,
+            "STRONG_DOWN": 35
+          },
+          "transitions_count": 7,
+          "first_emerging_bar": 16,
+          "peak_up_score": 22,
+          "peak_down_score": 15,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 4
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 75,
+            "STRONG_UP": 40,
+            "EMERGING_DOWN": 5,
+            "STRONG_DOWN": 36
+          },
+          "transitions_count": 7,
+          "first_emerging_bar": 16,
+          "peak_up_score": 22,
+          "peak_down_score": 15,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 4
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 76,
+            "STRONG_UP": 40,
+            "STRONG_DOWN": 37,
+            "EMERGING_DOWN": 3
+          },
+          "transitions_count": 6,
+          "first_emerging_bar": 16,
+          "peak_up_score": 22,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 4
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 76,
+            "STRONG_UP": 40,
+            "STRONG_DOWN": 37,
+            "EMERGING_DOWN": 3
+          },
+          "transitions_count": 6,
+          "first_emerging_bar": 16,
+          "peak_up_score": 22,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 4
+        }
+      }
+    },
+    "2026-11-02": {
+      "label": "Mon: subject day (two 30p+ legs, zero autobot fires, 11 BB/EMA losses)",
+      "day_range_pips": 68.9,
+      "day_net_pips": 22.7,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 192
+          },
+          "transitions_count": 0,
+          "first_emerging_bar": null,
+          "peak_up_score": 2,
+          "peak_down_score": 26,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 3
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 183,
+            "EMERGING_UP": 9
+          },
+          "transitions_count": 2,
+          "first_emerging_bar": 8,
+          "peak_up_score": 4,
+          "peak_down_score": 26,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 3
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 176,
+            "EMERGING_UP": 9,
+            "EMERGING_DOWN": 7
+          },
+          "transitions_count": 6,
+          "first_emerging_bar": 8,
+          "peak_up_score": 4,
+          "peak_down_score": 11,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 3
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 176,
+            "EMERGING_UP": 9,
+            "EMERGING_DOWN": 7
+          },
+          "transitions_count": 6,
+          "first_emerging_bar": 8,
+          "peak_up_score": 4,
+          "peak_down_score": 5,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 3
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 176,
+            "EMERGING_UP": 9,
+            "EMERGING_DOWN": 7
+          },
+          "transitions_count": 6,
+          "first_emerging_bar": 8,
+          "peak_up_score": 4,
+          "peak_down_score": 5,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 3
+        }
+      }
+    },
+    "2026-11-03": {
+      "label": "Tue: continued RANGE, partial day",
+      "day_range_pips": 30.3,
+      "day_net_pips": 11.3,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 5
+          },
+          "transitions_count": 0,
+          "first_emerging_bar": null,
+          "peak_up_score": 2,
+          "peak_down_score": 1,
+          "bb_admits_baseline": 0,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 0
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 5
+          },
+          "transitions_count": 0,
+          "first_emerging_bar": null,
+          "peak_up_score": 2,
+          "peak_down_score": 1,
+          "bb_admits_baseline": 0,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 0
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 5
+          },
+          "transitions_count": 0,
+          "first_emerging_bar": null,
+          "peak_up_score": 2,
+          "peak_down_score": 0.0,
+          "bb_admits_baseline": 0,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 0
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 5
+          },
+          "transitions_count": 0,
+          "first_emerging_bar": null,
+          "peak_up_score": 2,
+          "peak_down_score": 0.0,
+          "bb_admits_baseline": 0,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 0
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 5
+          },
+          "transitions_count": 0,
+          "first_emerging_bar": null,
+          "peak_up_score": 2,
+          "peak_down_score": 0.0,
+          "bb_admits_baseline": 0,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 0
+        }
+      }
+    },
+    "2026-10-29": {
+      "label": "Thu: late in NMS v3 rollout window",
+      "day_range_pips": 93.75,
+      "day_net_pips": 51.55,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 111,
+            "EMERGING_DOWN": 24,
+            "EMERGING_UP": 56
+          },
+          "transitions_count": 24,
+          "first_emerging_bar": 8,
+          "peak_up_score": 25,
+          "peak_down_score": 27,
+          "bb_admits_baseline": 1,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 1
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 111,
+            "EMERGING_DOWN": 24,
+            "EMERGING_UP": 56
+          },
+          "transitions_count": 24,
+          "first_emerging_bar": 8,
+          "peak_up_score": 25,
+          "peak_down_score": 27,
+          "bb_admits_baseline": 1,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 1
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 96,
+            "EMERGING_DOWN": 24,
+            "EMERGING_UP": 71
+          },
+          "transitions_count": 22,
+          "first_emerging_bar": 8,
+          "peak_up_score": 27,
+          "peak_down_score": 27,
+          "bb_admits_baseline": 0,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 1
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 86,
+            "EMERGING_DOWN": 24,
+            "EMERGING_UP": 81
+          },
+          "transitions_count": 26,
+          "first_emerging_bar": 8,
+          "peak_up_score": 27,
+          "peak_down_score": 11,
+          "bb_admits_baseline": 0,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 1
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 86,
+            "EMERGING_DOWN": 24,
+            "EMERGING_UP": 81
+          },
+          "transitions_count": 26,
+          "first_emerging_bar": 8,
+          "peak_up_score": 27,
+          "peak_down_score": 11,
+          "bb_admits_baseline": 0,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 1
+        }
+      }
+    },
+    "2026-10-28": {
+      "label": "Wed: dynamic IG min-stop deploy day",
+      "day_range_pips": 65.4,
+      "day_net_pips": 21.1,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 117,
+            "STRONG_DOWN": 23,
+            "EMERGING_UP": 41,
+            "EMERGING_DOWN": 11
+          },
+          "transitions_count": 25,
+          "first_emerging_bar": 26,
+          "peak_up_score": 21,
+          "peak_down_score": 51,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 5
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 113,
+            "STRONG_DOWN": 27,
+            "EMERGING_UP": 41,
+            "EMERGING_DOWN": 11
+          },
+          "transitions_count": 25,
+          "first_emerging_bar": 22,
+          "peak_up_score": 21,
+          "peak_down_score": 51,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 5
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 82,
+            "STRONG_DOWN": 27,
+            "STRONG_UP": 31,
+            "EMERGING_UP": 41,
+            "EMERGING_DOWN": 11
+          },
+          "transitions_count": 27,
+          "first_emerging_bar": 22,
+          "peak_up_score": 21,
+          "peak_down_score": 51,
+          "bb_admits_baseline": 2,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 5
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 76,
+            "STRONG_DOWN": 27,
+            "EMERGING_DOWN": 13,
+            "STRONG_UP": 31,
+            "EMERGING_UP": 45
+          },
+          "transitions_count": 27,
+          "first_emerging_bar": 22,
+          "peak_up_score": 21,
+          "peak_down_score": 10,
+          "bb_admits_baseline": 2,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 5
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 76,
+            "STRONG_DOWN": 27,
+            "EMERGING_DOWN": 13,
+            "STRONG_UP": 31,
+            "EMERGING_UP": 45
+          },
+          "transitions_count": 27,
+          "first_emerging_bar": 22,
+          "peak_up_score": 21,
+          "peak_down_score": 10,
+          "bb_admits_baseline": 2,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 5
+        }
+      }
+    },
+    "2026-10-27": {
+      "label": "Tue: multiple research dates (fib / BB bounce studies)",
+      "day_range_pips": 47.55,
+      "day_net_pips": -39.1,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 126,
+            "STRONG_DOWN": 14,
+            "STRONG_UP": 14,
+            "EMERGING_UP": 22,
+            "EMERGING_DOWN": 15
+          },
+          "transitions_count": 16,
+          "first_emerging_bar": 26,
+          "peak_up_score": 11,
+          "peak_down_score": 23,
+          "bb_admits_baseline": 10,
+          "bb_admits_c5": 5,
+          "bb_signals_total": 10
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 109,
+            "EMERGING_DOWN": 21,
+            "STRONG_DOWN": 25,
+            "STRONG_UP": 14,
+            "EMERGING_UP": 22
+          },
+          "transitions_count": 17,
+          "first_emerging_bar": 9,
+          "peak_up_score": 11,
+          "peak_down_score": 23,
+          "bb_admits_baseline": 8,
+          "bb_admits_c5": 5,
+          "bb_signals_total": 10
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 101,
+            "EMERGING_DOWN": 21,
+            "STRONG_DOWN": 25,
+            "EMERGING_UP": 27,
+            "STRONG_UP": 17
+          },
+          "transitions_count": 18,
+          "first_emerging_bar": 9,
+          "peak_up_score": 19,
+          "peak_down_score": 23,
+          "bb_admits_baseline": 8,
+          "bb_admits_c5": 5,
+          "bb_signals_total": 10
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 101,
+            "EMERGING_DOWN": 21,
+            "STRONG_DOWN": 25,
+            "EMERGING_UP": 27,
+            "STRONG_UP": 17
+          },
+          "transitions_count": 18,
+          "first_emerging_bar": 9,
+          "peak_up_score": 19,
+          "peak_down_score": 11,
+          "bb_admits_baseline": 8,
+          "bb_admits_c5": 5,
+          "bb_signals_total": 10
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 101,
+            "EMERGING_DOWN": 21,
+            "STRONG_DOWN": 25,
+            "EMERGING_UP": 27,
+            "STRONG_UP": 17
+          },
+          "transitions_count": 18,
+          "first_emerging_bar": 9,
+          "peak_up_score": 19,
+          "peak_down_score": 11,
+          "bb_admits_baseline": 8,
+          "bb_admits_c5": 5,
+          "bb_signals_total": 10
+        }
+      }
+    },
+    "2026-10-26": {
+      "label": "Mon: BST transition week",
+      "day_range_pips": 60.2,
+      "day_net_pips": -33.0,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 174,
+            "EMERGING_DOWN": 14,
+            "EMERGING_UP": 4
+          },
+          "transitions_count": 10,
+          "first_emerging_bar": 28,
+          "peak_up_score": 5,
+          "peak_down_score": 20,
+          "bb_admits_baseline": 15,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 15
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 171,
+            "EMERGING_DOWN": 17,
+            "EMERGING_UP": 4
+          },
+          "transitions_count": 14,
+          "first_emerging_bar": 19,
+          "peak_up_score": 5,
+          "peak_down_score": 20,
+          "bb_admits_baseline": 15,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 15
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 167,
+            "EMERGING_DOWN": 17,
+            "EMERGING_UP": 8
+          },
+          "transitions_count": 16,
+          "first_emerging_bar": 19,
+          "peak_up_score": 5,
+          "peak_down_score": 20,
+          "bb_admits_baseline": 15,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 15
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 164,
+            "EMERGING_DOWN": 20,
+            "EMERGING_UP": 8
+          },
+          "transitions_count": 18,
+          "first_emerging_bar": 19,
+          "peak_up_score": 5,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 15,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 15
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 164,
+            "EMERGING_DOWN": 20,
+            "EMERGING_UP": 8
+          },
+          "transitions_count": 18,
+          "first_emerging_bar": 19,
+          "peak_up_score": 5,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 15,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 15
+        }
+      }
+    },
+    "2026-10-23": {
+      "label": "Fri: ranging reference day",
+      "day_range_pips": 47.0,
+      "day_net_pips": -25.3,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 141,
+            "EMERGING_UP": 12,
+            "STRONG_DOWN": 5,
+            "EMERGING_DOWN": 10
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 19,
+          "peak_up_score": 8,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 5
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 141,
+            "EMERGING_UP": 12,
+            "STRONG_DOWN": 5,
+            "EMERGING_DOWN": 10
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 19,
+          "peak_up_score": 8,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 5
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 132,
+            "EMERGING_UP": 13,
+            "STRONG_UP": 8,
+            "STRONG_DOWN": 5,
+            "EMERGING_DOWN": 10
+          },
+          "transitions_count": 13,
+          "first_emerging_bar": 16,
+          "peak_up_score": 8,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 5
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 132,
+            "EMERGING_UP": 13,
+            "STRONG_UP": 8,
+            "STRONG_DOWN": 5,
+            "EMERGING_DOWN": 10
+          },
+          "transitions_count": 13,
+          "first_emerging_bar": 16,
+          "peak_up_score": 8,
+          "peak_down_score": 10,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 5
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 132,
+            "EMERGING_UP": 13,
+            "STRONG_UP": 8,
+            "STRONG_DOWN": 5,
+            "EMERGING_DOWN": 10
+          },
+          "transitions_count": 13,
+          "first_emerging_bar": 16,
+          "peak_up_score": 8,
+          "peak_down_score": 10,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 5
+        }
+      }
+    },
+    "2026-10-22": {
+      "label": "Thu",
+      "day_range_pips": 63.7,
+      "day_net_pips": 8.8,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 163,
+            "EMERGING_DOWN": 41
+          },
+          "transitions_count": 20,
+          "first_emerging_bar": 48,
+          "peak_up_score": 3,
+          "peak_down_score": 39,
+          "bb_admits_baseline": 7,
+          "bb_admits_c5": 7,
+          "bb_signals_total": 7
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 163,
+            "EMERGING_DOWN": 41
+          },
+          "transitions_count": 20,
+          "first_emerging_bar": 48,
+          "peak_up_score": 4,
+          "peak_down_score": 27,
+          "bb_admits_baseline": 7,
+          "bb_admits_c5": 7,
+          "bb_signals_total": 7
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 139,
+            "EMERGING_DOWN": 31,
+            "STRONG_DOWN": 24,
+            "EMERGING_UP": 10
+          },
+          "transitions_count": 22,
+          "first_emerging_bar": 36,
+          "peak_up_score": 8,
+          "peak_down_score": 27,
+          "bb_admits_baseline": 7,
+          "bb_admits_c5": 7,
+          "bb_signals_total": 7
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 138,
+            "EMERGING_DOWN": 32,
+            "STRONG_DOWN": 24,
+            "EMERGING_UP": 10
+          },
+          "transitions_count": 22,
+          "first_emerging_bar": 36,
+          "peak_up_score": 8,
+          "peak_down_score": 11,
+          "bb_admits_baseline": 7,
+          "bb_admits_c5": 7,
+          "bb_signals_total": 7
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 138,
+            "EMERGING_DOWN": 32,
+            "STRONG_DOWN": 24,
+            "EMERGING_UP": 10
+          },
+          "transitions_count": 22,
+          "first_emerging_bar": 36,
+          "peak_up_score": 8,
+          "peak_down_score": 11,
+          "bb_admits_baseline": 7,
+          "bb_admits_c5": 7,
+          "bb_signals_total": 7
+        }
+      }
+    },
+    "2026-10-21": {
+      "label": "Wed",
+      "day_range_pips": 39.1,
+      "day_net_pips": 22.3,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 145,
+            "STRONG_UP": 28,
+            "EMERGING_DOWN": 27,
+            "EMERGING_UP": 2
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 23,
+          "peak_up_score": 22,
+          "peak_down_score": 21,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 4
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 132,
+            "EMERGING_UP": 10,
+            "STRONG_UP": 33,
+            "EMERGING_DOWN": 27
+          },
+          "transitions_count": 13,
+          "first_emerging_bar": 10,
+          "peak_up_score": 24,
+          "peak_down_score": 10,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 4
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 132,
+            "EMERGING_UP": 10,
+            "STRONG_UP": 33,
+            "EMERGING_DOWN": 27
+          },
+          "transitions_count": 13,
+          "first_emerging_bar": 10,
+          "peak_up_score": 24,
+          "peak_down_score": 10,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 4
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 132,
+            "EMERGING_UP": 10,
+            "STRONG_UP": 33,
+            "EMERGING_DOWN": 27
+          },
+          "transitions_count": 13,
+          "first_emerging_bar": 10,
+          "peak_up_score": 24,
+          "peak_down_score": 6,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 4
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 132,
+            "EMERGING_UP": 10,
+            "STRONG_UP": 33,
+            "EMERGING_DOWN": 27
+          },
+          "transitions_count": 13,
+          "first_emerging_bar": 10,
+          "peak_up_score": 24,
+          "peak_down_score": 6,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 4
+        }
+      }
+    },
+    "2026-10-20": {
+      "label": "Tue",
+      "day_range_pips": 100.6,
+      "day_net_pips": 63.1,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 144,
+            "STRONG_UP": 24,
+            "EMERGING_UP": 27,
+            "EMERGING_DOWN": 8
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 69,
+          "peak_up_score": 28,
+          "peak_down_score": 27,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 4
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 97,
+            "EMERGING_DOWN": 25,
+            "STRONG_DOWN": 30,
+            "STRONG_UP": 24,
+            "EMERGING_UP": 27
+          },
+          "transitions_count": 19,
+          "first_emerging_bar": 12,
+          "peak_up_score": 28,
+          "peak_down_score": 24,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 4
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 96,
+            "EMERGING_DOWN": 25,
+            "STRONG_DOWN": 30,
+            "STRONG_UP": 25,
+            "EMERGING_UP": 27
+          },
+          "transitions_count": 19,
+          "first_emerging_bar": 12,
+          "peak_up_score": 28,
+          "peak_down_score": 24,
+          "bb_admits_baseline": 2,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 4
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 90,
+            "EMERGING_DOWN": 25,
+            "STRONG_DOWN": 30,
+            "STRONG_UP": 26,
+            "EMERGING_UP": 32
+          },
+          "transitions_count": 21,
+          "first_emerging_bar": 12,
+          "peak_up_score": 28,
+          "peak_down_score": 9,
+          "bb_admits_baseline": 2,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 4
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 90,
+            "EMERGING_DOWN": 25,
+            "STRONG_DOWN": 30,
+            "STRONG_UP": 26,
+            "EMERGING_UP": 32
+          },
+          "transitions_count": 21,
+          "first_emerging_bar": 12,
+          "peak_up_score": 28,
+          "peak_down_score": 9,
+          "bb_admits_baseline": 2,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 4
+        }
+      }
+    },
+    "2026-10-19": {
+      "label": "Mon",
+      "day_range_pips": 43.7,
+      "day_net_pips": -27.2,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 156,
+            "EMERGING_DOWN": 35,
+            "STRONG_DOWN": 3,
+            "EMERGING_UP": 10
+          },
+          "transitions_count": 15,
+          "first_emerging_bar": 14,
+          "peak_up_score": 10,
+          "peak_down_score": 29,
+          "bb_admits_baseline": 7,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 8
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 156,
+            "EMERGING_DOWN": 35,
+            "STRONG_DOWN": 3,
+            "EMERGING_UP": 10
+          },
+          "transitions_count": 15,
+          "first_emerging_bar": 14,
+          "peak_up_score": 10,
+          "peak_down_score": 29,
+          "bb_admits_baseline": 7,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 8
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 143,
+            "EMERGING_DOWN": 35,
+            "STRONG_DOWN": 3,
+            "EMERGING_UP": 23
+          },
+          "transitions_count": 19,
+          "first_emerging_bar": 14,
+          "peak_up_score": 10,
+          "peak_down_score": 29,
+          "bb_admits_baseline": 7,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 8
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 145,
+            "EMERGING_DOWN": 35,
+            "STRONG_DOWN": 3,
+            "EMERGING_UP": 21
+          },
+          "transitions_count": 17,
+          "first_emerging_bar": 14,
+          "peak_up_score": 10,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 7,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 8
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 145,
+            "EMERGING_DOWN": 35,
+            "STRONG_DOWN": 3,
+            "EMERGING_UP": 21
+          },
+          "transitions_count": 17,
+          "first_emerging_bar": 14,
+          "peak_up_score": 10,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 7,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 8
+        }
+      }
+    },
+    "2026-10-16": {
+      "label": "Fri",
+      "day_range_pips": 103.5,
+      "day_net_pips": 52.9,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 95,
+            "EMERGING_UP": 20,
+            "STRONG_UP": 45,
+            "EMERGING_DOWN": 8
+          },
+          "transitions_count": 11,
+          "first_emerging_bar": 24,
+          "peak_up_score": 24,
+          "peak_down_score": 9,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 7
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 95,
+            "EMERGING_UP": 20,
+            "STRONG_UP": 45,
+            "EMERGING_DOWN": 8
+          },
+          "transitions_count": 11,
+          "first_emerging_bar": 24,
+          "peak_up_score": 24,
+          "peak_down_score": 9,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 7
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 91,
+            "EMERGING_DOWN": 14,
+            "STRONG_UP": 45,
+            "EMERGING_UP": 18
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 20,
+          "peak_up_score": 24,
+          "peak_down_score": 9,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 7
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 90,
+            "EMERGING_DOWN": 14,
+            "STRONG_UP": 45,
+            "EMERGING_UP": 19
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 20,
+          "peak_up_score": 24,
+          "peak_down_score": 6,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 7
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 90,
+            "EMERGING_DOWN": 14,
+            "STRONG_UP": 45,
+            "EMERGING_UP": 19
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 20,
+          "peak_up_score": 24,
+          "peak_down_score": 6,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 7
+        }
+      }
+    },
+    "2026-10-15": {
+      "label": "Thu",
+      "day_range_pips": 58.45,
+      "day_net_pips": 42.0,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 160,
+            "EMERGING_UP": 24,
+            "STRONG_UP": 18,
+            "EMERGING_DOWN": 2
+          },
+          "transitions_count": 15,
+          "first_emerging_bar": 16,
+          "peak_up_score": 14,
+          "peak_down_score": 18,
+          "bb_admits_baseline": 9,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 9
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 160,
+            "EMERGING_UP": 24,
+            "STRONG_UP": 18,
+            "EMERGING_DOWN": 2
+          },
+          "transitions_count": 15,
+          "first_emerging_bar": 16,
+          "peak_up_score": 14,
+          "peak_down_score": 18,
+          "bb_admits_baseline": 9,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 9
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 161,
+            "STRONG_UP": 18,
+            "EMERGING_UP": 21,
+            "EMERGING_DOWN": 4
+          },
+          "transitions_count": 15,
+          "first_emerging_bar": 21,
+          "peak_up_score": 14,
+          "peak_down_score": 18,
+          "bb_admits_baseline": 9,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 9
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 161,
+            "STRONG_UP": 18,
+            "EMERGING_UP": 21,
+            "EMERGING_DOWN": 4
+          },
+          "transitions_count": 15,
+          "first_emerging_bar": 21,
+          "peak_up_score": 14,
+          "peak_down_score": 7,
+          "bb_admits_baseline": 9,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 9
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 161,
+            "STRONG_UP": 18,
+            "EMERGING_UP": 21,
+            "EMERGING_DOWN": 4
+          },
+          "transitions_count": 15,
+          "first_emerging_bar": 21,
+          "peak_up_score": 14,
+          "peak_down_score": 7,
+          "bb_admits_baseline": 9,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 9
+        }
+      }
+    },
+    "2026-10-14": {
+      "label": "Wed",
+      "day_range_pips": 138.8,
+      "day_net_pips": -27.6,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 137,
+            "EMERGING_DOWN": 33,
+            "STRONG_DOWN": 17,
+            "EMERGING_UP": 17
+          },
+          "transitions_count": 13,
+          "first_emerging_bar": 20,
+          "peak_up_score": 8,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 8
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 137,
+            "EMERGING_DOWN": 33,
+            "STRONG_DOWN": 17,
+            "EMERGING_UP": 17
+          },
+          "transitions_count": 13,
+          "first_emerging_bar": 20,
+          "peak_up_score": 8,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 8
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 125,
+            "EMERGING_DOWN": 33,
+            "EMERGING_UP": 24,
+            "STRONG_UP": 5,
+            "STRONG_DOWN": 17
+          },
+          "transitions_count": 18,
+          "first_emerging_bar": 20,
+          "peak_up_score": 8,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 8
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 124,
+            "EMERGING_DOWN": 33,
+            "EMERGING_UP": 24,
+            "STRONG_UP": 5,
+            "STRONG_DOWN": 18
+          },
+          "transitions_count": 18,
+          "first_emerging_bar": 20,
+          "peak_up_score": 8,
+          "peak_down_score": 10,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 8
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 124,
+            "EMERGING_DOWN": 33,
+            "EMERGING_UP": 24,
+            "STRONG_UP": 5,
+            "STRONG_DOWN": 18
+          },
+          "transitions_count": 18,
+          "first_emerging_bar": 20,
+          "peak_up_score": 8,
+          "peak_down_score": 10,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 8
+        }
+      }
+    },
+    "2026-10-13": {
+      "label": "Tue (nms v3 rollout day)",
+      "day_range_pips": 56.2,
+      "day_net_pips": 47.2,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 13,
+            "EMERGING_UP": 3,
+            "STRONG_UP": 188
+          },
+          "transitions_count": 2,
+          "first_emerging_bar": 13,
+          "peak_up_score": 16,
+          "peak_down_score": 14,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 6
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 11,
+            "EMERGING_UP": 5,
+            "STRONG_UP": 188
+          },
+          "transitions_count": 4,
+          "first_emerging_bar": 8,
+          "peak_up_score": 16,
+          "peak_down_score": 14,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 6
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 11,
+            "EMERGING_UP": 5,
+            "STRONG_UP": 188
+          },
+          "transitions_count": 4,
+          "first_emerging_bar": 8,
+          "peak_up_score": 16,
+          "peak_down_score": 14,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 6
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 11,
+            "EMERGING_UP": 5,
+            "STRONG_UP": 188
+          },
+          "transitions_count": 4,
+          "first_emerging_bar": 8,
+          "peak_up_score": 16,
+          "peak_down_score": 5,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 6
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 11,
+            "EMERGING_UP": 5,
+            "STRONG_UP": 188
+          },
+          "transitions_count": 4,
+          "first_emerging_bar": 8,
+          "peak_up_score": 16,
+          "peak_down_score": 5,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 6
+        }
+      }
+    },
+    "2026-10-09": {
+      "label": "Thu",
+      "day_range_pips": 44.4,
+      "day_net_pips": 4.8,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 120,
+            "EMERGING_UP": 23,
+            "STRONG_DOWN": 19,
+            "EMERGING_DOWN": 5
+          },
+          "transitions_count": 16,
+          "first_emerging_bar": 15,
+          "peak_up_score": 6,
+          "peak_down_score": 30,
+          "bb_admits_baseline": 5,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 7
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 120,
+            "EMERGING_UP": 23,
+            "STRONG_DOWN": 19,
+            "EMERGING_DOWN": 5
+          },
+          "transitions_count": 16,
+          "first_emerging_bar": 15,
+          "peak_up_score": 6,
+          "peak_down_score": 30,
+          "bb_admits_baseline": 5,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 7
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 63,
+            "EMERGING_UP": 55,
+            "EMERGING_DOWN": 12,
+            "STRONG_DOWN": 37
+          },
+          "transitions_count": 17,
+          "first_emerging_bar": 15,
+          "peak_up_score": 8,
+          "peak_down_score": 30,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 7
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 63,
+            "EMERGING_UP": 55,
+            "EMERGING_DOWN": 12,
+            "STRONG_DOWN": 37
+          },
+          "transitions_count": 17,
+          "first_emerging_bar": 15,
+          "peak_up_score": 8,
+          "peak_down_score": 11,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 7
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 63,
+            "EMERGING_UP": 55,
+            "EMERGING_DOWN": 12,
+            "STRONG_DOWN": 37
+          },
+          "transitions_count": 17,
+          "first_emerging_bar": 15,
+          "peak_up_score": 8,
+          "peak_down_score": 11,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 7
+        }
+      }
+    },
+    "2026-10-08": {
+      "label": "Wed",
+      "day_range_pips": 64.5,
+      "day_net_pips": 15.0,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 157,
+            "STRONG_UP": 7,
+            "EMERGING_UP": 40
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 16,
+          "peak_up_score": 19,
+          "peak_down_score": 26,
+          "bb_admits_baseline": 10,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 11
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 157,
+            "STRONG_UP": 7,
+            "EMERGING_UP": 40
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 16,
+          "peak_up_score": 19,
+          "peak_down_score": 26,
+          "bb_admits_baseline": 10,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 11
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 139,
+            "STRONG_UP": 7,
+            "EMERGING_DOWN": 18,
+            "EMERGING_UP": 40
+          },
+          "transitions_count": 20,
+          "first_emerging_bar": 16,
+          "peak_up_score": 19,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 8,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 11
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 139,
+            "STRONG_UP": 7,
+            "EMERGING_DOWN": 18,
+            "EMERGING_UP": 40
+          },
+          "transitions_count": 20,
+          "first_emerging_bar": 16,
+          "peak_up_score": 19,
+          "peak_down_score": 7,
+          "bb_admits_baseline": 8,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 11
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 139,
+            "STRONG_UP": 7,
+            "EMERGING_DOWN": 18,
+            "EMERGING_UP": 40
+          },
+          "transitions_count": 20,
+          "first_emerging_bar": 16,
+          "peak_up_score": 19,
+          "peak_down_score": 7,
+          "bb_admits_baseline": 8,
+          "bb_admits_c5": 4,
+          "bb_signals_total": 11
+        }
+      }
+    },
+    "2026-10-07": {
+      "label": "Tue",
+      "day_range_pips": 75.1,
+      "day_net_pips": -52.1,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 120,
+            "EMERGING_DOWN": 72,
+            "EMERGING_UP": 12
+          },
+          "transitions_count": 14,
+          "first_emerging_bar": 12,
+          "peak_up_score": 7,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 8
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 111,
+            "STRONG_DOWN": 56,
+            "EMERGING_DOWN": 25,
+            "EMERGING_UP": 12
+          },
+          "transitions_count": 14,
+          "first_emerging_bar": 12,
+          "peak_up_score": 7,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 8
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 111,
+            "STRONG_DOWN": 56,
+            "EMERGING_DOWN": 25,
+            "EMERGING_UP": 12
+          },
+          "transitions_count": 14,
+          "first_emerging_bar": 12,
+          "peak_up_score": 7,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 8
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 111,
+            "STRONG_DOWN": 56,
+            "EMERGING_DOWN": 25,
+            "EMERGING_UP": 12
+          },
+          "transitions_count": 14,
+          "first_emerging_bar": 12,
+          "peak_up_score": 7,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 8
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 111,
+            "STRONG_DOWN": 56,
+            "EMERGING_DOWN": 25,
+            "EMERGING_UP": 12
+          },
+          "transitions_count": 14,
+          "first_emerging_bar": 12,
+          "peak_up_score": 7,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 8
+        }
+      }
+    },
+    "2026-10-06": {
+      "label": "Mon",
+      "day_range_pips": 84.1,
+      "day_net_pips": 48.4,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 117,
+            "STRONG_UP": 53,
+            "EMERGING_UP": 11,
+            "EMERGING_DOWN": 22
+          },
+          "transitions_count": 10,
+          "first_emerging_bar": 9,
+          "peak_up_score": 30,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 5,
+          "bb_signals_total": 10
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 117,
+            "STRONG_UP": 53,
+            "EMERGING_UP": 11,
+            "EMERGING_DOWN": 22
+          },
+          "transitions_count": 10,
+          "first_emerging_bar": 9,
+          "peak_up_score": 30,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 5,
+          "bb_signals_total": 10
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 117,
+            "STRONG_UP": 53,
+            "EMERGING_UP": 11,
+            "EMERGING_DOWN": 22
+          },
+          "transitions_count": 10,
+          "first_emerging_bar": 9,
+          "peak_up_score": 30,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 5,
+          "bb_signals_total": 10
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 115,
+            "STRONG_UP": 53,
+            "EMERGING_UP": 13,
+            "EMERGING_DOWN": 22
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 9,
+          "peak_up_score": 30,
+          "peak_down_score": 7,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 5,
+          "bb_signals_total": 10
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 115,
+            "STRONG_UP": 53,
+            "EMERGING_UP": 13,
+            "EMERGING_DOWN": 22
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 9,
+          "peak_up_score": 30,
+          "peak_down_score": 7,
+          "bb_admits_baseline": 6,
+          "bb_admits_c5": 5,
+          "bb_signals_total": 10
+        }
+      }
+    },
+    "2026-09-30": {
+      "label": "Tue (research dates reference)",
+      "day_range_pips": 88.4,
+      "day_net_pips": 35.0,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 150,
+            "EMERGING_UP": 29,
+            "STRONG_DOWN": 4,
+            "EMERGING_DOWN": 20
+          },
+          "transitions_count": 27,
+          "first_emerging_bar": 5,
+          "peak_up_score": 21,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 6
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 150,
+            "EMERGING_UP": 29,
+            "STRONG_DOWN": 4,
+            "EMERGING_DOWN": 20
+          },
+          "transitions_count": 27,
+          "first_emerging_bar": 5,
+          "peak_up_score": 21,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 6
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 150,
+            "EMERGING_UP": 29,
+            "STRONG_DOWN": 4,
+            "EMERGING_DOWN": 20
+          },
+          "transitions_count": 27,
+          "first_emerging_bar": 5,
+          "peak_up_score": 21,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 6
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 148,
+            "EMERGING_UP": 29,
+            "STRONG_DOWN": 4,
+            "EMERGING_DOWN": 22
+          },
+          "transitions_count": 29,
+          "first_emerging_bar": 5,
+          "peak_up_score": 21,
+          "peak_down_score": 5,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 6
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 148,
+            "EMERGING_UP": 29,
+            "STRONG_DOWN": 4,
+            "EMERGING_DOWN": 22
+          },
+          "transitions_count": 29,
+          "first_emerging_bar": 5,
+          "peak_up_score": 21,
+          "peak_down_score": 5,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 6
+        }
+      }
+    },
+    "2026-09-29": {
+      "label": "Mon",
+      "day_range_pips": 52.8,
+      "day_net_pips": -24.2,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 149,
+            "EMERGING_DOWN": 37,
+            "STRONG_DOWN": 10,
+            "EMERGING_UP": 7
+          },
+          "transitions_count": 15,
+          "first_emerging_bar": 14,
+          "peak_up_score": 4,
+          "peak_down_score": 27,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 6
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 149,
+            "EMERGING_DOWN": 37,
+            "STRONG_DOWN": 10,
+            "EMERGING_UP": 7
+          },
+          "transitions_count": 15,
+          "first_emerging_bar": 16,
+          "peak_up_score": 4,
+          "peak_down_score": 27,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 6
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 130,
+            "EMERGING_DOWN": 37,
+            "STRONG_DOWN": 10,
+            "EMERGING_UP": 26
+          },
+          "transitions_count": 21,
+          "first_emerging_bar": 16,
+          "peak_up_score": 13,
+          "peak_down_score": 27,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 6
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 126,
+            "EMERGING_DOWN": 39,
+            "STRONG_DOWN": 10,
+            "EMERGING_UP": 28
+          },
+          "transitions_count": 23,
+          "first_emerging_bar": 16,
+          "peak_up_score": 13,
+          "peak_down_score": 11,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 6
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 126,
+            "EMERGING_DOWN": 39,
+            "STRONG_DOWN": 10,
+            "EMERGING_UP": 28
+          },
+          "transitions_count": 23,
+          "first_emerging_bar": 16,
+          "peak_up_score": 13,
+          "peak_down_score": 11,
+          "bb_admits_baseline": 3,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 6
+        }
+      }
+    },
+    "2026-09-25": {
+      "label": "Fri",
+      "day_range_pips": 54.1,
+      "day_net_pips": 37.05,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 54,
+            "EMERGING_UP": 29,
+            "STRONG_UP": 74,
+            "EMERGING_DOWN": 10
+          },
+          "transitions_count": 15,
+          "first_emerging_bar": 14,
+          "peak_up_score": 17,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 1,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 6
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 56,
+            "EMERGING_UP": 27,
+            "STRONG_UP": 74,
+            "EMERGING_DOWN": 10
+          },
+          "transitions_count": 13,
+          "first_emerging_bar": 18,
+          "peak_up_score": 20,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 1,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 6
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 56,
+            "EMERGING_UP": 27,
+            "STRONG_UP": 74,
+            "EMERGING_DOWN": 10
+          },
+          "transitions_count": 13,
+          "first_emerging_bar": 18,
+          "peak_up_score": 20,
+          "peak_down_score": 17,
+          "bb_admits_baseline": 1,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 6
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 53,
+            "EMERGING_UP": 30,
+            "STRONG_UP": 74,
+            "EMERGING_DOWN": 10
+          },
+          "transitions_count": 11,
+          "first_emerging_bar": 18,
+          "peak_up_score": 20,
+          "peak_down_score": 5,
+          "bb_admits_baseline": 1,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 6
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 53,
+            "EMERGING_UP": 30,
+            "STRONG_UP": 74,
+            "EMERGING_DOWN": 10
+          },
+          "transitions_count": 11,
+          "first_emerging_bar": 18,
+          "peak_up_score": 20,
+          "peak_down_score": 5,
+          "bb_admits_baseline": 1,
+          "bb_admits_c5": 0,
+          "bb_signals_total": 6
+        }
+      }
+    },
+    "2026-09-24": {
+      "label": "Thu",
+      "day_range_pips": 52.15,
+      "day_net_pips": -27.9,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 176,
+            "EMERGING_UP": 2,
+            "EMERGING_DOWN": 26
+          },
+          "transitions_count": 10,
+          "first_emerging_bar": 14,
+          "peak_up_score": 4,
+          "peak_down_score": 14,
+          "bb_admits_baseline": 5,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 5
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 168,
+            "STRONG_UP": 10,
+            "EMERGING_DOWN": 26
+          },
+          "transitions_count": 10,
+          "first_emerging_bar": 11,
+          "peak_up_score": 10,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 5,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 5
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 158,
+            "STRONG_UP": 10,
+            "EMERGING_DOWN": 36
+          },
+          "transitions_count": 10,
+          "first_emerging_bar": 11,
+          "peak_up_score": 10,
+          "peak_down_score": 8,
+          "bb_admits_baseline": 5,
+          "bb_admits_c5": 3,
+          "bb_signals_total": 5
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 136,
+            "STRONG_UP": 10,
+            "STRONG_DOWN": 52,
+            "EMERGING_DOWN": 6
+          },
+          "transitions_count": 6,
+          "first_emerging_bar": 11,
+          "peak_up_score": 10,
+          "peak_down_score": 6,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 5
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 136,
+            "STRONG_UP": 10,
+            "STRONG_DOWN": 52,
+            "EMERGING_DOWN": 6
+          },
+          "transitions_count": 6,
+          "first_emerging_bar": 11,
+          "peak_up_score": 10,
+          "peak_down_score": 6,
+          "bb_admits_baseline": 4,
+          "bb_admits_c5": 2,
+          "bb_signals_total": 5
+        }
+      }
+    },
+    "2026-09-22": {
+      "label": "Mon",
+      "day_range_pips": 66.3,
+      "day_net_pips": -24.8,
+      "configs": {
+        "baseline": {
+          "state_dist": {
+            "RANGE": 171,
+            "EMERGING_DOWN": 16,
+            "STRONG_DOWN": 10,
+            "EMERGING_UP": 7
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 21,
+          "peak_up_score": 6,
+          "peak_down_score": 16,
+          "bb_admits_baseline": 2,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 2
+        },
+        "c1": {
+          "state_dist": {
+            "RANGE": 171,
+            "EMERGING_DOWN": 16,
+            "STRONG_DOWN": 10,
+            "EMERGING_UP": 7
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 21,
+          "peak_up_score": 6,
+          "peak_down_score": 16,
+          "bb_admits_baseline": 2,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 2
+        },
+        "c1c2": {
+          "state_dist": {
+            "RANGE": 171,
+            "EMERGING_DOWN": 16,
+            "STRONG_DOWN": 10,
+            "EMERGING_UP": 7
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 21,
+          "peak_up_score": 6,
+          "peak_down_score": 16,
+          "bb_admits_baseline": 2,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 2
+        },
+        "c1c2c3": {
+          "state_dist": {
+            "RANGE": 171,
+            "EMERGING_DOWN": 16,
+            "STRONG_DOWN": 10,
+            "EMERGING_UP": 7
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 21,
+          "peak_up_score": 6,
+          "peak_down_score": 4,
+          "bb_admits_baseline": 2,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 2
+        },
+        "c1c2c3c4": {
+          "state_dist": {
+            "RANGE": 171,
+            "EMERGING_DOWN": 16,
+            "STRONG_DOWN": 10,
+            "EMERGING_UP": 7
+          },
+          "transitions_count": 12,
+          "first_emerging_bar": 21,
+          "peak_up_score": 6,
+          "peak_down_score": 4,
+          "bb_admits_baseline": 2,
+          "bb_admits_c5": 1,
+          "bb_signals_total": 2
+        }
+      }
+    }
+  },
+  "metrics": {}
+}

@@ -1,0 +1,119 @@
+{
+  "symbol": "GBPUSD",
+  "date": "2026-11-02",
+  "bars_total": 288,
+  "bars_london": 192,
+  "day_range_pips": 68.9,
+  "day_net_pips": 22.7,
+  "state_dist": {
+    "RANGE": 176,
+    "EMERGING_UP": 9,
+    "EMERGING_DOWN": 7
+  },
+  "regime_dist": {
+    "INSUFFICIENT_DATA": 5,
+    "RANGE": 3,
+    "EMERGING_UP": 9,
+    "CONSOLIDATION": 168,
+    "EMERGING_DOWN": 7
+  },
+  "transitions_count": 6,
+  "transitions": [
+    [
+      "2026-11-02T08:40:00+00:00",
+      "RANGE",
+      "EMERGING_UP"
+    ],
+    [
+      "2026-11-02T09:25:00+00:00",
+      "EMERGING_UP",
+      "RANGE"
+    ],
+    [
+      "2026-11-02T10:40:00+00:00",
+      "RANGE",
+      "EMERGING_DOWN"
+    ],
+    [
+      "2026-11-02T11:05:00+00:00",
+      "EMERGING_DOWN",
+      "RANGE"
+    ],
+    [
+      "2026-11-02T11:15:00+00:00",
+      "RANGE",
+      "EMERGING_DOWN"
+    ],
+    [
+      "2026-11-02T11:25:00+00:00",
+      "EMERGING_DOWN",
+      "RANGE"
+    ]
+  ],
+  "first_emerging_bar": 8,
+  "peak_up_score": 4,
+  "peak_down_score": 5,
+  "bb_signals_total": 3,
+  "bb_admits_baseline": 3,
+  "bb_admits_c5": 2,
+  "bb_admits_baseline_detail": [
+    {
+      "ts": "2026-11-02T13:35:00+00:00",
+      "sig": "SELL",
+      "ok": true,
+      "reason": "allow:range_or_normal:RANGE",
+      "state": "RANGE",
+      "m5_regime": "CONSOLIDATION",
+      "h1_dir": "UP"
+    },
+    {
+      "ts": "2026-11-02T21:30:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:range_or_normal:RANGE",
+      "state": "RANGE",
+      "m5_regime": "CONSOLIDATION",
+      "h1_dir": "UNKNOWN"
+    },
+    {
+      "ts": "2026-11-02T22:55:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:range_or_normal:RANGE",
+      "state": "RANGE",
+      "m5_regime": "CONSOLIDATION",
+      "h1_dir": "UNKNOWN"
+    }
+  ],
+  "bb_admits_c5_detail": [
+    {
+      "ts": "2026-11-02T13:35:00+00:00",
+      "sig": "SELL",
+      "ok": false,
+      "reason": "block:c5_counter_h1_UP:RANGE",
+      "state": "RANGE",
+      "m5_regime": "CONSOLIDATION",
+      "h1_dir": "UP"
+    },
+    {
+      "ts": "2026-11-02T21:30:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:range_or_normal:RANGE",
+      "state": "RANGE",
+      "m5_regime": "CONSOLIDATION",
+      "h1_dir": "UNKNOWN"
+    },
+    {
+      "ts": "2026-11-02T22:55:00+00:00",
+      "sig": "BUY",
+      "ok": true,
+      "reason": "allow:range_or_normal:RANGE",
+      "state": "RANGE",
+      "m5_regime": "CONSOLIDATION",
+      "h1_dir": "UNKNOWN"
+    }
+  ],
+  "label": "Mon: subject day (two 30p+ legs, zero autobot fires, 11 BB/EMA losses)",
+  "config": "c1c2c3c4"
+}
