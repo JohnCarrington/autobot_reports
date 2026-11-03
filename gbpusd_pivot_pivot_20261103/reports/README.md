@@ -16,7 +16,7 @@ Read-only historical investigation of GBP/USD price movement between daily pivot
 | 1b | (combined with Phase 1) textbook ≡ IG convention | ✓ |
 | 2 | Pivot interaction event table | pending |
 | 3 | Exhaustion / continuation features | pending |
-| 4 | Session + news regime split | pending |
+| 4 | `reports/PHASE4_SESSION_SPLIT.md` | ✓ (session only; news regime deferred) |
 | 5 | `reports/PHASE5_PIA_RECONSTRUCTION.md` | ✓ (small-sample, 4 forecasts) |
 | 6 | NMS historical-decision defect scan | pending |
 | 7 | Statistical validation with chronological OOS split | pending |
