@@ -1,0 +1,126 @@
+=== Trade 1 ===
+  C1 2026-11-03T00:20:00: O=13413.65 H=13415.65 L=13413.25 C=13414.75  color=GREEN  pierce=+1.44p
+  C2 2026-11-03T00:25:00: O=13414.55 H=13414.55 L=13412.25 C=13413.75  color=RED
+    body=0.80p range=2.30p upper_wick=0.00p lower_wick=1.50p
+    total_wick/body=1.88  close_in_range=65%  dist_inside_band=+1.23p
+  C3 2026-11-03T00:40:00: O=13414.05 H=13414.05 L=13400.85 C=13402.95  color=RED
+    confirmation strength: +9.30p below C2.low (13412.25)
+    time rejection→confirmation: 15 min
+  Entry: fill=13403.1 stop=13407.1 (dist=4.0p) TP=13303.1 ATR14=1.86p ATR/stop=0.47 BB_w=15.1p
+  Pre-30m: -5.75p  Pre-60m: -2.55p
+  NMS: v3=RANGE  exh=EXHAUSTION_DEVELOPING/BUYING_EXHAUSTION  companion=DOWN  Structure: TRADABLE_NON_RANGE/None
+  Exit: 2026-11-03T00:45:21  pips=0.0
+  MAE (fill→exit): +5.55p  MFE: +0.05p
+
+=== Trade 2 ===
+  C1 2026-11-03T03:35:00: O=13404.55 H=13406.25 L=13403.65 C=13406.05  color=GREEN  pierce=+1.21p
+  C2 2026-11-03T03:40:00: O=13406.15 H=13407.15 L=13405.05 C=13405.45  color=RED
+    body=0.70p range=2.10p upper_wick=1.00p lower_wick=0.40p
+    total_wick/body=2.00  close_in_range=19%  dist_inside_band=+0.25p
+  C3 2026-11-03T03:45:00: O=13405.55 H=13405.95 L=13403.95 C=13404.75  color=RED
+    confirmation strength: +0.30p below C2.low (13405.05)
+    time rejection→confirmation: 5 min
+  Entry: fill=13404.0 stop=13408.0 (dist=4.0p) TP=13304.0 ATR14=2.57p ATR/stop=0.64 BB_w=9.8p
+  Pre-30m: +3.55p  Pre-60m: +6.15p
+  NMS: v3=RANGE  exh=NO_EXHAUSTION/NONE  companion=None  Structure: PRODUCTIVE_RANGE/None
+  Exit: 2026-11-03T03:53:55  pips=0.0
+  MAE (fill→exit): +4.85p  MFE: +-0.05p
+
+=== Trade 3 ===
+  C1 2026-11-03T04:05:00: O=13408.85 H=13411.65 L=13408.85 C=13411.15  color=GREEN  pierce=+0.92p
+  C2 2026-11-03T04:10:00: O=13411.05 H=13411.05 L=13407.45 C=13408.45  color=RED
+    body=2.60p range=3.60p upper_wick=0.00p lower_wick=1.00p
+    total_wick/body=0.38  close_in_range=28%  dist_inside_band=+2.80p
+  C3 2026-11-03T04:15:00: O=13408.35 H=13409.45 L=13407.35 C=13407.35  color=RED
+    confirmation strength: +0.10p below C2.low (13407.45)
+    time rejection→confirmation: 5 min
+  Entry: fill=13406.7 stop=13410.7 (dist=4.0p) TP=13306.7 ATR14=2.87p ATR/stop=0.72 BB_w=15.0p
+  Pre-30m: +0.65p  Pre-60m: +6.25p
+  NMS: v3=RANGE  exh=NO_EXHAUSTION/NONE  companion=None  Structure: TRADABLE_NON_RANGE/None
+  Exit: 2026-11-03T05:04:37  pips=0.0
+  MAE (fill→exit): +3.75p  MFE: +4.05p
+
+=== Trade 4 ===
+  C1 2026-11-03T05:35:00: O=13415.65 H=13416.55 L=13412.95 C=13416.35  color=GREEN  pierce=+0.40p
+  C2 2026-11-03T05:40:00: O=13416.45 H=13417.35 L=13415.45 C=13415.85  color=RED
+    body=0.60p range=1.90p upper_wick=0.90p lower_wick=0.40p
+    total_wick/body=2.17  close_in_range=21%  dist_inside_band=+1.23p
+  C3 2026-11-03T05:45:00: O=13415.65 H=13416.05 L=13413.75 C=13414.15  color=RED
+    confirmation strength: +1.30p below C2.low (13415.45)
+    time rejection→confirmation: 5 min
+  Entry: fill=13413.4 stop=13417.4 (dist=4.0p) TP=13313.4 ATR14=2.39p ATR/stop=0.60 BB_w=16.0p
+  Pre-30m: +2.95p  Pre-60m: +9.75p
+  NMS: v3=RANGE  exh=NO_EXHAUSTION/NONE  companion=UP  Structure: TRADABLE_NON_RANGE/UP
+  Exit: 2026-11-03T06:23:30  pips=0.0
+  MAE (fill→exit): +3.55p  MFE: +4.95p
+
+=== Trade 5 ===
+  C1 2026-11-03T08:05:00: O=13421.05 H=13427.15 L=13420.65 C=13426.75  color=GREEN  pierce=+1.38p
+  C2 2026-11-03T08:10:00: O=13426.650000000001 H=13427.0 L=13424.15 C=13425.85  color=RED
+    body=0.80p range=2.85p upper_wick=0.35p lower_wick=1.70p
+    total_wick/body=2.56  close_in_range=60%  dist_inside_band=+1.31p
+  C3 2026-11-03T08:15:00: O=13425.6 H=13426.55 L=13419.75 C=13421.05  color=RED
+    confirmation strength: +3.10p below C2.low (13424.15)
+    time rejection→confirmation: 5 min
+  Entry: fill=13420.7 stop=13424.7 (dist=4.0p) TP=13320.7 ATR14=4.9p ATR/stop=1.23 BB_w=21.1p
+  Pre-30m: +3.15p  Pre-60m: +9.95p
+  NMS: v3=RANGE  exh=NO_EXHAUSTION/NONE  companion=UP  Structure: TRADABLE_NON_RANGE/UP
+  Exit: 2026-11-03T09:37:22  pips=0.0
+  MAE (fill→exit): +3.85p  MFE: +9.65p
+
+=== Trade 6 ===
+  C1 2026-11-03T12:10:00: O=13414.05 H=13415.65 L=13410.400000000001 C=13414.65  color=GREEN  pierce=+0.63p
+  C2 2026-11-03T12:15:00: O=13414.55 H=13415.55 L=13411.95 C=13413.65  color=RED
+    body=0.90p range=3.60p upper_wick=1.00p lower_wick=1.70p
+    total_wick/body=3.00  close_in_range=47%  dist_inside_band=+1.58p
+  C3 2026-11-03T12:25:00: O=13414.95 H=13416.05 L=13409.1 C=13409.349999999999  color=RED
+    confirmation strength: +2.60p below C2.low (13411.95)
+    time rejection→confirmation: 10 min
+  Entry: fill=13408.5 stop=13412.5 (dist=4.0p) TP=13308.5 ATR14=3.67p ATR/stop=0.92 BB_w=10.4p
+  Pre-30m: +0.35p  Pre-60m: -0.95p
+  NMS: v3=RANGE  exh=EXHAUSTION_DEVELOPING/SELLING_EXHAUSTION  companion=DOWN  Structure: TRADABLE_NON_RANGE/DOWN
+  Exit: 2026-11-03T12:52:57  pips=0.0
+  MAE (fill→exit): +4.05p  MFE: +4.25p
+
+=== Trade 7 ===
+  C1 2026-11-03T13:10:00: O=13411.15 H=13420.05 L=13411.15 C=13419.65  color=GREEN  pierce=+3.10p
+  C2 2026-11-03T13:15:00: O=13419.55 H=13420.05 L=13416.35 C=13416.55  color=RED
+    body=3.00p range=3.70p upper_wick=0.50p lower_wick=0.20p
+    total_wick/body=0.23  close_in_range=5%  dist_inside_band=+1.10p
+  C3 2026-11-03T13:20:00: O=13416.65 H=13419.15 L=13415.099999999999 C=13415.349999999999  color=RED
+    confirmation strength: +1.00p below C2.low (13416.35)
+    time rejection→confirmation: 5 min
+  Entry: fill=13414.9 stop=13418.9 (dist=4.0p) TP=13314.9 ATR14=4.32p ATR/stop=1.08 BB_w=12.3p
+  Pre-30m: +6.95p  Pre-60m: +0.25p
+  NMS: v3=RANGE  exh=NO_EXHAUSTION/NONE  companion=UP  Structure: PRODUCTIVE_RANGE/UP
+  Exit: 2026-11-03T13:26:18  pips=0.0
+  MAE (fill→exit): +11.95p  MFE: +-0.00p
+
+=== Trade 8 ===
+  C1 2026-11-03T13:40:00: O=13422.85 H=13429.25 L=13421.55 C=13426.65  color=GREEN  pierce=+2.81p
+  C2 2026-11-03T13:45:00: O=13426.55 H=13429.95 L=13417.75 C=13419.45  color=RED
+    body=7.10p range=12.20p upper_wick=3.40p lower_wick=1.70p
+    total_wick/body=0.72  close_in_range=14%  dist_inside_band=+7.43p
+  C3 2026-11-03T14:00:00: O=13421.849999999999 H=13422.0 L=13413.55 C=13415.25  color=RED
+    confirmation strength: +2.50p below C2.low (13417.75)
+    time rejection→confirmation: 15 min
+  Entry: fill=13414.1 stop=13418.1 (dist=4.0p) TP=13314.1 ATR14=6.09p ATR/stop=1.52 BB_w=24.6p
+  Pre-30m: -5.55p  Pre-60m: +6.15p
+  NMS: v3=RANGE  exh=UNKNOWN/UNKNOWN  companion=UP  Structure: PRODUCTIVE_RANGE/UP
+  Exit: 2026-11-03T14:05:31  pips=0.0
+  MAE (fill→exit): +5.55p  MFE: +-0.40p
+
+=== Trade 9 ===
+  C1 2026-11-03T14:50:00: O=13429.55 H=13433.25 L=13429.15 C=13431.35  color=GREEN  pierce=+3.14p
+  C2 2026-11-03T14:55:00: O=13431.75 H=13432.400000000001 L=13427.35 C=13428.75  color=RED
+    body=3.00p range=5.05p upper_wick=0.65p lower_wick=1.40p
+    total_wick/body=0.68  close_in_range=28%  dist_inside_band=+2.17p
+  C3 2026-11-03T15:00:00: O=13428.95 H=13431.150000000001 L=13422.7 C=13424.55  color=RED
+    confirmation strength: +2.80p below C2.low (13427.35)
+    time rejection→confirmation: 5 min
+  Entry: fill=13423.4 stop=13427.4 (dist=4.0p) TP=13323.4 ATR14=6.16p ATR/stop=1.54 BB_w=16.2p
+  Pre-30m: +4.85p  Pre-60m: +3.45p
+  NMS: v3=RANGE  exh=NO_EXHAUSTION/NONE  companion=UP  Structure: PRODUCTIVE_RANGE/UP
+  Exit: 2026-11-03T15:05:25  pips=0.0
+  MAE (fill→exit): +6.05p  MFE: +-0.70p
+

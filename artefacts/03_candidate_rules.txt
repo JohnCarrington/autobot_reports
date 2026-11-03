@@ -1,0 +1,25 @@
+Today 9 (treated as losses): 9
+Historical reconciled: 21  wins: 15  losses: 6
+
+Candidate Rule                           Today blocked    Hist wins blocked      Hist losses blocked    Net pips impact  
+--------------------------------------------------------------------------------------------------------------------------------------------
+  c2_close_in_range > 70                 0/9            6/15                 2/6                 -26.0p
+  c2_close_in_range > 50                 2/9 →          8/15                 4/6                 -24.1p
+  c2_wick_body > 2.0                     4/9 →          4/15                 2/6                 +4.2p
+  c2_body < 1.0                          5/9 →          3/15                 1/6                 +4.3p
+  c2_dist_inside < 1.0                   1/9 →          1/15                 1/6                 -0.3p
+  atr_stop_ratio < 1.0                   5/9 →          14/15                 6/6                 -42.8p
+  atr_stop_ratio < 1.5                   7/9 →          14/15                 6/6                 -34.8p
+  pre30 > 3.0                            4/9 →          5/15                 1/6                 -7.6p
+  pre30 > 5.0                            1/9 →          3/15                 1/6                 -9.3p
+  c1_pierce > 3.0                        2/9 →          1/15                 2/6                 +6.1p
+  c1_wick < 2.0                          3/9 →          3/15                 2/6                 +3.1p
+
+=== combined 2-of-3 rejection-quality rules ===
+Strong-rejection filter (body>=1 AND close_in_range<=40 AND wick_body<=1.5):
+  Today admitted: 4/9
+  Historical wins admitted: 4/15
+  Historical losses admitted: 2/6
+  Net pips UNFILTERED (actual): +32.2
+  Net pips FILTERED (admitted only): +6.0
+  Delta: -26.2

@@ -1,0 +1,69 @@
+Historical metrics computed: 95 / 95 TAKEN
+  reconciled: 21  unreconciled: 74
+
+WINNERS n=15, avg ++5.88p
+LOSSES n=6, avg -3.33p
+
+=== Winners vs Losers (reconciled) comparative ===
+  c1_pierce           
+    wins:     median=1.14  mean=1.31  min=0.01  max=3.65  n=15
+    losses:   median=1.98  mean=3.21  min=0.13  max=9.18  n=6
+  c1_wick             
+    wins:     median=3.50  mean=3.80  min=1.00  max=9.00  n=15
+    losses:   median=3.20  mean=3.78  min=0.40  max=8.50  n=6
+  c2_body             
+    wins:     median=1.70  mean=2.06  min=0.50  max=6.30  n=15
+    losses:   median=2.95  mean=2.78  min=0.40  max=4.90  n=6
+  c2_range            
+    wins:     median=3.40  mean=3.81  min=1.60  max=8.20  n=15
+    losses:   median=3.50  mean=5.73  min=1.60  max=14.65  n=6
+  c2_wick_body        
+    wins:     median=1.20  mean=1.40  min=0.12  max=4.00  n=15
+    losses:   median=0.43  mean=1.48  min=0.03  max=4.86  n=6
+  c2_close_in_range   
+    wins:     median=60.00  mean=57.73  min=8.54  max=100.00  n=15
+    losses:   median=65.43  mean=53.25  min=1.23  max=95.83  n=6
+  c2_dist_inside      
+    wins:     median=2.61  mean=2.64  min=0.66  max=6.13  n=15
+    losses:   median=2.07  mean=2.12  min=0.11  max=3.56  n=6
+  bb_width            
+    wins:     median=14.11  mean=15.38  min=4.21  max=31.60  n=15
+    losses:   median=10.61  mean=16.83  min=3.45  max=46.04  n=6
+  atr14               
+    wins:     median=3.29  mean=3.54  min=1.93  max=6.24  n=15
+    losses:   median=3.59  mean=4.41  min=1.56  max=11.44  n=6
+  atr_stop_ratio      
+    wins:     median=0.44  mean=0.52  min=0.25  max=1.56  n=15
+    losses:   median=0.34  mean=0.36  min=0.20  max=0.52  n=6
+  pre30               
+    wins:     median=1.35  mean=0.45  min=-8.15  max=8.95  n=15
+    losses:   median=-1.07  mean=0.21  min=-11.95  max=17.85  n=6
+  mae                 
+    wins:     median=4.35  mean=5.54  min=2.15  max=16.35  n=15
+    losses:   median=6.25  mean=7.98  min=3.15  max=20.00  n=6
+  mfe                 
+    wins:     median=14.55  mean=13.73  min=4.75  max=24.75  n=15
+    losses:   median=0.75  mean=2.71  min=-0.25  max=11.65  n=6
+
+=== 4p stop claim verification (prior investigation said 12/15 of winners had MAE > 4p in 1h window) ===
+Now using MAE up to ACTUAL exit time (not 1h window):
+  Winners whose MAE >= own stop_dist (up to exit): 4/15 = 27%
+  Winners whose MAE > 4p: 9/15 = 60%
+  Losses whose MAE > 4p: 5/6
+
+WINNER MAE values (sorted):
+  2026-10-27   MAE=+2.15p  final=+7.0p  stop_dist=6.6p
+  2026-10-23   MAE=+2.95p  final=+8.4p  stop_dist=6.2p
+  2026-10-29   MAE=+2.95p  final=+1.6p  stop_dist=7.8p
+  2026-10-22   MAE=+3.35p  final=+3.3p  stop_dist=7.7p
+  2026-10-30   MAE=+3.45p  final=+5.3p  stop_dist=4.0p
+  2026-10-23   MAE=+3.85p  final=+7.2p  stop_dist=7.9p
+  2026-10-13   MAE=+4.25p  final=+5.3p  stop_dist=7.2p
+  2026-10-30   MAE=+4.35p  final=+5.4p  stop_dist=4.0p
+  2026-10-30   MAE=+4.65p  final=+0.6p  stop_dist=4.0p
+  2026-10-23   MAE=+5.05p  final=+5.5p  stop_dist=12.2p
+  2026-10-30   MAE=+5.65p  final=+9.4p  stop_dist=4.0p
+  2026-10-29   MAE=+5.85p  final=+14.3p  stop_dist=10.3p
+  2026-10-29   MAE=+8.85p  final=+2.9p  stop_dist=17.3p
+  2026-10-23   MAE=+9.45p  final=+1.4p  stop_dist=12.75p
+  2026-10-28   MAE=+16.35p  final=+10.6p  stop_dist=10.6p
