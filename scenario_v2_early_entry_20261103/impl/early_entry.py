@@ -1,0 +1,632 @@
+"""Scenario V2 — early-entry shadow executor (research-only).
+
+HARD CONTRACTS (identical to deployed shadow_execution.py):
+  * No IG client, no broker call, no trades-api endpoint, no AutoBot
+    execution hook. Imports NOTHING from /opt/tradingbot outside the
+    research tree.
+  * Append-only JSONL journals under a configurable shadow dir
+    (default: research/live_obs/shadow_exec_early/).
+  * Lookahead-safe: a candle whose close is at or before the scenario
+    revision's gen_time MUST NOT be used for the fill. The same 2 h
+    retrospective-fill guard from shadow_execution.MAX_FILL_LOOKBACK_SECONDS
+    applies.
+  * Idempotent against service restarts: a proposal with the same
+    (scenario_id, revision_idx, mode) is NOT re-created; an open
+    position whose scenario_id is already OPEN is NOT re-opened; a
+    closed scenario cannot be re-closed.
+
+FEATURE FLAG:
+  Pass `mode` ∈ {"OFF","A","B","C","A_AND_C"} to each process_proposal
+  call. "OFF" is a no-op; the module records a WAITING row and returns.
+
+This module runs IN PARALLEL to the deployed shadow_execution.py; the
+two write to separate journals so their fills can be compared without
+interference. The deployed shadow_execution module is NOT imported or
+patched by this one.
+"""
+from __future__ import annotations
+
+import csv
+import datetime as dt
+import fcntl
+import json
+import pathlib
+from typing import Any
+
+UTC = dt.timezone.utc
+
+# ---------------------------------------------------------------------
+# Module config
+# ---------------------------------------------------------------------
+
+SHADOW_DIR_DEFAULT = pathlib.Path(
+    "/mnt/volume_lon1_1778405456698/research/live_obs/shadow_exec_early")
+# Must match the deployed shadow_execution.MAX_FILL_LOOKBACK_SECONDS
+# default. Mirrored (not imported) to preserve the "zero imports from
+# the deployed executor" contract.
+MAX_FILL_LOOKBACK_SECONDS = 2 * 60 * 60
+
+# Opportunity-quality thresholds (see EARLY_ENTRY_DESIGN.md §3.1).
+MIN_NET_REWARD_PIPS = 3.0
+MIN_NET_RR = 0.75
+MAX_EXHAUSTION = 0.70
+
+# GBP/USD pip conversion. The project uses IG index-scale (10000-20000)
+# for GBP/USD prices (e.g. 13425.18 = 1.34252). One pip = 1.0 at the
+# index scale.
+PIP = 1.0
+
+# Session-aware model spread (half-pip, pips). Hours in UTC.
+# Appendix A of the design: contemporaneous bid/ask unavailable.
+_SPREAD_HALF_SESSION = (
+    # (start_hour_utc, end_hour_utc, half_pips)
+    ( 6, 11, 0.45),   # London mid
+    (11, 14, 0.70),   # mid-session
+    (14, 17, 1.00),   # NY active
+    (17, 20, 1.50),   # NY late
+    (20, 24, 2.00),   # Asia thin
+    ( 0,  6, 1.80),   # Asia thin wrap
+)
+
+VALID_MODES = {"OFF", "A", "B", "C", "A_AND_C"}
+
+
+def spread_half_pips(ts: dt.datetime) -> float:
+    """Return the modelled half-spread at ``ts``. See design appendix."""
+    hr = ts.hour
+    for lo, hi, half in _SPREAD_HALF_SESSION:
+        if lo <= hr < hi:
+            return half
+    return 1.5
+
+
+# ---------------------------------------------------------------------
+# Journaling (identical structure to shadow_execution.py but to a
+# separate directory so comparison is clean)
+# ---------------------------------------------------------------------
+
+def _append_jsonl(path: pathlib.Path, row: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(row, default=str, sort_keys=True) + "\n")
+
+
+def _read_jsonl(path: pathlib.Path) -> list[dict]:
+    if not path.is_file():
+        return []
+    out: list[dict] = []
+    with path.open("r", encoding="utf-8") as f:
+        for ln in f:
+            ln = ln.strip()
+            if not ln:
+                continue
+            try:
+                out.append(json.loads(ln))
+            except json.JSONDecodeError:
+                continue
+    return out
+
+
+def _load_dedup(path: pathlib.Path) -> dict:
+    if not path.is_file():
+        return {"proposals": [], "open_positions": {}, "closed_scenarios": {}}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"proposals": [], "open_positions": {}, "closed_scenarios": {}}
+
+
+def _save_dedup(path: pathlib.Path, state: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(state, sort_keys=True, indent=2),
+                      encoding="utf-8")
+
+
+# ---------------------------------------------------------------------
+# Opportunity-quality gate
+# ---------------------------------------------------------------------
+
+def opp_quality(exec_price: float, stop: float, target: float,
+                  direction: str, half_spread_pips: float,
+                  scenario_gen_price: float | None) -> tuple[bool, str, dict]:
+    """Return (ok, reason, metrics)."""
+    d = direction.upper()
+    sign = 1 if d == "BUY" else -1
+    remaining = (target - exec_price) * sign
+    risk = (exec_price - stop) * sign
+    metrics = {
+        "exec_price": exec_price, "stop": stop, "target": target,
+        "direction": d,
+        "half_spread_pips": half_spread_pips,
+        "scenario_gen_price": scenario_gen_price,
+        "remaining_pips": round(remaining, 2),
+        "risk_pips": round(risk, 2),
+    }
+    if remaining <= 0 or risk <= 0:
+        return (False, "QUALITY_REJECTION_GEOMETRY", metrics)
+
+    net_reward = remaining - 2 * half_spread_pips
+    metrics["net_reward_pips"] = round(net_reward, 2)
+    if net_reward < MIN_NET_REWARD_PIPS:
+        metrics["threshold"] = f"MIN_NET_REWARD_PIPS={MIN_NET_REWARD_PIPS}"
+        return (False, "QUALITY_REJECTION_NET_REWARD", metrics)
+
+    net_rr = net_reward / (risk + 2 * half_spread_pips)
+    metrics["net_rr"] = round(net_rr, 3)
+    if net_rr < MIN_NET_RR:
+        metrics["threshold"] = f"MIN_NET_RR={MIN_NET_RR}"
+        return (False, "QUALITY_REJECTION_NET_RR", metrics)
+
+    if scenario_gen_price is not None:
+        full_range = (target - scenario_gen_price) * sign
+        if full_range <= 0:
+            metrics["threshold"] = "full_range<=0"
+            return (False, "QUALITY_REJECTION_EXHAUSTION", metrics)
+        consumed = (exec_price - scenario_gen_price) * sign
+        exhaustion = consumed / full_range
+        metrics["exhaustion_ratio"] = round(exhaustion, 3)
+        if exhaustion > MAX_EXHAUSTION:
+            metrics["threshold"] = f"MAX_EXHAUSTION={MAX_EXHAUSTION}"
+            return (False, "QUALITY_REJECTION_EXHAUSTION", metrics)
+
+    return (True, "OK", metrics)
+
+
+# ---------------------------------------------------------------------
+# Fill mechanisms
+# ---------------------------------------------------------------------
+
+def _candles_in_window(candles: list[dict], not_before: dt.datetime,
+                         now: dt.datetime) -> list[dict]:
+    return [c for c in candles
+            if c["ts_close"] > not_before and c["ts_close"] <= now]
+
+
+def _effective_not_before(gen_dt: dt.datetime, now: dt.datetime,
+                            lookback_s: int) -> dt.datetime:
+    if lookback_s <= 0:
+        return gen_dt
+    floor = now - dt.timedelta(seconds=lookback_s)
+    return gen_dt if gen_dt > floor else floor
+
+
+def _bar_hits_stop(c: dict, d: str, stop: float) -> bool:
+    return c["h"] >= stop if d == "SELL" else c["l"] <= stop
+
+
+def _bar_hits_target(c: dict, d: str, target: float) -> bool:
+    return c["l"] <= target if d == "SELL" else c["h"] >= target
+
+
+def _simulate_lifecycle(entry_bar: dict, simulated_entry: float,
+                          direction: str, stop: float, target: float,
+                          candles: list[dict], now: dt.datetime) -> dict:
+    """Shared with deployed shadow_execution — same stop/target rules."""
+    d = direction.upper()
+    monitor = [c for c in candles
+                 if c["ts_open"] > entry_bar["ts_open"] and c["ts_close"] <= now]
+    exit_reason = None
+    exit_bar = None
+    for c in monitor:
+        hs = _bar_hits_stop(c, d, stop)
+        ht = _bar_hits_target(c, d, target)
+        if hs and ht:
+            exit_reason = "AMBIGUOUS_INTRABAR"; exit_bar = c; break
+        if hs:
+            exit_reason = "STOP_HIT"; exit_bar = c; break
+        if ht:
+            exit_reason = "TARGET_HIT"; exit_bar = c; break
+
+    all_bars = [entry_bar] + [c for c in candles if c["ts_open"] > entry_bar["ts_open"]
+                                  and c["ts_close"] <= now]
+    if all_bars:
+        highs = max(c["h"] for c in all_bars)
+        lows  = min(c["l"] for c in all_bars)
+        if d == "SELL":
+            mfe = round(simulated_entry - lows, 1)
+            mae = round(highs - simulated_entry, 1)
+        else:
+            mfe = round(highs - simulated_entry, 1)
+            mae = round(simulated_entry - lows, 1)
+    else:
+        mfe = mae = 0.0
+
+    if exit_bar is None:
+        return {"position": "OPENED_AWAITING_EXIT",
+                "entry_bar_ts_utc": entry_bar["ts_open"].isoformat(),
+                "simulated_entry": simulated_entry,
+                "mfe_pips": mfe, "mae_pips": mae}
+
+    if exit_reason == "STOP_HIT":
+        sim_exit = stop
+    elif exit_reason == "TARGET_HIT":
+        sim_exit = target
+    else:
+        sim_exit = exit_bar["c"]
+
+    gross = round((sim_exit - simulated_entry) * (1 if d == "BUY" else -1), 1)
+    return {"position": "CLOSED",
+            "exit_reason": exit_reason,
+            "entry_bar_ts_utc": entry_bar["ts_open"].isoformat(),
+            "exit_bar_ts_utc": exit_bar["ts_open"].isoformat(),
+            "simulated_entry": simulated_entry,
+            "simulated_exit": sim_exit,
+            "gross_pips": gross,
+            "mfe_pips": mfe, "mae_pips": mae}
+
+
+# -- Mechanism A -------------------------------------------------------
+
+def _mech_A(gen_dt: dt.datetime, direction: str, entry_ref: float,
+              stop: float, target: float, decision_price: float | None,
+              candles: list[dict], now: dt.datetime,
+              lookback_s: int) -> dict:
+    enb = _effective_not_before(gen_dt, now, lookback_s)
+    post = _candles_in_window(candles, enb, now)
+    if not post:
+        return {"position": "WAITING_FOR_ENTRY",
+                "reason": "no post-gen bar in window"}
+    entry_bar = post[0]
+    sim_entry = entry_bar["c"]
+    ok, reason, metrics = opp_quality(sim_entry, stop, target, direction,
+                                          spread_half_pips(entry_bar["ts_close"]),
+                                          decision_price)
+    if not ok:
+        return {"position": "REJECTED", "reason": reason, "metrics": metrics}
+    res = _simulate_lifecycle(entry_bar, sim_entry, direction, stop,
+                                 target, candles, now)
+    res["quality_metrics"] = metrics
+    res["mechanism"] = "A"
+    return res
+
+
+# -- Mechanism B -------------------------------------------------------
+
+def _mech_B(gen_dt: dt.datetime, direction: str, entry_ref: float,
+              stop: float, target: float, decision_price: float | None,
+              candles: list[dict], now: dt.datetime,
+              lookback_s: int) -> dict:
+    if decision_price is None:
+        return {"position": "WAITING_FOR_ENTRY",
+                "reason": "no decision_price for pullback computation"}
+    enb = _effective_not_before(gen_dt, now, lookback_s)
+    post = _candles_in_window(candles, enb, now)
+    d = direction.upper()
+    seen_pullback = False
+    entry_bar = None
+    for bar in post:
+        # Pre-entry invalidation — if the AI's stop is already touched
+        # before an entry fires, the setup is dead and we don't backfill.
+        if (d == "BUY" and bar["l"] <= stop) \
+         or (d == "SELL" and bar["h"] >= stop):
+            return {"position": "REJECTED",
+                    "reason": "SETUP_INVALIDATED_PRE_ENTRY",
+                    "stop_bar_ts_utc": bar["ts_open"].isoformat()}
+        counter = (d == "BUY" and bar["c"] < decision_price) \
+               or (d == "SELL" and bar["c"] > decision_price)
+        indir   = (d == "BUY" and bar["c"] > decision_price) \
+               or (d == "SELL" and bar["c"] < decision_price)
+        if counter:
+            seen_pullback = True
+            continue
+        if seen_pullback and indir:
+            entry_bar = bar
+            break
+    if entry_bar is None:
+        return {"position": "WAITING_FOR_ENTRY",
+                "reason": "no in-direction bar after pullback"}
+    sim_entry = entry_bar["c"]
+    ok, reason, metrics = opp_quality(sim_entry, stop, target, direction,
+                                          spread_half_pips(entry_bar["ts_close"]),
+                                          decision_price)
+    if not ok:
+        return {"position": "REJECTED", "reason": reason, "metrics": metrics}
+    res = _simulate_lifecycle(entry_bar, sim_entry, direction, stop,
+                                 target, candles, now)
+    res["quality_metrics"] = metrics
+    res["mechanism"] = "B"
+    return res
+
+
+# -- Mechanism C -------------------------------------------------------
+
+def _mech_C(gen_dt: dt.datetime, direction: str, entry_ref: float,
+              stop: float, target: float, decision_price: float | None,
+              candles: list[dict], now: dt.datetime,
+              lookback_s: int) -> dict:
+    """Earlier breakout — intra-bar touch of the AI's entry trigger."""
+    if entry_ref is None:
+        return {"position": "WAITING_FOR_ENTRY", "reason": "no entry_ref"}
+    enb = _effective_not_before(gen_dt, now, lookback_s)
+    post = _candles_in_window(candles, enb, now)
+    d = direction.upper()
+    entry_bar = None
+    for bar in post:
+        if (d == "BUY" and bar["h"] >= entry_ref) \
+         or (d == "SELL" and bar["l"] <= entry_ref):
+            entry_bar = bar
+            break
+    if entry_bar is None:
+        return {"position": "WAITING_FOR_ENTRY",
+                "reason": "no bar touched entry trigger"}
+    # Fills AT the entry level (modelled stop-market order).
+    sim_entry = float(entry_ref)
+    ok, reason, metrics = opp_quality(sim_entry, stop, target, direction,
+                                          spread_half_pips(entry_bar["ts_close"]),
+                                          decision_price)
+    if not ok:
+        return {"position": "REJECTED", "reason": reason, "metrics": metrics}
+    res = _simulate_lifecycle(entry_bar, sim_entry, direction, stop,
+                                 target, candles, now)
+    res["quality_metrics"] = metrics
+    res["mechanism"] = "C"
+    return res
+
+
+# ---------------------------------------------------------------------
+# Public entry point
+# ---------------------------------------------------------------------
+
+def _dedup_key(scenario_id: str, revision_idx: int, mode: str) -> str:
+    return f"{scenario_id}|rev{revision_idx}|{mode}"
+
+
+def process_proposal(*,
+                       scenario_row: dict,
+                       primary_decision: dict,
+                       decision_price: float | None,
+                       candles: list[dict],
+                       mode: str = "A",
+                       shadow_dir: pathlib.Path = SHADOW_DIR_DEFAULT,
+                       now_utc: dt.datetime | None = None,
+                       max_fill_lookback_seconds: int | None = None,
+                       ) -> dict:
+    """Idempotently register a proposal + run its lifecycle under the
+    chosen early-entry mechanism. Returns an audit dict naming what
+    happened.
+
+    This is a SHADOW-ONLY research executor. It cannot submit broker
+    orders.
+    """
+    if mode not in VALID_MODES:
+        raise ValueError(f"mode must be one of {sorted(VALID_MODES)}; got {mode!r}")
+    if mode == "OFF":
+        return {"action": "DISABLED", "position": None, "mode": mode}
+
+    now = now_utc or dt.datetime.now(UTC)
+    scenario_id = scenario_row.get("scenario_id") or ""
+    revision_idx = int(scenario_row.get("revision_idx") or 0)
+    direction = ""
+    for o in (scenario_row.get("opportunities") or []):
+        if isinstance(o, dict) and (o.get("direction") or "").upper() in ("BUY", "SELL"):
+            direction = (o.get("direction") or "").upper()
+            break
+    tp = scenario_row.get("trade_proposal") or {}
+    entry_ref = tp.get("entry_price")
+    stop = tp.get("stop_price")
+    target = tp.get("target_price")
+    gen_at = scenario_row.get("generated_at_utc") or scenario_row.get("revised_at_utc") or ""
+    pub = (scenario_row.get("publication_decision") or {}).get("decision", "").upper()
+    scen_state = (scenario_row.get("state") or "").upper()
+    nms_direction = (primary_decision.get("direction") or "").upper()
+
+    # --- Hard gates ---
+    if scen_state in {"INVALIDATED", "COMPLETED"}:
+        return {"action": "SKIPPED", "position": None,
+                "reason": f"scenario_state={scen_state}",
+                "mode": mode}
+    if pub != "VALID":
+        return {"action": "SKIPPED", "position": None,
+                "reason": f"publication_decision={pub or 'UNVALIDATED'}",
+                "mode": mode}
+    if direction not in ("BUY", "SELL"):
+        return {"action": "SKIPPED", "position": None,
+                "reason": "no directional opportunity",
+                "mode": mode}
+    if entry_ref is None or stop is None or target is None:
+        return {"action": "SKIPPED", "position": None,
+                "reason": "missing structured entry/stop/target",
+                "mode": mode}
+    # NMS compatibility — same side or NEUTRAL. If NMS is already
+    # against V2's call, we refuse to open regardless of V2's VALID.
+    if nms_direction and nms_direction not in ("", "NEUTRAL", direction):
+        return {"action": "SKIPPED", "position": None,
+                "reason": f"NMS_CONFLICT nms={nms_direction} v2={direction}",
+                "mode": mode}
+    try:
+        gen_dt = dt.datetime.fromisoformat(gen_at.replace("Z", "+00:00"))
+    except Exception:
+        return {"action": "SKIPPED", "position": None,
+                "reason": "unparsable generated_at_utc",
+                "mode": mode}
+
+    key = _dedup_key(scenario_id, revision_idx, mode)
+    shadow_dir.mkdir(parents=True, exist_ok=True)
+    dedup_path = shadow_dir / "shadow_dedup_early.json"
+    proposals_path = shadow_dir / "shadow_proposals_early.jsonl"
+    positions_path = shadow_dir / "shadow_positions_early.jsonl"
+    closed_path    = shadow_dir / "shadow_closed_early.jsonl"
+    lock_path = shadow_dir / "shadow_exec_early.lock"
+    lock_fd = open(lock_path, "a+")
+    try:
+        try:
+            fcntl.flock(lock_fd.fileno(), fcntl.LOCK_EX)
+        except OSError:
+            pass
+        state = _load_dedup(dedup_path)
+
+        # --- Idempotency ---
+        if key not in state.get("proposals", []):
+            prop_row = {
+                "proposal_id": f"early-{key}",
+                "key": key,
+                "scenario_id": scenario_id,
+                "revision_idx": revision_idx,
+                "mode": mode,
+                "generated_at_utc": gen_at,
+                "created_at_utc": now.isoformat(),
+                "direction": direction,
+                "entry_ref": entry_ref, "stop": stop, "target": target,
+                "decision_price": decision_price,
+                "nms_direction": nms_direction,
+                "publication_decision": pub,
+                "scenario_state": scen_state,
+            }
+            _append_jsonl(proposals_path, prop_row)
+            state.setdefault("proposals", []).append(key)
+            action = "PROPOSAL_CREATED"
+        else:
+            action = "PROPOSAL_ALREADY_EXISTS"
+
+        # One open position per scenario_id (across modes).
+        if scenario_id in state.get("open_positions", {}):
+            open_rec = state["open_positions"][scenario_id]
+            _save_dedup(dedup_path, state)
+            return {"action": action, "position": "ALREADY_OPEN",
+                    "open_mode": open_rec.get("mode"),
+                    "open_rev": open_rec.get("revision_idx"),
+                    "opened_at_utc": open_rec.get("opened_at_utc"),
+                    "mode": mode}
+        if scenario_id in state.get("closed_scenarios", {}):
+            close_rec = state["closed_scenarios"][scenario_id]
+            _save_dedup(dedup_path, state)
+            return {"action": action, "position": "ALREADY_CLOSED",
+                    "closed_mode": close_rec.get("mode"),
+                    "exit_reason": close_rec.get("exit_reason"),
+                    "mode": mode}
+
+        lookback_s = (max_fill_lookback_seconds
+                       if max_fill_lookback_seconds is not None
+                       else MAX_FILL_LOOKBACK_SECONDS)
+
+        # --- Run selected mechanism(s) ---
+        def _run(m: str):
+            fn = {"A": _mech_A, "B": _mech_B, "C": _mech_C}[m]
+            return fn(gen_dt, direction, entry_ref, stop, target,
+                       decision_price, candles, now, lookback_s)
+
+        if mode == "A_AND_C":
+            # Fire whichever triggers first. Dedup still at scenario level.
+            resA = _run("A")
+            resC = _run("C")
+            # Pick the earlier entry bar if both fired; else whichever did.
+            def _bar_ts(r):
+                return r.get("entry_bar_ts_utc") or "9999"
+            if resA.get("position") in ("CLOSED", "OPENED_AWAITING_EXIT") \
+             and resC.get("position") in ("CLOSED", "OPENED_AWAITING_EXIT"):
+                res = resA if _bar_ts(resA) <= _bar_ts(resC) else resC
+            elif resA.get("position") in ("CLOSED", "OPENED_AWAITING_EXIT"):
+                res = resA
+            elif resC.get("position") in ("CLOSED", "OPENED_AWAITING_EXIT"):
+                res = resC
+            else:
+                res = resA  # both WAITING or REJECTED — report A's reason
+            res["combined_from"] = "A_AND_C"
+        else:
+            res = _run(mode)
+
+        # --- Journal + state update ---
+        if res.get("position") in ("OPENED_AWAITING_EXIT", "CLOSED"):
+            open_row = {
+                "proposal_id": f"early-{key}",
+                "scenario_id": scenario_id,
+                "revision_idx": revision_idx,
+                "mode": res.get("mechanism") or mode,
+                "direction": direction,
+                "simulated_entry_price": res.get("simulated_entry"),
+                "stop_price": stop, "target_price": target,
+                "entry_bar_ts_utc": res.get("entry_bar_ts_utc"),
+                "proposed_at_utc": gen_at,
+                "opened_at_utc": now.isoformat(),
+                "event": "OPEN",
+                "execution_mode": "SHADOW_ONLY",
+                "quality_metrics": res.get("quality_metrics"),
+            }
+            _append_jsonl(positions_path, open_row)
+            state.setdefault("open_positions", {})[scenario_id] = {
+                "mode": res.get("mechanism") or mode,
+                "revision_idx": revision_idx,
+                "opened_at_utc": now.isoformat(),
+                "entry_bar_ts_utc": res.get("entry_bar_ts_utc"),
+                "entry": res.get("simulated_entry"),
+                "stop": stop, "target": target,
+                "direction": direction,
+                "proposal_id": f"early-{key}",
+            }
+
+            if res.get("position") == "CLOSED":
+                close_row = {
+                    "proposal_id": f"early-{key}",
+                    "scenario_id": scenario_id,
+                    "revision_idx": revision_idx,
+                    "mode": res.get("mechanism") or mode,
+                    "direction": direction,
+                    "simulated_entry_price": res.get("simulated_entry"),
+                    "simulated_exit_price": res.get("simulated_exit"),
+                    "exit_reason": res.get("exit_reason"),
+                    "exit_bar_ts_utc": res.get("exit_bar_ts_utc"),
+                    "closed_at_utc": now.isoformat(),
+                    "gross_pips": res.get("gross_pips"),
+                    "mfe_pips": res.get("mfe_pips"),
+                    "mae_pips": res.get("mae_pips"),
+                    "event": "CLOSE",
+                    "execution_mode": "SHADOW_ONLY",
+                }
+                _append_jsonl(positions_path, close_row)
+                _append_jsonl(closed_path, close_row)
+                state.setdefault("open_positions", {}).pop(scenario_id, None)
+                state.setdefault("closed_scenarios", {})[scenario_id] = {
+                    "mode": res.get("mechanism") or mode,
+                    "revision_idx": revision_idx,
+                    "exit_reason": res.get("exit_reason"),
+                    "closed_at_utc": now.isoformat(),
+                    "proposal_id": f"early-{key}",
+                }
+        _save_dedup(dedup_path, state)
+        return {"action": action, **res, "mode": mode}
+    finally:
+        try:
+            fcntl.flock(lock_fd.fileno(), fcntl.LOCK_UN)
+        except OSError:
+            pass
+        lock_fd.close()
+
+
+def summary(shadow_dir: pathlib.Path = SHADOW_DIR_DEFAULT) -> dict:
+    proposals = _read_jsonl(shadow_dir / "shadow_proposals_early.jsonl")
+    positions = _read_jsonl(shadow_dir / "shadow_positions_early.jsonl")
+    closed    = _read_jsonl(shadow_dir / "shadow_closed_early.jsonl")
+    state = _load_dedup(shadow_dir / "shadow_dedup_early.json")
+
+    gross_total = sum((r.get("gross_pips") or 0.0) for r in closed
+                       if r.get("exit_reason") not in (None, "AMBIGUOUS_INTRABAR"))
+    outcomes = {
+        "target_hit": sum(1 for r in closed if r.get("exit_reason") == "TARGET_HIT"),
+        "stop_hit":   sum(1 for r in closed if r.get("exit_reason") == "STOP_HIT"),
+        "ambiguous":  sum(1 for r in closed if r.get("exit_reason") == "AMBIGUOUS_INTRABAR"),
+    }
+    return {
+        "schema": "shadow_exec_early.panel.v1",
+        "totals": {
+            "proposals": len(proposals),
+            "open": len(state.get("open_positions") or {}),
+            "closed": len(closed),
+            "gross_pips": round(gross_total, 1),
+            "outcomes": outcomes,
+        },
+        "execution_mode": "SHADOW_ONLY",
+    }
+
+
+__all__ = [
+    "process_proposal",
+    "summary",
+    "opp_quality",
+    "spread_half_pips",
+    "SHADOW_DIR_DEFAULT",
+    "MAX_FILL_LOOKBACK_SECONDS",
+    "MIN_NET_REWARD_PIPS",
+    "MIN_NET_RR",
+    "MAX_EXHAUSTION",
+    "VALID_MODES",
+]
