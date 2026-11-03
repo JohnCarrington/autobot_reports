@@ -1,0 +1,29 @@
+--- /home/autobot/reports-wt/scenario-v2-coverage-correction-20261103/scenario_v2_coverage_correction_20261103/scripts/run_shadow_exec.sh.deployed-baseline	2026-11-03 14:54:59.732823920 +0000
++++ /mnt/volume_lon1_1778405456698/research/live_obs/shadow_exec/run_shadow_exec.sh	2026-11-03 15:00:16.638402185 +0000
+@@ -16,6 +16,13 @@
+ LOG_PREFIX="[shadow-exec]"
+ 
+ MAX_REVISIONS="${SHADOW_MAX_REVISIONS:-40}"
++# 2026-11-03 coverage activation: default-on per-scenario coverage.
++# Every unique scenario is evaluated once per sweep; the top-N
++# revision window is only used when SHADOW_PER_SCENARIO_COVERAGE=0.
++# Executor-side dedup prevents duplicate fills; the 2 h
++# retrospective-fill cap in shadow_execution.py still bounds
++# historical reach.
++PER_SCENARIO_COVERAGE="${SHADOW_PER_SCENARIO_COVERAGE:-1}"
+ 
+ if [ ! -x "$PYTHON" ]; then
+     echo "$LOG_PREFIX FATAL: python not found at $PYTHON" >&2; exit 2
+@@ -48,5 +55,10 @@
+     exit 0
+ fi
+ 
+-echo "$LOG_PREFIX sweep begin max_revisions=$MAX_REVISIONS"
+-exec "$PYTHON" "$ENTRY" --max-revisions "$MAX_REVISIONS"
++if [ "$PER_SCENARIO_COVERAGE" = "1" ]; then
++    echo "$LOG_PREFIX sweep begin mode=per_scenario_coverage"
++    exec "$PYTHON" "$ENTRY" --per-scenario-coverage
++else
++    echo "$LOG_PREFIX sweep begin mode=legacy_top_n max_revisions=$MAX_REVISIONS"
++    exec "$PYTHON" "$ENTRY" --max-revisions "$MAX_REVISIONS"
++fi

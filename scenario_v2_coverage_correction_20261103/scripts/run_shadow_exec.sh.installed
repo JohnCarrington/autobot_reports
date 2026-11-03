@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# live-market-observer-shadow-exec — oneshot wrapper.
+#
+# RESEARCH-ONLY. Simulates trades against Scenario V2's VALID+READY
+# proposals using the primary observer's own completed-bar stream.
+# No IG order, no broker call, no trades-api endpoint. Append-only
+# journals under research/live_obs/shadow_exec/.
+#
+# Window gate: 07:00-17:00 Europe/London on weekdays. Outside the
+# window the wrapper exits 0 (no spend, no state churn).
+set -euo pipefail
+
+RES="/mnt/volume_lon1_1778405456698/research/live_obs"
+ENTRY="$RES/shadow_exec/run_shadow_exec.py"
+PYTHON="/opt/tradingbot/venv/bin/python"
+LOG_PREFIX="[shadow-exec]"
+
+MAX_REVISIONS="${SHADOW_MAX_REVISIONS:-40}"
+# 2026-11-03 coverage activation: default-on per-scenario coverage.
+# Every unique scenario is evaluated once per sweep; the top-N
+# revision window is only used when SHADOW_PER_SCENARIO_COVERAGE=0.
+# Executor-side dedup prevents duplicate fills; the 2 h
+# retrospective-fill cap in shadow_execution.py still bounds
+# historical reach.
+PER_SCENARIO_COVERAGE="${SHADOW_PER_SCENARIO_COVERAGE:-1}"
+
+if [ ! -x "$PYTHON" ]; then
+    echo "$LOG_PREFIX FATAL: python not found at $PYTHON" >&2; exit 2
+fi
+if [ ! -r "$ENTRY" ]; then
+    echo "$LOG_PREFIX FATAL: entry not readable at $ENTRY" >&2; exit 2
+fi
+
+WINDOW_PLAN=$("$PYTHON" - <<'PY'
+from datetime import datetime
+from zoneinfo import ZoneInfo
+UK = ZoneInfo("Europe/London")
+now_uk = datetime.now(UK)
+state = "IN_WINDOW"
+if now_uk.weekday() >= 5:
+    state = "WEEKEND"
+elif now_uk.hour < 7:
+    state = "BEFORE_WINDOW"
+elif now_uk.hour >= 17:
+    state = "AFTER_WINDOW"
+print(f"state={state}")
+print(f"now_uk={now_uk.isoformat()}")
+PY
+)
+eval "$WINDOW_PLAN"
+echo "$LOG_PREFIX now_uk=$now_uk state=$state"
+
+if [ "$state" != "IN_WINDOW" ]; then
+    echo "$LOG_PREFIX outside UK observation window; nothing to do"
+    exit 0
+fi
+
+if [ "$PER_SCENARIO_COVERAGE" = "1" ]; then
+    echo "$LOG_PREFIX sweep begin mode=per_scenario_coverage"
+    exec "$PYTHON" "$ENTRY" --per-scenario-coverage
+else
+    echo "$LOG_PREFIX sweep begin mode=legacy_top_n max_revisions=$MAX_REVISIONS"
+    exec "$PYTHON" "$ENTRY" --max-revisions "$MAX_REVISIONS"
+fi
