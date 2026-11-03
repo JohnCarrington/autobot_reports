@@ -149,8 +149,49 @@ class SetupOutcome:
 
 
 # ---------------------------------------------------------------------
-# Mechanism A — momentum impulse continuation
+# Mechanism A — momentum impulse continuation (LATEST-M5-ONLY)
 # ---------------------------------------------------------------------
+# 2026-11-03 freshness correction: the derivation only ever fires on
+# the SINGLE just-closed M5 bar. Earlier bars contribute to context
+# (median range, pre-entry stop-breach check) but can never themselves
+# trigger an entry retrospectively.
+#
+# "The just-closed M5 bar" is defined as the bar whose `ts_close` equals
+# `now` rounded down to the nearest 5-minute boundary. The sweeper runs
+# with RandomizedDelaySec=20s so at wall-clock 10:05:17 the just-closed
+# bar is the 10:00-10:05 bar (ts_close = 10:05:00).
+#
+# If the observer has not published that specific bar yet (common when
+# the sweep narrowly beats the observer), the derivation returns WAIT
+# with reason `latest_completed_m5_not_available`. It does NOT fall
+# back to the previous bar — operator-mandated: "a previous M5 interval"
+# is explicitly disallowed. Try again next sweep.
+
+
+def _latest_m5_boundary(now: dt.datetime) -> dt.datetime:
+    """Return ``now`` rounded DOWN to the nearest 5-minute boundary.
+
+    Example: 10:07:30 -> 10:05:00; 10:10:17 -> 10:10:00; 10:10:00 -> 10:10:00.
+    """
+    anchor = now.replace(second=0, microsecond=0)
+    return anchor - dt.timedelta(minutes=anchor.minute % 5)
+
+
+def _find_just_closed_bar(candles: list[dict],
+                            now: dt.datetime) -> dict | None:
+    """Return the single bar whose ``ts_close`` equals the latest 5-min
+    boundary at or before ``now``. Returns None if that bar is not in
+    the candle stream (observer lag / data gap)."""
+    boundary = _latest_m5_boundary(now)
+    for c in reversed(candles):
+        if c["ts_close"] == boundary:
+            return c
+        if c["ts_close"] < boundary:
+            # Stream is behind the expected boundary. The bar we need
+            # is not available.
+            return None
+    return None
+
 
 def _derive_momentum(gen_dt: dt.datetime, now: dt.datetime,
                        direction: str, v2_stop: float, target: float,
@@ -163,40 +204,92 @@ def _derive_momentum(gen_dt: dt.datetime, now: dt.datetime,
     if med_range <= 0:
         return SetupOutcome("wait", "MOMENTUM_IMPULSE", "zero_median_range",
                              None, None, None, target, direction)
+
+    # Identify the just-closed M5 bar. If missing, do NOT fire.
+    boundary = _latest_m5_boundary(now)
+    latest = _find_just_closed_bar(candles, now)
+    if latest is None:
+        return SetupOutcome("wait", "MOMENTUM_IMPULSE",
+                             "latest_completed_m5_not_available",
+                             None, None, None, target, direction,
+                             extras={"expected_m5_close": boundary.isoformat()})
+
+    # Scenario must have been actionable before this bar closed.
+    if latest["ts_close"] <= gen_dt:
+        return SetupOutcome("wait", "MOMENTUM_IMPULSE",
+                             "latest_bar_closed_before_scenario_actionable",
+                             None, None, None, target, direction,
+                             extras={"latest_close": latest["ts_close"].isoformat(),
+                                     "scen_gen": gen_dt.isoformat()})
+
+    # Defensive: the just-closed bar must sit inside the lookback cap.
+    # In normal operation the just-closed bar is seconds old, so this
+    # is a no-op. The check protects against pathological time-travel
+    # inputs in tests + any future refactor that passes a stale now.
+    if lookback_s > 0:
+        floor = now - dt.timedelta(seconds=lookback_s)
+        if latest["ts_close"] <= floor:
+            return SetupOutcome("wait", "MOMENTUM_IMPULSE",
+                                 "latest_bar_outside_lookback_cap",
+                                 None, None, None, target, direction)
+
+    # Pre-entry V2-stop-breach check — walk EARLIER post-gen bars (not
+    # the latest). If any earlier bar touched V2's structural stop before
+    # the latest bar formed, the setup is dead on arrival.
     for bar in _post_bars(candles, gen_dt, now, lookback_s):
+        if bar["ts_close"] >= latest["ts_close"]:
+            break
         if _stop_breach(bar, direction, v2_stop):
             return SetupOutcome("reject", "MOMENTUM_IMPULSE",
                                  "SETUP_INVALIDATED_PRE_ENTRY",
                                  None, None, None, target, direction,
                                  extras={"abort_bar_ts": bar["ts_open"].isoformat()})
-        rng = bar["h"] - bar["l"]
-        if rng <= 0:
-            continue
-        if direction == "BUY":
-            bullish = bar["c"] > bar["o"]
-            above_med = rng >= MOMENTUM_MIN_RANGE_MULT * med_range
-            upper_body = (bar["c"] - bar["l"]) / rng >= MOMENTUM_MIN_BODY_FRAC
-            if bullish and above_med and upper_body:
-                stop = bar["l"] - MOMENTUM_STOP_BUFFER_PIPS
-                return SetupOutcome("fill", "MOMENTUM_IMPULSE", None,
-                                     bar["ts_open"].isoformat(), bar["c"],
-                                     stop, target, direction,
-                                     extras={"impulse_range": round(rng, 2),
-                                             "median_range_10": round(med_range, 2)})
-        else:  # SELL
-            bearish = bar["c"] < bar["o"]
-            above_med = rng >= MOMENTUM_MIN_RANGE_MULT * med_range
-            lower_body = (bar["h"] - bar["c"]) / rng >= MOMENTUM_MIN_BODY_FRAC
-            if bearish and above_med and lower_body:
-                stop = bar["h"] + MOMENTUM_STOP_BUFFER_PIPS
-                return SetupOutcome("fill", "MOMENTUM_IMPULSE", None,
-                                     bar["ts_open"].isoformat(), bar["c"],
-                                     stop, target, direction,
-                                     extras={"impulse_range": round(rng, 2),
-                                             "median_range_10": round(med_range, 2)})
+
+    # The latest bar itself must not have breached V2's structural stop.
+    if _stop_breach(latest, direction, v2_stop):
+        return SetupOutcome("reject", "MOMENTUM_IMPULSE",
+                             "SETUP_INVALIDATED_PRE_ENTRY",
+                             None, None, None, target, direction,
+                             extras={"abort_bar_ts": latest["ts_open"].isoformat()})
+
+    # Apply momentum criteria to the latest bar ONLY.
+    rng = latest["h"] - latest["l"]
+    if rng <= 0:
+        return SetupOutcome("wait", "MOMENTUM_IMPULSE",
+                             "latest_bar_zero_range",
+                             None, None, None, target, direction)
+
+    if direction == "BUY":
+        bullish = latest["c"] > latest["o"]
+        above_med = rng >= MOMENTUM_MIN_RANGE_MULT * med_range
+        upper_body = (latest["c"] - latest["l"]) / rng >= MOMENTUM_MIN_BODY_FRAC
+        if bullish and above_med and upper_body:
+            stop = latest["l"] - MOMENTUM_STOP_BUFFER_PIPS
+            return SetupOutcome("fill", "MOMENTUM_IMPULSE", None,
+                                 latest["ts_open"].isoformat(), latest["c"],
+                                 stop, target, direction,
+                                 extras={"impulse_range": round(rng, 2),
+                                         "median_range_10": round(med_range, 2),
+                                         "latest_m5_close": latest["ts_close"].isoformat()})
+    else:  # SELL
+        bearish = latest["c"] < latest["o"]
+        above_med = rng >= MOMENTUM_MIN_RANGE_MULT * med_range
+        lower_body = (latest["h"] - latest["c"]) / rng >= MOMENTUM_MIN_BODY_FRAC
+        if bearish and above_med and lower_body:
+            stop = latest["h"] + MOMENTUM_STOP_BUFFER_PIPS
+            return SetupOutcome("fill", "MOMENTUM_IMPULSE", None,
+                                 latest["ts_open"].isoformat(), latest["c"],
+                                 stop, target, direction,
+                                 extras={"impulse_range": round(rng, 2),
+                                         "median_range_10": round(med_range, 2),
+                                         "latest_m5_close": latest["ts_close"].isoformat()})
+
     return SetupOutcome("wait", "MOMENTUM_IMPULSE",
-                         "no_momentum_impulse_within_window",
-                         None, None, None, target, direction)
+                         "latest_bar_did_not_meet_momentum_criteria",
+                         None, None, None, target, direction,
+                         extras={"latest_m5_close": latest["ts_close"].isoformat(),
+                                 "latest_range": round(rng, 2),
+                                 "median_range_10": round(med_range, 2)})
 
 
 # ---------------------------------------------------------------------

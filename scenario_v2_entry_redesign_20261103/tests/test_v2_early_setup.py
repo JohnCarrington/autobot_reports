@@ -67,7 +67,12 @@ def _scen(sid: str, direction: str, entry: float, stop: float, target: float,
 class MomentumImpulse(unittest.TestCase):
     def setUp(self):
         self.gen_dt = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
-        self.now = dt.datetime(2026, 11, 3, 10, 30, tzinfo=UTC)
+        # 2026-11-03 freshness correction: Mechanism A fires ONLY on the
+        # just-closed M5 bar. Fixtures place the impulse bar with
+        # ts_close == 10:05 so we set now = 10:05:20 (modelling the
+        # RandomizedDelaySec=20s on the systemd timer); boundary resolves
+        # to 10:05 and the impulse bar IS the just-closed bar.
+        self.now = dt.datetime(2026, 11, 3, 10, 5, 20, tzinfo=UTC)
 
     def test_fires_on_strong_bullish_impulse(self):
         pre_closes = [13410.0] * 10
@@ -220,7 +225,9 @@ class EarlyStructural(unittest.TestCase):
 class Invariants(unittest.TestCase):
     def test_direction_and_target_preserved(self):
         gen = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
-        now = dt.datetime(2026, 11, 3, 10, 30, tzinfo=UTC)
+        # Freshness correction: now must match the impulse bar's close
+        # (gen + 5min = 10:05) + 20s to model the systemd RandomizedDelaySec.
+        now = dt.datetime(2026, 11, 3, 10, 5, 20, tzinfo=UTC)
         pre = _bars(gen - dt.timedelta(minutes=50), [13410.0] * 10, span=1.0)
         post = [{"ts_open": gen, "ts_close": gen + dt.timedelta(minutes=5),
                   "o": 13410.0, "h": 13420.0, "l": 13409.5, "c": 13418.0,
@@ -272,7 +279,9 @@ class DemoExecutorInvariants(unittest.TestCase):
     def test_evaluate_scenario_disabled_returns_disabled_status(self):
         # Build a minimal scenario + candles that would otherwise fire.
         gen = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
-        now = dt.datetime(2026, 11, 3, 10, 30, tzinfo=UTC)
+        # Freshness correction: now must match the impulse bar's close
+        # (gen + 5min = 10:05) + 20s to model the systemd RandomizedDelaySec.
+        now = dt.datetime(2026, 11, 3, 10, 5, 20, tzinfo=UTC)
         pre = _bars(gen - dt.timedelta(minutes=50), [13410.0] * 10, span=1.0)
         post = [{"ts_open": gen, "ts_close": gen + dt.timedelta(minutes=5),
                   "o": 13410.0, "h": 13420.0, "l": 13409.5, "c": 13418.0,
@@ -301,7 +310,9 @@ class DemoExecutorInvariants(unittest.TestCase):
             loader.exec_module(mod)
             self.assertTrue(mod.V2_SV2_DEMO_ENABLED)
             gen = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
-            now = dt.datetime(2026, 11, 3, 10, 30, tzinfo=UTC)
+            # Freshness correction: now matches the impulse bar's close
+            # (gen + 5min = 10:05) + 20s RandomizedDelaySec.
+            now = dt.datetime(2026, 11, 3, 10, 5, 20, tzinfo=UTC)
             pre = _bars(gen - dt.timedelta(minutes=50), [13410.0] * 10, span=1.0)
             post = [{"ts_open": gen, "ts_close": gen + dt.timedelta(minutes=5),
                       "o": 13410.0, "h": 13420.0, "l": 13409.5, "c": 13418.0,
@@ -334,7 +345,9 @@ class DemoExecutorInvariants(unittest.TestCase):
 
     def test_rejected_scenarios_never_hit_broker(self):
         gen = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
-        now = dt.datetime(2026, 11, 3, 10, 30, tzinfo=UTC)
+        # Freshness correction: now must match the impulse bar's close
+        # (gen + 5min = 10:05) + 20s to model the systemd RandomizedDelaySec.
+        now = dt.datetime(2026, 11, 3, 10, 5, 20, tzinfo=UTC)
         scen = _scen("DR", "BUY", 13425.0, 13405.0, 13440.0, gen)
         scen["publication_decision"] = {"decision": "INVALID"}
         broker_called = []
@@ -348,7 +361,9 @@ class DemoExecutorInvariants(unittest.TestCase):
 
     def test_nms_block_prevents_broker(self):
         gen = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
-        now = dt.datetime(2026, 11, 3, 10, 30, tzinfo=UTC)
+        # Freshness correction: now must match the impulse bar's close
+        # (gen + 5min = 10:05) + 20s to model the systemd RandomizedDelaySec.
+        now = dt.datetime(2026, 11, 3, 10, 5, 20, tzinfo=UTC)
         pre = _bars(gen - dt.timedelta(minutes=50), [13410.0] * 10, span=1.0)
         post = [{"ts_open": gen, "ts_close": gen + dt.timedelta(minutes=5),
                   "o": 13410.0, "h": 13420.0, "l": 13409.5, "c": 13418.0,
@@ -367,7 +382,9 @@ class DemoExecutorInvariants(unittest.TestCase):
     def test_ig_min_stop_block_prevents_broker(self):
         """A stop tighter than IG's known minimum must skip the submit."""
         gen = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
-        now = dt.datetime(2026, 11, 3, 10, 30, tzinfo=UTC)
+        # Freshness correction: now must match the impulse bar's close
+        # (gen + 5min = 10:05) + 20s to model the systemd RandomizedDelaySec.
+        now = dt.datetime(2026, 11, 3, 10, 5, 20, tzinfo=UTC)
         pre = _bars(gen - dt.timedelta(minutes=50), [13410.0] * 10, span=1.0)
         post = [{"ts_open": gen, "ts_close": gen + dt.timedelta(minutes=5),
                   "o": 13410.0, "h": 13420.0, "l": 13409.5, "c": 13418.0,
@@ -398,7 +415,9 @@ class DemoExecutorInvariants(unittest.TestCase):
             mod = importlib.util.module_from_spec(spec)
             loader.exec_module(mod)
             gen = dt.datetime(2026, 11, 3, 10, 0, tzinfo=UTC)
-            now = dt.datetime(2026, 11, 3, 10, 30, tzinfo=UTC)
+            # Freshness correction: now matches the impulse bar's close
+            # (gen + 5min = 10:05) + 20s RandomizedDelaySec.
+            now = dt.datetime(2026, 11, 3, 10, 5, 20, tzinfo=UTC)
             pre = _bars(gen - dt.timedelta(minutes=50), [13410.0] * 10, span=1.0)
             post = [{"ts_open": gen, "ts_close": gen + dt.timedelta(minutes=5),
                       "o": 13410.0, "h": 13420.0, "l": 13409.5, "c": 13418.0,
