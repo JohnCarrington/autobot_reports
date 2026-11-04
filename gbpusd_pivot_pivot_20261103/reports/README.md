@@ -27,7 +27,8 @@ Read-only historical investigation of GBP/USD price movement between daily pivot
 | D | `reports/ADDENDUM_D_PIA_DESTINATION_FIRST.md` | ✓ — Reassesses C's "coincidental" overreach; hybrid Model C fits every observation best; no commentary available |
 | E | `reports/ADDENDUM_E_DESTINATION_AWARE_ENTRIES.md` | ✓ — Does destination-awareness improve QM entry timing? +0.72 p/trade head-to-head, driven by P; R1 degrades. No production change justified. **Contains an error corrected by Addendum F §0.** |
 | F | `reports/ADDENDUM_F_PIA_METHODOLOGY_REVERSE_ENGINEERING.md` | ✓ — PIA methodology reverse-engineering. Addendum E resistance error corrected. New: fixed 3:1/4:1 RR invariance, structural stops at pivots. H1 and H3 observationally equivalent |
-| G | `reports/ADDENDUM_G_HTF_PIVOT_ENTRIES.md` | ✓ — HTF + pivot test: aligned 11.1% win vs all-entries 10.5%, uplift ~0.5pp. PIA's own calls are NOT consistently HTF-aligned (T1 and T3 counter-HTF). Central question: NO |
+| G (draft) | `reports/ADDENDUM_G_HTF_PIVOT_ENTRIES.md` | ✓ — initial draft; preserved |
+| G (canonical) | `reports/ADDENDUM_G_PIA_HIGHER_TIMEFRAME_DIRECTION_AND_PIVOT_ENTRIES.md` | ✓ — Extended 5-variant test (Daily / H4 / combined / exhaustion / against) + 4:1 parallel + 6 direct answers. Best variant D D1+H4 = 13.9% win (vs 26.5% break-even). HTF uplift +2.5 pp — not enough |
 
 ## Datasets + scripts
 
