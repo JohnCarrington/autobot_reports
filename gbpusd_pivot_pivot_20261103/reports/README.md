@@ -31,6 +31,7 @@ Read-only historical investigation of GBP/USD price movement between daily pivot
 | G (canonical) | `reports/ADDENDUM_G_PIA_HIGHER_TIMEFRAME_DIRECTION_AND_PIVOT_ENTRIES.md` | ✓ — Extended 5-variant test (Daily / H4 / combined / exhaustion / against) + 4:1 parallel + 6 direct answers. Best variant D D1+H4 = 13.9% win (vs 26.5% break-even). HTF uplift +2.5 pp — not enough |
 | H | `reports/ADDENDUM_H_OPEN_VS_DESTINATION.md` | ✓ — Opening-side conditional pivot reach stats, 676 days. ABOVE-P opens: 34.3% reach R2. BELOW-P opens: 21.8% reach S2 |
 | I | `reports/ADDENDUM_I_PIVOT_SEQUENCE_PROBABILITIES.md` | ✓ — Sequence-conditional next-destination probabilities. P(R3 \| R2 first) = 51% (×2.88 uplift); P(S3 \| S2 first) = 52% (×4.58 uplift). Opposite-side touch ×0.50-0.72 penalty; P close-reclaim partially restores |
+| J | `reports/ADDENDUM_J_PIVOT_SEQUENCE_TRADEABILITY.md` | ✓ — Adverse-movement audit. R1→R2 @20p adverse = 56% DEST_FIRST (72% pre-07:00 UTC); R2→R3 @25p = 49%; no-reclaim reach = 4-9% (reclaim is near-necessary). Pre-07:00 UTC touches ~2-5× better than 16:00+ |
 
 ## Datasets + scripts
 
