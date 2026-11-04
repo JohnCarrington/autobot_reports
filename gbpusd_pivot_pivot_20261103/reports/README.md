@@ -29,6 +29,7 @@ Read-only historical investigation of GBP/USD price movement between daily pivot
 | F | `reports/ADDENDUM_F_PIA_METHODOLOGY_REVERSE_ENGINEERING.md` | ✓ — PIA methodology reverse-engineering. Addendum E resistance error corrected. New: fixed 3:1/4:1 RR invariance, structural stops at pivots. H1 and H3 observationally equivalent |
 | G (draft) | `reports/ADDENDUM_G_HTF_PIVOT_ENTRIES.md` | ✓ — initial draft; preserved |
 | G (canonical) | `reports/ADDENDUM_G_PIA_HIGHER_TIMEFRAME_DIRECTION_AND_PIVOT_ENTRIES.md` | ✓ — Extended 5-variant test (Daily / H4 / combined / exhaustion / against) + 4:1 parallel + 6 direct answers. Best variant D D1+H4 = 13.9% win (vs 26.5% break-even). HTF uplift +2.5 pp — not enough |
+| H | `reports/ADDENDUM_H_OPEN_VS_DESTINATION.md` | ✓ — Opening-side conditional pivot reach stats, 676 days. ABOVE-P opens: 34.3% reach R2. BELOW-P opens: 21.8% reach S2 |
 
 ## Datasets + scripts
 
