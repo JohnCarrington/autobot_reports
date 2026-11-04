@@ -1,0 +1,209 @@
+--- /opt/ema_pullback/ema_pullback/service.py	2026-11-04 09:08:08.641038142 +0000
++++ /home/autobot/emapb-expiry-fix-20261104/ema_pullback/service.py	2026-11-04 10:46:19.963758149 +0000
+@@ -54,6 +54,7 @@
+     CANCELLED,
+     CLOSED,
+     ESCALATED,
++    EXPIRED,
+     IN_TRADE,
+     Ledger,
+     NONE,
+@@ -555,6 +556,11 @@
+         # will retry.
+         self._cancel_outside_trading_hours(now_utc, diag)
+ 
++        # Setup validity-window expiry (2026-11-04). Must run BEFORE
++        # _run_intrabar so a stale setup cannot be filled by an entry-
++        # crossing tick in the same step.
++        self._check_setup_expiry(now_utc, diag)
++
+         # Intrabar ticks run every step, independent of whether a new
+         # completed bar has arrived. Touch / entry-crossing / stale-feed
+         # evaluation happens here. The completed-M5 cancellation and the
+@@ -1368,6 +1374,16 @@
+         setup = self.active
+         pip = self.cfg.pip_size
+         sl_pips, tp_pips = self._broker_sl_tp_pips_for_mode()
++
++        # Defence-in-depth: if the setup is stale relative to its
++        # original EMA8 touch, expire it NOW and refuse to fire. The
++        # primary expiry check runs at the top of ``step()`` but this
++        # guard catches any out-of-band caller (tests, future refactors)
++        # that reaches _apply_intrabar_fill without going through step().
++        if self._setup_is_expired(setup, now_utc):
++            self._check_setup_expiry(now_utc, diag)
++            return
++
+         entry_mode = str(getattr(self.cfg, "mechanical_entry_mode", "working_order")).lower()
+         is_market_on_trigger = (
+             entry_mode == "market_on_trigger"
+@@ -1809,6 +1825,169 @@
+             })
+             return False
+ 
++    # ── Setup validity-window expiry (2026-11-04) ───────────────────────
++
++    def _setup_is_expired(self, setup: Setup, now_utc: datetime) -> bool:
++        """Return True when ``setup`` has outlived ``setup_max_age_seconds``.
++
++        Reference time is the setup's ``trigger_ts`` — for intrabar
++        setups this is the tick timestamp of the EMA8 touch; for
++        completed-bar setups it is the touch candle's close. Both are
++        the "original EMA8 touch" per the 2026-11-04 spec.
++
++        Setups in SUBMITTING / UNCERTAIN / ESCALATED are never expired
++        by this check — those are broker-in-flight states handled by
++        the reconciler / operator CLI. Setups outside PENDING_STATES
++        (IN_TRADE, terminal states) are likewise exempt.
++
++        A non-positive ``setup_max_age_seconds`` disables the check
++        (returns False always), preserving pre-patch behaviour for
++        replay fixtures that depend on long waits.
++        """
++        if setup.state not in PENDING_STATES:
++            return False
++        if setup.state in UNRESOLVED_BROKER_STATES:
++            return False
++        budget = float(getattr(self.cfg, "setup_max_age_seconds", 0.0))
++        if budget <= 0.0:
++            return False
++        if setup.trigger_ts is None:
++            return False
++        ts = setup.trigger_ts
++        if ts.tzinfo is None:
++            ts = ts.replace(tzinfo=timezone.utc)
++        now = now_utc if now_utc.tzinfo else now_utc.replace(tzinfo=timezone.utc)
++        age = (now - ts).total_seconds()
++        return age > budget
++
++    def _check_setup_expiry(self, now_utc: datetime, diag: dict) -> None:
++        """Expire ARMED / ORDER_WAITING setups past ``setup_max_age_seconds``.
++
++        Contract (2026-11-04):
++          * ARMED → local drop (no broker footprint), state=EXPIRED.
++          * ORDER_WAITING + execution → broker ``cancel_working_order``
++            with FILLED-race protection (mirrors _cancel_outside_trading_hours).
++          * ORDER_WAITING + observation → local drop, state=EXPIRED.
++          * SUBMITTING / UNCERTAIN / ESCALATED → untouched (reconciler-managed).
++          * IN_TRADE / terminal → untouched.
++
++        After expiry ``self.active = None`` so the next EMA8 touch
++        creates a new setup with a freshly computed entry trigger
++        (spec requirement #4). The existing EMA21-close cancellation
++        contract is unchanged (spec requirement #5).
++
++        Fail-open on any error — leaves the setup alone and the next
++        step will retry.
++        """
++        try:
++            if self.active is None:
++                return
++            if not self._setup_is_expired(self.active, now_utc):
++                return
++            setup = self.active
++            age_s = (
++                now_utc - (setup.trigger_ts if setup.trigger_ts.tzinfo
++                           else setup.trigger_ts.replace(tzinfo=timezone.utc))
++            ).total_seconds()
++            budget = float(getattr(self.cfg, "setup_max_age_seconds", 1200.0))
++            reason = "setup_max_age_exceeded"
++            setup.audit["expired_at_utc"] = now_utc.isoformat()
++            setup.audit["expired_age_seconds"] = float(age_s)
++            setup.audit["expired_budget_seconds"] = budget
++            pair = str(getattr(self.cfg, "market", "GBPUSD"))
++
++            # ARMED: no broker footprint — local drop.
++            if setup.state == ARMED:
++                setup.state = EXPIRED
++                setup.cancellation_reason = reason
++                self.ledger.record("EXPIRED", setup)
++                self.csv_writer.append(setup)
++                self.ledger.save_active(None)
++                diag["events"].append({
++                    "kind": "expired",
++                    "reason": reason,
++                    "state": "ARMED",
++                    "setup_id": setup.setup_id,
++                    "age_seconds": float(age_s),
++                    "budget_seconds": budget,
++                })
++                logger.info(
++                    "[SETUP_EXPIRY] EMA_PULLBACK %s setup_id=%s state=ARMED "
++                    "age=%.1fs budget=%.0fs trigger_ts=%s",
++                    pair, setup.setup_id, age_s, budget,
++                    setup.trigger_ts.isoformat(),
++                )
++                self.active = None
++                return
++
++            # ORDER_WAITING in observation mode: local drop.
++            if not self.cfg.execution_enabled:
++                setup.state = EXPIRED
++                setup.cancellation_reason = reason
++                self.ledger.record("EXPIRED", setup)
++                self.csv_writer.append(setup)
++                self.ledger.save_active(None)
++                diag["events"].append({
++                    "kind": "expired",
++                    "reason": reason,
++                    "state": "ORDER_WAITING",
++                    "setup_id": setup.setup_id,
++                    "age_seconds": float(age_s),
++                    "budget_seconds": budget,
++                })
++                self.active = None
++                return
++
++            # ORDER_WAITING + live: cancel the broker working order
++            # BEFORE declaring the setup EXPIRED, so an outstanding
++            # order cannot survive the local cancellation (spec #3, #6).
++            res = self.ig.cancel_working_order(
++                setup.deal_id or "", setup.deal_reference or "",
++            )
++            if res.status == "FILLED":
++                # Race: broker filled before cancel landed. Promote to
++                # IN_TRADE, exactly mirroring _cancel_outside_trading_hours.
++                # The fill is already real; the local state must reflect it.
++                setup.state = IN_TRADE
++                setup.fill_price = setup.entry_level
++                setup.fill_ts = now_utc
++                setup.broker_sl_level = res.broker_sl_level
++                setup.broker_tp_level = res.broker_tp_level
++                setup.audit["cancel_race"] = "filled_before_cancel_expiry"
++                self.ledger.record("CANCEL_RACE_FILLED", setup)
++                self.ledger.save_active(setup)
++                diag["events"].append({
++                    "kind": "cancel_race_filled",
++                    "reason": reason,
++                    "setup_id": setup.setup_id,
++                })
++                return
++
++            setup.state = EXPIRED
++            setup.cancellation_reason = reason
++            self.ledger.record("EXPIRED", setup)
++            self.csv_writer.append(setup)
++            self.ledger.save_active(None)
++            diag["events"].append({
++                "kind": "expired",
++                "reason": reason,
++                "state": "ORDER_WAITING",
++                "setup_id": setup.setup_id,
++                "age_seconds": float(age_s),
++                "budget_seconds": budget,
++            })
++            logger.info(
++                "[SETUP_EXPIRY] EMA_PULLBACK %s setup_id=%s "
++                "state=ORDER_WAITING broker-cancelled age=%.1fs budget=%.0fs",
++                pair, setup.setup_id, age_s, budget,
++            )
++            self.active = None
++        except Exception as exc:
++            logger.warning(
++                "[SETUP_EXPIRY] expiry error (fail-open, retries next step): %s",
++                exc,
++            )
++
+     def _cancel_outside_trading_hours(
+         self,
+         now_utc: datetime,

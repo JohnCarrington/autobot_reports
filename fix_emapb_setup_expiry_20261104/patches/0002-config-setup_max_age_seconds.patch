@@ -1,0 +1,29 @@
+--- /opt/ema_pullback/ema_pullback/config.py	2026-11-04 09:08:08.649038179 +0000
++++ /home/autobot/emapb-expiry-fix-20261104/ema_pullback/config.py	2026-11-04 10:45:17.415468080 +0000
+@@ -297,6 +297,18 @@
+     # required to release the slot.
+     uncertain_escalation_seconds: float = 300.0
+ 
++    # ── Setup validity window (2026-11-04) ──────────────────────────────
++    # Maximum age in seconds between the original EMA8 touch (a setup's
++    # ``trigger_ts``) and the breakout fire. ARMED / ORDER_WAITING setups
++    # that exceed this budget are transitioned to EXPIRED by
++    # ``EmaPullbackService._check_setup_expiry`` BEFORE any intrabar tick
++    # can fill them. Addresses the 2026-11-04 10:17:22Z delayed BUY:
++    # setup armed 09:30:08Z, filled 47 min later after conditions had
++    # materially changed (entry above upper BB and R3, below 1.3500).
++    # SUBMITTING / UNCERTAIN / ESCALATED are EXEMPT (reconciler-managed).
++    # Set to 0 or a negative value to DISABLE the check entirely.
++    setup_max_age_seconds: float = 1200.0
++
+ 
+ def load_config(env_file: Optional[Path] = None) -> Config:
+     """Load config from .env (or env_file if provided). Env vars already in the
+@@ -392,6 +404,7 @@
+         quote_max_age_seconds=_as_float(g("QUOTE_MAX_AGE_SECONDS"), 3.0),
+         uncertain_resolution_timeout_seconds=_as_float(g("UNCERTAIN_RESOLUTION_TIMEOUT_SECONDS"), 300.0),
+         uncertain_escalation_seconds=_as_float(g("UNCERTAIN_ESCALATION_SECONDS"), 300.0),
++        setup_max_age_seconds=_as_float(g("SETUP_MAX_AGE_SECONDS"), 1200.0),
+         market_on_trigger_startup_cancel_existing_working_orders=_as_bool(
+             g("MARKET_ON_TRIGGER_STARTUP_CANCEL_EXISTING_WORKING_ORDERS"), False),
+         legacy_working_order_inventory_enabled=_as_bool(

@@ -1,0 +1,20 @@
+--- /opt/ema_pullback/ema_pullback/state_machine.py	2026-10-28 20:47:43.846899436 +0000
++++ /home/autobot/emapb-expiry-fix-20261104/ema_pullback/state_machine.py	2026-11-04 10:44:50.403342744 +0000
+@@ -98,10 +98,16 @@
+ IN_TRADE = "IN_TRADE"
+ CLOSED = "CLOSED"
+ CANCELLED = "CANCELLED"
++EXPIRED = "EXPIRED"
+ SKIPPED = "SKIPPED"
+ REJECTED = "REJECTED"
+ 
+-TERMINAL_STATES = {CLOSED, CANCELLED, SKIPPED, REJECTED}
++# EXPIRED is the terminal state applied when an ARMED / ORDER_WAITING
++# setup is dropped because its validity window (setup_max_age_seconds
++# from the original EMA8 touch) elapsed before the breakout trigger
++# fired. Kept distinct from CANCELLED so the ledger can distinguish
++# "EMA21-close invalidated" vs "stale, never triggered".
++TERMINAL_STATES = {CLOSED, CANCELLED, EXPIRED, SKIPPED, REJECTED}
+ # Any state in which a NEW trigger would be an illegal "duplicate".
+ # Includes the frozen ESCALATED state — the slot stays occupied even
+ # though reconciliation has given up pending operator intervention.
