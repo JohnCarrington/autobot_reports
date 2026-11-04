@@ -1,0 +1,42 @@
+--- /opt/ema_pullback/ema_pullback/config.py	2026-11-04 11:00:36.968140547 +0000
++++ /home/autobot/emapb-watch-gate-20261104/ema_pullback/config.py	2026-11-04 11:49:15.022153315 +0000
+@@ -309,6 +309,25 @@
+     # Set to 0 or a negative value to DISABLE the check entirely.
+     setup_max_age_seconds: float = 1200.0
+ 
++    # ── NMS WATCH_AND_WAIT directional-permission gate (2026-11-04) ─────
++    # Read-only consumer of the authority already running in the AutoBot
++    # proper (nms_watch_state_driver.py publishes
++    # /opt/tradingbot/cache/nms_watch_state_<SYM>.json on every M5 close).
++    # When enabled, EMA Pullback blocks new setups (and cancels pending
++    # ARMED / ORDER_WAITING setups) while the authority is in
++    # WATCH_AND_WAIT. Default disabled until operator activation. See
++    # ema_pullback/watch_state_gate.py for admission rules.
++    watch_state_gate_enabled: bool = False
++    watch_state_snapshot_dir: Path = Path("/opt/tradingbot/cache")
++    # Staleness threshold applied to BOTH evaluation_ts and last_bar_ts.
++    # Mirrors the BB Bounce consumer's _DEFAULT_MAX_AGE_SECONDS=900 so
++    # the two services apply a consistent lifecycle.
++    watch_state_max_age_seconds: float = 900.0
++    # "closed" blocks on any snapshot failure (missing / malformed /
++    # stale / schema mismatch / future ts / unknown state). "open" admits
++    # — intended for staged diagnostic / shadow rollouts only.
++    watch_state_fail_policy: str = "closed"
++
+ 
+ def load_config(env_file: Optional[Path] = None) -> Config:
+     """Load config from .env (or env_file if provided). Env vars already in the
+@@ -405,6 +424,13 @@
+         uncertain_resolution_timeout_seconds=_as_float(g("UNCERTAIN_RESOLUTION_TIMEOUT_SECONDS"), 300.0),
+         uncertain_escalation_seconds=_as_float(g("UNCERTAIN_ESCALATION_SECONDS"), 300.0),
+         setup_max_age_seconds=_as_float(g("SETUP_MAX_AGE_SECONDS"), 1200.0),
++        watch_state_gate_enabled=_as_bool(g("EMAPB_WATCH_STATE_GATE_ENABLED"), False),
++        watch_state_snapshot_dir=Path(
++            g("EMAPB_WATCH_STATE_SNAPSHOT_DIR", "/opt/tradingbot/cache")),
++        watch_state_max_age_seconds=_as_float(
++            g("EMAPB_WATCH_STATE_MAX_AGE_SECONDS"), 900.0),
++        watch_state_fail_policy=(
++            g("EMAPB_WATCH_STATE_FAIL_POLICY") or "closed").strip().lower(),
+         market_on_trigger_startup_cancel_existing_working_orders=_as_bool(
+             g("MARKET_ON_TRIGGER_STARTUP_CANCEL_EXISTING_WORKING_ORDERS"), False),
+         legacy_working_order_inventory_enabled=_as_bool(

@@ -1,0 +1,465 @@
+--- /opt/ema_pullback/ema_pullback/service.py	2026-11-04 11:00:36.976140589 +0000
++++ /home/autobot/emapb-watch-gate-20261104/ema_pullback/service.py	2026-11-04 11:51:44.790863441 +0000
+@@ -78,6 +78,12 @@
+     SnapshotProvider,
+     check as nms_check,
+ )
++from .watch_state_gate import (
++    FileWatchStateProvider,
++    WatchStateDecision,
++    WatchStateProvider,
++    check as watch_state_check,
++)
+ from .trend import (
+     H1QualificationConfig,
+     H1TrendSnapshot,
+@@ -300,7 +306,8 @@
+     def __init__(self, cfg: Config, ig: IGClientBase,
+                  price_source: Optional[PriceSource] = None,
+                  live_feed: Optional[PriceSource] = None,
+-                 nms_snapshot_provider: Optional[SnapshotProvider] = None):
++                 nms_snapshot_provider: Optional[SnapshotProvider] = None,
++                 watch_state_provider: Optional[WatchStateProvider] = None):
+         self.cfg = cfg
+         self.ig = ig
+         self.ledger = Ledger(cfg.state_dir)
+@@ -435,12 +442,26 @@
+         self._nms_provider: Optional[SnapshotProvider] = (
+             nms_snapshot_provider or FileSnapshotProvider(cfg.nms_snapshot_dir)
+         )
++        # W&W snapshot provider — reads the AutoBot-produced
++        # nms_watch_state_<SYM>.json. Pure read; never writes. Tests
++        # inject a fake provider to drive the gate without touching
++        # /opt/tradingbot/cache.
++        self._watch_state_provider: Optional[WatchStateProvider] = (
++            watch_state_provider
++            or FileWatchStateProvider(
++                getattr(cfg, "watch_state_snapshot_dir", cfg.nms_snapshot_dir),
++            )
++        )
+         # Rejection memory: (direction, forming_m5_ts_iso) → decision.
+         # A setup already rejected by NMS for a given (direction, forming
+         # M5 bar) must not be re-armed later within that same forming bar
+         # just because NMS has since flipped to RANGE. Pruned on bar
+         # advance (see _nms_prune_rejections).
+         self._nms_rejected: dict = {}
++        # Rejection memory for the W&W gate — same (direction,
++        # forming_m5_ts_iso) scoping. Prevents the touch detector from
++        # re-arming inside the same forming bar after W&W has cleared.
++        self._watch_state_rejected: dict = {}
+ 
+     # ----- Public step --------------------------------------------------
+ 
+@@ -561,6 +582,15 @@
+         # crossing tick in the same step.
+         self._check_setup_expiry(now_utc, diag)
+ 
++        # NMS WATCH_AND_WAIT cancellation (2026-11-04 PR-1). If the
++        # authority has entered WATCH_AND_WAIT (or REVERSAL_CONFIRMED,
++        # which EMA PB does not operate under), any ARMED / ORDER_WAITING
++        # setup is cancelled BEFORE the intrabar tick processor can fill
++        # it. The gate's ``watch_state_gate_enabled`` flag gates every
++        # action here — default-off preserves byte-identical pre-patch
++        # behaviour. Fail-closed on snapshot problems (configurable).
++        self._check_watch_state_cancellation(now_utc, diag)
++
+         # Intrabar ticks run every step, independent of whether a new
+         # completed bar has arrived. Touch / entry-crossing / stale-feed
+         # evaluation happens here. The completed-M5 cancellation and the
+@@ -645,13 +675,38 @@
+                         nms_dec, trend.direction, trigger_source="completed_m5",
+                         forming_ts=last_ctx.bar.ts,
+                     ))
+-                if nms_dec.allowed:
+-                    self._open_setup(trig, trend, m5s, m5_ctxs, now_utc, diag)
+-                else:
++                if not nms_dec.allowed:
+                     self._nms_record_rejection(
+                         trend.direction, last_ctx.bar.ts, nms_dec,
+                         trigger_source="completed_m5",
+                     )
++                elif self._watch_state_already_rejected(
++                    trend.direction, last_ctx.bar.ts,
++                ):
++                    diag["events"].append({
++                        "kind": "watch_state_already_rejected",
++                        "direction": trend.direction,
++                        "forming_m5_ts": last_ctx.bar.ts.isoformat(),
++                    })
++                else:
++                    # W&W directional-permission gate on the completed-M5
++                    # admission path (2026-11-04 PR-1). Mirrors the
++                    # intrabar admission wiring: v3 direction first,
++                    # W&W second, both must PASS before _open_setup.
++                    ws_dec = self._watch_state_check(trend.direction, now_utc)
++                    if ws_dec.reason != "watch_state_gate_disabled":
++                        diag["events"].append(self._watch_state_event_dict(
++                            ws_dec, trend.direction,
++                            trigger_source="completed_m5",
++                            forming_ts=last_ctx.bar.ts,
++                        ))
++                    if ws_dec.allowed:
++                        self._open_setup(trig, trend, m5s, m5_ctxs, now_utc, diag)
++                    else:
++                        self._watch_state_record_rejection(
++                            trend.direction, last_ctx.bar.ts, ws_dec,
++                            trigger_source="completed_m5",
++                        )
+         else:
+             diag["events"].append({"kind": "no_trigger", "reason": trig.reason})
+ 
+@@ -1216,6 +1271,292 @@
+             ts = ts.replace(tzinfo=timezone.utc)
+         return ts.astimezone(timezone.utc).isoformat()
+ 
++    # ---- NMS WATCH_AND_WAIT gate (2026-11-04) --------------------------
++
++    def _watch_state_check(
++        self, direction: str, now_utc: datetime,
++    ) -> WatchStateDecision:
++        """Consult the WATCH_AND_WAIT authority for the given direction.
++
++        A pure read of ``nms_watch_state_<SYM>.json``. The admission
++        contract is defined in ``ema_pullback/watch_state_gate.py`` and
++        mirrors the deployed BB Bounce consumer. Fail-safe: never
++        raises. On an unexpected exception synthesises a
++        ``snapshot_fail_closed`` decision that honours the configured
++        ``watch_state_fail_policy``.
++        """
++        if self._watch_state_provider is None:
++            return WatchStateDecision(
++                allowed=True,
++                reason="watch_state_gate_provider_absent",
++                reason_codes=["watch_state_gate_provider_absent"],
++            )
++        try:
++            return watch_state_check(
++                direction=direction,
++                symbol=self.cfg.market,
++                now_utc=now_utc,
++                provider=self._watch_state_provider,
++                max_age_seconds=self.cfg.watch_state_max_age_seconds,
++                fail_policy=self.cfg.watch_state_fail_policy,
++                enabled=self.cfg.watch_state_gate_enabled,
++            )
++        except Exception as exc:  # pragma: no cover — defensive
++            logger.exception("[WATCH_STATE_GATE] check error: %s", exc)
++            fail_closed = (self.cfg.watch_state_fail_policy or "closed") == "closed"
++            return WatchStateDecision(
++                allowed=not fail_closed,
++                reason=f"watch_state_gate_exception:{type(exc).__name__}",
++                reason_codes=[f"watch_state_gate_exception:{type(exc).__name__}"],
++                binding="snapshot_fail_closed" if fail_closed else "",
++            )
++
++    def _watch_state_event_dict(
++        self,
++        dec: WatchStateDecision,
++        direction: str,
++        *,
++        trigger_source: str,
++        forming_ts: Optional[datetime] = None,
++        touch_ts: Optional[datetime] = None,
++    ) -> dict:
++        """Diagnostic row for one W&W gate decision (allow or block)."""
++        kind = "watch_state_pass" if dec.allowed else "watch_state_blocked"
++        payload: dict = {
++            "kind": kind,
++            "trigger_source": trigger_source,
++            "direction": direction,
++            "state": dec.state,
++            "evaluation_ts": dec.evaluation_ts,
++            "last_bar_ts": dec.last_bar_ts,
++            "age_seconds": dec.age_seconds,
++            "last_bar_age_seconds": dec.last_bar_age_seconds,
++            "watched_trend_direction": dec.watched_trend_direction,
++            "reason": dec.reason,
++            "binding": dec.binding,
++            "fail_policy": self.cfg.watch_state_fail_policy,
++        }
++        if forming_ts is not None:
++            payload["forming_m5_ts"] = forming_ts.isoformat()
++        if touch_ts is not None:
++            payload["touch_ts"] = touch_ts.isoformat()
++        return payload
++
++    def _watch_state_record_rejection(
++        self,
++        direction: str,
++        forming_ts: datetime,
++        dec: WatchStateDecision,
++        *,
++        trigger_source: str,
++        touch_ts: Optional[datetime] = None,
++    ) -> None:
++        """Memoise a W&W rejection + append an audit-only SKIPPED Setup."""
++        key = (direction, self._nms_ts_key(forming_ts))
++        self._watch_state_rejected[key] = {
++            "decision": {
++                "allowed": dec.allowed,
++                "reason": dec.reason,
++                "state": dec.state,
++                "evaluation_ts": dec.evaluation_ts,
++                "age_seconds": dec.age_seconds,
++                "binding": dec.binding,
++            },
++            "trigger_source": trigger_source,
++            "touch_ts": touch_ts.isoformat() if touch_ts else None,
++        }
++        self._watch_state_prune_rejections(forming_ts)
++        try:
++            setup = Setup(
++                setup_id=(
++                    "WATCH-SKIP-"
++                    f"{self._nms_ts_key(forming_ts).replace(':', '').replace('+', '')}"
++                    f"-{direction}"
++                ),
++                direction=direction,
++                trigger_ts=touch_ts if touch_ts else forming_ts,
++                state=SKIPPED,
++                rejection_reason=dec.reason,
++                audit={
++                    "watch_state_blocked": True,
++                    "state": dec.state,
++                    "evaluation_ts": dec.evaluation_ts,
++                    "age_seconds": dec.age_seconds,
++                    "forming_m5_ts": forming_ts.isoformat() if forming_ts else None,
++                    "touch_ts": touch_ts.isoformat() if touch_ts else None,
++                    "trigger_source": trigger_source,
++                    "binding": dec.binding,
++                    "fail_policy": self.cfg.watch_state_fail_policy,
++                },
++            )
++            self.ledger.record("WATCH_STATE_BLOCKED", setup)
++        except Exception as exc:  # pragma: no cover — ledger best-effort
++            logger.debug("[WATCH_STATE_GATE] ledger record failed: %s", exc)
++
++    def _watch_state_already_rejected(
++        self, direction: str, forming_ts: datetime,
++    ) -> bool:
++        key = (direction, self._nms_ts_key(forming_ts))
++        return key in self._watch_state_rejected
++
++    def _watch_state_prune_rejections(self, now_ts: datetime) -> None:
++        if not self._watch_state_rejected:
++            return
++        cutoff = now_ts - timedelta(minutes=15)
++        pruned = {}
++        for key, val in self._watch_state_rejected.items():
++            try:
++                _, iso = key
++                ts = datetime.fromisoformat(iso)
++                if ts.tzinfo is None:
++                    ts = ts.replace(tzinfo=timezone.utc)
++                if ts >= cutoff:
++                    pruned[key] = val
++            except Exception:
++                pruned[key] = val
++        self._watch_state_rejected = pruned
++
++    def _check_watch_state_cancellation(
++        self, now_utc: datetime, diag: dict,
++    ) -> None:
++        """Cancel ARMED / ORDER_WAITING setups when NMS is in WATCH_AND_WAIT.
++
++        Called at the top of ``step()`` on every tick (after the setup
++        expiry check) and as a belt-and-braces guard immediately before
++        any broker submission in ``_apply_intrabar_fill``.
++
++        Contract (2026-11-04):
++          * ARMED → local drop, state=CANCELLED, reason=nms_watch_and_wait_block.
++          * ORDER_WAITING + execution → broker ``cancel_working_order``
++            with FILLED-race protection (mirrors _cancel_outside_trading_hours).
++          * ORDER_WAITING + observation → local drop.
++          * SUBMITTING / UNCERTAIN / ESCALATED → UNTOUCHED (reconciler-managed).
++          * IN_TRADE → UNTOUCHED (exit lifecycle owns it).
++          * No active setup or non-PENDING state → no-op.
++
++        Fail-safe: any error inside this method logs + returns. The next
++        step will retry. Never raises back into ``step()``.
++        """
++        try:
++            if self.active is None:
++                return
++            if self.active.state not in PENDING_STATES:
++                return
++            if self.active.state in UNRESOLVED_BROKER_STATES:
++                return
++            # The gate's own ``enabled`` flag is the kill switch. When
++            # off, this method is a no-op (byte-identical to pre-patch).
++            if not getattr(self.cfg, "watch_state_gate_enabled", False):
++                return
++            direction = self.active.direction
++            dec = self._watch_state_check(direction, now_utc)
++            if dec.allowed:
++                return
++            # Only cancel on an authoritative block — a "disabled" or
++            # "direction_not_in_scope" would have .allowed=True anyway.
++            # dec.allowed=False is either direction_block (WATCH_AND_WAIT /
++            # REVERSAL_CONFIRMED) or snapshot_fail_closed.
++            setup = self.active
++            reason = f"nms_watch_and_wait_block:{dec.reason}"
++            setup.audit["watch_state_cancel"] = {
++                "state": dec.state,
++                "evaluation_ts": dec.evaluation_ts,
++                "age_seconds": dec.age_seconds,
++                "binding": dec.binding,
++                "fail_policy": self.cfg.watch_state_fail_policy,
++                "at_utc": now_utc.isoformat(),
++            }
++            pair = str(getattr(self.cfg, "market", "GBPUSD"))
++
++            # ARMED: no broker footprint — local drop.
++            if setup.state == ARMED:
++                setup.state = CANCELLED
++                setup.cancellation_reason = reason
++                self.ledger.record("CANCELLED", setup)
++                self.csv_writer.append(setup)
++                self.ledger.save_active(None)
++                diag["events"].append({
++                    "kind": "cancelled",
++                    "reason": reason,
++                    "state": "ARMED",
++                    "setup_id": setup.setup_id,
++                    "watch_state": dec.state,
++                    "binding": dec.binding,
++                })
++                logger.info(
++                    "[WATCH_STATE_CANCEL] EMA_PULLBACK %s setup_id=%s "
++                    "state=ARMED cancelled (watch=%s binding=%s) at %s",
++                    pair, setup.setup_id, dec.state, dec.binding,
++                    now_utc.isoformat(),
++                )
++                self.active = None
++                return
++
++            # ORDER_WAITING (observation mode): local drop only.
++            if not self.cfg.execution_enabled:
++                setup.state = CANCELLED
++                setup.cancellation_reason = reason
++                self.ledger.record("CANCELLED", setup)
++                self.csv_writer.append(setup)
++                self.ledger.save_active(None)
++                diag["events"].append({
++                    "kind": "cancelled",
++                    "reason": reason,
++                    "state": "ORDER_WAITING",
++                    "setup_id": setup.setup_id,
++                    "watch_state": dec.state,
++                    "binding": dec.binding,
++                })
++                self.active = None
++                return
++
++            # ORDER_WAITING (live): cancel broker first, FILLED race
++            # promotes to IN_TRADE. Mirrors _cancel_outside_trading_hours.
++            res = self.ig.cancel_working_order(
++                setup.deal_id or "", setup.deal_reference or "",
++            )
++            if res.status == "FILLED":
++                setup.state = IN_TRADE
++                setup.fill_price = setup.entry_level
++                setup.fill_ts = now_utc
++                setup.broker_sl_level = res.broker_sl_level
++                setup.broker_tp_level = res.broker_tp_level
++                setup.audit["cancel_race"] = "filled_before_cancel_watch_state"
++                self.ledger.record("CANCEL_RACE_FILLED", setup)
++                self.ledger.save_active(setup)
++                diag["events"].append({
++                    "kind": "cancel_race_filled",
++                    "reason": reason,
++                    "setup_id": setup.setup_id,
++                    "watch_state": dec.state,
++                })
++                return
++
++            setup.state = CANCELLED
++            setup.cancellation_reason = reason
++            self.ledger.record("CANCELLED", setup)
++            self.csv_writer.append(setup)
++            self.ledger.save_active(None)
++            diag["events"].append({
++                "kind": "cancelled",
++                "reason": reason,
++                "state": "ORDER_WAITING",
++                "setup_id": setup.setup_id,
++                "watch_state": dec.state,
++                "binding": dec.binding,
++            })
++            logger.info(
++                "[WATCH_STATE_CANCEL] EMA_PULLBACK %s setup_id=%s "
++                "state=ORDER_WAITING broker-cancelled (watch=%s) at %s",
++                pair, setup.setup_id, dec.state, now_utc.isoformat(),
++            )
++            self.active = None
++        except Exception as exc:
++            logger.warning(
++                "[WATCH_STATE_CANCEL] cancel error (fail-open, retries next step): %s",
++                exc,
++            )
++
+     # ---- Intrabar flow -------------------------------------------------
+ 
+     def _run_intrabar(
+@@ -1343,6 +1684,35 @@
+                             trigger_source="intrabar", touch_ts=evt.ts,
+                         )
+                         continue
++                    # W&W directional-permission gate (2026-11-04 PR-1).
++                    # Ordered AFTER the v3 direction check — a direction
++                    # block always takes precedence (its binding is the
++                    # strongest). W&W blocks that aren't direction-blocked
++                    # are recorded as a separate skip to keep telemetry
++                    # unambiguous.
++                    if self._watch_state_already_rejected(
++                        trend.direction, evt.forming_ts,
++                    ):
++                        diag["events"].append({
++                            "kind": "watch_state_already_rejected",
++                            "direction": trend.direction,
++                            "touch_ts": evt.ts.isoformat(),
++                            "forming_m5_ts": evt.forming_ts.isoformat(),
++                        })
++                        continue
++                    ws_dec = self._watch_state_check(trend.direction, tick.ts)
++                    if ws_dec.reason != "watch_state_gate_disabled":
++                        diag["events"].append(self._watch_state_event_dict(
++                            ws_dec, trend.direction,
++                            trigger_source="intrabar",
++                            forming_ts=evt.forming_ts, touch_ts=evt.ts,
++                        ))
++                    if not ws_dec.allowed:
++                        self._watch_state_record_rejection(
++                            trend.direction, evt.forming_ts, ws_dec,
++                            trigger_source="intrabar", touch_ts=evt.ts,
++                        )
++                        continue
+                     self._open_setup_intrabar(evt, trend, m5s, now_utc, diag)
+                     # After arming do not re-check touch on same tick.
+                     continue
+@@ -1384,6 +1754,25 @@
+             self._check_setup_expiry(now_utc, diag)
+             return
+ 
++        # Defence-in-depth (2026-11-04 PR-1): a WATCH_AND_WAIT entered
++        # between step()'s top-level check and this tick MUST NOT be
++        # authorised to fire the broker submission. Recheck the
++        # authority at the exact submission moment. ARMED → CANCELLED
++        # locally; ORDER_WAITING → broker cancel first (FILLED race
++        # safe). SUBMITTING / UNCERTAIN / ESCALATED / IN_TRADE never
++        # reach this method via the normal flow but even if they did
++        # the cancellation method leaves them alone.
++        if getattr(self.cfg, "watch_state_gate_enabled", False):
++            ws_dec = self._watch_state_check(setup.direction, now_utc)
++            if not ws_dec.allowed:
++                diag["events"].append(self._watch_state_event_dict(
++                    ws_dec, setup.direction,
++                    trigger_source="pre_submit_recheck",
++                    touch_ts=evt.ts,
++                ))
++                self._check_watch_state_cancellation(now_utc, diag)
++                return
++
+         entry_mode = str(getattr(self.cfg, "mechanical_entry_mode", "working_order")).lower()
+         is_market_on_trigger = (
+             entry_mode == "market_on_trigger"
