@@ -2,7 +2,7 @@
 
 **Branch:** `research/gbpusd-pivot-pivot-20261103` (`JohnCarrington/autobot_reports`)
 **Started:** 2026-11-03
-**Status:** All eight phases + Addenda A, B, C, D complete. Nothing deployed.
+**Status:** All eight phases + Addenda A, B, C, D, E complete. Nothing deployed.
 
 ## Objective
 
@@ -25,6 +25,7 @@ Read-only historical investigation of GBP/USD price movement between daily pivot
 | B | `reports/ADDENDUM_B_QM_PREDICTION_ACCURACY.md` | ✓ — 102 graded QM candidates, 4-model OOS comparison, V2 Pick status |
 | C | `reports/ADDENDUM_C_PIA_PIVOT_HYPOTHESIS.md` | ✓ — PIA First ↔ pivots on the 5 forecasts supplied; n=3 unique theses; no significance claim |
 | D | `reports/ADDENDUM_D_PIA_DESTINATION_FIRST.md` | ✓ — Reassesses C's "coincidental" overreach; hybrid Model C fits every observation best; no commentary available |
+| E | `reports/ADDENDUM_E_DESTINATION_AWARE_ENTRIES.md` | ✓ — Does destination-awareness improve QM entry timing? +0.72 p/trade head-to-head, driven by P; R1 degrades. No production change justified |
 
 ## Datasets + scripts
 
