@@ -1,0 +1,11 @@
+question,qualifying,reached,pct,median_time_bars,median_time_min
+Q1 ABOVE: P(R2 | R1 first),191,119,62.3%,23,115
+Q2 ABOVE: P(R2 | first S1/S2 touch),141,24,17.0%,83.0,415.0
+Q3 ABOVE: P(R2 | S1/S2 touch + P reclaim via close),82,24,29.3%,74.0,370.0
+Q4 ABOVE: P(R3 | R2 first),123,63,51.2%,17,85
+Q5 ABOVE: P(return to P | R2 reached),123,44,35.8%,63.5,317.5
+Q1 BELOW: P(S2 | S1 first),136,65,47.8%,29,145
+Q2 BELOW: P(S2 | first R1/R2 touch),101,16,15.8%,77.5,387.5
+Q3 BELOW: P(S2 | R1/R2 touch + P reclaim via close),51,15,29.4%,51,255
+Q4 BELOW: P(S3 | S2 first),69,36,52.2%,21.0,105.0
+Q5 BELOW: P(return to P | S2 reached),69,22,31.9%,40.0,200.0
