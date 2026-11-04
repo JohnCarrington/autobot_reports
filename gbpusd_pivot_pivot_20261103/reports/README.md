@@ -2,7 +2,7 @@
 
 **Branch:** `research/gbpusd-pivot-pivot-20261103` (`JohnCarrington/autobot_reports`)
 **Started:** 2026-11-03
-**Status:** All eight phases + Addenda A, B, C, D, E, F complete. Nothing deployed.
+**Status:** All eight phases + Addenda A, B, C, D, E, F, G complete. Nothing deployed.
 
 ## Objective
 
@@ -27,6 +27,7 @@ Read-only historical investigation of GBP/USD price movement between daily pivot
 | D | `reports/ADDENDUM_D_PIA_DESTINATION_FIRST.md` | ✓ — Reassesses C's "coincidental" overreach; hybrid Model C fits every observation best; no commentary available |
 | E | `reports/ADDENDUM_E_DESTINATION_AWARE_ENTRIES.md` | ✓ — Does destination-awareness improve QM entry timing? +0.72 p/trade head-to-head, driven by P; R1 degrades. No production change justified. **Contains an error corrected by Addendum F §0.** |
 | F | `reports/ADDENDUM_F_PIA_METHODOLOGY_REVERSE_ENGINEERING.md` | ✓ — PIA methodology reverse-engineering. Addendum E resistance error corrected. New: fixed 3:1/4:1 RR invariance, structural stops at pivots. H1 and H3 observationally equivalent |
+| G | `reports/ADDENDUM_G_HTF_PIVOT_ENTRIES.md` | ✓ — HTF + pivot test: aligned 11.1% win vs all-entries 10.5%, uplift ~0.5pp. PIA's own calls are NOT consistently HTF-aligned (T1 and T3 counter-HTF). Central question: NO |
 
 ## Datasets + scripts
 
