@@ -2,7 +2,7 @@
 
 **Branch:** `research/gbpusd-pivot-pivot-20261103` (`JohnCarrington/autobot_reports`)
 **Started:** 2026-11-03
-**Status:** All eight phases + Addendum A complete. Nothing deployed.
+**Status:** All eight phases + Addendum A + Addendum B complete. Nothing deployed.
 
 ## Objective
 
@@ -22,6 +22,7 @@ Read-only historical investigation of GBP/USD price movement between daily pivot
 | 7 | folded into `PHASE3_PHASE7_PREDICTIVE_MODELLING.md` | ✓ |
 | 8 | `reports/PHASE8_RECOMMENDATIONS.md` | ✓ |
 | A | `reports/ADDENDUM_A_EVENT_DEFS_AND_QM.md` | ✓ — event-def audit + QM/AM/V2 Pick evaluation |
+| B | `reports/ADDENDUM_B_QM_PREDICTION_ACCURACY.md` | ✓ — 102 graded QM candidates, 4-model OOS comparison, V2 Pick status |
 
 ## Datasets + scripts
 
