@@ -1,0 +1,57 @@
+--- /opt/tradingbot/_backups/pre-side-norm-20261105T161507Z/central_execution_gate.py	2026-11-05 16:15:07.227888741 +0000
++++ /opt/tradingbot/central_execution_gate.py	2026-11-05 16:15:27.743983507 +0000
+@@ -1499,6 +1499,26 @@
+ }
+ 
+ 
++# 2026-11-05 — trader-side ↔ directional-side vocabulary.
++# BB_PIERCE_RUN, EMA_PULLBACK, V3 and most autobot strategies emit
++# candidate.side in trader-side vocabulary ("LONG" / "SHORT").
++# nms_directional_authority.enforce() accepts only directional
++# vocabulary ("BUY" / "SELL") and returns BLOCK_BAD_SIDE for anything
++# else. Normalise at the gate boundary so the enforcer's downstream
++# conditions (watch-and-wait, exhaustion, trend-wrong-direction) run
++# instead of short-circuiting on a vocabulary mismatch.
++# This is purely a vocabulary normalisation — BUY/SELL inputs pass
++# through unchanged; malformed/empty values remain malformed so the
++# enforcer's BAD_SIDE guard continues to protect against them.
++def _normalise_candidate_side(side: str) -> str:
++    s = str(side or "").upper().strip()
++    if s == "LONG":
++        return "BUY"
++    if s == "SHORT":
++        return "SELL"
++    return s
++
++
+ def _apply_unified_directional_authority(
+     pair: str, candidate: Any, family: str,
+ ) -> Optional[str]:
+@@ -1563,9 +1583,10 @@
+         # Unknown family → fail-closed per operator §11.
+         return (f"unified_authority_block:"
+                 f"BLOCK_FAMILY_UNRESOLVED:family={family}")
+-    side = str(getattr(candidate, "side", "")
+-                or getattr(candidate, "signal", "")
+-                or "").upper()
++    side = _normalise_candidate_side(
++        getattr(candidate, "side", "")
++        or getattr(candidate, "signal", "")
++    )
+     strategy_id = str(getattr(candidate, "strategy", "")
+                        or "").upper()
+     # 2026-10-27 pm — Stage 3 final safety: extract QM fingerprint
+@@ -2014,9 +2035,10 @@
+                         getattr(candidate, "opportunity_type", "")
+                         or ""
+                     ).upper().strip()
+-                    _side = (str(getattr(candidate, "side", "")
+-                                   or getattr(candidate, "signal", "")
+-                                   or "").upper() or "")
++                    _side = _normalise_candidate_side(
++                        getattr(candidate, "side", "")
++                        or getattr(candidate, "signal", "")
++                    )
+                     _sym = str(getattr(candidate, "pair", "")
+                                 or getattr(candidate, "symbol", "")
+                                 or "").upper()
