@@ -1,0 +1,57 @@
+--- /opt/tradingbot/_backups/pre-v1-veto-20261105T163237Z/bb_bounce_filters.py	2026-11-05 16:32:37.712506482 +0000
++++ /opt/tradingbot/bb_bounce_filters.py	2026-11-05 16:32:43.184529203 +0000
+@@ -59,6 +59,25 @@
+     return _env_bool("BB_BOUNCE_V1_PRESSURE_ENABLED", "0")
+ 
+ 
++# 2026-11-05 — v1-pressure veto downgraded to opt-in.
++#
++# The newer unified NMS directional authority
++# (nms_directional_authority.enforce via central_execution_gate)
++# already governs BB_BOUNCE admission on v3_state × side × exhaustion
++# × WATCH_AND_WAIT grounds. Audit of 29 v1_pressure_against blocks
++# 2026-10-15 → 2026-11-05 found 23 were uniquely-v1 (the authority
++# would admit); of the 4 of those with recoverable tick-level outcomes,
++# 3 wins / 1 loss = +40 p net at TP20/SL20.
++#
++# Veto is now opt-in: by default v1 still computes its WITH / AGAINST /
++# UNKNOWN state and emits it into the decision log for telemetry, but
++# does NOT set refusing_rule. Set BB_BOUNCE_V1_PRESSURE_VETO_ENABLED=1
++# to restore the pre-2026-11-05 hard-veto behaviour. Dollar-direction
++# and close-back vetoes are unaffected.
++def v1_pressure_veto_enabled() -> bool:
++    return _env_bool("BB_BOUNCE_V1_PRESSURE_VETO_ENABLED", "0")
++
++
+ def dollar_direction_enabled() -> bool:
+     return _env_bool("BB_BOUNCE_DOLLAR_DIRECTION_ENABLED", "0")
+ 
+@@ -699,14 +718,18 @@
+ 
+     cb_on = closeback_enabled()
+     v1_on = v1_pressure_enabled()
++    v1_veto_on = v1_pressure_veto_enabled()  # 2026-11-05 — veto now opt-in
+     dd_on = dollar_direction_enabled()
+ 
++    # v1 contributes to refusing_rule only when BOTH computation and
++    # veto flags are enabled. computation-only (v1_on, veto off) emits
++    # WITH / AGAINST / UNKNOWN into the decision log as telemetry.
+     refusing_rule: Optional[str] = None
+     if cb_on and cb.get("state") == CLOSEBACK_PENDING:
+         refusing_rule = "close_back_no_closeback_yet"
+-    elif v1_on and v1.get("state") == V1_UNKNOWN:
++    elif v1_on and v1_veto_on and v1.get("state") == V1_UNKNOWN:
+         refusing_rule = "v1_pressure_unknown"
+-    elif v1_on and v1.get("state") == V1_AGAINST:
++    elif v1_on and v1_veto_on and v1.get("state") == V1_AGAINST:
+         refusing_rule = "v1_pressure_against"
+     elif dd_on and dd.get("state") == DOLLAR_UNKNOWN:
+         refusing_rule = "dollar_direction_unknown"
+@@ -727,6 +750,7 @@
+         "flags": {
+             "closeback": cb_on,
+             "v1_pressure": v1_on,
++            "v1_pressure_veto": v1_veto_on,
+             "dollar_direction": dd_on,
+         },
+         # Build-2 Phase 4: zone context attached verbatim when the view
