@@ -70,6 +70,8 @@ All thirteen were **approved as recommended**, except that **FC-06 is replaced b
 
 ### Implementation notes (where the code had to be precise; for the owner's review)
 
+Reviewed one by one in `PRE_DEPLOYMENT_REVIEW.md` section 1, with recommendations R1 (note 2) and R2 (note 3) awaiting the owner's decision.
+
 These carry out the approved rules. Each changes nothing in trading, and each is open to the owner's correction.
 
 1. **"Destination reached before entry" (D-20, D-21).** It applies only when the primary destination lies beyond the price at the moment the recommendation is made, by more than the 3-pip allowance. Where the first Major zone below a sell zone lies between price and the zone, or right at price, "reaching it first" would happen at once and mean nothing. There, the destination is treated as on the way, and the recommendation says so in its invalidation list.
@@ -77,7 +79,7 @@ These carry out the approved rules. Each changes nothing in trading, and each is
 3. **Fixed and moving levels (FC-05).** Today's still-running London or New York session high or low is treated as a **moving** level, like the moving averages, because it changes as the session runs. A flipped level keeps its name ("4-hour swing low") and carries its role ("former support, now resistance") separately. Without these two, the same zone was superseded every hour in testing.
 4. **Zones are built from the fixed levels first** (anchored at each zone's lowest level, as approved). Moving levels then join the zone they fit, so a moving average can never reshape a zone. Zones are built from every level before the 150-pip window is applied, so the window's edge cannot shift the zones near price.
 5. **Moving-average levels** are written to 0.1 of a point, like every other level.
-6. **REVERSAL_RISK after a long rally (observation, no change made).** Under the approved rule, "the 4-hour MACD line above zero" gives REVERSAL_RISK. With MACD 35/45/30 the line is slow. In a made-up test market, a fresh 4-hour downtrend straight after a long rally read REVERSAL_RISK for its first days, because the line had not yet fallen below zero. So no recommendation is made then. This is the approved rule working as written; it is listed for the owner's review during observation.
+6. **REVERSAL_RISK after a long rally (observation, no change made).** Under the approved rule, "the 4-hour MACD line above zero" gives REVERSAL_RISK. With MACD 35/45/30 the line is slow. In a made-up test market, a fresh 4-hour downtrend straight after a long rally read REVERSAL_RISK for its first days, because the line had not yet fallen below zero. So no recommendation is made then. **Corrected on 17 November 2026 (owner's review):** the approved D-10 wording is the MACD line *crossing* above zero, but the code had used *is* above zero. Only a cross during the current 4-hour structure now gives REVERSAL_RISK; a line still lagging from before the structure is recorded as supporting evidence and never vetoes (commit `6dc4968`; see `PRE_DEPLOYMENT_REVIEW.md` section 2).
 
 ---
 

@@ -1,11 +1,11 @@
 # Structural Trade Planner V1: deployment readiness (observe only)
 
 **Date:** Tuesday 17 November 2026
-**Status:** **Built and tested on an isolated branch. NOT installed, NOT deployed, NOT switched on.** Nothing in the running bot (`/opt/autobot`) was changed. Nothing was restarted, IG was not contacted, and no trade, order or record was touched. This report asks for **separate approval to install observe-only forecasting**. Planner-based authorisation of bounce trades is a later stage and is **not** part of this request.
+**Status (updated after the final pre-deployment review, 17 November 2026):** **Built, reviewed and tested on an isolated branch. NOT installed, NOT deployed, NOT switched on.** The review (`PRE_DEPLOYMENT_REVIEW.md`) corrected the MACD veto to the approved "crossing" rule and found nothing that can affect trading. It recommends four small, planner-only items (R1–R4) for your decision before deployment. Nothing in the running bot (`/opt/autobot`) was changed. Nothing was restarted, IG was not contacted, and no trade, order or record was touched. This report asks for **separate approval to install observe-only forecasting**. Planner-based authorisation of bounce trades is a later stage and is **not** part of this request.
 
 **Where the work is:**
 
-- **Branch:** `structural-trade-planner-v1` (commit `c93bbb5`), in its own worktree `/home/autobot/worktrees/autobot-planner`, made from `main` at `aea2275`. It is committed locally and **not pushed** to the AutoBot GitHub repository.
+- **Branch:** `structural-trade-planner-v1` (commits `c93bbb5`, then the MACD correction `6dc4968`), in its own worktree `/home/autobot/worktrees/autobot-planner`, made from `main` at `aea2275`. It is committed locally and **not pushed** to the AutoBot GitHub repository.
 - **Design documents:** this folder (`/home/autobot/research/structural_trade_planner_v1/`), also published to the reports repository branch `structural-trade-planner-v1-design-20261117`.
 
 ---
@@ -60,7 +60,7 @@ The implementation notes (where the code had to make an approved rule precise) a
 
 ## 4. Test results
 
-**Planner tests: 51 passed** (`tests/technical/test_planner.py`: 34; `tests/functional/test_planner_scenarios.py`: 17, including one read-only check on the real candle store).
+**Planner tests: 64 passed** (`tests/technical/test_planner.py`: 43; `tests/functional/test_planner_scenarios.py`: 21, including one read-only check on the real candle store). 13 of them were added in the pre-deployment review: MACD regression tests and failure-isolation tests (`PRE_DEPLOYMENT_REVIEW.md` section 7).
 
 **Full suite on the branch:** see section 4.3.
 
@@ -106,7 +106,7 @@ No test uses the three recorded hourly-pierce trades, and no value was tuned to 
 
 ### 4.3 The full suite on the branch
 
-**2,192 passed, 0 failed** (8 minutes 25 seconds), run by the repository's pre-commit hook on the branch commit `c93bbb5`. That is the bot's existing 2,141 tests plus the 51 planner tests.
+**2,205 passed, 0 failed** (8 minutes 42 seconds), run by the repository's pre-commit hook on the MACD-correction commit `6dc4968`. That is the bot's existing 2,141 tests plus the 64 planner tests. (Before the review: 2,192 passed on `c93bbb5`.)
 
 One existing test needed a one-line update: `tests/technical/test_levels.py::test_the_live_run_and_the_service_update_the_levels` checks the exact text of the price service's `after_new_candle=...` line. It now expects `..., *extra, *planner)`, with the same intent (each pair's levels, then its market states, then the trading engine, the planner last). No other existing test was changed except `tests/technical/test_settings.py`, which gained the new settings and the switch test.
 
@@ -124,7 +124,7 @@ A first full run, before that update, gave 2,191 passed and that 1 failed. The b
 Each step is for when you approve installing observe-only forecasting. Steps marked **(owner)** need sudo, which the bot does not have.
 
 1. **Check the shared checkout.** In `/opt/autobot`, run `git status`. Today only other sessions' untracked research files are there, and none of the tracked files this branch changes are edited. If any are, stop and sort that out first.
-2. **Merge the branch** (by the bot, after your go-ahead): in `/opt/autobot`, `git merge --no-ff structural-trade-planner-v1`. The pre-commit hook runs the whole test suite and blocks the merge if anything fails. **Note:** nginx serves the dashboard page straight from `/opt/autobot/dashboard/static`, so **the new page appears as soon as the merge is done**. Until the dashboard service is restarted it shows only the OBSERVE ONLY label with "No planner forecast." The running price service and dashboard keep their old code until restarted.
+2. **(If R3 is approved first, the page change below is invisible until step 4.) Merge the branch** (by the bot, after your go-ahead): in `/opt/autobot`, `git merge --no-ff structural-trade-planner-v1`. The pre-commit hook runs the whole test suite and blocks the merge if anything fails. **Note:** nginx serves the dashboard page straight from `/opt/autobot/dashboard/static`, so **the new page appears as soon as the merge is done**. Until the dashboard service is restarted it shows only the OBSERVE ONLY label with "No planner forecast." The running price service and dashboard keep their old code until restarted.
 3. **(owner) Restart the dashboard:** `sudo systemctl restart autobot-dashboard`. The panel then reads the planner's file, and shows "no forecast" until the planner has run.
 4. **Switch the planner on (owner):** add `PLANNER_OBSERVE=on` to `/opt/autobot/.env`.
 5. **(owner) Restart the price service at a quiet moment**, with no bounce setup waiting and preferably outside 10:00–16:00 UK: `sudo systemctl restart autobot-prices`. The engine replays the week and takes over open trades exactly as on any restart. The planner starts after the next 5-minute candle.
@@ -140,6 +140,9 @@ Each step is for when you approve installing observe-only forecasting. Steps mar
 
 - **Stop the planner (fastest; no code change):** remove `PLANNER_OBSERVE` from `.env` (or set it `off`) and **(owner)** restart `autobot-prices`. The planner is then never started. Its files stay in `data/planner/` for review, and the panel keeps showing the last forecast with its time and "NOT current". To hide the panel's content as well, **(owner)** move `data/planner/GBPUSD/current.json` aside.
 - **Remove the code entirely:** in `/opt/autobot`, `git revert -m 1 <merge commit>` (the pre-commit hook runs the tests), then **(owner)** restart `autobot-dashboard` and `autobot-prices`. The page reverts at once (nginx serves it from the checkout). `data/planner/` can be kept for review or archived. Nothing else in the bot depends on it.
+- **A planner run in progress when the price service stops** is stopped with it (systemd's default kill mode covers every process of the service, whatever its session). Its last complete `current.json` stays; at worst, the last history line is cut short.
+- **Old code ignores a leftover `PLANNER_OBSERVE` line** in `.env` (`config/switches.py` reads only the switches it knows), so a full rollback starts normally even before `.env` is tidied.
+- **Optional cleanup:** `data/planner/GBPUSD/` (`current.json`, `recommendations.jsonl`, `.lock`, any `current.damaged-*.json`) and `logs/planner.log` with its rotated copies. Keeping them for review is recommended.
 - **No trading record, order, position or setting outside `[planner]` and `PLANNER_OBSERVE` is affected** by installing or rolling back.
 
 ## 8. What happens next (each step separately approved)
