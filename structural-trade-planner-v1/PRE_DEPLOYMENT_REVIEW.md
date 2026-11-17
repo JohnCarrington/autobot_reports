@@ -139,7 +139,9 @@ So **MACD can still prevent a recommendation through these approved rules** (ite
 - **Full rollback** (`git revert -m 1 <merge>`, then **(owner)** restart both services) restores the original code and page. **No trading state is touched:** the planner never writes `data/records`, `data/trade_manager`, `data/orders`, `data/candles`, `data/levels` or `data/analyser`. **Old code ignores a leftover `PLANNER_OBSERVE` line** (`config/switches.py` reads only the switches it knows), so the bot starts normally even if `.env` still has it. Removing it is still recommended for tidiness.
 - **Resources to clean up (optional, nothing depends on them):** `data/planner/GBPUSD/current.json`, `recommendations.jsonl` and `.lock`, any `current.damaged-*.json`, and `logs/planner.log` with its rotated copies. I recommend **keeping** the history for review rather than deleting it.
 
-## 6. Recommendations before deployment (each needs your yes; none made)
+## 6. Recommendations before deployment
+
+**Owner's decision, 17 November 2026: R1, R2 and R3 approved and implemented (commit `aac51f6`; 2,221 tests pass); R4 deferred.**
 
 | ID | What | Size | Affects trading? |
 |---|---|---|---|
