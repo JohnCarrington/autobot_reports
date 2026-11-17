@@ -11,7 +11,7 @@
 - **D-21:** recommendations are **event-driven**. They have no time-based expiry, they are reassessed on new completed H1/H4 evidence and on the other listed events, and stale data stops new authorisation.
 - **D-37:** the planner **will become** the sole structural authorisation authority for bounce trades. The architecture is settled; only implementation and activation remain to be approved.
 
-**No numerical parameter is approved yet.** Where this document says a number needs approval, see `PARAMETER_APPROVAL_REGISTER.md`. Elsewhere, the original rationale and alternatives are kept as written.
+**Final approvals (17 November 2026):** all seven parameter groups and FC-01 to FC-13 are approved, with three adjustments: no confirming hourly candle (adjustment 1); the 4-hour 40-pip and daily 110-pip swing moves are provisional, and turns they hold back are recorded (adjustment 2); the zone width is provisional, and each recommendation records its boundaries, levels, families and reason (adjustment 3). The observe-only implementation is described in `DEPLOYMENT_READINESS.md`, and its implementation notes are in `IMPLEMENTATION_READINESS.md` section 3. Elsewhere, the original rationale and alternatives are kept as written.
 
 How to read this document:
 
@@ -550,14 +550,14 @@ It is written to `data/planner/GBPUSD/current.json` (safe write) and appended to
 
 | State | Means | Entries allowed (once authorisation is switched on)? |
 |---|---|---|
-| **CANDIDATE** | Worked out, but not yet stable, or one condition is borderline (e.g. reachability EXTENDED) | No |
+| **CANDIDATE** | Worked out in this analysis. Under adjustment 1 (17 November 2026), a recommendation with all the evidence passes straight to WAITING in the same analysis; CANDIDATE stays in its history as the moment it was made | No |
 | **WAITING** | Valid; price not yet in the zone | No |
 | **ACTIVE** | Valid; price is in the zone | **Yes**, if the bounce confirms there |
 | **INVALIDATED** | One of the invalidation triggers happened | No; final |
 | **SUPERSEDED** | A newer recommendation replaced it (the structure moved) | No; final |
-| **COMPLETED** | It became ACTIVE and price later reached the primary destination; or the destination was reached first (see 10.2, 5: recorded as "completed without entry") | No; final |
+| **COMPLETED** | It became ACTIVE and price later reached the primary destination. (The destination reached *before* entry is an invalidation, as in 10.2 and D-20/D-21, recorded as "destination reached before entry".) | No; final |
 
-**How a recommendation is born:** when an hourly candle closes, the planner reruns everything. If the result is a valid zone, and no live recommendation exists, a new CANDIDATE is made. Whether it must hold for one more hourly re-plan before becoming WAITING is parameter P-F3 (functional question FC-06).
+**How a recommendation is born:** when an hourly candle closes, the planner reruns everything. If the result is a valid zone, and no live recommendation exists, a new recommendation is made and **issued at once** (adjustment 1, 17 November 2026): it is recorded as CANDIDATE and becomes WAITING in the same analysis, with no confirming hourly candle. Each later hourly analysis reassesses it and records whether it is still supported, changed or invalid.
 
 **When it is superseded:** when a rerun finds a *different* preferred zone or direction, the old one is SUPERSEDED and the new one starts as CANDIDATE. A recommendation never changes its own zone silently [D-22].
 

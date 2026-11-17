@@ -1,7 +1,7 @@
 # Structural Trade Planner V1: parameter approval register
 
 **Date:** Tuesday 17 November 2026
-**Status:** **Nothing in this register is approved yet.** The owner approved the planner's *architecture* (all 38 decisions in `DECISION_REGISTER.md`, four with modifications). That approval does **not** cover any number. This register lists every number the planner needs and recommends a value for each, so you can approve them group by group.
+**Status (updated 17 November 2026):** **all seven parameter groups are APPROVED by the owner**, as recommended, with three final adjustments that take precedence: (1) **P-F3 is 0**: a recommendation is issued on the first completed analysis where all the required evidence is available, with no extra confirming hourly candle; each later hourly analysis reassesses it and records whether it is still supported, changed or invalid. (2) **P-B3 (4-hour 40 pips) and P-B6 (daily 110 pips) are provisional observation values**: every turning point they hold back is recorded, and they are never adjusted or optimised automatically. (3) **P-C3 (the larger of 5 pips and 0.15 × the 20-day ADR) is provisional**: every recommendation records the zone's lower and upper boundary, its individual levels, its evidence families and why it was chosen, and zones are never widened or optimised automatically. P-G5 is settled as recommended: activation is judged by the owner's own review, with no performance figure. The approved values are in `config/settings.toml` `[planner]` on the implementation branch (`structural-trade-planner-v1`); the original recommendations, alternatives and reasons are kept below.
 **Companion documents:** `ARCHITECTURE_AND_DESIGN.md`, `DECISION_REGISTER.md`, `IMPLEMENTATION_READINESS.md` (all in the same folder).
 
 ## Read this first
@@ -46,10 +46,10 @@ No value here was tuned against past trades. The three hourly-pierce trades (all
 | **B. Swings and structure** | | | |
 | P-B1 | Hourly swings | EXISTING | 3 each side; 20 pips; within 6; last 2 weeks |
 | P-B2 | 4-hour swing: candles each side | PROPOSED | 3 |
-| P-B3 | 4-hour swing: minimum move | PROPOSED | 40 pips |
+| P-B3 | 4-hour swing: minimum move | APPROVED, provisional | 40 pips |
 | P-B4 | 4-hour swing: move within | PROPOSED | 6 candles |
 | P-B5 | Daily swing: candles each side | PROPOSED | 3 |
-| P-B6 | Daily swing: minimum move | PROPOSED | 110 pips |
+| P-B6 | Daily swing: minimum move | APPROVED, provisional | 110 pips |
 | P-B7 | Daily swing: move within | PROPOSED | 6 candles |
 | P-B8 | 4-hour swing look-back (level map) | PROPOSED | 8 weeks |
 | P-B9 | Daily swing look-back (level map) | PROPOSED | 48 weeks |
@@ -60,7 +60,7 @@ No value here was tuned against past trades. The three hourly-pierce trades (all
 | **C. Levels and zones** | | | |
 | P-C1 | Same-level grouping | EXISTING | 5 pips |
 | P-C2 | Level / zone interaction allowance | EXISTING | 3 pips (one-sided; see notes) |
-| P-C3 | Zone width | PROPOSED | the larger of 5 pips and 0.15 × ADR |
+| P-C3 | Zone width | APPROVED, provisional | the larger of 5 pips and 0.15 × ADR |
 | P-C4 | Maximum zone width | NOT REQUIRED | bounded by P-C3 |
 | P-C5 | Level map distance window | PROPOSED (reuse) | 150 pips |
 | P-C6 | Round-number spacing | EXISTING | 50 pips (00 and 50) |
@@ -89,7 +89,7 @@ No value here was tuned against past trades. The three hourly-pierce trades (all
 | **F. Recommendation lifecycle** | | | |
 | P-F1 | Re-plan timing | NOT REQUIRED | each completed hourly candle + events |
 | P-F2 | Price checks | NOT REQUIRED | each completed 5-minute candle |
-| P-F3 | Confirmation before WAITING | PROPOSED | 1 more hourly re-plan |
+| P-F3 | Confirmation before WAITING | APPROVED (adjustment 1) | **0**: issued on the first complete analysis |
 | P-F4 | Zone invalidation | EXISTING value (reuse) | hourly close ≥ 3 pips beyond the far edge |
 | P-F5 | Destination reached | EXISTING (reuse) | P-C2 |
 | P-F6 | ACTIVE back to WAITING | NOT REQUIRED | an hourly candle wholly clear by > 3 pips |
@@ -100,7 +100,7 @@ No value here was tuned against past trades. The three hourly-pierce trades (all
 | P-G2 | Status "stale" warning | EXISTING | 30 seconds |
 | P-G3 | Past recommendations on the panel | PROPOSED | last 5 |
 | P-G4 | Minimum observation period | PROPOSED | 4 complete trading weeks |
-| P-G5 | Evidence needed before considering activation | UNRESOLVED | your review (no performance figure proposed) |
+| P-G5 | Evidence needed before considering activation | APPROVED | the owner's review (no performance figure) |
 | P-G6 | Time-of-day reference times | EXISTING | 10:00, 14:00, 16:00 UK |
 
 **New numbers you are asked to approve: 21** (P-A8; P-B2 to P-B11; P-C3, P-C5, P-C7; P-D1, P-D6, P-D9; P-F3, P-F7; P-G3, P-G4). Five of them reuse an existing bot value for a new job: P-B4, P-B7, P-B10, P-C5 and P-F7. Plus three methods or lists (P-C9, P-D7, P-E3) and one unresolved choice (P-G5).
@@ -168,7 +168,7 @@ No value here was tuned against past trades. The three hourly-pierce trades (all
 - **Too high / too low:** too long a look-back understates a newly volatile market (zones too narrow); too short makes zone widths move from day to day.
 - **Changes trade eligibility:** indirectly, through zone width (P-C3), once authorisation is on. It never rejects an opportunity by itself (D-14). **Approval required:** yes.
 
-> **Group A approval** — P-A1, P-A2, P-A3 reuse confirmed: ☐ yes ☐ no  P-A8: ☐ 20 weekdays ☐ other ______  **Date / initials:** ________
+> **Group A: APPROVED by the owner, 17 November 2026.** All as recommended: P-A1, P-A2, P-A3 reused; P-A8 20 weekdays.
 
 ---
 
@@ -267,7 +267,7 @@ The approved approach (D-05) reuses the **shape** of the existing hourly turning
 
 - Weekly context comes from weekly pivots and the previous week's high and low (D-35), which need no new numbers. Leaving weekly swings out avoids three more parameters. See FC-11 in `IMPLEMENTATION_READINESS.md`.
 
-> **Group B approval** — P-B1 reuse: ☐  P-B2/B3/B4 (4-hour 3 / 40 / 6): ☐ yes ☐ other ______  P-B5/B6/B7 (daily 3 / 110 / 6): ☐ yes ☐ other ______  P-B8/B9 (8 / 48 weeks): ☐ yes ☐ other ______  P-B10/B11 (3 pips, 1 close): ☐ yes ☐ other ______  **Date / initials:** ________
+> **Group B: APPROVED by the owner, 17 November 2026.** All as recommended: P-B1 reused; 4-hour 3 / 40 / 6 and daily 3 / 110 / 6 (the 40 and 110 PROVISIONAL, adjustment 2); look-backs 8 and 48 weeks; break 3 pips, 1 close.
 
 ---
 
@@ -338,7 +338,7 @@ The approved approach (D-05) reuses the **shape** of the existing hourly turning
 - **Alternatives:** add the daily EMA21/100; drop the Bollinger middle.
 - **Changes trade eligibility:** only through zone classes. **Approval required:** yes.
 
-> **Group C approval** — P-C1, P-C2, P-C6 reuse: ☐  P-C3 (max of 5 pips and 0.15 × ADR): ☐ yes ☐ other ______  P-C5 (150 pips): ☐ yes ☐ other ______  P-C7 (classes as above; minimum Moderate): ☐ yes ☐ other ______  P-C9 (list): ☐ yes ☐ other ______  **Date / initials:** ________
+> **Group C: APPROVED by the owner, 17 November 2026.** All as recommended: P-C1, P-C2, P-C6 reused; P-C3 the larger of 5 pips and 0.15 × the 20-day ADR (PROVISIONAL, adjustment 3); P-C5 150 pips; P-C7 classes as recommended, minimum Moderate; P-C9 the list as recommended.
 
 ---
 
@@ -410,7 +410,7 @@ The approved six classes (D-10) and the two opportunity types (D-16, modified) a
 
 - Today's range and the impulse are shown as shares of the ADR (for example "today 1.2 × ADR"). **No "too far" line is used, and nothing is rejected on it.**
 
-> **Group D approval** — P-D1 (6 candles): ☐ yes ☐ other ______  P-D6 (3 candles): ☐ yes ☐ other ______  P-D7 (4-hour decides): ☐ yes ☐ no  P-D9 (3 hourly candles): ☐ yes ☐ other ______  **Date / initials:** ________
+> **Group D: APPROVED by the owner, 17 November 2026.** All as recommended: P-D1 6 candles; P-D6 3 candles; P-D7 the 4-hour decides; P-D9 3 hourly candles.
 
 ---
 
@@ -442,7 +442,7 @@ The approved six classes (D-10) and the two opportunity types (D-16, modified) a
 - **Existing value used:** big releases for the pair from `data/news/calendar.json`, from now **until 20:30 UK** (`[hours] close_all_trades_at`, when the bounce's trades are closed). News direction is never predicted or used.
 - **Approval required:** confirm reuse.
 
-> **Group E approval** — P-E2 (no distance boundary): ☐ agreed  P-E3 (Major obstacle): ☐ yes ☐ other ______  P-E5 reuse: ☐  **Date / initials:** ________
+> **Group E: APPROVED by the owner, 17 November 2026.** All as recommended: P-E2 no distance boundary; P-E3 a Major zone is a significant obstacle; P-E5 reused.
 
 ---
 
@@ -456,7 +456,7 @@ The approved six classes (D-10) and the two opportunity types (D-16, modified) a
 
 - After **each completed 5-minute candle**: zone interaction (P-C2), the destination reached first (P-F5), freshness (P-A3).
 
-### P-F3. Confirmation before WAITING — PROPOSED
+### P-F3. Confirmation before WAITING — APPROVED AS 0 (adjustment 1; supersedes the recommendation of 1 below)
 
 - **Purpose:** a new recommendation starts as CANDIDATE. This sets how many more hourly re-plans must find the same zone before it becomes WAITING, and so able to authorise.
 - **Recommended:** **1** more hourly re-plan.
@@ -489,7 +489,7 @@ The approved six classes (D-10) and the two opportunity types (D-16, modified) a
 
 - `recommendations.jsonl` is append-only and kept for good, like the bot's existing records (`records/book.py`). It grows by a few kilobytes a day. `current.json` is rewritten with a safe write.
 
-> **Group F approval** — P-F3 (1 re-plan): ☐ yes ☐ other ______  P-F4 reuse: ☐  P-F7 (3 hourly candles): ☐ yes ☐ other ______  **Date / initials:** ________
+> **Group F: APPROVED by the owner, 17 November 2026.** Approved with adjustment 1: **P-F3 = 0** (no confirming hourly candle; issued on the first complete analysis, reassessed every hour); P-F4 reused; P-F7 3 hourly candles.
 
 ---
 
@@ -527,7 +527,7 @@ The approved six classes (D-10) and the two opportunity types (D-16, modified) a
 
 - 10:00, 14:00 and 16:00 UK. `[bounce] near_times`; `strategies/common.py` `near_times()`. Recorded only (D-26). The existing `BOUNCE_ONLY_NEAR_TIMES` switch stays off and unchanged.
 
-> **Group G approval** — P-G1, P-G2, P-G6 reuse: ☐  P-G3 (last 5): ☐ yes ☐ other ______  P-G4 (4 trading weeks): ☐ yes ☐ other ______  P-G5: ______________________  **Date / initials:** ________
+> **Group G: APPROVED by the owner, 17 November 2026.** All as recommended: P-G1, P-G2, P-G6 reused; P-G3 last 5; P-G4 at least 4 complete trading weeks; P-G5 the owner's own review, no performance figure.
 
 ---
 

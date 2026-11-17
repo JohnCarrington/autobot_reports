@@ -1,7 +1,7 @@
 # Structural Trade Planner V1: implementation readiness
 
 **Date:** Tuesday 17 November 2026
-**Status:** Architecture **approved** (all 38 decisions, four with modifications). Numbers **not approved**. Nothing has been built, and **no implementation is authorised yet**.
+**Status (updated 17 November 2026):** architecture, **all seven parameter groups and FC-01 to FC-13 are APPROVED** (with the owner's three final adjustments, below). **Observe-only implementation was authorised and has been built** on the branch `structural-trade-planner-v1` (worktree `/home/autobot/worktrees/autobot-planner`): see `DEPLOYMENT_READINESS.md`. Installation into the running price service, and any planner-based authorisation of trades, each still need separate approval.
 **Companion documents:** `ARCHITECTURE_AND_DESIGN.md` (the full design), `DECISION_REGISTER.md` (the 38 approved decisions), `PARAMETER_APPROVAL_REGISTER.md` (the numbers to approve). All are in the same folder.
 
 This document answers: what can be built once you say go, what still needs a number, what still needs a functional answer, and what needs a separate approval because it would change live trading.
@@ -63,6 +63,21 @@ These are questions about **behaviour**, not numbers. Each has a recommended ans
 | **FC-11** | Are weekly swings used? | The design mentioned weekly swing extremes; they would need three more numbers | **Not in V1.** Weekly context = weekly pivots and the previous week's high and low |
 | **FC-12** | Which combination of evidence makes EXHAUSTION (D-10)? | The classes are approved; their exact recipe is not | EXHAUSTION = a new extreme in the current impulse **and** momentum not confirming it (the MACD weakening run, P-D6, **or** divergence) **and** at least one of: RSI 3 back inside its line, or a close back inside the Bollinger band. ADR extension and nearby support are **recorded**, not required (D-14) |
 | **FC-13** | Is the recommendation's COMPLETED state linked to whether a trade happened? | The planner doesn't trade | **No.** Lifecycle states describe the market against the plan, not the bot's trades. Trades are linked to recommendations only through the recommendation id written on each bounce idea |
+
+### Approval of FC-01 to FC-13 (17 November 2026)
+
+All thirteen were **approved as recommended**, except that **FC-06 is replaced by adjustment 1**: no confirming hourly candle; a recommendation is issued on the first complete analysis and reassessed every hour.
+
+### Implementation notes (where the code had to be precise; for the owner's review)
+
+These carry out the approved rules. Each changes nothing in trading, and each is open to the owner's correction.
+
+1. **"Destination reached before entry" (D-20, D-21).** It applies only when the primary destination lies beyond the price at the moment the recommendation is made, by more than the 3-pip allowance. Where the first Major zone below a sell zone lies between price and the zone, or right at price, "reaching it first" would happen at once and mean nothing. There, the destination is treated as on the way, and the recommendation says so in its invalidation list.
+2. **Opportunity type (D-16, FC-04).** The type follows the owner's two definitions directly. It is a "corrective reversal" when momentum stopped confirming the impulse (an exhausted impulse), and a "healthy-trend pullback" when it did not. This is separate from the condition class: a pullback that is already under way is CORRECTION_ACTIVE (the approved class rule) but still labelled a healthy-trend pullback.
+3. **Fixed and moving levels (FC-05).** Today's still-running London or New York session high or low is treated as a **moving** level, like the moving averages, because it changes as the session runs. A flipped level keeps its name ("4-hour swing low") and carries its role ("former support, now resistance") separately. Without these two, the same zone was superseded every hour in testing.
+4. **Zones are built from the fixed levels first** (anchored at each zone's lowest level, as approved). Moving levels then join the zone they fit, so a moving average can never reshape a zone. Zones are built from every level before the 150-pip window is applied, so the window's edge cannot shift the zones near price.
+5. **Moving-average levels** are written to 0.1 of a point, like every other level.
+6. **REVERSAL_RISK after a long rally (observation, no change made).** Under the approved rule, "the 4-hour MACD line above zero" gives REVERSAL_RISK. With MACD 35/45/30 the line is slow. In a made-up test market, a fresh 4-hour downtrend straight after a long rally read REVERSAL_RISK for its first days, because the line had not yet fallen below zero. So no recommendation is made then. This is the approved rule working as written; it is listed for the owner's review during observation.
 
 ---
 
