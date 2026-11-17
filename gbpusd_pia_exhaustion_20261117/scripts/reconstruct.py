@@ -64,7 +64,33 @@ FORECASTS = [
     dict(id="T4",  thesis="T4", date="2026-11-04", pub="2026-11-04T07:58:00+00:00",
          direction="BUY", entry=1.3431, stop=1.3381, tgt1=1.3581, tgt2=None,
          confidence=40, repeat_of=None,
-         note="Full commentary preserved: PIA states NO exhaustion ('no clear indication that the upward move is ending')."),
+         note="Full commentary preserved: PIA states NO exhaustion ('no clear indication that the upward move is coming to an end')."),
+    # --- v2 corpus (operator-supplied verbatim 2026-11-17) -------------
+    # Candle archive ends 2026-11-06T18:00Z so build_market_row / outcome /
+    # count rows return a NO_CANDLE_DATA placeholder for everything from
+    # 2026-11-10 onwards. The forecasts are still included so the register
+    # and schema of the output CSVs stay consistent with the brief's
+    # comparison table (4 / 11 / 13 / 16 / 17 Nov).
+    dict(id="T5",  thesis="T5", date="2026-11-10", pub="2026-11-10T08:36:00+00:00",
+         direction="SELL", entry=1.3529, stop=1.3572, tgt1=1.3411, tgt2=None,
+         confidence=60, repeat_of=None,
+         note="DATE PROVISIONAL per operator. Full commentary: 'sell into rallies', 'trend line resistance 13532', 'temporary move higher'. No market reconstruction possible — archive ends 2026-11-06."),
+    dict(id="T6",  thesis="T6", date="2026-11-11", pub="2026-11-11T07:25:00+00:00",
+         direction="BUY", entry=1.3295, stop=1.3256, tgt1=1.3406, tgt2=None,
+         confidence=60, repeat_of=None,
+         note="Full commentary. DIRECTION CHANGE SELL→BUY within 1 day of T5. PIA cites 'forming a bottom' + 'weekly pivot at 13295'. No market reconstruction possible."),
+    dict(id="T7",  thesis="T7", date="2026-11-13", pub="2026-11-13T07:25:00+00:00",
+         direction="SELL", entry=1.3290, stop=1.3329, tgt1=1.3179, tgt2=None,
+         confidence=60, repeat_of=None,
+         note="Full commentary. DIRECTION CHANGE BUY→SELL within 2 days of T6. PIA explicitly names trigger: 'Previous support level of 13277 broken' — STRUCTURAL break, not exhaustion. No market reconstruction possible."),
+    dict(id="T8",  thesis="T8", date="2026-11-16", pub="2026-11-16T07:42:00+00:00",
+         direction="SELL", entry=1.3273, stop=1.3311, tgt1=1.3165, tgt2=None,
+         confidence=60, repeat_of="T7",
+         note="Full commentary. Core Phase 4 observation: 'Although the bears are in control, the stalling negative momentum indicates a turnaround is possible' — exhaustion present + SELL maintained. No market reconstruction possible."),
+    dict(id="T9",  thesis="T9", date="2026-11-17", pub="2026-11-17T07:32:00+00:00",
+         direction="SELL", entry=1.3245, stop=1.3283, tgt1=1.3138, tgt2=None,
+         confidence=60, repeat_of="T7",
+         note="Full commentary. Continuation of T7/T8 thesis. 'Bespoke resistance 13245' — entry sits exactly at the stated resistance. No market reconstruction possible."),
 ]
 
 # ------------------------------------------------------------
@@ -357,12 +383,21 @@ def completed_swings(bars: list[Candle], threshold_pips: float = 15.0) -> int:
 # Market-condition row builder
 # ------------------------------------------------------------
 
+STALENESS_LIMIT_MIN = 30.0  # last bar must be within 30 minutes of publication
+
 def build_market_row(f: dict) -> dict:
     pub = datetime.fromisoformat(f["pub"])
     # Load 30 days of M5 preceding publication — enough for D1(20), H4(20), H1(50).
     m5 = load_m5(pub - timedelta(days=30), pub)
     if not m5:
         return dict(id=f["id"], date=f["date"], pub_utc=f["pub"], note="NO CANDLE DATA")
+    # Staleness gate: candle archive ends 2026-11-06T18:00Z. Any publication
+    # whose last preceding M5 bar is >STALENESS_LIMIT_MIN minutes before
+    # the publication means we don't have usable publication-time state.
+    stale_min = (pub - m5[-1].ts).total_seconds() / 60.0
+    if stale_min > STALENESS_LIMIT_MIN:
+        return dict(id=f["id"], date=f["date"], pub_utc=f["pub"], direction=f["direction"],
+                    note=f"NO_CANDLE_DATA (last bar {m5[-1].ts.isoformat()}, {stale_min/1440:.1f}d stale)")
     h1 = resample(m5, 60)
     h4 = resample(m5, 240)
     d1 = resample_d1(m5)
@@ -440,6 +475,10 @@ def build_count_row(f: dict) -> dict:
     m5 = load_m5(pub - timedelta(days=30), pub)
     if not m5:
         return dict(id=f["id"], date=f["date"], pub_utc=f["pub"], note="NO CANDLE DATA")
+    stale_min = (pub - m5[-1].ts).total_seconds() / 60.0
+    if stale_min > STALENESS_LIMIT_MIN:
+        return dict(id=f["id"], date=f["date"], pub_utc=f["pub"], direction=f["direction"],
+                    note=f"NO_CANDLE_DATA ({stale_min/1440:.1f}d stale)")
     h1 = resample(m5, 60)
     h4 = resample(m5, 240)
     d1 = resample_d1(m5)
@@ -479,6 +518,12 @@ def build_outcome_row(f: dict, horizon_days: int = 10) -> dict:
     )
     if not m5:
         out["note"] = "NO POST-PUBLICATION CANDLES"
+        return out
+    # If every post-publication bar is literally before the publication
+    # timestamp (archive ended before publication), bail out — this
+    # happens for T5-T9 where the archive ends 2026-11-06.
+    if m5[0].ts < pub:
+        out["note"] = f"NO_POST_PUBLICATION_CANDLES (archive ends {m5[-1].ts.isoformat()})"
         return out
 
     entry = f["entry"]
