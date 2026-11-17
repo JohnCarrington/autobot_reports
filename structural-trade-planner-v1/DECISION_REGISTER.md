@@ -1,7 +1,9 @@
 # Structural Trade Planner V1: decision register
 
 **Date:** Tuesday 17 November 2026
-**Status:** Every decision below is **open**. Nothing has been built. Nothing in the bot has changed.
+**Status (updated 17 November 2026):** **all 38 architectural decisions are APPROVED by the owner**, four of them with modifications (D-14, D-16, D-21, D-37) that take precedence over the original recommendations. **No numerical parameter is approved.** The numbers are in `PARAMETER_APPROVAL_REGISTER.md`; open functional questions and readiness are in `IMPLEMENTATION_READINESS.md`. Nothing has been built. Nothing in the bot has changed.
+
+Each decision below keeps its original options and recommendation, for the record, followed by the owner's approval. Where a modification differs from the original recommendation, the modification wins.
 **Companion document:** `ARCHITECTURE_AND_DESIGN.md` (the same folder) has the full reasoning. This register is meant to be readable on its own.
 
 ## Read this first
@@ -20,13 +22,14 @@
 - **Confirmed break:** a candle *closing* beyond a level, as opposed to only a wick poking through.
 - **Warm-up:** the bot's existing rule that an EMA, MACD or RSI may only be used once it has enough past candles (`warm_up_seed_weight_percent = 2`).
 
-**How each decision is set out.** Its identifier, what needs deciding, the options with their advantages and disadvantages, my recommendation and why, whether it **affects trading**, whether **your approval is required**, and a box for your choice.
+**How each decision is set out.** Its identifier, what needs deciding, the options with their advantages and disadvantages, the original recommendation and why, whether it **affects trading**, and (since 17 November 2026) **the owner's approval**, with any modification and any numbers still to approve.
 
 **Labels:**
 
 - **EXISTING:** the bot already does this today (file named). The recommendation is usually to reuse it.
 - **PROPOSED:** new behaviour.
-- **No numbers have been chosen.** Where a number is needed, the register says so and leaves it to you.
+- **APPROVED:** the owner's approved architectural choice (17 November 2026).
+- **No numbers have been approved.** Where a number is needed, the register names its parameter in `PARAMETER_APPROVAL_REGISTER.md`.
 
 **Trading impact in one line:** while the switch `PLANNER_AUTHORISES_BOUNCE` (D-33) is off, **none of these decisions changes any trade**. They only change what the planner writes and shows.
 
@@ -90,7 +93,8 @@
 **Recommendation:** **A, leave it out.** **Why:** it would mostly duplicate the existing averages. Revisit only if the missing 4-hour EMA200 turns out to matter.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Retain EMA 7/13/21/100/200. Do not introduce EMA50.
 
 ---
 
@@ -113,7 +117,8 @@
 **Recommendation:** **A.** **Why:** it keeps your existing choices intact and avoids a built-in contradiction.
 **Affects trading:** yes, if B is chosen and authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> The existing 5-minute EMA100 / daily-pivot direction rule stays unchanged for the EMA pullback. It does not restrict planner recommendations.
 
 ---
 
@@ -136,7 +141,9 @@
 **Recommendation:** **A**, and **stay BEARISH** in the example. **Why:** one clear authority, with the disagreement made visible.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A (and stay BEARISH in the example).
+> The 4-hour chart decides the dominant direction; daily and weekly give context. The 4-hour EMA100 slope is supporting evidence.
+> **Numbers still to approve:** P-D1 (slope look-back), in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -157,7 +164,8 @@
 **Recommendation:** **A, unchanged.** Revisit only Monday handling (C) after watching it. **Why:** changing the convention is a bot-wide change outside this design.
 **Affects trading:** yes, if B (every strategy). **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Keep the existing pivot session convention (UK-midnight days; Monday's pivots from IG's short Sunday candle).
 
 ---
 
@@ -180,7 +188,9 @@
 **Recommendation:** **A**. **Numbers needed from you:** candles each side and minimum move, for H4 and daily. **Why:** reuse, not invention.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Numbers:** H4 ____ / ____  Daily ____ / ____  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Reuse the existing swing logic (the shape of the hourly turning-level rule). The 4-hour and daily numbers need separate approval.
+> **Numbers still to approve:** P-B2 to P-B9, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -201,7 +211,11 @@
 **Recommendation:** **B.** **Why:** it reuses an existing, tested setting.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+**Verified 17 November 2026:** the 3 pips (`[rejection] near_level_within_pips`) is used in `rejection/watch.py` `_pierced()`, on 5-minute candles. For a sell, a level counts as reached when the candle's high gets to **within 3 pips below the level or goes through it**, and the candle's low is at or below the level. A buy is the mirror image. It is a one-sided "near miss short of the level" allowance, **not** a band of 3 pips either side. The analyser's own watcher also requires the candle to have opened on the near side of the level; the strategies' watcher does not. How this carries over to zones is functional question **FC-01** in `IMPLEMENTATION_READINESS.md`.
+
+> **APPROVED by the owner, 17 November 2026.** Choice: Option B.
+> Reuse the existing 3-pip level allowance, subject to verifying its existing meaning and implementation.
+> **Numbers still to approve:** P-C2, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -223,7 +237,9 @@
 **Recommendation:** **C.** **Number needed:** the share of ADR (or band width). **Why:** zones should be wider on wild days and narrower on quiet ones.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Number:** ______  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option C.
+> Keep the existing 5-pip level grouping, and design volatility-adjusted wider zones. The numbers are not approved.
+> **Numbers still to approve:** P-C3, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -242,7 +258,8 @@
 **Recommendation:** **A**, plus the "same consolidation counts once" part of C for swings. **Why:** it matches the brief's own warning about three swing highs.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A, plus "the same consolidation counts once" for swings.
+> Count independent families of evidence; avoid double-counting related levels.
 
 ---
 
@@ -263,7 +280,9 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Recommendation:** **A.** **Needed from you:** the tier definitions. **Why:** simple, deterministic and explainable.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Tier rules:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Use Major / Moderate / Minor zone classes, without weighted scores.
+> **Numbers still to approve:** P-C7 (the class boundaries), in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -292,7 +311,9 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Recommendation:** **A.** **Why:** it follows the brief's six classes with observable evidence.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Numbers:** ______  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Use the six correction and exhaustion classes.
+> **Numbers still to approve:** P-D6, P-D9 and the evidence rule in FC-12, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -313,7 +334,9 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Recommendation:** **A.** **Number needed:** the ADR look-back in days. **Why:** it measures without inventing a line.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **ADR days:** ______  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Measure daily extension against the average daily range. No unapproved exhaustion threshold.
+> **Numbers still to approve:** P-A8 (ADR look-back), in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -334,7 +357,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Recommendation:** **A** now. Consider **B** after watching the planner. **Why:** keep your settings; add only if needed.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Keep RSI 3 with the 70/30 lines.
 
 ---
 
@@ -355,7 +379,9 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Recommendation:** **A.** **Number needed:** N. **Why:** it separates "bearish momentum weakening" from "bullish momentum established", as the brief asks.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **N:** ______  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Keep MACD 35/45/30.
+> **Numbers still to approve:** P-D6 (histogram run), in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -382,7 +408,11 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Recommendation:** **A**, recording pace (B) as evidence. **Number needed:** M. **Why:** objective and explainable.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **M:** ______  **Date / initials:** ________
+**Owner's modification (takes precedence over the recommendation above):** ADR helps judge how stretched a move is, but price can exceed its average range, especially in volatile sessions. ADR is context only. A structurally valid corrective opportunity is **never rejected just because the daily range has been exceeded**. So option A's "fits inside today's remaining room" and "more than M × ADR" boundaries are **withdrawn**. Distance in pips and in ADR units is shown, but by itself never lowers a zone's reachability. EXTENDED now comes from obstacles; UNLIKELY comes from structure (a zone beyond the dominant structure's invalidation point). See P-E2 and FC-03.
+
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A as modified (ADR context only).
+> Use volatility, structural obstacles and correction evidence to judge reachability. ADR is context, **not a hard limit** on movement.
+> **Numbers still to approve:** P-E2 (no distance boundary), in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -401,7 +431,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Recommendation:** **A.** **Why:** price often stalls at the first strong obstacle (the brief's R1-versus-R2 example).
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A (a Major zone in between makes the target EXTENDED; others noted).
+> Account for significant intermediate structural obstacles.
 
 ---
 
@@ -424,7 +455,11 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Recommendation:** **A**; CONTINUATION **not** included at first. **Why:** neither nearest nor strongest wins on its own, as the brief requires.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Minimum tier:** ______  **Date / initials:** ________
+**Owner's modification (takes precedence over the recommendation above, which left CONTINUATION out):** two kinds of opportunity are both in scope. (1) **Corrective reversal:** an exhausted impulse produces a temporary correction towards a structural entry zone, where a return in the dominant direction is expected. (2) **Healthy-trend pullback:** an established trend retraces towards significant support or resistance, **without** the dominant trend needing to be exhausted. Recommendations are **not** limited to exhaustion. See FC-03 and FC-04.
+
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A for choosing, with CONTINUATION included.
+> Prefer the strongest reasonably reachable entry zone. Allow healthy-trend pullbacks as well as exhaustion or correction opportunities.
+> **Numbers still to approve:** P-C7 (the minimum class is part of the tier rules), in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -441,7 +476,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Recommendation:** **A.** **Why:** traceable.
 **Affects trading:** no (information only). **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Use the most significant structural level inside the chosen entry zone as the reference entry.
 
 ---
 
@@ -460,7 +496,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Recommendation:** **A.** **Why:** structural and consistent with zone grading.
 **Affects trading:** no. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> The first Major structural destination is the primary target; intermediate and extended destinations are identified separately.
 
 ---
 
@@ -476,7 +513,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A.** **Affects trading:** no. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Use the near edge of the destination zone; no invented target offsets.
 
 ---
 
@@ -496,7 +534,11 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Recommendation:** **D for zones (3 pips beyond, on an hourly close), A for the 4-hour structure.** **Why:** it reuses an existing setting where it fits.
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+**Verified 17 November 2026:** in `analyser/hourly_read.py` `HourlyReader`, a sell-off starts when an hourly candle's **close is at least 3 pips below** the lowest low of the 12 hourly candles before it (`close <= bottom - 3 pips`, so exactly 3 pips counts). A rally is the mirror image. The 3 pips is `[hourly_read] break_beyond_pips`. Wicks never count; only the close does. Carried over (PROPOSED, P-F4): a sell zone is invalidated when an hourly candle closes at least 3 pips above the zone's top (its far edge), and the mirror for a buy zone. The 4-hour structural break uses the same "close at least 3 pips beyond" form against the last confirmed 4-hour swing (P-B10). See FC-02.
+
+> **APPROVED by the owner, 17 November 2026.** Choice: Options D (zones) and A (4-hour structure).
+> Use the existing 3-pip hourly-close confirmation for zone invalidation where it applies, and 4-hour structural confirmation for changes of dominant direction. Verify the exact existing rule before adopting it.
+> **Numbers still to approve:** P-B10, P-B11, P-F4, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -513,7 +555,11 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 **Why:** fresh enough to trust, without arbitrary timers. **The planner never closes open trades on a timer.**
 **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** a ______ b ______ c ______  **Date / initials:** ________
+**Owner's modification (takes precedence over the recommendation above, which suggested expiry at the weekly close):** no recommendation expires just because time has passed. It is **reassessed** when: new completed H1 or H4 evidence arrives; relevant structural levels change; the daily pivots roll over; the dominant direction changes; the zone is invalidated; the destination is reached before entry; or the supporting conditions materially change. **Stale or unavailable data stops new trade authorisation.** A recommendation may stay valid across many analysis cycles, but it is **never treated as current without fresh validation** (FC-08). Question (a), whether a new recommendation must hold for one more hourly re-plan, is still open as P-F3 / FC-06. Question (b) is settled as "pause only".
+
+> **APPROVED by the owner, 17 November 2026.** Choice: Event-driven validity (modified).
+> Recommendations stay valid while their structural basis stays valid. Reassess on relevant market events and at the daily rollover. No arbitrary time-based expiry. Stale data must stop new authorisation.
+> **Numbers still to approve:** P-A3, P-F3, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -529,7 +575,9 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A.** **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Supersede recommendations explicitly and keep their history.
+> **Numbers still to approve:** FC-05 (when a moving level counts as a change), in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -543,7 +591,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A**; the second-best zone is shown for information. **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> One active recommendation per instrument; alternatives may be shown for information.
 
 ---
 
@@ -559,7 +608,9 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A, recorded only.** **Affects trading:** only if made a filter. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **N:** ______  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A, recorded only.
+> Record wick sweeps, completed breaks and reclaims. Not mandatory filters yet.
+> **Numbers still to approve:** P-F7, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -575,7 +626,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A, recorded only (not a filter).** **Affects trading:** only if made a filter. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A, recorded only.
+> Record distinct tests of a zone, without an unapproved trading filter.
 
 ---
 
@@ -591,7 +643,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A**, with the existing switch left as your filter. **Affects trading:** no (unless you turn the existing switch on). **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Record the time of day, without another time-based entry filter.
 
 ---
 
@@ -608,7 +661,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A**; weekly EMA100/200 dropped from V1. **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A; weekly EMA100/200 dropped from V1.
+> Leave indicators out until they have enough warm-up history. Never fabricate indicator values.
 
 ---
 
@@ -623,7 +677,9 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A.** **Affects trading:** no. **Approval required:** yes (light).
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Refresh the dashboard regularly; update the structural analysis from completed candles.
+> **Numbers still to approve:** P-G1 to P-G3, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -643,7 +699,9 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A.** **Affects trading:** **yes.** **Approval required:** **yes, explicitly, before switching on.**
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> The bounce's rejection candle must interact with the authorised zone; the eventual entry price need not stay inside the zone.
+> **Numbers still to approve:** P-C2; FC-07, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -659,7 +717,9 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **B.** **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option B.
+> Leave IG's short Sunday candles out of the ADR; keep the existing daily indicator behaviour.
+> **Numbers still to approve:** P-A8, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -675,7 +735,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A.** The first rebuilt candle (7 August 00:00–04:00 UK) lacks its first hour and is dropped. **Affects trading:** no. **Approval required:** yes (light).
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Rebuild historical 4-hour candles from completed hourly candles, with verified session alignment.
 
 ---
 
@@ -685,7 +746,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **reuse it unchanged.** **Affects trading:** no. **Approval required:** confirmation only.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Confirmed.
+> Keep the existing bid (sell) price convention.
 
 ---
 
@@ -700,7 +762,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A.** **Affects trading:** **yes, when switched on.** **Approval required:** yes, and you switch it on yourself.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> `PLANNER_AUTHORISES_BOUNCE` is OFF by default.
 
 ---
 
@@ -716,7 +779,9 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A**, with the per-opportunity diagnostic (no totals) as support. **Affects trading:** no. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Period:** ______  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Start with forecast observation and review before authorising any planner-based trading restriction.
+> **Numbers still to approve:** P-G4, P-G5, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
@@ -731,7 +796,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A.** **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Work out weekly structural levels from the existing weekly candles with the classic pivot formulas.
 
 ---
 
@@ -745,7 +811,8 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A.** **Affects trading:** only once authorisation is on. **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Re-plan on completed hourly candles; watch zone interactions on the 5-minute chart.
 
 ---
 
@@ -759,7 +826,10 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **decide at switch-on time**, after the observation period. **Affects trading:** **yes.** **Approval required:** yes, explicitly.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+**Owner's modification (final, not to be reopened):** the planner will become the sole structural authorisation authority for bounce strategies. The hourly-pierce strategy still confirms its own entry, and the existing execution and risk controls stay in place. The EMA pullback stays independent at first. The architecture is settled. **Only the implementation and the switching-on remain to be approved**, the switching-on separately and explicitly.
+
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A (architecture settled); activation separately.
+> The planner will become the only structural authorisation authority for bounce trades. Switching it on needs separate, explicit approval.
 
 ---
 
@@ -775,11 +845,15 @@ The brief's priority list (daily pivots first … EMAs last) is used as the **di
 
 **Recommendation:** **A.** **Affects trading:** only once authorisation is on (and only as context). **Approval required:** yes.
 
-> **Approved choice:** ______________________  **Date / initials:** ________
+> **APPROVED by the owner, 17 November 2026.** Choice: Option A.
+> Show the locally stored economic-calendar information as context; never predict news direction.
+> **Numbers still to approve:** P-E5, in `PARAMETER_APPROVAL_REGISTER.md`. Approving the approach does **not** approve any number.
 
 ---
 
 ## Summary: existing, proposed, unresolved
+
+**Since 17 November 2026:** every architectural choice above is approved. The lists below are kept as originally written. The authoritative list of numbers still to approve is now `PARAMETER_APPROVAL_REGISTER.md`. Under D-14 (modified), the "M for UNLIKELY" number is **withdrawn**.
 
 - **Existing and recommended for reuse unchanged:** the indicator formulas and your settings (EMA 7/13/21/100/200, Bollinger 20/2, MACD 35/45/30, RSI 3 70/30); the daily pivot formulas and the UK-midnight day (D-04); the 5-pip same-level grouping (D-07, first tier); the 3-pip "at a level" (D-06); the hourly read's 3-pip close rule for zone breaks (D-20); the sell price (D-32); the 10-minute out-of-date allowance (D-21); the near-times settings (D-26); the news calendar file (D-38); the levels updater's "never stop the price service" protection.
 - **Proposed:** everything else in the planner.

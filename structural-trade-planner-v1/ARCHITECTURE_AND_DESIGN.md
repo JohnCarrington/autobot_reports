@@ -2,7 +2,16 @@
 
 **Date:** Tuesday 17 November 2026
 **Status:** Design for approval. **No code was written or changed. Nothing in `/opt/autobot` was modified.** I made no IG calls, did no restarts, and downloaded no data. The only things run were read-only listings of the candle store and the records, plus one read-only check of the candle data (section 16).
-**Companion document:** `DECISION_REGISTER.md` (the same folder). Every choice this design leaves open is listed there as D-01 to D-38, with a space for your approval.
+**Companion documents:** `DECISION_REGISTER.md`, `PARAMETER_APPROVAL_REGISTER.md` and `IMPLEMENTATION_READINESS.md` (all in the same folder).
+
+**Approval status (updated 17 November 2026):** the owner has **approved all 38 architectural decisions** (D-01 to D-38). Four were approved **with modifications that take precedence** over this document's original wording, and the affected passages below have been updated:
+
+- **D-14:** the average daily range (ADR) is **context only, never a hard limit**. A structurally valid opportunity is never rejected because the day's range has been exceeded.
+- **D-16:** **healthy-trend pullbacks** are in scope as well as corrective reversals after exhaustion.
+- **D-21:** recommendations are **event-driven**. They have no time-based expiry, they are reassessed on new completed H1/H4 evidence and on the other listed events, and stale data stops new authorisation.
+- **D-37:** the planner **will become** the sole structural authorisation authority for bounce trades. The architecture is settled; only implementation and activation remain to be approved.
+
+**No numerical parameter is approved yet.** Where this document says a number needs approval, see `PARAMETER_APPROVAL_REGISTER.md`. Elsewhere, the original rationale and alternatives are kept as written.
 
 How to read this document:
 
@@ -433,7 +442,7 @@ The **strongest** zone and the **reachable** zone are different questions, and t
 1. The correction's strength (the CORRECTION classification and its evidence).
 2. Current momentum (the H1 histogram direction and the RSI 3 position).
 3. How far the correction has already travelled, in ADR units.
-4. **Remaining room**: the average daily range minus today's range so far. This is an objective number from existing candles. Only the ADR's look-back needs approval [D-11, D-14].
+4. **Remaining room**: the average daily range minus today's range so far, shown as **context only** (D-14, modified). Price can and does exceed its average range. Remaining room never rules a zone out or lowers its class by itself [D-11, D-14].
 5. Intermediate zones between price and the candidate zone, and their tiers [D-15].
 6. The candidate zone's own significance.
 7. Whether reaching it would itself break the dominant structure. A sell zone **above** the last H4 lower high is a contradiction and is marked UNLIKELY.
@@ -443,19 +452,22 @@ The **strongest** zone and the **reachable** zone are different questions, and t
 
 | Class | Objective reading |
 |---|---|
-| **NEAR** | Price is already at the zone, or within the approved small distance of its near edge |
-| **PLAUSIBLE** | The distance fits inside today's remaining room, no Major zone lies in between, and the correction evidence is CORRECTION_LIKELY or CORRECTION_ACTIVE |
-| **EXTENDED** | It needs more than today's remaining room, **or** price must first pass a Major zone |
-| **UNLIKELY** | It lies beyond the dominant structure's invalidation point, **or** needs a multiple of the ADR (approved) |
-| **INDETERMINATE** | Data not ready, or no ADR available |
+| **NEAR** | Price is already at the zone, or within the existing 3-pip allowance of its near edge (P-C2) |
+| **PLAUSIBLE** | No Major zone lies in between, and the opportunity evidence supports a move towards the zone (a corrective reversal: EXHAUSTION, CORRECTION_LIKELY or CORRECTION_ACTIVE; a healthy-trend pullback: CONTINUATION) |
+| **EXTENDED** | Price must first pass a Major zone (D-15) |
+| **UNLIKELY** | It lies beyond the dominant structure's invalidation point (reaching it would itself break the 4-hour structure) |
+| **INDETERMINATE** | Data not ready, or the direction is NEUTRAL or TRANSITIONAL |
 
-No probabilities are quoted. These are classes, not odds.
+**Approved modification (D-14):** distance, in pips and in ADR units, and today's remaining room are **shown with every zone as context**, but **never by themselves** make a zone EXTENDED or UNLIKELY. An earlier draft of this table used "today's remaining room" and "a multiple of the ADR" as boundaries; those are withdrawn. No probabilities are quoted. These are classes, not odds.
 
 ### 9.4 Choosing the preferred entry zone
 
 For BEARISH (BULLISH is the mirror image):
 
-1. Only when the correction class is EXHAUSTION, CORRECTION_LIKELY or CORRECTION_ACTIVE, or CONTINUATION if you approve trading pullbacks in a healthy trend [D-16].
+1. **Two opportunity types, both in scope (D-16, approved with modification):**
+   - a **corrective reversal**: the class is EXHAUSTION, CORRECTION_LIKELY or CORRECTION_ACTIVE, and an exhausted impulse is expected to correct up into resistance before falling again;
+   - a **healthy-trend pullback**: the class is CONTINUATION, the trend is not exhausted, and price is expected to retrace into resistance within an established downtrend.
+   The recommendation records which type it is. The same zone rules apply to both. No recommendation in REVERSAL_RISK or INDETERMINATE.
 2. Candidates: resistance zones **above** price and **below** the H4 invalidation point.
 3. Rule out zones graded below the approved minimum tier, and zones that are UNLIKELY or INDETERMINATE.
 4. Choose among the rest by an approved method [D-16]:
@@ -545,11 +557,13 @@ It is written to `data/planner/GBPUSD/current.json` (safe write) and appended to
 | **SUPERSEDED** | A newer recommendation replaced it (the structure moved) | No; final |
 | **COMPLETED** | It became ACTIVE and price later reached the primary destination; or the destination was reached first (see 10.2, 5: recorded as "completed without entry") | No; final |
 
-**How a recommendation is born:** when an hourly candle closes, the planner reruns everything. If the result is a valid zone, and no live recommendation exists, a new CANDIDATE is made. Whether it must hold for more than one evaluation before becoming WAITING is [D-21].
+**How a recommendation is born:** when an hourly candle closes, the planner reruns everything. If the result is a valid zone, and no live recommendation exists, a new CANDIDATE is made. Whether it must hold for one more hourly re-plan before becoming WAITING is parameter P-F3 (functional question FC-06).
 
 **When it is superseded:** when a rerun finds a *different* preferred zone or direction, the old one is SUPERSEDED and the new one starts as CANDIDATE. A recommendation never changes its own zone silently [D-22].
 
-**Stale data:** if the newest finished candle is older than the analyser's existing "out of date" allowance (`[analyser] out_of_date_after_minutes = 10`, reused), the recommendation stops authorising until fresh data arrives. Whether staleness also *invalidates* it is [D-21]. Whether a recommendation also has a maximum age (for example, it does not survive the UK midnight pivot change or the weekend) is [D-21].
+**Event-driven validity (D-21, approved with modification).** A recommendation has **no time-based expiry**. It stays valid while its structural basis stays valid, and it is **reassessed** whenever: a new H1 or H4 candle completes; relevant structural levels change; the daily pivots roll over (00:00 UK); the dominant direction changes; the zone is invalidated; the destination is reached before entry; or the supporting conditions materially change. A recommendation may stay valid across many cycles, but it is **never treated as current without fresh validation**: it must have been re-checked at the latest completed hourly re-plan, and the price checks must be up to the latest finished 5-minute candle (FC-08).
+
+**Stale data:** if the newest finished candle is older than the analyser's existing "out of date" allowance (`[analyser] out_of_date_after_minutes = 10`, reused), **no new authorisation is given** until fresh data arrives. Staleness pauses the recommendation; it does not invalidate it.
 
 **How many at once:** **one live recommendation per instrument** is recommended ("one view at a time", as your existing safety rule). Alternatives are one per direction, or several zones ranked [D-23].
 
@@ -582,8 +596,8 @@ All six are **worked out and recorded** with every recommendation and with every
 
 1. the same instrument;
 2. the same direction (a planner SELL only allows a bounce sell);
-3. **price within the authorised entry zone**. The bounce's *rejection candle* high, for a sell, must have reached the zone, and the entry price must not be beyond the invalidation price [D-29];
-4. the recommendation is ACTIVE and its data is fresh;
+3. **the rejection candle interacted with the authorised zone** (D-29, approved). For a sell, the rejection candle's high reached the zone under the existing 3-pip allowance (P-C2). **The eventual entry price need not be inside the zone.** Whether the entry price must at least not be beyond the invalidation price is functional question FC-07;
+4. the recommendation was ACTIVE at the rejection candle (the rejection candle's own interaction with the zone is what makes a WAITING recommendation ACTIVE), freshly validated (FC-08), and its data is fresh;
 5. no invalidation since;
 6. the existing hourly-pierce confirmation (unchanged);
 7. the existing safety, risk and broker checks (unchanged).
@@ -595,7 +609,7 @@ The planner never makes an order because price entered the zone, never skips any
 - **PROPOSED `planner/authorise.py`:** `authorise(settings, pair, direction, t, rejection_extreme, entry_price) → (allowed, reasons, recommendation_id)`. It reads the recommendation as it stood at time `t`. Live, that is the current file. In a replay it is reworked for `t` (the same function, section 4.1).
 - **PROPOSED check 7 in `strategies/common.py` `allowed()`:** for `BOLLINGER_BOUNCE` only, and only while a new `.env` switch **`PLANNER_AUTHORISES_BOUNCE`** is on. It would be **off unless set**, the same pattern as `BOUNCE_ONLY_WHEN_HOURLY_RANGING` and `BOUNCE_ONLY_NEAR_TIMES`. A refused bounce becomes a BLOCKED idea with a reason such as *"the planner's recommendation STP-… is WAITING: price has not reached the zone 1.32409–1.32500"*, and an allowed one adds a step naming the recommendation id. Nothing else changes: EMA pullback and every other strategy are untouched.
 - **Records:** the idea record in `decisions.jsonl` gains the recommendation id and status, so every allowed or refused bounce can be traced to the plan.
-- **One thing this changes on purpose:** the bounce currently "opens without hindrance" (your decision of 15 November). Switching on check 7 would be a deliberate change to that, and needs your explicit approval at the time.
+- **One thing this changes on purpose:** the bounce currently "opens without hindrance" (your decision of 15 November). **D-37 (approved, final):** the planner will become the sole structural authorisation authority for bounce trades, the hourly pierce still confirms its own entry, the execution and risk controls stay, and the EMA pullback stays independent at first. The architecture is settled. **Switching check 7 on still needs separate, explicit approval.**
 
 ### 13.3 A practical risk to weigh before switching it on
 
@@ -726,7 +740,7 @@ The bot's own warm-up rule (`warm_up_seed_weight_percent = 2`, `prices/indicator
 
 1. **H4 EMA200.** Not usable until about **the third week of December 2026**: the bot adds about 31 four-hour candles a week and needs 144 more. Consequence: no "price against the H4 EMA200" reading, and no H4 EMA200 level, before then. Options [D-27]: (a) leave it out and add it automatically once warmed up, flagged on the dashboard *(recommended)*; (b) use EMA50 as a stand-in (see [D-01]); (c) relax the warm-up rule for it (not recommended: it would quietly use a guessed value); (d) fetch more history through the history door (outside this task; it uses your IG allowance and needs your say-so).
 2. **Weekly EMA100 and EMA200.** Cannot be warmed up (they would need about 6 and 11 years). Options: leave them out of the planner *(recommended)*; weekly structure, pivots and high/low already give the weekly context.
-3. **Sunday candles in daily indicators.** Daily EMAs, the daily RSI and daily ADR would count the 3-hour Sunday candle as a day, which shrinks the average daily range and distorts the indicators. Options [D-27, D-04]: keep them as the chart does (consistent with the existing trend-day RSI14, which includes them); or leave Sunday candles out of daily **indicators and ADR** while keeping the pivot convention unchanged. **Recommended: leave them out of the ADR** (a 15-pip "day" is not a day's range), and ask you about the indicators.
+3. **Sunday candles in daily indicators.** Daily EMAs, the daily RSI and daily ADR would count the 3-hour Sunday candle as a day, which shrinks the average daily range and distorts the indicators. Options [D-27, D-04]: keep them as the chart does (consistent with the existing trend-day RSI14, which includes them); or leave Sunday candles out of daily **indicators and ADR** while keeping the pivot convention unchanged. **Approved (D-30): Sunday candles are left out of the ADR only**; the existing daily indicator behaviour, which includes them, is kept (recent Sunday candles average about 24 pips against a 20-weekday ADR of about 73 pips).
 4. **H4 from H1.** Safe, as verified above. The rebuild must use the same UK-time 4-hour boundaries as the store (`prices/calendar.py`), which also handles the clock changes correctly. The only alternative would be storing a second set of 4-hour candles, which is not needed.
 5. **Session boundaries.** All pivots, previous-day highs and lows, daily ranges and "today" use the UK-midnight day. In winter that is midnight UTC; in summer 23:00 UTC. The New York 17:00 alternative is [D-04].
 
@@ -735,6 +749,8 @@ No data needs to be fetched for V1. Every calculation that lacks history is name
 ---
 
 ## 17. Decision register
+
+**All 38 decisions were approved on 17 November 2026** (four with modifications; see the top of this document). The numbers still to approve are in **`PARAMETER_APPROVAL_REGISTER.md`**, and readiness and open functional questions are in **`IMPLEMENTATION_READINESS.md`**.
 
 The full register is the companion document **`DECISION_REGISTER.md`**. It is written to be read on its own. It holds 38 decisions: the 29 the brief requires, plus 9 found during the inspection (D-30 to D-38: Sunday candles in daily indicators and the average daily range, the source of 4-hour candles, the price side, the planner's own switch, the observe-only period, the weekly levels' definition, when the planner re-plans, the bounce's "without hindrance" status, and the use of the news calendar).
 
@@ -748,7 +764,7 @@ Each step ends with tests and your sign-off before the next. A restart of `autob
 
 | Step | What | Changes trading? |
 |---|---|---|
-| 0 | You go through `DECISION_REGISTER.md` | No |
+| 0 | You go through `DECISION_REGISTER.md` (**done 17 November 2026: all approved**), then `PARAMETER_APPROVAL_REGISTER.md` and the functional questions in `IMPLEMENTATION_READINESS.md` | No |
 | 1 | **Measurements:** H1/H4/daily/weekly indicators through `prices/indicators.py`; H4 rebuilt from H1 (with the equality check as a test); weekly pivots via `daily_pivots()`; the previous week's high and low; warm-up flags | No |
 | 2 | **Structure and level map:** swings on H1/H4/daily (generalised turning levels), breaks, failed breaks, role changes, tests; zones and tiers | No |
 | 3 | **Direction and correction** classifiers, with evidence lines | No |
